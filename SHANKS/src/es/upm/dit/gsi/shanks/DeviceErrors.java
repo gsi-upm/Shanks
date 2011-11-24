@@ -1,11 +1,8 @@
 package es.upm.dit.gsi.shanks;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import sim.portrayal.DrawInfo2D;
 import sim.portrayal.SimplePortrayal2D;
 
 /**
@@ -135,24 +132,24 @@ public class DeviceErrors extends SimplePortrayal2D {
 	}
 
 	
-	public void draw(Object object, Graphics2D graphics, DrawInfo2D info) {
-
-		final double width = 20;
-		final double height = 20;		
-
-		// Draw the devices
-		final int x = (int) (info.draw.x - width / 2.0);
-		final int y = (int) (info.draw.y - height / 2.0);
-		final int w = (int) (width);
-		final int h = (int) (height);
-		
+//	public void draw(Object object, Graphics2D graphics, DrawInfo2D info) {
+//
+//		final double width = 20;
+//		final double height = 20;		
+//
+//		// Draw the devices
+//		final int x = (int) (info.draw.x - width / 2.0);
+//		final int y = (int) (info.draw.y - height / 2.0);
+//		final int w = (int) (width);
+//		final int h = (int) (height);
+//		
+////		graphics.setColor(Color.black);
+////		graphics.fillOval(x, y, w, h);
+//
+//		// Draw the devices ID ID
 //		graphics.setColor(Color.black);
-//		graphics.fillOval(x, y, w, h);
-
-		// Draw the devices ID ID
-		graphics.setColor(Color.black);
-		graphics.drawString(ScenarioManager.dev.getName(), x - 3, y);
-	}
+//		graphics.drawString(ScenarioManager.dev.getName(), x - 3, y);
+//	}
 
 
 }

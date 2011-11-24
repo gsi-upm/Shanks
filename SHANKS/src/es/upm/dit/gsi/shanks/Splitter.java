@@ -12,6 +12,12 @@ package es.upm.dit.gsi.shanks;
 
 public class Splitter extends Device {
    
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8253186044606614656L;
+
+
 	public Splitter(String id, int status, int temperature, int type) {
 		super(id, status, temperature, type);
 	}	

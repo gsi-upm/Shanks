@@ -1,5 +1,6 @@
 package es.upm.dit.gsi.shanks;
 
+
 /**
  * OLT class
  * 
@@ -14,6 +15,13 @@ package es.upm.dit.gsi.shanks;
 
 public class OLT extends Device {
     
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6004213563737699458L;
+
+
+
 	public OLT(String id, int status, int temperature, int type) {
 		super(id, status, temperature, type);
 	}
@@ -74,5 +82,6 @@ public class OLT extends Device {
 	public void setOutputBitrate(int outputBitrate) {
 		this.outputBitrate = outputBitrate;
 	}
+	
     
 }

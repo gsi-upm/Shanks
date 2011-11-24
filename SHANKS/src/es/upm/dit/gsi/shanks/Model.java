@@ -5,14 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import es.upm.dit.gsi.shanks.Definitions;
-
+import sim.engine.Schedule;
 import sim.engine.SimState;
-import sim.field.continuous.Continuous2D;
+import sim.field.continuous.Continuous3D;
 import sim.field.grid.SparseGrid2D;
 import sim.field.network.Edge;
 import sim.field.network.Network;
-import sim.util.Double2D;
+import sim.util.Double3D;
 import sim.util.Int2D;
 
 
@@ -36,23 +35,22 @@ public class Model extends SimState{
 	public String[] allScenarios = {"FTTH", "PRUEBA"};
 	public static List<Device> ftth = new ArrayList<Device>();
 	public static SparseGrid2D elements;
-	public static int gridWidth = 500;
-	public static int gridHeight = 500;
-	public static int continuous1 = 500;
-	public static int continuous2 = 500;
-	public static int continuous3 = 500;
+	public int gridWidth = 500;
+	public int gridHeight = 500;
+	public int continuous1 = 500;
+	public int continuous2 = 500;
+	public int continuous3 = 500;
 	public static Scenarios scenario;
 	public static double PROB_BROKEN = 0.15;
-	public static String SELECT_SCENARIO = "PRUEBA";
+	public static String SELECT_SCENARIO = "REAL FTTH";
 	public static String SELECT_ERROR_GENERATION = "ErrorList";
-	public static Network links1;
+	public Network links1;
 	public ScenarioManager m;
-	public Continuous2D elements3d;
+	public Continuous3D elements3d;
 	
 	/**Default Constructor*/
 	public Model(long seed) {
 		super(seed);
-		elements3d = new Continuous2D(continuous1, continuous2, continuous3);
 		log.fine("Model constructor ->");
 	}
 	
@@ -69,8 +67,8 @@ public class Model extends SimState{
 	 * Set the grid Width
 	 * @param gridWidth
 	 */
-	public void setGridWidth(int gridWidth) {
-		this.gridWidth = gridWidth;
+	public void setGridWidth(int width) {
+		gridWidth = width;
 	}
 
 	/**
@@ -85,8 +83,8 @@ public class Model extends SimState{
 	 * Set the grid Height
 	 * @param gridHeight
 	 */
-	public void setGridHeight(int gridHeight) {
-		this.gridHeight = gridHeight;
+	public void setGridHeight(int height) {
+		gridHeight = height;
 	}
 	
 	/**
@@ -109,46 +107,46 @@ public class Model extends SimState{
 	 * Set the scenario of the simulation
 	 * @param scen
 	 */
-	public static void setSelectScenario(String scen){
-		SELECT_SCENARIO = scen;
-	}
+//	public static void setSelectScenario(String scen){
+//		SELECT_SCENARIO = scen;
+//	}
 	
 	/**
 	 * Get the simulation scenario
 	 * @return SELECT_SCENARIO
 	 */
-	public static String getSelectScenario(){
-		return SELECT_SCENARIO;
-	}
+//	public static String getSelectScenario(){
+//		return SELECT_SCENARIO;
+//	}
 	
 	/**
 	 * Set the way to simulate the errors
 	 * @param error
 	 */
-	public void setErrorGeneration(String error){
-		this.SELECT_ERROR_GENERATION = error;
-	}
-	
-	/**
-	 * Get the way to simulate the errors
-	 * @return SELECT_ERROR_GENERATION
-	 */
-	public String getErrorGeneration(){
-		return SELECT_ERROR_GENERATION;
-	}
+//	public void setErrorGeneration(String error){
+//		this.SELECT_ERROR_GENERATION = error;
+//	}
+//	
+//	/**
+//	 * Get the way to simulate the errors
+//	 * @return SELECT_ERROR_GENERATION
+//	 */
+//	public String getErrorGeneration(){
+//		return SELECT_ERROR_GENERATION;
+//	}
 	
 	/**
 	 * Assign an int to ech scenario
 	 * @return int that represent the selected scenario
 	 */
 	public int selectScenario(){
-		if(SELECT_SCENARIO.equals("FTTH")){
-			return 0;
-		}
-		if(SELECT_SCENARIO.equals("PRUEBA")){
+		if(SELECT_SCENARIO.equals("REAL FTTH")){
 			return 1;
 		}
-		return 0;
+		if(SELECT_SCENARIO.equals("SIMPLE FTTH")){
+			return 0;
+		}
+		return 1;
 	}
 	
 	/**
@@ -169,15 +167,22 @@ public class Model extends SimState{
 	 * Create a simple FTTH scenario
 	 * @return ftth List which contains the different device of the scenario
 	 */
-	public static List<Device> createFTTH(){
+	public List<Device> createFTTH(){
 		Gateway gateway = new Gateway("Gateway", 0, 45, Definitions.GATEWAY);
 		OLT olt = new OLT("OLT", 0, 45, Definitions.OLT);
 		ONT ont = new ONT("ONT", 0, 45, Definitions.ONT);
-		Splitter splitter = new Splitter("Splitter", 0, 45, Definitions.SPLITTER1);
+		Splitter splitter1 = new Splitter("Splitter1", 0, 45, Definitions.SPLITTER1);
+		Splitter splitter2 = new Splitter("Splitter2", 0, 45, Definitions.SPLITTER2);
+		elements3d.setObjectLocation(olt, new Double3D(-400, 0, 0));
+		elements3d.setObjectLocation(splitter1, new Double3D(-200,0,0));
+		elements3d.setObjectLocation(ont, new Double3D(0,0,0));
+		elements3d.setObjectLocation(splitter2, new Double3D(200,0,0));
+		elements3d.setObjectLocation(gateway, new Double3D(400,0,0));
 		ftth.add(gateway);
 		ftth.add(olt);
 		ftth.add(ont);
-		ftth.add(splitter);
+		ftth.add(splitter1);
+		ftth.add(splitter2);
 		System.out.println("FTTH RECIEN CREADA NUMERO DEVICES: " + ftth.size());
 		scenario = new Scenarios(SELECT_SCENARIO, ftth);
 		return ftth;
@@ -192,7 +197,7 @@ public class Model extends SimState{
 			if(d.getType() == Definitions.GATEWAY){
 				elements.setObjectLocation(d, new Int2D(400,
 						random.nextInt(gridHeight)));
-				elements3d.setObjectLocation(d, new Double2D(random.nextDouble(),0));
+				//elements3d.setObjectLocation(d, new Double2D(random.nextDouble(),0));
 				for(Device dev : ftth){
 					if(dev.getType() == Definitions.ONT && dev.getType()!= Definitions.GATEWAY){
 						Edge e = new Edge(d, dev, new Links());
@@ -203,7 +208,7 @@ public class Model extends SimState{
 			if(d.getType() == Definitions.ONT){
 				elements.setObjectLocation(d, new Int2D(300,
 						random.nextInt(gridHeight)));
-				elements3d.setObjectLocation(d, new Double2D(random.nextDouble(),0));
+				//elements3d.setObjectLocation(d, new Double2D(random.nextDouble(),0));
 				for(Device dev : ftth){
 					if((dev.getType() == Definitions.SPLITTER1 || dev.getType() == Definitions.GATEWAY) && dev.getType()!=Definitions.ONT){
 						Edge e = new Edge(d, dev, new Links());
@@ -214,7 +219,7 @@ public class Model extends SimState{
 			if(d.getType() == Definitions.SPLITTER1){
 				elements.setObjectLocation(d, new Int2D(200,
 						random.nextInt(gridHeight)));
-				elements3d.setObjectLocation(d, new Double2D(random.nextDouble(),0));
+				//elements3d.setObjectLocation(d, new Double2D(random.nextDouble(),0));
 				for(Device dev : ftth){
 					if((dev.getType() == Definitions.ONT || dev.getType() == Definitions.OLT) && dev.getType()!= Definitions.SPLITTER1){
 						Edge e = new Edge(d, dev, new Links());
@@ -225,7 +230,7 @@ public class Model extends SimState{
 			if(d.getType() == Definitions.OLT){
 				elements.setObjectLocation(d, new Int2D(100,
 						random.nextInt(gridHeight)));
-				elements3d.setObjectLocation(d, new Double2D(random.nextDouble(),0));
+				//elements3d.setObjectLocation(d, new Double2D(random.nextDouble(),0));
 			}
 		}		
 	}
@@ -263,6 +268,20 @@ public class Model extends SimState{
 		ftth.add(ont4);
 		ftth.add(splitter2c);
 		ftth.add(splitter2d);
+		elements3d.setObjectLocation(olt, new Double3D(-400, 0, 0));
+		elements3d.setObjectLocation(splitter1, new Double3D(-200, 0, 0));
+		elements3d.setObjectLocation(splitter2a, new Double3D(0, 400, 0));
+		elements3d.setObjectLocation(splitter2b, new Double3D(0, 200, 0));
+		elements3d.setObjectLocation(splitter2c, new Double3D(0, -200, 0));
+		elements3d.setObjectLocation(splitter2d, new Double3D(0, -400, 0));
+		elements3d.setObjectLocation(ont1, new Double3D(200, 400, 0));
+		elements3d.setObjectLocation(ont2, new Double3D(200, 200, 0));
+		elements3d.setObjectLocation(ont3, new Double3D(200, -200, 0));
+		elements3d.setObjectLocation(ont4, new Double3D(200, -400, 0));
+		elements3d.setObjectLocation(gateway1, new Double3D(400, 400, 0));
+		elements3d.setObjectLocation(gateway2, new Double3D(400, 200, 0));
+		elements3d.setObjectLocation(gateway3, new Double3D(400, -200, 0));
+		elements3d.setObjectLocation(gateway4, new Double3D(400, -400, 0));
 		elements.setObjectLocation(olt, new Int2D(100,gridHeight/2));
 		elements.setObjectLocation(splitter1, new Int2D(200,gridHeight/2));
 		elements.setObjectLocation(splitter2a, new Int2D(300,100));
@@ -318,16 +337,15 @@ public class Model extends SimState{
 	public void setBrokenStatus(){
     	Double randomize = Math.random();
     	int numeroAleatorio = (int) (Math.random()*ftth.size());
-    	System.out.println("NUMERO ALEATORIO: " + numeroAleatorio + "     BROKEN: " + randomize);
     	if(randomize < PROB_BROKEN){
     		ftth.get(numeroAleatorio).setStatus(1);
     	}
     }
 	
 	//The initial configuration of the scenario
-	public void startModel() throws NullPointerException{
+	public void startModel() {
 		ftth.clear();
-		elements3d = new Continuous2D(continuous1, continuous2, continuous3);
+		elements3d = new Continuous3D(5, gridWidth, gridHeight, gridHeight); 
 		links1 = new Network();
 		elements = new SparseGrid2D(gridWidth, gridHeight);
 		ScenarioManager.totalproblems = 0;
@@ -341,12 +359,14 @@ public class Model extends SimState{
 			case 1:
 				createPPP();
 				m = new ScenarioManager(scenario);
+				System.out.println("SELECTED SCENARIO " + scenario.getName());
 				break;
 			}
-		//This line create the scenario that we want (For example: change for createPPP(); if you want other scenario)
 		DeviceErrors.createDeviceErrors();
-		Device d;			
-		schedule.scheduleRepeating(m);
+		Agent a = new Agent();
+		schedule.scheduleRepeating(Schedule.EPOCH,0,m,2);
+		schedule.scheduleRepeating(Schedule.EPOCH + 1,2,a,2);
+		
 		
 	}
 	

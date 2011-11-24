@@ -11,6 +11,11 @@ package es.upm.dit.gsi.shanks;
  */
 public class Gateway extends Device {
     
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4404570654854838121L;
+
 	public Gateway(String id, int status, int temperature, int type) {
 		super(id, status, temperature, type);
 	}

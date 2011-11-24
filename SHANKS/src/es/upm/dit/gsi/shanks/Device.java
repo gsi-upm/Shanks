@@ -1,19 +1,11 @@
 package es.upm.dit.gsi.shanks;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.geom.Ellipse2D;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javax.swing.ImageIcon;
-
-
 import sim.engine.SimState;
 import sim.engine.Steppable;
-import sim.portrayal.DrawInfo2D;
-import sim.portrayal.SimplePortrayal2D;
+import sim.portrayal3d.SimplePortrayal3D;
 
 
 /**
@@ -26,12 +18,12 @@ import sim.portrayal.SimplePortrayal2D;
  *
  */
 
-public class Device extends SimplePortrayal2D implements Steppable{ 
+public class Device extends SimplePortrayal3D implements Steppable{ 
 	
 	private static final long serialVersionUID = 5533704302816153428L;
 	public Logger log = Logger.getLogger("Device");
     private String id; 
-    private int status; // The status of the device (1 for broken, 0 for healthy)
+    protected int status; // The status of the device (1 for broken, 0 for healthy)
     private int temperature; 
     private List<Link> linkList; //The different devices that are connected
     private int linkNumber; 
@@ -129,49 +121,7 @@ public class Device extends SimplePortrayal2D implements Steppable{
 		
 	}
 
-	
-/**
- * Load an Image in order to use it in the GUI
- * @param filename The direction of the image
- * @return An ImageIcon with the image
- */
-	public static Image loadImage(String filename){ 
-	    return new ImageIcon(Model.class.getResource(filename)).getImage(); 
-	    }
 
-	public void draw(Object object, Graphics2D graphics, DrawInfo2D info) {
-
-		final double width = 20;
-		final double height = 20;
-		
-		//If they are broken the platform draw theme in red, if they are OK draw them in green
-		switch(this.status){
-		case Definitions.BROKEN_STATE:
-			graphics.setColor(Color.red);
-			break;
-		case Definitions.HEALTHY_STATUS:
-			graphics.setColor(Color.green);
-			break;
-		}
-		
-
-		// Draw the devices
-		final int x = (int) (info.draw.x - width / 2.0);
-		final int y = (int) (info.draw.y - height / 2.0);
-		final int w = (int) (width);
-		final int h = (int) (height);
-		graphics.fillOval(x, y, w, h);
-
-		// Draw the devices ID ID
-		graphics.setColor(Color.black);
-		Device d = ((Device) (object));
-		log.info("DEVICE A DIBUJAR " + d);
-		log.info("ID DEL DEVICE "+ d.getID());
-		String id = d.getID();
-		log.info("DIBUJA " + id);
-		graphics.drawString(id, x - 3, y);
-
-	}
 
 }
 

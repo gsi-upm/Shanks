@@ -1,18 +1,23 @@
 package es.upm.dit.gsi.shanks;
 
-import java.awt.Color;
-import java.awt.Image;
 import java.util.logging.Logger;
 
+import javax.media.j3d.Appearance;
+import javax.media.j3d.ColoringAttributes;
+import javax.media.j3d.Material;
 import javax.media.j3d.TransformGroup;
-import javax.swing.ImageIcon;
+import javax.vecmath.Color3f;
 
-import sim.portrayal3d.simple.BoxPortrayal3D;
-import sim.portrayal3d.simple.CubePortrayal3D;
-import sim.portrayal3d.simple.SpherePortrayal3D;
+import sim.portrayal3d.SimplePortrayal3D;
+import sim.portrayal3d.network.SimpleEdgePortrayal3D;
+
+import com.sun.j3d.utils.geometry.Box;
+import com.sun.j3d.utils.geometry.Cone;
+import com.sun.j3d.utils.geometry.Cylinder;
+import com.sun.j3d.utils.geometry.Sphere;
 
 
-public class DevicePortrayal extends BoxPortrayal3D{
+public class DevicePortrayal extends SimplePortrayal3D{
 	
 	/**
 	 * 
@@ -21,67 +26,182 @@ public class DevicePortrayal extends BoxPortrayal3D{
 
 	public Logger log = Logger.getLogger("DevicePortrayal");
 	
-	final static Color healthyColor = Color.green;
-    final static Color brokenColor = Color.red;
-    public float diameter = 40;
-        
+	final static Color3f healthyColor = new Color3f(153,153,153);
+    final static Color3f brokenColor = new Color3f(200,0,0);
+    public float diameter = 30;
+    
+    
     public DevicePortrayal(){
+ 
     }
     
-//    public SpherePortrayal3D getSphere(Object obj){
-//    	SpherePortrayal3D portrayal = null;
-//    		if(((Device)obj).getStatus() == Definitions.HEALTHY_STATUS){
-//    			portrayal = new SpherePortrayal3D(Model3DGUI.loadImage("earthmap.jpg");
-//    		}
-//		return portrayal;
-//    	
-//    }
-    
+    public String getLabel(es.upm.dit.gsi.shanks.Device d){
+    	String deviceName = d.getID();
+    	return deviceName;
+    }
     public TransformGroup getModel(Object obj, TransformGroup j3dModel){
-    		if (j3dModel==null || ((Device)obj).status == Definitions.HEALTHY_STATUS){
-    			setAppearance(j3dModel, appearanceForColors(
-                        healthyColor,
-                        null, 
-                        healthyColor, 
-                        null,
-                        1.0f,
-                        1.0f));
-    		}else{ 
-    			setAppearance(j3dModel, appearanceForColors(
-                        brokenColor, 
-                        null,
-                        brokenColor, 
-                        null,    
-                        1.0f, 
-                        1.0f));
-            }
-    		if(j3dModel == null){
-    			setScale(j3dModel, diameter);
+    		if (j3dModel == null || ((Device)obj).getType() == Definitions.GATEWAY){
+    			j3dModel = new TransformGroup();
+    			Sphere s = new Sphere((float)diameter);
+    			if(((Device)obj).getStatus() == Definitions.HEALTHY_STATUS){
+    				j3dModel.removeAllChildren();
+    				Appearance appearance = new Appearance();
+                	appearance.setColoringAttributes(new ColoringAttributes(healthyColor, ColoringAttributes.SHADE_GOURAUD));          
+                	Material m= new Material();
+                	m.setAmbientColor(healthyColor);
+                	m.setEmissiveColor(0f,0f,0f);
+                	m.setDiffuseColor(healthyColor);
+                	m.setSpecularColor(1f,1f,1f);
+                	m.setShininess(128f);
+                	appearance.setMaterial(m);
+                	s.setAppearance(appearance);
+                	j3dModel.addChild(s);
+
+                	clearPickableFlags(j3dModel);
+    			}else{
+    				j3dModel.removeAllChildren();
+    				Appearance appearance = new Appearance();
+                	appearance.setColoringAttributes(new ColoringAttributes(brokenColor, ColoringAttributes.SHADE_GOURAUD));          
+                	Material m= new Material();
+                	m.setAmbientColor(brokenColor);
+                	m.setEmissiveColor(0f,0f,0f);
+                	m.setDiffuseColor(brokenColor);
+                	m.setSpecularColor(1f,1f,1f);
+                	m.setShininess(128f);
+                	appearance.setMaterial(m);
+                	s.setAppearance(appearance);
+                	j3dModel.addChild(s);
+                	clearPickableFlags(j3dModel);           
+                }
+    		}else if(j3dModel == null || ((Device)obj).getType() == Definitions.SPLITTER1){
+    			j3dModel = new TransformGroup();
+    			Appearance appearance = new Appearance();
+    			Box s = new Box(diameter, diameter*3, diameter, appearance);
+    			if(((Device)obj).getStatus() == Definitions.HEALTHY_STATUS){
+    				j3dModel.removeAllChildren();
+                	appearance.setColoringAttributes(new ColoringAttributes(healthyColor, ColoringAttributes.SHADE_GOURAUD));          
+                	Material m= new Material();
+                	m.setAmbientColor(healthyColor);
+                	m.setEmissiveColor(0f,0f,0f);
+                	m.setDiffuseColor(healthyColor);
+                	m.setSpecularColor(1f,1f,1f);
+                	m.setShininess(128f);
+                	appearance.setMaterial(m);
+                	s.setAppearance(appearance);
+                	j3dModel.addChild(s);
+                	clearPickableFlags(j3dModel);
+    			}else{
+    				j3dModel.removeAllChildren();
+                	appearance.setColoringAttributes(new ColoringAttributes(brokenColor, ColoringAttributes.SHADE_GOURAUD));          
+                	Material m= new Material();
+                	m.setAmbientColor(brokenColor);
+                	m.setEmissiveColor(0f,0f,0f);
+                	m.setDiffuseColor(brokenColor);
+                	m.setSpecularColor(1f,1f,1f);
+                	m.setShininess(128f);
+                	appearance.setMaterial(m);
+                	s.setAppearance(appearance);
+                	j3dModel.addChild(s);
+                	clearPickableFlags(j3dModel);           
+                }
+            
+    		}else if(j3dModel == null || ((Device)obj).getType() == Definitions.SPLITTER2){
+    			j3dModel = new TransformGroup();
+    			Appearance appearance = new Appearance();
+    			Box s = new Box(diameter, diameter, diameter, appearance);
+    			if(((Device)obj).getStatus() == Definitions.HEALTHY_STATUS){
+    				j3dModel.removeAllChildren();
+    				appearance.setColoringAttributes(new ColoringAttributes(healthyColor, ColoringAttributes.SHADE_GOURAUD));          
+    				Material m= new Material();
+    				m.setAmbientColor(healthyColor);
+    				m.setEmissiveColor(0f,0f,0f);
+    				m.setDiffuseColor(healthyColor);
+    				m.setSpecularColor(1f,1f,1f);
+    				m.setShininess(128f);
+    				appearance.setMaterial(m);
+    				s.setAppearance(appearance);
+    				j3dModel.addChild(s);
+    				clearPickableFlags(j3dModel);
+    			}else{
+    				j3dModel.removeAllChildren();
+    				appearance.setColoringAttributes(new ColoringAttributes(brokenColor, ColoringAttributes.SHADE_GOURAUD));          
+    				Material m= new Material();
+    				m.setAmbientColor(brokenColor);
+    				m.setEmissiveColor(0f,0f,0f);
+    				m.setDiffuseColor(brokenColor);
+    				m.setSpecularColor(1f,1f,1f);
+    				m.setShininess(128f);
+    				appearance.setMaterial(m);
+    				s.setAppearance(appearance);
+    				j3dModel.addChild(s);
+    				clearPickableFlags(j3dModel);           
+    			}
+    		}else if(j3dModel == null || ((Device)obj).getType() == Definitions.OLT){
+    			j3dModel = new TransformGroup();
+    			Cone s = new Cone((float) diameter, diameter*3);
+    			if(((Device)obj).getStatus() == Definitions.HEALTHY_STATUS){
+    				j3dModel.removeAllChildren(); 
+    				Appearance appearance = new Appearance();
+                	appearance.setColoringAttributes(new ColoringAttributes(healthyColor, ColoringAttributes.SHADE_GOURAUD));          
+                	Material m= new Material();
+                	m.setAmbientColor(healthyColor);
+                	m.setEmissiveColor(0f,0f,0f);
+                	m.setDiffuseColor(healthyColor);
+                	m.setSpecularColor(1f,1f,1f);
+                	m.setShininess(128f);
+                	appearance.setMaterial(m);
+                	s.setAppearance(appearance);
+                	j3dModel.addChild(s);
+                	clearPickableFlags(j3dModel);
+    			}else{
+    				j3dModel.removeAllChildren();
+    				Appearance appearance = new Appearance();
+                	appearance.setColoringAttributes(new ColoringAttributes(brokenColor, ColoringAttributes.SHADE_GOURAUD));          
+                	Material m= new Material();
+                	m.setAmbientColor(brokenColor);
+                	m.setEmissiveColor(0f,0f,0f);
+                	m.setDiffuseColor(brokenColor);
+                	m.setSpecularColor(1f,1f,1f);
+                	m.setShininess(128f);
+                	appearance.setMaterial(m);
+                	s.setAppearance(appearance);
+                	j3dModel.addChild(s);
+                	clearPickableFlags(j3dModel);           
+                }
+    		}else if(j3dModel == null || ((Device)obj).getType() == Definitions.ONT){
+    			j3dModel = new TransformGroup();
+    			Cylinder s = new Cylinder(diameter, diameter);
+    			if(((Device)obj).getStatus() == Definitions.HEALTHY_STATUS){
+    				j3dModel.removeAllChildren();
+    				Appearance appearance = new Appearance();
+    				appearance.setColoringAttributes(new ColoringAttributes(healthyColor, ColoringAttributes.SHADE_GOURAUD));          
+    				Material m= new Material();
+    				m.setAmbientColor(healthyColor);
+    				m.setEmissiveColor(0f,0f,0f);
+    				m.setDiffuseColor(healthyColor);
+    				m.setSpecularColor(1f,1f,1f);
+    				m.setShininess(128f);
+    				appearance.setMaterial(m);
+    				s.setAppearance(appearance);
+    				j3dModel.addChild(s);
+    				clearPickableFlags(j3dModel);
+    			}else{
+    				j3dModel.removeAllChildren();
+    				Appearance appearance = new Appearance();
+    				appearance.setColoringAttributes(new ColoringAttributes(brokenColor, ColoringAttributes.SHADE_GOURAUD));          
+    				Material m= new Material();
+    				m.setAmbientColor(brokenColor);
+    				m.setEmissiveColor(0f,0f,0f);
+    				m.setDiffuseColor(brokenColor);
+    				m.setSpecularColor(1f,1f,1f);
+    				m.setShininess(128f);
+    				appearance.setMaterial(m);
+    				s.setAppearance(appearance);
+    				j3dModel.addChild(s);
+    				clearPickableFlags(j3dModel);           
+    			}
     		}
         return super.getModel(obj, j3dModel);
     }
     
-//    public TransformGroup getModel(Object obj, TransformGroup j3dModel){
-//		if (((Device)obj).getType() == Definitions.OLT){
-//			setAppearance(j3dModel, appearanceForImage(Model3DGUI.loadImage("OLT(Recortada).jpg"), true));
-////		}else{ 
-////			setAppearance(j3dModel, appearanceForImage(Model3DGUI.loadImage("OLT(Recortada).jpg"), true));
-//        }else if(((Device)obj).getStatus() == Definitions.HEALTHY_STATUS && ((Device)obj).getType() != Definitions.OLT)
-//        	setAppearance(j3dModel, appearanceForColors(
-//                  brokenColor, 
-//                  null,
-//                  brokenColor, 
-//                  null,    
-//                  1.0f, 
-//                  1.0f));
-//    
-//        	if(j3dModel == null){
-//			setScale(j3dModel, diameter);
-//		}
-//    return super.getModel(obj, j3dModel);
-//}
-    
-    
-
-	
 }

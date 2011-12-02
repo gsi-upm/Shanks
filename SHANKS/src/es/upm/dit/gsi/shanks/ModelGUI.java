@@ -153,8 +153,8 @@ public class ModelGUI extends GUIState {
 	//Setup the Portrayals
 	public void setupPortrayals(){
 		Model model = (Model) state;
-		agents.setField(Model.elements);
-		links.setField(new SpatialNetwork2D(Model.elements, model.links1));
+		agents.setField(Model.problems);
+		links.setField(new SpatialNetwork2D(Model.problems, model.links1));
 		//links.setPortrayalForAll(new Links());
 		display.reset();
 		display.setBackdrop(Color.white);

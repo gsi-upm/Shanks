@@ -38,21 +38,27 @@ public class ScenarioManager implements Steppable{
 		
 		//Get the devices from scenario
 		public static List<Device> getDeviceFromScenario(){
-			return Model.ftth;
+			return Model.devicesnetwork;
 		}
 		
 		
 		public void generateProblem(){
-			repairProblems();
+			if(Agent.repairFlag){
+				repairProblems();
+			}
 			int randomproblem = (int) (Math.random()*DeviceErrors.deverrors.size());
 			double randomerrorgenerator = Math.random();
 			if(randomerrorgenerator <= Model.PROB_BROKEN){
 				dev = DeviceErrors.deverrors.get(randomproblem);
-				dev.setTrigger(true);		
+				dev.setTrigger(true);
+				Model.problems.setObjectLocation(dev, 25, 25);
+				Agent.problemDetected = dev.getName();
 				totalproblems++;				
 			}else if(randomerrorgenerator > Model.PROB_BROKEN){
 				DeviceErrors noproblem = new DeviceErrors ("No problem", true);
 				dev = noproblem;
+				Model.problems.setObjectLocation(dev, 25, 25);
+				Agent.problemDetected = dev.getName();
 			}
 			System.out.println("ERROR " + dev.getName());
 			System.out.println("TOTAL PROBLEMS " + totalproblems);
@@ -67,7 +73,6 @@ public class ScenarioManager implements Steppable{
 		
 		//The actions done by the agent for each step
 		public void step(SimState state){
-			//repairProblems();
 			System.out.println("NUEVA PRUEBA");
 			Model model = (Model)state;
 			switch(model.selectError()){
@@ -79,7 +84,6 @@ public class ScenarioManager implements Steppable{
 				DeviceErrors.setDeviceWithProblems();
 				break;
 			}
-			//repairProblems();
 		}
 	}
 

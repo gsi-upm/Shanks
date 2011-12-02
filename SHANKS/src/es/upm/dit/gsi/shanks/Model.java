@@ -33,8 +33,8 @@ public class Model extends SimState{
 	public Logger log = Logger.getLogger("Model");
 	
 	public String[] allScenarios = {"FTTH", "PRUEBA"};
-	public static List<Device> ftth = new ArrayList<Device>();
-	public static SparseGrid2D elements;
+	public static List<Device> devicesnetwork = new ArrayList<Device>();
+	public static SparseGrid2D problems;
 	public int gridWidth = 500;
 	public int gridHeight = 500;
 	public int continuous1 = 500;
@@ -47,6 +47,7 @@ public class Model extends SimState{
 	public Network links1;
 	public ScenarioManager m;
 	public Continuous3D elements3d;
+	public Continuous3D legend;
 	
 	/**Default Constructor*/
 	public Model(long seed) {
@@ -103,37 +104,6 @@ public class Model extends SimState{
 		return PROB_BROKEN;
 	}
 	
-	/**
-	 * Set the scenario of the simulation
-	 * @param scen
-	 */
-//	public static void setSelectScenario(String scen){
-//		SELECT_SCENARIO = scen;
-//	}
-	
-	/**
-	 * Get the simulation scenario
-	 * @return SELECT_SCENARIO
-	 */
-//	public static String getSelectScenario(){
-//		return SELECT_SCENARIO;
-//	}
-	
-	/**
-	 * Set the way to simulate the errors
-	 * @param error
-	 */
-//	public void setErrorGeneration(String error){
-//		this.SELECT_ERROR_GENERATION = error;
-//	}
-//	
-//	/**
-//	 * Get the way to simulate the errors
-//	 * @return SELECT_ERROR_GENERATION
-//	 */
-//	public String getErrorGeneration(){
-//		return SELECT_ERROR_GENERATION;
-//	}
 	
 	/**
 	 * Assign an int to ech scenario
@@ -162,10 +132,21 @@ public class Model extends SimState{
 		}
 		return 0;
 	}
-
+	
+	public void makeLinks (Device from, Device to){
+		Edge e = new Edge(from, to, new Links());
+		links1.addEdge(e);
+	}
+	
+	public void situateDevice(Device d, double x, double y, double z){
+		elements3d.setObjectLocation(d, new Double3D(x, y, z));
+		devicesnetwork.add(d);
+	}
+	
+	
 	/**
 	 * Create a simple FTTH scenario
-	 * @return ftth List which contains the different device of the scenario
+	 * @return devicesnetwork List which contains the different device of the scenario
 	 */
 	public List<Device> createFTTH(){
 		Gateway gateway = new Gateway("Gateway", 0, 45, Definitions.GATEWAY);
@@ -173,71 +154,25 @@ public class Model extends SimState{
 		ONT ont = new ONT("ONT", 0, 45, Definitions.ONT);
 		Splitter splitter1 = new Splitter("Splitter1", 0, 45, Definitions.SPLITTER1);
 		Splitter splitter2 = new Splitter("Splitter2", 0, 45, Definitions.SPLITTER2);
-		elements3d.setObjectLocation(olt, new Double3D(-400, 0, 0));
-		elements3d.setObjectLocation(splitter1, new Double3D(-200,0,0));
-		elements3d.setObjectLocation(ont, new Double3D(0,0,0));
-		elements3d.setObjectLocation(splitter2, new Double3D(200,0,0));
-		elements3d.setObjectLocation(gateway, new Double3D(400,0,0));
-		ftth.add(gateway);
-		ftth.add(olt);
-		ftth.add(ont);
-		ftth.add(splitter1);
-		ftth.add(splitter2);
-		System.out.println("FTTH RECIEN CREADA NUMERO DEVICES: " + ftth.size());
-		scenario = new Scenarios(SELECT_SCENARIO, ftth);
-		return ftth;
+		situateDevice(olt, -400, 0, 0);
+		situateDevice(ont, -200, 0, 0);
+		situateDevice(splitter1, -0, 0, 0);
+		situateDevice(splitter2, 200, 0, 0);
+		situateDevice(gateway, 400, 0, 0);
+		makeLinks(olt, splitter1);
+		makeLinks(splitter1, splitter2);
+		makeLinks(splitter2, ont);
+		makeLinks(ont, gateway);	
+		System.out.println("FTTH RECIEN CREADA NUMERO DEVICES: " + devicesnetwork.size());
+		scenario = new Scenarios(SELECT_SCENARIO, devicesnetwork);
+		return devicesnetwork;
 	}
 	
-	/**
-	 * Make the connections between the devices
-	 *
-	 */
-	public void makeFTTHLinks(){
-		for(Device d : ftth){
-			if(d.getType() == Definitions.GATEWAY){
-				elements.setObjectLocation(d, new Int2D(400,
-						random.nextInt(gridHeight)));
-				//elements3d.setObjectLocation(d, new Double2D(random.nextDouble(),0));
-				for(Device dev : ftth){
-					if(dev.getType() == Definitions.ONT && dev.getType()!= Definitions.GATEWAY){
-						Edge e = new Edge(d, dev, new Links());
-						links1.addEdge(e);
-					}
-				}
-			}
-			if(d.getType() == Definitions.ONT){
-				elements.setObjectLocation(d, new Int2D(300,
-						random.nextInt(gridHeight)));
-				//elements3d.setObjectLocation(d, new Double2D(random.nextDouble(),0));
-				for(Device dev : ftth){
-					if((dev.getType() == Definitions.SPLITTER1 || dev.getType() == Definitions.GATEWAY) && dev.getType()!=Definitions.ONT){
-						Edge e = new Edge(d, dev, new Links());
-						links1.addEdge(e);
-					}
-				}
-			}
-			if(d.getType() == Definitions.SPLITTER1){
-				elements.setObjectLocation(d, new Int2D(200,
-						random.nextInt(gridHeight)));
-				//elements3d.setObjectLocation(d, new Double2D(random.nextDouble(),0));
-				for(Device dev : ftth){
-					if((dev.getType() == Definitions.ONT || dev.getType() == Definitions.OLT) && dev.getType()!= Definitions.SPLITTER1){
-						Edge e = new Edge(d, dev, new Links());
-						links1.addEdge(e);
-					}
-				}
-			}
-			if(d.getType() == Definitions.OLT){
-				elements.setObjectLocation(d, new Int2D(100,
-						random.nextInt(gridHeight)));
-				//elements3d.setObjectLocation(d, new Double2D(random.nextDouble(),0));
-			}
-		}		
-	}
+	
 	/**
 	 * A more complex FTTH scenario, in this case is not necessary a method which make the connections, they are
 	 * made in this method
-	 * @return ftth List with the different device that form the scenario
+	 * @return devicesnetwork List with the different device that form the scenario
 	 */
 	public List<Device> createPPP(){
 		Gateway gateway1 = new Gateway("Gateway1", 0, 45, Definitions.GATEWAY);
@@ -254,76 +189,35 @@ public class Model extends SimState{
 		Splitter splitter2b = new Splitter("Splitter2b", 0, 45, Definitions.SPLITTER2);
 		Splitter splitter2c = new Splitter("Splitter2c", 0, 45, Definitions.SPLITTER2);
 		Splitter splitter2d = new Splitter("Splitter2d", 0, 45, Definitions.SPLITTER2);
-		ftth.add(gateway1);
-		ftth.add(olt);
-		ftth.add(ont1);
-		ftth.add(splitter1);
-		ftth.add(gateway2);
-		ftth.add(ont2);
-		ftth.add(splitter2a);
-		ftth.add(gateway3);
-		ftth.add(ont3);
-		ftth.add(splitter2b);
-		ftth.add(gateway4);
-		ftth.add(ont4);
-		ftth.add(splitter2c);
-		ftth.add(splitter2d);
-		elements3d.setObjectLocation(olt, new Double3D(-400, 0, 0));
-		elements3d.setObjectLocation(splitter1, new Double3D(-200, 0, 0));
-		elements3d.setObjectLocation(splitter2a, new Double3D(0, 400, 0));
-		elements3d.setObjectLocation(splitter2b, new Double3D(0, 200, 0));
-		elements3d.setObjectLocation(splitter2c, new Double3D(0, -200, 0));
-		elements3d.setObjectLocation(splitter2d, new Double3D(0, -400, 0));
-		elements3d.setObjectLocation(ont1, new Double3D(200, 400, 0));
-		elements3d.setObjectLocation(ont2, new Double3D(200, 200, 0));
-		elements3d.setObjectLocation(ont3, new Double3D(200, -200, 0));
-		elements3d.setObjectLocation(ont4, new Double3D(200, -400, 0));
-		elements3d.setObjectLocation(gateway1, new Double3D(400, 400, 0));
-		elements3d.setObjectLocation(gateway2, new Double3D(400, 200, 0));
-		elements3d.setObjectLocation(gateway3, new Double3D(400, -200, 0));
-		elements3d.setObjectLocation(gateway4, new Double3D(400, -400, 0));
-		elements.setObjectLocation(olt, new Int2D(100,gridHeight/2));
-		elements.setObjectLocation(splitter1, new Int2D(200,gridHeight/2));
-		elements.setObjectLocation(splitter2a, new Int2D(300,100));
-		elements.setObjectLocation(splitter2b, new Int2D(300,200));
-		elements.setObjectLocation(splitter2c, new Int2D(300,300));
-		elements.setObjectLocation(splitter2d, new Int2D(300,400));
-		elements.setObjectLocation(ont1, new Int2D(400,100));
-		elements.setObjectLocation(ont2, new Int2D(400,200));
-		elements.setObjectLocation(ont3, new Int2D(400,300));
-		elements.setObjectLocation(ont4, new Int2D(400,400));
-		elements.setObjectLocation(gateway1, new Int2D(500,100));
-		elements.setObjectLocation(gateway2, new Int2D(500,200));
-		elements.setObjectLocation(gateway3, new Int2D(500,300));
-		elements.setObjectLocation(gateway4, new Int2D(500,400));
-		Edge e1 = new Edge(olt, splitter1, new Links());
-		Edge e2 = new Edge(splitter1, splitter2a, new Links());
-		Edge e3 = new Edge(splitter1, splitter2b, new Links());
-		Edge e4 = new Edge(splitter1, splitter2c, new Links());
-		Edge e5 = new Edge(splitter1, splitter2d, new Links());
-		Edge e6 = new Edge(splitter2a, ont1, new Links());
-		Edge e7 = new Edge(splitter2b, ont2, new Links());
-		Edge e8 = new Edge(splitter2c, ont3, new Links());
-		Edge e9 = new Edge(splitter2d, ont4, new Links());
-		Edge e10 = new Edge(ont1, gateway1, new Links());
-		Edge e11 = new Edge(ont2, gateway2, new Links());
-		Edge e12 = new Edge(ont3, gateway3, new Links());
-		Edge e13 = new Edge(ont4, gateway4, new Links());
-		links1.addEdge(e1);
-		links1.addEdge(e2);
-		links1.addEdge(e3);
-		links1.addEdge(e4);
-		links1.addEdge(e5);
-		links1.addEdge(e6);
-		links1.addEdge(e7);
-		links1.addEdge(e8);
-		links1.addEdge(e9);
-		links1.addEdge(e10);
-		links1.addEdge(e11);
-		links1.addEdge(e12);
-		links1.addEdge(e13);	
-		scenario = new Scenarios(SELECT_SCENARIO, ftth);
-		return ftth;
+		situateDevice(olt, -400, 0, 0);
+		situateDevice(splitter1, -200, 0, 0);
+		situateDevice(splitter2a, 0, 400, 0);
+		situateDevice(splitter2b, 0, 200, 0);
+		situateDevice(splitter2c, 0, -200, 0);
+		situateDevice(splitter2d, 0, -400, 0);
+		situateDevice(ont1, 200, 400, 0);
+		situateDevice(ont2, 200, 200, 0);
+		situateDevice(ont3, 200, -200, 0);
+		situateDevice(ont4, 200, -400, 0);
+		situateDevice(gateway1, 400, 400, 0);
+		situateDevice(gateway2, 400, 200, 0);
+		situateDevice(gateway3, 400, -200, 0);
+		situateDevice(gateway4, 400, -400, 0);		
+		makeLinks(olt, splitter1);
+		makeLinks(splitter1, splitter2a);
+		makeLinks(splitter1, splitter2b);
+		makeLinks(splitter1, splitter2c);
+		makeLinks(splitter1, splitter2d);
+		makeLinks(splitter2a, ont1);
+		makeLinks(splitter2b, ont2);
+		makeLinks(splitter2c, ont3);
+		makeLinks(splitter2d, ont4);
+		makeLinks(ont1, gateway1);
+		makeLinks(ont2, gateway2);
+		makeLinks(ont3, gateway3);
+		makeLinks(ont4, gateway4);	
+		scenario = new Scenarios(SELECT_SCENARIO, devicesnetwork);
+		return devicesnetwork;
 	}
 	
 	
@@ -336,23 +230,36 @@ public class Model extends SimState{
 	//Broke a random device
 	public void setBrokenStatus(){
     	Double randomize = Math.random();
-    	int numeroAleatorio = (int) (Math.random()*ftth.size());
+    	int numeroAleatorio = (int) (Math.random()*devicesnetwork.size());
     	if(randomize < PROB_BROKEN){
-    		ftth.get(numeroAleatorio).setStatus(1);
+    		devicesnetwork.get(numeroAleatorio).setStatus(1);
     	}
     }
-	
+	 public void createLegend(){
+		 Gateway g = new Gateway("Gateway",0,45,Definitions.GATEWAY);
+		 Splitter sp1 = new Splitter("Splitter 1",0,45,Definitions.SPLITTER1);
+		 Splitter sp2 = new Splitter("Splitter 2",0,45,Definitions.SPLITTER2);
+		 OLT olt = new OLT("OLT",0,45,Definitions.OLT);
+		 ONT ont = new ONT("ONT",0,45,Definitions.ONT);
+		 legend.setObjectLocation(g, new Double3D(-300, 300, 0));
+		 legend.setObjectLocation(sp1, new Double3D(-100, 300, 0));
+		 legend.setObjectLocation(sp2, new Double3D(100, 300, 0));
+		 legend.setObjectLocation(olt, new Double3D(300, 300, 0));
+		 legend.setObjectLocation(ont, new Double3D(-300, 0, 0));		 
+	 }
+	 
 	//The initial configuration of the scenario
 	public void startModel() {
-		ftth.clear();
+		devicesnetwork.clear();
 		elements3d = new Continuous3D(5, gridWidth, gridHeight, gridHeight); 
 		links1 = new Network();
-		elements = new SparseGrid2D(gridWidth, gridHeight);
+		problems = new SparseGrid2D(365, 50);
+		legend = new Continuous3D(5, gridWidth, gridHeight, gridHeight);
+		createLegend();
 		ScenarioManager.totalproblems = 0;
 			switch(selectScenario()){
 			case 0:
 				createFTTH();
-				makeFTTHLinks();
 				m = new ScenarioManager(scenario);
 				System.out.println("SELECTED SCENARIO " + scenario.getName());
 				break;

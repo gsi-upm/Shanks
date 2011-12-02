@@ -1,9 +1,14 @@
 package es.upm.dit.gsi.shanks;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 
+import sim.portrayal.DrawInfo2D;
 import sim.portrayal.SimplePortrayal2D;
+import sim.portrayal.simple.ImagePortrayal2D;
 
 /**
  * DeviceErrors class
@@ -17,6 +22,7 @@ import sim.portrayal.SimplePortrayal2D;
 
 public class DeviceErrors extends SimplePortrayal2D {
 	
+
 	/**DeviceErrors parametres and diferent types of errors*/
 	private static final long serialVersionUID = -5684572432145540188L;
 	public String name;
@@ -104,52 +110,52 @@ public class DeviceErrors extends SimplePortrayal2D {
 	 */
 	public static void setDeviceWithProblems(){
 		if(getProblemStatus(ipconf) || getProblemStatus(natproblem) || getProblemStatus(dhcproblem)){
-			for(Device d: Model.ftth){
+			for(Device d: Model.devicesnetwork){
 				if(d.getType() == Definitions.GATEWAY){
 					d.setStatus(1);
 				}
 			}
 		}
 		if(getProblemStatus(bitrate)){
-			for(Device d : Model.ftth){
+			for(Device d : Model.devicesnetwork){
 				if(d.getType() == Definitions.OLT || d.getType()==Definitions.ONT){
 					d.setStatus(1);
 				}
 			}
 		}
 		if(getProblemStatus(laser)){
-			for(Device d : Model.ftth){
+			for(Device d : Model.devicesnetwork){
 				if(d.getType() == Definitions.OLT || d.getType()==Definitions.ONT){
 					d.setStatus(1);
 				}
 			}
 		}
 		if(getProblemStatus(connection)){
-			for(Device d : Model.ftth){
+			for(Device d : Model.devicesnetwork){
 				d.setStatus(1);
 			}
 		}
 	}
 
 	
-//	public void draw(Object object, Graphics2D graphics, DrawInfo2D info) {
-//
-//		final double width = 20;
-//		final double height = 20;		
-//
-//		// Draw the devices
-//		final int x = (int) (info.draw.x - width / 2.0);
-//		final int y = (int) (info.draw.y - height / 2.0);
-//		final int w = (int) (width);
-//		final int h = (int) (height);
-//		
-////		graphics.setColor(Color.black);
-////		graphics.fillOval(x, y, w, h);
-//
-//		// Draw the devices ID ID
+	public void draw(Object object, Graphics2D graphics, DrawInfo2D info) {
+
+		final double width = 20;
+		final double height = 20;		
+
+		// Draw the devices
+		final int x = (int) (info.draw.x - width / 2.0);
+		final int y = (int) (info.draw.y - height / 2.0);
+		final int w = (int) (width);
+		final int h = (int) (height);
+		
 //		graphics.setColor(Color.black);
-//		graphics.drawString(ScenarioManager.dev.getName(), x - 3, y);
-//	}
+//		graphics.fillOval(x, y, w, h);
+
+		// Draw the devices ID ID
+		graphics.setColor(Color.black);
+		graphics.drawString("Problem generated ----> " + ScenarioManager.dev.getName(), x - 3, y);
+	}
 
 
 }

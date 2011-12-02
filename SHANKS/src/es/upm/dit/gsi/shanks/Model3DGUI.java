@@ -1,8 +1,11 @@
 package es.upm.dit.gsi.shanks;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.Point;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -20,12 +23,13 @@ import sim.engine.SimState;
 import sim.portrayal.Inspector;
 import sim.portrayal.SimpleInspector;
 import sim.portrayal.grid.SparseGridPortrayal2D;
+import sim.portrayal.simple.ImagePortrayal2D;
 import sim.portrayal3d.continuous.ContinuousPortrayal3D;
 import sim.portrayal3d.network.CylinderEdgePortrayal3D;
 import sim.portrayal3d.network.NetworkPortrayal3D;
 import sim.portrayal3d.network.SimpleEdgePortrayal3D;
 import sim.portrayal3d.network.SpatialNetwork3D;
-import sim.portrayal3d.simple.CircledPortrayal3D;
+import sim.portrayal3d.simple.ImagePortrayal3D;
 
 
 
@@ -35,12 +39,17 @@ public class Model3DGUI extends GUIState {
 	
 	public Display3D display;
     public JFrame displayFrame; 
+    
+    public Display3D legendDisplay;
+    public JFrame legendFrame;
+    
     public Display2D displayMessage;
     public JFrame frameMessage;
-    SparseGridPortrayal2D problems = new SparseGridPortrayal2D();
-    static ContinuousPortrayal3D elementsPortrayal = new ContinuousPortrayal3D();
+    
+    public static SparseGridPortrayal2D messagePortrayal = new SparseGridPortrayal2D();
+    public static ContinuousPortrayal3D elementsPortrayal = new ContinuousPortrayal3D();
+    public static ContinuousPortrayal3D legendPortrayal = new ContinuousPortrayal3D();
     NetworkPortrayal3D edgePortrayal = new NetworkPortrayal3D();
-    public static List<Device> devices = new ArrayList<Device>();
 
     public static void main(String[] args){
     	new Model3DGUI().createController();
@@ -78,59 +87,87 @@ public class Model3DGUI extends GUIState {
 
     public void quit(){
     	super.quit();
-    	if (displayFrame!=null && frameMessage != null){ 
+    	if (displayFrame!=null && frameMessage!=null && legendFrame!=null){ 
     		displayFrame.dispose();
     		frameMessage.dispose();
+    		legendFrame.dispose();
     		frameMessage = null;
        		displayFrame = null;
+       		legendFrame = null;
     		display = null;
     		displayMessage = null;
+    		legendDisplay = null;
     	}
     }
-    
-    public static Image loadImage(String filename)
-    { 
-    return new ImageIcon(Model.class.getResource(filename)).getImage(); 
+    public static Image loadImage(String img){ 
+        return new ImageIcon(Model.class.getResource(img)).getImage(); 
     }
+
+
     
     public void setupPortrayals(){
     	display.destroySceneGraph();
+    	legendDisplay.destroySceneGraph();
     	Model mod = (Model) state;
-    	
-//    	displayMessage = new Display2D(600, 600, this, 1);
-//		displayMessage.setClipping(false);
-//
-//		frameMessage = displayMessage.createFrame();
-//		displayFrame1.setTitle("Environment Display - Simulation Model 1");
-//		c.registerFrame(displayFrame1);
-//		displayFrame1.setVisible(true);
-    	
+        
     	edgePortrayal.setField( new SpatialNetwork3D(mod.elements3d, mod.links1 ) );
         SimpleEdgePortrayal3D linkportrayal = new CylinderEdgePortrayal3D((float) 1);
-
         edgePortrayal.setPortrayalForAll(linkportrayal);
-        elementsPortrayal.setField(mod.elements3d); 
+        elementsPortrayal.setField(mod.elements3d);
+        legendPortrayal.setField(mod.legend);
+
+        messagePortrayal.setField(Model.problems);
         DevicePortrayal dport = new DevicePortrayal();
-        elementsPortrayal.setPortrayalForAll(dport);
-        display.reset();
-        display.createSceneGraph();
         
+        ImagePortrayal2D img = new ImagePortrayal2D(loadImage("OLT(Recortada).jpg"));
+        elementsPortrayal.setPortrayalForAll(dport);
+        legendPortrayal.setPortrayalForAll(dport);
+        displayMessage.reset();
+        display.reset();
+        legendDisplay.reset();
+        displayMessage.setBackdrop(Color.white);
+        display.createSceneGraph();
+        legendDisplay.createSceneGraph();
+        displayMessage.repaint();
     }
     
     public void init(Controller c){
     	super.init(c);
     	Model mod = (Model) state;
+    	
        	display = new Display3D(800,800,this,1);
+       	legendDisplay = new Display3D(450,450,this,1);
+       	displayMessage = new Display2D(365, 50, this, 1);
+		
+       	legendDisplay.attach(legendPortrayal, "Legend");       	
+       	displayMessage.attach(messagePortrayal, "Problems");  	
        	display.attach(edgePortrayal, "EDGES");
     	display.attach(elementsPortrayal, "SHANKS");
     	display.scale(1.0/mod.gridHeight*1.05);
+    	legendDisplay.scale(1.0/mod.gridHeight*1.05);
+    	  	
     	displayFrame = display.createFrame();
+    	legendFrame = legendDisplay.createFrame();
+    	frameMessage = displayMessage.createFrame();
+    	
+    	frameMessage.setLocation(0,855);
+    	frameMessage.setTitle("Problems Display");
+       	legendFrame.setLocation(800,400);
+    	legendFrame.setTitle("Scenario Legend");
+    	
+    	c.registerFrame(frameMessage);
+    	c.registerFrame(legendFrame);
         c.registerFrame(displayFrame);
+        
+        frameMessage.setVisible(true);
+        legendFrame.setVisible(true);
         displayFrame.setVisible(true);
+        
         display.mSelectBehavior.setTolerance(10.0f);
+        legendDisplay.mSelectBehavior.setTolerance(10.0f);
         }
     
-    
+       
     public class ScenarioChoice{
     	int cells = 0;
     	int error = 0;
@@ -175,8 +212,8 @@ public class Model3DGUI extends GUIState {
             
         // reattach the portrayals
         display.detatchAll();
-        display.attach(elementsPortrayal,"Heat");
-        display.attach(edgePortrayal,"Bugs");
+        display.attach(elementsPortrayal,"Devices");
+        display.attach(edgePortrayal,"Edges");
 
         // redisplay
         if (display!=null) display.repaint();
@@ -202,9 +239,7 @@ public class Model3DGUI extends GUIState {
 		
 		
 		Box b = new Box(BoxLayout.X_AXIS) {
-        /**
-			 * 
-			 */
+
 			private static final long serialVersionUID = 7429894079728338277L;
 
 		public Insets getInsets(){ 

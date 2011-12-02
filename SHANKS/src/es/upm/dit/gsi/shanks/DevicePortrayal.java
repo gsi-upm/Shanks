@@ -26,7 +26,7 @@ public class DevicePortrayal extends SimplePortrayal3D{
 
 	public Logger log = Logger.getLogger("DevicePortrayal");
 	
-	final static Color3f healthyColor = new Color3f(153,153,153);
+	final static Color3f healthyColor = new Color3f(0,200,0);
     final static Color3f brokenColor = new Color3f(200,0,0);
     public float diameter = 30;
     

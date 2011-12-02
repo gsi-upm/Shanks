@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks;
+package es.upm.dit.gsi.shanks.model;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,6 +14,8 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+
+import es.upm.dit.gsi.shanks.portrayal.DevicePortrayal;
 
 import sim.display.Controller;
 import sim.display.Display2D;

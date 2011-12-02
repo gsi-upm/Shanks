@@ -1,5 +1,7 @@
 package es.upm.dit.gsi.shanks;
 
+import es.upm.dit.gsi.shanks.devices.Device;
+
 /**
  * Message class
  * 

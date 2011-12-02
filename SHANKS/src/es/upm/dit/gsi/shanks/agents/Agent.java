@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks;
+package es.upm.dit.gsi.shanks.agents;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -8,6 +8,11 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
+
+import es.upm.dit.gsi.shanks.Definitions;
+import es.upm.dit.gsi.shanks.ScenarioManager;
+import es.upm.dit.gsi.shanks.devices.Device;
+import es.upm.dit.gsi.shanks.model.Model;
 
 
 import sim.engine.SimState;

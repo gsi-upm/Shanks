@@ -2,6 +2,8 @@ package es.upm.dit.gsi.shanks;
 
 import java.util.List;
 
+import es.upm.dit.gsi.shanks.devices.Device;
+
 /**
  * Scenarios class
  * 

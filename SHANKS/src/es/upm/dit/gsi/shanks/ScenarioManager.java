@@ -16,6 +16,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import es.upm.dit.gsi.shanks.agents.Agent;
+import es.upm.dit.gsi.shanks.devices.Device;
+import es.upm.dit.gsi.shanks.model.Model;
+
 import sim.engine.SimState;
 import sim.engine.Steppable;
 

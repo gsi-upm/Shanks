@@ -1,9 +1,21 @@
-package es.upm.dit.gsi.shanks;
+package es.upm.dit.gsi.shanks.model;
 
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+
+import es.upm.dit.gsi.shanks.Definitions;
+import es.upm.dit.gsi.shanks.DeviceErrors;
+import es.upm.dit.gsi.shanks.ScenarioManager;
+import es.upm.dit.gsi.shanks.Scenarios;
+import es.upm.dit.gsi.shanks.agents.Agent;
+import es.upm.dit.gsi.shanks.devices.Device;
+import es.upm.dit.gsi.shanks.devices.Gateway;
+import es.upm.dit.gsi.shanks.devices.OLT;
+import es.upm.dit.gsi.shanks.devices.ONT;
+import es.upm.dit.gsi.shanks.devices.Splitter;
+import es.upm.dit.gsi.shanks.portrayal.Links;
 
 import sim.engine.Schedule;
 import sim.engine.SimState;

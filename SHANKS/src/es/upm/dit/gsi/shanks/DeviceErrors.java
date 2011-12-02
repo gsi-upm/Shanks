@@ -6,6 +6,9 @@ import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.upm.dit.gsi.shanks.devices.Device;
+import es.upm.dit.gsi.shanks.model.Model;
+
 import sim.portrayal.DrawInfo2D;
 import sim.portrayal.SimplePortrayal2D;
 import sim.portrayal.simple.ImagePortrayal2D;

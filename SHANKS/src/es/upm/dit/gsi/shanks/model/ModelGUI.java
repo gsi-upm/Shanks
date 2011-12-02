@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks;
+package es.upm.dit.gsi.shanks.model;
 
 import java.awt.Color;
 import java.awt.Image;

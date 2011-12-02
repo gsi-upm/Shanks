@@ -1,0 +1,16 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>es.upm.dit.gsi</groupId>
+  <artifactId>SHANKS</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>Simulation for Heterogeneous and Autonomic Networks with MASON</name>
+  <description>"Shanks with MASON" is a framework to simulate different network scenarios in order to add autonomic capabilities using MASON simulation framework.
+
+To achieve this goal, a multi-agent system (MAS) is used to handle possible situations in the scenario. These agents are able to analyse environment data, perform inference and self-healing actions, etc. </description>
+  <url>http://code.google.com/p/shanks-with-mason/</url>
+  <inceptionYear>2011</inceptionYear>
+  <organization>
+  	<name>Universidad Politécnica de Madrid</name>
+  	<url>http://www.etsit.upm.es</url>
+  </organization>
+</project>

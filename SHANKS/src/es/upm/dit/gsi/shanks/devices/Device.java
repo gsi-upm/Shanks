@@ -1,7 +1,9 @@
-package es.upm.dit.gsi.shanks;
+package es.upm.dit.gsi.shanks.devices;
 
 import java.util.List;
 import java.util.logging.Logger;
+
+import es.upm.dit.gsi.shanks.Definitions;
 
 import sim.engine.SimState;
 import sim.engine.Steppable;

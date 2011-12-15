@@ -121,7 +121,6 @@ public class Model3DGUI extends GUIState {
         messagePortrayal.setField(Model.problems);
         DevicePortrayal dport = new DevicePortrayal();
         
-        ImagePortrayal2D img = new ImagePortrayal2D(loadImage("OLT(Recortada).jpg"));
         elementsPortrayal.setPortrayalForAll(dport);
         legendPortrayal.setPortrayalForAll(dport);
         displayMessage.reset();

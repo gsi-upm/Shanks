@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
+import sim.display.Console;
 import sim.display.Controller;
 import sim.display.Display2D;
 import sim.display.GUIState;
@@ -96,6 +97,17 @@ public class ModelGUI extends GUIState {
         // redisplay
         if (display!=null) display.repaint();
         }
+	}
+	
+	/**
+	 * Creates and returns a controller ready for the user to manipulate. By
+	 * default this method creates a Console, sets it visible, and returns it.
+	 * You can override this to provide some other kind of controller.
+	 */
+	public Controller createController() {
+		Console console = new Console(this);
+		console.setVisible(true);
+		return console;
 	}
 //	public Inspector getInspector() {
 //		

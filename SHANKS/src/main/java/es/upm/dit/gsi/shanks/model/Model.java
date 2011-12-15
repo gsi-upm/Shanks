@@ -78,7 +78,7 @@ public class Model extends SimState{
 
 	/**
 	 * Set the grid Width
-	 * @param gridWidth
+	 * @param width
 	 */
 	public void setGridWidth(int width) {
 		gridWidth = width;
@@ -94,7 +94,7 @@ public class Model extends SimState{
 
 	/**
 	 * Set the grid Height
-	 * @param gridHeight
+	 * @param height
 	 */
 	public void setGridHeight(int height) {
 		gridHeight = height;

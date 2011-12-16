@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks.model.ftth;
+package es.upm.dit.gsi.shanks.model.scenario.ftth;
 
 import java.util.List;
 

@@ -1,12 +1,12 @@
-package es.upm.dit.gsi.shanks.model.ftth.device;
+package es.upm.dit.gsi.shanks.model.scenario.ftth.device;
 
 import es.upm.dit.gsi.shanks.model.scenario.Device;
 
 
 /**
- * OLT class
+ * ONT class
  * 
- * Create the OLTs of the scenario
+ * Create the ONTs of the scenario
  * 
  * @author Daniel Lara
  * @version 0.1
@@ -14,43 +14,38 @@ import es.upm.dit.gsi.shanks.model.scenario.Device;
  */
 
 
-
-public class OLT extends Device {
+public class ONT extends Device {
     
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6004213563737699458L;
+	private static final long serialVersionUID = -7825776336743519245L;
 
-
-
-	public OLT(String id, int status, int temperature, int type) {
+	public ONT(String id, int status, int temperature, int type) {
 		super(id, status, temperature, type);
 	}
 	
-	private int coreConnectionState;
-    private int ftthConnectionState;
+	private int gatewayConnectionState;
+    private int fiberConnectionState;
     private int emitedLaserPower;
     private int receivedLaserPower;
     private int inputBitrate;
     private int outputBitrate;
     
-    
-    
-	public int getCoreConnectionState() {
-		return coreConnectionState;
+	public int getGatewayConnectionState() {
+		return gatewayConnectionState;
 	}
 	
-	public void setCoreConnectionState(int coreConnectionState) {
-		this.coreConnectionState = coreConnectionState;
+	public void setGatewayConnectionState(int gatewayConnectionState) {
+		this.gatewayConnectionState = gatewayConnectionState;
 	}
 	
-	public int getFtthConnectionState() {
-		return ftthConnectionState;
+	public int getFiberConnectionState() {
+		return fiberConnectionState;
 	}
 	
-	public void setFtthConnectionState(int ftthConnectionState) {
-		this.ftthConnectionState = ftthConnectionState;
+	public void setFiberConnectionState(int fiberConnectionState) {
+		this.fiberConnectionState = fiberConnectionState;
 	}
 	
 	public int getEmitedLaserPower() {
@@ -85,5 +80,6 @@ public class OLT extends Device {
 		this.outputBitrate = outputBitrate;
 	}
 	
+    
     
 }

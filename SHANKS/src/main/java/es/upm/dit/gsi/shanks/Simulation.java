@@ -5,18 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import es.upm.dit.gsi.shanks.agent.Agent;
-import es.upm.dit.gsi.shanks.model.ScenarioManager;
-import es.upm.dit.gsi.shanks.model.common.Definitions;
-import es.upm.dit.gsi.shanks.model.failure.Failure;
-import es.upm.dit.gsi.shanks.model.ftth.device.Gateway;
-import es.upm.dit.gsi.shanks.model.ftth.device.OLT;
-import es.upm.dit.gsi.shanks.model.ftth.device.ONT;
-import es.upm.dit.gsi.shanks.model.ftth.device.Splitter;
-import es.upm.dit.gsi.shanks.model.scenario.Device;
-import es.upm.dit.gsi.shanks.model.scenario.Scenario;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.Links;
-
 import sim.engine.Schedule;
 import sim.engine.SimState;
 import sim.field.continuous.Continuous3D;
@@ -24,7 +12,17 @@ import sim.field.grid.SparseGrid2D;
 import sim.field.network.Edge;
 import sim.field.network.Network;
 import sim.util.Double3D;
-import sim.util.Int2D;
+import es.upm.dit.gsi.shanks.agent.Agent;
+import es.upm.dit.gsi.shanks.model.ScenarioManager;
+import es.upm.dit.gsi.shanks.model.common.Definitions;
+import es.upm.dit.gsi.shanks.model.failure.Failure;
+import es.upm.dit.gsi.shanks.model.scenario.Device;
+import es.upm.dit.gsi.shanks.model.scenario.Scenario;
+import es.upm.dit.gsi.shanks.model.scenario.ftth.device.Gateway;
+import es.upm.dit.gsi.shanks.model.scenario.ftth.device.OLT;
+import es.upm.dit.gsi.shanks.model.scenario.ftth.device.ONT;
+import es.upm.dit.gsi.shanks.model.scenario.ftth.device.Splitter;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.Links;
 
 
 /**

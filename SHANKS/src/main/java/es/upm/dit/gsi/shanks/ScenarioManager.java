@@ -31,11 +31,11 @@ public class ScenarioManager implements Steppable{
 		public Logger log = Logger.getLogger(this.getClass().toString());
 	
 		private static final long serialVersionUID = -7448202235281457216L;
-		public static Scenarios scenario;
+		public static Scenario scenario;
 		public static DeviceErrors dev;
 		public static int totalproblems = 0;
 		
-		public ScenarioManager(Scenarios scen){
+		public ScenarioManager(Scenario scen){
 			this.log.setLevel(Level.ALL);
 			scenario = scen;
 		}

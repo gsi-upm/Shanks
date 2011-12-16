@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 import es.upm.dit.gsi.shanks.Definitions;
 import es.upm.dit.gsi.shanks.DeviceErrors;
 import es.upm.dit.gsi.shanks.ScenarioManager;
-import es.upm.dit.gsi.shanks.Scenarios;
+import es.upm.dit.gsi.shanks.Scenario;
 import es.upm.dit.gsi.shanks.agents.Agent;
 import es.upm.dit.gsi.shanks.devices.Device;
 import es.upm.dit.gsi.shanks.devices.Gateway;
@@ -52,7 +52,7 @@ public class Model extends SimState{
 	public int continuous1 = 500;
 	public int continuous2 = 500;
 	public int continuous3 = 500;
-	public static Scenarios scenario;
+	public static Scenario scenario;
 	public static double PROB_BROKEN = 0.15;
 	public static String SELECT_SCENARIO = "REAL FTTH";
 	public static String SELECT_ERROR_GENERATION = "ErrorList";
@@ -176,7 +176,7 @@ public class Model extends SimState{
 		makeLinks(splitter2, ont);
 		makeLinks(ont, gateway);	
 		System.out.println("FTTH RECIEN CREADA NUMERO DEVICES: " + devicesnetwork.size());
-		scenario = new Scenarios(SELECT_SCENARIO, devicesnetwork);
+		scenario = new Scenario(SELECT_SCENARIO, devicesnetwork);
 		return devicesnetwork;
 	}
 	
@@ -228,7 +228,7 @@ public class Model extends SimState{
 		makeLinks(ont2, gateway2);
 		makeLinks(ont3, gateway3);
 		makeLinks(ont4, gateway4);	
-		scenario = new Scenarios(SELECT_SCENARIO, devicesnetwork);
+		scenario = new Scenario(SELECT_SCENARIO, devicesnetwork);
 		return devicesnetwork;
 	}
 	

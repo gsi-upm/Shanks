@@ -10,21 +10,22 @@ import es.upm.dit.gsi.shanks.devices.Device;
  * This class create the different scenarios
  * 
  * @author Daniel Lara
+ * @author Álvaro Carrera
  * @version 0.1
  *
  */
 
 
 //This class make the diferent scenarios
-public class Scenarios {
+public class Scenario {
 	
 	public String name;
 	public List<Device> devices;
 	public List<Device> ftth;
-	public Scenarios scenario;
+	public Scenario scenario;
 	
 	
-	public Scenarios(String name, List<Device> devices){
+	public Scenario(String name, List<Device> devices){
 		this.name = name;
 		this.devices = devices;
 		

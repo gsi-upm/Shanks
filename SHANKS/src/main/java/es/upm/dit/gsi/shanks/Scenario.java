@@ -11,32 +11,28 @@ import es.upm.dit.gsi.shanks.devices.Device;
  * 
  * @author Daniel Lara
  * @author Álvaro Carrera
- * @version 0.1
- *
+ * @version 0.1.1
+ * 
  */
-
-
-//This class make the diferent scenarios
 public class Scenario {
-	
+
 	public String name;
 	public List<Device> devices;
 	public List<Device> ftth;
 	public Scenario scenario;
-	
-	
-	public Scenario(String name, List<Device> devices){
+
+	public Scenario(String name, List<Device> devices) {
 		this.name = name;
 		this.devices = devices;
-		
+
 	}
 
-	public String getName(){
+	public String getName() {
 		return name;
 	}
-	
-	public List<Device> getDevices(){
+
+	public List<Device> getDevices() {
 		return devices;
 	}
-	
+
 }

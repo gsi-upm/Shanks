@@ -32,7 +32,7 @@ public class ScenarioManager implements Steppable{
 	
 		private static final long serialVersionUID = -7448202235281457216L;
 		public static Scenario scenario;
-		public static DeviceErrors dev;
+		public static Error dev;
 		public static int totalproblems = 0;
 		
 		public ScenarioManager(Scenario scen){
@@ -50,17 +50,17 @@ public class ScenarioManager implements Steppable{
 			if(Agent.repairFlag){
 				repairProblems();
 			}
-			int randomproblem = (int) (Math.random()*DeviceErrors.deverrors.size());
+			int randomproblem = (int) (Math.random()*Error.deverrors.size());
 			double randomerrorgenerator = Math.random();
 			if(randomerrorgenerator <= Model.PROB_BROKEN){
-				dev = DeviceErrors.deverrors.get(randomproblem);
+				dev = Error.deverrors.get(randomproblem);
 				dev.setTrigger(true);
 				Model.problems.setObjectLocation(dev, 25, 25);
 				Agent.problemDetected = dev.getName();
 				totalproblems++;				
 			}else if(randomerrorgenerator > Model.PROB_BROKEN){
-				DeviceErrors noproblem = new DeviceErrors ("No problem", true);
-				dev = noproblem;
+//				Error noproblem = new Error ("No problem", true);
+//				dev = noproblem;
 				Model.problems.setObjectLocation(dev, 25, 25);
 				Agent.problemDetected = dev.getName();
 			}
@@ -69,7 +69,7 @@ public class ScenarioManager implements Steppable{
 		}
 		
 		public void repairProblems(){
-			for(DeviceErrors d : DeviceErrors.deverrors){
+			for(Error d : Error.deverrors){
 				d.setTrigger(false);
 			}
 		}
@@ -85,7 +85,7 @@ public class ScenarioManager implements Steppable{
 				break;
 			case 1:
 				generateProblem();
-				DeviceErrors.setDeviceWithProblems();
+				Error.setDeviceWithProblems();
 				break;
 			}
 		}

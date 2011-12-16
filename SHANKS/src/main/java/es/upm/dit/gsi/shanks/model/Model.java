@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import es.upm.dit.gsi.shanks.Definitions;
-import es.upm.dit.gsi.shanks.DeviceErrors;
+import es.upm.dit.gsi.shanks.Error;
 import es.upm.dit.gsi.shanks.ScenarioManager;
 import es.upm.dit.gsi.shanks.Scenario;
 import es.upm.dit.gsi.shanks.agents.Agent;
@@ -281,7 +281,7 @@ public class Model extends SimState{
 				System.out.println("SELECTED SCENARIO " + scenario.getName());
 				break;
 			}
-		DeviceErrors.createDeviceErrors();
+		Error.createDeviceErrors();
 		Agent a = new Agent();
 		schedule.scheduleRepeating(Schedule.EPOCH,0,m,2);
 		schedule.scheduleRepeating(Schedule.EPOCH + 1,2,a,2);

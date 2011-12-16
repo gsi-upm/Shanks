@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>es.upm.dit.gsi</groupId>
 	<artifactId>shanks</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>SHANKS with MASON</name>
 	<description>Simulation for Heterogeneous and Autonomic Networks with MASON.

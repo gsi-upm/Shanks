@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import es.upm.dit.gsi.shanks.agent.Agent;
-import es.upm.dit.gsi.shanks.devices.Gateway;
-import es.upm.dit.gsi.shanks.devices.OLT;
-import es.upm.dit.gsi.shanks.devices.ONT;
-import es.upm.dit.gsi.shanks.devices.Splitter;
 import es.upm.dit.gsi.shanks.model.ScenarioManager;
 import es.upm.dit.gsi.shanks.model.common.Definitions;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
+import es.upm.dit.gsi.shanks.model.ftth.device.Gateway;
+import es.upm.dit.gsi.shanks.model.ftth.device.OLT;
+import es.upm.dit.gsi.shanks.model.ftth.device.ONT;
+import es.upm.dit.gsi.shanks.model.ftth.device.Splitter;
 import es.upm.dit.gsi.shanks.model.scenario.Device;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Links;

@@ -3,8 +3,8 @@ package es.upm.dit.gsi.shanks.model.scenario;
 import java.util.List;
 import java.util.logging.Logger;
 
-import es.upm.dit.gsi.shanks.devices.Link;
 import es.upm.dit.gsi.shanks.model.common.Definitions;
+import es.upm.dit.gsi.shanks.model.ftth.device.Link;
 
 import sim.engine.SimState;
 import sim.engine.Steppable;

@@ -23,7 +23,7 @@ public class Scenario {
 	public Scenario(String name, List<Device> devices) {
 		this.name = name;
 		this.devices = devices;
-
+		
 	}
 
 	public String getName() {
@@ -32,6 +32,10 @@ public class Scenario {
 
 	public List<Device> getDevices() {
 		return devices;
+	}
+	
+	public void addDevice(Device device) {
+		
 	}
 
 }

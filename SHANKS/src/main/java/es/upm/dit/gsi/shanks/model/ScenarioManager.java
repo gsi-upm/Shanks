@@ -61,7 +61,9 @@ public class ScenarioManager implements Steppable{
 				Agent.problemDetected = dev.getName();
 				totalproblems++;				
 			}else if(randomerrorgenerator > Simulation.PROB_BROKEN){
-//				Error noproblem = new Error ("No problem", true);
+				
+				// TODO create a valid failure
+//				Error noproblem = new Failure ("No problem", true);
 //				dev = noproblem;
 				Simulation.problems.setObjectLocation(dev, 25, 25);
 				Agent.problemDetected = dev.getName();

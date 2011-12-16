@@ -218,14 +218,14 @@ public class Simulation3DGUI extends GUIState {
 				Simulation.SELECT_SCENARIO = "SIMPLE FTTH";
 			}
 
-			// reattach the portrayals
-			display.detatchAll();
-			display.attach(elementsPortrayal, "Devices");
-			display.attach(edgePortrayal, "Edges");
-
-			// redisplay
-			if (display != null)
-				display.repaint();
+//			// reattach the portrayals
+//			display.detatchAll();
+//			display.attach(elementsPortrayal, "Devices");
+//			display.attach(edgePortrayal, "Edges");
+//
+//			// redisplay
+//			if (display != null)
+//				display.repaint();
 		}
 	}
 

@@ -9,7 +9,7 @@ import java.util.List;
  * This class create the different scenarios
  * 
  * @author Daniel Lara
- * @author ¡lvaro Carrera
+ * @author √Ålvaro Carrera
  * @version 0.1.1
  * 
  */

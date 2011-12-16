@@ -18,7 +18,7 @@ import es.upm.dit.gsi.shanks.model.scenario.Device;
  * Make the possible erros of the devices
  * 
  * @author Daniel Lara
- * @author ¡lvaro Carrera
+ * @author √Ålvaro Carrera
  * @version 0.1.1
  * 
  */

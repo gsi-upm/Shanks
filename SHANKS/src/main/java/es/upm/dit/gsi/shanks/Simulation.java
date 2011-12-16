@@ -1,21 +1,21 @@
-package es.upm.dit.gsi.shanks.model;
+package es.upm.dit.gsi.shanks;
 
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import es.upm.dit.gsi.shanks.Definitions;
-import es.upm.dit.gsi.shanks.Error;
-import es.upm.dit.gsi.shanks.ScenarioManager;
-import es.upm.dit.gsi.shanks.Scenario;
-import es.upm.dit.gsi.shanks.agents.Agent;
-import es.upm.dit.gsi.shanks.devices.Device;
+import es.upm.dit.gsi.shanks.agent.Agent;
 import es.upm.dit.gsi.shanks.devices.Gateway;
 import es.upm.dit.gsi.shanks.devices.OLT;
 import es.upm.dit.gsi.shanks.devices.ONT;
 import es.upm.dit.gsi.shanks.devices.Splitter;
-import es.upm.dit.gsi.shanks.portrayal.Links;
+import es.upm.dit.gsi.shanks.model.ScenarioManager;
+import es.upm.dit.gsi.shanks.model.common.Definitions;
+import es.upm.dit.gsi.shanks.model.failure.Failure;
+import es.upm.dit.gsi.shanks.model.scenario.Device;
+import es.upm.dit.gsi.shanks.model.scenario.Scenario;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.Links;
 
 import sim.engine.Schedule;
 import sim.engine.SimState;
@@ -37,7 +37,7 @@ import sim.util.Int2D;
  *
  */
 
-public class Model extends SimState{
+public class Simulation extends SimState{
 	
 	/**Parameters of the class*/
 	private static final long serialVersionUID = -2238530527253654867L;
@@ -62,7 +62,7 @@ public class Model extends SimState{
 	public Continuous3D legend;
 	
 	/**Default Constructor*/
-	public Model(long seed) {
+	public Simulation(long seed) {
 		super(seed);
 		log.fine("Model constructor ->");
 	}
@@ -105,7 +105,7 @@ public class Model extends SimState{
 	 * @param prob
 	 */
 	public void setProbBroken(double prob){
-		Model.PROB_BROKEN = prob;
+		Simulation.PROB_BROKEN = prob;
 	}
 	
 	/**
@@ -281,7 +281,7 @@ public class Model extends SimState{
 				System.out.println("SELECTED SCENARIO " + scenario.getName());
 				break;
 			}
-		Error.createDeviceErrors();
+		Failure.createDeviceErrors();
 		Agent a = new Agent();
 		schedule.scheduleRepeating(Schedule.EPOCH,0,m,2);
 		schedule.scheduleRepeating(Schedule.EPOCH + 1,2,a,2);
@@ -291,7 +291,7 @@ public class Model extends SimState{
 	
 	
 	public static void main(String []args){
-		doLoop(Model.class, args);
+		doLoop(Simulation.class, args);
 	    System.exit(0); 
 	}
 

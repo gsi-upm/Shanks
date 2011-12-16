@@ -1,5 +1,7 @@
 package es.upm.dit.gsi.shanks.devices;
 
+import es.upm.dit.gsi.shanks.model.scenario.Device;
+
 
 /**
  * OLT class

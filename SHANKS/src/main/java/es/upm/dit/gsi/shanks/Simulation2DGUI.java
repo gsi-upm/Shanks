@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks.model;
+package es.upm.dit.gsi.shanks;
 
 import java.awt.Color;
 import java.awt.Image;
@@ -27,7 +27,7 @@ import sim.portrayal.network.SpatialNetwork2D;
  */
 
 //The GUI of the model
-public class ModelGUI extends GUIState {
+public class Simulation2DGUI extends GUIState {
 	
 	public Logger log = Logger.getLogger("ModelGUI");
 	
@@ -40,22 +40,22 @@ public class ModelGUI extends GUIState {
 
 
 	public static void main(String[] args) {
-		ModelGUI modelgui = new ModelGUI();
+		Simulation2DGUI modelgui = new Simulation2DGUI();
 		modelgui.createController();
 
 	}
 	
 	public static Image loadImage(String img){ 
-    return new ImageIcon(Model.class.getResource(img)).getImage(); 
+    return new ImageIcon(Simulation.class.getResource(img)).getImage(); 
     }
 
 
-	public ModelGUI() {
-		super(new Model(System.currentTimeMillis()));
+	public Simulation2DGUI() {
+		super(new Simulation(System.currentTimeMillis()));
 		log.finer("-> Constructor ModelGUI");
 	}
 
-	public ModelGUI(SimState state) {
+	public Simulation2DGUI(SimState state) {
 		super(state);
 	}
 
@@ -82,11 +82,11 @@ public class ModelGUI extends GUIState {
 		public void setSelectscenario(int val){
 			if(val == 0){
 				selected = val;
-				Model.SELECT_SCENARIO = "FTTH";
+				Simulation.SELECT_SCENARIO = "FTTH";
 			}
 			else if (val==1){
 				selected = val;
-				Model.SELECT_SCENARIO = "PRUEBA";
+				Simulation.SELECT_SCENARIO = "PRUEBA";
 			}
             
         //reattach the portrayals
@@ -164,9 +164,9 @@ public class ModelGUI extends GUIState {
 	
 	//Setup the Portrayals
 	public void setupPortrayals(){
-		Model model = (Model) state;
-		agents.setField(Model.problems);
-		links.setField(new SpatialNetwork2D(Model.problems, model.links1));
+		Simulation model = (Simulation) state;
+		agents.setField(Simulation.problems);
+		links.setField(new SpatialNetwork2D(Simulation.problems, model.links1));
 		//links.setPortrayalForAll(new Links());
 		display.reset();
 		display.setBackdrop(Color.white);

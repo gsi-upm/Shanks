@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks.portrayal;
+package es.upm.dit.gsi.shanks.model.scenario.portrayal;
 
 import java.util.logging.Logger;
 
@@ -16,8 +16,8 @@ import com.sun.j3d.utils.geometry.Cone;
 import com.sun.j3d.utils.geometry.Cylinder;
 import com.sun.j3d.utils.geometry.Sphere;
 
-import es.upm.dit.gsi.shanks.Definitions;
-import es.upm.dit.gsi.shanks.devices.Device;
+import es.upm.dit.gsi.shanks.model.common.Definitions;
+import es.upm.dit.gsi.shanks.model.scenario.Device;
 
 
 public class DevicePortrayal extends SimplePortrayal3D{
@@ -38,7 +38,7 @@ public class DevicePortrayal extends SimplePortrayal3D{
  
     }
     
-    public String getLabel(es.upm.dit.gsi.shanks.devices.Device d){
+    public String getLabel(es.upm.dit.gsi.shanks.model.scenario.Device d){
     	String deviceName = d.getID();
     	return deviceName;
     }

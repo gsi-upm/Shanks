@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks.model;
+package es.upm.dit.gsi.shanks;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,7 +15,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
-import es.upm.dit.gsi.shanks.portrayal.DevicePortrayal;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.DevicePortrayal;
 
 import sim.display.Console;
 import sim.display.Controller;
@@ -34,7 +34,7 @@ import sim.portrayal3d.network.SimpleEdgePortrayal3D;
 import sim.portrayal3d.network.SpatialNetwork3D;
 import sim.portrayal3d.simple.ImagePortrayal3D;
 
-public class Model3DGUI extends GUIState {
+public class Simulation3DGUI extends GUIState {
 
 	public Logger log = Logger.getLogger("ModelGUI");
 
@@ -53,14 +53,14 @@ public class Model3DGUI extends GUIState {
 	NetworkPortrayal3D edgePortrayal = new NetworkPortrayal3D();
 
 	public static void main(String[] args) {
-		new Model3DGUI().createController();
+		new Simulation3DGUI().createController();
 	}
 
-	public Model3DGUI() {
-		super(new Model(System.currentTimeMillis()));
+	public Simulation3DGUI() {
+		super(new Simulation(System.currentTimeMillis()));
 	}
 
-	public Model3DGUI(SimState state) {
+	public Simulation3DGUI(SimState state) {
 		super(state);
 	}
 
@@ -113,13 +113,13 @@ public class Model3DGUI extends GUIState {
 	}
 
 	public static Image loadImage(String img) {
-		return new ImageIcon(Model.class.getResource(img)).getImage();
+		return new ImageIcon(Simulation.class.getResource(img)).getImage();
 	}
 
 	public void setupPortrayals() {
 		display.destroySceneGraph();
 		legendDisplay.destroySceneGraph();
-		Model mod = (Model) state;
+		Simulation mod = (Simulation) state;
 
 		edgePortrayal
 				.setField(new SpatialNetwork3D(mod.elements3d, mod.links1));
@@ -129,7 +129,7 @@ public class Model3DGUI extends GUIState {
 		elementsPortrayal.setField(mod.elements3d);
 		legendPortrayal.setField(mod.legend);
 
-		messagePortrayal.setField(Model.problems);
+		messagePortrayal.setField(Simulation.problems);
 		DevicePortrayal dport = new DevicePortrayal();
 
 		elementsPortrayal.setPortrayalForAll(dport);
@@ -145,7 +145,7 @@ public class Model3DGUI extends GUIState {
 
 	public void init(Controller c) {
 		super.init(c);
-		Model mod = (Model) state;
+		Simulation mod = (Simulation) state;
 
 		display = new Display3D(800, 800, this, 1);
 		legendDisplay = new Display3D(450, 450, this, 1);
@@ -202,20 +202,20 @@ public class Model3DGUI extends GUIState {
 		public void setErrorGenerationChoice(int val) {
 			if (val == 0) {
 				error = val;
-				Model.SELECT_ERROR_GENERATION = "ErrorList";
+				Simulation.SELECT_ERROR_GENERATION = "ErrorList";
 			} else if (val == 1) {
 				error = val;
-				Model.SELECT_ERROR_GENERATION = "ProbBroken";
+				Simulation.SELECT_ERROR_GENERATION = "ProbBroken";
 			}
 		}
 
 		public void setScenarioChoice(int val) {
 			if (val == 0) {
 				cells = val;
-				Model.SELECT_SCENARIO = "REAL FTTH";
+				Simulation.SELECT_SCENARIO = "REAL FTTH";
 			} else if (val == 1) {
 				cells = val;
-				Model.SELECT_SCENARIO = "SIMPLE FTTH";
+				Simulation.SELECT_SCENARIO = "SIMPLE FTTH";
 			}
 
 			// reattach the portrayals

@@ -1,6 +1,6 @@
-package es.upm.dit.gsi.shanks;
+package es.upm.dit.gsi.shanks.agent;
 
-import es.upm.dit.gsi.shanks.devices.Device;
+import es.upm.dit.gsi.shanks.model.scenario.Device;
 
 /**
  * Message class

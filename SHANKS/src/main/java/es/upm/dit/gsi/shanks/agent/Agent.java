@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks.agents;
+package es.upm.dit.gsi.shanks.agent;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -9,10 +9,10 @@ import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 
-import es.upm.dit.gsi.shanks.Definitions;
-import es.upm.dit.gsi.shanks.ScenarioManager;
-import es.upm.dit.gsi.shanks.devices.Device;
-import es.upm.dit.gsi.shanks.model.Model;
+import es.upm.dit.gsi.shanks.Simulation;
+import es.upm.dit.gsi.shanks.model.ScenarioManager;
+import es.upm.dit.gsi.shanks.model.common.Definitions;
+import es.upm.dit.gsi.shanks.model.scenario.Device;
 
 
 import sim.engine.SimState;
@@ -63,7 +63,7 @@ public class Agent extends SimplePortrayal2D implements Steppable{
 			}
 			
 		}
-		Model.problems.setObjectLocation(a,25,50);
+		Simulation.problems.setObjectLocation(a,25,50);
 		return faildevices;
 	}
 	
@@ -89,7 +89,7 @@ public class Agent extends SimplePortrayal2D implements Steppable{
 		}
 	}
 	public static Image loadImage(String img){ 
-	    return new ImageIcon(Model.class.getResource(img)).getImage(); 
+	    return new ImageIcon(Simulation.class.getResource(img)).getImage(); 
 	}
 
 	public void draw(Object object, Graphics2D graphics, DrawInfo2D info) {

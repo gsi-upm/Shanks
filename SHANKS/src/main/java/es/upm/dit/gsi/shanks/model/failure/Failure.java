@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks;
+package es.upm.dit.gsi.shanks.model.failure;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -7,8 +7,10 @@ import java.util.List;
 
 import sim.portrayal.DrawInfo2D;
 import sim.portrayal.SimplePortrayal2D;
-import es.upm.dit.gsi.shanks.devices.Device;
-import es.upm.dit.gsi.shanks.model.Model;
+import es.upm.dit.gsi.shanks.Simulation;
+import es.upm.dit.gsi.shanks.model.ScenarioManager;
+import es.upm.dit.gsi.shanks.model.common.Definitions;
+import es.upm.dit.gsi.shanks.model.scenario.Device;
 
 /**
  * DeviceErrors class
@@ -21,20 +23,20 @@ import es.upm.dit.gsi.shanks.model.Model;
  * 
  */
 
-public abstract class Error extends SimplePortrayal2D {
+public abstract class Failure extends SimplePortrayal2D {
 
 	/** DeviceErrors parametres and diferent types of errors */
 	private static final long serialVersionUID = -5684572432145540188L;
 	public String name;
 	public boolean trigger;
-	public static Error ipconf;
-	public static Error natproblem;
-	public static Error dhcproblem;
-	public static Error laser;
-	public static Error bitrate;
-	public static Error connection;
+	public static Failure ipconf;
+	public static Failure natproblem;
+	public static Failure dhcproblem;
+	public static Failure laser;
+	public static Failure bitrate;
+	public static Failure connection;
 
-	public static List<Error> deverrors = new ArrayList<Error>();
+	public static List<Failure> deverrors = new ArrayList<Failure>();
 
 	/**
 	 * Constructor of the class
@@ -44,7 +46,7 @@ public abstract class Error extends SimplePortrayal2D {
 	 * @param trigger
 	 *            TRUE if the error happens, FALSE in the other case
 	 */
-	public Error(String name, boolean trigger) {
+	public Failure(String name, boolean trigger) {
 		this.name = name;
 		this.trigger = trigger;
 	}
@@ -107,7 +109,7 @@ public abstract class Error extends SimplePortrayal2D {
 	 *            The Device Error that we can see its trigger
 	 * @return TRUE if the error is happening, FALSE in other case
 	 */
-	public static boolean getProblemStatus(Error de) {
+	public static boolean getProblemStatus(Failure de) {
 		return de.getTrigger();
 	}
 
@@ -118,14 +120,14 @@ public abstract class Error extends SimplePortrayal2D {
 	public static void setDeviceWithProblems() {
 		if (getProblemStatus(ipconf) || getProblemStatus(natproblem)
 				|| getProblemStatus(dhcproblem)) {
-			for (Device d : Model.devicesnetwork) {
+			for (Device d : Simulation.devicesnetwork) {
 				if (d.getType() == Definitions.GATEWAY) {
 					d.setStatus(1);
 				}
 			}
 		}
 		if (getProblemStatus(bitrate)) {
-			for (Device d : Model.devicesnetwork) {
+			for (Device d : Simulation.devicesnetwork) {
 				if (d.getType() == Definitions.OLT
 						|| d.getType() == Definitions.ONT) {
 					d.setStatus(1);
@@ -133,7 +135,7 @@ public abstract class Error extends SimplePortrayal2D {
 			}
 		}
 		if (getProblemStatus(laser)) {
-			for (Device d : Model.devicesnetwork) {
+			for (Device d : Simulation.devicesnetwork) {
 				if (d.getType() == Definitions.OLT
 						|| d.getType() == Definitions.ONT) {
 					d.setStatus(1);
@@ -141,7 +143,7 @@ public abstract class Error extends SimplePortrayal2D {
 			}
 		}
 		if (getProblemStatus(connection)) {
-			for (Device d : Model.devicesnetwork) {
+			for (Device d : Simulation.devicesnetwork) {
 				d.setStatus(1);
 			}
 		}

@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks;
+package es.upm.dit.gsi.shanks.model;
 
 
 /**
@@ -16,9 +16,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import es.upm.dit.gsi.shanks.agents.Agent;
-import es.upm.dit.gsi.shanks.devices.Device;
-import es.upm.dit.gsi.shanks.model.Model;
+import es.upm.dit.gsi.shanks.Simulation;
+import es.upm.dit.gsi.shanks.agent.Agent;
+import es.upm.dit.gsi.shanks.model.failure.Failure;
+import es.upm.dit.gsi.shanks.model.scenario.Device;
+import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 
 import sim.engine.SimState;
 import sim.engine.Steppable;
@@ -32,7 +34,7 @@ public class ScenarioManager implements Steppable{
 	
 		private static final long serialVersionUID = -7448202235281457216L;
 		public static Scenario scenario;
-		public static Error dev;
+		public static Failure dev;
 		public static int totalproblems = 0;
 		
 		public ScenarioManager(Scenario scen){
@@ -42,7 +44,7 @@ public class ScenarioManager implements Steppable{
 		
 		//Get the devices from scenario
 		public static List<Device> getDeviceFromScenario(){
-			return Model.devicesnetwork;
+			return Simulation.devicesnetwork;
 		}
 		
 		
@@ -50,18 +52,18 @@ public class ScenarioManager implements Steppable{
 			if(Agent.repairFlag){
 				repairProblems();
 			}
-			int randomproblem = (int) (Math.random()*Error.deverrors.size());
+			int randomproblem = (int) (Math.random()*Failure.deverrors.size());
 			double randomerrorgenerator = Math.random();
-			if(randomerrorgenerator <= Model.PROB_BROKEN){
-				dev = Error.deverrors.get(randomproblem);
+			if(randomerrorgenerator <= Simulation.PROB_BROKEN){
+				dev = Failure.deverrors.get(randomproblem);
 				dev.setTrigger(true);
-				Model.problems.setObjectLocation(dev, 25, 25);
+				Simulation.problems.setObjectLocation(dev, 25, 25);
 				Agent.problemDetected = dev.getName();
 				totalproblems++;				
-			}else if(randomerrorgenerator > Model.PROB_BROKEN){
+			}else if(randomerrorgenerator > Simulation.PROB_BROKEN){
 //				Error noproblem = new Error ("No problem", true);
 //				dev = noproblem;
-				Model.problems.setObjectLocation(dev, 25, 25);
+				Simulation.problems.setObjectLocation(dev, 25, 25);
 				Agent.problemDetected = dev.getName();
 			}
 			System.out.println("ERROR " + dev.getName());
@@ -69,7 +71,7 @@ public class ScenarioManager implements Steppable{
 		}
 		
 		public void repairProblems(){
-			for(Error d : Error.deverrors){
+			for(Failure d : Failure.deverrors){
 				d.setTrigger(false);
 			}
 		}
@@ -78,14 +80,14 @@ public class ScenarioManager implements Steppable{
 		//The actions done by the agent for each step
 		public void step(SimState state){
 			System.out.println("NUEVA PRUEBA");
-			Model model = (Model)state;
+			Simulation model = (Simulation)state;
 			switch(model.selectError()){
 			case 0:
 				model.setBrokenStatus();
 				break;
 			case 1:
 				generateProblem();
-				Error.setDeviceWithProblems();
+				Failure.setDeviceWithProblems();
 				break;
 			}
 		}

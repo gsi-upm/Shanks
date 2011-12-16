@@ -2,6 +2,8 @@ package es.upm.dit.gsi.shanks.devices;
 
 import java.util.List;
 
+import es.upm.dit.gsi.shanks.model.scenario.Device;
+
 /**
  * Link class
  * 

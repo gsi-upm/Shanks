@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks.model.scenario;
+package es.upm.dit.gsi.shanks.model.device;
 
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import sim.portrayal3d.SimplePortrayal3D;
-import es.upm.dit.gsi.shanks.model.common.Definitions;
-import es.upm.dit.gsi.shanks.model.scenario.ftth.device.Link;
+import es.upm.dit.gsi.shanks.model.device.ftth.Link;
+import es.upm.dit.gsi.shanks.model.scenario.ScenarioDefinitions;
 
 /**
  * Device class
@@ -78,7 +78,7 @@ public abstract class Device extends SimplePortrayal3D {
     /**
      * Return the type of the device
      * 
-     * @see Definitions
+     * @see ScenarioDefinitions
      * @return type The type of the device
      */
     public String getType() {

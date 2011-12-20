@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks.model.scenario.portrayal;
+package es.upm.dit.gsi.shanks.model.device.portrayal;
 
 import java.io.Serializable;
 

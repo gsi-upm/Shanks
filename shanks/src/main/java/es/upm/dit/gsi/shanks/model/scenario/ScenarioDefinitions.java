@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks.model.common;
+package es.upm.dit.gsi.shanks.model.scenario;
 
 /**
  * Definitions class for constants.
@@ -11,7 +11,7 @@ package es.upm.dit.gsi.shanks.model.common;
  * 
  */
 
-public class Definitions {
+public class ScenarioDefinitions {
 
     /**
      * Scenarios.

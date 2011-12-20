@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks.model.scenario.ftth.device;
+package es.upm.dit.gsi.shanks.model.device.ftth;
 
 //
 //

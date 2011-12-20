@@ -16,8 +16,8 @@ import java.util.logging.Logger;
 
 import es.upm.dit.gsi.shanks.Simulation;
 import es.upm.dit.gsi.shanks.agent.Agent;
+import es.upm.dit.gsi.shanks.model.device.Device;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
-import es.upm.dit.gsi.shanks.model.scenario.Device;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 
 import sim.engine.SimState;

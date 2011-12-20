@@ -1,49 +1,49 @@
-package es.upm.dit.gsi.shanks.model.scenario.ftth.device;
+package es.upm.dit.gsi.shanks.model.device.ftth;
 
-import es.upm.dit.gsi.shanks.model.scenario.Device;
+import es.upm.dit.gsi.shanks.model.device.Device;
 
 /**
- * ONT class
+ * OLT class
  * 
- * Create the ONTs of the scenario
+ * Create the OLTs of the scenario
  * 
  * @author Daniel Lara
  * @version 0.1
  * 
  */
 
-public class ONT extends Device {
+public class OLT extends Device {
 
     /**
 	 * 
 	 */
-    private static final long serialVersionUID = -7825776336743519245L;
+    private static final long serialVersionUID = -6004213563737699458L;
 
-    public ONT(String id, int status, int temperature, int type) {
+    public OLT(String id, int status, int temperature, int type) {
         super(id, status, temperature, type);
     }
 
-    private int gatewayConnectionState;
-    private int fiberConnectionState;
+    private int coreConnectionState;
+    private int ftthConnectionState;
     private int emitedLaserPower;
     private int receivedLaserPower;
     private int inputBitrate;
     private int outputBitrate;
 
-    public int getGatewayConnectionState() {
-        return gatewayConnectionState;
+    public int getCoreConnectionState() {
+        return coreConnectionState;
     }
 
-    public void setGatewayConnectionState(int gatewayConnectionState) {
-        this.gatewayConnectionState = gatewayConnectionState;
+    public void setCoreConnectionState(int coreConnectionState) {
+        this.coreConnectionState = coreConnectionState;
     }
 
-    public int getFiberConnectionState() {
-        return fiberConnectionState;
+    public int getFtthConnectionState() {
+        return ftthConnectionState;
     }
 
-    public void setFiberConnectionState(int fiberConnectionState) {
-        this.fiberConnectionState = fiberConnectionState;
+    public void setFtthConnectionState(int ftthConnectionState) {
+        this.ftthConnectionState = ftthConnectionState;
     }
 
     public int getEmitedLaserPower() {

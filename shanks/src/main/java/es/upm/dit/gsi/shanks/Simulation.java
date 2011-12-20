@@ -12,15 +12,15 @@ import sim.field.network.Network;
 import sim.util.Double3D;
 import es.upm.dit.gsi.shanks.agent.Agent;
 import es.upm.dit.gsi.shanks.model.ScenarioManager;
-import es.upm.dit.gsi.shanks.model.common.Definitions;
+import es.upm.dit.gsi.shanks.model.device.Device;
+import es.upm.dit.gsi.shanks.model.device.ftth.Gateway;
+import es.upm.dit.gsi.shanks.model.device.ftth.OLT;
+import es.upm.dit.gsi.shanks.model.device.ftth.ONT;
+import es.upm.dit.gsi.shanks.model.device.ftth.Splitter;
+import es.upm.dit.gsi.shanks.model.device.portrayal.Links;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
-import es.upm.dit.gsi.shanks.model.scenario.Device;
+import es.upm.dit.gsi.shanks.model.scenario.ScenarioDefinitions;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
-import es.upm.dit.gsi.shanks.model.scenario.ftth.device.Gateway;
-import es.upm.dit.gsi.shanks.model.scenario.ftth.device.OLT;
-import es.upm.dit.gsi.shanks.model.scenario.ftth.device.ONT;
-import es.upm.dit.gsi.shanks.model.scenario.ftth.device.Splitter;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.Links;
 
 /**
  * Model class
@@ -163,13 +163,13 @@ public class Simulation extends SimState {
      *         scenario
      */
     public List<Device> createFTTH() {
-        Gateway gateway = new Gateway("Gateway", 0, 45, Definitions.GATEWAY);
-        OLT olt = new OLT("OLT", 0, 45, Definitions.OLT);
-        ONT ont = new ONT("ONT", 0, 45, Definitions.ONT);
+        Gateway gateway = new Gateway("Gateway", 0, 45, ScenarioDefinitions.GATEWAY);
+        OLT olt = new OLT("OLT", 0, 45, ScenarioDefinitions.OLT);
+        ONT ont = new ONT("ONT", 0, 45, ScenarioDefinitions.ONT);
         Splitter splitter1 = new Splitter("Splitter1", 0, 45,
-                Definitions.SPLITTER1);
+                ScenarioDefinitions.SPLITTER1);
         Splitter splitter2 = new Splitter("Splitter2", 0, 45,
-                Definitions.SPLITTER2);
+                ScenarioDefinitions.SPLITTER2);
         situateDevice(olt, -400, 0, 0);
         situateDevice(ont, -200, 0, 0);
         situateDevice(splitter1, -0, 0, 0);
@@ -193,25 +193,25 @@ public class Simulation extends SimState {
      *         scenario
      */
     public List<Device> createPPP() {
-        Gateway gateway1 = new Gateway("Gateway1", 0, 45, Definitions.GATEWAY);
-        Gateway gateway2 = new Gateway("Gateway2", 0, 45, Definitions.GATEWAY);
-        Gateway gateway3 = new Gateway("Gateway3", 0, 45, Definitions.GATEWAY);
-        Gateway gateway4 = new Gateway("Gateway4", 0, 45, Definitions.GATEWAY);
-        OLT olt = new OLT("OLT", 0, 45, Definitions.OLT);
-        ONT ont1 = new ONT("ONT1", 0, 45, Definitions.ONT);
-        ONT ont2 = new ONT("ONT2", 0, 45, Definitions.ONT);
-        ONT ont3 = new ONT("ONT3", 0, 45, Definitions.ONT);
-        ONT ont4 = new ONT("ONT4", 0, 45, Definitions.ONT);
+        Gateway gateway1 = new Gateway("Gateway1", 0, 45, ScenarioDefinitions.GATEWAY);
+        Gateway gateway2 = new Gateway("Gateway2", 0, 45, ScenarioDefinitions.GATEWAY);
+        Gateway gateway3 = new Gateway("Gateway3", 0, 45, ScenarioDefinitions.GATEWAY);
+        Gateway gateway4 = new Gateway("Gateway4", 0, 45, ScenarioDefinitions.GATEWAY);
+        OLT olt = new OLT("OLT", 0, 45, ScenarioDefinitions.OLT);
+        ONT ont1 = new ONT("ONT1", 0, 45, ScenarioDefinitions.ONT);
+        ONT ont2 = new ONT("ONT2", 0, 45, ScenarioDefinitions.ONT);
+        ONT ont3 = new ONT("ONT3", 0, 45, ScenarioDefinitions.ONT);
+        ONT ont4 = new ONT("ONT4", 0, 45, ScenarioDefinitions.ONT);
         Splitter splitter1 = new Splitter("Splitter1", 0, 45,
-                Definitions.SPLITTER1);
+                ScenarioDefinitions.SPLITTER1);
         Splitter splitter2a = new Splitter("Splitter2a", 0, 45,
-                Definitions.SPLITTER2);
+                ScenarioDefinitions.SPLITTER2);
         Splitter splitter2b = new Splitter("Splitter2b", 0, 45,
-                Definitions.SPLITTER2);
+                ScenarioDefinitions.SPLITTER2);
         Splitter splitter2c = new Splitter("Splitter2c", 0, 45,
-                Definitions.SPLITTER2);
+                ScenarioDefinitions.SPLITTER2);
         Splitter splitter2d = new Splitter("Splitter2d", 0, 45,
-                Definitions.SPLITTER2);
+                ScenarioDefinitions.SPLITTER2);
         situateDevice(olt, -400, 0, 0);
         situateDevice(splitter1, -200, 0, 0);
         situateDevice(splitter2a, 0, 400, 0);
@@ -260,11 +260,11 @@ public class Simulation extends SimState {
     }
 
     public void createLegend() {
-        Gateway g = new Gateway("Gateway", 0, 45, Definitions.GATEWAY);
-        Splitter sp1 = new Splitter("Splitter 1", 0, 45, Definitions.SPLITTER1);
-        Splitter sp2 = new Splitter("Splitter 2", 0, 45, Definitions.SPLITTER2);
-        OLT olt = new OLT("OLT", 0, 45, Definitions.OLT);
-        ONT ont = new ONT("ONT", 0, 45, Definitions.ONT);
+        Gateway g = new Gateway("Gateway", 0, 45, ScenarioDefinitions.GATEWAY);
+        Splitter sp1 = new Splitter("Splitter 1", 0, 45, ScenarioDefinitions.SPLITTER1);
+        Splitter sp2 = new Splitter("Splitter 2", 0, 45, ScenarioDefinitions.SPLITTER2);
+        OLT olt = new OLT("OLT", 0, 45, ScenarioDefinitions.OLT);
+        ONT ont = new ONT("ONT", 0, 45, ScenarioDefinitions.ONT);
         legend.setObjectLocation(g, new Double3D(-300, 300, 0));
         legend.setObjectLocation(sp1, new Double3D(-100, 300, 0));
         legend.setObjectLocation(sp2, new Double3D(100, 300, 0));

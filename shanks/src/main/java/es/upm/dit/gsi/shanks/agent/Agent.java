@@ -11,8 +11,8 @@ import javax.swing.ImageIcon;
 
 import es.upm.dit.gsi.shanks.Simulation;
 import es.upm.dit.gsi.shanks.model.ScenarioManager;
-import es.upm.dit.gsi.shanks.model.common.Definitions;
-import es.upm.dit.gsi.shanks.model.scenario.Device;
+import es.upm.dit.gsi.shanks.model.device.Device;
+import es.upm.dit.gsi.shanks.model.scenario.ScenarioDefinitions;
 
 import sim.engine.SimState;
 import sim.engine.Steppable;
@@ -69,7 +69,7 @@ public class Agent extends SimplePortrayal2D implements Steppable {
         log.info("-> repairDevices()");
         for (Device d : faildevices) {
             log.fine("Device broken: " + d.getID());
-            d.setStatus(Definitions.HEALTHY_STATUS);
+            d.setStatus(ScenarioDefinitions.HEALTHY_STATUS);
             log.fine("STATUS " + d.getStatus() + " of Device " + d.getID());
         }
         faildevices.clear();

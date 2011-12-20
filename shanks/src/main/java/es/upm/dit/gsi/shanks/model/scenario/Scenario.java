@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import es.upm.dit.gsi.shanks.model.device.Device;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 
 /**

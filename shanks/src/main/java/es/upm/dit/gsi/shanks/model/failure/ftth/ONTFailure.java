@@ -3,8 +3,8 @@
  */
 package es.upm.dit.gsi.shanks.model.failure.ftth;
 
-import es.upm.dit.gsi.shanks.model.common.Definitions;
 import es.upm.dit.gsi.shanks.model.failure.ConfigurationFailure;
+import es.upm.dit.gsi.shanks.model.scenario.ScenarioDefinitions;
 
 /**
  * @author a.carrera
@@ -21,7 +21,7 @@ public class ONTFailure extends ConfigurationFailure {
      * @param type
      */
     public ONTFailure() {
-        super(Definitions.FAILURRE_CONFIGURATION_ONT);
+        super(ScenarioDefinitions.FAILURRE_CONFIGURATION_ONT);
     }
 
 }

@@ -2,9 +2,13 @@ package es.upm.dit.gsi.shanks.model.failure;
 
 public abstract class NetworkFailure extends Failure {
 
-	public NetworkFailure(String name, boolean trigger) {
-		super(name, trigger);
-		// TODO Auto-generated constructor stub
-	}
+    /**
+	 * 
+	 */
+    private static final long serialVersionUID = -838331953844650206L;
+
+    public NetworkFailure(String type) {
+        super(type);
+    }
 
 }

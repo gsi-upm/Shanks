@@ -18,8 +18,8 @@ public class Splitter1 extends Splitter {
 	 */
     private static final long serialVersionUID = -7692959076564342643L;
 
-    public Splitter1(String id, int status, int temperature, int type) {
-        super(id, status, temperature, type);
+    public Splitter1(String id, String status) {
+        super(id, status);
     }
 
 }

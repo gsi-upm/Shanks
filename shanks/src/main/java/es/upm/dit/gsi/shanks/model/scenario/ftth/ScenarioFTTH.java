@@ -20,11 +20,11 @@ public class ScenarioFTTH extends Scenario {
     @Override
     public void addDevices() {
         // TODO rellenar con los dispositivos de FTTH, por ejemplo:
-        this.addDevice(new Gateway("Gateway de Juan", 0, 45));
-        this.addDevice(new OLT("OLT", 0, 45, ScenarioDefinitions.OLT));
-        this.addDevice(new ONT("ONT", 0, 45, ScenarioDefinitions.ONT));
-        this.addDevice(new Splitter("Splitter1", 0, 45, ScenarioDefinitions.SPLITTER1));
-        this.addDevice(new Splitter("Splitter2", 0, 45, ScenarioDefinitions.SPLITTER2));
+        this.addDevice(new Gateway("Gateway de Juan", DeviceDefinitions.DEVICE_GATEWAY));
+        this.addDevice(new OLT("OLT", DeviceDefinitions.DEVICE_OLT));
+        this.addDevice(new ONT("ONT", DeviceDefinitions.DEVICE_ONT));
+        this.addDevice(new Splitter("Splitter1", DeviceDefinitions.DEVICE_SPLITTER1));
+        this.addDevice(new Splitter("Splitter2", DeviceDefinitions.DEVICE_SPLITTER2));
     }
 
     @Override
@@ -32,5 +32,7 @@ public class ScenarioFTTH extends Scenario {
         // TODO rellenar los posibles tipos de failures, por ejemplo:
         this.addPossibleFailure(ONTFailure.class);
     }
+    
+    // TODO hay que añadir la manera de situarlos "en el espacio", ahora mismo eso esta hecho en Simulation.java
 
 }

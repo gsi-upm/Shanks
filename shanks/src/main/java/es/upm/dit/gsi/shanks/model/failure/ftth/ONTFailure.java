@@ -21,7 +21,7 @@ public class ONTFailure extends ConfigurationFailure {
      * @param type
      */
     public ONTFailure() {
-        super(FailureDefinitions.FAILURRE_CONFIGURATION_ONT);
+        super(FailureDefinitions.FAILURE_CONFIGURATION_ONT);
     }
 
 }

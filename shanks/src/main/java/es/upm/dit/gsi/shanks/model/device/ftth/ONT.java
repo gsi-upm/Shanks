@@ -19,8 +19,8 @@ public class ONT extends Device {
 	 */
     private static final long serialVersionUID = -7825776336743519245L;
 
-    public ONT(String id, int status, int temperature, int type) {
-        super(id, status, temperature, type);
+    public ONT(String id, String status) {
+        super(id, status);
     }
 
     private int gatewayConnectionState;

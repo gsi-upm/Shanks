@@ -12,15 +12,13 @@ import es.upm.dit.gsi.shanks.model.device.Device;
  * 
  */
 public class Gateway extends Device {
-    // LOOK aunque ya lo sabes... muchas como esta son las que deben implementar
-    // para los dispositivos
     /**
 	 * 
 	 */
     private static final long serialVersionUID = -4404570654854838121L;
 
-    public Gateway(String id, int status, int temperature, int type) {
-        super(id, status, temperature, type);
+    public Gateway(String id, String status) {
+        super(id, status);
     }
 
     private int ipConfiguration;

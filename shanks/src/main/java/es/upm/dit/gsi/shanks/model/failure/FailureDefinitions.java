@@ -13,5 +13,5 @@ public class FailureDefinitions {
     /**
      * All implemented Failures.
      */
-    public static final String FAILURRE_CONFIGURATION_ONT = "ONT_CONF_FAILURE";
+    public static final String FAILURE_CONFIGURATION_ONT = "ONT_CONF_FAILURE";
 }

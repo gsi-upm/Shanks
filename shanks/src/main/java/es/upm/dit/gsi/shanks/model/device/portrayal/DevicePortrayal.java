@@ -17,6 +17,7 @@ import com.sun.j3d.utils.geometry.Cylinder;
 import com.sun.j3d.utils.geometry.Sphere;
 
 import es.upm.dit.gsi.shanks.model.device.Device;
+import es.upm.dit.gsi.shanks.model.device.DeviceDefinitions;
 import es.upm.dit.gsi.shanks.model.scenario.ScenarioDefinitions;
 
 public class DevicePortrayal extends SimplePortrayal3D {
@@ -43,10 +44,10 @@ public class DevicePortrayal extends SimplePortrayal3D {
 
     @Override
     public TransformGroup getModel(Object obj, TransformGroup j3dModel) {
-        if (j3dModel == null || ((Device) obj).getType() == ScenarioDefinitions.GATEWAY) {
+        if (j3dModel == null || ((Device) obj).getType() == DeviceDefinitions.DEVICE_GATEWAY) {
             j3dModel = new TransformGroup();
             Sphere s = new Sphere(diameter);
-            if (((Device) obj).getStatus() == ScenarioDefinitions.HEALTHY_STATUS) {
+            if (((Device) obj).getStatus() == DeviceDefinitions.HEALTHY_STATUS) {
                 j3dModel.removeAllChildren();
                 Appearance appearance = new Appearance();
                 appearance.setColoringAttributes(new ColoringAttributes(
@@ -79,11 +80,11 @@ public class DevicePortrayal extends SimplePortrayal3D {
                 clearPickableFlags(j3dModel);
             }
         } else if (j3dModel == null
-                || ((Device) obj).getType() == ScenarioDefinitions.SPLITTER1) {
+                || ((Device) obj).getType() == DeviceDefinitions.DEVICE_SPLITTER1) {
             j3dModel = new TransformGroup();
             Appearance appearance = new Appearance();
             Box s = new Box(diameter, diameter * 3, diameter, appearance);
-            if (((Device) obj).getStatus() == ScenarioDefinitions.HEALTHY_STATUS) {
+            if (((Device) obj).getStatus() == DeviceDefinitions.HEALTHY_STATUS) {
                 j3dModel.removeAllChildren();
                 appearance.setColoringAttributes(new ColoringAttributes(
                         healthyColor, ColoringAttributes.SHADE_GOURAUD));
@@ -114,11 +115,11 @@ public class DevicePortrayal extends SimplePortrayal3D {
             }
 
         } else if (j3dModel == null
-                || ((Device) obj).getType() == ScenarioDefinitions.SPLITTER2) {
+                || ((Device) obj).getType() == DeviceDefinitions.DEVICE_SPLITTER2) {
             j3dModel = new TransformGroup();
             Appearance appearance = new Appearance();
             Box s = new Box(diameter, diameter, diameter, appearance);
-            if (((Device) obj).getStatus() == ScenarioDefinitions.HEALTHY_STATUS) {
+            if (((Device) obj).getStatus() == DeviceDefinitions.HEALTHY_STATUS) {
                 j3dModel.removeAllChildren();
                 appearance.setColoringAttributes(new ColoringAttributes(
                         healthyColor, ColoringAttributes.SHADE_GOURAUD));
@@ -148,10 +149,10 @@ public class DevicePortrayal extends SimplePortrayal3D {
                 clearPickableFlags(j3dModel);
             }
         } else if (j3dModel == null
-                || ((Device) obj).getType() == ScenarioDefinitions.OLT) {
+                || ((Device) obj).getType() == DeviceDefinitions.DEVICE_OLT) {
             j3dModel = new TransformGroup();
             Cone s = new Cone(diameter, diameter * 3);
-            if (((Device) obj).getStatus() == ScenarioDefinitions.HEALTHY_STATUS) {
+            if (((Device) obj).getStatus() == DeviceDefinitions.HEALTHY_STATUS) {
                 j3dModel.removeAllChildren();
                 Appearance appearance = new Appearance();
                 appearance.setColoringAttributes(new ColoringAttributes(
@@ -183,10 +184,10 @@ public class DevicePortrayal extends SimplePortrayal3D {
                 clearPickableFlags(j3dModel);
             }
         } else if (j3dModel == null
-                || ((Device) obj).getType() == ScenarioDefinitions.ONT) {
+                || ((Device) obj).getType() == DeviceDefinitions.DEVICE_ONT) {
             j3dModel = new TransformGroup();
             Cylinder s = new Cylinder(diameter, diameter);
-            if (((Device) obj).getStatus() == ScenarioDefinitions.HEALTHY_STATUS) {
+            if (((Device) obj).getStatus() == DeviceDefinitions.HEALTHY_STATUS) {
                 j3dModel.removeAllChildren();
                 Appearance appearance = new Appearance();
                 appearance.setColoringAttributes(new ColoringAttributes(

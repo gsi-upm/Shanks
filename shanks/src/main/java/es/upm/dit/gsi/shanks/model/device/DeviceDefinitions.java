@@ -17,8 +17,8 @@ public class DeviceDefinitions {
     public static final String DEVICE_ONT = "ONT";
     public static final String DEVICE_GATEWAY = "GATEWAY";
     public static final String DEVICE_OLT = "OLT";
-    public static final String DEVICE_SPLITTER1 = "SPLITTER1";
-    public static final String DEVICE_SPLITTER2 = "SPLITTER2";
+    public static final String DEVICE_SPLITTER4 = "SPLITTER4";
+    public static final String DEVICE_SPLITTER16 = "SPLITTER16";
     
     
     /**

@@ -21,6 +21,9 @@ import sim.portrayal.SimplePortrayal2D;
 
 public abstract class Failure extends SimplePortrayal2D {
 
+    //TOIMP hace que pueda haber fallos complejos igual que scenarios complejos
+    
+    
     /** DeviceErrors parametres */
     private static final long serialVersionUID = -5684572432145540188L;
     public String type;

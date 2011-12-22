@@ -30,12 +30,12 @@ public abstract class Device extends SimplePortrayal3D {
     private Enumeration<String> possibleStatus;
     private String status;
     private List<Link> linkList; // The different devices that are connected
-    private HashMap<String, String> properties;
+    private HashMap<String, Object> properties;
 
     public Device(String id, String type) {
         this.id = id;
         this.type = type;
-        this.properties = new HashMap<String, String>();
+        this.properties = new HashMap<String, Object>();
     }
 
     /**
@@ -103,7 +103,7 @@ public abstract class Device extends SimplePortrayal3D {
     /**
      * @return the properties
      */
-    public HashMap<String, String> getProperties() {
+    public HashMap<String, Object> getProperties() {
         return properties;
     }
 
@@ -111,7 +111,7 @@ public abstract class Device extends SimplePortrayal3D {
      * @param property
      *            the property to add
      */
-    public void addProperty(String propertyType, String propertyValue) {
+    public void addProperty(String propertyType, Object propertyValue) {
         this.properties.put(propertyType, propertyValue);
     }
 
@@ -119,7 +119,7 @@ public abstract class Device extends SimplePortrayal3D {
      * @param property
      *            the property to remove
      */
-    public void addProperty(String propertyType) {
+    public void removeProperty(String propertyType) {
         this.properties.remove(propertyType);
     }
 

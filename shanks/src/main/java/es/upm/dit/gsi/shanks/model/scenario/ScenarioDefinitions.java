@@ -14,18 +14,7 @@ package es.upm.dit.gsi.shanks.model.scenario;
 public class ScenarioDefinitions {
 
     /**
-     * Scenarios.
+     * All implemented Scenarios.
      */
-    public static final String SCENARIO_FTTH = "FTTH";
-
-    /**
-     * Devices.
-     */
-    public static final String DEVICE_ONT = "ONT";
-
-    /**
-     * Failures.
-     */
-    public static final String FAILURRE_CONFIGURATION_ONT = "ONT_CONF_FAILURE";
-
+    public static final String SCENARIO_FTTH_ACCESS_NETWORK = "FTTH_ACCESS_NETWORK";
 }

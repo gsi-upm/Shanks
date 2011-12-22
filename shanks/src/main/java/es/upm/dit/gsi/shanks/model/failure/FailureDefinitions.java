@@ -10,4 +10,8 @@ package es.upm.dit.gsi.shanks.model.failure;
  */
 public class FailureDefinitions {
 
+    /**
+     * All implemented Failures.
+     */
+    public static final String FAILURRE_CONFIGURATION_ONT = "ONT_CONF_FAILURE";
 }

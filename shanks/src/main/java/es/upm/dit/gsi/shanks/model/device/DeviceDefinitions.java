@@ -10,4 +10,8 @@ package es.upm.dit.gsi.shanks.model.device;
  */
 public class DeviceDefinitions {
 
+    /**
+     * All implemented Devices.
+     */
+    public static final String DEVICE_ONT = "ONT";
 }

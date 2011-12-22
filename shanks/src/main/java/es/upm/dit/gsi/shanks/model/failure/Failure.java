@@ -90,7 +90,7 @@ public abstract class Failure extends SimplePortrayal2D {
                 y);
     }
 
-    // TODO Aqu� antes se generaban todos los errores, ahora se deben generar en
+    // TODO Aquí antes se generaban todos los errores, ahora se deben generar en
     // otra clase
 
 }

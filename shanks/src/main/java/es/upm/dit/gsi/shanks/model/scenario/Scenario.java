@@ -26,6 +26,9 @@ public abstract class Scenario {
     public List<Failure> currentFailures;
     public List<Class<? extends Failure>> possibleFailures;
 
+    //TOIMP obligar que todo escenario al menos tengo un GatewayDevice
+    //TOIMP mirar las ontologías de starfire porque ya hay un modelado hecho
+    // http://code.google.com/p/starfire/source/browse/#svn%2Ftrunk%2Fstarfire%2Fplugins%2Fedu.stanford.smi.protegex.owl
     public Scenario(String type) {
         this.type = type;
         this.currentDevices = new ArrayList<Device>();

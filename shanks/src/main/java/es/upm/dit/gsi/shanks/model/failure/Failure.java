@@ -73,10 +73,16 @@ public abstract class Failure extends SimplePortrayal2D {
         this.status = false;
     }
 
+    /**
+     * @return
+     */
     public boolean getStatus() {
         return status;
     }
 
+    /* (non-Javadoc)
+     * @see sim.portrayal.SimplePortrayal2D#draw(java.lang.Object, java.awt.Graphics2D, sim.portrayal.DrawInfo2D)
+     */
     @Override
     public void draw(Object object, Graphics2D graphics, DrawInfo2D info) {
 

@@ -29,6 +29,9 @@ public abstract class Scenario {
     //TOIMP obligar que todo escenario al menos tengo un GatewayDevice
     //TOIMP mirar las ontologías de starfire porque ya hay un modelado hecho
     // http://code.google.com/p/starfire/source/browse/#svn%2Ftrunk%2Fstarfire%2Fplugins%2Fedu.stanford.smi.protegex.owl
+    /**
+     * @param type
+     */
     public Scenario(String type) {
         this.type = type;
         this.currentDevices = new ArrayList<Device>();
@@ -39,26 +42,46 @@ public abstract class Scenario {
         this.addPossibleFailures();
     }
 
+    /**
+     * @return
+     */
     public String getName() {
         return type;
     }
 
+    /**
+     * @return
+     */
     public List<Device> getDevices() {
         return currentDevices;
     }
 
+    /**
+     * @param device
+     */
     public void addDevice(Device device) {
         this.currentDevices.add(device);
     }
 
+    /**
+     * @param device
+     */
     public void removeDevice(Device device) {
         this.currentDevices.remove(device);
     }
 
+    /**
+     * @return List of devices
+     */
     public List<Device> getCurrentDevices() {
         return this.currentDevices;
     }
 
+    /**
+     * 
+     * 
+     * @param failure Failure to add
+     */
     public void addFailure(Failure failure) {
         if (this.possibleFailures.contains(failure.getClass())) {
             this.currentFailures.add(failure);
@@ -68,27 +91,48 @@ public abstract class Scenario {
         }
     }
 
+    /**
+     * @param failure
+     */
     public void removeFailure(Failure failure) {
         this.currentFailures.remove(failure);
     }
 
+    /**
+     * @return
+     */
     public List<Failure> getCurrentFailures() {
         return this.currentFailures;
     }
 
+    /**
+     * @param failure
+     */
     public void addPossibleFailure(Class<? extends Failure> failure) {
         this.possibleFailures.add(failure);
     }
 
+    /**
+     * @param failureType
+     */
     public void removePossibleFailure(Class<Failure> failureType) {
         this.possibleFailures.remove(failureType);
     }
 
+    /**
+     * @return
+     */
     public List<Class<? extends Failure>> getPossibleFailures() {
         return this.possibleFailures;
     }
 
+    /**
+     * 
+     */
     abstract public void addDevices();
 
+    /**
+     * 
+     */
     abstract public void addPossibleFailures();
 }

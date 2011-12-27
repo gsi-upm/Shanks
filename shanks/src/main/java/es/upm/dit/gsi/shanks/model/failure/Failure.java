@@ -27,9 +27,9 @@ public abstract class Failure extends SimplePortrayal2D {
     /** DeviceErrors parametres */
     private static final long serialVersionUID = -5684572432145540188L;
     public String type;
-    public boolean status;
+    public boolean activated;
 
-    public static List<Failure> deverrors = new ArrayList<Failure>();
+    public static List<NetworkElement> deverrors = new ArrayList<NetworkElement>();
 
     /**
      * Constructor of the class
@@ -39,7 +39,7 @@ public abstract class Failure extends SimplePortrayal2D {
      */
     public Failure(String type) {
         this.type = type;
-        this.status = false;
+        this.activated = false;
     }
 
     /**
@@ -62,7 +62,7 @@ public abstract class Failure extends SimplePortrayal2D {
      * 
      */
     public void activateFailure() {
-        this.status = true;
+        this.activated = true;
     }
 
     /**
@@ -70,14 +70,14 @@ public abstract class Failure extends SimplePortrayal2D {
      * 
      */
     public void deactivateFailure() {
-        this.status = false;
+        this.activated = false;
     }
 
     /**
      * @return
      */
     public boolean getStatus() {
-        return status;
+        return activated;
     }
 
     /* (non-Javadoc)

@@ -5,7 +5,7 @@
 package es.upm.dit.gsi.shanks.model.failure;
 
 /**
- * @author Álvaro
+ * @author a.carrera
  *
  */
 public class FailureDefinitions {

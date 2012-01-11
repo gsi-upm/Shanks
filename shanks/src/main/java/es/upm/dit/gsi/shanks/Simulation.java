@@ -12,12 +12,12 @@ import sim.field.network.Network;
 import sim.util.Double3D;
 import es.upm.dit.gsi.shanks.agent.Agent;
 import es.upm.dit.gsi.shanks.model.ScenarioManager;
-import es.upm.dit.gsi.shanks.model.device.Device;
-import es.upm.dit.gsi.shanks.model.device.ftth.Gateway;
-import es.upm.dit.gsi.shanks.model.device.ftth.OLT;
-import es.upm.dit.gsi.shanks.model.device.ftth.ONT;
-import es.upm.dit.gsi.shanks.model.device.ftth.Splitter;
-import es.upm.dit.gsi.shanks.model.device.portrayal.Links;
+import es.upm.dit.gsi.shanks.model.element.device.Device;
+import es.upm.dit.gsi.shanks.model.element.device.ftth.Gateway;
+import es.upm.dit.gsi.shanks.model.element.device.ftth.OLT;
+import es.upm.dit.gsi.shanks.model.element.device.ftth.ONT;
+import es.upm.dit.gsi.shanks.model.element.device.ftth.Splitter;
+import es.upm.dit.gsi.shanks.model.element.link.portrayal.LinkPortrayal;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.ScenarioDefinitions;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
@@ -147,7 +147,7 @@ public class Simulation extends SimState {
     }
 
     public void makeLinks(Device from, Device to) {
-        Edge e = new Edge(from, to, new Links());
+        Edge e = new Edge(from, to, new LinkPortrayal());
         links1.addEdge(e);
     }
 

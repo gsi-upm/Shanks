@@ -15,7 +15,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
-import es.upm.dit.gsi.shanks.model.device.portrayal.DevicePortrayal;
+import es.upm.dit.gsi.shanks.model.element.device.portrayal.DevicePortrayal;
 
 import sim.display.Console;
 import sim.display.Controller;

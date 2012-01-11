@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks.model.device;
+package es.upm.dit.gsi.shanks.model.element.device;
 
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import sim.portrayal3d.SimplePortrayal3D;
-import es.upm.dit.gsi.shanks.model.device.ftth.Link;
+import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.scenario.ScenarioDefinitions;
 
 /**

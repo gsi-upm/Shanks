@@ -30,7 +30,8 @@ public abstract class Failure extends SimplePortrayal2D {
     public boolean activated;
 
     public static List<NetworkElement> deverrors = new ArrayList<NetworkElement>();
-
+// TOIMP create NetworkElement class
+    
     /**
      * Constructor of the class
      * 

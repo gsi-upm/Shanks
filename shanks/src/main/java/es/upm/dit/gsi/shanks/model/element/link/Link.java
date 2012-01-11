@@ -1,8 +1,8 @@
-package es.upm.dit.gsi.shanks.model.device.ftth;
+package es.upm.dit.gsi.shanks.model.element.link;
 
 import java.util.List;
 
-import es.upm.dit.gsi.shanks.model.device.Device;
+import es.upm.dit.gsi.shanks.model.element.device.Device;
 
 /**
  * Link class

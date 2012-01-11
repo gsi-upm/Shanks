@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks.model.device.portrayal;
+package es.upm.dit.gsi.shanks.model.element.link.portrayal;
 
 import java.io.Serializable;
 
@@ -13,7 +13,7 @@ import sim.util.MutableDouble;
  * @version 0.1
  * 
  */
-public class Links extends MutableDouble implements Serializable {
+public class LinkPortrayal extends MutableDouble implements Serializable {
 
     /**
 	 * 
@@ -23,6 +23,6 @@ public class Links extends MutableDouble implements Serializable {
     /**
      * Default constructor
      */
-    public Links() {
+    public LinkPortrayal() {
     }
 }

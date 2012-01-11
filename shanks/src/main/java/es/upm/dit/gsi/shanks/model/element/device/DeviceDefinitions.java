@@ -2,7 +2,7 @@
  20/12/2011
 
  */
-package es.upm.dit.gsi.shanks.model.device;
+package es.upm.dit.gsi.shanks.model.element.device;
 
 /**
  * @author Álvaro

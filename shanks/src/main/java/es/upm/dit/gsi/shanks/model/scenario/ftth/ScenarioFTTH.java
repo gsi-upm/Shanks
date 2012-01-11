@@ -1,10 +1,10 @@
 package es.upm.dit.gsi.shanks.model.scenario.ftth;
 
-import es.upm.dit.gsi.shanks.model.device.DeviceDefinitions;
-import es.upm.dit.gsi.shanks.model.device.ftth.Gateway;
-import es.upm.dit.gsi.shanks.model.device.ftth.OLT;
-import es.upm.dit.gsi.shanks.model.device.ftth.ONT;
-import es.upm.dit.gsi.shanks.model.device.ftth.Splitter;
+import es.upm.dit.gsi.shanks.model.element.device.DeviceDefinitions;
+import es.upm.dit.gsi.shanks.model.element.device.ftth.Gateway;
+import es.upm.dit.gsi.shanks.model.element.device.ftth.OLT;
+import es.upm.dit.gsi.shanks.model.element.device.ftth.ONT;
+import es.upm.dit.gsi.shanks.model.element.device.ftth.Splitter;
 import es.upm.dit.gsi.shanks.model.failure.ftth.ONTFailure;
 import es.upm.dit.gsi.shanks.model.scenario.ScenarioDefinitions;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;

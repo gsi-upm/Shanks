@@ -9,15 +9,14 @@ import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 
-import es.upm.dit.gsi.shanks.Simulation;
-import es.upm.dit.gsi.shanks.model.ScenarioManager;
-import es.upm.dit.gsi.shanks.model.device.Device;
-import es.upm.dit.gsi.shanks.model.scenario.ScenarioDefinitions;
-
 import sim.engine.SimState;
 import sim.engine.Steppable;
 import sim.portrayal.DrawInfo2D;
 import sim.portrayal.SimplePortrayal2D;
+import es.upm.dit.gsi.shanks.Simulation;
+import es.upm.dit.gsi.shanks.model.ScenarioManager;
+import es.upm.dit.gsi.shanks.model.element.device.Device;
+import es.upm.dit.gsi.shanks.model.scenario.ScenarioDefinitions;
 
 public class Agent extends SimplePortrayal2D implements Steppable {
 

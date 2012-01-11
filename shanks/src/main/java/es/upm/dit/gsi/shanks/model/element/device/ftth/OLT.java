@@ -1,6 +1,6 @@
-package es.upm.dit.gsi.shanks.model.device.ftth;
+package es.upm.dit.gsi.shanks.model.element.device.ftth;
 
-import es.upm.dit.gsi.shanks.model.device.Device;
+import es.upm.dit.gsi.shanks.model.element.device.Device;
 
 /**
  * OLT class

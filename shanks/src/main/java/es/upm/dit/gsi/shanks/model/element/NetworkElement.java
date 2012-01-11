@@ -10,4 +10,6 @@ package es.upm.dit.gsi.shanks.model.element;
  */
 public class NetworkElement {
 
+    //TOIMP hacer esta clase que está vacía
+    
 }

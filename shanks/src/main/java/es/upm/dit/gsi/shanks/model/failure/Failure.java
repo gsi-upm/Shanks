@@ -28,11 +28,10 @@ public abstract class Failure extends SimplePortrayal2D {
     
     /** DeviceErrors parametres */
     private static final long serialVersionUID = -5684572432145540188L;
-    public String type;
-    public boolean activated;
+    private String type;
+    private boolean activated;
 
     public static List<NetworkElement> deverrors = new ArrayList<NetworkElement>();
-// TOIMP create NetworkElement class
     
     /**
      * Constructor of the class

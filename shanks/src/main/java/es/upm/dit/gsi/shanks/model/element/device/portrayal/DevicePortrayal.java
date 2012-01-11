@@ -80,7 +80,7 @@ public class DevicePortrayal extends SimplePortrayal3D {
                 clearPickableFlags(j3dModel);
             }
         } else if (j3dModel == null
-                || ((Device) obj).getType() == DeviceDefinitions.DEVICE_SPLITTER1) {
+                || ((Device) obj).getType() == DeviceDefinitions.DEVICE_SPLITTER4) {
             j3dModel = new TransformGroup();
             Appearance appearance = new Appearance();
             Box s = new Box(diameter, diameter * 3, diameter, appearance);
@@ -115,7 +115,7 @@ public class DevicePortrayal extends SimplePortrayal3D {
             }
 
         } else if (j3dModel == null
-                || ((Device) obj).getType() == DeviceDefinitions.DEVICE_SPLITTER2) {
+                || ((Device) obj).getType() == DeviceDefinitions.DEVICE_SPLITTER16) {
             j3dModel = new TransformGroup();
             Appearance appearance = new Appearance();
             Box s = new Box(diameter, diameter, diameter, appearance);

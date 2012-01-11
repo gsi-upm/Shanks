@@ -5,6 +5,8 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.upm.dit.gsi.shanks.model.element.NetworkElement;
+
 import sim.portrayal.DrawInfo2D;
 import sim.portrayal.SimplePortrayal2D;
 

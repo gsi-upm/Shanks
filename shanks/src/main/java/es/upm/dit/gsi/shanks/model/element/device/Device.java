@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
-import sim.portrayal3d.SimplePortrayal3D;
+import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.scenario.ScenarioDefinitions;
 
@@ -19,7 +19,7 @@ import es.upm.dit.gsi.shanks.model.scenario.ScenarioDefinitions;
  * 
  */
 
-public abstract class Device extends SimplePortrayal3D {
+public abstract class Device extends NetworkElement {
 
     Logger logger = Logger.getLogger(Device.class.getName());
 

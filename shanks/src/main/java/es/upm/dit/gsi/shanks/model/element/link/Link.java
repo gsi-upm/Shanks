@@ -2,6 +2,7 @@ package es.upm.dit.gsi.shanks.model.element.link;
 
 import java.util.List;
 
+import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 
 /**
@@ -14,7 +15,7 @@ import es.upm.dit.gsi.shanks.model.element.device.Device;
  * 
  */
 
-public class Link {
+public class Link extends NetworkElement {
     private String id;
     private int status;
     private int type;

@@ -10,7 +10,7 @@ import es.upm.dit.gsi.shanks.model.element.link.Link;
 /**
  * Device class
  * 
- * This is used for create a common Device
+ * This is used to represent a common Device
  * 
  * @author Daniel Lara
  * @author a.carrera

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
+import es.upm.dit.gsi.shanks.model.element.device.Device;
+import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 
 /**

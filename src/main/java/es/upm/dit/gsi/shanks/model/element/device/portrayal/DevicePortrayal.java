@@ -3,7 +3,6 @@ package es.upm.dit.gsi.shanks.model.element.device.portrayal;
 import java.util.logging.Logger;
 
 import javax.media.j3d.TransformGroup;
-import javax.vecmath.Color3f;
 
 import sim.portrayal3d.SimplePortrayal3D;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
@@ -15,10 +14,10 @@ public class DevicePortrayal extends SimplePortrayal3D {
 	 */
     private static final long serialVersionUID = -8701221342283565341L;
 
-    public Logger log = Logger.getLogger("DevicePortrayal");
+    public Logger log = Logger.getLogger(DevicePortrayal.class.getName());
 
-    final static Color3f healthyColor = new Color3f(0, 200, 0);
-    final static Color3f brokenColor = new Color3f(200, 0, 0);
+//    final static Color3f healthyColor = new Color3f(0, 200, 0);
+//    final static Color3f brokenColor = new Color3f(200, 0, 0);
     public float diameter = 30;
 
     public DevicePortrayal() {

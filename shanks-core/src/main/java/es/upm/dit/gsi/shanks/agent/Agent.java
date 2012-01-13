@@ -32,6 +32,8 @@ public class Agent extends SimplePortrayal2D implements Steppable {
     public static boolean repairFlag = true;
     public static String problemDetected = "No problem";
 
+    //TODO create other maven module to move this package
+    
     public Agent() {
 
     }

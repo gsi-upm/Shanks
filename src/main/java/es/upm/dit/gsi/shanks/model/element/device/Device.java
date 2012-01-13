@@ -23,9 +23,15 @@ public abstract class Device extends NetworkElement {
     Logger logger = Logger.getLogger(Device.class.getName());
 
     private List<Link> linksList;
+    private boolean isGateway;
 
-    public Device(String id) {
+    /**
+     * @param id
+     * @param isGateway
+     */
+    public Device(String id, boolean isGateway) {
         super(id);
+        this.isGateway = isGateway;
         this.linksList = new ArrayList<Link>();
     }
 
@@ -60,5 +66,12 @@ public abstract class Device extends NetworkElement {
         } else {
             logger.info("Device " + this.getID() + " could not be disconnected from Link " + link.getID() + ", because it was not connected.");
         }
+    }
+
+    /**
+     * @return the isGateway
+     */
+    public boolean isGateway() {
+        return isGateway;
     }
 }

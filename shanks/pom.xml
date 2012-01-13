@@ -19,6 +19,7 @@
 	<modules>
 		<module>../shanks-core</module>
 		<module>../shanks-ftth-module</module>
+		<module>../shanks-simple-agents</module>
 	</modules>
 
 	<licenses>

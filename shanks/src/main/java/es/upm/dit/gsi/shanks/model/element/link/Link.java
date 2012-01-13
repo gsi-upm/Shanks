@@ -16,31 +16,16 @@ import es.upm.dit.gsi.shanks.model.element.device.Device;
  */
 
 public class Link extends NetworkElement {
-    private String id;
-    private int status;
-    private int type;
-    private List<Device> linkedDeviceList;
+    private List<Device> linkedDevices;
 
-    public Link(String id, int status, int type) {
-        this.id = id;
-        this.status = status;
-        this.type = type;
+    public Link(String id) {
+        super(id);
     }
 
-    public String getID() {
-        return id;
+    public List<Device> getLinkedDevices() {
+        return linkedDevices;
     }
 
-    public int getStatus() {
-        return status;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public List<Device> getDevices() {
-        return linkedDeviceList;
-    }
-
+    //TODO add devices
+    
 }

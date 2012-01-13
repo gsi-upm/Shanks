@@ -11,14 +11,9 @@ import es.upm.dit.gsi.shanks.model.element.device.Device;
  * @version 0.1
  * 
  */
-public class Gateway extends Device {
-    /**
-	 * 
-	 */
-    private static final long serialVersionUID = -4404570654854838121L;
-
-    public Gateway(String id, String status) {
-        super(id, status);
+public class GatewayRouter extends Device {
+    public GatewayRouter(String id, String status) {
+        super(id);
     }
 
     private int ipConfiguration;
@@ -28,6 +23,8 @@ public class Gateway extends Device {
     public void setIPConf(int ip) {
         ipConfiguration = ip;
     }
+    
+    
 
     public void setNATProblem(int nat) {
         NATProblem = nat; // 1 if there is a problem, 0 in the other case

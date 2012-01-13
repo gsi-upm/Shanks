@@ -1,10 +1,12 @@
 package es.upm.dit.gsi.shanks.model.scenario.ftth;
 
 import es.upm.dit.gsi.shanks.model.element.device.DeviceDefinitions;
-import es.upm.dit.gsi.shanks.model.element.device.ftth.Gateway;
+import es.upm.dit.gsi.shanks.model.element.device.ftth.GatewayRouter;
 import es.upm.dit.gsi.shanks.model.element.device.ftth.OLT;
 import es.upm.dit.gsi.shanks.model.element.device.ftth.ONT;
 import es.upm.dit.gsi.shanks.model.element.device.ftth.Splitter;
+import es.upm.dit.gsi.shanks.model.element.link.LinkDefinitions;
+import es.upm.dit.gsi.shanks.model.element.link.ftth.OpticalFiber;
 import es.upm.dit.gsi.shanks.model.failure.ftth.ONTFailure;
 import es.upm.dit.gsi.shanks.model.scenario.ScenarioDefinitions;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
@@ -18,13 +20,14 @@ public class ScenarioFTTH extends Scenario {
     }
 
     @Override
-    public void addDevices() {
+    public void addNetworkElements() {
         // TODO rellenar con los dispositivos de FTTH, por ejemplo:
-        this.addDevice(new Gateway("Gateway de Juan", DeviceDefinitions.DEVICE_GATEWAY));
-        this.addDevice(new OLT("OLT", DeviceDefinitions.DEVICE_OLT));
-        this.addDevice(new ONT("ONT", DeviceDefinitions.DEVICE_ONT));
-        this.addDevice(new Splitter("Splitter1", DeviceDefinitions.DEVICE_SPLITTER1));
-        this.addDevice(new Splitter("Splitter2", DeviceDefinitions.DEVICE_SPLITTER2));
+        this.addNetworkElement(new OLT("OLT", DeviceDefinitions.DEVICE_OLT));
+        this.addNetworkElement(new OpticalFiber("Fiber1", LinkDefinitions.OPTICAL_FIBER));
+        this.addNetworkElement(new ONT("ONT", DeviceDefinitions.DEVICE_ONT));
+        this.addNetworkElement(new Splitter("Splitter1-4", DeviceDefinitions.DEVICE_SPLITTER4));
+        this.addNetworkElement(new Splitter("Splitter1-16", DeviceDefinitions.DEVICE_SPLITTER16));
+        this.addNetworkElement(new GatewayRouter("Gateway de Juan", DeviceDefinitions.DEVICE_GATEWAY));
     }
 
     @Override

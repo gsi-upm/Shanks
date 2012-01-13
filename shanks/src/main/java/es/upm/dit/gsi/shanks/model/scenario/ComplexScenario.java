@@ -7,7 +7,7 @@ package es.upm.dit.gsi.shanks.model.scenario;
 import java.util.ArrayList;
 import java.util.List;
 
-import es.upm.dit.gsi.shanks.model.element.device.Device;
+import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 
 /**
@@ -31,12 +31,12 @@ public abstract class ComplexScenario extends Scenario {
      * Add the scenario to the complex scenario.
      * @param scenario
      */
-    public void addScenario(Scenario scenario, GatewayDevice localDevice, GatewayDevice remoteDevice){
+    public void addScenario(Scenario scenario, Device localGateway, Link externalLink){
         //TOIMP crear clase GatewayDevice para conectar scenarios que se conectan a través de Link que puede ser extendido ilimitadas veces para tener diferentes conexiones
-        scenarios.add(scenario);
-        List<Device> devices = scenario.getDevices();
-        for (Device device : devices) {
-            this.currentDevices.add(device);
+        this.scenarios.add(scenario);
+        List<NetworkElement> elements = scenario.getCurrentElements();
+        for (NetworkElement element : elements) {
+            this.currentElements.add(element);
         }
         List<Class<? extends Failure>> possibleFailures = scenario.getPossibleFailures();
         for (Class<? extends Failure> possibleFailure : possibleFailures) {

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import es.upm.dit.gsi.shanks.model.element.device.Device;
+import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 
 /**
@@ -22,7 +22,7 @@ public abstract class Scenario {
     Logger logger = Logger.getLogger(Scenario.class.getName());
 
     public String type;
-    public List<Device> currentDevices;
+    public List<NetworkElement> currentElements;
     public List<Failure> currentFailures;
     public List<Class<? extends Failure>> possibleFailures;
 
@@ -34,11 +34,11 @@ public abstract class Scenario {
      */
     public Scenario(String type) {
         this.type = type;
-        this.currentDevices = new ArrayList<Device>();
+        this.currentElements = new ArrayList<NetworkElement>();
         this.currentFailures = new ArrayList<Failure>();
         this.possibleFailures = new ArrayList<Class<? extends Failure>>();
 
-        this.addDevices();
+        this.addNetworkElements();
         this.addPossibleFailures();
     }
 
@@ -48,33 +48,26 @@ public abstract class Scenario {
     public String getName() {
         return type;
     }
-
+    
+    /**
+     * @param element
+     */
+    public void addNetworkElement(NetworkElement element) {
+        this.currentElements.add(element);
+    }
+    
+    /**
+     * @param element
+     */
+    public void removeNetworkElement(NetworkElement element) {
+        this.currentElements.remove(element);
+    }
+    
     /**
      * @return
      */
-    public List<Device> getDevices() {
-        return currentDevices;
-    }
-
-    /**
-     * @param device
-     */
-    public void addDevice(Device device) {
-        this.currentDevices.add(device);
-    }
-
-    /**
-     * @param device
-     */
-    public void removeDevice(Device device) {
-        this.currentDevices.remove(device);
-    }
-
-    /**
-     * @return List of devices
-     */
-    public List<Device> getCurrentDevices() {
-        return this.currentDevices;
+    public List<NetworkElement> getCurrentElements() {
+        return this.currentElements;
     }
 
     /**
@@ -129,7 +122,7 @@ public abstract class Scenario {
     /**
      * 
      */
-    abstract public void addDevices();
+    abstract public void addNetworkElements();
 
     /**
      * 

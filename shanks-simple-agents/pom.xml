@@ -9,4 +9,12 @@
   <artifactId>shanks-simple-agents</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>Simple Agents for shanks simulator</name>
+  
+  <dependencies>
+  	<dependency>
+  		<groupId>es.upm.dit.gsi</groupId>
+  		<artifactId>shanks-core</artifactId>
+  		<version>0.0.2-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
 </project>

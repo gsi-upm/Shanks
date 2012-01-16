@@ -29,8 +29,8 @@ public abstract class Device extends NetworkElement {
      * @param id
      * @param isGateway
      */
-    public Device(String id, boolean isGateway) {
-        super(id);
+    public Device(String id, String initialState, boolean isGateway) {
+        super(id, initialState);
         this.isGateway = isGateway;
         this.linksList = new ArrayList<Link>();
     }

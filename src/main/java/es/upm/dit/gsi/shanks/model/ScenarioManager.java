@@ -41,10 +41,10 @@ public class ScenarioManager implements Steppable {
         if (Agent.repairFlag) {
             repairProblems();
         }
-        int randomproblem = (int) (Math.random() * Failure.deverrors.size());
+        int randomproblem = (int) (Math.random() * Failure.getCurrentAffectedElements().size());
         double randomerrorgenerator = Math.random();
         if (randomerrorgenerator <= Simulation.PROB_BROKEN) {
-            dev = Failure.deverrors.get(randomproblem);
+            dev = Failure.getCurrentAffectedElements().get(randomproblem);
             dev.setTrigger(true);
             Simulation.problems.setObjectLocation(dev, 25, 25);
             Agent.problemDetected = dev.getName();
@@ -62,7 +62,7 @@ public class ScenarioManager implements Steppable {
     }
 
     public void repairProblems() {
-        for (Failure d : Failure.deverrors) {
+        for (Failure d : Failure.getCurrentAffectedElements()) {
             d.setTrigger(false);
         }
     }

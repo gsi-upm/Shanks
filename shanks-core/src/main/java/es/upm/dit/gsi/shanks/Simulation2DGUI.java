@@ -173,7 +173,7 @@ public class Simulation2DGUI extends GUIState {
     public void setupPortrayals() {
         Simulation model = (Simulation) state;
         agents.setField(Simulation.problems);
-        links.setField(new SpatialNetwork2D(Simulation.problems, model.links1));
+        links.setField(new SpatialNetwork2D(Simulation.problems, model.links));
         // links.setPortrayalForAll(new Links());
         display.reset();
         display.setBackdrop(Color.white);

@@ -13,7 +13,7 @@ import sim.util.MutableDouble;
  * @version 0.1
  * 
  */
-public class LinkPortrayal extends MutableDouble implements Serializable {
+public abstract class LinkPortrayal extends MutableDouble implements Serializable {
 
     /**
 	 * 

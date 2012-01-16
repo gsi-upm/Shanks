@@ -131,7 +131,7 @@ public abstract class NetworkElement {
 
 
     /**
-     * @param possibleStates the possibleStates to set
+     *
      */
     abstract public void setPossibleStates();
     

@@ -49,14 +49,15 @@ public abstract class NetworkElement {
     /**
      * @param desiredStatus the currentStatus to set
      * @return true if the status was set correctly and false if the status is not a possible status of the network element
+     * @throws UnsupportedNetworkElementStatusException 
      */
-    public boolean setCurrentStatus(String desiredStatus) {
+    public boolean setCurrentStatus(String desiredStatus) throws UnsupportedNetworkElementStatusException {
         if (this.isPossibleStatus(desiredStatus)) {
             this.currentStatus = desiredStatus;
             return true;
         } else {
             logger.warning("Impossible to set status: " + desiredStatus + ". This network element " + this.getID() + "does not support this status.");
-            return false;
+            throw new UnsupportedNetworkElementStatusException();
         }
     }
 

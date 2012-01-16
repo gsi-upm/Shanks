@@ -21,8 +21,8 @@ public abstract class ComplexFailure extends Failure {
     /**
      * @param type
      */
-    public ComplexFailure(String id) {
-        super(id);
+    public ComplexFailure(String id, double occurrenceProbability) {
+        super(id,occurrenceProbability);
         this.addedFailures = new ArrayList<Failure>();
     }
     

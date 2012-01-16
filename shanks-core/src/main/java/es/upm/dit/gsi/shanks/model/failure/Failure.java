@@ -30,14 +30,17 @@ public abstract class Failure {
     private HashMap<NetworkElement,String> affectedElements;
     private HashMap<NetworkElement,String> oldStatesOfAffectedElements;
     private List<Class<? extends NetworkElement>> possibleAffectedElements;
+    
+    private double occurrenceProbability;
 
     /**
      * Constructor of the class
      * 
      * @param id
      */
-    public Failure(String id) {
+    public Failure(String id, double occurrenceProbability) {
         this.id = id;
+        this.occurrenceProbability = occurrenceProbability;
         this.affectedElements = new HashMap<NetworkElement, String>();
         this.possibleAffectedElements = new ArrayList<Class<? extends NetworkElement>>();
         this.active = false;
@@ -58,6 +61,22 @@ public abstract class Failure {
     public String getID() {
         return id;
     }
+
+    /**
+     * @return the occurrenceProbability
+     */
+    public double getOccurrenceProbability() {
+        return occurrenceProbability;
+    }
+
+
+    /**
+     * @param occurrenceProbability the occurrenceProbability to set
+     */
+    public void setOccurrenceProbability(double occurrenceProbability) {
+        this.occurrenceProbability = occurrenceProbability;
+    }
+
 
     /**
      * Used to activate a failure. All elements will be set with the affected status.

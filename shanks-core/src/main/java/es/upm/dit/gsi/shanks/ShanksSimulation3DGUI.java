@@ -16,7 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device3DPortrayal;
-import es.upm.dit.gsi.shanks.Simulation;
+import es.upm.dit.gsi.shanks.ShanksSimulation;
 
 import sim.display.Console;
 import sim.display.Controller;
@@ -35,7 +35,7 @@ import sim.portrayal3d.network.SimpleEdgePortrayal3D;
 import sim.portrayal3d.network.SpatialNetwork3D;
 import sim.portrayal3d.simple.ImagePortrayal3D;
 
-public class Simulation3DGUI extends GUIState {
+public class ShanksSimulation3DGUI extends GUIState {
 
     public Logger log = Logger.getLogger("ModelGUI");
 
@@ -54,14 +54,14 @@ public class Simulation3DGUI extends GUIState {
     NetworkPortrayal3D edgePortrayal = new NetworkPortrayal3D();
 
     public static void main(String[] args) {
-        new Simulation3DGUI().createController();
+        new ShanksSimulation3DGUI().createController();
     }
 
-    public Simulation3DGUI() {
-        super(new Simulation(System.currentTimeMillis()));
+    public ShanksSimulation3DGUI() {
+        super(new ShanksSimulation(System.currentTimeMillis()));
     }
 
-    public Simulation3DGUI(SimState state) {
+    public ShanksSimulation3DGUI(SimState state) {
         super(state);
     }
 
@@ -118,13 +118,13 @@ public class Simulation3DGUI extends GUIState {
     }
 
     public static Image loadImage(String img) {
-        return new ImageIcon(Simulation.class.getResource(img)).getImage();
+        return new ImageIcon(ShanksSimulation.class.getResource(img)).getImage();
     }
 
     public void setupPortrayals() {
         display.destroySceneGraph();
         legendDisplay.destroySceneGraph();
-        Simulation mod = (Simulation) state;
+        ShanksSimulation mod = (ShanksSimulation) state;
 
         edgePortrayal
                 .setField(new SpatialNetwork3D(mod.elements3d, mod.links1));
@@ -133,7 +133,7 @@ public class Simulation3DGUI extends GUIState {
         elementsPortrayal.setField(mod.elements3d);
         legendPortrayal.setField(mod.legend);
 
-        messagePortrayal.setField(Simulation.problems);
+        messagePortrayal.setField(ShanksSimulation.problems);
         DevicePortrayal dport = new DevicePortrayal();
 
         elementsPortrayal.setPortrayalForAll(dport);
@@ -150,7 +150,7 @@ public class Simulation3DGUI extends GUIState {
     @Override
     public void init(Controller c) {
         super.init(c);
-        Simulation mod = (Simulation) state;
+        ShanksSimulation mod = (ShanksSimulation) state;
 
         display = new Display3D(800, 800, this, 1);
         legendDisplay = new Display3D(450, 450, this, 1);
@@ -207,20 +207,20 @@ public class Simulation3DGUI extends GUIState {
         public void setErrorGenerationChoice(int val) {
             if (val == 0) {
                 error = val;
-                Simulation.SELECT_ERROR_GENERATION = "ErrorList";
+                ShanksSimulation.SELECT_ERROR_GENERATION = "ErrorList";
             } else if (val == 1) {
                 error = val;
-                Simulation.SELECT_ERROR_GENERATION = "ProbBroken";
+                ShanksSimulation.SELECT_ERROR_GENERATION = "ProbBroken";
             }
         }
 
         public void setScenarioChoice(int val) {
             if (val == 0) {
                 cells = val;
-                Simulation.SELECT_SCENARIO = "REAL FTTH";
+                ShanksSimulation.SELECT_SCENARIO = "REAL FTTH";
             } else if (val == 1) {
                 cells = val;
-                Simulation.SELECT_SCENARIO = "SIMPLE FTTH";
+                ShanksSimulation.SELECT_SCENARIO = "SIMPLE FTTH";
             }
 
             // // reattach the portrayals

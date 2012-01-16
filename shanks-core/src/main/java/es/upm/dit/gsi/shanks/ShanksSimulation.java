@@ -18,11 +18,11 @@ import es.upm.dit.gsi.shanks.model.scenario.Scenario;
  * 
  */
 
-public abstract class Simulation extends SimState {
+public abstract class ShanksSimulation extends SimState {
 
     private static final long serialVersionUID = -2238530527253654867L;
 
-    public Logger logger = Logger.getLogger(Simulation.class.getName());
+    public Logger logger = Logger.getLogger(ShanksSimulation.class.getName());
 
     public static SparseGrid2D problems;
 
@@ -36,7 +36,7 @@ public abstract class Simulation extends SimState {
     /**
      * @param seed
      */
-    public Simulation(long seed) {
+    public ShanksSimulation(long seed) {
         super(seed);
         this.scenarioManager = new ScenarioManager(this.getScenario());
 //        this.setScenarioPortrayal(this.getScenarioPortrayal());
@@ -119,7 +119,7 @@ public abstract class Simulation extends SimState {
      * @param args
      */
     public static void main(String[] args) {
-        doLoop(Simulation.class, args);
+        doLoop(ShanksSimulation.class, args);
         System.exit(0);
     }
 

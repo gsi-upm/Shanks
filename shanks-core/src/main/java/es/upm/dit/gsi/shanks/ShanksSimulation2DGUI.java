@@ -27,7 +27,7 @@ import sim.portrayal.network.SpatialNetwork2D;
  */
 
 // The GUI of the model
-public class Simulation2DGUI extends GUIState {
+public class ShanksSimulation2DGUI extends GUIState {
 
     public Logger log = Logger.getLogger("ModelGUI");
 
@@ -38,21 +38,21 @@ public class Simulation2DGUI extends GUIState {
     SparseGridPortrayal2D problems = new SparseGridPortrayal2D();
 
     public static void main(String[] args) {
-        Simulation2DGUI modelgui = new Simulation2DGUI();
+        ShanksSimulation2DGUI modelgui = new ShanksSimulation2DGUI();
         modelgui.createController();
 
     }
 
     public static Image loadImage(String img) {
-        return new ImageIcon(Simulation.class.getResource(img)).getImage();
+        return new ImageIcon(ShanksSimulation.class.getResource(img)).getImage();
     }
 
-    public Simulation2DGUI() {
-        super(new Simulation(System.currentTimeMillis()));
+    public ShanksSimulation2DGUI() {
+        super(new ShanksSimulation(System.currentTimeMillis()));
         log.finer("-> Constructor ModelGUI");
     }
 
-    public Simulation2DGUI(SimState state) {
+    public ShanksSimulation2DGUI(SimState state) {
         super(state);
     }
 
@@ -87,10 +87,10 @@ public class Simulation2DGUI extends GUIState {
         public void setSelectscenario(final int val) {
             if (val == 0) {
                 selected = val;
-                Simulation.SELECT_SCENARIO = "FTTH";
+                ShanksSimulation.SELECT_SCENARIO = "FTTH";
             } else if (val == 1) {
                 selected = val;
-                Simulation.SELECT_SCENARIO = "PRUEBA";
+                ShanksSimulation.SELECT_SCENARIO = "PRUEBA";
             }
 
             // reattach the portrayals
@@ -171,9 +171,9 @@ public class Simulation2DGUI extends GUIState {
 
     // Setup the Portrayals
     public void setupPortrayals() {
-        Simulation model = (Simulation) state;
-        agents.setField(Simulation.problems);
-        links.setField(new SpatialNetwork2D(Simulation.problems, model.links));
+        ShanksSimulation model = (ShanksSimulation) state;
+        agents.setField(ShanksSimulation.problems);
+        links.setField(new SpatialNetwork2D(ShanksSimulation.problems, model.links));
         // links.setPortrayalForAll(new Links());
         display.reset();
         display.setBackdrop(Color.white);

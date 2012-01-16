@@ -32,11 +32,12 @@ public abstract class Failure {
     private List<Class<? extends NetworkElement>> possibleAffectedElements;
     
     private double occurrenceProbability;
-
+    
     /**
      * Constructor of the class
      * 
      * @param id
+     * @param occurrenceProbability
      */
     public Failure(String id, double occurrenceProbability) {
         this.id = id;
@@ -183,6 +184,25 @@ public abstract class Failure {
      */
     public void addPossibleAffectedElements (Class<? extends NetworkElement> c) {
         this.possibleAffectedElements.add(c);
+    }
+
+
+    /**
+     * To know if a failure is resolved, the 
+     * 
+     * @return
+     */
+    public boolean isResolved() {
+        // FIXME check this method, maybe... if two failures affect to one element at the same time... the old status is a not valid check
+        boolean resolved = false;
+        for (NetworkElement element : this.affectedElements.keySet()) {
+            if (element.getCurrentStatus().equals(this.oldStatesOfAffectedElements.get(element))) {
+                resolved = true;
+            } else {
+                resolved = false;
+            }
+        }
+        return resolved;
     }
 
 }

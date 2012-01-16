@@ -1,15 +1,11 @@
 package es.upm.dit.gsi.shanks.model.failure;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import sim.portrayal.DrawInfo2D;
-import sim.portrayal.SimplePortrayal2D;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 
@@ -24,12 +20,9 @@ import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementSt
  * 
  */
 
-public abstract class Failure extends SimplePortrayal2D {
+public abstract class Failure {
     
     private Logger logger = Logger.getLogger(Failure.class.getName());
-
-    /** DeviceErrors parametres */
-    private static final long serialVersionUID = -5684572432145540188L;
     
     private String id;
     private boolean active;
@@ -48,7 +41,15 @@ public abstract class Failure extends SimplePortrayal2D {
         this.affectedElements = new HashMap<NetworkElement, String>();
         this.possibleAffectedElements = new ArrayList<Class<? extends NetworkElement>>();
         this.active = false;
+        
+        this.addPossibleAffectedElements();
     }
+
+
+    /**
+     * Add classes using addPossibleAffectedElements method
+     */
+    public abstract void addPossibleAffectedElements();
 
 
     /**
@@ -119,15 +120,22 @@ public abstract class Failure extends SimplePortrayal2D {
             return null;
         }
     }
+
+    /**
+     * @return the affectedElements
+     */
+    public HashMap<NetworkElement,String> getAffectedElements() {
+            return affectedElements;
+    }
     
     /**
      * @param element The element that will be affected by this failure when the failure will be active
      * @param affectedStatus The element status that will be set when the failure will be active
-     * @return true if the status is possible, false if not
+     * @return true if the status is possible and the element is not already in the affected element list, false if not
      */
     public boolean addAffectedElement (NetworkElement element, String affectedStatus) {
         Class<? extends NetworkElement> c = element.getClass();
-        if (this.possibleAffectedElements.contains(c) && element.getPossibleStates().contains(affectedStatus)) {
+        if (this.possibleAffectedElements.contains(c) && element.getPossibleStates().contains(affectedStatus) && !this.affectedElements.containsKey(element)) {
             this.affectedElements.put(element, affectedStatus);
             return true;
         } else {
@@ -156,28 +164,6 @@ public abstract class Failure extends SimplePortrayal2D {
      */
     public void addPossibleAffectedElements (Class<? extends NetworkElement> c) {
         this.possibleAffectedElements.add(c);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see sim.portrayal.SimplePortrayal2D#draw(java.lang.Object,
-     * java.awt.Graphics2D, sim.portrayal.DrawInfo2D)
-     */
-    @Override
-    public void draw(Object object, Graphics2D graphics, DrawInfo2D info) {
-
-        final double width = 20;
-        final double height = 20;
-
-        // Draw the devices
-        final int x = (int) (info.draw.x - width / 2.0);
-        final int y = (int) (info.draw.y - height / 2.0);
-
-        // Draw the devices ID ID
-        graphics.setColor(Color.black);
-        graphics.drawString("Problem generated ----> "
-                + this.getClass().getName(), x - 3, y);
     }
 
 }

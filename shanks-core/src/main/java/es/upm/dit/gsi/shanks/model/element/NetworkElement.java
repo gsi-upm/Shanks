@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+
 
 /**
  * @author a.carrera

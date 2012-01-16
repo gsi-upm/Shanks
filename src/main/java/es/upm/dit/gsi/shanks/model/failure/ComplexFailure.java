@@ -4,23 +4,46 @@
  */
 package es.upm.dit.gsi.shanks.model.failure;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import es.upm.dit.gsi.shanks.model.element.NetworkElement;
+
 /**
  * @author a.carrera
  *
  */
-public class ComplexFailure extends Failure {
+public abstract class ComplexFailure extends Failure {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -1713104617728419692L;
-
+    private List<Failure> addedFailures;
+    
     /**
      * @param type
      */
-    public ComplexFailure(String type) {
-        super(type);
-        // TODO Auto-generated constructor stub
+    public ComplexFailure(String id) {
+        super(id);
+        this.addedFailures = new ArrayList<Failure>();
     }
+    
+    /**
+     * Add a failure to a simple
+     * 
+     * @param f The failure that must be deactivated when it is added
+     * @return true if it is added, false if not
+     */
+    public boolean addSimpleFailure(Failure f) {
+        if (!this.addedFailures.contains(f)) {
+            HashMap<NetworkElement,String> elements = f.getAffectedElements();
+            for (NetworkElement element : elements.keySet()) {
+                super.addAffectedElement(element, elements.get(element));
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    //TODO queda darle alguna vuelta...
 
 }

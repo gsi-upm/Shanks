@@ -18,7 +18,7 @@ import es.upm.dit.gsi.shanks.model.element.device.Device;
  * 
  */
 
-public class Link extends NetworkElement {
+public abstract class Link extends NetworkElement {
     
     private Logger logger = Logger.getLogger(Link.class.getName());
     
@@ -29,8 +29,8 @@ public class Link extends NetworkElement {
      * @param id
      * @param capacity
      */
-    public Link(String id, int capacity) {
-        super(id);
+    public Link(String id, String initialState, int capacity) {
+        super(id, initialState);
         this.deviceCapacity = capacity;
         this.linkedDevices = new ArrayList<Device>();
     }

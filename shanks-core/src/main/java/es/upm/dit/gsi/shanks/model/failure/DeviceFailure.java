@@ -7,7 +7,7 @@ package es.upm.dit.gsi.shanks.model.failure;
 public abstract class DeviceFailure extends Failure {
 
     /**
-	 * 
+	 * I think this class it is not required
 	 */
     private static final long serialVersionUID = 2180405818058420531L;
 

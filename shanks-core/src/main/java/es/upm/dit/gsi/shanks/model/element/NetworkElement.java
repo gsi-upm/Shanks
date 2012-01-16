@@ -4,6 +4,7 @@
  */
 package es.upm.dit.gsi.shanks.model.element;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
@@ -27,10 +28,17 @@ public abstract class NetworkElement {
     /**
      * @param id
      */
-    public NetworkElement(String id) {
+    public NetworkElement(String id, String initialStatus) {
         this.id = id;
         this.properties = new HashMap<String, Object>();
-        this.currentStatus = null;
+        
+        this.setPossibleStates();
+        
+        try {
+            this.setCurrentStatus(initialStatus);
+        } catch (UnsupportedNetworkElementStatusException e) {
+            logger.severe("Exception setting initial status: " + initialStatus + " in element " + this.getID() + ". Exception: " + e.getMessage());
+        }
     }
 
 
@@ -108,19 +116,24 @@ public abstract class NetworkElement {
 
 
     /**
-     * @return the possibleStates
+     * This method only returns a copy of the list, if you modify the copy, the internal list of PossibleStates will be not modified.
+     * To interact with the real list, use "addPossibleStatus" and "removePossibleStatus" methods
+     * 
+     * @return a copy of possibleStates list
      */
     public List<String> getPossibleStates() {
-        return possibleStates;
+        List<String> copy = new ArrayList<String>();
+        for (String possibleStatus : possibleStates) {
+            copy.add(possibleStatus);
+        }
+        return copy;
     }
 
 
     /**
      * @param possibleStates the possibleStates to set
      */
-    public void setPossibleStates(List<String> possibleStates) {
-        this.possibleStates = possibleStates;
-    }
+    abstract public void setPossibleStates();
     
     /**
      * @param possibleStatus
@@ -135,4 +148,5 @@ public abstract class NetworkElement {
     public void removePossibleStatus(String possibleStatus) {
         this.possibleStates.remove(possibleStatus);
     }
+
 }

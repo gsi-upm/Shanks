@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks.model.element;
+package es.upm.dit.gsi.shanks.model.element.exception;
 
 public class UnsupportedNetworkElementStatusException extends Exception {
 

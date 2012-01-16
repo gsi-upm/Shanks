@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 
 import sim.engine.SimState;
 import sim.engine.Steppable;
-import es.upm.dit.gsi.shanks.Simulation;
+import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 
@@ -45,7 +45,7 @@ public class ScenarioManager implements Steppable {
     // The actions done by the agent for each step
     // TODO chekc this method
     public void step(SimState state) {
-        Simulation sim = (Simulation) state;
+        ShanksSimulation sim = (ShanksSimulation) state;
         switch (this.simulationStateMachineStatus) {
         case CHECK_FAILURES:
             this.checkFailures(sim);
@@ -61,14 +61,14 @@ public class ScenarioManager implements Steppable {
     /**
      * @param sim
      */
-    private void generateFailures(Simulation sim) {
+    private void generateFailures(ShanksSimulation sim) {
         this.scenario.generateFailures();
     }
 
     /**
      * @param sim
      */
-    private void checkFailures(Simulation sim) {
+    private void checkFailures(ShanksSimulation sim) {
         List<Failure> resolved = this.scenario.checkResolvedFailures();
         sim.numOfResolvedFailures += resolved.size();       
     }

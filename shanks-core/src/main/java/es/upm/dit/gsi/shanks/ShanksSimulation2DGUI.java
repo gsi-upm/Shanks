@@ -7,6 +7,8 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
+
 import sim.display.Console;
 import sim.display.Controller;
 import sim.display.Display2D;
@@ -27,81 +29,59 @@ import sim.portrayal.network.SpatialNetwork2D;
  */
 
 // The GUI of the model
-public class ShanksSimulation2DGUI extends GUIState {
+public abstract class ShanksSimulation2DGUI extends GUIState {
 
     public Logger log = Logger.getLogger("ModelGUI");
 
     public Display2D display;
     public JFrame frame;
-    SparseGridPortrayal2D agents = new SparseGridPortrayal2D();
-    NetworkPortrayal2D links = new NetworkPortrayal2D();
-    SparseGridPortrayal2D problems = new SparseGridPortrayal2D();
+    private Scenario2DPortrayal scenarioPortrayal;
 
-    public static void main(String[] args) {
-        ShanksSimulation2DGUI modelgui = new ShanksSimulation2DGUI();
-        modelgui.createController();
-
-    }
-
+    /**
+     * @param img
+     * @return
+     */
     public static Image loadImage(String img) {
         return new ImageIcon(ShanksSimulation.class.getResource(img)).getImage();
     }
 
-    public ShanksSimulation2DGUI() {
-        super(new ShanksSimulation(System.currentTimeMillis()));
-        log.finer("-> Constructor ModelGUI");
+    /**
+     * @param sim
+     * @param scenarioPortrayal
+     */
+    public ShanksSimulation2DGUI(ShanksSimulation sim, Scenario2DPortrayal scenarioPortrayal) {
+        super(sim);
+        this.scenarioPortrayal = scenarioPortrayal;
+        this.createController();
     }
 
-    public ShanksSimulation2DGUI(SimState state) {
-        super(state);
-    }
-
+    /**
+     * @return
+     */
     public static String getName() {
-        return "SHANKS Console Control";
+        return "SHANKS Console Control - This is a default name";
     }
 
+    /**
+     * @return
+     */
     public static Object getInfo() {
-        return "<H2>Simulation of Heterogeneal and Autonomus</H2>";
+        return "<H2>Simulation for Heterogeneous and Autonomic Networks with MASON</H2>";
     }
 
+    /* (non-Javadoc)
+     * @see sim.display.GUIState#getSimulationInspectedObject()
+     */
     @Override
     public Object getSimulationInspectedObject() {
         return state;
     }
-
-    public class ScenarioChoice {
-        int selected = 0;
-
-        public Object domScenarios() {
-            return new Object[] { "FTTH", "PRUEBA" };
-        }
-
-        public int getSelectScenario() {
-            return selected;
-        }
-
-        /**
-         * 
-         * @param val
-         */
-        public void setSelectscenario(final int val) {
-            if (val == 0) {
-                selected = val;
-                ShanksSimulation.SELECT_SCENARIO = "FTTH";
-            } else if (val == 1) {
-                selected = val;
-                ShanksSimulation.SELECT_SCENARIO = "PRUEBA";
-            }
-
-            // reattach the portrayals
-            display.detatchAll();
-            display.attach(agents, "Devices");
-            display.attach(links, "Links");
-
-            // redisplay
-            if (display != null)
-                display.repaint();
-        }
+    
+    /**
+     * @return
+     */
+    public ShanksSimulation getSimulation() {
+        return (ShanksSimulation) state;
     }
 
     /**
@@ -115,63 +95,21 @@ public class ShanksSimulation2DGUI extends GUIState {
         return console;
     }
 
-    // public Inspector getInspector() {
-    //
-    // log.fine("-> Inspector");
-    //
-    // final Inspector originalInspector = super.getInspector();
-    // final SimpleInspector scenarioInspector = new SimpleInspector(new
-    // ScenarioChoice(),this);
-    //
-    // originalInspector.setVolatile(true);
-    //
-    // Inspector newInspector = new Inspector(){
-    // public void updateInspector(){
-    // originalInspector.updateInspector();
-    // }
-    // };
-    //
-    // newInspector.setVolatile(false);
-    //
-    // Box b = new Box(BoxLayout.X_AXIS) {
-    // public Insets getInsets(){
-    // return new Insets(2,2,2,2);
-    // } // in a bit
-    // };
-    //
-    // b.add(newInspector.makeUpdateButton());
-    // b.add(Box.createGlue());
-    //
-    // log.info("Before Box b2");
-    //
-    // Box b2 = new Box(BoxLayout.Y_AXIS);
-    // b2.add(b);
-    // b2.add(scenarioInspector);
-    // b2.add(Box.createGlue());
-    //
-    // // all one blob now. We can add it at NORTH.
-    //
-    // newInspector.setLayout(new BorderLayout());
-    // newInspector.add(b2,BorderLayout.NORTH);
-    // newInspector.add(originalInspector,BorderLayout.CENTER);
-    //
-    // log.fine("Inspector ->");
-    //
-    // return originalInspector;
-    // }
-    //
-    //
-    //
-
+    /* (non-Javadoc)
+     * @see sim.display.GUIState#start()
+     */
     @Override
     public void start() {
         super.start();
         setupPortrayals();
     }
 
-    // Setup the Portrayals
+    
+    /**
+     * 
+     */
     public void setupPortrayals() {
-        ShanksSimulation model = (ShanksSimulation) state;
+        ShanksSimulation sim = this.getSimulation();
         agents.setField(ShanksSimulation.problems);
         links.setField(new SpatialNetwork2D(ShanksSimulation.problems, model.links));
         // links.setPortrayalForAll(new Links());
@@ -180,7 +118,9 @@ public class ShanksSimulation2DGUI extends GUIState {
         display.repaint();
     }
 
-    // Controller that create the displays
+    /* (non-Javadoc)
+     * @see sim.display.GUIState#init(sim.display.Controller)
+     */
     @Override
     public void init(Controller c) {
         super.init(c);
@@ -195,6 +135,9 @@ public class ShanksSimulation2DGUI extends GUIState {
 
     }
 
+    /* (non-Javadoc)
+     * @see sim.display.GUIState#quit()
+     */
     @Override
     public void quit() {
         super.quit();

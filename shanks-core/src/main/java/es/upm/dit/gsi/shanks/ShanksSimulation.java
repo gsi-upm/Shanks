@@ -27,9 +27,6 @@ public abstract class ShanksSimulation extends SimState {
     public static SparseGrid2D problems;
 
     private ScenarioManager scenarioManager;
-//    private ScenarioPortrayal scenarioPortrayal;
-//    public Continuous3D elements3d;
-//    public Continuous3D legend;
 
     public int numOfResolvedFailures;
 
@@ -47,19 +44,6 @@ public abstract class ShanksSimulation extends SimState {
      * This method will set all required information about Scenario
      */
     abstract public Scenario getScenario();
-
-//    /**
-//     * @return The portrayal of the scenario
-//     */
-//    abstract public ScenarioPortrayal getScenarioPortrayal();
-//
-//
-//    /**
-//     * @param scenarioPortrayal the scenarioPortrayal to set
-//     */
-//    public void setScenarioPortrayal(ScenarioPortrayal scenarioPortrayal) {
-//        this.scenarioPortrayal = scenarioPortrayal;
-//    }
 
     /* (non-Javadoc)
      * @see sim.engine.SimState#start()

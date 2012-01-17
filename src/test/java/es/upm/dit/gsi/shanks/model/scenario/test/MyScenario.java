@@ -1,7 +1,12 @@
 package es.upm.dit.gsi.shanks.model.scenario.test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
+import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
@@ -18,9 +23,17 @@ public class MyScenario extends Scenario {
     
     public static final String CLOUDY = "CLOUDY";
     public static final String SUNNY = "SUNNY";
+    
+    private double cloudyPenalty;
 
+    public MyScenario(String id, String initialState, double cloudyPenalty) throws UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException {
+        super(id, initialState);
+        this.cloudyPenalty = cloudyPenalty;
+    }
+    
     public MyScenario(String id, String initialState) throws UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException {
         super(id, initialState);
+        this.cloudyPenalty = 3.0;
     }
 
     /* (non-Javadoc)
@@ -61,7 +74,16 @@ public class MyScenario extends Scenario {
      */
     @Override
     public void addPossibleFailures() {
-        this.addPossibleFailure(MyFailure.class);
+        Set<NetworkElement> set = new HashSet<NetworkElement>();
+        set.add(this.getNetworkElement("D1"));
+        set.add(this.getNetworkElement("L1"));
+        Set<NetworkElement> set2 = new HashSet<NetworkElement>();
+        set2.add(this.getNetworkElement("D5"));
+        set2.add(this.getNetworkElement("L3"));
+        List<Set<NetworkElement>> possibleCombinations = new ArrayList<Set<NetworkElement>>();
+        possibleCombinations.add(set);
+        possibleCombinations.add(set2);
+        this.addPossibleFailure(MyFailure.class, possibleCombinations);
     }
 
     /* (non-Javadoc)
@@ -107,7 +129,7 @@ public class MyScenario extends Scenario {
     private HashMap<Class<? extends Failure>, Double> getCloudyPenalties() {
         HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
         
-        penalties.put(MyFailure.class, 3.0);
+        penalties.put(MyFailure.class, this.cloudyPenalty);
         
         return penalties;
     }

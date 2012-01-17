@@ -31,6 +31,7 @@ public abstract class NetworkElement {
     public NetworkElement(String id, String initialStatus) {
         this.id = id;
         this.properties = new HashMap<String, Object>();
+        this.possibleStates = new ArrayList<String>();
         
         this.setPossibleStates();
         

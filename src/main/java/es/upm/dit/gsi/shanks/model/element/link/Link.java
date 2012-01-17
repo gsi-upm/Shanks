@@ -49,6 +49,7 @@ public abstract class Link extends NetworkElement {
     public boolean connectDevice(Device device) {
         if (this.linkedDevices.size()<deviceCapacity) {
             this.linkedDevices.add(device);
+            device.connectToLink(this);
             logger.fine("Link " + this.getID() + " has Device " + device.getID() + " in its linked device list.");
             return true;
         } else {
@@ -62,6 +63,7 @@ public abstract class Link extends NetworkElement {
      */
     public void disconnectDevice(Device device) {
         this.linkedDevices.remove(device);
+        device.disconnectFromLink(this);
     }
     
 }

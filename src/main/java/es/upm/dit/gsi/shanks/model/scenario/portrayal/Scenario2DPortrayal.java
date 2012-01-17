@@ -1,33 +1,56 @@
 package es.upm.dit.gsi.shanks.model.scenario.portrayal;
 
 import sim.field.grid.SparseGrid2D;
-import sim.portrayal.grid.SparseGridPortrayal2D;
-import sim.portrayal.network.NetworkPortrayal2D;
+import sim.field.network.Network;
 import sim.util.Int2D;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
+import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 
 /**
  * @author a.carrera
  * 
  */
-public abstract class Scenario2DPortrayal {
-
-    private int gridWidth;
-    private int gridHeight;
+public abstract class Scenario2DPortrayal extends ScenarioPortrayal{
 
     private SparseGrid2D elements;
-    private NetworkPortrayal2D links;
-    private SparseGridPortrayal2D failures;
+    private Network links;
 
-    public Scenario2DPortrayal(int width, int height) {
-        this.gridHeight = height;
-        this.gridWidth = width;
+    /**
+     * The constructor needs the scenario and the size of the simulation
+     * 
+     * @param scenario
+     * @param width
+     * @param height
+     */
+    public Scenario2DPortrayal(Scenario scenario, int width, int height) {
+        super(scenario);
         elements = new SparseGrid2D(width, height);
-        links = new NetworkPortrayal2D();
-        failures = new SparseGridPortrayal2D();
+        links = new Network();
     }
 
+    /**
+     * To place a device in the simulation
+     * 
+     * @param d
+     * @param x
+     * @param y
+     */
     public void situateDevice(Device d, int x, int y) {
         elements.setObjectLocation(d, new Int2D(x, y));
+    }
+
+    
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal#getElements()
+     */
+    public SparseGrid2D getElements() {
+        return this.elements;
+    }
+    
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal#getLinks()
+     */
+    public Network getLinks() {
+        return this.links;
     }
 }

@@ -20,6 +20,7 @@ import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
+import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 
 public class ScenarioManager implements Steppable {
@@ -58,15 +59,26 @@ public class ScenarioManager implements Steppable {
     public ScenarioPortrayal getPortrayal() {
         return portrayal;
     }
-
-    // The actions done by the agent for each step
-    // TODO chekc this method
+    
+    /* (non-Javadoc)
+     * @see sim.engine.Steppable#step(sim.engine.SimState)
+     */
     public void step(SimState state) {
         ShanksSimulation sim = (ShanksSimulation) state;
-        this.stateMachine(sim);
+        try {
+            this.stateMachine(sim);
+        } catch (UnsupportedScenarioStatusException e) {
+            logger.severe("Exception: " + e.getMessage());
+        }
     }
 
-    public void stateMachine(ShanksSimulation sim) {
+    /**
+     * This method implements the state machine of the scneario manager
+     * 
+     * @param sim
+     * @throws UnsupportedScenarioStatusException 
+     */
+    public void stateMachine(ShanksSimulation sim) throws UnsupportedScenarioStatusException {
         logger.info("Using default state machine for ScenarioManager");
         switch (this.simulationStateMachineStatus) {
         case CHECK_FAILURES:
@@ -82,8 +94,9 @@ public class ScenarioManager implements Steppable {
 
     /**
      * @param sim
+     * @throws UnsupportedScenarioStatusException 
      */
-    private void generateFailures(ShanksSimulation sim) {
+    private void generateFailures(ShanksSimulation sim) throws UnsupportedScenarioStatusException {
         this.scenario.generateFailures();
     }
 

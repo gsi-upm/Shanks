@@ -27,19 +27,15 @@ public abstract class NetworkElement {
     
     /**
      * @param id
+     * @throws UnsupportedNetworkElementStatusException 
      */
-    public NetworkElement(String id, String initialStatus) {
+    public NetworkElement(String id, String initialStatus) throws UnsupportedNetworkElementStatusException {
         this.id = id;
         this.properties = new HashMap<String, Object>();
         this.possibleStates = new ArrayList<String>();
         
         this.setPossibleStates();
-        
-        try {
-            this.setCurrentStatus(initialStatus);
-        } catch (UnsupportedNetworkElementStatusException e) {
-            logger.severe("Exception setting initial status: " + initialStatus + " in element " + this.getID() + ". Exception: " + e.getMessage());
-        }
+        this.setCurrentStatus(initialStatus);
     }
 
 

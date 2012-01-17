@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
+import es.upm.dit.gsi.shanks.model.failure.exception.UnsupportedElementInFailureException;
 
 /**
  * @author a.carrera
@@ -36,7 +37,12 @@ public abstract class ComplexFailure extends Failure {
         if (!this.addedFailures.contains(f)) {
             HashMap<NetworkElement,String> elements = f.getAffectedElements();
             for (NetworkElement element : elements.keySet()) {
-                super.addAffectedElement(element, elements.get(element));
+                try {
+                    super.addAffectedElement(element, elements.get(element));
+                } catch (UnsupportedElementInFailureException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
             return true;
         } else {

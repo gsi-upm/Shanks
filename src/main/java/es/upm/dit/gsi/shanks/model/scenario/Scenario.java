@@ -11,6 +11,7 @@ import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
+import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 
 /**
@@ -30,7 +31,7 @@ public abstract class Scenario {
     public String id;
     private List<String> possibleStates;
     private String currentStatus;
-    public List<NetworkElement> currentElements;
+    public HashMap<String, NetworkElement> currentElements;
     public List<Failure> currentFailures;
     public List<Class<? extends Failure>> possibleFailures;
 
@@ -39,11 +40,12 @@ public abstract class Scenario {
      * @throws UnsupportedNetworkElementStatusException 
      * @throws TooManyConnectionException 
      * @throws UnsupportedScenarioStatusException 
+     * @throws DuplicatedIDException 
      */
-    public Scenario(String id, String initialState) throws UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException {
+    public Scenario(String id, String initialState) throws UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException {
         this.id = id;
         this.possibleStates = new ArrayList<String>();
-        this.currentElements = new ArrayList<NetworkElement>();
+        this.currentElements = new HashMap<String, NetworkElement>();
         this.currentFailures = new ArrayList<Failure>();
         this.possibleFailures = new ArrayList<Class<? extends Failure>>();
 
@@ -126,22 +128,27 @@ public abstract class Scenario {
 
     /**
      * @param element
+     * @throws DuplicatedIDException 
      */
-    public void addNetworkElement(NetworkElement element) {
-        this.currentElements.add(element);
+    public void addNetworkElement(NetworkElement element) throws DuplicatedIDException {
+        if (!this.currentElements.containsKey(element.getID())) {
+            this.currentElements.put(element.getID(), element);   
+        } else {
+            throw new DuplicatedIDException(element);
+        }
     }
 
     /**
      * @param element
      */
     public void removeNetworkElement(NetworkElement element) {
-        this.currentElements.remove(element);
+        this.currentElements.remove(element.getID());
     }
 
     /**
      * @return
      */
-    public List<NetworkElement> getCurrentElements() {
+    public HashMap<String, NetworkElement> getCurrentElements() {
         return this.currentElements;
     }
 
@@ -203,9 +210,10 @@ public abstract class Scenario {
     /**
      * @throws UnsupportedNetworkElementStatusException 
      * @throws TooManyConnectionException 
+     * @throws DuplicatedIDException 
      * 
      */
-    abstract public void addNetworkElements() throws UnsupportedNetworkElementStatusException, TooManyConnectionException;
+    abstract public void addNetworkElements() throws UnsupportedNetworkElementStatusException, TooManyConnectionException, DuplicatedIDException;
 
     /**
      * 
@@ -276,6 +284,16 @@ public abstract class Scenario {
            this.currentFailures.remove(resolved);
        }
        return resolvedFailures;
+    }
+    
+    /**
+     * Return the network element with these id
+     * 
+     * @param id
+     * @return
+     */
+    public NetworkElement getNetworkElement(String id) {
+        return this.currentElements.get(id);
     }
 
 }

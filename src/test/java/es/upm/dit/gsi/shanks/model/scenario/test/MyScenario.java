@@ -11,6 +11,7 @@ import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.failure.test.MyFailure;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
+import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 
 public class MyScenario extends Scenario {
@@ -18,7 +19,7 @@ public class MyScenario extends Scenario {
     public static final String CLOUDY = "CLOUDY";
     public static final String SUNNY = "SUNNY";
 
-    public MyScenario(String id, String initialState) throws UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException {
+    public MyScenario(String id, String initialState) throws UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException {
         super(id, initialState);
     }
 
@@ -26,7 +27,7 @@ public class MyScenario extends Scenario {
      * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#addNetworkElements()
      */
     @Override
-    public void addNetworkElements() throws UnsupportedNetworkElementStatusException, TooManyConnectionException {
+    public void addNetworkElements() throws UnsupportedNetworkElementStatusException, TooManyConnectionException, DuplicatedIDException {
         Device d1 = new MyDevice("D1", MyDevice.OK, false);
         Device d2 = new MyDevice("D2", MyDevice.OK, false);
         Device d3 = new MyDevice("D3", MyDevice.OK, false);
@@ -34,7 +35,7 @@ public class MyScenario extends Scenario {
         Device d5 = new MyDevice("D5", MyDevice.OK, true);
         Link l1 = new MyLink("L1", MyLink.OK, 3);
         Link l2 = new MyLink("L2", MyLink.OK, 2);
-        Link l3 = new MyLink("L1", MyLink.OK, 2);
+        Link l3 = new MyLink("L3", MyLink.OK, 2);
         
         d1.connectToLink(l1);
         d2.connectToLink(l1);
@@ -43,6 +44,15 @@ public class MyScenario extends Scenario {
         l2.connectDevices(d1, d4);
         
         l3.connectDevices(d3, d5);
+        
+        this.addNetworkElement(d1);
+        this.addNetworkElement(d2);
+        this.addNetworkElement(d3);
+        this.addNetworkElement(d4);
+        this.addNetworkElement(d5);
+        this.addNetworkElement(l1);
+        this.addNetworkElement(l2);
+        this.addNetworkElement(l3);
 
     }
 
@@ -52,7 +62,6 @@ public class MyScenario extends Scenario {
     @Override
     public void addPossibleFailures() {
         this.addPossibleFailure(MyFailure.class);
-
     }
 
     /* (non-Javadoc)

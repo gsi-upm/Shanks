@@ -24,11 +24,26 @@ public abstract class ScenarioPortrayal {
     /**
      * @return the SparseGrid2D or the Continuous3D object
      */
-    abstract public Object getElements();
+    abstract public Object getDevices();
+    
+    /**
+     * @return the SparseGridPortrayal2D or the ContinuousPortrayal3D object
+     */
+    abstract public Object getDevicesPortrayal();
     
     /**
      * @return the Network object with all links
      */
-    abstract public Network getLinks(); 
+    abstract public Network getLinks();
+    
+    /**
+     * @return the NetworkPortrayal2D or the NetworkPortrayal3D object
+     */
+    abstract public Object getLinksPortrayal();
+    
+    /**
+     * To setup all portrayals of the simulation
+     */
+    abstract public void setupPortrayals();
 
 }

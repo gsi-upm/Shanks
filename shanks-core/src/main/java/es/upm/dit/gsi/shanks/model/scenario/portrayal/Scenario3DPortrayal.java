@@ -12,7 +12,7 @@ import es.upm.dit.gsi.shanks.model.scenario.Scenario;
  */
 public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
 
-    private Continuous3D elements;
+    private Continuous3D devices;
     private Network links;
 
     /**
@@ -24,7 +24,7 @@ public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
      */
     public Scenario3DPortrayal(Scenario scenario, long width, long height, long length) {
         super(scenario);
-        this.elements = new Continuous3D(5, width, height, length);
+        this.devices = new Continuous3D(5, width, height, length);
     }
 
     /**
@@ -36,14 +36,14 @@ public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
      * @param z
      */
     public void situateDevice(Device d, double x, double y, double z) {
-        elements.setObjectLocation(d, new Double3D(x, y, z));
+        devices.setObjectLocation(d, new Double3D(x, y, z));
     }
     
     /* (non-Javadoc)
      * @see es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal#getElements()
      */
-    public Continuous3D getElements() {
-        return this.elements;
+    public Continuous3D getDevices() {
+        return this.devices;
     }
     
     /* (non-Javadoc)

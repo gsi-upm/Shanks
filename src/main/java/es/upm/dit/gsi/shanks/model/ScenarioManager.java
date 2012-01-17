@@ -27,7 +27,7 @@ public class ScenarioManager implements Steppable {
 
     private static final long serialVersionUID = -7448202235281457216L;
 
-    //STATES OF SCENARIO MANAGER
+    // STATES OF SCENARIO MANAGER
     private static final int CHECK_FAILURES = 0;
     private static final int GENERATE_FAILURES = 1;
 
@@ -46,10 +46,15 @@ public class ScenarioManager implements Steppable {
     // TODO chekc this method
     public void step(SimState state) {
         ShanksSimulation sim = (ShanksSimulation) state;
+        this.stateMachine(sim);
+    }
+
+    public void stateMachine(ShanksSimulation sim) {
+        logger.info("Using default state machine for ScenarioManager");
         switch (this.simulationStateMachineStatus) {
         case CHECK_FAILURES:
             this.checkFailures(sim);
-            this.simulationStateMachineStatus = GENERATE_FAILURES; 
+            this.simulationStateMachineStatus = GENERATE_FAILURES;
             break;
         case GENERATE_FAILURES:
             this.generateFailures(sim);
@@ -57,7 +62,7 @@ public class ScenarioManager implements Steppable {
             break;
         }
     }
-    
+
     /**
      * @param sim
      */
@@ -70,6 +75,6 @@ public class ScenarioManager implements Steppable {
      */
     private void checkFailures(ShanksSimulation sim) {
         List<Failure> resolved = this.scenario.checkResolvedFailures();
-        sim.numOfResolvedFailures += resolved.size();       
+        sim.numOfResolvedFailures += resolved.size();
     }
 }

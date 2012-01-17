@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
 import es.upm.dit.gsi.shanks.model.failure.exception.UnsupportedElementInFailureException;
@@ -36,6 +37,7 @@ public class FailureTest {
             Assert.assertTrue(f.getCurrentAffectedElements().size()==0);
         } catch (UnsupportedElementInFailureException e) {
             e.printStackTrace();
+            Assert.fail();
         }
     }
 
@@ -53,6 +55,7 @@ public class FailureTest {
             Assert.assertTrue(f.getCurrentAffectedElements().size()==1);
         } catch (UnsupportedElementInFailureException e) {
             e.printStackTrace();
+            Assert.fail();
         }
     }
 
@@ -71,6 +74,7 @@ public class FailureTest {
             Assert.assertTrue(f.getCurrentAffectedElements().size()==0);
         } catch (UnsupportedElementInFailureException e) {
             e.printStackTrace();
+            Assert.fail();
         }
     }
 
@@ -85,7 +89,25 @@ public class FailureTest {
         } catch (UnsupportedElementInFailureException e) {
             catched = true;
         }
-        Assert.assertEquals(true, catched);
+        Assert.assertTrue(catched);
+    }
+
+    @Test
+    public void createFailureAndResolveIt() {
+        Failure f = new MyFailure("MyFailure", 0.01);
+        Link l = new MyLink("L1", MyLink.OK, 3);
+        try {
+            f.addAffectedElement(l, MyLink.BROKEN);
+            f.activateFailure();
+            l.setCurrentStatus(MyLink.OK);
+            Assert.assertTrue(f.isResolved());
+        } catch (UnsupportedElementInFailureException e) {
+            e.printStackTrace();
+            Assert.fail();
+        } catch (UnsupportedNetworkElementStatusException e) {
+            e.printStackTrace();
+            Assert.fail();
+        }
     }
     
 

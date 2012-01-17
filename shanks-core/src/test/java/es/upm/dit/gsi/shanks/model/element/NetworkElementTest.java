@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
 
@@ -38,6 +39,30 @@ public class NetworkElementTest {
         Assert.assertEquals("MyDevice", d.getID());
         Assert.assertEquals(MyDevice.NOK, d.getCurrentStatus());
         Assert.assertEquals(true, d.isGateway());
+    }
+
+    @Test
+    public void createDeviceChangeStatus() {
+        Device d = new MyDevice("MyDevice", MyDevice.NOK, true);
+        try {
+            d.setCurrentStatus(MyDevice.OK);
+        } catch (UnsupportedNetworkElementStatusException e) {
+            e.printStackTrace();
+            Assert.fail();
+        }
+        Assert.assertEquals(MyDevice.OK, d.getCurrentStatus());
+    }
+
+    @Test
+    public void createDeviceChangeToImpossibleStatus() {
+        Device d = new MyDevice("MyDevice", MyDevice.NOK, true);
+        boolean catched = false;
+        try {
+            d.setCurrentStatus("WrongStatus");
+        } catch (UnsupportedNetworkElementStatusException e) {
+            catched = true;
+        }
+        Assert.assertTrue(catched);
     }
 
     @Test

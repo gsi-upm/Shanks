@@ -2,6 +2,7 @@ package es.upm.dit.gsi.shanks.model.failure;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -126,7 +127,7 @@ public abstract class Failure {
     /**
      * @return
      */
-    public boolean getStatus() {
+    public boolean isActive() {
         return active;
     }
 
@@ -137,7 +138,7 @@ public abstract class Failure {
         if (this.active) {
             return affectedElements.keySet();   
         } else {
-            return null;
+            return new HashSet<NetworkElement>();
         }
     }
 

@@ -42,6 +42,7 @@ public abstract class Scenario {
      */
     public Scenario(String id, String initialState) throws UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException {
         this.id = id;
+        this.possibleStates = new ArrayList<String>();
         this.currentElements = new ArrayList<NetworkElement>();
         this.currentFailures = new ArrayList<Failure>();
         this.possibleFailures = new ArrayList<Class<? extends Failure>>();

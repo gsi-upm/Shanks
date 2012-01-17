@@ -19,6 +19,7 @@ import sim.engine.SimState;
 import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
+import es.upm.dit.gsi.shanks.model.failure.exception.NoCombinationForFailureException;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
@@ -68,7 +69,9 @@ public class ScenarioManager implements Steppable {
         try {
             this.stateMachine(sim);
         } catch (UnsupportedScenarioStatusException e) {
-            logger.severe("Exception: " + e.getMessage());
+            logger.severe("UnsupportedScenarioStatusException: " + e.getMessage());
+        } catch (NoCombinationForFailureException e) {
+            logger.severe("NoCombinationForFailureException: " + e.getMessage());
         }
     }
 
@@ -77,8 +80,9 @@ public class ScenarioManager implements Steppable {
      * 
      * @param sim
      * @throws UnsupportedScenarioStatusException 
+     * @throws NoCombinationForFailureException 
      */
-    public void stateMachine(ShanksSimulation sim) throws UnsupportedScenarioStatusException {
+    public void stateMachine(ShanksSimulation sim) throws UnsupportedScenarioStatusException, NoCombinationForFailureException {
         logger.info("Using default state machine for ScenarioManager");
         switch (this.simulationStateMachineStatus) {
         case CHECK_FAILURES:
@@ -95,8 +99,9 @@ public class ScenarioManager implements Steppable {
     /**
      * @param sim
      * @throws UnsupportedScenarioStatusException 
+     * @throws NoCombinationForFailureException 
      */
-    private void generateFailures(ShanksSimulation sim) throws UnsupportedScenarioStatusException {
+    private void generateFailures(ShanksSimulation sim) throws UnsupportedScenarioStatusException, NoCombinationForFailureException {
         this.scenario.generateFailures();
     }
 

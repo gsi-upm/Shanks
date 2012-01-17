@@ -6,14 +6,14 @@ import es.upm.dit.gsi.shanks.model.failure.Failure;
 
 public class MyFailure extends Failure {
 
-    public MyFailure(String id, double occurrenceProbability) {
-        super(id, occurrenceProbability);
+    public MyFailure() {
+        super(MyFailure.class.getName(), 0.01);
     }
 
     @Override
     public void addPossibleAffectedElements() {
-        this.addPossibleAffectedElements(MyDevice.class);
-        this.addPossibleAffectedElements(MyLink.class);
+        this.addPossibleAffectedElements(MyDevice.class, MyDevice.NOK);
+        this.addPossibleAffectedElements(MyLink.class, MyLink.BROKEN);
     }
 
 }

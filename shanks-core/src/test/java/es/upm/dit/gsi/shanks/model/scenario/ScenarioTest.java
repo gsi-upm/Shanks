@@ -12,13 +12,14 @@ import org.junit.Test;
 
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.failure.exception.NoCombinationForFailureException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
 
 /**
  * @author a.carrera
- *
+ * 
  */
 public class ScenarioTest {
 
@@ -37,25 +38,34 @@ public class ScenarioTest {
     }
 
     @Test
-    public void createScenario() throws UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException {
+    public void createScenario()
+            throws UnsupportedNetworkElementStatusException,
+            TooManyConnectionException, UnsupportedScenarioStatusException,
+            DuplicatedIDException {
         Scenario s = new MyScenario("MyScenario", MyScenario.SUNNY);
         Assert.assertEquals("MyScenario", s.getID());
         Assert.assertEquals(MyScenario.SUNNY, s.getCurrentStatus());
     }
 
     @Test
-    public void createScenarioAndChangeState() throws UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException {
+    public void createScenarioAndChangeState()
+            throws UnsupportedNetworkElementStatusException,
+            TooManyConnectionException, UnsupportedScenarioStatusException,
+            DuplicatedIDException {
         Scenario s = new MyScenario("MyScenario", MyScenario.SUNNY);
         s.setCurrentStatus(MyScenario.CLOUDY);
         Assert.assertEquals(MyScenario.CLOUDY, s.getCurrentStatus());
     }
 
     @Test
-    public void createScenarioAndChangeWrongState() throws UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException {
+    public void createScenarioAndChangeWrongState()
+            throws UnsupportedNetworkElementStatusException,
+            TooManyConnectionException, UnsupportedScenarioStatusException,
+            DuplicatedIDException {
         Scenario s = new MyScenario("MyScenario", MyScenario.SUNNY);
         boolean catched = false;
         try {
-            s.setCurrentStatus("WrongStatus");   
+            s.setCurrentStatus("WrongStatus");
         } catch (UnsupportedScenarioStatusException e) {
             catched = true;
         }
@@ -63,10 +73,12 @@ public class ScenarioTest {
     }
 
     @Test
-    public void createScenarioWithWrongState() throws UnsupportedNetworkElementStatusException, TooManyConnectionException, DuplicatedIDException {
+    public void createScenarioWithWrongState()
+            throws UnsupportedNetworkElementStatusException,
+            TooManyConnectionException, DuplicatedIDException {
         boolean catched = false;
         try {
-            new MyScenario("MyScenario", "WrongStatus");   
+            new MyScenario("MyScenario", "WrongStatus");
         } catch (UnsupportedScenarioStatusException e) {
             catched = true;
         }
@@ -74,11 +86,13 @@ public class ScenarioTest {
     }
 
     @Test
-    public void createScenarioAndGenerateFailures() throws UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException {
-        Scenario s = new MyScenario("MyScenario", MyScenario.CLOUDY);
+    public void createScenarioAndGenerateFailures()
+            throws UnsupportedNetworkElementStatusException,
+            TooManyConnectionException, UnsupportedScenarioStatusException,
+            DuplicatedIDException, NoCombinationForFailureException {
+        Scenario s = new MyScenario("MyScenario", MyScenario.CLOUDY, 100000000);
         s.generateFailures();
-        //TODO aquí falta comprobar
+        Assert.assertTrue(s.getCurrentFailures().size() > 0);
     }
-    
 
 }

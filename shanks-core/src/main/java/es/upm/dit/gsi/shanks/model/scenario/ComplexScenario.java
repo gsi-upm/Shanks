@@ -7,6 +7,7 @@ package es.upm.dit.gsi.shanks.model.scenario;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
@@ -49,10 +50,11 @@ public abstract class ComplexScenario extends Scenario {
         for (String element : elements.keySet()) {
             this.currentElements.put(element, elements.get(element));
         }
-        List<Class<? extends Failure>> possibleFailures = scenario.getPossibleFailures();
-        for (Class<? extends Failure> possibleFailure : possibleFailures) {
-            this.possibleFailures.add(possibleFailure);
-        }
+//        HashMap<Class<? extends Failure>, List<Set<NetworkElement>>> possibleFailures = scenario.getPossibleFailures();
+//        for (Class<? extends Failure> possibleFailure : possibleFailures) {
+//            this.possibleFailures.add(possibleFailure);
+//        }
+        //TOIMP implement this method
         List<Failure> failures = scenario.getCurrentFailures();
         for (Failure failure : failures) {
             this.currentFailures.add(failure);

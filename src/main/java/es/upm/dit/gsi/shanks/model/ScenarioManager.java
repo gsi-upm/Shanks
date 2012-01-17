@@ -20,6 +20,7 @@ import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 
 public class ScenarioManager implements Steppable {
 
@@ -27,19 +28,35 @@ public class ScenarioManager implements Steppable {
 
     private static final long serialVersionUID = -7448202235281457216L;
 
-    // STATES OF SCENARIO MANAGER
+    // DEFAULT STATES OF SCENARIO MANAGER
     private static final int CHECK_FAILURES = 0;
     private static final int GENERATE_FAILURES = 1;
 
     private Scenario scenario;
+    private ScenarioPortrayal portrayal;
     private int simulationStateMachineStatus;
 
     /**
      * @param scenario
      */
-    public ScenarioManager(Scenario scenario) {
+    public ScenarioManager(Scenario scenario, ScenarioPortrayal portrayal) {
         this.logger.setLevel(Level.ALL);
         this.scenario = scenario;
+        this.portrayal = portrayal;
+    }
+    
+    /**
+     * @return the scenario
+     */
+    public Scenario getScenario() {
+        return this.scenario;
+    }
+
+    /**
+     * @return the portrayal
+     */
+    public ScenarioPortrayal getPortrayal() {
+        return portrayal;
     }
 
     // The actions done by the agent for each step

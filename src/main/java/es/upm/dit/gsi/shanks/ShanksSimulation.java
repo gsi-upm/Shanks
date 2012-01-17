@@ -7,6 +7,7 @@ import sim.engine.SimState;
 import sim.field.grid.SparseGrid2D;
 import es.upm.dit.gsi.shanks.model.ScenarioManager;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 
 /**
  * Model class
@@ -35,15 +36,36 @@ public abstract class ShanksSimulation extends SimState {
      */
     public ShanksSimulation(long seed) {
         super(seed);
-        this.scenarioManager = new ScenarioManager(this.getScenario());
-//        this.setScenarioPortrayal(this.getScenarioPortrayal());
-        logger.fine("Simulation constructor ->");
+        this.scenarioManager = this.createScenarioManager();
     }
 
     /**
      * This method will set all required information about Scenario
+     *
+     * @return the completed Scenario object
      */
-    abstract public Scenario getScenario();
+    abstract public ScenarioManager createScenarioManager();
+    
+    /**
+     * @return
+     */
+    public ScenarioManager getScenarioManager() {
+        return this.scenarioManager;
+    }
+    
+    /**
+     * @return
+     */
+    public Scenario getScenario() {
+        return this.scenarioManager.getScenario();
+    }
+    
+    /**
+     * @return
+     */
+    public ScenarioPortrayal getPortrayal() {
+        return this.scenarioManager.getPortrayal();
+    }
 
     /* (non-Javadoc)
      * @see sim.engine.SimState#start()
@@ -55,49 +77,32 @@ public abstract class ShanksSimulation extends SimState {
         startSimulation();
     }
 
-//    public void createLegend() {
-//        GatewayRouter g = new GatewayRouter("Gateway", 0, 45, ScenarioDefinitions.GATEWAY);
-//        Splitter sp1 = new Splitter("Splitter 1", 0, 45, ScenarioDefinitions.SPLITTER1);
-//        Splitter sp2 = new Splitter("Splitter 2", 0, 45, ScenarioDefinitions.SPLITTER2);
-//        OLT olt = new OLT("OLT", 0, 45, ScenarioDefinitions.OLT);
-//        ONT ont = new ONT("ONT", 0, 45, ScenarioDefinitions.ONT);
-//        legend.setObjectLocation(g, new Double3D(-300, 300, 0));
-//        legend.setObjectLocation(sp1, new Double3D(-100, 300, 0));
-//        legend.setObjectLocation(sp2, new Double3D(100, 300, 0));
-//        legend.setObjectLocation(olt, new Double3D(300, 300, 0));
-//        legend.setObjectLocation(ont, new Double3D(-300, 0, 0));
-//    }
-
-    // 
     /**
      * The initial configuration of the scenario
      */
     public void startSimulation() {
-//        devicesnetwork.clear();
-//        elements3d = new Continuous3D(5, gridWidth, gridHeight, gridHeight);
-//        links1 = new Network();
-//        problems = new SparseGrid2D(365, 50);
-//        legend = new Continuous3D(5, gridWidth, gridHeight, gridHeight);
-//        createLegend();
-//        ScenarioManager.totalproblems = 0;
-//        switch (selectScenario()) {
-//        case 0:
-//            createFTTH();
-//            m = new ScenarioManager(scenario);
-//            System.out.println("SELECTED SCENARIO " + scenario.getName());
-//            break;
-//        case 1:
-//            createPPP();
-//            m = new ScenarioManager(scenario);
-//            System.out.println("SELECTED SCENARIO " + scenario.getName());
-//            break;
-//        }
-//        Failure.createDeviceErrors();
-//        Agent a = new Agent();
         schedule.scheduleRepeating(Schedule.EPOCH, 0, this.scenarioManager, 2);
+        this.addSteppables();
 //        schedule.scheduleRepeating(Schedule.EPOCH + 1, 2, a, 2);
 
     }
+    
+    /**
+     * It is required to add steppables
+     * 
+     * @return
+     */
+    public Schedule getSchedule() {
+        return schedule;
+    }
+    
+
+    /**
+     * This method is called during the start phase of the simulation. The command:
+     * schedule.scheduleRepeating(Schedule.EPOCH, 0, this.scenarioManager, 2);
+     * is always executed in the first place.
+     */
+    abstract public void addSteppables();
 
     /**
      * @param args

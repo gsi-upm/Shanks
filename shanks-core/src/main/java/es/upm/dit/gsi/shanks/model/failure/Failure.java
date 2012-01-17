@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.failure.exception.UnsupportedElementInFailureException;
 
 /**
  * DeviceErrors class
@@ -44,6 +45,7 @@ public abstract class Failure {
         this.id = id;
         this.occurrenceProbability = occurrenceProbability;
         this.affectedElements = new HashMap<NetworkElement, String>();
+        this.oldStatesOfAffectedElements = new HashMap<NetworkElement, String>();
         this.possibleAffectedElements = new ArrayList<Class<? extends NetworkElement>>();
         this.active = false;
         
@@ -152,15 +154,14 @@ public abstract class Failure {
     /**
      * @param element The element that will be affected by this failure when the failure will be active
      * @param affectedStatus The element status that will be set when the failure will be active
-     * @return true if the status is possible and the element is not already in the affected element list, false if not
+     * @throws UnsupportedElementInFailureException 
      */
-    public boolean addAffectedElement (NetworkElement element, String affectedStatus) {
+    public void addAffectedElement (NetworkElement element, String affectedStatus) throws UnsupportedElementInFailureException {
         Class<? extends NetworkElement> c = element.getClass();
         if (this.possibleAffectedElements.contains(c) && element.getPossibleStates().contains(affectedStatus) && !this.affectedElements.containsKey(element)) {
             this.affectedElements.put(element, affectedStatus);
-            return true;
         } else {
-            return false;
+            throw new UnsupportedElementInFailureException(element);
         }
     }
     
@@ -185,6 +186,15 @@ public abstract class Failure {
      */
     public void addPossibleAffectedElements (Class<? extends NetworkElement> c) {
         this.possibleAffectedElements.add(c);
+    }
+    
+    /**
+     * @param c
+     */
+    public void removePossibleAffectedElements (Class<? extends NetworkElement> c) {
+        if (this.possibleAffectedElements.contains(c)) {
+            this.possibleAffectedElements.remove(c);            
+        }
     }
 
 

@@ -25,7 +25,7 @@ public class FailureTest {
     }
 
     @Test
-    public void createFailureAndNoActiveIt() {
+    public void createFailureAndNoActiveIt() throws UnsupportedNetworkElementStatusException {
         Failure f = new MyFailure("MyFailure", 0.01);
         Device d = new MyDevice("MyDevice", MyDevice.OK, false);
         try {
@@ -42,7 +42,7 @@ public class FailureTest {
     }
 
     @Test
-    public void createFailureAndActiveIt() {
+    public void createFailureAndActiveIt() throws UnsupportedNetworkElementStatusException {
         Failure f = new MyFailure("MyFailure", 0.01);
         Device d = new MyDevice("MyDevice", MyDevice.OK, false);
         try {
@@ -60,7 +60,7 @@ public class FailureTest {
     }
 
     @Test
-    public void createFailureAndDeactiveIt() {
+    public void createFailureAndDeactiveIt() throws UnsupportedNetworkElementStatusException {
         Failure f = new MyFailure("MyFailure", 0.01);
         Device d = new MyDevice("MyDevice", MyDevice.OK, false);
         try {
@@ -79,7 +79,7 @@ public class FailureTest {
     }
 
     @Test
-    public void createFailureAndAddNonPossibleElement() {
+    public void createFailureAndAddNonPossibleElement() throws UnsupportedNetworkElementStatusException {
         Failure f = new MyFailure("MyFailure", 0.01);
         Link l = new MyLink("L1", MyLink.OK, 3);
         f.removePossibleAffectedElements(MyLink.class);
@@ -93,7 +93,7 @@ public class FailureTest {
     }
 
     @Test
-    public void createFailureAndResolveIt() {
+    public void createFailureAndResolveIt() throws UnsupportedNetworkElementStatusException {
         Failure f = new MyFailure("MyFailure", 0.01);
         Link l = new MyLink("L1", MyLink.OK, 3);
         try {

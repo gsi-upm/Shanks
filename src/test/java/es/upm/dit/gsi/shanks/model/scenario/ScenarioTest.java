@@ -4,11 +4,16 @@
  */
 package es.upm.dit.gsi.shanks.model.scenario;
 
-import static org.junit.Assert.*;
+import junit.framework.Assert;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
+import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
 
 /**
  * @author a.carrera
@@ -31,9 +36,9 @@ public class ScenarioTest {
     }
 
     @Test
-    public void test() {
-        fail("Not yet implemented");
-        //TOTEST implement this test
+    public void createScenario() throws UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException {
+        Scenario s = new MyScenario("MyScenario", MyScenario.SUNNY);
+        Assert.assertEquals("MyScenario", s.getID());
     }
 
 }

@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
+import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
@@ -26,7 +27,7 @@ public class NetworkElementTest {
     }
 
     @Test
-    public void createDevice() {
+    public void createDevice() throws UnsupportedNetworkElementStatusException {
         Device d = new MyDevice("MyDevice", MyDevice.OK, false);
         Assert.assertEquals("MyDevice", d.getID());
         Assert.assertEquals(MyDevice.OK, d.getCurrentStatus());
@@ -34,7 +35,8 @@ public class NetworkElementTest {
     }
 
     @Test
-    public void createGatewayDevice() {
+    public void createGatewayDevice()
+            throws UnsupportedNetworkElementStatusException {
         Device d = new MyDevice("MyDevice", MyDevice.NOK, true);
         Assert.assertEquals("MyDevice", d.getID());
         Assert.assertEquals(MyDevice.NOK, d.getCurrentStatus());
@@ -42,7 +44,8 @@ public class NetworkElementTest {
     }
 
     @Test
-    public void createDeviceChangeStatus() {
+    public void createDeviceChangeStatus()
+            throws UnsupportedNetworkElementStatusException {
         Device d = new MyDevice("MyDevice", MyDevice.NOK, true);
         try {
             d.setCurrentStatus(MyDevice.OK);
@@ -54,7 +57,8 @@ public class NetworkElementTest {
     }
 
     @Test
-    public void createDeviceChangeToImpossibleStatus() {
+    public void createDeviceChangeToImpossibleStatus()
+            throws UnsupportedNetworkElementStatusException {
         Device d = new MyDevice("MyDevice", MyDevice.NOK, true);
         boolean catched = false;
         try {
@@ -66,7 +70,20 @@ public class NetworkElementTest {
     }
 
     @Test
-    public void PorpertiesNetworkElement() {
+    public void createDeviceWithImpossibleStatus()
+            throws UnsupportedNetworkElementStatusException {
+        boolean catched = false;
+        try {
+            new MyDevice("MyDevice", "WrongStatus", true);
+        } catch (UnsupportedNetworkElementStatusException e) {
+            catched = true;
+        }
+        Assert.assertTrue(catched);
+    }
+
+    @Test
+    public void PorpertiesNetworkElement()
+            throws UnsupportedNetworkElementStatusException {
         Device d1 = new MyDevice("D1", MyDevice.OK, true);
         Device d2 = new MyDevice("D2", MyDevice.OK, true);
         d1.addProperty("friendDevice", d2);
@@ -74,10 +91,11 @@ public class NetworkElementTest {
     }
 
     @Test
-    public void FullPorpertiesNetworkElement() {
+    public void FullPorpertiesNetworkElement()
+            throws UnsupportedNetworkElementStatusException {
         Device d1 = new MyDevice("D1", MyDevice.OK, true);
         Device d2 = new MyDevice("D2", MyDevice.OK, true);
-        HashMap<String, Object> properties = new HashMap<String,Object>();
+        HashMap<String, Object> properties = new HashMap<String, Object>();
         properties.put("friend", d2);
         d1.setProperties(properties);
         d1.addProperty("Size", "20cm");
@@ -86,7 +104,9 @@ public class NetworkElementTest {
     }
 
     @Test
-    public void connect2DevicesToLink() {
+    public void connect2DevicesToLink()
+            throws UnsupportedNetworkElementStatusException,
+            TooManyConnectionException {
         Device d1 = new MyDevice("D1", MyDevice.OK, true);
         Device d2 = new MyDevice("D2", MyDevice.OK, true);
         Link l1 = new MyLink("L1", MyLink.OK, 2);
@@ -107,7 +127,9 @@ public class NetworkElementTest {
     }
 
     @Test
-    public void disconnectDeviceFromLink() {
+    public void disconnectDeviceFromLink()
+            throws UnsupportedNetworkElementStatusException,
+            TooManyConnectionException {
         Device d1 = new MyDevice("D1", MyDevice.OK, true);
         Device d2 = new MyDevice("D2", MyDevice.OK, true);
         Link l1 = new MyLink("L1", MyLink.OK, 2);
@@ -129,7 +151,9 @@ public class NetworkElementTest {
     }
 
     @Test
-    public void disconnectLinkFromDevice() {
+    public void disconnectLinkFromDevice()
+            throws UnsupportedNetworkElementStatusException,
+            TooManyConnectionException {
         Device d1 = new MyDevice("D1", MyDevice.OK, true);
         Device d2 = new MyDevice("D2", MyDevice.OK, true);
         Link l1 = new MyLink("L1", MyLink.OK, 2);
@@ -151,7 +175,9 @@ public class NetworkElementTest {
     }
 
     @Test
-    public void disconnectLinkFromDeviceAndViceversa() {
+    public void disconnectLinkFromDeviceAndViceversa()
+            throws UnsupportedNetworkElementStatusException,
+            TooManyConnectionException {
         Device d1 = new MyDevice("D1", MyDevice.OK, true);
         Device d2 = new MyDevice("D2", MyDevice.OK, true);
         Link l1 = new MyLink("L1", MyLink.OK, 2);
@@ -171,6 +197,24 @@ public class NetworkElementTest {
         Assert.assertTrue(!d1list.contains(l1));
         Assert.assertTrue(d2list.size() == 0);
         Assert.assertTrue(!d2list.contains(l1));
+    }
+
+    @Test
+    public void connectDeviceToFullLink()
+            throws UnsupportedNetworkElementStatusException,
+            TooManyConnectionException {
+        Device d1 = new MyDevice("D1", MyDevice.OK, true);
+        Device d2 = new MyDevice("D2", MyDevice.OK, true);
+        Link l1 = new MyLink("L1", MyLink.OK, 1);
+
+        d1.connectToLink(l1);
+        boolean catched = false;
+        try {
+            d2.connectToLink(l1);
+        } catch (TooManyConnectionException e) {
+            catched = true;
+        }
+        Assert.assertTrue(catched);
     }
 
 }

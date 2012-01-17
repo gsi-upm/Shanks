@@ -8,8 +8,10 @@ import java.util.logging.Logger;
 
 import ec.util.MersenneTwisterFast;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
+import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
+import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 
 /**
  * Scenarios class
@@ -34,8 +36,11 @@ public abstract class Scenario {
 
     /**
      * @param type
+     * @throws UnsupportedNetworkElementStatusException 
+     * @throws TooManyConnectionException 
+     * @throws UnsupportedScenarioStatusException 
      */
-    public Scenario(String id) {
+    public Scenario(String id, String initialState) throws UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException {
         this.id = id;
         this.currentElements = new ArrayList<NetworkElement>();
         this.currentFailures = new ArrayList<Failure>();
@@ -44,6 +49,8 @@ public abstract class Scenario {
         this.setPossibleStates();
         this.addNetworkElements();
         this.addPossibleFailures();
+        
+        this.setCurrentStatus(initialState);
     }
 
     /**
@@ -68,7 +75,7 @@ public abstract class Scenario {
      * @throws UnsupportedNetworkElementStatusException
      */
     public boolean setCurrentStatus(String desiredStatus)
-            throws UnsupportedNetworkElementStatusException {
+            throws UnsupportedScenarioStatusException {
         if (this.isPossibleStatus(desiredStatus)) {
             this.currentStatus = desiredStatus;
             return true;
@@ -76,7 +83,7 @@ public abstract class Scenario {
             logger.warning("Impossible to set status: " + desiredStatus
                     + ". This network element " + this.getID()
                     + "does not support this status.");
-            throw new UnsupportedNetworkElementStatusException();
+            throw new UnsupportedScenarioStatusException();
         }
     }
 
@@ -89,6 +96,30 @@ public abstract class Scenario {
             return true;
         } else {
             return false;
+        }
+    }
+    
+    /**
+     * @param possibleStatus
+     */
+    public void addPossibleStatus(String possibleStatus) {
+        if (!this.possibleStates.contains(possibleStatus)) {
+            this.possibleStates.add(possibleStatus);
+            logger.fine("Status: " + possibleStatus + " was added as possible status to Scenario " + this.getID());
+        } else {
+            logger.fine("Status: " + possibleStatus + " was already added as possible status to Scenario " + this.getID());
+        }
+    }
+    
+    /**
+     * @param possibleStatus
+     */
+    public void removePossibleStatus(String possibleStatus) {
+        if (this.possibleStates.contains(possibleStatus)) {
+            this.possibleStates.remove(possibleStatus);
+            logger.fine("Status: " + possibleStatus + " was removed as possible status to Scenario " + this.getID());
+        } else {
+            logger.fine("Status: " + possibleStatus + " was not removed as possible status to Scenario " + this.getID() + " because it was not a possible status previously.");
         }
     }
 
@@ -169,9 +200,11 @@ public abstract class Scenario {
     abstract public void setPossibleStates();
 
     /**
+     * @throws UnsupportedNetworkElementStatusException 
+     * @throws TooManyConnectionException 
      * 
      */
-    abstract public void addNetworkElements();
+    abstract public void addNetworkElements() throws UnsupportedNetworkElementStatusException, TooManyConnectionException;
 
     /**
      * 
@@ -179,9 +212,10 @@ public abstract class Scenario {
     abstract public void addPossibleFailures();
 
     /**
+     * @throws UnsupportedScenarioStatusException 
      * 
      */
-    public void generateFailures() {
+    public void generateFailures() throws UnsupportedScenarioStatusException {
         MersenneTwisterFast randomizer = new MersenneTwisterFast();
         String status = this.getCurrentStatus();
         HashMap<Class<? extends Failure>, Double> penalties = this
@@ -196,7 +230,11 @@ public abstract class Scenario {
                 Failure failure = type.newInstance();
                 try {
                     penalty = penalties.get(type);
-                    prob = failure.getOccurrenceProbability() * penalty;
+                    if(penalty>0) {
+                        prob = failure.getOccurrenceProbability() * penalty;   
+                    } else {
+                        prob=-1.0; // Impossible failure
+                    }
                 } catch (Exception e) {
                     logger.fine("There is no penalty for failures: "
                             + type.getName() + " in status " + status);
@@ -213,11 +251,15 @@ public abstract class Scenario {
     }
 
     /**
+     * This method can return multipliers >1.0 (more probable failures) or <1.0(less probable failure).
+     * CAUTION: If the multiplier is <=0.0, the failure never happends.
+     * 
      * @param status
      * @return Multiplier for each type of failure
+     * @throws UnsupportedScenarioStatusException 
      */
     abstract public HashMap<Class<? extends Failure>, Double> getPenaltiesInStatus(
-            String status);
+            String status) throws UnsupportedScenarioStatusException;
 
     /**
      * @return resolved failures

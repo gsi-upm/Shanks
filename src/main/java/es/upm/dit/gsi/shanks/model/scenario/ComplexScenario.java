@@ -9,8 +9,11 @@ import java.util.List;
 
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
+import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
+import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 
 /**
  * @author a.carrera
@@ -23,9 +26,12 @@ public abstract class ComplexScenario extends Scenario {
     /**
      * Create a complex scenario to compose the whole scenario adding other scenarios. 
      * @param type
+     * @throws TooManyConnectionException 
+     * @throws UnsupportedNetworkElementStatusException 
+     * @throws UnsupportedScenarioStatusException 
      */
-    public ComplexScenario(String type) {
-        super(type);
+    public ComplexScenario(String type, String initialState) throws UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException {
+        super(type, initialState);
         this.scenarios = new ArrayList<Scenario>();
     }
     

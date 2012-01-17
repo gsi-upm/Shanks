@@ -1,10 +1,11 @@
 package es.upm.dit.gsi.shanks.model.element.device.test;
 
 import es.upm.dit.gsi.shanks.model.element.device.Device;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 
 public class MyDevice extends Device {
 
-    public MyDevice(String id, String initialState, boolean isGateway) {
+    public MyDevice(String id, String initialState, boolean isGateway) throws UnsupportedNetworkElementStatusException {
         super(id, initialState, isGateway);
     }
 

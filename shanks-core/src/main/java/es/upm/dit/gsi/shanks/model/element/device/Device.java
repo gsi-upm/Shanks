@@ -50,8 +50,11 @@ public abstract class Device extends NetworkElement {
      * @param link
      */
     public void connectToLink(Link link) {
-        this.linksList.add(link);
-        logger.info("Device " + this.getID() + " is now connected to Link " + link.getID());
+        if (!this.linksList.contains(link)) {
+            this.linksList.add(link);
+            logger.info("Device " + this.getID() + " is now connected to Link " + link.getID());
+            link.connectDevice(this);   
+        }
     }
     
     /**
@@ -62,6 +65,7 @@ public abstract class Device extends NetworkElement {
     public void disconnectFromLink(Link link) {
         boolean disconnected = this.linksList.remove(link);
         if (disconnected) {
+            link.disconnectDevice(this);
             logger.info("Device " + this.getID() + " is now disconnected from Link " + link.getID());
         } else {
             logger.info("Device " + this.getID() + " could not be disconnected from Link " + link.getID() + ", because it was not connected.");

@@ -25,6 +25,7 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusE
 public abstract class ComplexScenario extends Scenario {
 
     private List<Scenario> scenarios;
+    //TOIMP crear network para controlar que escenarios se tocan y para controlar los links de enlace
     
     /**
      * Create a complex scenario to compose the whole scenario adding other scenarios. 

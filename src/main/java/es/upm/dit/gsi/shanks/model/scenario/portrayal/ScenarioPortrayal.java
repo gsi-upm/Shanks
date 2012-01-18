@@ -16,6 +16,7 @@ public abstract class ScenarioPortrayal {
      */
     public ScenarioPortrayal(Scenario scenario) {
         this.scenario = scenario;
+        this.portrayals = new HashMap<String, Portrayal>();
     }
     
     /**

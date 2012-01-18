@@ -72,7 +72,7 @@ public abstract class Scenario2DPortrayal extends ScenarioPortrayal {
         List<Device> linkedDevices = link.getLinkedDevices();
         for (int i = 0; i<linkedDevices.size(); i++) {
             Device from = linkedDevices.get(i);
-            for (int j = i+1 ; i<linkedDevices.size(); j++) {
+            for (int j = i+1 ; j<linkedDevices.size(); j++) {
                 Device to = linkedDevices.get(j);
 //                Edge e = new Edge(from, to, new MutableDouble(link.getLinkedDevices().size())); //TOTEST check if this size is resizable (redimensionable) during the simulation
                 Edge e = new Edge(from, to, new MutableDouble(link.getCapacity()));

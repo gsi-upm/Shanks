@@ -2,6 +2,8 @@ package es.upm.dit.gsi.shanks;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.util.HashMap;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
@@ -12,6 +14,8 @@ import sim.display.Controller;
 import sim.display.Display2D;
 import sim.display.GUIState;
 import sim.portrayal.FieldPortrayal2D;
+import sim.portrayal.Portrayal;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 
 /**
  * ShanksSimulation2DGUI class
@@ -96,7 +100,12 @@ public abstract class ShanksSimulation2DGUI extends GUIState {
         c.registerFrame(frame);
         frame.setVisible(true);
         
-        for (String name : this.getSimulation().getScenarioPortrayal().getPortrayals().keySet()) {
+        ShanksSimulation sim = this.getSimulation();
+        ScenarioPortrayal sp = sim.getScenarioPortrayal();
+        HashMap<String, Portrayal> portrayals = sp.getPortrayals();
+        Set<String> set = portrayals.keySet();
+        
+        for (String name : set) {
             display.attach((FieldPortrayal2D) this.getSimulation().getScenarioPortrayal().getPortrayals().get(name), name);
         }
     }

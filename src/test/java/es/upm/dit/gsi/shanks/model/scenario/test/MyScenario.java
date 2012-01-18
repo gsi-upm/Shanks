@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
@@ -18,29 +19,48 @@ import es.upm.dit.gsi.shanks.model.failure.test.MyFailure;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyScenario2DPortrayal;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyScenario3DPortrayal;
 
 public class MyScenario extends Scenario {
+
+    private Logger logger = Logger.getLogger(MyScenario.class.getName());
     
     public static final String CLOUDY = "CLOUDY";
     public static final String SUNNY = "SUNNY";
-    
+
+    private int dimensions;
+
     private double cloudyPenalty;
 
-    public MyScenario(String id, String initialState, double cloudyPenalty) throws UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException {
+    public MyScenario(String id, String initialState, double cloudyPenalty)
+            throws UnsupportedNetworkElementStatusException,
+            TooManyConnectionException, UnsupportedScenarioStatusException,
+            DuplicatedIDException {
         super(id, initialState);
         this.cloudyPenalty = cloudyPenalty;
-    }
-    
-    public MyScenario(String id, String initialState) throws UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException {
-        super(id, initialState);
-        this.cloudyPenalty = 3.0;
+        this.dimensions = 2;
     }
 
-    /* (non-Javadoc)
+    public MyScenario(String id, String initialState)
+            throws UnsupportedNetworkElementStatusException,
+            TooManyConnectionException, UnsupportedScenarioStatusException,
+            DuplicatedIDException {
+        super(id, initialState);
+        this.cloudyPenalty = 3.0;
+        this.dimensions = 2;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#addNetworkElements()
      */
     @Override
-    public void addNetworkElements() throws UnsupportedNetworkElementStatusException, TooManyConnectionException, DuplicatedIDException {
+    public void addNetworkElements()
+            throws UnsupportedNetworkElementStatusException,
+            TooManyConnectionException, DuplicatedIDException {
         Device d1 = new MyDevice("D1", MyDevice.OK, false);
         Device d2 = new MyDevice("D2", MyDevice.OK, false);
         Device d3 = new MyDevice("D3", MyDevice.OK, false);
@@ -49,15 +69,15 @@ public class MyScenario extends Scenario {
         Link l1 = new MyLink("L1", MyLink.OK, 3);
         Link l2 = new MyLink("L2", MyLink.OK, 2);
         Link l3 = new MyLink("L3", MyLink.OK, 2);
-        
+
         d1.connectToLink(l1);
         d2.connectToLink(l1);
         d3.connectToLink(l1);
-        
+
         l2.connectDevices(d1, d4);
-        
+
         l3.connectDevices(d3, d5);
-        
+
         this.addNetworkElement(d1);
         this.addNetworkElement(d2);
         this.addNetworkElement(d3);
@@ -69,7 +89,9 @@ public class MyScenario extends Scenario {
 
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#addPossibleFailures()
      */
     @Override
@@ -90,22 +112,28 @@ public class MyScenario extends Scenario {
         this.addPossibleFailure(MyFailure.class, possibleCombinations);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#setPossibleStates()
      */
     @Override
     public void setPossibleStates() {
         this.addPossibleStatus(MyScenario.CLOUDY);
-        this.addPossibleStatus(MyScenario.SUNNY);        
+        this.addPossibleStatus(MyScenario.SUNNY);
     }
 
-    /* (non-Javadoc)
-     * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#getPenaltiesInStatus(java.lang.String)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * es.upm.dit.gsi.shanks.model.scenario.Scenario#getPenaltiesInStatus(java
+     * .lang.String)
      */
     @Override
     public HashMap<Class<? extends Failure>, Double> getPenaltiesInStatus(
             String status) throws UnsupportedScenarioStatusException {
-        
+
         if (status.equals(MyScenario.CLOUDY)) {
             return this.getCloudyPenalties();
         } else if (status.equals(MyScenario.SUNNY)) {
@@ -113,7 +141,7 @@ public class MyScenario extends Scenario {
         } else {
             throw new UnsupportedScenarioStatusException();
         }
-                
+
     }
 
     /**
@@ -121,9 +149,9 @@ public class MyScenario extends Scenario {
      */
     private HashMap<Class<? extends Failure>, Double> getSunnyPenalties() {
         HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
-        
+
         penalties.put(MyFailure.class, 1.0);
-        
+
         return penalties;
     }
 
@@ -132,10 +160,24 @@ public class MyScenario extends Scenario {
      */
     private HashMap<Class<? extends Failure>, Double> getCloudyPenalties() {
         HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
-        
+
         penalties.put(MyFailure.class, this.cloudyPenalty);
-        
+
         return penalties;
+    }
+
+    public ScenarioPortrayal createScenarioPortrayal() {
+        logger.fine("Creating Scenario Portrayal...");
+        switch (this.dimensions) {
+        case 2:
+            logger.fine("Creating Scenario2DPortrayal");
+            return new MyScenario2DPortrayal(this, 100, 100);
+        case 3:
+            logger.fine("Creating Scenario3DPortrayal");
+            return new MyScenario3DPortrayal(this, 100, 100, 100);
+        }
+        return null;
+
     }
 
 }

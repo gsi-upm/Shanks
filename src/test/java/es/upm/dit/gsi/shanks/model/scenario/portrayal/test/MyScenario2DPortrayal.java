@@ -22,7 +22,7 @@ public class MyScenario2DPortrayal extends Scenario2DPortrayal {
         
         this.situateDevice((Device)this.getScenario().getNetworkElement("D1"), 10, 50);
         this.situateDevice((Device)this.getScenario().getNetworkElement("D2"), 50, 50);
-        this.situateDevice((Device)this.getScenario().getNetworkElement("D3"), 25, 25);
+        this.situateDevice((Device)this.getScenario().getNetworkElement("D3"), 30, 30);
         this.situateDevice((Device)this.getScenario().getNetworkElement("D4"), 10, 10);
         this.situateDevice((Device)this.getScenario().getNetworkElement("D5"), 50, 10);
         

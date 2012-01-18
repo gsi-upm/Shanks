@@ -28,8 +28,9 @@ public class ShanksSimulationTest {
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
         LogManager lm = LogManager.getLogManager();
-        File f = new File("src/test/resources/logging.properties");
-        lm.readConfiguration(new FileInputStream(f));
+        File configFile = new File("src/test/resources/logging.properties");
+        lm.readConfiguration(new FileInputStream(configFile));
+
     }
 
     /**
@@ -57,7 +58,7 @@ public class ShanksSimulationTest {
     public void ShanksSimulationWithoutGUI() {
         boolean catched = false;
         try {
-            String [] args = new String[1];
+            String[] args = new String[1];
             args[0] = new String("0");
             MyShanksSimulation.main(args);
         } catch (Exception e) {
@@ -72,7 +73,7 @@ public class ShanksSimulationTest {
     public void ShanksSimulationResolvingProblemsWithoutGUI() {
         boolean catched = false;
         try {
-            String [] args = new String[1];
+            String[] args = new String[1];
             args[0] = new String("1");
             MyShanksSimulation.main(args);
         } catch (Exception e) {
@@ -81,16 +82,25 @@ public class ShanksSimulationTest {
         }
         Assert.assertFalse(catched);
 
-        //TOTEST implement test that count the number of generated tests or the number of resolved tests
+        // TOTEST implement test that count the number of generated tests or the
+        // number of resolved tests
     }
-    
+
     @Test
     public void ShanksSimulationWith2DGUI() {
         boolean catched = false;
         try {
-            String [] args = new String[1];
+            String[] args = new String[1];
             args[0] = new String("0");
-            MyShanksSimulation2DGUI.main(args);
+            MyShanksSimulation sim = new MyShanksSimulation(
+                    System.currentTimeMillis(), args);
+            MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
+            gui.start();
+            do
+                if (!gui.getSimulation().schedule.step(sim))
+                    break;
+            while (gui.getSimulation().schedule.getSteps() < 2001);
+            gui.finish();
         } catch (Exception e) {
             catched = true;
             e.printStackTrace();
@@ -98,14 +108,22 @@ public class ShanksSimulationTest {
         Assert.assertFalse(catched);
 
     }
-    
+
     @Test
     public void ShanksSimulationResolvingProblemsWith2DGUI() {
         boolean catched = false;
         try {
-            String [] args = new String[1];
+            String[] args = new String[1];
             args[0] = new String("1");
-            MyShanksSimulation2DGUI.main(args);
+            MyShanksSimulation sim = new MyShanksSimulation(
+                    System.currentTimeMillis(), args);
+            MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
+            gui.start();
+            do
+                if (!gui.getSimulation().schedule.step(sim))
+                    break;
+            while (gui.getSimulation().schedule.getSteps() < 2001);
+            gui.finish();
         } catch (Exception e) {
             catched = true;
             e.printStackTrace();

@@ -1,9 +1,14 @@
 package es.upm.dit.gsi.shanks.model.failure;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.logging.LogManager;
+
 import junit.framework.Assert;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import es.upm.dit.gsi.shanks.model.element.device.Device;
@@ -15,6 +20,17 @@ import es.upm.dit.gsi.shanks.model.failure.exception.UnsupportedElementInFailure
 import es.upm.dit.gsi.shanks.model.failure.test.MyFailure;
 
 public class FailureTest {
+
+    /**
+     * @throws java.lang.Exception
+     */
+    @BeforeClass
+    public static void setUpBeforeClass() throws Exception {
+        LogManager lm = LogManager.getLogManager();
+        File configFile = new File("src/test/resources/logging.properties");
+        lm.readConfiguration(new FileInputStream(configFile));
+        
+    }
 
     @Before
     public void setUp() throws Exception {

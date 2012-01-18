@@ -1,12 +1,16 @@
 package es.upm.dit.gsi.shanks.model.element;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.LogManager;
 
 import junit.framework.Assert;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import es.upm.dit.gsi.shanks.model.element.device.Device;
@@ -17,6 +21,17 @@ import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
 
 public class NetworkElementTest {
+
+    /**
+     * @throws java.lang.Exception
+     */
+    @BeforeClass
+    public static void setUpBeforeClass() throws Exception {
+        LogManager lm = LogManager.getLogManager();
+        File configFile = new File("src/test/resources/logging.properties");
+        lm.readConfiguration(new FileInputStream(configFile));
+        
+    }
 
     @Before
     public void setUp() throws Exception {

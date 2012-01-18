@@ -87,6 +87,16 @@ public abstract class ShanksSimulation2DGUI extends GUIState {
         display.repaint();
     }
 
+
+    /* (non-Javadoc)
+     * @see sim.display.GUIState#load(sim.engine.SimState)
+     */
+    public void load(ShanksSimulation state)
+        {
+        super.load(state);
+        this.getSimulation().getScenarioPortrayal().setupPortrayals();
+        }
+
     /* (non-Javadoc)
      * @see sim.display.GUIState#init(sim.display.Controller)
      */

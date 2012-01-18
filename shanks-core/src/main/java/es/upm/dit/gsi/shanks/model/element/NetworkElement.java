@@ -61,6 +61,7 @@ public abstract class NetworkElement {
     public boolean setCurrentStatus(String desiredStatus) throws UnsupportedNetworkElementStatusException {
         if (this.isPossibleStatus(desiredStatus)) {
             this.currentStatus = desiredStatus;
+            logger.fine("Network Element Status changed -> ElementID: " + this.getID() + " Current Status: " + desiredStatus);
             return true;
         } else {
             logger.warning("Impossible to set status: " + desiredStatus + ". This network element " + this.getID() + "does not support this status.");

@@ -9,7 +9,6 @@ import sim.portrayal.grid.SparseGridPortrayal2D;
 import sim.portrayal.network.NetworkPortrayal2D;
 import sim.portrayal.network.SpatialNetwork2D;
 import sim.util.Int2D;
-import sim.util.MutableDouble;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
@@ -22,6 +21,7 @@ public abstract class Scenario2DPortrayal extends ScenarioPortrayal {
 
     private SparseGrid2D devices;
     private Network links;
+    private SpatialNetwork2D deviceLinkNetwork;
 
     /**
      * The constructor needs the scenario and the size of the simulation
@@ -34,11 +34,12 @@ public abstract class Scenario2DPortrayal extends ScenarioPortrayal {
         super(scenario);
         this.devices = new SparseGrid2D(width, height);
         this.links = new Network();
+        this.deviceLinkNetwork = new SpatialNetwork2D(this.devices, this.links);
         SparseGridPortrayal2D devicesPortrayal = new SparseGridPortrayal2D();
         NetworkPortrayal2D linksPortrayal = new NetworkPortrayal2D();
 
         devicesPortrayal.setField(this.devices);
-        linksPortrayal.setField(new SpatialNetwork2D(this.devices, this.links));
+        linksPortrayal.setField(deviceLinkNetwork);
 
         this.addPortrayal("Devices", devicesPortrayal);
         this.addPortrayal("Links", linksPortrayal);
@@ -75,7 +76,7 @@ public abstract class Scenario2DPortrayal extends ScenarioPortrayal {
             for (int j = i+1 ; j<linkedDevices.size(); j++) {
                 Device to = linkedDevices.get(j);
 //                Edge e = new Edge(from, to, new MutableDouble(link.getLinkedDevices().size())); //TOTEST check if this size is resizable (redimensionable) during the simulation
-                Edge e = new Edge(from, to, new MutableDouble(link.getCapacity()));
+                Edge e = new Edge(from, to, link);
                 links.addEdge(e);
             }
         }

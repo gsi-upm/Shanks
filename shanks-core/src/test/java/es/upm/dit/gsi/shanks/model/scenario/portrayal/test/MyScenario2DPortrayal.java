@@ -38,8 +38,8 @@ public class MyScenario2DPortrayal extends Scenario2DPortrayal {
         SparseGridPortrayal2D devicePortrayal = (SparseGridPortrayal2D) this.getPortrayals().get("Devices");
         NetworkPortrayal2D networkPortrayal = (NetworkPortrayal2D) this.getPortrayals().get("Links");
         devicePortrayal.setPortrayalForClass(MyDevice.class, new MyDevice2DPortrayal());
-        networkPortrayal.setPortrayalForClass(MyLink.class, new MyLink2DPortrayal());
-
+//        networkPortrayal.setPortrayalForClass(MyLink.class, new MyLink2DPortrayal());
+        networkPortrayal.setPortrayalForAll(new MyLink2DPortrayal());
     }
 
 }

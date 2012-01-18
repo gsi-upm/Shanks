@@ -111,7 +111,7 @@ public class MyShanksSimulation extends ShanksSimulation {
         case 1:
             for (int i = 0; i<this.stepabbles.size(); i++) {
                 Steppable steppable = this.stepabbles.get(i);
-                schedule.scheduleRepeating(Schedule.EPOCH, i+1, steppable, 700);
+                schedule.scheduleRepeating(Schedule.EPOCH, i+1, steppable, 5);
             }
             break;
         default:

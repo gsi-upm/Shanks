@@ -80,9 +80,13 @@ public class MyScenario extends Scenario {
         Set<NetworkElement> set2 = new HashSet<NetworkElement>();
         set2.add(this.getNetworkElement("D5"));
         set2.add(this.getNetworkElement("L3"));
+        Set<NetworkElement> set3 = new HashSet<NetworkElement>();
+        set3.add(this.getNetworkElement("D4"));
+        set3.add(this.getNetworkElement("L2"));
         List<Set<NetworkElement>> possibleCombinations = new ArrayList<Set<NetworkElement>>();
         possibleCombinations.add(set);
         possibleCombinations.add(set2);
+        possibleCombinations.add(set3);
         this.addPossibleFailure(MyFailure.class, possibleCombinations);
     }
 

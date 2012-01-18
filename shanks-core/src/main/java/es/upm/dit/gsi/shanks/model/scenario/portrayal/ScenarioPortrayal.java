@@ -1,11 +1,15 @@
 package es.upm.dit.gsi.shanks.model.scenario.portrayal;
 
+import java.util.HashMap;
+
 import sim.field.network.Network;
+import sim.portrayal.Portrayal;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 
 public abstract class ScenarioPortrayal {
     
     private Scenario scenario;
+    private HashMap<String, Portrayal> portrayals; 
     
     /**
      * @param scenario
@@ -27,23 +31,42 @@ public abstract class ScenarioPortrayal {
     abstract public Object getDevices();
     
     /**
-     * @return the SparseGridPortrayal2D or the ContinuousPortrayal3D object
-     */
-    abstract public Object getDevicesPortrayal();
-    
-    /**
      * @return the Network object with all links
      */
     abstract public Network getLinks();
     
     /**
-     * @return the NetworkPortrayal2D or the NetworkPortrayal3D object
-     */
-    abstract public Object getLinksPortrayal();
-    
-    /**
      * To setup all portrayals of the simulation
      */
     abstract public void setupPortrayals();
+
+    /**
+     * @return the portrayals
+     */
+    public HashMap<String, Portrayal> getPortrayals() {
+        return portrayals;
+    }
+
+    /**
+     * @param portrayals the portrayals to set
+     */
+    public void setPortrayals(HashMap<String, Portrayal> portrayals) {
+        this.portrayals = portrayals;
+    }
+    
+    /**
+     * @param portrayalName
+     * @param portrayal
+     */
+    public void addPortrayal(String portrayalName, Portrayal portrayal) {
+        this.portrayals.put(portrayalName, portrayal);
+    }
+    
+    /**
+     * @param portrayalName
+     */
+    public void removePortrayal(String portrayalName) {
+        this.portrayals.remove(portrayalName);
+    }
 
 }

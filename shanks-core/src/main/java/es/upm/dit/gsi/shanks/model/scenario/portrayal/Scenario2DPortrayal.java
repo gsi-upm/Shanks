@@ -17,9 +17,6 @@ public abstract class Scenario2DPortrayal extends ScenarioPortrayal{
 
     private SparseGrid2D devices;
     private Network links;
-    
-    private SparseGridPortrayal2D devicesPortrayal;
-    private NetworkPortrayal2D linksPortrayal;
 
     /**
      * The constructor needs the scenario and the size of the simulation
@@ -32,11 +29,14 @@ public abstract class Scenario2DPortrayal extends ScenarioPortrayal{
         super(scenario);
         this.devices = new SparseGrid2D(width, height);
         this.links = new Network();
-        this.devicesPortrayal = new SparseGridPortrayal2D();
-        this.linksPortrayal = new NetworkPortrayal2D();
+        SparseGridPortrayal2D devicesPortrayal = new SparseGridPortrayal2D();
+        NetworkPortrayal2D linksPortrayal = new NetworkPortrayal2D();
         
-        this.devicesPortrayal.setField(this.devices);
-        this.linksPortrayal.setField(new SpatialNetwork2D(this.devices, this.links));
+        devicesPortrayal.setField(this.devices);
+        linksPortrayal.setField(new SpatialNetwork2D(this.devices, this.links));
+        
+        this.addPortrayal("Devices", devicesPortrayal);
+        this.addPortrayal("Links", linksPortrayal);
         
     }
 
@@ -64,19 +64,5 @@ public abstract class Scenario2DPortrayal extends ScenarioPortrayal{
      */
     public Network getLinks() {
         return this.links;
-    }
-    
-    /* (non-Javadoc)
-     * @see es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal#getDevicesPortrayal()
-     */
-    public SparseGridPortrayal2D getDevicesPortrayal() {
-        return this.devicesPortrayal;
-    }
-    
-    /* (non-Javadoc)
-     * @see es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal#getLinksPortrayal()
-     */
-    public NetworkPortrayal2D getLinksPortrayal() {
-        return this.linksPortrayal;
     }
 }

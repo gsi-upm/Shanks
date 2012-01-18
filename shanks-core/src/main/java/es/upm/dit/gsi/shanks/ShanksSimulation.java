@@ -63,7 +63,7 @@ public abstract class ShanksSimulation extends SimState {
     /**
      * @return
      */
-    public ScenarioPortrayal getPortrayal() {
+    public ScenarioPortrayal getScenarioPortrayal() {
         return this.scenarioManager.getPortrayal();
     }
 

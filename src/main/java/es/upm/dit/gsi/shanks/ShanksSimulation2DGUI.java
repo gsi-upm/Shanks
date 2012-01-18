@@ -85,6 +85,14 @@ public abstract class ShanksSimulation2DGUI extends GUIState {
         display.reset();
         display.setBackdrop(Color.white);
         display.repaint();
+
+        ShanksSimulation sim = this.getSimulation();
+        ScenarioPortrayal sp = sim.getScenarioPortrayal();
+        HashMap<String, Portrayal> portrayals = sp.getPortrayals();
+        Set<String> set = portrayals.keySet();
+        for (String name : set) {
+            display.attach((FieldPortrayal2D) this.getSimulation().getScenarioPortrayal().getPortrayals().get(name), name);
+        }
     }
 
 
@@ -109,15 +117,6 @@ public abstract class ShanksSimulation2DGUI extends GUIState {
         frame.setTitle(getName());
         c.registerFrame(frame);
         frame.setVisible(true);
-        
-        ShanksSimulation sim = this.getSimulation();
-        ScenarioPortrayal sp = sim.getScenarioPortrayal();
-        HashMap<String, Portrayal> portrayals = sp.getPortrayals();
-        Set<String> set = portrayals.keySet();
-        
-        for (String name : set) {
-            display.attach((FieldPortrayal2D) this.getSimulation().getScenarioPortrayal().getPortrayals().get(name), name);
-        }
     }
 
     /* (non-Javadoc)

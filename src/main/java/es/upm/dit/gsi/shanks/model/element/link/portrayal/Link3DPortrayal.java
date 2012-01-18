@@ -1,8 +1,6 @@
 package es.upm.dit.gsi.shanks.model.element.link.portrayal;
 
-import java.io.Serializable;
-
-import sim.util.MutableDouble;
+import sim.portrayal3d.network.SimpleEdgePortrayal3D;
 
 /**
  * Links class
@@ -13,16 +11,10 @@ import sim.util.MutableDouble;
  * @version 0.1
  * 
  */
-public abstract class LinkPortrayal extends MutableDouble implements Serializable {
+public abstract class Link3DPortrayal extends SimpleEdgePortrayal3D {
 
     /**
 	 * 
 	 */
     private static final long serialVersionUID = 3575152597887827354L;
-
-    /**
-     * Default constructor
-     */
-    public LinkPortrayal() {
-    }
 }

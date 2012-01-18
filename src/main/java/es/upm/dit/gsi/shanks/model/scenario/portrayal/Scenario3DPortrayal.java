@@ -26,6 +26,11 @@ public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
         super(scenario);
         this.devices = new Continuous3D(5, width, height, length);
     }
+    
+    /**
+     * Draw all elements of the simulation
+     */
+    abstract public void placeElements();
 
     /**
      * To place a device in the simulation
@@ -42,7 +47,7 @@ public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
     /* (non-Javadoc)
      * @see es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal#getElements()
      */
-    public Continuous3D getDevices() {
+    public Continuous3D getPlacedDevices() {
         return this.devices;
     }
     

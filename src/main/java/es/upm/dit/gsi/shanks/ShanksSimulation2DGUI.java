@@ -77,7 +77,7 @@ public abstract class ShanksSimulation2DGUI extends GUIState {
     @Override
     public void start() {
         super.start();
-        this.getSimulation().getPortrayal().setupPortrayals();
+        this.getSimulation().getScenarioPortrayal().setupPortrayals();
         display.reset();
         display.setBackdrop(Color.white);
         display.repaint();
@@ -96,16 +96,10 @@ public abstract class ShanksSimulation2DGUI extends GUIState {
         c.registerFrame(frame);
         frame.setVisible(true);
         
-        display.attach((FieldPortrayal2D) this.getSimulation().getPortrayal().getLinksPortrayal(), "Links");
-        display.attach((FieldPortrayal2D) this.getSimulation().getPortrayal().getDevicesPortrayal(), "Devices");
-        
-        this.attachPortrayals(display);
+        for (String name : this.getSimulation().getScenarioPortrayal().getPortrayals().keySet()) {
+            display.attach((FieldPortrayal2D) this.getSimulation().getScenarioPortrayal().getPortrayals().get(name), name);
+        }
     }
-
-    /**
-     * @param display
-     */
-    abstract public void attachPortrayals(Display2D display);
 
     /* (non-Javadoc)
      * @see sim.display.GUIState#quit()

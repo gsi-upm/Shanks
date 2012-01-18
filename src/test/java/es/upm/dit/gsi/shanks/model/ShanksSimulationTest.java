@@ -4,7 +4,11 @@
  */
 package es.upm.dit.gsi.shanks.model;
 
-import static org.junit.Assert.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.logging.LogManager;
+
+import junit.framework.Assert;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -14,7 +18,7 @@ import org.junit.Test;
 
 /**
  * @author a.carrera
- *
+ * 
  */
 public class ShanksSimulationTest {
 
@@ -23,6 +27,9 @@ public class ShanksSimulationTest {
      */
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
+        LogManager lm = LogManager.getLogManager();
+        File f = new File("src/test/resources/logging.properties");
+        lm.readConfiguration(new FileInputStream(f));
     }
 
     /**
@@ -47,9 +54,33 @@ public class ShanksSimulationTest {
     }
 
     @Test
-    public void test() {
-        fail("Not yet implemented");
-        //TOTEST implement this test
+    public void ShanksSimulationWithoutGUI() {
+        boolean catched = false;
+        try {
+            String [] args = new String[1];
+            args[0] = new String("0");
+            MyShanksSimulation.main(args);
+        } catch (Exception e) {
+            catched = true;
+            e.printStackTrace();
+        }
+        Assert.assertFalse(catched);
+
+    }
+
+    @Test
+    public void ShanksSimulationResolvingProblemsWithoutGUI() {
+        boolean catched = false;
+        try {
+            String [] args = new String[1];
+            args[0] = new String("1");
+            MyShanksSimulation.main(args);
+        } catch (Exception e) {
+            catched = true;
+            e.printStackTrace();
+        }
+        Assert.assertFalse(catched);
+
     }
 
 }

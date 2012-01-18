@@ -7,7 +7,6 @@ import es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice2DPortr
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.portrayal.test.MyLink2DPortrayal;
-import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 
@@ -40,6 +39,7 @@ public class MyScenario2DPortrayal extends Scenario2DPortrayal {
         devicePortrayal.setPortrayalForClass(MyDevice.class, new MyDevice2DPortrayal());
 //        networkPortrayal.setPortrayalForClass(MyLink.class, new MyLink2DPortrayal());
         networkPortrayal.setPortrayalForAll(new MyLink2DPortrayal());
+        //TODO echarle un ojo a esto para que pueda pintarse cada link como se quiera
     }
 
 }

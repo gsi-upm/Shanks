@@ -28,7 +28,7 @@ public abstract class ScenarioPortrayal {
     /**
      * @return the SparseGrid2D or the Continuous3D object
      */
-    abstract public Object getDevices();
+    abstract public Object getPlacedDevices();
     
     /**
      * @return the Network object with all links

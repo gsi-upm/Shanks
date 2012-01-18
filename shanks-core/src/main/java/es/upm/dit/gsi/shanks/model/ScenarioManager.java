@@ -12,7 +12,6 @@ package es.upm.dit.gsi.shanks.model;
  */
 
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import sim.engine.SimState;
@@ -41,11 +40,19 @@ public class ScenarioManager implements Steppable {
 
     /**
      * @param scenario
+     * @param portrayal
      */
     public ScenarioManager(Scenario scenario, ScenarioPortrayal portrayal) {
-        this.logger.setLevel(Level.ALL);
         this.scenario = scenario;
         this.portrayal = portrayal;
+    }
+
+    /**
+     * @param scenario
+     */
+    public ScenarioManager(Scenario scenario) {
+        this.scenario = scenario;
+        this.portrayal = null;
     }
     
     /**
@@ -60,6 +67,13 @@ public class ScenarioManager implements Steppable {
      */
     public ScenarioPortrayal getPortrayal() {
         return portrayal;
+    }
+
+    /**
+     * 
+     */
+    public void setPortrayal(ScenarioPortrayal portrayal) {
+        this.portrayal = portrayal;
     }
     
     /* (non-Javadoc)

@@ -82,5 +82,22 @@ public class ShanksSimulationTest {
         Assert.assertFalse(catched);
 
     }
+    
+    //TOTEST implement test that count the number of generated tests or the number of resolved tests
+
+    @Test
+    public void ShanksSimulationResolvingProblemsWith2DGUI() {
+        boolean catched = false;
+        try {
+            String [] args = new String[1];
+            args[0] = new String("0");
+            MyShanksSimulation2DGUI.main(args);
+        } catch (Exception e) {
+            catched = true;
+            e.printStackTrace();
+        }
+        Assert.assertFalse(catched);
+
+    }
 
 }

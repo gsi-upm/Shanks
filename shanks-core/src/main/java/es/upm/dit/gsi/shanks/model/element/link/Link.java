@@ -46,6 +46,14 @@ public abstract class Link extends NetworkElement {
     }
 
     /**
+     * Get the capacity of the link (max number of connected device)
+     * @return
+     */
+    public int getCapacity() {
+        return deviceCapacity;
+    }
+
+    /**
      * @param device
      * @return
      * @throws TooManyConnectionException 

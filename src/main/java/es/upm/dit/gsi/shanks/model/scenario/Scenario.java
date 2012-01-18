@@ -67,6 +67,8 @@ public abstract class Scenario {
         this.addPossibleFailures();
 
         this.setCurrentStatus(initialState);
+        
+        logger.info("Scenario " + this.getID() + " successfully created.");
     }
 
     /**
@@ -302,7 +304,8 @@ public abstract class Scenario {
                 Failure failure = type.newInstance();
                 List<Set<NetworkElement>> list = this.getPossibleFailures()
                         .get(type);
-                int numberOfCombinations = randomizer.nextInt(list.size());
+                int numberOfCombinations = list.size();
+                int combinationNumber = randomizer.nextInt(numberOfCombinations);
                 try {
                     // Apply penalty
                     penalty = penalties.get(type);
@@ -319,14 +322,10 @@ public abstract class Scenario {
                 if (randomizer.nextDouble() < prob) {
                     // Generate failure
                     Set<NetworkElement> elementsSet;
-                    if (numberOfCombinations > 1) {
-                        elementsSet = list.get(numberOfCombinations);
+                    if (numberOfCombinations >= 1) {
+                        elementsSet = list.get(combinationNumber);
                         this.setupFailure(failure, elementsSet,
-                                numberOfCombinations);
-                    } else if (numberOfCombinations == 1) {
-                        elementsSet = list.get(0);
-                        this.setupFailure(failure, elementsSet,
-                                numberOfCombinations);
+                                combinationNumber);
                     } else if (this.generatedFailureConfigurations.get(type).size() == 0) {
                         throw new NoCombinationForFailureException(failure);
                     }
@@ -366,6 +365,7 @@ public abstract class Scenario {
             this.generatedFailureConfigurations.put(failure.getClass(), numList);
             failure.activateFailure();
             this.addFailure(failure, configurationNumber);
+            logger.fine("Generated Failure " + failure.getID() + " with configuration " + configurationNumber);
         }
 
     }
@@ -392,8 +392,10 @@ public abstract class Scenario {
                 resolvedFailures.add(failure);
                 List<Integer> numList = this.generatedFailureConfigurations.get(failure
                         .getClass());
+                Integer conf = this.currentFailures.get(failure);
                 numList.remove((Integer) this.currentFailures.get(failure));
                 this.generatedFailureConfigurations.put(failure.getClass(), numList);
+                logger.fine("Resolved failure " + failure.getID() + ". Failure class: " + failure.getClass().getName() + " with configuration " + conf);
             }
         }
         for (Failure resolved : resolvedFailures) {

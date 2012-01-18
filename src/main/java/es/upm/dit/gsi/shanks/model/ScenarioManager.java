@@ -93,7 +93,7 @@ public class ScenarioManager implements Steppable {
      * @throws UnsupportedElementInFailureException 
      */
     public void stateMachine(ShanksSimulation sim) throws UnsupportedScenarioStatusException, NoCombinationForFailureException, UnsupportedElementInFailureException, InstantiationException, IllegalAccessException {
-        logger.info("Using default state machine for ScenarioManager");
+        logger.fine("Using default state machine for ScenarioManager");
         switch (this.simulationStateMachineStatus) {
         case CHECK_FAILURES:
             this.checkFailures(sim);
@@ -103,6 +103,11 @@ public class ScenarioManager implements Steppable {
             this.generateFailures(sim);
             this.simulationStateMachineStatus = CHECK_FAILURES;
             break;
+        }
+        long step = sim.getSchedule().getSteps();
+        if (step%500==0) {
+            logger.info("In step " + step + ", there are " + sim.getScenario().getCurrentFailures().size() + " current failures.");
+            logger.info("In step " + step + ", there are " + sim.getNumOfResolvedFailures() + " resolved failures.");
         }
     }
 
@@ -123,6 +128,7 @@ public class ScenarioManager implements Steppable {
      */
     private void checkFailures(ShanksSimulation sim) {
         List<Failure> resolved = this.scenario.checkResolvedFailures();
-        sim.numOfResolvedFailures += resolved.size();
+        sim.setNumOfResolvedFailures(sim.getNumOfResolvedFailures()
+                + resolved.size());
     }
 }

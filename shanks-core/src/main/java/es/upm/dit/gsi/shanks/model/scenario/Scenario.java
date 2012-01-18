@@ -17,6 +17,7 @@ import es.upm.dit.gsi.shanks.model.failure.exception.NoCombinationForFailureExce
 import es.upm.dit.gsi.shanks.model.failure.exception.UnsupportedElementInFailureException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 
 /**
  * Scenarios class
@@ -70,6 +71,13 @@ public abstract class Scenario {
         
         logger.info("Scenario " + this.getID() + " successfully created.");
     }
+
+    /**
+     * Create the scenario portrayal (2D o 3D).
+     *
+     * @return
+     */
+    abstract public ScenarioPortrayal createScenarioPortrayal();
 
     /**
      * @return the id

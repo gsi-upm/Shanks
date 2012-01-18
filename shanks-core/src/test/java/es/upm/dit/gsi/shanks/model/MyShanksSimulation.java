@@ -18,6 +18,7 @@ import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
 
 public class MyShanksSimulation extends ShanksSimulation {
@@ -92,7 +93,12 @@ public class MyShanksSimulation extends ShanksSimulation {
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException {
         Scenario s = new MyScenario("MyScenario", MyScenario.CLOUDY, 50);
-        ScenarioManager sm = new ScenarioManager(s);
+        logger.warning("Scenario created");
+        ScenarioPortrayal sp = s.createScenarioPortrayal();
+        if (sp==null) {
+            logger.warning("ScenarioPortrayals is null");
+        }
+        ScenarioManager sm = new ScenarioManager(s, sp);
         return sm;
     }
 

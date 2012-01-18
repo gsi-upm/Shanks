@@ -16,7 +16,7 @@ import org.junit.Test;
  * @author a.carrera
  *
  */
-public class ScenarioManagerTest {
+public class ShanksSimulationTest {
 
     /**
      * @throws java.lang.Exception

@@ -48,16 +48,16 @@ public abstract class ComplexScenario extends Scenario {
         this.scenarios.add(scenario);
         HashMap<String, NetworkElement> elements = scenario.getCurrentElements();
         for (String element : elements.keySet()) {
-            this.currentElements.put(element, elements.get(element));
+            this.getCurrentElements().put(element, elements.get(element));
         }
 //        HashMap<Class<? extends Failure>, List<Set<NetworkElement>>> possibleFailures = scenario.getPossibleFailures();
 //        for (Class<? extends Failure> possibleFailure : possibleFailures) {
 //            this.possibleFailures.add(possibleFailure);
 //        }
         //TOIMP implement this method
-        List<Failure> failures = scenario.getCurrentFailures();
+        Set<Failure> failures = scenario.getCurrentFailures();
         for (Failure failure : failures) {
-            this.currentFailures.add(failure);
+            this.getCurrentFailures().add(failure);
         }
         // TODO hay que meter aquí el dispositivo que conecta los dos escenarios para crear el escenario complejo
     }

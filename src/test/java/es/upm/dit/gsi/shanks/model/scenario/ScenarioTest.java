@@ -13,6 +13,7 @@ import org.junit.Test;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.failure.exception.NoCombinationForFailureException;
+import es.upm.dit.gsi.shanks.model.failure.exception.UnsupportedElementInFailureException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
@@ -89,7 +90,7 @@ public class ScenarioTest {
     public void createScenarioAndGenerateFailures()
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, NoCombinationForFailureException {
+            DuplicatedIDException, NoCombinationForFailureException, UnsupportedElementInFailureException, InstantiationException, IllegalAccessException {
         Scenario s = new MyScenario("MyScenario", MyScenario.CLOUDY, 100000000);
         s.generateFailures();
         Assert.assertTrue(s.getCurrentFailures().size() > 0);

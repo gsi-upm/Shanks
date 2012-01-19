@@ -4,11 +4,22 @@
  */
 package es.upm.dit.gsi.shanks.model.scenario;
 
-import static org.junit.Assert.*;
+import java.util.Properties;
+
+import junit.framework.Assert;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.scenario.exception.AlreadyConnectedScenarioException;
+import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
+import es.upm.dit.gsi.shanks.model.scenario.exception.NonGatewayDeviceException;
+import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
+import es.upm.dit.gsi.shanks.model.scenario.test.MyComplexScenario;
+import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
 
 /**
  * @author a.carrera
@@ -31,9 +42,35 @@ public class ComplexScenarioTest {
     }
 
     @Test
-    public void test() {
-        fail("Not yet implemented");
-        //TOTEST implement this test
+    public void createComplexScenario()
+            throws UnsupportedNetworkElementStatusException,
+            TooManyConnectionException, UnsupportedScenarioStatusException,
+            DuplicatedIDException, NonGatewayDeviceException, AlreadyConnectedScenarioException {
+        Properties scenarioProperties = new Properties();
+        scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
+        scenarioProperties.put(Scenario.PORTRAYAL_DIMENSIONS, Scenario.NO_GUI);
+        Scenario s = new MyComplexScenario("MyComplexScenario", MyComplexScenario.SUNNY, scenarioProperties);
+        Assert.assertEquals("MyComplexScenario", s.getID());
+        Assert.assertEquals(MyComplexScenario.SUNNY, s.getCurrentStatus());
+    }
+    
+
+
+    @Test
+    public void createComplexScenarioAndGetScenarios()
+            throws UnsupportedNetworkElementStatusException,
+            TooManyConnectionException, UnsupportedScenarioStatusException,
+            DuplicatedIDException, NonGatewayDeviceException, AlreadyConnectedScenarioException {
+        Properties scenarioProperties = new Properties();
+        scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
+        scenarioProperties.put(Scenario.PORTRAYAL_DIMENSIONS, Scenario.NO_GUI);
+        ComplexScenario s = new MyComplexScenario("MyComplexScenario", MyComplexScenario.SUNNY, scenarioProperties);
+        Assert.assertEquals("MyComplexScenario", s.getID());
+        Assert.assertEquals(MyComplexScenario.SUNNY, s.getCurrentStatus());
+        Scenario s1 = s.getScenario("Scenario1");
+        Scenario s2 = s.getScenario("Scenario2");
+        Assert.assertEquals("Scenario1", s1.getID());
+        Assert.assertEquals("Scenario2", s2.getID());
     }
 
 }

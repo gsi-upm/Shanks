@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="4.603" errors="0" skipped="0" tests="6" name="es.upm.dit.gsi.shanks.model.ShanksSimulationTest">
+<testsuite failures="2" time="3.491" errors="0" skipped="0" tests="6" name="es.upm.dit.gsi.shanks.model.ShanksSimulationTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.6.0_30\jre\bin"/>
@@ -59,10 +59,202 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase time="0.082" classname="es.upm.dit.gsi.shanks.model.ShanksSimulationTest" name="ShanksSimulationWithoutGUI"/>
-  <testcase time="0.178" classname="es.upm.dit.gsi.shanks.model.ShanksSimulationTest" name="ShanksSimulationResolvingProblemsWithoutGUI"/>
-  <testcase time="2.221" classname="es.upm.dit.gsi.shanks.model.ShanksSimulationTest" name="ShanksSimulationWith2DGUI"/>
-  <testcase time="0.398" classname="es.upm.dit.gsi.shanks.model.ShanksSimulationTest" name="ShanksSimulationResolvingProblemsWith2DGUI"/>
-  <testcase time="1.288" classname="es.upm.dit.gsi.shanks.model.ShanksSimulationTest" name="ShanksSimulationWith3DGUI"/>
-  <testcase time="0.428" classname="es.upm.dit.gsi.shanks.model.ShanksSimulationTest" name="ShanksSimulationResolvingProblemsWith3DGUI"/>
+  <testcase time="0.118" classname="es.upm.dit.gsi.shanks.model.ShanksSimulationTest" name="ShanksSimulationWithoutGUI"/>
+  <testcase time="0.074" classname="es.upm.dit.gsi.shanks.model.ShanksSimulationTest" name="ShanksSimulationResolvingProblemsWithoutGUI"/>
+  <testcase time="2.096" classname="es.upm.dit.gsi.shanks.model.ShanksSimulationTest" name="ShanksSimulationWith2DGUI"/>
+  <testcase time="0.374" classname="es.upm.dit.gsi.shanks.model.ShanksSimulationTest" name="ShanksSimulationResolvingProblemsWith2DGUI"/>
+  <testcase time="0.585" classname="es.upm.dit.gsi.shanks.model.ShanksSimulationTest" name="ShanksSimulationWith3DGUI">
+    <failure type="junit.framework.AssertionFailedError:">junit.framework.AssertionFailedError: null
+	at junit.framework.Assert.fail(Assert.java:47)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at junit.framework.Assert.assertFalse(Assert.java:34)
+	at junit.framework.Assert.assertFalse(Assert.java:41)
+	at es.upm.dit.gsi.shanks.model.ShanksSimulationTest.ShanksSimulationWith3DGUI(ShanksSimulationTest.java:188)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:44)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:41)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:31)
+	at org.junit.runners.BlockJUnit4ClassRunner.runNotIgnored(BlockJUnit4ClassRunner.java:79)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:71)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:49)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:193)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:52)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:191)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:42)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:184)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:31)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:236)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:234)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:133)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:114)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:188)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:166)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:86)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:101)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:74)
+</failure>
+    <system-err>19-ene-2012 17:26:45 es.upm.dit.gsi.shanks.model.element.device.Device connectToLink
+INFO: Device D1 is now connected to Link L1
+19-ene-2012 17:26:45 es.upm.dit.gsi.shanks.model.element.device.Device connectToLink
+INFO: Device D2 is now connected to Link L1
+19-ene-2012 17:26:45 es.upm.dit.gsi.shanks.model.element.device.Device connectToLink
+INFO: Device D3 is now connected to Link L1
+19-ene-2012 17:26:45 es.upm.dit.gsi.shanks.model.element.device.Device connectToLink
+INFO: Device D1 is now connected to Link L2
+19-ene-2012 17:26:45 es.upm.dit.gsi.shanks.model.element.device.Device connectToLink
+INFO: Device D4 is now connected to Link L2
+19-ene-2012 17:26:45 es.upm.dit.gsi.shanks.model.element.device.Device connectToLink
+INFO: Device D3 is now connected to Link L3
+19-ene-2012 17:26:45 es.upm.dit.gsi.shanks.model.element.device.Device connectToLink
+INFO: Device D5 is now connected to Link L3
+19-ene-2012 17:26:45 es.upm.dit.gsi.shanks.model.scenario.Scenario &lt;init&gt;
+INFO: Scenario MyScenario successfully created.
+19-ene-2012 17:26:45 es.upm.dit.gsi.shanks.ShanksSimulation createScenarioManager
+ADVERTENCIA: Scenario created
+java.lang.ClassCastException: sim.portrayal3d.network.NetworkPortrayal3D cannot be cast to sim.portrayal.FieldPortrayal2D
+	at es.upm.dit.gsi.shanks.ShanksSimulation2DGUI.start(ShanksSimulation2DGUI.java:94)
+	at es.upm.dit.gsi.shanks.model.ShanksSimulationTest.ShanksSimulationWith3DGUI(ShanksSimulationTest.java:178)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:44)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:41)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:31)
+	at org.junit.runners.BlockJUnit4ClassRunner.runNotIgnored(BlockJUnit4ClassRunner.java:79)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:71)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:49)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:193)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:52)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:191)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:42)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:184)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:31)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:236)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:234)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:133)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:114)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:188)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:166)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:86)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:101)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:74)
+</system-err>
+  </testcase>
+  <testcase time="0.237" classname="es.upm.dit.gsi.shanks.model.ShanksSimulationTest" name="ShanksSimulationResolvingProblemsWith3DGUI">
+    <failure type="junit.framework.AssertionFailedError:">junit.framework.AssertionFailedError: null
+	at junit.framework.Assert.fail(Assert.java:47)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at junit.framework.Assert.assertFalse(Assert.java:34)
+	at junit.framework.Assert.assertFalse(Assert.java:41)
+	at es.upm.dit.gsi.shanks.model.ShanksSimulationTest.ShanksSimulationResolvingProblemsWith3DGUI(ShanksSimulationTest.java:214)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:44)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:41)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:31)
+	at org.junit.runners.BlockJUnit4ClassRunner.runNotIgnored(BlockJUnit4ClassRunner.java:79)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:71)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:49)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:193)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:52)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:191)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:42)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:184)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:31)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:236)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:234)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:133)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:114)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:188)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:166)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:86)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:101)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:74)
+</failure>
+    <system-err>19-ene-2012 17:26:45 es.upm.dit.gsi.shanks.model.element.device.Device connectToLink
+INFO: Device D1 is now connected to Link L1
+19-ene-2012 17:26:45 es.upm.dit.gsi.shanks.model.element.device.Device connectToLink
+INFO: Device D2 is now connected to Link L1
+19-ene-2012 17:26:45 es.upm.dit.gsi.shanks.model.element.device.Device connectToLink
+INFO: Device D3 is now connected to Link L1
+19-ene-2012 17:26:45 es.upm.dit.gsi.shanks.model.element.device.Device connectToLink
+INFO: Device D1 is now connected to Link L2
+19-ene-2012 17:26:45 es.upm.dit.gsi.shanks.model.element.device.Device connectToLink
+INFO: Device D4 is now connected to Link L2
+19-ene-2012 17:26:45 es.upm.dit.gsi.shanks.model.element.device.Device connectToLink
+INFO: Device D3 is now connected to Link L3
+19-ene-2012 17:26:45 es.upm.dit.gsi.shanks.model.element.device.Device connectToLink
+INFO: Device D5 is now connected to Link L3
+19-ene-2012 17:26:45 es.upm.dit.gsi.shanks.model.scenario.Scenario &lt;init&gt;
+INFO: Scenario MyScenario successfully created.
+19-ene-2012 17:26:45 es.upm.dit.gsi.shanks.ShanksSimulation createScenarioManager
+ADVERTENCIA: Scenario created
+java.lang.ClassCastException: sim.portrayal3d.network.NetworkPortrayal3D cannot be cast to sim.portrayal.FieldPortrayal2D
+	at es.upm.dit.gsi.shanks.ShanksSimulation2DGUI.start(ShanksSimulation2DGUI.java:94)
+	at es.upm.dit.gsi.shanks.model.ShanksSimulationTest.ShanksSimulationResolvingProblemsWith3DGUI(ShanksSimulationTest.java:204)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:44)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:41)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:31)
+	at org.junit.runners.BlockJUnit4ClassRunner.runNotIgnored(BlockJUnit4ClassRunner.java:79)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:71)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:49)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:193)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:52)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:191)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:42)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:184)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:31)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:236)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:234)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:133)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:114)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:188)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:166)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:86)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:101)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:74)
+</system-err>
+  </testcase>
 </testsuite>

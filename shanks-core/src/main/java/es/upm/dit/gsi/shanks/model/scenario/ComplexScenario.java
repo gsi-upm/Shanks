@@ -6,10 +6,12 @@ package es.upm.dit.gsi.shanks.model.scenario;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
+import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
@@ -44,26 +46,33 @@ public abstract class ComplexScenario extends Scenario {
      * @throws NonGatewayDeviceException
      * @throws AlreadyConnectedScenarioException
      */
-    public ComplexScenario(String type, String initialState, Properties properties)
+    public ComplexScenario(String type, String initialState,
+            Properties properties)
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, NonGatewayDeviceException, AlreadyConnectedScenarioException {
+            DuplicatedIDException, NonGatewayDeviceException,
+            AlreadyConnectedScenarioException {
         super(type, initialState, properties);
         this.scenarios = new HashMap<Scenario, List<Link>>();
-        
+
         this.addScenarios();
     }
 
     /**
      * Add all scenarios to the simulation using addScenario method
-     * @throws DuplicatedIDException 
-     * @throws UnsupportedScenarioStatusException 
-     * @throws TooManyConnectionException 
-     * @throws UnsupportedNetworkElementStatusException 
-     * @throws AlreadyConnectedScenarioException 
-     * @throws NonGatewayDeviceException 
+     * 
+     * @throws DuplicatedIDException
+     * @throws UnsupportedScenarioStatusException
+     * @throws TooManyConnectionException
+     * @throws UnsupportedNetworkElementStatusException
+     * @throws AlreadyConnectedScenarioException
+     * @throws NonGatewayDeviceException
      */
-    abstract public void addScenarios() throws UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException, NonGatewayDeviceException, AlreadyConnectedScenarioException;
+    abstract public void addScenarios()
+            throws UnsupportedNetworkElementStatusException,
+            TooManyConnectionException, UnsupportedScenarioStatusException,
+            DuplicatedIDException, NonGatewayDeviceException,
+            AlreadyConnectedScenarioException;
 
     /**
      * Add the scenario to the complex scenario.
@@ -106,10 +115,11 @@ public abstract class ComplexScenario extends Scenario {
     public Set<Scenario> getScenarios() {
         return this.scenarios.keySet();
     }
-    
+
     /**
      * @param scenarioID
-     * @return null if the ComplexScenario does not contains the searched scenarioID
+     * @return null if the ComplexScenario does not contains the searched
+     *         scenarioID
      */
     public Scenario getScenario(String scenarioID) {
         for (Scenario s : this.scenarios.keySet()) {
@@ -119,30 +129,76 @@ public abstract class ComplexScenario extends Scenario {
         }
         return null;
     }
-    
-    /* (non-Javadoc)
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#generateFailures()
      */
-    public void generateFailures() throws UnsupportedScenarioStatusException, NoCombinationForFailureException, UnsupportedElementInFailureException, InstantiationException, IllegalAccessException {
+    public void generateFailures() throws UnsupportedScenarioStatusException,
+            NoCombinationForFailureException,
+            UnsupportedElementInFailureException, InstantiationException,
+            IllegalAccessException {
         super.generateFailures();
         for (Scenario scenario : this.scenarios.keySet()) {
             scenario.generateFailures();
         }
     }
-    
-    /* (non-Javadoc)
-     * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#checkResolvedFailures()
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * es.upm.dit.gsi.shanks.model.scenario.Scenario#checkResolvedFailures()
      */
     public List<Failure> checkResolvedFailures() {
         List<Failure> fullList = new ArrayList<Failure>();
-        
+
         fullList.addAll(super.checkResolvedFailures());
-        
+
         for (Scenario scenario : this.scenarios.keySet()) {
-           fullList.addAll(scenario.checkResolvedFailures());
+            fullList.addAll(scenario.checkResolvedFailures());
         }
-        
+
         return fullList;
+    }
+
+    /**
+     * @return All failures classified by scenario of the complex scenario
+     */
+    public HashMap<Scenario, Set<Failure>> getCurrentFailuresByScenario() {
+        HashMap<Scenario, Set<Failure>> maps = new HashMap<Scenario, Set<Failure>>();
+        maps.put(this, this.getCurrentFailures());
+        for (Scenario s : this.getScenarios()) {
+            maps.put(s, s.getCurrentFailures());
+        }
+
+        return maps;
+    }
+    
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#getCurrentFailures()
+     */
+    public Set<Failure> getCurrentFailures() {
+        Set<Failure> failures = new HashSet<Failure>();
+        failures.addAll(this.getFullCurrentFailures().keySet());
+        for(Scenario s : this.getScenarios()) {
+            failures.addAll(s.getCurrentFailures());
+        }
+        return failures;
+    }
+
+    /**
+     * @return All elements classified by scenario of the complex scenario
+     */
+    public HashMap<Scenario, HashMap<String, NetworkElement>> getCurrentElementsByScenario() {
+        HashMap<Scenario, HashMap<String, NetworkElement>> maps = new HashMap<Scenario, HashMap<String, NetworkElement>>();
+        maps.put(this, this.getCurrentElements());
+        for (Scenario s : this.getScenarios()) {
+            maps.put(s, s.getCurrentElements());
+        }
+
+        return maps;
     }
 
 }

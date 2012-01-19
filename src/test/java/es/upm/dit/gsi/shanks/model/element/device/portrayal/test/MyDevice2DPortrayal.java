@@ -24,11 +24,11 @@ public class MyDevice2DPortrayal extends Device2DPortrayal implements Portrayal 
         final double height = 20;
 
         String status = device.getCurrentStatus();
-        if (status.equals(MyDevice.OK)) {
+        if (status.equals(MyDevice.OK_STATUS)) {
             graphics.setColor(Color.green);
-        } else if (status.equals(MyDevice.NOK)) {
+        } else if (status.equals(MyDevice.NOK_STATUS)) {
             graphics.setColor(Color.red);
-        } else if (status.equals(MyDevice.UNKOWN)) {
+        } else if (status.equals(MyDevice.UNKOWN_STATUS)) {
             graphics.setColor(Color.blue);
         }
 

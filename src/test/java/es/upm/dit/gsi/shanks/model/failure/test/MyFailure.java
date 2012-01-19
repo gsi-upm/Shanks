@@ -12,8 +12,8 @@ public class MyFailure extends Failure {
 
     @Override
     public void addPossibleAffectedElements() {
-        this.addPossibleAffectedElements(MyDevice.class, MyDevice.NOK);
-        this.addPossibleAffectedElements(MyLink.class, MyLink.BROKEN);
+        this.addPossibleAffectedElements(MyDevice.class, MyDevice.NOK_STATUS);
+        this.addPossibleAffectedElements(MyLink.class, MyLink.BROKEN_STATUS);
     }
 
 }

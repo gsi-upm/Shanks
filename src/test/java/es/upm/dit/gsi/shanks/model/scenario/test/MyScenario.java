@@ -61,14 +61,14 @@ public class MyScenario extends Scenario {
     public void addNetworkElements()
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException, DuplicatedIDException {
-        Device d1 = new MyDevice("D1", MyDevice.OK, false);
-        Device d2 = new MyDevice("D2", MyDevice.OK, false);
-        Device d3 = new MyDevice("D3", MyDevice.OK, false);
-        Device d4 = new MyDevice("D4", MyDevice.OK, false);
-        Device d5 = new MyDevice("D5", MyDevice.OK, true);
-        Link l1 = new MyLink("L1", MyLink.OK, 3);
-        Link l2 = new MyLink("L2", MyLink.OK, 2);
-        Link l3 = new MyLink("L3", MyLink.OK, 2);
+        Device d1 = new MyDevice("D1", MyDevice.OK_STATUS, false);
+        Device d2 = new MyDevice("D2", MyDevice.OK_STATUS, false);
+        Device d3 = new MyDevice("D3", MyDevice.OK_STATUS, false);
+        Device d4 = new MyDevice("D4", MyDevice.OK_STATUS, false);
+        Device d5 = new MyDevice("D5", MyDevice.OK_STATUS, true);
+        Link l1 = new MyLink("L1", MyLink.OK_STATUS, 3);
+        Link l2 = new MyLink("L2", MyLink.OK_STATUS, 2);
+        Link l3 = new MyLink("L3", MyLink.OK_STATUS, 2);
 
         d1.connectToLink(l1);
         d2.connectToLink(l1);

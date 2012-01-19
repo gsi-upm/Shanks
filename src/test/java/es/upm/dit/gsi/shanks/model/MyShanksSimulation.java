@@ -62,13 +62,13 @@ public class MyShanksSimulation extends ShanksSimulation {
                         Class<? extends NetworkElement> c = element.getClass();
                         if (c.equals(MyDevice.class)) {
                             try {
-                                element.setCurrentStatus(MyDevice.OK);
+                                element.setCurrentStatus(MyDevice.OK_STATUS);
                             } catch (UnsupportedNetworkElementStatusException e) {
                                 e.printStackTrace();
                             }
                         } else if (c.equals(MyLink.class)) {
                             try {
-                                element.setCurrentStatus(MyLink.OK);
+                                element.setCurrentStatus(MyLink.OK_STATUS);
                             } catch (UnsupportedNetworkElementStatusException e) {
                                 e.printStackTrace();
                             }

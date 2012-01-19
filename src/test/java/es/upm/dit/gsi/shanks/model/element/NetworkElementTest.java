@@ -43,38 +43,66 @@ public class NetworkElementTest {
 
     @Test
     public void createDevice() throws UnsupportedNetworkElementStatusException {
-        Device d = new MyDevice("MyDevice", MyDevice.OK, false);
+        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         Assert.assertEquals("MyDevice", d.getID());
-        Assert.assertEquals(MyDevice.OK, d.getCurrentStatus());
+        Assert.assertEquals(MyDevice.OK_STATUS, d.getCurrentStatus());
         Assert.assertEquals(false, d.isGateway());
+    }
+
+    @Test
+    public void createDeviceAndCheckInitialStatus() throws UnsupportedNetworkElementStatusException {
+        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
+        Assert.assertEquals("MyDevice", d.getID());
+        Assert.assertEquals(MyDevice.OK_STATUS, d.getCurrentStatus());
+        Assert.assertEquals(30, d.getProperty(MyDevice.TEMPERATURE_PROPERTY));
+        Assert.assertEquals("Windows", d.getProperty(MyDevice.OS_PROPERTY));
+        Assert.assertEquals(false, d.isGateway());
+    }
+
+    @Test
+    public void createDeviceAndCheckChangedStatus() throws UnsupportedNetworkElementStatusException {
+        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
+        Assert.assertEquals("MyDevice", d.getID());
+        Assert.assertEquals(MyDevice.OK_STATUS, d.getCurrentStatus());
+        Assert.assertEquals(30, d.getProperty(MyDevice.TEMPERATURE_PROPERTY));
+        Assert.assertEquals("Windows", d.getProperty(MyDevice.OS_PROPERTY));
+        Assert.assertEquals(false, d.isGateway());
+        
+        d.setCurrentStatus(MyDevice.NOK_STATUS);
+        Assert.assertEquals("MyDevice", d.getID());
+        Assert.assertEquals(MyDevice.NOK_STATUS, d.getCurrentStatus());
+        Assert.assertEquals(90, d.getProperty(MyDevice.TEMPERATURE_PROPERTY));
+        Assert.assertEquals("Windows", d.getProperty(MyDevice.OS_PROPERTY));
+        Assert.assertEquals(false, d.isGateway());
+        
     }
 
     @Test
     public void createGatewayDevice()
             throws UnsupportedNetworkElementStatusException {
-        Device d = new MyDevice("MyDevice", MyDevice.NOK, true);
+        Device d = new MyDevice("MyDevice", MyDevice.NOK_STATUS, true);
         Assert.assertEquals("MyDevice", d.getID());
-        Assert.assertEquals(MyDevice.NOK, d.getCurrentStatus());
+        Assert.assertEquals(MyDevice.NOK_STATUS, d.getCurrentStatus());
         Assert.assertEquals(true, d.isGateway());
     }
 
     @Test
     public void createDeviceChangeStatus()
             throws UnsupportedNetworkElementStatusException {
-        Device d = new MyDevice("MyDevice", MyDevice.NOK, true);
+        Device d = new MyDevice("MyDevice", MyDevice.NOK_STATUS, true);
         try {
-            d.setCurrentStatus(MyDevice.OK);
+            d.setCurrentStatus(MyDevice.OK_STATUS);
         } catch (UnsupportedNetworkElementStatusException e) {
             e.printStackTrace();
             Assert.fail();
         }
-        Assert.assertEquals(MyDevice.OK, d.getCurrentStatus());
+        Assert.assertEquals(MyDevice.OK_STATUS, d.getCurrentStatus());
     }
 
     @Test
     public void createDeviceChangeToImpossibleStatus()
             throws UnsupportedNetworkElementStatusException {
-        Device d = new MyDevice("MyDevice", MyDevice.NOK, true);
+        Device d = new MyDevice("MyDevice", MyDevice.NOK_STATUS, true);
         boolean catched = false;
         try {
             d.setCurrentStatus("WrongStatus");
@@ -99,8 +127,8 @@ public class NetworkElementTest {
     @Test
     public void PorpertiesNetworkElement()
             throws UnsupportedNetworkElementStatusException {
-        Device d1 = new MyDevice("D1", MyDevice.OK, true);
-        Device d2 = new MyDevice("D2", MyDevice.OK, true);
+        Device d1 = new MyDevice("D1", MyDevice.OK_STATUS, true);
+        Device d2 = new MyDevice("D2", MyDevice.OK_STATUS, true);
         d1.addProperty("friendDevice", d2);
         Assert.assertEquals(d2, d1.getProperty("friendDevice"));
     }
@@ -108,8 +136,8 @@ public class NetworkElementTest {
     @Test
     public void FullPorpertiesNetworkElement()
             throws UnsupportedNetworkElementStatusException {
-        Device d1 = new MyDevice("D1", MyDevice.OK, true);
-        Device d2 = new MyDevice("D2", MyDevice.OK, true);
+        Device d1 = new MyDevice("D1", MyDevice.OK_STATUS, true);
+        Device d2 = new MyDevice("D2", MyDevice.OK_STATUS, true);
         HashMap<String, Object> properties = new HashMap<String, Object>();
         properties.put("friend", d2);
         d1.setProperties(properties);
@@ -122,9 +150,9 @@ public class NetworkElementTest {
     public void connect2DevicesToLink()
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException {
-        Device d1 = new MyDevice("D1", MyDevice.OK, true);
-        Device d2 = new MyDevice("D2", MyDevice.OK, true);
-        Link l1 = new MyLink("L1", MyLink.OK, 2);
+        Device d1 = new MyDevice("D1", MyDevice.OK_STATUS, true);
+        Device d2 = new MyDevice("D2", MyDevice.OK_STATUS, true);
+        Link l1 = new MyLink("L1", MyLink.OK_STATUS, 2);
         List<Device> linkList = l1.getLinkedDevices();
         List<Link> d1list = d1.getLinks();
         List<Link> d2list = d2.getLinks();
@@ -145,9 +173,9 @@ public class NetworkElementTest {
     public void disconnectDeviceFromLink()
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException {
-        Device d1 = new MyDevice("D1", MyDevice.OK, true);
-        Device d2 = new MyDevice("D2", MyDevice.OK, true);
-        Link l1 = new MyLink("L1", MyLink.OK, 2);
+        Device d1 = new MyDevice("D1", MyDevice.OK_STATUS, true);
+        Device d2 = new MyDevice("D2", MyDevice.OK_STATUS, true);
+        Link l1 = new MyLink("L1", MyLink.OK_STATUS, 2);
         List<Device> linkList = l1.getLinkedDevices();
         List<Link> d1list = d1.getLinks();
         List<Link> d2list = d2.getLinks();
@@ -169,9 +197,9 @@ public class NetworkElementTest {
     public void disconnectLinkFromDevice()
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException {
-        Device d1 = new MyDevice("D1", MyDevice.OK, true);
-        Device d2 = new MyDevice("D2", MyDevice.OK, true);
-        Link l1 = new MyLink("L1", MyLink.OK, 2);
+        Device d1 = new MyDevice("D1", MyDevice.OK_STATUS, true);
+        Device d2 = new MyDevice("D2", MyDevice.OK_STATUS, true);
+        Link l1 = new MyLink("L1", MyLink.OK_STATUS, 2);
         List<Device> linkList = l1.getLinkedDevices();
         List<Link> d1list = d1.getLinks();
         List<Link> d2list = d2.getLinks();
@@ -193,9 +221,9 @@ public class NetworkElementTest {
     public void disconnectLinkFromDeviceAndViceversa()
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException {
-        Device d1 = new MyDevice("D1", MyDevice.OK, true);
-        Device d2 = new MyDevice("D2", MyDevice.OK, true);
-        Link l1 = new MyLink("L1", MyLink.OK, 2);
+        Device d1 = new MyDevice("D1", MyDevice.OK_STATUS, true);
+        Device d2 = new MyDevice("D2", MyDevice.OK_STATUS, true);
+        Link l1 = new MyLink("L1", MyLink.OK_STATUS, 2);
         List<Device> linkList = l1.getLinkedDevices();
         List<Link> d1list = d1.getLinks();
         List<Link> d2list = d2.getLinks();
@@ -218,9 +246,9 @@ public class NetworkElementTest {
     public void connectDeviceToFullLink()
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException {
-        Device d1 = new MyDevice("D1", MyDevice.OK, true);
-        Device d2 = new MyDevice("D2", MyDevice.OK, true);
-        Link l1 = new MyLink("L1", MyLink.OK, 1);
+        Device d1 = new MyDevice("D1", MyDevice.OK_STATUS, true);
+        Device d2 = new MyDevice("D2", MyDevice.OK_STATUS, true);
+        Link l1 = new MyLink("L1", MyLink.OK_STATUS, 1);
 
         d1.connectToLink(l1);
         boolean catched = false;

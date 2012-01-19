@@ -52,9 +52,7 @@ public class ScenarioManager implements Steppable {
      */
     public ScenarioManager(Scenario scenario) {
         this.scenario = scenario;
-        while (this.getPortrayal()==null) {
-            this.portrayal = scenario.createScenarioPortrayal();
-        }
+        this.portrayal = null;
     }
     
     /**

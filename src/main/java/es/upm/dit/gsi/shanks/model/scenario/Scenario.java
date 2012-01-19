@@ -77,7 +77,7 @@ public abstract class Scenario {
      *
      * @return
      */
-    abstract public ScenarioPortrayal createScenarioPortrayal();
+    abstract public ScenarioPortrayal createScenarioPortrayal(String dimensions);
 
     /**
      * @return the id

@@ -1,9 +1,16 @@
 package es.upm.dit.gsi.shanks.model.scenario.portrayal;
 
+import java.util.List;
+
 import sim.field.continuous.Continuous3D;
+import sim.field.network.Edge;
 import sim.field.network.Network;
+import sim.portrayal3d.continuous.ContinuousPortrayal3D;
+import sim.portrayal3d.network.NetworkPortrayal3D;
+import sim.portrayal3d.network.SpatialNetwork3D;
 import sim.util.Double3D;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
+import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 
 /**
@@ -14,6 +21,7 @@ public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
 
     private Continuous3D devices;
     private Network links;
+    private SpatialNetwork3D deviceLinkNetwork;
 
     /**
      * The constructor needs the size of the simulation
@@ -25,6 +33,18 @@ public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
     public Scenario3DPortrayal(Scenario scenario, long width, long height, long length) {
         super(scenario);
         this.devices = new Continuous3D(5, width, height, length);
+        this.links = new Network();
+        this.deviceLinkNetwork = new SpatialNetwork3D(this.devices, this.links);
+        ContinuousPortrayal3D devicesPortrayal = new ContinuousPortrayal3D();
+        NetworkPortrayal3D linksPortrayal = new NetworkPortrayal3D();
+
+        devicesPortrayal.setField(this.devices);
+        linksPortrayal.setField(deviceLinkNetwork);
+
+        this.addPortrayal(ScenarioPortrayal.DEVICES_PORTRAYAL, devicesPortrayal);
+        this.addPortrayal(ScenarioPortrayal.LINKS_PORTRAYAL, linksPortrayal);
+
+        this.placeElements();
     }
     
     /**
@@ -42,6 +62,24 @@ public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
      */
     public void situateDevice(Device d, double x, double y, double z) {
         devices.setObjectLocation(d, new Double3D(x, y, z));
+    }
+
+    /**
+     * To draw a link
+     * 
+     * @param link
+     */
+    public void drawLink(Link link) {
+        List<Device> linkedDevices = link.getLinkedDevices();
+        for (int i = 0; i<linkedDevices.size(); i++) {
+            Device from = linkedDevices.get(i);
+            for (int j = i+1 ; j<linkedDevices.size(); j++) {
+                Device to = linkedDevices.get(j);
+//                Edge e = new Edge(from, to, new MutableDouble(link.getLinkedDevices().size())); //TOTEST check if this size is resizable (redimensionable) during the simulation
+                Edge e = new Edge(from, to, link);
+                links.addEdge(e);
+            }
+        }
     }
     
     /* (non-Javadoc)

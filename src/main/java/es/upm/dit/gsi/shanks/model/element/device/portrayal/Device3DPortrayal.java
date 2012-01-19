@@ -20,6 +20,6 @@ public abstract class Device3DPortrayal extends SimplePortrayal3D {
         return device.getID();
     }
 
-    public abstract TransformGroup getModel(Object obj, TransformGroup j3dModel);
+    public abstract TransformGroup getModel(Object object, TransformGroup model);
 
 }

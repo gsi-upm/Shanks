@@ -31,15 +31,21 @@ public abstract class ShanksSimulation extends SimState {
     private ScenarioManager scenarioManager;
 
     private int numOfResolvedFailures;
-
+    
+    private String dimensions;
+    
+    public static final String SIMULATION_2D = "2D";
+    public static final String SIMULATION_3D = "3D";
+    public static final String NO_GUI = "NO GUI";    
     /**
     /**
      * @param seed
      */
-    public ShanksSimulation(long seed) {
+    public ShanksSimulation(long seed, String dimensions) {
         super(seed);
+        this.dimensions = dimensions;
         try {
-            this.scenarioManager = this.createScenarioManager();
+            this.scenarioManager = this.createScenarioManager(dimensions);
         } catch (UnsupportedNetworkElementStatusException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -64,7 +70,7 @@ public abstract class ShanksSimulation extends SimState {
      * @throws TooManyConnectionException
      * @throws UnsupportedNetworkElementStatusException
      */
-    abstract public ScenarioManager createScenarioManager()
+    abstract public ScenarioManager createScenarioManager(String dimensions)
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException;
@@ -89,7 +95,7 @@ public abstract class ShanksSimulation extends SimState {
     public ScenarioPortrayal getScenarioPortrayal() {
         ScenarioPortrayal sp = this.scenarioManager.getPortrayal();
         while (sp==null) {
-            sp = this.scenarioManager.getScenario().createScenarioPortrayal();
+            sp = this.scenarioManager.getScenario().createScenarioPortrayal(dimensions);
             this.scenarioManager.setPortrayal(sp);
         }
         return sp;

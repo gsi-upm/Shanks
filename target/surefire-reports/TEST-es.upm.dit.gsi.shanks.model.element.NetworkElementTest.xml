@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.154" errors="0" skipped="0" tests="14" name="es.upm.dit.gsi.shanks.model.element.NetworkElementTest">
+<testsuite failures="0" time="0.137" errors="0" skipped="0" tests="14" name="es.upm.dit.gsi.shanks.model.element.NetworkElementTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.6.0_30\jre\bin"/>
@@ -59,18 +59,18 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase time="0.011" classname="es.upm.dit.gsi.shanks.model.element.NetworkElementTest" name="createDevice"/>
+  <testcase time="0.01" classname="es.upm.dit.gsi.shanks.model.element.NetworkElementTest" name="createDevice"/>
   <testcase time="0" classname="es.upm.dit.gsi.shanks.model.element.NetworkElementTest" name="createDeviceAndCheckInitialStatus"/>
   <testcase time="0" classname="es.upm.dit.gsi.shanks.model.element.NetworkElementTest" name="createDeviceAndCheckChangedStatus"/>
   <testcase time="0" classname="es.upm.dit.gsi.shanks.model.element.NetworkElementTest" name="createGatewayDevice"/>
   <testcase time="0.001" classname="es.upm.dit.gsi.shanks.model.element.NetworkElementTest" name="createDeviceChangeStatus"/>
-  <testcase time="0.02" classname="es.upm.dit.gsi.shanks.model.element.NetworkElementTest" name="createDeviceChangeToImpossibleStatus"/>
+  <testcase time="0.016" classname="es.upm.dit.gsi.shanks.model.element.NetworkElementTest" name="createDeviceChangeToImpossibleStatus"/>
   <testcase time="0.001" classname="es.upm.dit.gsi.shanks.model.element.NetworkElementTest" name="createDeviceWithImpossibleStatus"/>
-  <testcase time="0.001" classname="es.upm.dit.gsi.shanks.model.element.NetworkElementTest" name="PorpertiesNetworkElement"/>
+  <testcase time="0" classname="es.upm.dit.gsi.shanks.model.element.NetworkElementTest" name="PorpertiesNetworkElement"/>
   <testcase time="0.001" classname="es.upm.dit.gsi.shanks.model.element.NetworkElementTest" name="FullPorpertiesNetworkElement"/>
   <testcase time="0.002" classname="es.upm.dit.gsi.shanks.model.element.NetworkElementTest" name="connect2DevicesToLink"/>
-  <testcase time="0.003" classname="es.upm.dit.gsi.shanks.model.element.NetworkElementTest" name="disconnectDeviceFromLink"/>
+  <testcase time="0.002" classname="es.upm.dit.gsi.shanks.model.element.NetworkElementTest" name="disconnectDeviceFromLink"/>
   <testcase time="0.004" classname="es.upm.dit.gsi.shanks.model.element.NetworkElementTest" name="disconnectLinkFromDevice"/>
-  <testcase time="0.002" classname="es.upm.dit.gsi.shanks.model.element.NetworkElementTest" name="disconnectLinkFromDeviceAndViceversa"/>
-  <testcase time="0.013" classname="es.upm.dit.gsi.shanks.model.element.NetworkElementTest" name="connectDeviceToFullLink"/>
+  <testcase time="0.006" classname="es.upm.dit.gsi.shanks.model.element.NetworkElementTest" name="disconnectLinkFromDeviceAndViceversa"/>
+  <testcase time="0" classname="es.upm.dit.gsi.shanks.model.element.NetworkElementTest" name="connectDeviceToFullLink"/>
 </testsuite>

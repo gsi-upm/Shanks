@@ -32,6 +32,7 @@ public abstract class ShanksSimulation2DGUI extends GUIState {
 
     public Display2D display;
     public JFrame frame;
+    //TODO hacer hashMaps
 
     /**
      * @param sim
@@ -92,6 +93,8 @@ public abstract class ShanksSimulation2DGUI extends GUIState {
         Set<String> set = portrayals.keySet();
         for (String name : set) {
             display.attach((FieldPortrayal2D) this.getSimulation().getScenarioPortrayal().getPortrayals().get(name), name);
+            
+            //TOIMP hacer que se pueda elegir a que display se hacen attachs
         }
     }
 

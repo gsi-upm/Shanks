@@ -35,7 +35,7 @@ public abstract class ShanksSimulation3DGUI extends GUIState {
     
     public Display3D display;
     public JFrame frame;
-
+//TOIMP hacer HashMap
     /**
      * @param sim
      */
@@ -93,6 +93,7 @@ public abstract class ShanksSimulation3DGUI extends GUIState {
         Set<String> set = portrayals.keySet();
         for (String name : set) {
             display.attach((FieldPortrayal3D) this.getSimulation().getScenarioPortrayal().getPortrayals().get(name), name);
+          //TOIMP hacer que se pueda elegir a que display se hacen attachs
         }
     }
 

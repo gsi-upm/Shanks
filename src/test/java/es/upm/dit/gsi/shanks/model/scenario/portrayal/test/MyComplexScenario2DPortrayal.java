@@ -34,12 +34,12 @@ public class MyComplexScenario2DPortrayal extends Scenario2DPortrayal {
         this.drawLink((Link)s1.getNetworkElement("L2"));
         this.drawLink((Link)s1.getNetworkElement("L3"));
         
-        Scenario s2 = cs.getScenario("Scenario1");
-        this.situateDevice((Device)s2.getNetworkElement("D1"), 10, 50);
-        this.situateDevice((Device)s2.getNetworkElement("D2"), 50, 50);
-        this.situateDevice((Device)s2.getNetworkElement("D3"), 30, 30);
-        this.situateDevice((Device)s2.getNetworkElement("D4"), 10, 10);
-        this.situateDevice((Device)s2.getNetworkElement("D5"), 50, 10);
+        Scenario s2 = cs.getScenario("Scenario2");
+        this.situateDevice((Device)s2.getNetworkElement("D1"), 70, 50);
+        this.situateDevice((Device)s2.getNetworkElement("D2"), 70, 30);
+        this.situateDevice((Device)s2.getNetworkElement("D3"), 60, 10);
+        this.situateDevice((Device)s2.getNetworkElement("D4"), 80, 50);
+        this.situateDevice((Device)s2.getNetworkElement("D5"), 60, 30);
         
         this.drawLink((Link)s2.getNetworkElement("L1"));
         this.drawLink((Link)s2.getNetworkElement("L2"));

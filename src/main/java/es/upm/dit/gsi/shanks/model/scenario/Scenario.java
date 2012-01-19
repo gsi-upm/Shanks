@@ -18,6 +18,8 @@ import es.upm.dit.gsi.shanks.model.failure.exception.NoCombinationForFailureExce
 import es.upm.dit.gsi.shanks.model.failure.exception.UnsupportedElementInFailureException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 
 /**
@@ -85,7 +87,31 @@ public abstract class Scenario {
      *
      * @return
      */
-    abstract public ScenarioPortrayal createScenarioPortrayal();
+    public ScenarioPortrayal createScenarioPortrayal() {
+        logger.fine("Creating Scenario Portrayal...");
+        String dimensions = this.getProperty(Scenario.PORTRAYAL_DIMENSIONS);
+        if (dimensions.equals(Scenario.SIMULATION_2D)) {
+            logger.fine("Creating Scenario2DPortrayal");
+            return this.createScenario2DPortrayal();   
+        } else if (dimensions.equals(Scenario.SIMULATION_3D)){
+            logger.fine("Creating Scenario3DPortrayal");
+            return this.createScenario3DPortrayal();
+        } else if (dimensions.equals(Scenario.NO_GUI)) {
+            return null;   
+        }
+        return null;
+        
+    }
+
+    /**
+     * @return a Scenario3DPortrayal
+     */
+    abstract public Scenario2DPortrayal createScenario2DPortrayal();
+
+    /**
+     * @return a Scenario2DPortrayal
+     */
+    abstract public Scenario3DPortrayal createScenario3DPortrayal();
 
     /**
      * @return the id
@@ -259,6 +285,13 @@ public abstract class Scenario {
      */
     public Set<Failure> getCurrentFailures() {
         return this.currentFailures.keySet();
+    }
+
+    /**
+     * @return
+     */
+    protected HashMap<Failure,Integer> getFullCurrentFailures() {
+        return this.currentFailures;
     }
 
     /**

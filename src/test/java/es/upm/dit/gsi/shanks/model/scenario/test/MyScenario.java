@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
-import java.util.logging.Logger;
 
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
@@ -20,7 +19,8 @@ import es.upm.dit.gsi.shanks.model.failure.test.MyFailure;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyScenario3DPortrayal;
 
@@ -33,11 +33,11 @@ public class MyScenario extends Scenario {
         super(id, initialState, properties);
     }
 
-    private Logger logger = Logger.getLogger(MyScenario.class.getName());
+//    private Logger logger = Logger.getLogger(MyScenario.class.getName());
 
     public static final String CLOUDY = "CLOUDY";
     public static final String SUNNY = "SUNNY";
-    
+
     public static final String CLOUDY_PROB = "CLOUDY_PROB";
 
     /*
@@ -148,27 +148,21 @@ public class MyScenario extends Scenario {
      */
     private HashMap<Class<? extends Failure>, Double> getCloudyPenalties() {
         HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
-
-        double prob = new Double(this.getProperty(MyScenario.CLOUDY_PROB));
+        String probs = this.getProperty(MyScenario.CLOUDY_PROB);
+        double prob = new Double(probs);
         penalties.put(MyFailure.class, prob);
 
         return penalties;
     }
 
-    public ScenarioPortrayal createScenarioPortrayal() {
-        logger.fine("Creating Scenario Portrayal...");
-        String dimensions = this.getProperty(Scenario.PORTRAYAL_DIMENSIONS);
-        if (dimensions.equals(Scenario.SIMULATION_2D)) {
-            logger.fine("Creating Scenario2DPortrayal");
-            return new MyScenario2DPortrayal(this, 100, 100);   
-        } else if (dimensions.equals(Scenario.SIMULATION_3D)){
-            logger.fine("Creating Scenario3DPortrayal");
-            return new MyScenario3DPortrayal(this, 100, 100, 100);
-        } else if (dimensions.equals(Scenario.NO_GUI)) {
-            return null;   
-        }
-        return null;
+    @Override
+    public Scenario2DPortrayal createScenario2DPortrayal() {
+        return new MyScenario2DPortrayal(this, 100, 100);
+    }
 
+    @Override
+    public Scenario3DPortrayal createScenario3DPortrayal() {
+        return new MyScenario3DPortrayal(this, 100, 100, 100);
     }
 
 }

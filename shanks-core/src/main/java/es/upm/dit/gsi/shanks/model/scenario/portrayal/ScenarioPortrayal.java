@@ -9,7 +9,10 @@ import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 public abstract class ScenarioPortrayal {
     
     private Scenario scenario;
-    private HashMap<String, Portrayal> portrayals; 
+    private HashMap<String, Portrayal> portrayals;
+    
+    public static final String DEVICES_PORTRAYAL = "Devices";
+    public static final String LINKS_PORTRAYAL = "Links";
     
     /**
      * @param scenario

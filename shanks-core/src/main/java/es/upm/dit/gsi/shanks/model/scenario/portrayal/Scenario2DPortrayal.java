@@ -41,8 +41,8 @@ public abstract class Scenario2DPortrayal extends ScenarioPortrayal {
         devicesPortrayal.setField(this.devices);
         linksPortrayal.setField(deviceLinkNetwork);
 
-        this.addPortrayal("Devices", devicesPortrayal);
-        this.addPortrayal("Links", linksPortrayal);
+        this.addPortrayal(ScenarioPortrayal.DEVICES_PORTRAYAL, devicesPortrayal);
+        this.addPortrayal(ScenarioPortrayal.LINKS_PORTRAYAL, linksPortrayal);
 
         this.placeElements();
 

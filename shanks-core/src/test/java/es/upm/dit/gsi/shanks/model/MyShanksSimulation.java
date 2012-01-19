@@ -30,7 +30,7 @@ public class MyShanksSimulation extends ShanksSimulation {
      * @param seed
      */
     public MyShanksSimulation(long seed, String[] args) {
-        super(seed);
+        super(seed, args[1]);
         this.stepabbles = new ArrayList<Steppable>();
         this.config(new Integer(args[0]), args);
     }
@@ -88,13 +88,13 @@ public class MyShanksSimulation extends ShanksSimulation {
     private static final long serialVersionUID = -3889593103393654950L;
 
     @Override
-    public ScenarioManager createScenarioManager()
+    public ScenarioManager createScenarioManager(String dimensions)
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException {
         Scenario s = new MyScenario("MyScenario", MyScenario.CLOUDY, 50);
         logger.warning("Scenario created");
-        ScenarioPortrayal sp = s.createScenarioPortrayal();
+        ScenarioPortrayal sp = s.createScenarioPortrayal(dimensions);
         if (sp==null) {
             logger.warning("ScenarioPortrayals is null");
         }

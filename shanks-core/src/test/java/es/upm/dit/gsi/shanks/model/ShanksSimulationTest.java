@@ -16,6 +16,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import es.upm.dit.gsi.shanks.ShanksSimulation;
+
 /**
  * @author a.carrera
  * 
@@ -58,8 +60,9 @@ public class ShanksSimulationTest {
     public void ShanksSimulationWithoutGUI() {
         boolean catched = false;
         try {
-            String[] args = new String[1];
-            args[0] = new String("0");
+            String[] args = new String[2];
+            args[0] = new String("0"); // Configuration
+            args[1] = new String(ShanksSimulation.NO_GUI); // Dimensions
             MyShanksSimulation.main(args);
         } catch (Exception e) {
             catched = true;
@@ -73,8 +76,9 @@ public class ShanksSimulationTest {
     public void ShanksSimulationResolvingProblemsWithoutGUI() {
         boolean catched = false;
         try {
-            String[] args = new String[1];
-            args[0] = new String("1");
+            String[] args = new String[2];
+            args[0] = new String("1"); // Configuration
+            args[1] = new String(ShanksSimulation.NO_GUI); // Dimensions
             MyShanksSimulation.main(args);
         } catch (Exception e) {
             catched = true;
@@ -90,8 +94,9 @@ public class ShanksSimulationTest {
     public void ShanksSimulationWith2DGUI() {
         boolean catched = false;
         try {
-            String[] args = new String[1];
-            args[0] = new String("0");
+            String[] args = new String[2];
+            args[0] = new String("0"); // Configuration
+            args[1] = new String(ShanksSimulation.SIMULATION_2D); // Dimensions
             MyShanksSimulation sim = new MyShanksSimulation(
                     System.currentTimeMillis(), args);
             MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
@@ -113,11 +118,60 @@ public class ShanksSimulationTest {
     public void ShanksSimulationResolvingProblemsWith2DGUI() {
         boolean catched = false;
         try {
-            String[] args = new String[1];
-            args[0] = new String("1");
+            String[] args = new String[2];
+            args[0] = new String("1"); // Configuration
+            args[1] = new String(ShanksSimulation.SIMULATION_2D); // Dimensions
             MyShanksSimulation sim = new MyShanksSimulation(
                     System.currentTimeMillis(), args);
             MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
+            gui.start();
+            do
+                if (!gui.getSimulation().schedule.step(sim))
+                    break;
+            while (gui.getSimulation().schedule.getSteps() < 2001);
+            gui.finish();
+        } catch (Exception e) {
+            catched = true;
+            e.printStackTrace();
+        }
+        Assert.assertFalse(catched);
+
+    }
+
+    @Test
+    public void ShanksSimulationWith3DGUI() {
+        boolean catched = false;
+        try {
+            String[] args = new String[2];
+            args[0] = new String("0"); // Configuration
+            args[1] = new String(ShanksSimulation.SIMULATION_3D); // Dimensions
+            MyShanksSimulation sim = new MyShanksSimulation(
+                    System.currentTimeMillis(), args);
+            MyShanksSimulation3DGUI gui = new MyShanksSimulation3DGUI(sim);
+            gui.start();
+            do
+                if (!gui.getSimulation().schedule.step(sim))
+                    break;
+            while (gui.getSimulation().schedule.getSteps() < 2001);
+            gui.finish();
+        } catch (Exception e) {
+            catched = true;
+            e.printStackTrace();
+        }
+        Assert.assertFalse(catched);
+
+    }
+
+    @Test
+    public void ShanksSimulationResolvingProblemsWith3DGUI() {
+        boolean catched = false;
+        try {
+            String[] args = new String[2];
+            args[0] = new String("1"); // Configuration
+            args[1] = new String(ShanksSimulation.SIMULATION_3D); // Dimensions
+            MyShanksSimulation sim = new MyShanksSimulation(
+                    System.currentTimeMillis(), args);
+            MyShanksSimulation3DGUI gui = new MyShanksSimulation3DGUI(sim);
             gui.start();
             do
                 if (!gui.getSimulation().schedule.step(sim))

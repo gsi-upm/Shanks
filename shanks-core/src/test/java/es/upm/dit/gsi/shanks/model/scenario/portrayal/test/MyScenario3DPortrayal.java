@@ -1,32 +1,45 @@
 package es.upm.dit.gsi.shanks.model.scenario.portrayal.test;
 
-import sim.field.network.Network;
+import sim.portrayal3d.continuous.ContinuousPortrayal3D;
+import sim.portrayal3d.network.NetworkPortrayal3D;
+import es.upm.dit.gsi.shanks.model.element.device.Device;
+import es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice3DPortrayal;
+import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
+import es.upm.dit.gsi.shanks.model.element.link.Link;
+import es.upm.dit.gsi.shanks.model.element.link.portrayal.test.MyLink3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 
-public class MyScenario3DPortrayal extends ScenarioPortrayal {
+public class MyScenario3DPortrayal extends Scenario3DPortrayal {
 
     public MyScenario3DPortrayal(Scenario scenario, int i, int j, int k) {
-        super(scenario);
-        // TODO Auto-generated constructor stub
+        super(scenario, 1000, 1000, 1000);
     }
 
     @Override
-    public Object getPlacedDevices() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Network getLinks() {
-        // TODO Auto-generated method stub
-        return null;
+    public void placeElements() {
+        
+        this.situateDevice((Device)this.getScenario().getNetworkElement("D1"), 100.0, 500.0, 100.0);
+        this.situateDevice((Device)this.getScenario().getNetworkElement("D2"), 500.0, 500.0, 500.0);
+        this.situateDevice((Device)this.getScenario().getNetworkElement("D3"), 300.0, 300.0, 300.0);
+        this.situateDevice((Device)this.getScenario().getNetworkElement("D4"), 100.0, 100.0, 100.0);
+        this.situateDevice((Device)this.getScenario().getNetworkElement("D5"), 500.0, 100.0, 500.0);
+        
+        this.drawLink((Link)this.getScenario().getNetworkElement("L1"));
+        this.drawLink((Link)this.getScenario().getNetworkElement("L2"));
+        this.drawLink((Link)this.getScenario().getNetworkElement("L3"));
     }
 
     @Override
     public void setupPortrayals() {
-        // TODO Auto-generated method stub
-
+        ContinuousPortrayal3D devicePortrayal = (ContinuousPortrayal3D) this.getPortrayals().get(ScenarioPortrayal.DEVICES_PORTRAYAL);
+        NetworkPortrayal3D networkPortrayal = (NetworkPortrayal3D) this.getPortrayals().get(ScenarioPortrayal.LINKS_PORTRAYAL);
+        devicePortrayal.setPortrayalForClass(MyDevice.class, new MyDevice3DPortrayal());
+//        networkPortrayal.setPortrayalForClass(MyLink.class, new MyLink2DPortrayal());
+        networkPortrayal.setPortrayalForAll(new MyLink3DPortrayal());
+        //TODO echarle un ojo a esto para que pueda pintarse cada link como se quiera
+        
     }
 
 }

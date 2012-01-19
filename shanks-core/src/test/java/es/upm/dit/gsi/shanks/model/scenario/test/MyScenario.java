@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
@@ -26,11 +27,9 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyScenario3DPortrayal
 public class MyScenario extends Scenario {
 
     private Logger logger = Logger.getLogger(MyScenario.class.getName());
-    
+
     public static final String CLOUDY = "CLOUDY";
     public static final String SUNNY = "SUNNY";
-
-    private int dimensions;
 
     private double cloudyPenalty;
 
@@ -40,7 +39,6 @@ public class MyScenario extends Scenario {
             DuplicatedIDException {
         super(id, initialState);
         this.cloudyPenalty = cloudyPenalty;
-        this.dimensions = 2;
     }
 
     public MyScenario(String id, String initialState)
@@ -49,7 +47,6 @@ public class MyScenario extends Scenario {
             DuplicatedIDException {
         super(id, initialState);
         this.cloudyPenalty = 3.0;
-        this.dimensions = 2;
     }
 
     /*
@@ -166,15 +163,16 @@ public class MyScenario extends Scenario {
         return penalties;
     }
 
-    public ScenarioPortrayal createScenarioPortrayal() {
+    public ScenarioPortrayal createScenarioPortrayal(String dimensions) {
         logger.fine("Creating Scenario Portrayal...");
-        switch (this.dimensions) {
-        case 2:
+        if (dimensions.equals(ShanksSimulation.SIMULATION_2D)) {
             logger.fine("Creating Scenario2DPortrayal");
-            return new MyScenario2DPortrayal(this, 100, 100);
-        case 3:
+            return new MyScenario2DPortrayal(this, 100, 100);   
+        } else if (dimensions.equals(ShanksSimulation.SIMULATION_3D)){
             logger.fine("Creating Scenario3DPortrayal");
             return new MyScenario3DPortrayal(this, 100, 100, 100);
+        } else if (dimensions.equals(ShanksSimulation.NO_GUI)) {
+            return null;   
         }
         return null;
 

@@ -9,6 +9,7 @@ import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.portrayal.test.MyLink2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 
 public class MyScenario2DPortrayal extends Scenario2DPortrayal {
 
@@ -34,8 +35,8 @@ public class MyScenario2DPortrayal extends Scenario2DPortrayal {
 
     @Override
     public void setupPortrayals() {
-        SparseGridPortrayal2D devicePortrayal = (SparseGridPortrayal2D) this.getPortrayals().get("Devices");
-        NetworkPortrayal2D networkPortrayal = (NetworkPortrayal2D) this.getPortrayals().get("Links");
+        SparseGridPortrayal2D devicePortrayal = (SparseGridPortrayal2D) this.getPortrayals().get(ScenarioPortrayal.DEVICES_PORTRAYAL);
+        NetworkPortrayal2D networkPortrayal = (NetworkPortrayal2D) this.getPortrayals().get(ScenarioPortrayal.LINKS_PORTRAYAL);
         devicePortrayal.setPortrayalForClass(MyDevice.class, new MyDevice2DPortrayal());
 //        networkPortrayal.setPortrayalForClass(MyLink.class, new MyLink2DPortrayal());
         networkPortrayal.setPortrayalForAll(new MyLink2DPortrayal());

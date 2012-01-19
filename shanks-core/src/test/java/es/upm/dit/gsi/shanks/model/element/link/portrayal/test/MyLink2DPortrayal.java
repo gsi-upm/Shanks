@@ -40,9 +40,9 @@ public class MyLink2DPortrayal extends Link2DPortrayal {
         String status = link.getCurrentStatus();
 
         graphics.setColor(Color.black);
-        if (status.equals(MyLink.OK)) {
+        if (status.equals(MyLink.OK_STATUS)) {
             graphics.setColor(Color.green);
-        } else if (status.equals(MyLink.BROKEN)) {
+        } else if (status.equals(MyLink.BROKEN_STATUS)) {
             graphics.setColor(Color.red);
         }
 
@@ -76,9 +76,9 @@ public class MyLink2DPortrayal extends Link2DPortrayal {
 
         graphics.setColor(Color.black);
         String status = link.getCurrentStatus();
-        if (status.equals(MyLink.OK)) {
+        if (status.equals(MyLink.OK_STATUS)) {
             graphics.setColor(Color.green);
-        } else if (status.equals(MyLink.BROKEN)) {
+        } else if (status.equals(MyLink.BROKEN_STATUS)) {
             graphics.setColor(Color.red);
         }
         graphics.drawLine(startX, startY, endX, endY);

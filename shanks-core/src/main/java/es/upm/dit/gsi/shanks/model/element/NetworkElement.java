@@ -35,6 +35,7 @@ public abstract class NetworkElement {
         this.possibleStates = new ArrayList<String>();
         
         this.setPossibleStates();
+        this.fillIntialProperties();
         this.setCurrentStatus(initialStatus);
     }
 
@@ -61,6 +62,7 @@ public abstract class NetworkElement {
     public boolean setCurrentStatus(String desiredStatus) throws UnsupportedNetworkElementStatusException {
         if (this.isPossibleStatus(desiredStatus)) {
             this.currentStatus = desiredStatus;
+            this.checkProperties();
             logger.fine("Network Element Status changed -> ElementID: " + this.getID() + " Current Status: " + desiredStatus);
             return true;
         } else {
@@ -68,6 +70,18 @@ public abstract class NetworkElement {
             throw new UnsupportedNetworkElementStatusException();
         }
     }
+
+
+    /**
+     * Set the initial properties of the network element
+     */
+    abstract public void fillIntialProperties();
+
+    /**
+     * This method check properties and change them depending on the current status
+     */
+    abstract public void checkProperties();
+
 
     /**
      * @param possibleStatus
@@ -101,6 +115,16 @@ public abstract class NetworkElement {
      * @param propertyValue
      */
     public void addProperty(String propertyName, Object propertyValue) {
+        this.properties.put(propertyName, propertyValue);
+    }
+    
+    /**
+     * If the property exists, this method changes it. If not, this method creates it.
+     * 
+     * @param propertyName
+     * @param propertyValue
+     */
+    public void changeProperty(String propertyName, Object propertyValue) {
         this.properties.put(propertyName, propertyValue);
     }
     

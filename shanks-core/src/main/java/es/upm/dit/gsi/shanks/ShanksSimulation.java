@@ -1,5 +1,8 @@
 package es.upm.dit.gsi.shanks;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Properties;
 import java.util.logging.Logger;
 
 import sim.engine.Schedule;
@@ -32,33 +35,27 @@ public abstract class ShanksSimulation extends SimState {
 
     private int numOfResolvedFailures;
     
-    private String dimensions;
     
-    public static final String SIMULATION_2D = "2D";
-    public static final String SIMULATION_3D = "3D";
-    public static final String NO_GUI = "NO GUI";    
-    /**
     /**
      * @param seed
+     * @param scenarioClass
+     * @param scenarioID
+     * @param initialState
+     * @param properties
+     * @throws SecurityException
+     * @throws IllegalArgumentException
+     * @throws NoSuchMethodException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws InvocationTargetException
+     * @throws UnsupportedNetworkElementStatusException
+     * @throws TooManyConnectionException
+     * @throws UnsupportedScenarioStatusException
+     * @throws DuplicatedIDException
      */
-    public ShanksSimulation(long seed, String dimensions) {
+    public ShanksSimulation(long seed, Class<? extends Scenario> scenarioClass, String scenarioID, String initialState, Properties properties) throws SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException, UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException {
         super(seed);
-        this.dimensions = dimensions;
-        try {
-            this.scenarioManager = this.createScenarioManager(dimensions);
-        } catch (UnsupportedNetworkElementStatusException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (TooManyConnectionException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (UnsupportedScenarioStatusException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (DuplicatedIDException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+            this.scenarioManager = this.createScenarioManager(scenarioClass, scenarioID, initialState, properties);
     }
 
     /**
@@ -69,11 +66,29 @@ public abstract class ShanksSimulation extends SimState {
      * @throws UnsupportedScenarioStatusException
      * @throws TooManyConnectionException
      * @throws UnsupportedNetworkElementStatusException
+     * @throws NoSuchMethodException 
+     * @throws SecurityException 
+     * @throws InvocationTargetException 
+     * @throws IllegalAccessException 
+     * @throws InstantiationException 
+     * @throws IllegalArgumentException 
      */
-    abstract public ScenarioManager createScenarioManager(String dimensions)
+    private ScenarioManager createScenarioManager(Class<? extends Scenario> scenarioClass, String scenarioID, String initialState, Properties properties)
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException;
+            DuplicatedIDException, SecurityException, NoSuchMethodException, IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
+        
+        Constructor<? extends Scenario> c  = scenarioClass.getConstructor(new Class[]{String.class,String.class,Properties.class});
+       
+        Scenario s = c.newInstance(scenarioID,initialState,properties);
+        logger.warning("Scenario created");
+        ScenarioPortrayal sp = s.createScenarioPortrayal();
+        if (sp==null) {
+            logger.warning("ScenarioPortrayals is null");
+        }
+        ScenarioManager sm = new ScenarioManager(s, sp);
+        return sm;
+    }
 
     /**
      * @return
@@ -95,7 +110,7 @@ public abstract class ShanksSimulation extends SimState {
     public ScenarioPortrayal getScenarioPortrayal() {
         ScenarioPortrayal sp = this.scenarioManager.getPortrayal();
         while (sp==null) {
-            sp = this.scenarioManager.getScenario().createScenarioPortrayal(dimensions);
+            sp = this.scenarioManager.getScenario().createScenarioPortrayal();
             this.scenarioManager.setPortrayal(sp);
         }
         return sp;

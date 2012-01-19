@@ -47,6 +47,15 @@ public abstract class NetworkElement {
         return id;
     }
 
+
+    /**
+     * @param id
+     */
+    public void setID(String id) {
+        this.id = id;
+    }
+    
+
     /**
      * @return the currentStatus
      */

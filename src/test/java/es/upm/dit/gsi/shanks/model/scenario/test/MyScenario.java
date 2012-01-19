@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
@@ -26,28 +26,19 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyScenario3DPortrayal
 
 public class MyScenario extends Scenario {
 
+    public MyScenario(String id, String initialState, Properties properties)
+            throws UnsupportedNetworkElementStatusException,
+            TooManyConnectionException, UnsupportedScenarioStatusException,
+            DuplicatedIDException {
+        super(id, initialState, properties);
+    }
+
     private Logger logger = Logger.getLogger(MyScenario.class.getName());
 
     public static final String CLOUDY = "CLOUDY";
     public static final String SUNNY = "SUNNY";
-
-    private double cloudyPenalty;
-
-    public MyScenario(String id, String initialState, double cloudyPenalty)
-            throws UnsupportedNetworkElementStatusException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException {
-        super(id, initialState);
-        this.cloudyPenalty = cloudyPenalty;
-    }
-
-    public MyScenario(String id, String initialState)
-            throws UnsupportedNetworkElementStatusException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException {
-        super(id, initialState);
-        this.cloudyPenalty = 3.0;
-    }
+    
+    public static final String CLOUDY_PROB = "CLOUDY_PROB";
 
     /*
      * (non-Javadoc)
@@ -158,20 +149,22 @@ public class MyScenario extends Scenario {
     private HashMap<Class<? extends Failure>, Double> getCloudyPenalties() {
         HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
 
-        penalties.put(MyFailure.class, this.cloudyPenalty);
+        double prob = new Double(this.getProperty(MyScenario.CLOUDY_PROB));
+        penalties.put(MyFailure.class, prob);
 
         return penalties;
     }
 
-    public ScenarioPortrayal createScenarioPortrayal(String dimensions) {
+    public ScenarioPortrayal createScenarioPortrayal() {
         logger.fine("Creating Scenario Portrayal...");
-        if (dimensions.equals(ShanksSimulation.SIMULATION_2D)) {
+        String dimensions = this.getProperty(Scenario.PORTRAYAL_DIMENSIONS);
+        if (dimensions.equals(Scenario.SIMULATION_2D)) {
             logger.fine("Creating Scenario2DPortrayal");
             return new MyScenario2DPortrayal(this, 100, 100);   
-        } else if (dimensions.equals(ShanksSimulation.SIMULATION_3D)){
+        } else if (dimensions.equals(Scenario.SIMULATION_3D)){
             logger.fine("Creating Scenario3DPortrayal");
             return new MyScenario3DPortrayal(this, 100, 100, 100);
-        } else if (dimensions.equals(ShanksSimulation.NO_GUI)) {
+        } else if (dimensions.equals(Scenario.NO_GUI)) {
             return null;   
         }
         return null;

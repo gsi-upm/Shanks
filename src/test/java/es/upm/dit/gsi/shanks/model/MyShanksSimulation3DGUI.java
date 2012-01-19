@@ -13,13 +13,4 @@ public class MyShanksSimulation3DGUI extends ShanksSimulation3DGUI {
         return "MyShanksSimulation3DGUI! :)";
     }
 
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-        MyShanksSimulation sim = new MyShanksSimulation(
-                System.currentTimeMillis(), args);
-        new MyShanksSimulation3DGUI(sim);
-    }
-
 }

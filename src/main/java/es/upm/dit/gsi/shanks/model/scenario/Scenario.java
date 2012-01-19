@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -35,9 +36,15 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
  */
 public abstract class Scenario {
 
-    Logger logger = Logger.getLogger(Scenario.class.getName());
+    private Logger logger = Logger.getLogger(Scenario.class.getName());
+    
+    public static final String PORTRAYAL_DIMENSIONS = "PORTRAYAL DIMENSIONS";
+    public static final String SIMULATION_2D = "2D";
+    public static final String SIMULATION_3D = "3D";
+    public static final String NO_GUI = "NO GUI";
 
     private String id;
+    private Properties properties;
     private List<String> possibleStates;
     private String currentStatus;
     private HashMap<String, NetworkElement> currentElements;
@@ -52,11 +59,12 @@ public abstract class Scenario {
      * @throws UnsupportedScenarioStatusException
      * @throws DuplicatedIDException
      */
-    public Scenario(String id, String initialState)
+    public Scenario(String id, String initialState, Properties properties)
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException {
         this.id = id;
+        this.setProperties(properties);
         this.possibleStates = new ArrayList<String>();
         this.currentElements = new HashMap<String, NetworkElement>();
         this.currentFailures = new HashMap<Failure, Integer>();
@@ -77,7 +85,7 @@ public abstract class Scenario {
      *
      * @return
      */
-    abstract public ScenarioPortrayal createScenarioPortrayal(String dimensions);
+    abstract public ScenarioPortrayal createScenarioPortrayal();
 
     /**
      * @return the id
@@ -183,6 +191,43 @@ public abstract class Scenario {
      */
     public HashMap<String, NetworkElement> getCurrentElements() {
         return this.currentElements;
+    }
+
+    /**
+     * @return the properties
+     */
+    public Properties getProperties() {
+        return properties;
+    }
+
+    /**
+     * @param properties the properties to set
+     */
+    public void setProperties(Properties properties) {
+        this.properties = properties;
+    }
+    
+    /**
+     * @param propertyKey
+     * @return
+     */
+    public String getProperty(String propertyKey) {
+        return this.properties.getProperty(propertyKey);
+    }
+    
+    /**
+     * @param propertyKey
+     * @param propertyValue
+     */
+    public void addProperty(String propertyKey, String propertyValue) {
+        this.properties.put(propertyKey, propertyValue);
+    }
+    
+    /**
+     * @param propertyKey
+     */
+    public void removePorperty(String propertyKey) {
+        this.properties.remove(propertyKey);
     }
 
     /**

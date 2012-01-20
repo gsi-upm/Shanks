@@ -85,6 +85,10 @@ public class MyScenario extends Scenario {
      */
     @Override
     public void addPossibleFailures() {
+        Set<NetworkElement> seta = new HashSet<NetworkElement>();
+        seta.add(this.getNetworkElement("D1"));
+        seta.add(this.getNetworkElement("L1"));
+        this.addPossibleFailure(MyFailure.class, seta);
         Set<NetworkElement> set = new HashSet<NetworkElement>();
         set.add(this.getNetworkElement("D1"));
         set.add(this.getNetworkElement("L1"));

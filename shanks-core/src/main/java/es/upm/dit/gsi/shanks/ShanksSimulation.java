@@ -26,7 +26,7 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
  * 
  */
 
-public abstract class ShanksSimulation extends SimState {
+public class ShanksSimulation extends SimState {
 
     private static final long serialVersionUID = -2238530527253654867L;
 
@@ -170,7 +170,9 @@ public abstract class ShanksSimulation extends SimState {
      * command: schedule.scheduleRepeating(Schedule.EPOCH, 0,
      * this.scenarioManager, 2); is always executed in the first place.
      */
-    abstract public void addSteppables();
+    public void addSteppables() {
+        logger.info("No steppables added...");
+    }
 
     /**
      * @param args

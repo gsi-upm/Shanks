@@ -2,7 +2,6 @@ package es.upm.dit.gsi.shanks.model.scenario.portrayal.test;
 
 import sim.portrayal3d.continuous.ContinuousPortrayal3D;
 import sim.portrayal3d.network.NetworkPortrayal3D;
-import es.upm.dit.gsi.shanks.ShanksSimulation3DGUI;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice3DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
@@ -35,8 +34,8 @@ public class MyScenario3DPortrayal extends Scenario3DPortrayal {
 
     @Override
     public void setupPortrayals() {
-        ContinuousPortrayal3D devicePortrayal = (ContinuousPortrayal3D) this.getPortrayals().get(ShanksSimulation3DGUI.MAIN_DISPLAY).get(ScenarioPortrayal.DEVICES_PORTRAYAL);
-        NetworkPortrayal3D networkPortrayal = (NetworkPortrayal3D) this.getPortrayals().get(ShanksSimulation3DGUI.MAIN_DISPLAY).get(ScenarioPortrayal.LINKS_PORTRAYAL);
+        ContinuousPortrayal3D devicePortrayal = (ContinuousPortrayal3D) this.getPortrayals().get(Scenario3DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.DEVICES_PORTRAYAL);
+        NetworkPortrayal3D networkPortrayal = (NetworkPortrayal3D) this.getPortrayals().get(Scenario3DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.LINKS_PORTRAYAL);
         devicePortrayal.setPortrayalForClass(MyDevice.class, new MyDevice3DPortrayal());
 //        networkPortrayal.setPortrayalForClass(MyLink.class, new MyLink2DPortrayal());
         networkPortrayal.setPortrayalForAll(new MyLink3DPortrayal());

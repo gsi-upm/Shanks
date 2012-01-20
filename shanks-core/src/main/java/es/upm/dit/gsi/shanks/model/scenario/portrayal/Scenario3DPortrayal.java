@@ -33,6 +33,8 @@ public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
     public HashMap<String, JFrame> frameList;
     
     public static final String MAIN_DISPLAY_ID = "MainDisplay";
+    
+    private HashMap<String,Boolean> scaled;
 
     /**
      * The constructor needs the size of the simulation
@@ -44,6 +46,7 @@ public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
      */
     public Scenario3DPortrayal(Scenario scenario, long width, long height, long length) throws DuplicatedPortrayalID {
         super(scenario);
+        this.scaled = new HashMap<String,Boolean>();
         this.devices = new Continuous3D(5, width, height, length);
         this.links = new Network();
         this.deviceLinkNetwork = new SpatialNetwork3D(this.devices, this.links);
@@ -85,6 +88,7 @@ public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
             throw new DuplictaedDisplayID(displayID);
         }
         this.displayList.put(displayID, display);
+        this.scaled.put(displayID, false);
     }
     
     /**
@@ -177,6 +181,28 @@ public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
      */
     public Network getLinks() {
         return this.links;
+    }
+
+    /**
+     * @param d
+     */
+    public void scaleDisplay(String displayID, double d) {
+        if (this.scaled.containsKey(displayID) && !this.scaled.get(displayID)) {
+            Display3D mainDisplay = this.getDisplay(Scenario3DPortrayal.MAIN_DISPLAY_ID);
+            mainDisplay.scale(d);
+            this.scaled.put(displayID, true);
+        }
+    }
+
+    /**
+     * @param d
+     */
+    public void rescaleDisplay(String displayID, double d) {
+        if (this.scaled.containsKey(displayID)) {
+            Display3D mainDisplay = this.getDisplay(Scenario3DPortrayal.MAIN_DISPLAY_ID);
+            mainDisplay.scale(d);
+            this.scaled.put(displayID, true);
+        }
     }
 
 }

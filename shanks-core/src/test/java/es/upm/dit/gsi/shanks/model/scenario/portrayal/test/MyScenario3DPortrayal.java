@@ -13,9 +13,9 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
 
 public class MyScenario3DPortrayal extends Scenario3DPortrayal {
-
-    public MyScenario3DPortrayal(Scenario scenario, int i, int j, int k) throws DuplicatedPortrayalID {
-        super(scenario, 1000, 1000, 1000);
+    
+    public MyScenario3DPortrayal(Scenario scenario, int width, int height, int length) throws DuplicatedPortrayalID {
+        super(scenario, width, height, length);
     }
 
     @Override
@@ -40,6 +40,9 @@ public class MyScenario3DPortrayal extends Scenario3DPortrayal {
 //        networkPortrayal.setPortrayalForClass(MyLink.class, new MyLink2DPortrayal());
         networkPortrayal.setPortrayalForAll(new MyLink3DPortrayal());
         //TODO echarle un ojo a esto para que pueda pintarse cada link como se quiera
+
+        
+        this.scaleDisplay(Scenario3DPortrayal.MAIN_DISPLAY_ID, 1.5);
         
     }
 

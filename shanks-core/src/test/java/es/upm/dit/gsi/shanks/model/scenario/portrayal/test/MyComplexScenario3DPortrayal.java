@@ -1,6 +1,5 @@
 package es.upm.dit.gsi.shanks.model.scenario.portrayal.test;
 
-import sim.display3d.Display3D;
 import sim.portrayal3d.continuous.ContinuousPortrayal3D;
 import sim.portrayal3d.network.NetworkPortrayal3D;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
@@ -16,12 +15,9 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
 
 public class MyComplexScenario3DPortrayal extends Scenario3DPortrayal {
 
-    private boolean scaled;
-
     public MyComplexScenario3DPortrayal(Scenario scenario, long width,
             long height, long length) throws DuplicatedPortrayalID {
         super(scenario, width, height, length);
-        this.scaled = false; 
     }
 
     @Override
@@ -64,7 +60,7 @@ public class MyComplexScenario3DPortrayal extends Scenario3DPortrayal {
         devicePortrayal.setPortrayalForClass(MyDevice.class, new MyDevice3DPortrayal());
         networkPortrayal.setPortrayalForAll(new MyLink3DPortrayal());
         
-        this.rescaleMainDisplay(1.5);
+        this.scaleDisplay(Scenario3DPortrayal.MAIN_DISPLAY_ID, 1.5);
 //        Display3D mainDisplay = this.getDisplay(Scenario3DPortrayal.MAIN_DISPLAY_ID);
 //        MouseListener[] mls = mainDisplay.getMouseListeners();
 //        for (MouseListener l : mls) {
@@ -90,14 +86,6 @@ public class MyComplexScenario3DPortrayal extends Scenario3DPortrayal {
 
         //TODO echarle un ojo a esto para que pueda pintarse cada link como se quiera
 
-    }
-
-    private void rescaleMainDisplay(double d) {
-        if (!scaled) {
-            Display3D mainDisplay = this.getDisplay(Scenario3DPortrayal.MAIN_DISPLAY_ID);
-            mainDisplay.scale(d);
-            this.scaled = true;
-        }
     }
 
 }

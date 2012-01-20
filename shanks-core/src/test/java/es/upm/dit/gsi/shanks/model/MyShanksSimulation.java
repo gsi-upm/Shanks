@@ -123,7 +123,7 @@ public class MyShanksSimulation extends ShanksSimulation {
 
     @Override
     public void addSteppables() {
-        int conf = new Integer(this.configuration.getProperty("Configuration"));
+        int conf = new Integer(this.configuration.getProperty(MyShanksSimulation.CONFIGURATION));
         switch (conf) {
         case 0:
             logger.fine("Nothing todo here... No more steppables");

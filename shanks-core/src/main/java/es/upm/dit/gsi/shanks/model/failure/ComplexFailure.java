@@ -49,7 +49,6 @@ public abstract class ComplexFailure extends Failure {
             return false;
         }
     }
-    Esto es para que no compile :P
     //TODO queda darle alguna vuelta...
 
 }

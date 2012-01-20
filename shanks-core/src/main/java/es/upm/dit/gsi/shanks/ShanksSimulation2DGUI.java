@@ -15,7 +15,9 @@ import sim.display.Display2D;
 import sim.display.GUIState;
 import sim.portrayal.FieldPortrayal2D;
 import sim.portrayal.Portrayal;
+import es.upm.dit.gsi.shanks.exception.DuplictaedDisplayID;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
 
 /**
  * ShanksSimulation2DGUI class
@@ -30,9 +32,10 @@ public abstract class ShanksSimulation2DGUI extends GUIState {
 
     public Logger logger = Logger.getLogger(ShanksSimulation2DGUI.class.getName());
 
-    public Display2D display;
-    public JFrame frame;
-    //TODO hacer hashMaps
+    private HashMap<String,Display2D> displayList;
+    private HashMap<String,JFrame> frameList;
+    
+    public static final String MAIN_DISPLAY = "MainDisplay";
 
     /**
      * @param sim
@@ -66,6 +69,68 @@ public abstract class ShanksSimulation2DGUI extends GUIState {
     }
 
     /**
+     * @return
+     */
+    public HashMap<String, Display2D> getDisplayList() {
+        return displayList;
+    }
+
+    /**
+     * @param displayList
+     */
+    public void setDisplayList(HashMap<String, Display2D> displayList) {
+        this.displayList = displayList;
+    }
+    
+    /**
+     * @param displayID
+     * @param display
+     * @throws DuplictaedDisplayID 
+     */
+    public void addDisplay(String displayID, Display2D display) throws DuplictaedDisplayID {
+        if (this.displayList.containsKey(displayID)) {
+            throw new DuplictaedDisplayID(displayID);
+        }
+        this.displayList.put(displayID, display);
+    }
+    
+    /**
+     * @param displayID
+     */
+    public void removeDisplay(String displayID) {
+        this.displayList.remove(displayID);
+    }
+
+    /**
+     * @return
+     */
+    public HashMap<String, JFrame> getFrameList() {
+        return frameList;
+    }
+
+    /**
+     * @param frameList
+     */
+    public void setFrameList(HashMap<String, JFrame> frameList) {
+        this.frameList = frameList;
+    }
+    
+    /**
+     * @param frameID
+     * @param frame
+     */
+    public void addFrame(String frameID, JFrame frame) {
+        this.frameList.put(frameID, frame);
+    }
+    
+    /**
+     * @param frameID
+     */
+    public void removeFrame(String frameID) {
+        this.frameList.remove(frameID);
+    }
+
+    /**
      * Creates and returns a controller ready for the user to manipulate. By
      * default this method creates a Console, sets it visible, and returns it.
      * You can override this to provide some other kind of controller.
@@ -82,19 +147,34 @@ public abstract class ShanksSimulation2DGUI extends GUIState {
     @Override
     public void start() {
         super.start();
-        this.getSimulation().getScenarioPortrayal().setupPortrayals();
-        display.reset();
-        display.setBackdrop(Color.white);
-        display.repaint();
+        try {
+            this.getSimulation().getScenarioPortrayal().setupPortrayals();
+        } catch (DuplicatedPortrayalID e) {
+            logger.severe(e.getMessage());
+            e.printStackTrace();
+        }
+        for (String s : displayList.keySet()) {
+            Display2D display = displayList.get(s);
+            display.reset();
+            display.repaint();            
+        }
 
         ShanksSimulation sim = this.getSimulation();
-        ScenarioPortrayal sp = sim.getScenarioPortrayal();
-        HashMap<String, Portrayal> portrayals = sp.getPortrayals();
-        Set<String> set = portrayals.keySet();
-        for (String name : set) {
-            display.attach((FieldPortrayal2D) this.getSimulation().getScenarioPortrayal().getPortrayals().get(name), name);
-            
-            //TOIMP hacer que se pueda elegir a que display se hacen attachs
+        ScenarioPortrayal sp;
+        try {
+            sp = sim.getScenarioPortrayal();
+            HashMap<String,HashMap<String, Portrayal>> portrayals = sp.getPortrayals();
+            Set<String> set = portrayals.keySet();
+            for (String displayID : set) {
+                Display2D display = this.displayList.get(displayID);
+                HashMap<String,Portrayal> displayPortrayals = portrayals.get(displayID);
+                for (String portrayalID : displayPortrayals.keySet()) {
+                    display.attach((FieldPortrayal2D) displayPortrayals.get(portrayalID), portrayalID);   
+                }
+            }
+        } catch (DuplicatedPortrayalID e) {
+            logger.severe(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -102,7 +182,7 @@ public abstract class ShanksSimulation2DGUI extends GUIState {
     /* (non-Javadoc)
      * @see sim.display.GUIState#load(sim.engine.SimState)
      */
-    public void load(ShanksSimulation state)
+    public void load(ShanksSimulation state) throws DuplicatedPortrayalID
         {
         super.load(state);
         this.getSimulation().getScenarioPortrayal().setupPortrayals();
@@ -114,12 +194,24 @@ public abstract class ShanksSimulation2DGUI extends GUIState {
     @Override
     public void init(Controller c) {
         super.init(c);
-        display = new Display2D(600, 600, this);
-        display.setClipping(false);
-        frame = display.createFrame();
-        frame.setTitle(getName());
-        c.registerFrame(frame);
-        frame.setVisible(true);
+        Display2D mainDisplay = new Display2D(600, 600, this);
+        mainDisplay.setBackdrop(Color.white);
+        try {
+            this.addDisplay(ShanksSimulation2DGUI.MAIN_DISPLAY, mainDisplay);
+        } catch (DuplictaedDisplayID e) {
+            logger.severe(e.getMessage());
+            e.printStackTrace();
+        }
+        
+        for (String displayID : this.displayList.keySet()) {
+            Display2D display = this.displayList.get(displayID);
+            display.setClipping(false);
+            JFrame frame = display.createFrame();
+            this.frameList.put(displayID, frame);
+            frame.setTitle(displayID);
+            c.registerFrame(frame);
+            frame.setVisible(true);            
+        }
     }
 
     /* (non-Javadoc)
@@ -129,10 +221,14 @@ public abstract class ShanksSimulation2DGUI extends GUIState {
     public void quit() {
         super.quit();
 
-        if (frame != null) {
-            frame.dispose();
-            frame = null;
-            display = null;
+        for (String frameID : this.frameList.keySet()) {
+            JFrame frame = this.frameList.get(frameID);
+            if (frame != null) {
+                frame.dispose();
+                this.frameList.remove(frameID);
+                this.displayList.remove(frameID);
+            }
+            
         }
     }
 

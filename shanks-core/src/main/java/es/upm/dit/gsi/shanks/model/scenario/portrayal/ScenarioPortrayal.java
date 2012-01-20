@@ -5,11 +5,12 @@ import java.util.HashMap;
 import sim.field.network.Network;
 import sim.portrayal.Portrayal;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
 
 public abstract class ScenarioPortrayal {
     
     private Scenario scenario;
-    private HashMap<String, Portrayal> portrayals;
+    private HashMap<String,HashMap<String, Portrayal>> portrayals; // <displayID - <portrayalID, portrayal>>
     
     public static final String DEVICES_PORTRAYAL = "Devices";
     public static final String LINKS_PORTRAYAL = "Links";
@@ -19,7 +20,7 @@ public abstract class ScenarioPortrayal {
      */
     public ScenarioPortrayal(Scenario scenario) {
         this.scenario = scenario;
-        this.portrayals = new HashMap<String, Portrayal>();
+        this.portrayals = new HashMap<String,HashMap<String, Portrayal>>();
     }
     
     /**
@@ -47,30 +48,43 @@ public abstract class ScenarioPortrayal {
     /**
      * @return the portrayals
      */
-    public HashMap<String, Portrayal> getPortrayals() {
+    public HashMap<String,HashMap<String, Portrayal>> getPortrayals() {
         return portrayals;
     }
 
     /**
      * @param portrayals the portrayals to set
      */
-    public void setPortrayals(HashMap<String, Portrayal> portrayals) {
+    public void setPortrayals(HashMap<String,HashMap<String, Portrayal>> portrayals) {
         this.portrayals = portrayals;
     }
     
     /**
-     * @param portrayalName
+     * @param displayID
+     * @param portrayalID
      * @param portrayal
+     * @throws DuplicatedPortrayalID 
      */
-    public void addPortrayal(String portrayalName, Portrayal portrayal) {
-        this.portrayals.put(portrayalName, portrayal);
+    public void addPortrayal(String displayID, String portrayalID, Portrayal portrayal) throws DuplicatedPortrayalID {
+        if (!this.portrayals.containsKey(displayID)) {
+            this.portrayals.put(displayID, new HashMap<String,Portrayal>());
+        }
+        HashMap<String,Portrayal> displayPortrayals = this.portrayals.get(displayID);
+        if (!displayPortrayals.containsKey(portrayalID)) {
+            displayPortrayals.put(portrayalID, portrayal);
+        } else {
+            throw new DuplicatedPortrayalID(displayID,portrayalID);
+        }
     }
     
     /**
-     * @param portrayalName
+     * @param displayID
+     * @param portrayalID
      */
-    public void removePortrayal(String portrayalName) {
-        this.portrayals.remove(portrayalName);
+    public void removePortrayal(String displayID, String portrayalID) {
+        if (this.portrayals.containsKey(displayID)) {
+            this.portrayals.get(displayID).remove(portrayalID);   
+        }
     }
 
 }

@@ -1,7 +1,11 @@
 package es.upm.dit.gsi.shanks.model.scenario.portrayal;
 
+import java.util.HashMap;
 import java.util.List;
 
+import javax.swing.JFrame;
+
+import sim.display.Display2D;
 import sim.field.grid.SparseGrid2D;
 import sim.field.network.Edge;
 import sim.field.network.Network;
@@ -9,7 +13,7 @@ import sim.portrayal.grid.SparseGridPortrayal2D;
 import sim.portrayal.network.NetworkPortrayal2D;
 import sim.portrayal.network.SpatialNetwork2D;
 import sim.util.Int2D;
-import es.upm.dit.gsi.shanks.ShanksSimulation2DGUI;
+import es.upm.dit.gsi.shanks.exception.DuplictaedDisplayID;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
@@ -25,30 +29,111 @@ public abstract class Scenario2DPortrayal extends ScenarioPortrayal {
     private Network links;
     private SpatialNetwork2D deviceLinkNetwork;
 
+    private HashMap<String, Display2D> displayList;
+    private HashMap<String, JFrame> frameList;
+
+    public static final String MAIN_DISPLAY_ID = "MainDisplay";
+
     /**
      * The constructor needs the scenario and the size of the simulation
      * 
      * @param scenario
      * @param width
      * @param height
-     * @throws DuplicatedPortrayalID 
+     * @throws DuplicatedPortrayalID
      */
-    public Scenario2DPortrayal(Scenario scenario, int width, int height) throws DuplicatedPortrayalID {
+    public Scenario2DPortrayal(Scenario scenario, int width, int height)
+            throws DuplicatedPortrayalID {
         super(scenario);
         this.devices = new SparseGrid2D(width, height);
         this.links = new Network();
         this.deviceLinkNetwork = new SpatialNetwork2D(this.devices, this.links);
+        this.displayList = new HashMap<String, Display2D>();
+        this.frameList = new HashMap<String, JFrame>();
         SparseGridPortrayal2D devicesPortrayal = new SparseGridPortrayal2D();
         NetworkPortrayal2D linksPortrayal = new NetworkPortrayal2D();
 
         devicesPortrayal.setField(this.devices);
         linksPortrayal.setField(deviceLinkNetwork);
 
-        this.addPortrayal(ShanksSimulation2DGUI.MAIN_DISPLAY, ScenarioPortrayal.DEVICES_PORTRAYAL, devicesPortrayal);
-        this.addPortrayal(ShanksSimulation2DGUI.MAIN_DISPLAY, ScenarioPortrayal.LINKS_PORTRAYAL, linksPortrayal);
+        this.addPortrayal(Scenario2DPortrayal.MAIN_DISPLAY_ID,
+                ScenarioPortrayal.DEVICES_PORTRAYAL, devicesPortrayal);
+        this.addPortrayal(Scenario2DPortrayal.MAIN_DISPLAY_ID,
+                ScenarioPortrayal.LINKS_PORTRAYAL, linksPortrayal);
 
         this.placeElements();
 
+    }
+
+    /**
+     * @return
+     */
+    public HashMap<String, Display2D> getDisplayList() {
+        return displayList;
+    }
+
+    /**
+     * @param displayList
+     */
+    public void setDisplayList(HashMap<String, Display2D> displayList) {
+        this.displayList = displayList;
+    }
+
+    /**
+     * @param displayID
+     * @param display
+     * @throws DuplictaedDisplayID
+     */
+    public void addDisplay(String displayID, Display2D display)
+            throws DuplictaedDisplayID {
+        if (this.displayList.containsKey(displayID)) {
+            throw new DuplictaedDisplayID(displayID);
+        }
+        this.displayList.put(displayID, display);
+    }
+
+    /**
+     * @param displayID
+     * @return
+     */
+    public Display2D getDisplay(String displayID) {
+        return this.displayList.get(displayID);
+    }
+
+    /**
+     * @param displayID
+     */
+    public void removeDisplay(String displayID) {
+        this.displayList.remove(displayID);
+    }
+
+    /**
+     * @return
+     */
+    public HashMap<String, JFrame> getFrameList() {
+        return frameList;
+    }
+
+    /**
+     * @param frameList
+     */
+    public void setFrameList(HashMap<String, JFrame> frameList) {
+        this.frameList = frameList;
+    }
+
+    /**
+     * @param frameID
+     * @param frame
+     */
+    public void addFrame(String frameID, JFrame frame) {
+        this.frameList.put(frameID, frame);
+    }
+
+    /**
+     * @param frameID
+     */
+    public void removeFrame(String frameID) {
+        this.frameList.remove(frameID);
     }
 
     /**
@@ -74,9 +159,9 @@ public abstract class Scenario2DPortrayal extends ScenarioPortrayal {
      */
     public void drawLink(Link link) {
         List<Device> linkedDevices = link.getLinkedDevices();
-        for (int i = 0; i<linkedDevices.size(); i++) {
+        for (int i = 0; i < linkedDevices.size(); i++) {
             Device from = linkedDevices.get(i);
-            for (int j = i+1 ; j<linkedDevices.size(); j++) {
+            for (int j = i + 1; j < linkedDevices.size(); j++) {
                 Device to = linkedDevices.get(j);
                 Edge e = new Edge(from, to, link);
                 links.addEdge(e);

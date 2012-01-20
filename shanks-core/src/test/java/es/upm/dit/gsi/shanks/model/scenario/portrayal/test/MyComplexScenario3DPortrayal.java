@@ -1,8 +1,8 @@
 package es.upm.dit.gsi.shanks.model.scenario.portrayal.test;
 
+import sim.display3d.Display3D;
 import sim.portrayal3d.continuous.ContinuousPortrayal3D;
 import sim.portrayal3d.network.NetworkPortrayal3D;
-import es.upm.dit.gsi.shanks.ShanksSimulation3DGUI;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice3DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
@@ -16,9 +16,12 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
 
 public class MyComplexScenario3DPortrayal extends Scenario3DPortrayal {
 
+    private boolean scaled;
+
     public MyComplexScenario3DPortrayal(Scenario scenario, long width,
             long height, long length) throws DuplicatedPortrayalID {
         super(scenario, width, height, length);
+        this.scaled = false; 
     }
 
     @Override
@@ -56,10 +59,25 @@ public class MyComplexScenario3DPortrayal extends Scenario3DPortrayal {
     public void setupPortrayals() {
         
         //Global
-        ContinuousPortrayal3D devicePortrayal = (ContinuousPortrayal3D) this.getPortrayals().get(ShanksSimulation3DGUI.MAIN_DISPLAY).get(ScenarioPortrayal.DEVICES_PORTRAYAL);
-        NetworkPortrayal3D networkPortrayal = (NetworkPortrayal3D) this.getPortrayals().get(ShanksSimulation3DGUI.MAIN_DISPLAY).get(ScenarioPortrayal.LINKS_PORTRAYAL);
+        ContinuousPortrayal3D devicePortrayal = (ContinuousPortrayal3D) this.getPortrayals().get(Scenario3DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.DEVICES_PORTRAYAL);
+        NetworkPortrayal3D networkPortrayal = (NetworkPortrayal3D) this.getPortrayals().get(Scenario3DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.LINKS_PORTRAYAL);
         devicePortrayal.setPortrayalForClass(MyDevice.class, new MyDevice3DPortrayal());
         networkPortrayal.setPortrayalForAll(new MyLink3DPortrayal());
+        
+        this.rescaleMainDisplay(1.5);
+//        Display3D mainDisplay = this.getDisplay(Scenario3DPortrayal.MAIN_DISPLAY_ID);
+//        MouseListener[] mls = mainDisplay.getMouseListeners();
+//        for (MouseListener l : mls) {
+//            mainDisplay.removeMouseListener(l);
+//        }
+//        MouseMotionListener[] mmls = mainDisplay.getMouseMotionListeners();
+//        for (MouseMotionListener l : mmls) {
+//            mainDisplay.removeMouseMotionListener(l);
+//        }
+//        MouseWheelListener[] mwls = mainDisplay.getMouseWheelListeners();
+//        for (MouseWheelListener l : mwls) {
+//            mainDisplay.removeMouseWheelListener(l);
+//        }
         
 //        ComplexScenario cs = (ComplexScenario) this.getScenario();
 //        //Scenario1
@@ -72,6 +90,14 @@ public class MyComplexScenario3DPortrayal extends Scenario3DPortrayal {
 
         //TODO echarle un ojo a esto para que pueda pintarse cada link como se quiera
 
+    }
+
+    private void rescaleMainDisplay(double d) {
+        if (!scaled) {
+            Display3D mainDisplay = this.getDisplay(Scenario3DPortrayal.MAIN_DISPLAY_ID);
+            mainDisplay.scale(d);
+            this.scaled = true;
+        }
     }
 
 }

@@ -2,6 +2,7 @@ package es.upm.dit.gsi.shanks.model.scenario.portrayal.test;
 
 import sim.portrayal3d.continuous.ContinuousPortrayal3D;
 import sim.portrayal3d.network.NetworkPortrayal3D;
+import es.upm.dit.gsi.shanks.ShanksSimulation3DGUI;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice3DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
@@ -11,11 +12,12 @@ import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
 
 public class MyComplexScenario3DPortrayal extends Scenario3DPortrayal {
 
     public MyComplexScenario3DPortrayal(Scenario scenario, long width,
-            long height, long length) {
+            long height, long length) throws DuplicatedPortrayalID {
         super(scenario, width, height, length);
     }
 
@@ -54,8 +56,8 @@ public class MyComplexScenario3DPortrayal extends Scenario3DPortrayal {
     public void setupPortrayals() {
         
         //Global
-        ContinuousPortrayal3D devicePortrayal = (ContinuousPortrayal3D) this.getPortrayals().get(ScenarioPortrayal.DEVICES_PORTRAYAL);
-        NetworkPortrayal3D networkPortrayal = (NetworkPortrayal3D) this.getPortrayals().get(ScenarioPortrayal.LINKS_PORTRAYAL);
+        ContinuousPortrayal3D devicePortrayal = (ContinuousPortrayal3D) this.getPortrayals().get(ShanksSimulation3DGUI.MAIN_DISPLAY).get(ScenarioPortrayal.DEVICES_PORTRAYAL);
+        NetworkPortrayal3D networkPortrayal = (NetworkPortrayal3D) this.getPortrayals().get(ShanksSimulation3DGUI.MAIN_DISPLAY).get(ScenarioPortrayal.LINKS_PORTRAYAL);
         devicePortrayal.setPortrayalForClass(MyDevice.class, new MyDevice3DPortrayal());
         networkPortrayal.setPortrayalForAll(new MyLink3DPortrayal());
         

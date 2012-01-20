@@ -21,6 +21,7 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.NonGatewayDeviceException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyComplexScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyComplexScenario3DPortrayal;
 
@@ -118,7 +119,7 @@ public class MyComplexScenario extends ComplexScenario {
         this.addScenario(s2, (Device)s2.getNetworkElement("D5"), (Link)this.getNetworkElement("EL1"));
     }
     
-    public static void main (String[] args) throws SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException, UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException {
+    public static void main (String[] args) throws SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException, UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException, DuplicatedPortrayalID {
 
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "5");
@@ -133,12 +134,12 @@ public class MyComplexScenario extends ComplexScenario {
     }
 
     @Override
-    public Scenario2DPortrayal createScenario2DPortrayal() {
+    public Scenario2DPortrayal createScenario2DPortrayal() throws DuplicatedPortrayalID {
         return new MyComplexScenario2DPortrayal(this, 100, 100);
     }
 
     @Override
-    public Scenario3DPortrayal createScenario3DPortrayal() {
+    public Scenario3DPortrayal createScenario3DPortrayal() throws DuplicatedPortrayalID {
         return new MyComplexScenario3DPortrayal(this, 100, 100, 100);
     }
 

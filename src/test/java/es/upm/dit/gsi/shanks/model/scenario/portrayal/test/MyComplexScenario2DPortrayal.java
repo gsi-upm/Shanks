@@ -2,6 +2,7 @@ package es.upm.dit.gsi.shanks.model.scenario.portrayal.test;
 
 import sim.portrayal.grid.SparseGridPortrayal2D;
 import sim.portrayal.network.NetworkPortrayal2D;
+import es.upm.dit.gsi.shanks.ShanksSimulation2DGUI;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice2DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
@@ -11,10 +12,11 @@ import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
 
 public class MyComplexScenario2DPortrayal extends Scenario2DPortrayal {
 
-    public MyComplexScenario2DPortrayal(ComplexScenario scenario, int width, int height) {
+    public MyComplexScenario2DPortrayal(ComplexScenario scenario, int width, int height) throws DuplicatedPortrayalID {
         super(scenario, width, height);
     }
 
@@ -51,8 +53,8 @@ public class MyComplexScenario2DPortrayal extends Scenario2DPortrayal {
 
     @Override
     public void setupPortrayals() {
-        SparseGridPortrayal2D devicePortrayal = (SparseGridPortrayal2D) this.getPortrayals().get(ScenarioPortrayal.DEVICES_PORTRAYAL);
-        NetworkPortrayal2D networkPortrayal = (NetworkPortrayal2D) this.getPortrayals().get(ScenarioPortrayal.LINKS_PORTRAYAL);
+        SparseGridPortrayal2D devicePortrayal = (SparseGridPortrayal2D) this.getPortrayals().get(ShanksSimulation2DGUI.MAIN_DISPLAY).get(ScenarioPortrayal.DEVICES_PORTRAYAL);
+        NetworkPortrayal2D networkPortrayal = (NetworkPortrayal2D) this.getPortrayals().get(ShanksSimulation2DGUI.MAIN_DISPLAY).get(ScenarioPortrayal.LINKS_PORTRAYAL);
         devicePortrayal.setPortrayalForClass(MyDevice.class, new MyDevice2DPortrayal());
 //        networkPortrayal.setPortrayalForClass(MyLink.class, new MyLink2DPortrayal());
         networkPortrayal.setPortrayalForAll(new MyLink2DPortrayal());

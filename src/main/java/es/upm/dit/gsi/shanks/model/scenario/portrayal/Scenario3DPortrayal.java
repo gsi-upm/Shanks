@@ -9,9 +9,11 @@ import sim.portrayal3d.continuous.ContinuousPortrayal3D;
 import sim.portrayal3d.network.NetworkPortrayal3D;
 import sim.portrayal3d.network.SpatialNetwork3D;
 import sim.util.Double3D;
+import es.upm.dit.gsi.shanks.ShanksSimulation3DGUI;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
 
 /**
  * @author a.carrera
@@ -29,8 +31,9 @@ public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
      * @param length
      * @param width
      * @param height
+     * @throws DuplicatedPortrayalID 
      */
-    public Scenario3DPortrayal(Scenario scenario, long width, long height, long length) {
+    public Scenario3DPortrayal(Scenario scenario, long width, long height, long length) throws DuplicatedPortrayalID {
         super(scenario);
         this.devices = new Continuous3D(5, width, height, length);
         this.links = new Network();
@@ -41,8 +44,8 @@ public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
         devicesPortrayal.setField(this.devices);
         linksPortrayal.setField(deviceLinkNetwork);
 
-        this.addPortrayal(ScenarioPortrayal.DEVICES_PORTRAYAL, devicesPortrayal);
-        this.addPortrayal(ScenarioPortrayal.LINKS_PORTRAYAL, linksPortrayal);
+        this.addPortrayal(ShanksSimulation3DGUI.MAIN_DISPLAY, ScenarioPortrayal.DEVICES_PORTRAYAL, devicesPortrayal);
+        this.addPortrayal(ShanksSimulation3DGUI.MAIN_DISPLAY, ScenarioPortrayal.LINKS_PORTRAYAL, linksPortrayal);
 
         this.placeElements();
     }
@@ -75,7 +78,6 @@ public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
             Device from = linkedDevices.get(i);
             for (int j = i+1 ; j<linkedDevices.size(); j++) {
                 Device to = linkedDevices.get(j);
-//                Edge e = new Edge(from, to, new MutableDouble(link.getLinkedDevices().size())); //TOTEST check if this size is resizable (redimensionable) during the simulation
                 Edge e = new Edge(from, to, link);
                 links.addEdge(e);
             }

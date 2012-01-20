@@ -21,6 +21,7 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusE
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
 
 /**
  * Scenarios class
@@ -86,8 +87,9 @@ public abstract class Scenario {
      * Create the scenario portrayal (2D o 3D).
      *
      * @return
+     * @throws DuplicatedPortrayalID 
      */
-    public ScenarioPortrayal createScenarioPortrayal() {
+    public ScenarioPortrayal createScenarioPortrayal() throws DuplicatedPortrayalID {
         logger.fine("Creating Scenario Portrayal...");
         String dimensions = this.getProperty(Scenario.PORTRAYAL_DIMENSIONS);
         if (dimensions.equals(Scenario.SIMULATION_2D)) {
@@ -105,13 +107,15 @@ public abstract class Scenario {
 
     /**
      * @return a Scenario3DPortrayal
+     * @throws DuplicatedPortrayalID 
      */
-    abstract public Scenario2DPortrayal createScenario2DPortrayal();
+    abstract public Scenario2DPortrayal createScenario2DPortrayal() throws DuplicatedPortrayalID;
 
     /**
      * @return a Scenario2DPortrayal
+     * @throws DuplicatedPortrayalID 
      */
-    abstract public Scenario3DPortrayal createScenario3DPortrayal();
+    abstract public Scenario3DPortrayal createScenario3DPortrayal() throws DuplicatedPortrayalID;
 
     /**
      * @return the id

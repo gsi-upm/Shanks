@@ -21,6 +21,7 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyScenario3DPortrayal;
 
@@ -156,12 +157,12 @@ public class MyScenario extends Scenario {
     }
 
     @Override
-    public Scenario2DPortrayal createScenario2DPortrayal() {
+    public Scenario2DPortrayal createScenario2DPortrayal() throws DuplicatedPortrayalID {
         return new MyScenario2DPortrayal(this, 100, 100);
     }
 
     @Override
-    public Scenario3DPortrayal createScenario3DPortrayal() {
+    public Scenario3DPortrayal createScenario3DPortrayal() throws DuplicatedPortrayalID {
         return new MyScenario3DPortrayal(this, 100, 100, 100);
     }
 

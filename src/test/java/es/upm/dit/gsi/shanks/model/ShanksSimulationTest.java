@@ -136,7 +136,7 @@ public class ShanksSimulationTest {
             do
                 if (!sim.schedule.step(sim))
                     break;
-            while (sim.schedule.getSteps() < 2001);
+            while (sim.schedule.getSteps() < 5001);
             Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
             sim.finish();
         } catch (Exception e) {

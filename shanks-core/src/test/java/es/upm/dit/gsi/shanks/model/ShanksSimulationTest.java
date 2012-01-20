@@ -17,6 +17,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import es.upm.dit.gsi.shanks.ShanksSimulation2DGUI;
+import es.upm.dit.gsi.shanks.ShanksSimulation3DGUI;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
@@ -263,7 +265,7 @@ public class ShanksSimulationTest {
     }
 
     @Test
-    public void ShanksSimulationResolvingProblemsWithComplexScenario2DGUI() {
+    public void MyShanksSimulationResolvingProblemsWithComplexScenario2DGUI() {
         boolean catched = false;
         try {
             Properties scenarioProperties = new Properties();
@@ -278,6 +280,36 @@ public class ShanksSimulationTest {
                     "MyComplexScenario", MyComplexScenario.SUNNY,
                     scenarioProperties, configProperties);
             MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
+            gui.start();
+            do
+                if (!gui.getSimulation().schedule.step(sim))
+                    break;
+            while (gui.getSimulation().schedule.getSteps() < 2001);
+            gui.finish();
+        } catch (Exception e) {
+            catched = true;
+            e.printStackTrace();
+        }
+        Assert.assertFalse(catched);
+
+    }
+
+    @Test
+    public void ShanksSimulationResolvingProblemsWithComplexScenario2DGUI() {
+        boolean catched = false;
+        try {
+            Properties scenarioProperties = new Properties();
+            scenarioProperties.put(MyScenario.CLOUDY_PROB, "50.0");
+            scenarioProperties.put(Scenario.PORTRAYAL_DIMENSIONS,
+                    Scenario.SIMULATION_2D);
+
+            Properties configProperties = new Properties();
+            configProperties.put(MyShanksSimulation.CONFIGURATION, "1");
+            MyShanksSimulation sim = new MyShanksSimulation(
+                    System.currentTimeMillis(), MyComplexScenario.class,
+                    "MyComplexScenario", MyComplexScenario.SUNNY,
+                    scenarioProperties, configProperties);
+            ShanksSimulation2DGUI gui = new ShanksSimulation2DGUI(sim);
             gui.start();
             do
                 if (!gui.getSimulation().schedule.step(sim))
@@ -435,7 +467,7 @@ public class ShanksSimulationTest {
     }
 
     @Test
-    public void ShanksSimulationResolvingProblemsWithComplexScenario3DGUI() {
+    public void MyShanksSimulationResolvingProblemsWithComplexScenario3DGUI() {
         boolean catched = false;
         try {
             Properties scenarioProperties = new Properties();
@@ -450,6 +482,36 @@ public class ShanksSimulationTest {
                     "MyComplexScenario", MyComplexScenario.SUNNY,
                     scenarioProperties, configProperties);
             MyShanksSimulation3DGUI gui = new MyShanksSimulation3DGUI(sim);
+            gui.start();
+            do
+                if (!gui.getSimulation().schedule.step(sim))
+                    break;
+            while (gui.getSimulation().schedule.getSteps() < 2001);
+            gui.finish();
+        } catch (Exception e) {
+            catched = true;
+            e.printStackTrace();
+        }
+        Assert.assertFalse(catched);
+
+    }
+
+    @Test
+    public void ShanksSimulationResolvingProblemsWithComplexScenario3DGUI() {
+        boolean catched = false;
+        try {
+            Properties scenarioProperties = new Properties();
+            scenarioProperties.put(MyScenario.CLOUDY_PROB, "50.0");
+            scenarioProperties.put(Scenario.PORTRAYAL_DIMENSIONS,
+                    Scenario.SIMULATION_3D);
+
+            Properties configProperties = new Properties();
+            configProperties.put(MyShanksSimulation.CONFIGURATION, "1");
+            MyShanksSimulation sim = new MyShanksSimulation(
+                    System.currentTimeMillis(), MyComplexScenario.class,
+                    "MyComplexScenario", MyComplexScenario.SUNNY,
+                    scenarioProperties, configProperties);
+            ShanksSimulation3DGUI gui = new ShanksSimulation3DGUI(sim);
             gui.start();
             do
                 if (!gui.getSimulation().schedule.step(sim))

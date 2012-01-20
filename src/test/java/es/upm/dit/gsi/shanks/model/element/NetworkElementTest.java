@@ -259,7 +259,5 @@ public class NetworkElementTest {
         }
         Assert.assertTrue(catched);
     }
-
-    //TOTEST hacer test con las properties
     
 }

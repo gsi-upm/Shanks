@@ -21,7 +21,6 @@ import sim.portrayal3d.network.SimpleEdgePortrayal3D;
 import sim.portrayal3d.network.SpatialNetwork3D;
 import sim.util.Double3D;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
-import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
 
 /**
  * Links class
@@ -58,7 +57,7 @@ public abstract class Link3DPortrayal extends SimpleEdgePortrayal3D {
 
         wrapper = (LocationWrapper) object;
         Edge edge = (Edge) (wrapper.getLocation());
-        MyLink link = (MyLink) wrapper.getObject();
+        Link link = (Link) wrapper.getObject();
         field = (SpatialNetwork3D) wrapper.fieldPortrayal.getField();
 
         Color color = this.getLinkColor(link);

@@ -70,7 +70,7 @@ public class ShanksSimulationTest {
         try {
             Properties scenarioProperties = new Properties();
             scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
-            scenarioProperties.put(Scenario.PORTRAYAL_DIMENSIONS,
+            scenarioProperties.put(Scenario.SIMULATION_GUI,
                     Scenario.NO_GUI);
 
             Properties configProperties = new Properties();
@@ -98,7 +98,7 @@ public class ShanksSimulationTest {
         try {
             Properties scenarioProperties = new Properties();
             scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
-            scenarioProperties.put(Scenario.PORTRAYAL_DIMENSIONS,
+            scenarioProperties.put(Scenario.SIMULATION_GUI,
                     Scenario.NO_GUI);
 
             Properties configProperties = new Properties();
@@ -126,7 +126,7 @@ public class ShanksSimulationTest {
         try {
             Properties scenarioProperties = new Properties();
             scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
-            scenarioProperties.put(Scenario.PORTRAYAL_DIMENSIONS,
+            scenarioProperties.put(Scenario.SIMULATION_GUI,
                     Scenario.NO_GUI);
 
             Properties configProperties = new Properties();
@@ -154,7 +154,7 @@ public class ShanksSimulationTest {
         try {
             Properties scenarioProperties = new Properties();
             scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
-            scenarioProperties.put(Scenario.PORTRAYAL_DIMENSIONS,
+            scenarioProperties.put(Scenario.SIMULATION_GUI,
                     Scenario.SIMULATION_2D);
 
             Properties configProperties = new Properties();
@@ -183,7 +183,7 @@ public class ShanksSimulationTest {
         try {
             Properties scenarioProperties = new Properties();
             scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
-            scenarioProperties.put(Scenario.PORTRAYAL_DIMENSIONS,
+            scenarioProperties.put(Scenario.SIMULATION_GUI,
                     Scenario.SIMULATION_2D);
 
             Properties configProperties = new Properties();
@@ -212,7 +212,7 @@ public class ShanksSimulationTest {
         try {
             Properties scenarioProperties = new Properties();
             scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
-            scenarioProperties.put(Scenario.PORTRAYAL_DIMENSIONS,
+            scenarioProperties.put(Scenario.SIMULATION_GUI,
                     Scenario.SIMULATION_3D);
 
             Properties configProperties = new Properties();
@@ -241,7 +241,7 @@ public class ShanksSimulationTest {
         try {
             Properties scenarioProperties = new Properties();
             scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
-            scenarioProperties.put(Scenario.PORTRAYAL_DIMENSIONS,
+            scenarioProperties.put(Scenario.SIMULATION_GUI,
                     Scenario.SIMULATION_3D);
 
             Properties configProperties = new Properties();
@@ -270,7 +270,7 @@ public class ShanksSimulationTest {
         try {
             Properties scenarioProperties = new Properties();
             scenarioProperties.put(MyScenario.CLOUDY_PROB, "50.0");
-            scenarioProperties.put(Scenario.PORTRAYAL_DIMENSIONS,
+            scenarioProperties.put(Scenario.SIMULATION_GUI,
                     Scenario.SIMULATION_2D);
 
             Properties configProperties = new Properties();
@@ -300,7 +300,7 @@ public class ShanksSimulationTest {
         try {
             Properties scenarioProperties = new Properties();
             scenarioProperties.put(MyScenario.CLOUDY_PROB, "50.0");
-            scenarioProperties.put(Scenario.PORTRAYAL_DIMENSIONS,
+            scenarioProperties.put(Scenario.SIMULATION_GUI,
                     Scenario.SIMULATION_2D);
 
             Properties configProperties = new Properties();
@@ -330,7 +330,7 @@ public class ShanksSimulationTest {
         try {
             Properties scenarioProperties = new Properties();
             scenarioProperties.put(MyScenario.CLOUDY_PROB, "50.0");
-            scenarioProperties.put(Scenario.PORTRAYAL_DIMENSIONS,
+            scenarioProperties.put(Scenario.SIMULATION_GUI,
                     Scenario.NO_GUI);
 
             Properties configProperties = new Properties();
@@ -376,7 +376,7 @@ public class ShanksSimulationTest {
         try {
             Properties scenarioProperties = new Properties();
             scenarioProperties.put(MyScenario.CLOUDY_PROB, "50.0");
-            scenarioProperties.put(Scenario.PORTRAYAL_DIMENSIONS,
+            scenarioProperties.put(Scenario.SIMULATION_GUI,
                     Scenario.SIMULATION_2D);
 
             Properties configProperties = new Properties();
@@ -424,7 +424,7 @@ public class ShanksSimulationTest {
         try {
             Properties scenarioProperties = new Properties();
             scenarioProperties.put(MyScenario.CLOUDY_PROB, "50.0");
-            scenarioProperties.put(Scenario.PORTRAYAL_DIMENSIONS,
+            scenarioProperties.put(Scenario.SIMULATION_GUI,
                     Scenario.SIMULATION_3D);
 
             Properties configProperties = new Properties();
@@ -472,7 +472,7 @@ public class ShanksSimulationTest {
         try {
             Properties scenarioProperties = new Properties();
             scenarioProperties.put(MyScenario.CLOUDY_PROB, "50.0");
-            scenarioProperties.put(Scenario.PORTRAYAL_DIMENSIONS,
+            scenarioProperties.put(Scenario.SIMULATION_GUI,
                     Scenario.SIMULATION_3D);
 
             Properties configProperties = new Properties();
@@ -502,7 +502,7 @@ public class ShanksSimulationTest {
         try {
             Properties scenarioProperties = new Properties();
             scenarioProperties.put(MyScenario.CLOUDY_PROB, "50.0");
-            scenarioProperties.put(Scenario.PORTRAYAL_DIMENSIONS,
+            scenarioProperties.put(Scenario.SIMULATION_GUI,
                     Scenario.SIMULATION_3D);
 
             Properties configProperties = new Properties();

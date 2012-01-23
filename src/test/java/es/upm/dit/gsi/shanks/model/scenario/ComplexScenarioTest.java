@@ -48,7 +48,7 @@ public class ComplexScenarioTest {
             DuplicatedIDException, NonGatewayDeviceException, AlreadyConnectedScenarioException {
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
-        scenarioProperties.put(Scenario.PORTRAYAL_DIMENSIONS, Scenario.NO_GUI);
+        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
         Scenario s = new MyComplexScenario("MyComplexScenario", MyComplexScenario.SUNNY, scenarioProperties);
         Assert.assertEquals("MyComplexScenario", s.getID());
         Assert.assertEquals(MyComplexScenario.SUNNY, s.getCurrentStatus());
@@ -63,7 +63,7 @@ public class ComplexScenarioTest {
             DuplicatedIDException, NonGatewayDeviceException, AlreadyConnectedScenarioException {
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
-        scenarioProperties.put(Scenario.PORTRAYAL_DIMENSIONS, Scenario.NO_GUI);
+        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
         ComplexScenario s = new MyComplexScenario("MyComplexScenario", MyComplexScenario.SUNNY, scenarioProperties);
         Assert.assertEquals("MyComplexScenario", s.getID());
         Assert.assertEquals(MyComplexScenario.SUNNY, s.getCurrentStatus());

@@ -41,7 +41,7 @@ public abstract class Scenario {
 
     private Logger logger = Logger.getLogger(Scenario.class.getName());
     
-    public static final String PORTRAYAL_DIMENSIONS = "PORTRAYAL DIMENSIONS";
+    public static final String SIMULATION_GUI = "SIMULATION GUI";
     public static final String SIMULATION_2D = "2D";
     public static final String SIMULATION_3D = "3D";
     public static final String NO_GUI = "NO GUI";
@@ -91,7 +91,7 @@ public abstract class Scenario {
      */
     public ScenarioPortrayal createScenarioPortrayal() throws DuplicatedPortrayalID {
         logger.fine("Creating Scenario Portrayal...");
-        String dimensions = this.getProperty(Scenario.PORTRAYAL_DIMENSIONS);
+        String dimensions = this.getProperty(Scenario.SIMULATION_GUI);
         if (dimensions.equals(Scenario.SIMULATION_2D)) {
             logger.fine("Creating Scenario2DPortrayal");
             return this.createScenario2DPortrayal();   

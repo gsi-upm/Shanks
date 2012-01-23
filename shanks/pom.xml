@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>es.upm.dit.gsi</groupId>
 	<artifactId>shanks</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>pom</packaging>
 	<name>Shanks Project</name>
 	<description>Parent project for all shanks modules</description>
@@ -35,9 +35,9 @@
 	</organization>
 
 	<scm>
-		<connection>scm:svn:http://shanks-with-mason.googlecode.com/svn/trunk/</connection>
-		<developerConnection>scm:svn:https://shanks-with-mason.googlecode.com/svn/trunk/</developerConnection>
-		<url>http://shanks-with-mason.googlecode.com/svn/trunk/</url>
+		<connection>scm:svn:http://shanks-with-mason.googlecode.com/svn/tags/shanks-0.0.1/trunk</connection>
+		<developerConnection>scm:svn:https://shanks-with-mason.googlecode.com/svn/tags/shanks-0.0.1/trunk</developerConnection>
+		<url>http://shanks-with-mason.googlecode.com/svn/tags/shanks-0.0.1/trunk</url>
 	</scm>
 
 	<properties>

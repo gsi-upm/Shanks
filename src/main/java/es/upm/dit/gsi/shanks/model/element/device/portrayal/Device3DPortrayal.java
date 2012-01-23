@@ -20,7 +20,7 @@ import sim.portrayal3d.SimplePortrayal3D;
 import com.sun.j3d.utils.geometry.Sphere;
 
 import es.upm.dit.gsi.shanks.model.element.device.Device;
-import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
+
 
 public abstract class Device3DPortrayal extends SimplePortrayal3D {
 
@@ -38,7 +38,7 @@ public abstract class Device3DPortrayal extends SimplePortrayal3D {
 
     public TransformGroup getModel(Object object, TransformGroup model) {
 
-        MyDevice device = (MyDevice) object;
+        Device device = (Device) object;
         model = new TransformGroup();
 
         Color3f colour;

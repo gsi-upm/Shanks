@@ -107,12 +107,12 @@ public class MyComplexScenario extends ComplexScenario {
     public void addScenarios() throws UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException, NonGatewayDeviceException, AlreadyConnectedScenarioException {
         Properties scenarioProperties1 = new Properties();
         scenarioProperties1.put(MyScenario.CLOUDY_PROB, this.getProperty(MyScenario.CLOUDY_PROB));
-        scenarioProperties1.put(Scenario.PORTRAYAL_DIMENSIONS, Scenario.SIMULATION_2D);
+        scenarioProperties1.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_2D);
         Scenario s1 = new MyScenario("Scenario1", MyScenario.SUNNY, scenarioProperties1);
 
         Properties scenarioProperties2 = new Properties();
         scenarioProperties2.put(MyScenario.CLOUDY_PROB, this.getProperty(MyScenario.CLOUDY_PROB));
-        scenarioProperties2.put(Scenario.PORTRAYAL_DIMENSIONS, Scenario.SIMULATION_2D);
+        scenarioProperties2.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_2D);
         Scenario s2 = new MyScenario("Scenario2", MyScenario.CLOUDY, scenarioProperties2);
         
         this.addScenario(s1, (Device)s1.getNetworkElement("D5"), (Link)this.getNetworkElement("EL1"));
@@ -123,8 +123,8 @@ public class MyComplexScenario extends ComplexScenario {
 
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "5");
-//        scenarioProperties.put(Scenario.PORTRAYAL_DIMENSIONS, Scenario.SIMULATION_2D);
-        scenarioProperties.put(Scenario.PORTRAYAL_DIMENSIONS, Scenario.SIMULATION_3D);
+//        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_2D);
+        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_3D);
         Properties configProperties = new Properties();
         configProperties.put(MyShanksSimulation.CONFIGURATION, "1");
         MyShanksSimulation sim = new MyShanksSimulation(System.currentTimeMillis(), MyComplexScenario.class, "MyComplexScenario", MyComplexScenario.SUNNY, scenarioProperties, configProperties);

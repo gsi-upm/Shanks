@@ -47,7 +47,7 @@ public class ScenarioTest {
             DuplicatedIDException {
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
-        scenarioProperties.put(Scenario.PORTRAYAL_DIMENSIONS, Scenario.NO_GUI);
+        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
         Scenario s = new MyScenario("MyScenario", MyScenario.SUNNY, scenarioProperties);
         Assert.assertEquals("MyScenario", s.getID());
         Assert.assertEquals(MyScenario.SUNNY, s.getCurrentStatus());
@@ -60,7 +60,7 @@ public class ScenarioTest {
             DuplicatedIDException {
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
-        scenarioProperties.put(Scenario.PORTRAYAL_DIMENSIONS, Scenario.NO_GUI);
+        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
         Scenario s = new MyScenario("MyScenario", MyScenario.SUNNY, scenarioProperties);
         s.setCurrentStatus(MyScenario.CLOUDY);
         Assert.assertEquals(MyScenario.CLOUDY, s.getCurrentStatus());
@@ -73,7 +73,7 @@ public class ScenarioTest {
             DuplicatedIDException {
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
-        scenarioProperties.put(Scenario.PORTRAYAL_DIMENSIONS, Scenario.NO_GUI);
+        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
         Scenario s = new MyScenario("MyScenario", MyScenario.SUNNY, scenarioProperties);
         boolean catched = false;
         try {
@@ -92,7 +92,7 @@ public class ScenarioTest {
         try {
             Properties scenarioProperties = new Properties();
             scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
-            scenarioProperties.put(Scenario.PORTRAYAL_DIMENSIONS, Scenario.NO_GUI);
+            scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
             new MyScenario("MyScenario", "WrongStatus", scenarioProperties);
         } catch (UnsupportedScenarioStatusException e) {
             catched = true;
@@ -108,7 +108,7 @@ public class ScenarioTest {
 
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
-        scenarioProperties.put(Scenario.PORTRAYAL_DIMENSIONS, Scenario.NO_GUI);
+        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
         Scenario s = new MyScenario("MyScenario", MyScenario.CLOUDY, scenarioProperties);
         s.generateFailures();
         Assert.assertTrue(s.getCurrentFailures().size() > 0);

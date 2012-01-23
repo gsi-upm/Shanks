@@ -43,9 +43,9 @@
 	</organization>
 
 	<scm>
-		<connection>scm:svn:http://shanks-with-mason.googlecode.com/svn/trunk/</connection>
-		<developerConnection>scm:svn:https://shanks-with-mason.googlecode.com/svn/trunk/</developerConnection>
-		<url>http://shanks-with-mason.googlecode.com/svn/trunk/</url>
+		<connection>scm:svn:http://shanks-with-mason.googlecode.com/svn/trunk/shanks-core</connection>
+		<developerConnection>scm:svn:https://shanks-with-mason.googlecode.com/svn/trunk/shanks-core</developerConnection>
+		<url>http://shanks-with-mason.googlecode.com/svn/trunk/shanks-core</url>
 	</scm>
 
 	<properties>

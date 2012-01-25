@@ -36,9 +36,7 @@ public class MyComplexScenario2DPortrayal extends ComplexScenario2DPortrayal {
         ContinuousPortrayal2D devicePortrayal = (ContinuousPortrayal2D) this.getPortrayals().get(Scenario2DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.DEVICES_PORTRAYAL);
         NetworkPortrayal2D networkPortrayal = (NetworkPortrayal2D) this.getPortrayals().get(Scenario2DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.LINKS_PORTRAYAL);
         devicePortrayal.setPortrayalForClass(MyDevice.class, new MyDevice2DPortrayal());
-//        networkPortrayal.setPortrayalForClass(MyLink.class, new MyLink2DPortrayal());
         networkPortrayal.setPortrayalForAll(new MyLink2DPortrayal());
-        //TODO echarle un ojo a esto para que pueda pintarse cada link como se quiera
     }
 
     @Override

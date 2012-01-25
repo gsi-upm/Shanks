@@ -37,9 +37,7 @@ public class MyScenario3DPortrayal extends Scenario3DPortrayal {
         ContinuousPortrayal3D devicePortrayal = (ContinuousPortrayal3D) this.getPortrayals().get(Scenario3DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.DEVICES_PORTRAYAL);
         NetworkPortrayal3D networkPortrayal = (NetworkPortrayal3D) this.getPortrayals().get(Scenario3DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.LINKS_PORTRAYAL);
         devicePortrayal.setPortrayalForClass(MyDevice.class, new MyDevice3DPortrayal());
-//        networkPortrayal.setPortrayalForClass(MyLink.class, new MyLink2DPortrayal());
         networkPortrayal.setPortrayalForAll(new MyLink3DPortrayal());
-        //TODO echarle un ojo a esto para que pueda pintarse cada link como se quiera
 
         
         this.scaleDisplay(Scenario3DPortrayal.MAIN_DISPLAY_ID, 1.5);

@@ -5,8 +5,9 @@ import java.util.HashMap;
 import java.util.Properties;
 
 import es.upm.dit.gsi.shanks.model.MyShanksSimulation;
-import es.upm.dit.gsi.shanks.model.MyShanksSimulation2DGUI;
+import es.upm.dit.gsi.shanks.model.MyShanksSimulation3DGUI;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
+import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
@@ -54,8 +55,11 @@ public class MyComplexScenario extends ComplexScenario {
     public void addNetworkElements()
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException, DuplicatedIDException {
-        Link el1 = new MyLink("EL1", MyLink.OK_STATUS, 2);
+        Link el1 = new MyLink("EL1", MyLink.OK_STATUS, 3);
+        Device ed1 = new MyDevice("ED1", MyDevice.OK_STATUS, true);
 
+        this.addNetworkElement(ed1);
+        ed1.connectToLink(el1);
         this.addNetworkElement(el1);
 
     }
@@ -139,17 +143,17 @@ public class MyComplexScenario extends ComplexScenario {
 
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "5");
-        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_2D);
         // scenarioProperties.put(Scenario.SIMULATION_GUI,
-        // Scenario.SIMULATION_3D);
+        // Scenario.SIMULATION_2D);
+        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_3D);
         Properties configProperties = new Properties();
         configProperties.put(MyShanksSimulation.CONFIGURATION, "1");
         MyShanksSimulation sim = new MyShanksSimulation(
                 System.currentTimeMillis(), MyComplexScenario.class,
                 "MyComplexScenario", MyComplexScenario.SUNNY,
                 scenarioProperties, configProperties);
-        MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
-        // MyShanksSimulation3DGUI gui = new MyShanksSimulation3DGUI(sim);
+        // MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
+        MyShanksSimulation3DGUI gui = new MyShanksSimulation3DGUI(sim);
         gui.start();
     }
 

@@ -3,6 +3,7 @@ package es.upm.dit.gsi.shanks.model.scenario.portrayal.test;
 import sim.portrayal3d.continuous.ContinuousPortrayal3D;
 import sim.portrayal3d.network.NetworkPortrayal3D;
 import sim.util.Double3D;
+import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice3DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
@@ -26,7 +27,7 @@ public class MyComplexScenario3DPortrayal extends ComplexScenario3DPortrayal {
     public void placeElements() {
         
         ComplexScenario cs = (ComplexScenario) this.getScenario();        
-        
+        this.situateDevice((Device)cs.getNetworkElement("ED1"), 0, 0, 0);
         this.drawLink((Link)cs.getNetworkElement("EL1"));
     }
 
@@ -48,7 +49,7 @@ public class MyComplexScenario3DPortrayal extends ComplexScenario3DPortrayal {
     public void placeScenarios() throws DuplicatedPortrayalID {
         ComplexScenario cs = (ComplexScenario) this.getScenario();
         this.situateScenario(cs.getScenario("Scenario1"), new Double3D(0,0,0), ShanksMath.A0, ShanksMath.A0, ShanksMath.A0);
-        this.situateScenario(cs.getScenario("Scenario2"), new Double3D(550,0,0), ShanksMath.A0, ShanksMath.A180, ShanksMath.A180);
+        this.situateScenario(cs.getScenario("Scenario2"), new Double3D(0,0,0), ShanksMath.A0, ShanksMath.A270, ShanksMath.A180);
         
     }
 

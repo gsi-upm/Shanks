@@ -3,6 +3,7 @@ package es.upm.dit.gsi.shanks.model.scenario.portrayal.test;
 import sim.portrayal.continuous.ContinuousPortrayal2D;
 import sim.portrayal.network.NetworkPortrayal2D;
 import sim.util.Double2D;
+import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice2DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
@@ -23,8 +24,8 @@ public class MyComplexScenario2DPortrayal extends ComplexScenario2DPortrayal {
     @Override
     public void placeElements() {
         
-        ComplexScenario cs = (ComplexScenario) this.getScenario();
-        
+        ComplexScenario cs = (ComplexScenario) this.getScenario();       
+        this.situateDevice((Device)cs.getNetworkElement("ED1"), 60, 60);        
         this.drawLink((Link)cs.getNetworkElement("EL1"));
         
     }

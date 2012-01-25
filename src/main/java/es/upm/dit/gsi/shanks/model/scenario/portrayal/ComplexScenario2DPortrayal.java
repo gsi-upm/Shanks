@@ -9,6 +9,7 @@ import sim.util.Double2D;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
+import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
@@ -25,9 +26,10 @@ public abstract class ComplexScenario2DPortrayal extends Scenario2DPortrayal {
      * Place all scenarios of the ComplexScenario
      * 
      * @throws DuplicatedPortrayalID
-     * @throws ScenarioNotFoundException 
+     * @throws ScenarioNotFoundException
      */
-    abstract public void placeScenarios() throws DuplicatedPortrayalID, ScenarioNotFoundException;
+    abstract public void placeScenarios() throws DuplicatedPortrayalID,
+            ScenarioNotFoundException;
 
     /**
      * Situate the scenario in the complex scenario main display
@@ -38,10 +40,11 @@ public abstract class ComplexScenario2DPortrayal extends Scenario2DPortrayal {
      * @param beta
      * @param gamma
      * @throws DuplicatedPortrayalID
-     * @throws ScenarioNotFoundException 
+     * @throws ScenarioNotFoundException
      */
     public void situateScenario(Scenario scenario, Double2D position,
-            Double2D alpha, Double2D beta) throws DuplicatedPortrayalID, ScenarioNotFoundException {
+            Double2D alpha, Double2D beta) throws DuplicatedPortrayalID,
+            ScenarioNotFoundException {
         Scenario2DPortrayal portrayal;
         try {
             portrayal = (Scenario2DPortrayal) scenario
@@ -72,9 +75,40 @@ public abstract class ComplexScenario2DPortrayal extends Scenario2DPortrayal {
                     this.drawLink((Link) element);
                 }
             }
+            if (scenario instanceof ComplexScenario) {
+                this.drawScenarioLinksLinks((ComplexScenario) scenario);
+            }
         } catch (DuplicatedPortrayalID e) {
             throw e;
         }
     }
 
+    /**
+     * @param complexScenario
+     */
+    private void drawScenarioLinksLinks(ComplexScenario complexScenario) {
+        HashMap<String, NetworkElement> elements = complexScenario
+                .getCurrentElements();
+        for (String id : elements.keySet()) {
+            NetworkElement element = elements.get(id);
+            if (element instanceof Link) {
+                this.drawLink((Link) element);
+            }
+            for (Scenario scenario : complexScenario.getScenarios()) {
+                if (scenario instanceof ComplexScenario) {
+                    this.drawScenarioLinksLinks((ComplexScenario) scenario);
+                } else {
+                    elements = scenario.getCurrentElements();
+                    for (String eid : elements.keySet()) {
+                        NetworkElement e = elements.get(eid);
+                        if (e instanceof Link) {
+                            this.drawLink((Link) e);
+                        }
+
+                    }
+                }
+            }
+
+        }
+    }
 }

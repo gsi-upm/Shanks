@@ -1,8 +1,19 @@
 package es.upm.dit.gsi.shanks.model.scenario.portrayal.test;
 
+import sim.portrayal3d.continuous.ContinuousPortrayal3D;
+import sim.portrayal3d.network.NetworkPortrayal3D;
+import sim.util.Double3D;
+import es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice3DPortrayal;
+import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
+import es.upm.dit.gsi.shanks.model.element.link.Link;
+import es.upm.dit.gsi.shanks.model.element.link.portrayal.test.MyLink3DPortrayal;
+import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ComplexScenario3DPortrayal;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.ShanksMath;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
 
 public class MySuperComplexScenario3DPortrayal extends
@@ -15,21 +26,29 @@ public class MySuperComplexScenario3DPortrayal extends
     }
 
     @Override
-    public void placeScenarios() throws DuplicatedPortrayalID {
-        // TODO Auto-generated method stub
-
+    public void placeScenarios() throws DuplicatedPortrayalID, ScenarioNotFoundException {
+        ComplexScenario cs = (ComplexScenario) this.getScenario();
+        this.situateScenario(cs.getScenario("ComplexScenario1"), new Double3D(0,0,0), ShanksMath.A0, ShanksMath.A0, ShanksMath.A0);
+        this.situateScenario(cs.getScenario("ComplexScenario2"), new Double3D(-100,0,0), ShanksMath.A0, ShanksMath.A180, ShanksMath.A0);
     }
 
     @Override
     public void placeElements() {
-        // TODO Auto-generated method stub
-
+        ComplexScenario cs = (ComplexScenario) this.getScenario();        
+        this.drawLink((Link)cs.getNetworkElement("SEL1"));
     }
 
     @Override
     public void setupPortrayals() {
-        // TODO Auto-generated method stub
-
+        
+        //Global
+        ContinuousPortrayal3D devicePortrayal = (ContinuousPortrayal3D) this.getPortrayals().get(Scenario3DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.DEVICES_PORTRAYAL);
+        NetworkPortrayal3D networkPortrayal = (NetworkPortrayal3D) this.getPortrayals().get(Scenario3DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.LINKS_PORTRAYAL);
+        devicePortrayal.setPortrayalForClass(MyDevice.class, new MyDevice3DPortrayal());
+        networkPortrayal.setPortrayalForAll(new MyLink3DPortrayal());
+        
+        this.scaleDisplay(Scenario3DPortrayal.MAIN_DISPLAY_ID, 1.5);
+        this.getDisplay(MAIN_DISPLAY_ID).setShowsAxes(false);
     }
 
 }

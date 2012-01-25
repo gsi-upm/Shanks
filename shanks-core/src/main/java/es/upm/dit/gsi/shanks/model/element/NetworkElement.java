@@ -135,6 +135,7 @@ public abstract class NetworkElement {
      */
     public void changeProperty(String propertyName, Object propertyValue) {
         this.properties.put(propertyName, propertyValue);
+        //TOIMP check if the status of the network element could be changed depending on the property
     }
     
     /**

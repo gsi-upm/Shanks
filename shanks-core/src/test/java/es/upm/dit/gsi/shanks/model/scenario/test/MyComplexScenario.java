@@ -41,7 +41,10 @@ public class MyComplexScenario extends ComplexScenario {
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException, NonGatewayDeviceException,
-            AlreadyConnectedScenarioException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+            AlreadyConnectedScenarioException, SecurityException,
+            IllegalArgumentException, NoSuchMethodException,
+            InstantiationException, IllegalAccessException,
+            InvocationTargetException {
         super(type, initialState, properties);
     }
 
@@ -115,10 +118,18 @@ public class MyComplexScenario extends ComplexScenario {
     public void addScenarios() throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException, NonGatewayDeviceException,
-            AlreadyConnectedScenarioException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+            AlreadyConnectedScenarioException, SecurityException,
+            IllegalArgumentException, NoSuchMethodException,
+            InstantiationException, IllegalAccessException,
+            InvocationTargetException {
 
-        this.addScenario(MyScenario.class, "Scenario1", MyScenario.SUNNY, this.getProperties(), "D5", "EL1");
-        this.addScenario(MyScenario.class, "Scenario2", MyScenario.SUNNY, this.getProperties(), "D5", "EL1");
+        Properties p = this.getProperties();
+        p.put(MyScenario.CLOUDY_PROB, "10.0");
+        this.addScenario(MyScenario.class, "Scenario1", MyScenario.SUNNY, p,
+                "D5", "EL1");
+        p.put(MyScenario.CLOUDY_PROB, "50.0");
+        this.addScenario(MyScenario.class, "Scenario2", MyScenario.SUNNY, p,
+                "D5", "EL1");
     }
 
     public static void main(String[] args) throws SecurityException,
@@ -127,22 +138,22 @@ public class MyComplexScenario extends ComplexScenario {
             InvocationTargetException,
             UnsupportedNetworkElementStatusException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, DuplicatedPortrayalID, ScenarioNotFoundException {
+            DuplicatedIDException, DuplicatedPortrayalID,
+            ScenarioNotFoundException {
 
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "5");
-        // scenarioProperties.put(Scenario.SIMULATION_GUI,
-        // Scenario.SIMULATION_2D);
+//        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_2D);
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_3D);
-//         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
+        // scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
         Properties configProperties = new Properties();
         configProperties.put(MyShanksSimulation.CONFIGURATION, "1");
         MyShanksSimulation sim = new MyShanksSimulation(
                 System.currentTimeMillis(), MyComplexScenario.class,
                 "MyComplexScenario", MyComplexScenario.SUNNY,
                 scenarioProperties, configProperties);
-        // MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
-        MyShanksSimulation3DGUI gui = new MyShanksSimulation3DGUI(sim);
+//        MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
+         MyShanksSimulation3DGUI gui = new MyShanksSimulation3DGUI(sim);
         gui.start();
     }
 

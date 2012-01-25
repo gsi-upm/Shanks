@@ -413,7 +413,9 @@ public abstract class Scenario {
                     logger.fine("There is no penalty for failures: "
                             + type.getName() + " in status " + status);
                 }
-                if (randomizer.nextDouble() < prob) {
+//                double aux = randomizer.nextDouble(); // THIS OPTION GENERATE MANY FAULTS OF THE SAME TYPE AT THE SAME TIME
+                double aux = Math.random(); // THIS WORKS BETTER, MORE RANDOMLY
+                if (aux < prob) {
                     // Generate failure
                     Set<NetworkElement> elementsSet;
                     if (numberOfCombinations >= 1) {

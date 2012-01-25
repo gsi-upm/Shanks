@@ -148,12 +148,11 @@ public class ShanksSimulation2DGUI extends GUIState {
 
             HashMap<String, Display2D> displays = scenarioPortrayal
                     .getDisplayList();
-            HashMap<String, JFrame> frames = scenarioPortrayal.getFrameList();
             for (String displayID : displays.keySet()) {
                 Display2D display = displays.get(displayID);
                 display.setClipping(false);
                 JFrame frame = display.createFrame();
-                frames.put(displayID, frame);
+                scenarioPortrayal.addFrame(displayID, frame);
                 frame.setTitle(displayID);
                 c.registerFrame(frame);
                 frame.setVisible(true);

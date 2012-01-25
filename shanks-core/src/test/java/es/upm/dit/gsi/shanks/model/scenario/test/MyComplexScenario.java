@@ -143,7 +143,8 @@ public class MyComplexScenario extends ComplexScenario {
 
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "5");
-//        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_2D);
+        // scenarioProperties.put(Scenario.SIMULATION_GUI,
+        // Scenario.SIMULATION_2D);
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_3D);
         // scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
         Properties configProperties = new Properties();
@@ -152,8 +153,8 @@ public class MyComplexScenario extends ComplexScenario {
                 System.currentTimeMillis(), MyComplexScenario.class,
                 "MyComplexScenario", MyComplexScenario.SUNNY,
                 scenarioProperties, configProperties);
-//        MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
-         MyShanksSimulation3DGUI gui = new MyShanksSimulation3DGUI(sim);
+        // MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
+        MyShanksSimulation3DGUI gui = new MyShanksSimulation3DGUI(sim);
         gui.start();
     }
 

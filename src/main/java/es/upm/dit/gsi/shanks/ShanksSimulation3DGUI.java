@@ -150,7 +150,6 @@ public class ShanksSimulation3DGUI extends GUIState {
 
             HashMap<String, Display3D> displays = scenarioPortrayal
                     .getDisplayList();
-            HashMap<String, JFrame> frames = scenarioPortrayal.getFrameList();
             ContinuousPortrayal3D devicesPortrayal;
             devicesPortrayal = (ContinuousPortrayal3D) sim
                     .getScenarioPortrayal().getPortrayals()
@@ -166,7 +165,7 @@ public class ShanksSimulation3DGUI extends GUIState {
             for (String displayID : displays.keySet()) {
                 Display3D display = displays.get(displayID);
                 JFrame frame = display.createFrame();
-                frames.put(displayID, frame);
+                scenarioPortrayal.addFrame(displayID, frame);
                 frame.setTitle(displayID);
                 c.registerFrame(frame);
                 frame.setVisible(true);

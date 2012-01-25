@@ -528,6 +528,36 @@ public class ShanksSimulationTest {
     }
 
     @Test
+    public void ShanksSimulationResolvingProblemsWithSuperComplexScenario2DGUI() {
+        boolean catched = false;
+        try {
+            Properties scenarioProperties = new Properties();
+            scenarioProperties.put(MyScenario.CLOUDY_PROB, "50.0");
+            scenarioProperties.put(Scenario.SIMULATION_GUI,
+                    Scenario.SIMULATION_2D);
+
+            Properties configProperties = new Properties();
+            configProperties.put(MyShanksSimulation.CONFIGURATION, "1");
+            MyShanksSimulation sim = new MyShanksSimulation(
+                    System.currentTimeMillis(), MySuperComplexScenario.class,
+                    "MySuperComplexScenario", MySuperComplexScenario.SUNNY,
+                    scenarioProperties, configProperties);
+            ShanksSimulation2DGUI gui = new ShanksSimulation2DGUI(sim);
+            gui.start();
+            do
+                if (!gui.getSimulation().schedule.step(sim))
+                    break;
+            while (gui.getSimulation().schedule.getSteps() < 2001);
+            gui.finish();
+        } catch (Exception e) {
+            catched = true;
+            e.printStackTrace();
+        }
+        Assert.assertFalse(catched);
+
+    }
+
+    @Test
     public void ShanksSimulationResolvingProblemsWithSuperComplexScenario3DGUI() {
         boolean catched = false;
         try {

@@ -3,6 +3,7 @@ package es.upm.dit.gsi.shanks.model.scenario.portrayal.test;
 import sim.portrayal3d.continuous.ContinuousPortrayal3D;
 import sim.portrayal3d.network.NetworkPortrayal3D;
 import sim.util.Double3D;
+import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice3DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
@@ -34,7 +35,8 @@ public class MySuperComplexScenario3DPortrayal extends
 
     @Override
     public void placeElements() {
-        ComplexScenario cs = (ComplexScenario) this.getScenario();        
+        ComplexScenario cs = (ComplexScenario) this.getScenario();     
+        this.situateDevice((Device)cs.getNetworkElement("SED1"), 0, 0, 0);   
         this.drawLink((Link)cs.getNetworkElement("SEL1"));
     }
 

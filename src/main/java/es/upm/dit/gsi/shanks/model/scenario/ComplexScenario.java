@@ -4,6 +4,8 @@
  */
 package es.upm.dit.gsi.shanks.model.scenario;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -45,13 +47,19 @@ public abstract class ComplexScenario extends Scenario {
      * @throws DuplicatedIDException
      * @throws NonGatewayDeviceException
      * @throws AlreadyConnectedScenarioException
+     * @throws InvocationTargetException 
+     * @throws IllegalAccessException 
+     * @throws InstantiationException 
+     * @throws NoSuchMethodException 
+     * @throws IllegalArgumentException 
+     * @throws SecurityException 
      */
     public ComplexScenario(String type, String initialState,
             Properties properties)
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException, NonGatewayDeviceException,
-            AlreadyConnectedScenarioException {
+            AlreadyConnectedScenarioException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
         super(type, initialState, properties);
         this.scenarios = new HashMap<Scenario, List<Link>>();
 
@@ -67,12 +75,18 @@ public abstract class ComplexScenario extends Scenario {
      * @throws UnsupportedNetworkElementStatusException
      * @throws AlreadyConnectedScenarioException
      * @throws NonGatewayDeviceException
+     * @throws InvocationTargetException 
+     * @throws IllegalAccessException 
+     * @throws InstantiationException 
+     * @throws NoSuchMethodException 
+     * @throws IllegalArgumentException 
+     * @throws SecurityException 
      */
     abstract public void addScenarios()
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException, NonGatewayDeviceException,
-            AlreadyConnectedScenarioException;
+            AlreadyConnectedScenarioException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException;
 
     /**
      * Add the scenario to the complex scenario.
@@ -84,11 +98,23 @@ public abstract class ComplexScenario extends Scenario {
      * @throws TooManyConnectionException
      * @throws DuplicatedIDException
      * @throws AlreadyConnectedScenarioException
+     * @throws NoSuchMethodException 
+     * @throws SecurityException 
+     * @throws InvocationTargetException 
+     * @throws IllegalAccessException 
+     * @throws InstantiationException 
+     * @throws IllegalArgumentException 
      */
-    public void addScenario(Scenario scenario, Device gateway, Link externalLink)
+    public void addScenario(Class<? extends Scenario> scenarioClass, String scenarioID, String initialState, Properties properties, String gatewayDeviceID, String externalLinkID)
             throws NonGatewayDeviceException, TooManyConnectionException,
-            DuplicatedIDException, AlreadyConnectedScenarioException {
-        if (!scenario.getCurrentElements().containsKey(gateway.getID())) {
+            DuplicatedIDException, AlreadyConnectedScenarioException, SecurityException, NoSuchMethodException, IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
+        Constructor<? extends Scenario> c  = scenarioClass.getConstructor(new Class[]{String.class,String.class,Properties.class});
+        
+        Scenario scenario = c.newInstance(scenarioID,initialState,properties);
+
+        Device gateway = (Device) scenario.getNetworkElement(gatewayDeviceID);
+        Link externalLink = (Link) this.getNetworkElement(externalLinkID);
+        if (!scenario.getCurrentElements().containsKey(gatewayDeviceID)) {
             throw new NonGatewayDeviceException(scenario, gateway, externalLink);
         } else {
             gateway.connectToLink(externalLink);
@@ -96,7 +122,6 @@ public abstract class ComplexScenario extends Scenario {
                 this.addNetworkElement(externalLink);
             }
             if (!this.scenarios.containsKey(scenario)) {
-                scenario.addProperty(Scenario.SIMULATION_GUI, this.getProperty(Scenario.SIMULATION_GUI));
                 this.scenarios.put(scenario, new ArrayList<Link>());
             } else {
                 List<Link> externalLinks = this.scenarios.get(scenario);

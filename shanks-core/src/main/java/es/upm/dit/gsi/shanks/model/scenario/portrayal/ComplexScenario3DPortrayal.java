@@ -10,6 +10,7 @@ import sim.util.Double3D;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
+import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
@@ -76,8 +77,40 @@ public abstract class ComplexScenario3DPortrayal extends Scenario3DPortrayal {
                     this.drawLink((Link) element);
                 }
             }
+            if (scenario instanceof ComplexScenario) {
+                this.drawScenarioLinksLinks((ComplexScenario) scenario);
+            }
         } catch (DuplicatedPortrayalID e) {
             throw e;
+        }
+    }
+
+    /**
+     * @param complexScenario
+     */
+    private void drawScenarioLinksLinks(ComplexScenario complexScenario) {
+        HashMap<String, NetworkElement> elements = complexScenario
+                .getCurrentElements();
+        for (String id : elements.keySet()) {
+            NetworkElement element = elements.get(id);
+            if (element instanceof Link) {
+                this.drawLink((Link) element);
+            }
+            for (Scenario scenario : complexScenario.getScenarios()) {
+                if (scenario instanceof ComplexScenario) {
+                    this.drawScenarioLinksLinks((ComplexScenario) scenario);
+                } else {
+                    elements = scenario.getCurrentElements();
+                    for (String eid : elements.keySet()) {
+                        NetworkElement e = elements.get(eid);
+                        if (e instanceof Link) {
+                            this.drawLink((Link) e);
+                        }
+
+                    }
+                }
+            }
+
         }
     }
 

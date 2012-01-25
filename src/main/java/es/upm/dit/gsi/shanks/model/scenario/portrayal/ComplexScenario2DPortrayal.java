@@ -94,21 +94,20 @@ public abstract class ComplexScenario2DPortrayal extends Scenario2DPortrayal {
             if (element instanceof Link) {
                 this.drawLink((Link) element);
             }
-            for (Scenario scenario : complexScenario.getScenarios()) {
-                if (scenario instanceof ComplexScenario) {
-                    this.drawScenarioLinksLinks((ComplexScenario) scenario);
-                } else {
-                    elements = scenario.getCurrentElements();
-                    for (String eid : elements.keySet()) {
-                        NetworkElement e = elements.get(eid);
-                        if (e instanceof Link) {
-                            this.drawLink((Link) e);
-                        }
-
+        }
+        for (Scenario scenario : complexScenario.getScenarios()) {
+            if (scenario instanceof ComplexScenario) {
+                this.drawScenarioLinksLinks((ComplexScenario) scenario);
+            } else {
+                elements = scenario.getCurrentElements();
+                for (String eid : elements.keySet()) {
+                    NetworkElement e = elements.get(eid);
+                    if (e instanceof Link) {
+                        this.drawLink((Link) e);
                     }
+
                 }
             }
-
         }
     }
 }

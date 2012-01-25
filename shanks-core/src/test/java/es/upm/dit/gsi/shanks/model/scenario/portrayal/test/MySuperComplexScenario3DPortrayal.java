@@ -28,8 +28,8 @@ public class MySuperComplexScenario3DPortrayal extends
     @Override
     public void placeScenarios() throws DuplicatedPortrayalID, ScenarioNotFoundException {
         ComplexScenario cs = (ComplexScenario) this.getScenario();
-        this.situateScenario(cs.getScenario("ComplexScenario1"), new Double3D(0,0,0), ShanksMath.A0, ShanksMath.A0, ShanksMath.A0);
-        this.situateScenario(cs.getScenario("ComplexScenario2"), new Double3D(-100,0,0), ShanksMath.A0, ShanksMath.A180, ShanksMath.A0);
+        this.situateScenario(cs.getScenario("ComplexScenario1"), new Double3D(250,0,0), ShanksMath.A0, ShanksMath.A315, ShanksMath.A0);
+        this.situateScenario(cs.getScenario("ComplexScenario2"), new Double3D(0,0,250), ShanksMath.A0, ShanksMath.A45, ShanksMath.A0);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class MySuperComplexScenario3DPortrayal extends
         networkPortrayal.setPortrayalForAll(new MyLink3DPortrayal());
         
         this.scaleDisplay(Scenario3DPortrayal.MAIN_DISPLAY_ID, 1.5);
-        this.getDisplay(MAIN_DISPLAY_ID).setShowsAxes(false);
+//        this.getDisplay(MAIN_DISPLAY_ID).setShowsAxes(false);
     }
 
 }

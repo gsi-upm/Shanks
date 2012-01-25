@@ -48,7 +48,7 @@ public class MySuperComplexScenario3DPortrayal extends
         networkPortrayal.setPortrayalForAll(new MyLink3DPortrayal());
         
         this.scaleDisplay(Scenario3DPortrayal.MAIN_DISPLAY_ID, 1.5);
-//        this.getDisplay(MAIN_DISPLAY_ID).setShowsAxes(false);
+        this.getDisplay(MAIN_DISPLAY_ID).setShowsAxes(false);
     }
 
 }

@@ -18,8 +18,8 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
 public abstract class ComplexScenario3DPortrayal extends Scenario3DPortrayal {
 
     public ComplexScenario3DPortrayal(Scenario scenario, long width,
-            long height, long length)
-            throws DuplicatedPortrayalID, ScenarioNotFoundException {
+            long height, long length) throws DuplicatedPortrayalID,
+            ScenarioNotFoundException {
         super(scenario, width, height, length);
         this.placeScenarios();
     }
@@ -28,9 +28,10 @@ public abstract class ComplexScenario3DPortrayal extends Scenario3DPortrayal {
      * Place all scenarios of the ComplexScenario
      * 
      * @throws DuplicatedPortrayalID
-     * @throws ScenarioNotFoundException 
+     * @throws ScenarioNotFoundException
      */
-    abstract public void placeScenarios() throws DuplicatedPortrayalID, ScenarioNotFoundException;
+    abstract public void placeScenarios() throws DuplicatedPortrayalID,
+            ScenarioNotFoundException;
 
     /**
      * Situate the scenario in the complex scenario main display
@@ -41,7 +42,7 @@ public abstract class ComplexScenario3DPortrayal extends Scenario3DPortrayal {
      * @param beta
      * @param gamma
      * @throws DuplicatedPortrayalID
-     * @throws ScenarioNotFoundException 
+     * @throws ScenarioNotFoundException
      */
     public void situateScenario(Scenario scenario, Double3D position,
             Double2D alpha, Double2D beta, Double2D gamma)
@@ -96,21 +97,20 @@ public abstract class ComplexScenario3DPortrayal extends Scenario3DPortrayal {
             if (element instanceof Link) {
                 this.drawLink((Link) element);
             }
-            for (Scenario scenario : complexScenario.getScenarios()) {
-                if (scenario instanceof ComplexScenario) {
-                    this.drawScenarioLinksLinks((ComplexScenario) scenario);
-                } else {
-                    elements = scenario.getCurrentElements();
-                    for (String eid : elements.keySet()) {
-                        NetworkElement e = elements.get(eid);
-                        if (e instanceof Link) {
-                            this.drawLink((Link) e);
-                        }
-
+        }
+        for (Scenario scenario : complexScenario.getScenarios()) {
+            if (scenario instanceof ComplexScenario) {
+                this.drawScenarioLinksLinks((ComplexScenario) scenario);
+            } else {
+                elements = scenario.getCurrentElements();
+                for (String eid : elements.keySet()) {
+                    NetworkElement e = elements.get(eid);
+                    if (e instanceof Link) {
+                        this.drawLink((Link) e);
                     }
+
                 }
             }
-
         }
     }
 

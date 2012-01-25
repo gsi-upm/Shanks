@@ -30,6 +30,7 @@ public class MyComplexScenario3DPortrayal extends ComplexScenario3DPortrayal {
         ComplexScenario cs = (ComplexScenario) this.getScenario();        
         this.situateDevice((Device)cs.getNetworkElement("ED1"), 0, 0, 0);
         this.drawLink((Link)cs.getNetworkElement("EL1"));
+        this.drawLink((Link)cs.getNetworkElement("EL2"));
     }
 
     @Override

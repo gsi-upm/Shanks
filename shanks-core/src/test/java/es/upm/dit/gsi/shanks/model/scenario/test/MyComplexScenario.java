@@ -59,12 +59,15 @@ public class MyComplexScenario extends ComplexScenario {
     public void addNetworkElements()
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException, DuplicatedIDException {
-        Link el1 = new MyLink("EL1", MyLink.OK_STATUS, 3);
+        Link el1 = new MyLink("EL1", MyLink.OK_STATUS, 2);
+        Link el2 = new MyLink("EL2", MyLink.OK_STATUS, 2);
         Device ed1 = new MyDevice("ED1", MyDevice.OK_STATUS, true);
 
         this.addNetworkElement(ed1);
         ed1.connectToLink(el1);
+        ed1.connectToLink(el2);
         this.addNetworkElement(el1);
+        this.addNetworkElement(el2);
 
     }
 
@@ -129,7 +132,7 @@ public class MyComplexScenario extends ComplexScenario {
                 "D5", "EL1");
         p.put(MyScenario.CLOUDY_PROB, "50.0");
         this.addScenario(MyScenario.class, "Scenario2", MyScenario.SUNNY, p,
-                "D5", "EL1");
+                "D5", "EL2");
     }
 
     public static void main(String[] args) throws SecurityException,

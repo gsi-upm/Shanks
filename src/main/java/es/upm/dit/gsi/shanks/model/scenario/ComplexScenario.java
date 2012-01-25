@@ -96,6 +96,7 @@ public abstract class ComplexScenario extends Scenario {
                 this.addNetworkElement(externalLink);
             }
             if (!this.scenarios.containsKey(scenario)) {
+                scenario.addProperty(Scenario.SIMULATION_GUI, this.getProperty(Scenario.SIMULATION_GUI));
                 this.scenarios.put(scenario, new ArrayList<Link>());
             } else {
                 List<Link> externalLinks = this.scenarios.get(scenario);

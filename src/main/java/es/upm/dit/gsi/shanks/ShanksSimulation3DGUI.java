@@ -159,6 +159,7 @@ public class ShanksSimulation3DGUI extends GUIState {
             Continuous3D devicesGrid = (Continuous3D) devicesPortrayal
                     .getField();
             mainDisplay.scale(0.08 / devicesGrid.getHeight());
+            mainDisplay.setShowsAxes(true);
             scenarioPortrayal.addDisplay(Scenario3DPortrayal.MAIN_DISPLAY_ID,
                     mainDisplay);
 

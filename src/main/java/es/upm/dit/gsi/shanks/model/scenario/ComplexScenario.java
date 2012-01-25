@@ -24,6 +24,7 @@ import es.upm.dit.gsi.shanks.model.failure.exception.UnsupportedElementInFailure
 import es.upm.dit.gsi.shanks.model.scenario.exception.AlreadyConnectedScenarioException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.NonGatewayDeviceException;
+import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 
 /**
@@ -146,14 +147,15 @@ public abstract class ComplexScenario extends Scenario {
      * @param scenarioID
      * @return null if the ComplexScenario does not contains the searched
      *         scenarioID
+     * @throws ScenarioNotFoundException 
      */
-    public Scenario getScenario(String scenarioID) {
+    public Scenario getScenario(String scenarioID) throws ScenarioNotFoundException {
         for (Scenario s : this.scenarios.keySet()) {
             if (s.getID().equals(scenarioID)) {
                 return s;
             }
         }
-        return null;
+        throw new ScenarioNotFoundException(scenarioID,this.getID());
     }
 
     /*

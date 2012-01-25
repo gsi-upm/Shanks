@@ -16,6 +16,7 @@ import sim.display.GUIState;
 import sim.portrayal.FieldPortrayal2D;
 import sim.portrayal.Portrayal;
 import es.upm.dit.gsi.shanks.exception.DuplictaedDisplayID;
+import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
@@ -117,6 +118,9 @@ public class ShanksSimulation2DGUI extends GUIState {
         } catch (DuplicatedPortrayalID e) {
             logger.severe(e.getMessage());
             e.printStackTrace();
+        } catch (ScenarioNotFoundException e) {
+            logger.severe(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -125,7 +129,7 @@ public class ShanksSimulation2DGUI extends GUIState {
      * 
      * @see sim.display.GUIState#load(sim.engine.SimState)
      */
-    public void load(ShanksSimulation state) throws DuplicatedPortrayalID {
+    public void load(ShanksSimulation state) throws DuplicatedPortrayalID, ScenarioNotFoundException {
         super.load(state);
         this.getSimulation().getScenarioPortrayal().setupPortrayals();
     }
@@ -148,6 +152,9 @@ public class ShanksSimulation2DGUI extends GUIState {
 
             HashMap<String, Display2D> displays = scenarioPortrayal
                     .getDisplayList();
+            
+            this.addDisplays(scenarioPortrayal);
+            
             for (String displayID : displays.keySet()) {
                 Display2D display = displays.get(displayID);
                 display.setClipping(false);
@@ -163,7 +170,18 @@ public class ShanksSimulation2DGUI extends GUIState {
         } catch (DuplicatedPortrayalID e) {
             logger.severe(e.getMessage());
             e.printStackTrace();
+        } catch (ScenarioNotFoundException e) {
+            logger.severe(e.getMessage());
+            e.printStackTrace();
         }
+    }
+
+    /**
+     * To create extra displays
+     * @param scenarioPortrayal
+     */
+    public void addDisplays(Scenario2DPortrayal scenarioPortrayal) {
+        logger.info("No extra display to show");        
     }
 
     /*
@@ -193,6 +211,9 @@ public class ShanksSimulation2DGUI extends GUIState {
 
             }
         } catch (DuplicatedPortrayalID e) {
+            logger.severe(e.getMessage());
+            e.printStackTrace();
+        } catch (ScenarioNotFoundException e) {
             logger.severe(e.getMessage());
             e.printStackTrace();
         }

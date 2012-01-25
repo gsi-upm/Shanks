@@ -18,6 +18,7 @@ import sim.portrayal.Portrayal;
 import sim.portrayal3d.FieldPortrayal3D;
 import sim.portrayal3d.continuous.ContinuousPortrayal3D;
 import es.upm.dit.gsi.shanks.exception.DuplictaedDisplayID;
+import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
@@ -119,6 +120,9 @@ public class ShanksSimulation3DGUI extends GUIState {
         } catch (DuplicatedPortrayalID e) {
             logger.severe(e.getMessage());
             e.printStackTrace();
+        } catch (ScenarioNotFoundException e) {
+            logger.severe(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -127,7 +131,7 @@ public class ShanksSimulation3DGUI extends GUIState {
      * 
      * @see sim.display.GUIState#load(sim.engine.SimState)
      */
-    public void load(ShanksSimulation state) throws DuplicatedPortrayalID {
+    public void load(ShanksSimulation state) throws DuplicatedPortrayalID, ScenarioNotFoundException {
         super.load(state);
         this.getSimulation().getScenarioPortrayal().setupPortrayals();
     }
@@ -161,7 +165,9 @@ public class ShanksSimulation3DGUI extends GUIState {
             mainDisplay.setShowsAxes(true);
             scenarioPortrayal.addDisplay(Scenario3DPortrayal.MAIN_DISPLAY_ID,
                     mainDisplay);
-
+            
+            this.addDisplays(scenarioPortrayal);
+            
             for (String displayID : displays.keySet()) {
                 Display3D display = displays.get(displayID);
                 JFrame frame = display.createFrame();
@@ -177,7 +183,18 @@ public class ShanksSimulation3DGUI extends GUIState {
         } catch (DuplicatedPortrayalID e) {
             logger.severe(e.getMessage());
             e.printStackTrace();
+        } catch (ScenarioNotFoundException e) {
+            logger.severe(e.getMessage());
+            e.printStackTrace();
         }
+    }
+
+    /**
+     * To create extra displays
+     * @param scenarioPortrayal
+     */
+    public void addDisplays(Scenario3DPortrayal scenarioPortrayal) {
+        logger.info("No extra display to show");
     }
 
     /*
@@ -207,6 +224,9 @@ public class ShanksSimulation3DGUI extends GUIState {
 
             }
         } catch (DuplicatedPortrayalID e) {
+            logger.severe(e.getMessage());
+            e.printStackTrace();
+        } catch (ScenarioNotFoundException e) {
             logger.severe(e.getMessage());
             e.printStackTrace();
         }

@@ -10,6 +10,7 @@ import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.portrayal.test.MyLink3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
+import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ComplexScenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
@@ -19,8 +20,8 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
 public class MyComplexScenario3DPortrayal extends ComplexScenario3DPortrayal {
 
     public MyComplexScenario3DPortrayal(Scenario scenario, long width,
-            long height, long length, boolean showAllDisplays) throws DuplicatedPortrayalID {
-        super(scenario, width, height, length, showAllDisplays);
+            long height, long length) throws DuplicatedPortrayalID, ScenarioNotFoundException {
+        super(scenario, width, height, length);
     }
 
     @Override
@@ -46,7 +47,7 @@ public class MyComplexScenario3DPortrayal extends ComplexScenario3DPortrayal {
     }
 
     @Override
-    public void placeScenarios() throws DuplicatedPortrayalID {
+    public void placeScenarios() throws DuplicatedPortrayalID, ScenarioNotFoundException {
         ComplexScenario cs = (ComplexScenario) this.getScenario();
         this.situateScenario(cs.getScenario("Scenario1"), new Double3D(0,0,0), ShanksMath.A0, ShanksMath.A0, ShanksMath.A0);
         this.situateScenario(cs.getScenario("Scenario2"), new Double3D(0,0,0), ShanksMath.A0, ShanksMath.A270, ShanksMath.A180);

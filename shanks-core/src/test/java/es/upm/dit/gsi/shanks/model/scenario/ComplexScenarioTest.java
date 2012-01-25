@@ -4,6 +4,7 @@
  */
 package es.upm.dit.gsi.shanks.model.scenario;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
 
 import junit.framework.Assert;
@@ -17,6 +18,7 @@ import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementSt
 import es.upm.dit.gsi.shanks.model.scenario.exception.AlreadyConnectedScenarioException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.NonGatewayDeviceException;
+import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.test.MyComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
@@ -45,7 +47,7 @@ public class ComplexScenarioTest {
     public void createComplexScenario()
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, NonGatewayDeviceException, AlreadyConnectedScenarioException {
+            DuplicatedIDException, NonGatewayDeviceException, AlreadyConnectedScenarioException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
@@ -60,7 +62,7 @@ public class ComplexScenarioTest {
     public void createComplexScenarioAndGetScenarios()
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, NonGatewayDeviceException, AlreadyConnectedScenarioException {
+            DuplicatedIDException, NonGatewayDeviceException, AlreadyConnectedScenarioException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException, ScenarioNotFoundException {
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);

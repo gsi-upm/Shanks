@@ -78,6 +78,27 @@ public class NetworkElementTest {
     }
 
     @Test
+    public void createDeviceAndCheckChangedStatusAndChangedProperty() throws UnsupportedNetworkElementStatusException {
+        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
+        Assert.assertEquals("MyDevice", d.getID());
+        Assert.assertEquals(MyDevice.OK_STATUS, d.getCurrentStatus());
+        Assert.assertEquals(30, d.getProperty(MyDevice.TEMPERATURE_PROPERTY));
+        Assert.assertEquals("Windows", d.getProperty(MyDevice.OS_PROPERTY));
+        Assert.assertEquals(false, d.isGateway());
+        
+        d.setCurrentStatus(MyDevice.NOK_STATUS);
+        Assert.assertEquals("MyDevice", d.getID());
+        Assert.assertEquals(MyDevice.NOK_STATUS, d.getCurrentStatus());
+        Assert.assertEquals(90, d.getProperty(MyDevice.TEMPERATURE_PROPERTY));
+        Assert.assertEquals("Windows", d.getProperty(MyDevice.OS_PROPERTY));
+        Assert.assertEquals(false, d.isGateway());
+        
+        d.changeProperty(MyDevice.TEMPERATURE_PROPERTY, 50);
+        Assert.assertEquals(MyDevice.OK_STATUS, d.getCurrentStatus());
+        
+    }
+
+    @Test
     public void createGatewayDevice()
             throws UnsupportedNetworkElementStatusException {
         Device d = new MyDevice("MyDevice", MyDevice.NOK_STATUS, true);

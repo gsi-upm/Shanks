@@ -63,16 +63,16 @@ public abstract class Link extends NetworkElement {
             if (!this.linkedDevices.contains(device)) {
                 this.linkedDevices.add(device);
                 device.connectToLink(this);
-                logger.fine("Link " + this.getID() + " has Device " + device.getID() + " in its linked device list.");
+                logger.finer("Link " + this.getID() + " has Device " + device.getID() + " in its linked device list.");
             } else {
-                logger.fine("Link " + this.getID() + " already has Device " + device.getID() + " in its linked device list.");
+                logger.finer("Link " + this.getID() + " already has Device " + device.getID() + " in its linked device list.");
             }
         } else {
             if (!this.linkedDevices.contains(device)) {
-                logger.fine("Link " + this.getID() + " is full of its capacity. Device " + device.getID() + " was not included in its linked device list.");
+                logger.warning("Link " + this.getID() + " is full of its capacity. Device " + device.getID() + " was not included in its linked device list.");
                 throw new TooManyConnectionException(this);   
             } else {
-                logger.fine("Link " + this.getID() + " already has Device " + device.getID() + " in its linked device list.");
+                logger.finer("Link " + this.getID() + " already has Device " + device.getID() + " in its linked device list.");
             }
         }
     }

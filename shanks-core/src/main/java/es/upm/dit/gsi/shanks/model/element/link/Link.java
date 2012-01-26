@@ -39,7 +39,7 @@ public abstract class Link extends NetworkElement {
     }
 
     /**
-     * @return
+     * @return List of connected devices to the link
      */
     public List<Device> getLinkedDevices() {
         return linkedDevices;
@@ -47,15 +47,15 @@ public abstract class Link extends NetworkElement {
 
     /**
      * Get the capacity of the link (max number of connected device)
-     * @return
+     * @return the capacity
      */
     public int getCapacity() {
         return deviceCapacity;
     }
 
     /**
+     * Connect a device to the link
      * @param device
-     * @return
      * @throws TooManyConnectionException 
      */
     public void connectDevice(Device device) throws TooManyConnectionException {

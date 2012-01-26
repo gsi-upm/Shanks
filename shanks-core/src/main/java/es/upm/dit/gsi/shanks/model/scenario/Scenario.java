@@ -57,7 +57,11 @@ public abstract class Scenario {
     private HashMap<Class<? extends Failure>, List<Integer>> generatedFailureConfigurations;
 
     /**
-     * @param type
+     * Constructor of scenario
+     * 
+     * @param id
+     * @param initialState
+     * @param properties
      * @throws UnsupportedNetworkElementStatusException
      * @throws TooManyConnectionException
      * @throws UnsupportedScenarioStatusException
@@ -87,13 +91,13 @@ public abstract class Scenario {
     /**
      * Create the scenario portrayal (2D o 3D).
      *
-     * @return
+     * @return Scenario2DPortrayal or Scenario3DPortrayal object
      * @throws DuplicatedPortrayalID 
      * @throws ScenarioNotFoundException 
      */
     public ScenarioPortrayal createScenarioPortrayal() throws DuplicatedPortrayalID, ScenarioNotFoundException {
         logger.fine("Creating Scenario Portrayal...");
-        String dimensions = this.getProperty(Scenario.SIMULATION_GUI);
+        String dimensions = (String) this.getProperty(Scenario.SIMULATION_GUI);
         if (dimensions.equals(Scenario.SIMULATION_2D)) {
             logger.fine("Creating Scenario2DPortrayal");
             return this.createScenario2DPortrayal();   
@@ -221,7 +225,7 @@ public abstract class Scenario {
     }
 
     /**
-     * @return
+     * @return Map with key: NetworkElementID and value: NetworkElement
      */
     public HashMap<String, NetworkElement> getCurrentElements() {
         return this.currentElements;
@@ -243,9 +247,9 @@ public abstract class Scenario {
     
     /**
      * @param propertyKey
-     * @return
+     * @return the property value
      */
-    public String getProperty(String propertyKey) {
+    public Object getProperty(String propertyKey) {
         return this.properties.getProperty(propertyKey);
     }
     
@@ -289,14 +293,14 @@ public abstract class Scenario {
     }
 
     /**
-     * @return
+     * @return set of current active failures in the scenario
      */
     public Set<Failure> getCurrentFailures() {
         return this.currentFailures.keySet();
     }
 
     /**
-     * @return
+     * @return Map with key: Failure object and value: Combination Number
      */
     protected HashMap<Failure,Integer> getFullCurrentFailures() {
         return this.currentFailures;
@@ -343,7 +347,7 @@ public abstract class Scenario {
     }
 
     /**
-     * @return
+     * @return Map with key: Concrete Failure Class and value: List of combinations of the failure
      */
     public HashMap<Class<? extends Failure>, List<Set<NetworkElement>>> getPossibleFailures() {
         return this.possibleFailures;
@@ -504,7 +508,7 @@ public abstract class Scenario {
      * Return the network element with these id
      * 
      * @param id
-     * @return
+     * @return NetworkElement object
      */
     public NetworkElement getNetworkElement(String id) {
         return this.currentElements.get(id);

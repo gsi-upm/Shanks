@@ -97,21 +97,21 @@ public class ShanksSimulation extends SimState {
     }
 
     /**
-     * @return
+     * @return ScenarioManager of the simulation
      */
     public ScenarioManager getScenarioManager() {
         return this.scenarioManager;
     }
 
     /**
-     * @return
+     * @return Scenario of the simulation
      */
     public Scenario getScenario() {
         return this.scenarioManager.getScenario();
     }
 
     /**
-     * @return
+     * @return ScenarioPortrayal of the scenario of the simulation
      * @throws DuplicatedPortrayalID 
      * @throws ScenarioNotFoundException 
      */
@@ -161,9 +161,9 @@ public class ShanksSimulation extends SimState {
     }
 
     /**
-     * It is required to add steppables
+     * It is required to add Steppables
      * 
-     * @return
+     * @return Schedule of the simulation
      */
     public Schedule getSchedule() {
         return schedule;

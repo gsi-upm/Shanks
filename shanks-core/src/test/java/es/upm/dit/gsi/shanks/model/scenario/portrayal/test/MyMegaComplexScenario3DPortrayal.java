@@ -57,11 +57,11 @@ public class MyMegaComplexScenario3DPortrayal extends
             ScenarioNotFoundException {
         ComplexScenario cs = (ComplexScenario) this.getScenario();
         this.situateScenario(cs.getScenario("SuperComplexScenario1"),
-                new Double3D(0, 0, 0), ShanksMath.A0, ShanksMath.A0,
-                ShanksMath.A0);
+                new Double3D(0, 0, 0), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0,
+                ShanksMath.ANGLE_0);
         this.situateScenario(cs.getScenario("SuperComplexScenario2"),
-                new Double3D(-300, 0, -300), ShanksMath.A0, ShanksMath.A180,
-                ShanksMath.A0);
+                new Double3D(-300, 0, -300), ShanksMath.ANGLE_0, ShanksMath.ANGLE_180,
+                ShanksMath.ANGLE_0);
     }
 
 }

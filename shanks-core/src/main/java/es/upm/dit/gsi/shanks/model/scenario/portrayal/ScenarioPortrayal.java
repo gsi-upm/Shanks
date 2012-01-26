@@ -24,7 +24,7 @@ public abstract class ScenarioPortrayal {
     }
     
     /**
-     * @return
+     * @return Scenario of this portrayal
      */
     public Scenario getScenario() {
         return this.scenario;

@@ -47,7 +47,7 @@ public class ShanksSimulation3DGUI extends GUIState {
 
     /**
      * @param img
-     * @return
+     * @return Image object
      */
     public static Image loadImage(String img) {
         return new ImageIcon(ShanksSimulation.class.getResource(img))
@@ -65,7 +65,7 @@ public class ShanksSimulation3DGUI extends GUIState {
     }
 
     /**
-     * @return
+     * @return Simulation of the GUI
      */
     public ShanksSimulation getSimulation() {
         return (ShanksSimulation) state;

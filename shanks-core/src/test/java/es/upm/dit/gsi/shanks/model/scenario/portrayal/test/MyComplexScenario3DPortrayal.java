@@ -50,8 +50,8 @@ public class MyComplexScenario3DPortrayal extends ComplexScenario3DPortrayal {
     @Override
     public void placeScenarios() throws DuplicatedPortrayalID, ScenarioNotFoundException {
         ComplexScenario cs = (ComplexScenario) this.getScenario();
-        this.situateScenario(cs.getScenario("Scenario1"), new Double3D(0,0,0), ShanksMath.A0, ShanksMath.A0, ShanksMath.A0);
-        this.situateScenario(cs.getScenario("Scenario2"), new Double3D(0,0,0), ShanksMath.A0, ShanksMath.A270, ShanksMath.A180);
+        this.situateScenario(cs.getScenario("Scenario1"), new Double3D(0,0,0), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
+        this.situateScenario(cs.getScenario("Scenario2"), new Double3D(0,0,0), ShanksMath.ANGLE_0, ShanksMath.ANGLE_270, ShanksMath.ANGLE_180);
         
     }
 

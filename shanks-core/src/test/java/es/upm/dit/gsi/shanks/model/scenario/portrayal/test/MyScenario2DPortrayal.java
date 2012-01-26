@@ -12,12 +12,25 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 
+/**
+ * @author a.carrera
+ *
+ */
 public class MyScenario2DPortrayal extends Scenario2DPortrayal {
 
+    /**
+     * @param scenario
+     * @param width
+     * @param height
+     * @throws DuplicatedPortrayalIDException
+     */
     public MyScenario2DPortrayal(Scenario scenario, int width, int height) throws DuplicatedPortrayalIDException {
         super(scenario, width, height);
     }
 
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal#placeElements()
+     */
     @Override
     public void placeElements() {
         
@@ -34,6 +47,9 @@ public class MyScenario2DPortrayal extends Scenario2DPortrayal {
         
     }
 
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal#setupPortrayals()
+     */
     @Override
     public void setupPortrayals() {
         ContinuousPortrayal2D devicePortrayal = (ContinuousPortrayal2D) this.getPortrayals().get(Scenario2DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.DEVICES_PORTRAYAL);

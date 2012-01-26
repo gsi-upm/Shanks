@@ -9,6 +9,10 @@ import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device2DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 
+/**
+ * @author a.carrera
+ *
+ */
 public class MyDevice2DPortrayal extends Device2DPortrayal implements Portrayal {
 
     /**
@@ -16,6 +20,9 @@ public class MyDevice2DPortrayal extends Device2DPortrayal implements Portrayal 
      */
     private static final long serialVersionUID = 3180819560173840065L;
 
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.element.device.portrayal.Device2DPortrayal#draw(java.lang.Object, java.awt.Graphics2D, sim.portrayal.DrawInfo2D)
+     */
     @Override
     public void draw(Object object, Graphics2D graphics, DrawInfo2D info) {
 

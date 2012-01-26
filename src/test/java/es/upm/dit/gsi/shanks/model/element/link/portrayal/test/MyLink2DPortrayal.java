@@ -10,13 +10,21 @@ import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.portrayal.Link2DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
 
+/**
+ * @author a.carrera
+ *
+ */
 public class MyLink2DPortrayal extends Link2DPortrayal {
+
 
     /**
      * 
      */
     private static final long serialVersionUID = -7612525235009977268L;
 
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.element.link.portrayal.Link2DPortrayal#draw(java.lang.Object, java.awt.Graphics2D, sim.portrayal.DrawInfo2D)
+     */
     public void draw(Object object, Graphics2D graphics, DrawInfo2D info) {
         Edge e = (Edge) object;
 
@@ -24,12 +32,17 @@ public class MyLink2DPortrayal extends Link2DPortrayal {
         if (link.getCapacity() == 2) {
             this.drawSimpleLink(link, object, graphics, info);
         } else if (link.getCapacity() > 2) {
-//            this.drawSimpleLink(link, object, graphics, info);
             this.drawComplexLink(link, object, graphics, info);
         }
 
     }
 
+    /**
+     * @param link
+     * @param object
+     * @param graphics
+     * @param info
+     */
     private void drawComplexLink(Link link, Object object, Graphics2D graphics,
             DrawInfo2D info) {
 
@@ -63,6 +76,12 @@ public class MyLink2DPortrayal extends Link2DPortrayal {
         graphics.drawString(link.getID(), midX - 5, midY);
     }
 
+    /**
+     * @param link
+     * @param object
+     * @param graphics
+     * @param info
+     */
     private void drawSimpleLink(Link link, Object object, Graphics2D graphics,
             DrawInfo2D info) {
         EdgeDrawInfo2D ei = (EdgeDrawInfo2D) info;

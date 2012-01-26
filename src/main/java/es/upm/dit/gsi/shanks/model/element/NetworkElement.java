@@ -79,6 +79,22 @@ public abstract class NetworkElement {
             throw new UnsupportedNetworkElementStatusException();
         }
     }
+    
+    /**
+     * @param desiredStatus the currentStatus to set
+     * @return true if the status was set correctly and false if the status is not a possible status of the network element
+     * @throws UnsupportedNetworkElementStatusException 
+     */
+    public boolean updateStatusTo(String desiredStatus) throws UnsupportedNetworkElementStatusException {
+        if (this.isPossibleStatus(desiredStatus)) {
+            this.currentStatus = desiredStatus;
+            logger.fine("Network Element Status updated -> ElementID: " + this.getID() + " Current Status: " + desiredStatus);
+            return true;
+        } else {
+            logger.warning("Impossible to update status: " + desiredStatus + ". This network element " + this.getID() + "does not support this status.");
+            throw new UnsupportedNetworkElementStatusException();
+        }
+    }
 
 
     /**
@@ -88,8 +104,9 @@ public abstract class NetworkElement {
 
     /**
      * This method check properties and change them depending on the current status
+     * @throws UnsupportedNetworkElementStatusException 
      */
-    abstract public void checkProperties();
+    abstract public void checkProperties() throws UnsupportedNetworkElementStatusException;
 
 
     /**
@@ -132,11 +149,22 @@ public abstract class NetworkElement {
      * 
      * @param propertyName
      * @param propertyValue
+     * @throws UnsupportedNetworkElementStatusException 
      */
-    public void changeProperty(String propertyName, Object propertyValue) {
+    public void changeProperty(String propertyName, Object propertyValue) throws UnsupportedNetworkElementStatusException {
         this.properties.put(propertyName, propertyValue);
+        this.checkStatus();
     }
     
+    /**
+     * This method check status and change them depending on the current properties
+     * This method must use updateStatusTo(String desiredStatus) method to change element status.
+     * WARNING: Do not use setCurrentStatus(String desiredStatus) to avoid an infinitive loop
+     * @throws UnsupportedNetworkElementStatusException 
+     */
+    abstract public void checkStatus() throws UnsupportedNetworkElementStatusException;
+
+
     /**
      * @param propertyName
      * @return property value

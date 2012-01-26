@@ -39,7 +39,7 @@ public abstract class Link extends NetworkElement {
     }
 
     /**
-     * @return
+     * @return List of connected devices to the link
      */
     public List<Device> getLinkedDevices() {
         return linkedDevices;
@@ -47,15 +47,15 @@ public abstract class Link extends NetworkElement {
 
     /**
      * Get the capacity of the link (max number of connected device)
-     * @return
+     * @return the capacity
      */
     public int getCapacity() {
         return deviceCapacity;
     }
 
     /**
+     * Connect a device to the link
      * @param device
-     * @return
      * @throws TooManyConnectionException 
      */
     public void connectDevice(Device device) throws TooManyConnectionException {
@@ -63,16 +63,16 @@ public abstract class Link extends NetworkElement {
             if (!this.linkedDevices.contains(device)) {
                 this.linkedDevices.add(device);
                 device.connectToLink(this);
-                logger.fine("Link " + this.getID() + " has Device " + device.getID() + " in its linked device list.");
+                logger.finer("Link " + this.getID() + " has Device " + device.getID() + " in its linked device list.");
             } else {
-                logger.fine("Link " + this.getID() + " already has Device " + device.getID() + " in its linked device list.");
+                logger.finer("Link " + this.getID() + " already has Device " + device.getID() + " in its linked device list.");
             }
         } else {
             if (!this.linkedDevices.contains(device)) {
-                logger.fine("Link " + this.getID() + " is full of its capacity. Device " + device.getID() + " was not included in its linked device list.");
+                logger.warning("Link " + this.getID() + " is full of its capacity. Device " + device.getID() + " was not included in its linked device list.");
                 throw new TooManyConnectionException(this);   
             } else {
-                logger.fine("Link " + this.getID() + " already has Device " + device.getID() + " in its linked device list.");
+                logger.finer("Link " + this.getID() + " already has Device " + device.getID() + " in its linked device list.");
             }
         }
     }

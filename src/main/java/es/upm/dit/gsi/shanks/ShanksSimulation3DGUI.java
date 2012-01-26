@@ -3,7 +3,7 @@ package es.upm.dit.gsi.shanks;
 import java.awt.Color;
 import java.awt.Image;
 import java.util.HashMap;
-import java.util.Set;
+import java.util.Map.Entry;
 import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
@@ -17,10 +17,11 @@ import sim.field.continuous.Continuous3D;
 import sim.portrayal.Portrayal;
 import sim.portrayal3d.FieldPortrayal3D;
 import sim.portrayal3d.continuous.ContinuousPortrayal3D;
-import es.upm.dit.gsi.shanks.exception.DuplictaedDisplayID;
+import es.upm.dit.gsi.shanks.exception.DuplictaedDisplayIDException;
+import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 
 /**
  * ShanksSimulation3DGUI class
@@ -46,7 +47,7 @@ public class ShanksSimulation3DGUI extends GUIState {
 
     /**
      * @param img
-     * @return
+     * @return Image object
      */
     public static Image loadImage(String img) {
         return new ImageIcon(ShanksSimulation.class.getResource(img))
@@ -64,7 +65,7 @@ public class ShanksSimulation3DGUI extends GUIState {
     }
 
     /**
-     * @return
+     * @return Simulation of the GUI
      */
     public ShanksSimulation getSimulation() {
         return (ShanksSimulation) state;
@@ -95,10 +96,9 @@ public class ShanksSimulation3DGUI extends GUIState {
                     .getSimulation().getScenarioPortrayal();
             HashMap<String, Display3D> displays = scenarioPortrayal
                     .getDisplayList();
-            for (String s : displays.keySet()) {
-                Display3D display = displays.get(s);
-                display.reset();
-                display.repaint();
+            for (Entry<String, Display3D> entry : displays.entrySet()) {
+                entry.getValue().reset();
+                entry.getValue().repaint();
             }
 
             ShanksSimulation sim = this.getSimulation();
@@ -106,17 +106,17 @@ public class ShanksSimulation3DGUI extends GUIState {
             sp = sim.getScenarioPortrayal();
             HashMap<String, HashMap<String, Portrayal>> portrayals = sp
                     .getPortrayals();
-            Set<String> set = portrayals.keySet();
-            for (String displayID : set) {
-                Display3D display = displays.get(displayID);
-                HashMap<String, Portrayal> displayPortrayals = portrayals
-                        .get(displayID);
-                for (String portrayalID : displayPortrayals.keySet()) {
-                    display.attach((FieldPortrayal3D) displayPortrayals
-                            .get(portrayalID), portrayalID);
+            for (Entry<String, HashMap<String, Portrayal>> displayEntry : portrayals.entrySet()) {
+                Display3D display = displays.get(displayEntry.getKey());
+                HashMap<String, Portrayal> displayPortrayals = displayEntry.getValue();
+                for (Entry<String, Portrayal> portrayalEntry : displayPortrayals.entrySet()) {
+                    display.attach((FieldPortrayal3D) portrayalEntry.getValue(), portrayalEntry.getKey());
                 }
             }
-        } catch (DuplicatedPortrayalID e) {
+        } catch (DuplicatedPortrayalIDException e) {
+            logger.severe(e.getMessage());
+            e.printStackTrace();
+        } catch (ScenarioNotFoundException e) {
             logger.severe(e.getMessage());
             e.printStackTrace();
         }
@@ -127,7 +127,7 @@ public class ShanksSimulation3DGUI extends GUIState {
      * 
      * @see sim.display.GUIState#load(sim.engine.SimState)
      */
-    public void load(ShanksSimulation state) throws DuplicatedPortrayalID {
+    public void load(ShanksSimulation state) throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
         super.load(state);
         this.getSimulation().getScenarioPortrayal().setupPortrayals();
     }
@@ -150,7 +150,6 @@ public class ShanksSimulation3DGUI extends GUIState {
 
             HashMap<String, Display3D> displays = scenarioPortrayal
                     .getDisplayList();
-            HashMap<String, JFrame> frames = scenarioPortrayal.getFrameList();
             ContinuousPortrayal3D devicesPortrayal;
             devicesPortrayal = (ContinuousPortrayal3D) sim
                     .getScenarioPortrayal().getPortrayals()
@@ -159,25 +158,38 @@ public class ShanksSimulation3DGUI extends GUIState {
             Continuous3D devicesGrid = (Continuous3D) devicesPortrayal
                     .getField();
             mainDisplay.scale(0.08 / devicesGrid.getHeight());
+            mainDisplay.setShowsAxes(true);
             scenarioPortrayal.addDisplay(Scenario3DPortrayal.MAIN_DISPLAY_ID,
                     mainDisplay);
-
-            for (String displayID : displays.keySet()) {
-                Display3D display = displays.get(displayID);
-                JFrame frame = display.createFrame();
-                frames.put(displayID, frame);
-                frame.setTitle(displayID);
+            
+            this.addDisplays(scenarioPortrayal);
+            
+            for (Entry<String, Display3D> displayEntry : displays.entrySet()) {
+                JFrame frame = displayEntry.getValue().createFrame();
+                scenarioPortrayal.addFrame(displayEntry.getKey(), frame);
+                frame.setTitle(displayEntry.getKey());
                 c.registerFrame(frame);
                 frame.setVisible(true);
-                display.getSelectionBehavior().setTolerance(10.0f);
+                displayEntry.getValue().getSelectionBehavior().setTolerance(10.0f);
             }
-        } catch (DuplictaedDisplayID e) {
+        } catch (DuplictaedDisplayIDException e) {
             logger.severe(e.getMessage());
             e.printStackTrace();
-        } catch (DuplicatedPortrayalID e) {
+        } catch (DuplicatedPortrayalIDException e) {
+            logger.severe(e.getMessage());
+            e.printStackTrace();
+        } catch (ScenarioNotFoundException e) {
             logger.severe(e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    /**
+     * To create extra displays
+     * @param scenarioPortrayal
+     */
+    public void addDisplays(Scenario3DPortrayal scenarioPortrayal) {
+        logger.info("No extra display to show");
     }
 
     /*
@@ -197,16 +209,18 @@ public class ShanksSimulation3DGUI extends GUIState {
             HashMap<String, Display3D> displays = scenarioPortrayal
                     .getDisplayList();
             HashMap<String, JFrame> frames = scenarioPortrayal.getFrameList();
-            for (String frameID : frames.keySet()) {
-                JFrame frame = frames.get(frameID);
-                if (frame != null) {
-                    frame.dispose();
-                    frames.remove(frameID);
-                    displays.remove(frameID);
+            for (Entry<String, JFrame> frameEntry : frames.entrySet()) {
+                if (frameEntry.getValue() != null) {
+                    frameEntry.getValue().dispose();
+                    frames.remove(frameEntry.getKey());
+                    displays.remove(frameEntry.getKey());
                 }
 
             }
-        } catch (DuplicatedPortrayalID e) {
+        } catch (DuplicatedPortrayalIDException e) {
+            logger.severe(e.getMessage());
+            e.printStackTrace();
+        } catch (ScenarioNotFoundException e) {
             logger.severe(e.getMessage());
             e.printStackTrace();
         }

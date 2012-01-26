@@ -5,7 +5,7 @@ import java.util.HashMap;
 import sim.field.network.Network;
 import sim.portrayal.Portrayal;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 
 public abstract class ScenarioPortrayal {
     
@@ -24,7 +24,7 @@ public abstract class ScenarioPortrayal {
     }
     
     /**
-     * @return
+     * @return Scenario of this portrayal
      */
     public Scenario getScenario() {
         return this.scenario;
@@ -63,9 +63,9 @@ public abstract class ScenarioPortrayal {
      * @param displayID
      * @param portrayalID
      * @param portrayal
-     * @throws DuplicatedPortrayalID 
+     * @throws DuplicatedPortrayalIDException 
      */
-    public void addPortrayal(String displayID, String portrayalID, Portrayal portrayal) throws DuplicatedPortrayalID {
+    public void addPortrayal(String displayID, String portrayalID, Portrayal portrayal) throws DuplicatedPortrayalIDException {
         if (!this.portrayals.containsKey(displayID)) {
             this.portrayals.put(displayID, new HashMap<String,Portrayal>());
         }
@@ -73,7 +73,7 @@ public abstract class ScenarioPortrayal {
         if (!displayPortrayals.containsKey(portrayalID)) {
             displayPortrayals.put(portrayalID, portrayal);
         } else {
-            throw new DuplicatedPortrayalID(displayID,portrayalID);
+            throw new DuplicatedPortrayalIDException(displayID,portrayalID);
         }
     }
     

@@ -19,14 +19,16 @@ import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
+import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 
+/**
+ * @author a.carrera
+ *
+ */
 public class MyShanksSimulation extends ShanksSimulation {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = 1778288778609950190L;
     private List<Steppable> stepabbles;
     private Properties configuration;
@@ -35,19 +37,25 @@ public class MyShanksSimulation extends ShanksSimulation {
 
     /**
      * @param seed
-     * @throws DuplicatedIDException 
-     * @throws UnsupportedScenarioStatusException 
-     * @throws TooManyConnectionException 
-     * @throws UnsupportedNetworkElementStatusException 
-     * @throws InvocationTargetException 
-     * @throws IllegalAccessException 
-     * @throws InstantiationException 
-     * @throws NoSuchMethodException 
-     * @throws IllegalArgumentException 
-     * @throws SecurityException 
-     * @throws DuplicatedPortrayalID 
+     * @param scenarioClass
+     * @param scenarioID
+     * @param initialState
+     * @param properties
+     * @param configPropertiesMyShanksSimulation
+     * @throws SecurityException
+     * @throws IllegalArgumentException
+     * @throws NoSuchMethodException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws InvocationTargetException
+     * @throws UnsupportedNetworkElementStatusException
+     * @throws TooManyConnectionException
+     * @throws UnsupportedScenarioStatusException
+     * @throws DuplicatedIDException
+     * @throws DuplicatedPortrayalIDException
+     * @throws ScenarioNotFoundException
      */
-    public MyShanksSimulation(long seed, Class<? extends Scenario> scenarioClass, String scenarioID, String initialState, Properties properties, Properties configPropertiesMyShanksSimulation) throws SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException, UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException, DuplicatedPortrayalID {
+    public MyShanksSimulation(long seed, Class<? extends Scenario> scenarioClass, String scenarioID, String initialState, Properties properties, Properties configPropertiesMyShanksSimulation) throws SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException, UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException, DuplicatedPortrayalIDException, ScenarioNotFoundException {
         super(seed, scenarioClass, scenarioID, initialState, properties);
         this.stepabbles = new ArrayList<Steppable>();
         this.config(configPropertiesMyShanksSimulation);
@@ -100,27 +108,10 @@ public class MyShanksSimulation extends ShanksSimulation {
         };
         this.stepabbles.add(resolver);
     }
-//
-//    /**
-//     * 
-//     */
-//    private static final long serialVersionUID = -3889593103393654950L;
-//
-//    @Override
-//    public ScenarioManager createScenarioManager(String dimensions)
-//            throws UnsupportedNetworkElementStatusException,
-//            TooManyConnectionException, UnsupportedScenarioStatusException,
-//            DuplicatedIDException {
-//        Scenario s = new MyScenario("MyScenario", MyScenario.CLOUDY, 50);
-//        logger.warning("Scenario created");
-//        ScenarioPortrayal sp = s.createScenarioPortrayal(dimensions);
-//        if (sp==null) {
-//            logger.warning("ScenarioPortrayals is null");
-//        }
-//        ScenarioManager sm = new ScenarioManager(s, sp);
-//        return sm;
-//    }
 
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.ShanksSimulation#addSteppables()
+     */
     @Override
     public void addSteppables() {
         int conf = new Integer(this.configuration.getProperty(MyShanksSimulation.CONFIGURATION));

@@ -21,7 +21,8 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
  * @author a.carrera
  *
  */
-public class MyComplexScenario3DPortrayal extends ComplexScenario3DPortrayal {
+public class MyMegaComplexScenario3DPortrayal extends
+        ComplexScenario3DPortrayal {
 
     /**
      * @param scenario
@@ -31,8 +32,9 @@ public class MyComplexScenario3DPortrayal extends ComplexScenario3DPortrayal {
      * @throws DuplicatedPortrayalIDException
      * @throws ScenarioNotFoundException
      */
-    public MyComplexScenario3DPortrayal(Scenario scenario, long width,
-            long height, long length) throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
+    public MyMegaComplexScenario3DPortrayal(Scenario scenario, long width,
+            long height, long length) throws DuplicatedPortrayalIDException,
+            ScenarioNotFoundException {
         super(scenario, width, height, length);
     }
 
@@ -41,11 +43,9 @@ public class MyComplexScenario3DPortrayal extends ComplexScenario3DPortrayal {
      */
     @Override
     public void placeElements() {
-        
-        ComplexScenario cs = (ComplexScenario) this.getScenario();        
-        this.situateDevice((Device)cs.getNetworkElement("ED1"), 0, 0, 0);
-        this.drawLink((Link)cs.getNetworkElement("EL1"));
-        this.drawLink((Link)cs.getNetworkElement("EL2"));
+        ComplexScenario cs = (ComplexScenario) this.getScenario();
+        this.situateDevice((Device) cs.getNetworkElement("MED1"), -150, 500, -150);
+        this.drawLink((Link) cs.getNetworkElement("MEL1"));
     }
 
     /* (non-Javadoc)
@@ -53,15 +53,20 @@ public class MyComplexScenario3DPortrayal extends ComplexScenario3DPortrayal {
      */
     @Override
     public void setupPortrayals() {
-        
-        //Global
-        ContinuousPortrayal3D devicePortrayal = (ContinuousPortrayal3D) this.getPortrayals().get(Scenario3DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.DEVICES_PORTRAYAL);
-        NetworkPortrayal3D networkPortrayal = (NetworkPortrayal3D) this.getPortrayals().get(Scenario3DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.LINKS_PORTRAYAL);
-        devicePortrayal.setPortrayalForClass(MyDevice.class, new MyDevice3DPortrayal());
+
+        // Global
+        ContinuousPortrayal3D devicePortrayal = (ContinuousPortrayal3D) this
+                .getPortrayals().get(Scenario3DPortrayal.MAIN_DISPLAY_ID)
+                .get(ScenarioPortrayal.DEVICES_PORTRAYAL);
+        NetworkPortrayal3D networkPortrayal = (NetworkPortrayal3D) this
+                .getPortrayals().get(Scenario3DPortrayal.MAIN_DISPLAY_ID)
+                .get(ScenarioPortrayal.LINKS_PORTRAYAL);
+        devicePortrayal.setPortrayalForClass(MyDevice.class,
+                new MyDevice3DPortrayal());
         networkPortrayal.setPortrayalForAll(new MyLink3DPortrayal());
-        
+
         this.scaleDisplay(Scenario3DPortrayal.MAIN_DISPLAY_ID, 1.5);
-        this.getDisplay(MAIN_DISPLAY_ID).setShowsAxes(false);
+//        this.getDisplay(MAIN_DISPLAY_ID).setShowsAxes(false);
 
     }
 
@@ -69,11 +74,15 @@ public class MyComplexScenario3DPortrayal extends ComplexScenario3DPortrayal {
      * @see es.upm.dit.gsi.shanks.model.scenario.portrayal.ComplexScenario3DPortrayal#placeScenarios()
      */
     @Override
-    public void placeScenarios() throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
+    public void placeScenarios() throws DuplicatedPortrayalIDException,
+            ScenarioNotFoundException {
         ComplexScenario cs = (ComplexScenario) this.getScenario();
-        this.situateScenario(cs.getScenario("Scenario1"), new Double3D(0,0,0), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
-        this.situateScenario(cs.getScenario("Scenario2"), new Double3D(0,0,0), ShanksMath.ANGLE_0, ShanksMath.ANGLE_270, ShanksMath.ANGLE_180);
-        
+        this.situateScenario(cs.getScenario("SuperComplexScenario1"),
+                new Double3D(0, 0, 0), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0,
+                ShanksMath.ANGLE_0);
+        this.situateScenario(cs.getScenario("SuperComplexScenario2"),
+                new Double3D(-300, 0, -300), ShanksMath.ANGLE_0, ShanksMath.ANGLE_180,
+                ShanksMath.ANGLE_0);
     }
 
 }

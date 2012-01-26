@@ -20,10 +20,14 @@ import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementSt
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
 
+/**
+ * @author a.carrera
+ *
+ */
 public class NetworkElementTest {
-
+    
     /**
-     * @throws java.lang.Exception
+     * @throws Exception
      */
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
@@ -33,14 +37,23 @@ public class NetworkElementTest {
         
     }
 
+    /**
+     * @throws Exception
+     */
     @Before
     public void setUp() throws Exception {
     }
 
+    /**
+     * @throws Exception
+     */
     @After
     public void tearDown() throws Exception {
     }
 
+    /**
+     * @throws UnsupportedNetworkElementStatusException
+     */
     @Test
     public void createDevice() throws UnsupportedNetworkElementStatusException {
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
@@ -49,6 +62,9 @@ public class NetworkElementTest {
         Assert.assertEquals(false, d.isGateway());
     }
 
+    /**
+     * @throws UnsupportedNetworkElementStatusException
+     */
     @Test
     public void createDeviceAndCheckInitialStatus() throws UnsupportedNetworkElementStatusException {
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
@@ -59,6 +75,9 @@ public class NetworkElementTest {
         Assert.assertEquals(false, d.isGateway());
     }
 
+    /**
+     * @throws UnsupportedNetworkElementStatusException
+     */
     @Test
     public void createDeviceAndCheckChangedStatus() throws UnsupportedNetworkElementStatusException {
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
@@ -77,6 +96,33 @@ public class NetworkElementTest {
         
     }
 
+    /**
+     * @throws UnsupportedNetworkElementStatusException
+     */
+    @Test
+    public void createDeviceAndCheckChangedStatusAndChangedProperty() throws UnsupportedNetworkElementStatusException {
+        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
+        Assert.assertEquals("MyDevice", d.getID());
+        Assert.assertEquals(MyDevice.OK_STATUS, d.getCurrentStatus());
+        Assert.assertEquals(30, d.getProperty(MyDevice.TEMPERATURE_PROPERTY));
+        Assert.assertEquals("Windows", d.getProperty(MyDevice.OS_PROPERTY));
+        Assert.assertEquals(false, d.isGateway());
+        
+        d.setCurrentStatus(MyDevice.NOK_STATUS);
+        Assert.assertEquals("MyDevice", d.getID());
+        Assert.assertEquals(MyDevice.NOK_STATUS, d.getCurrentStatus());
+        Assert.assertEquals(90, d.getProperty(MyDevice.TEMPERATURE_PROPERTY));
+        Assert.assertEquals("Windows", d.getProperty(MyDevice.OS_PROPERTY));
+        Assert.assertEquals(false, d.isGateway());
+        
+        d.changeProperty(MyDevice.TEMPERATURE_PROPERTY, 50);
+        Assert.assertEquals(MyDevice.OK_STATUS, d.getCurrentStatus());
+        
+    }
+
+    /**
+     * @throws UnsupportedNetworkElementStatusException
+     */
     @Test
     public void createGatewayDevice()
             throws UnsupportedNetworkElementStatusException {
@@ -86,6 +132,9 @@ public class NetworkElementTest {
         Assert.assertEquals(true, d.isGateway());
     }
 
+    /**
+     * @throws UnsupportedNetworkElementStatusException
+     */
     @Test
     public void createDeviceChangeStatus()
             throws UnsupportedNetworkElementStatusException {
@@ -99,6 +148,9 @@ public class NetworkElementTest {
         Assert.assertEquals(MyDevice.OK_STATUS, d.getCurrentStatus());
     }
 
+    /**
+     * @throws UnsupportedNetworkElementStatusException
+     */
     @Test
     public void createDeviceChangeToImpossibleStatus()
             throws UnsupportedNetworkElementStatusException {
@@ -112,6 +164,9 @@ public class NetworkElementTest {
         Assert.assertTrue(catched);
     }
 
+    /**
+     * @throws UnsupportedNetworkElementStatusException
+     */
     @Test
     public void createDeviceWithImpossibleStatus()
             throws UnsupportedNetworkElementStatusException {
@@ -124,6 +179,9 @@ public class NetworkElementTest {
         Assert.assertTrue(catched);
     }
 
+    /**
+     * @throws UnsupportedNetworkElementStatusException
+     */
     @Test
     public void PorpertiesNetworkElement()
             throws UnsupportedNetworkElementStatusException {
@@ -133,6 +191,9 @@ public class NetworkElementTest {
         Assert.assertEquals(d2, d1.getProperty("friendDevice"));
     }
 
+    /**
+     * @throws UnsupportedNetworkElementStatusException
+     */
     @Test
     public void FullPorpertiesNetworkElement()
             throws UnsupportedNetworkElementStatusException {
@@ -146,6 +207,10 @@ public class NetworkElementTest {
         Assert.assertEquals("20cm", d1.getProperty("Size"));
     }
 
+    /**
+     * @throws UnsupportedNetworkElementStatusException
+     * @throws TooManyConnectionException
+     */
     @Test
     public void connect2DevicesToLink()
             throws UnsupportedNetworkElementStatusException,
@@ -169,6 +234,10 @@ public class NetworkElementTest {
         Assert.assertTrue(d2list.contains(l1));
     }
 
+    /**
+     * @throws UnsupportedNetworkElementStatusException
+     * @throws TooManyConnectionException
+     */
     @Test
     public void disconnectDeviceFromLink()
             throws UnsupportedNetworkElementStatusException,
@@ -193,6 +262,10 @@ public class NetworkElementTest {
         Assert.assertTrue(d2list.contains(l1));
     }
 
+    /**
+     * @throws UnsupportedNetworkElementStatusException
+     * @throws TooManyConnectionException
+     */
     @Test
     public void disconnectLinkFromDevice()
             throws UnsupportedNetworkElementStatusException,
@@ -217,6 +290,10 @@ public class NetworkElementTest {
         Assert.assertTrue(d2list.contains(l1));
     }
 
+    /**
+     * @throws UnsupportedNetworkElementStatusException
+     * @throws TooManyConnectionException
+     */
     @Test
     public void disconnectLinkFromDeviceAndViceversa()
             throws UnsupportedNetworkElementStatusException,
@@ -242,6 +319,10 @@ public class NetworkElementTest {
         Assert.assertTrue(!d2list.contains(l1));
     }
 
+    /**
+     * @throws UnsupportedNetworkElementStatusException
+     * @throws TooManyConnectionException
+     */
     @Test
     public void connectDeviceToFullLink()
             throws UnsupportedNetworkElementStatusException,

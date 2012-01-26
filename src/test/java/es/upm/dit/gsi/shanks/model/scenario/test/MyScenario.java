@@ -21,20 +21,31 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyScenario3DPortrayal;
 
+/**
+ * @author a.carrera
+ *
+ */
 public class MyScenario extends Scenario {
 
+    /**
+     * @param id
+     * @param initialState
+     * @param properties
+     * @throws UnsupportedNetworkElementStatusException
+     * @throws TooManyConnectionException
+     * @throws UnsupportedScenarioStatusException
+     * @throws DuplicatedIDException
+     */
     public MyScenario(String id, String initialState, Properties properties)
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException {
         super(id, initialState, properties);
     }
-
-//    private Logger logger = Logger.getLogger(MyScenario.class.getName());
 
     public static final String CLOUDY = "CLOUDY";
     public static final String SUNNY = "SUNNY";
@@ -153,20 +164,26 @@ public class MyScenario extends Scenario {
      */
     private HashMap<Class<? extends Failure>, Double> getCloudyPenalties() {
         HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
-        String probs = this.getProperty(MyScenario.CLOUDY_PROB);
+        String probs = (String) this.getProperty(MyScenario.CLOUDY_PROB);
         double prob = new Double(probs);
         penalties.put(MyFailure.class, prob);
 
         return penalties;
     }
 
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#createScenario2DPortrayal()
+     */
     @Override
-    public Scenario2DPortrayal createScenario2DPortrayal() throws DuplicatedPortrayalID {
+    public Scenario2DPortrayal createScenario2DPortrayal() throws DuplicatedPortrayalIDException {
         return new MyScenario2DPortrayal(this, 100, 100);
     }
 
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#createScenario3DPortrayal()
+     */
     @Override
-    public Scenario3DPortrayal createScenario3DPortrayal() throws DuplicatedPortrayalID {
+    public Scenario3DPortrayal createScenario3DPortrayal() throws DuplicatedPortrayalIDException {
         return new MyScenario3DPortrayal(this, 100, 100, 100);
     }
 

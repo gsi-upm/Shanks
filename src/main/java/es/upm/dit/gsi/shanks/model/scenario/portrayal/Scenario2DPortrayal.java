@@ -6,18 +6,18 @@ import java.util.List;
 import javax.swing.JFrame;
 
 import sim.display.Display2D;
-import sim.field.grid.SparseGrid2D;
+import sim.field.continuous.Continuous2D;
 import sim.field.network.Edge;
 import sim.field.network.Network;
-import sim.portrayal.grid.SparseGridPortrayal2D;
+import sim.portrayal.continuous.ContinuousPortrayal2D;
 import sim.portrayal.network.NetworkPortrayal2D;
 import sim.portrayal.network.SpatialNetwork2D;
-import sim.util.Int2D;
-import es.upm.dit.gsi.shanks.exception.DuplictaedDisplayID;
+import sim.util.Double2D;
+import es.upm.dit.gsi.shanks.exception.DuplictaedDisplayIDException;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 
 /**
  * @author a.carrera
@@ -25,7 +25,7 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
  */
 public abstract class Scenario2DPortrayal extends ScenarioPortrayal {
 
-    private SparseGrid2D devices;
+    private Continuous2D devices;
     private Network links;
     private SpatialNetwork2D deviceLinkNetwork;
 
@@ -40,17 +40,17 @@ public abstract class Scenario2DPortrayal extends ScenarioPortrayal {
      * @param scenario
      * @param width
      * @param height
-     * @throws DuplicatedPortrayalID
+     * @throws DuplicatedPortrayalIDException
      */
     public Scenario2DPortrayal(Scenario scenario, int width, int height)
-            throws DuplicatedPortrayalID {
+            throws DuplicatedPortrayalIDException {
         super(scenario);
-        this.devices = new SparseGrid2D(width, height);
+        this.devices = new Continuous2D(5, width, height);
         this.links = new Network();
         this.deviceLinkNetwork = new SpatialNetwork2D(this.devices, this.links);
         this.displayList = new HashMap<String, Display2D>();
         this.frameList = new HashMap<String, JFrame>();
-        SparseGridPortrayal2D devicesPortrayal = new SparseGridPortrayal2D();
+        ContinuousPortrayal2D devicesPortrayal = new ContinuousPortrayal2D();
         NetworkPortrayal2D linksPortrayal = new NetworkPortrayal2D();
 
         devicesPortrayal.setField(this.devices);
@@ -66,7 +66,7 @@ public abstract class Scenario2DPortrayal extends ScenarioPortrayal {
     }
 
     /**
-     * @return
+     * @return Map with key: Display name and value: Display2D
      */
     public HashMap<String, Display2D> getDisplayList() {
         return displayList;
@@ -82,19 +82,19 @@ public abstract class Scenario2DPortrayal extends ScenarioPortrayal {
     /**
      * @param displayID
      * @param display
-     * @throws DuplictaedDisplayID
+     * @throws DuplictaedDisplayIDException
      */
     public void addDisplay(String displayID, Display2D display)
-            throws DuplictaedDisplayID {
+            throws DuplictaedDisplayIDException {
         if (this.displayList.containsKey(displayID)) {
-            throw new DuplictaedDisplayID(displayID);
+            throw new DuplictaedDisplayIDException(displayID);
         }
         this.displayList.put(displayID, display);
     }
 
     /**
      * @param displayID
-     * @return
+     * @return Display2D object
      */
     public Display2D getDisplay(String displayID) {
         return this.displayList.get(displayID);
@@ -108,7 +108,7 @@ public abstract class Scenario2DPortrayal extends ScenarioPortrayal {
     }
 
     /**
-     * @return
+     * @return Map with key: JFrame name and value: JFrame
      */
     public HashMap<String, JFrame> getFrameList() {
         return frameList;
@@ -148,8 +148,8 @@ public abstract class Scenario2DPortrayal extends ScenarioPortrayal {
      * @param x
      * @param y
      */
-    public void situateDevice(Device d, int x, int y) {
-        devices.setObjectLocation(d, new Int2D(x, y));
+    public void situateDevice(Device d, double x, double y) {
+        devices.setObjectLocation(d, new Double2D(x, y));
     }
 
     /**
@@ -176,7 +176,7 @@ public abstract class Scenario2DPortrayal extends ScenarioPortrayal {
      * es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal#getElements
      * ()
      */
-    public SparseGrid2D getPlacedDevices() {
+    public Continuous2D getPlacedDevices() {
         return this.devices;
     }
 

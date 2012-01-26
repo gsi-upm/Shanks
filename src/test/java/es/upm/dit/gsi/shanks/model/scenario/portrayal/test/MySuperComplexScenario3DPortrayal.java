@@ -2,31 +2,50 @@ package es.upm.dit.gsi.shanks.model.scenario.portrayal.test;
 
 import sim.portrayal3d.continuous.ContinuousPortrayal3D;
 import sim.portrayal3d.network.NetworkPortrayal3D;
+import sim.util.Double3D;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice3DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.portrayal.test.MyLink3DPortrayal;
+import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
+import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.ComplexScenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.ShanksMath;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 
 /**
  * @author a.carrera
  *
  */
-public class MyScenario3DPortrayal extends Scenario3DPortrayal {
-    
+public class MySuperComplexScenario3DPortrayal extends
+        ComplexScenario3DPortrayal {
+
     /**
      * @param scenario
      * @param width
      * @param height
      * @param length
      * @throws DuplicatedPortrayalIDException
+     * @throws ScenarioNotFoundException
      */
-    public MyScenario3DPortrayal(Scenario scenario, int width, int height, int length) throws DuplicatedPortrayalIDException {
+    public MySuperComplexScenario3DPortrayal(Scenario scenario, long width,
+            long height, long length)
+            throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
         super(scenario, width, height, length);
+    }
+
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.portrayal.ComplexScenario3DPortrayal#placeScenarios()
+     */
+    @Override
+    public void placeScenarios() throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
+        ComplexScenario cs = (ComplexScenario) this.getScenario();
+        this.situateScenario(cs.getScenario("ComplexScenario1"), new Double3D(250,0,0), ShanksMath.ANGLE_0, ShanksMath.ANGLE_315, ShanksMath.ANGLE_0);
+        this.situateScenario(cs.getScenario("ComplexScenario2"), new Double3D(0,0,250), ShanksMath.ANGLE_0, ShanksMath.ANGLE_45, ShanksMath.ANGLE_0);
     }
 
     /* (non-Javadoc)
@@ -34,16 +53,9 @@ public class MyScenario3DPortrayal extends Scenario3DPortrayal {
      */
     @Override
     public void placeElements() {
-        
-        this.situateDevice((Device)this.getScenario().getNetworkElement("D1"), 100.0, 500.0, 100.0);
-        this.situateDevice((Device)this.getScenario().getNetworkElement("D2"), 500.0, 500.0, 500.0);
-        this.situateDevice((Device)this.getScenario().getNetworkElement("D3"), 300.0, 300.0, 300.0);
-        this.situateDevice((Device)this.getScenario().getNetworkElement("D4"), 100.0, 100.0, 100.0);
-        this.situateDevice((Device)this.getScenario().getNetworkElement("D5"), 500.0, 100.0, 500.0);
-        
-        this.drawLink((Link)this.getScenario().getNetworkElement("L1"));
-        this.drawLink((Link)this.getScenario().getNetworkElement("L2"));
-        this.drawLink((Link)this.getScenario().getNetworkElement("L3"));
+        ComplexScenario cs = (ComplexScenario) this.getScenario();     
+        this.situateDevice((Device)cs.getNetworkElement("SED1"), 0, 0, 0);   
+        this.drawLink((Link)cs.getNetworkElement("SEL1"));
     }
 
     /* (non-Javadoc)
@@ -51,14 +63,15 @@ public class MyScenario3DPortrayal extends Scenario3DPortrayal {
      */
     @Override
     public void setupPortrayals() {
+        
+        //Global
         ContinuousPortrayal3D devicePortrayal = (ContinuousPortrayal3D) this.getPortrayals().get(Scenario3DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.DEVICES_PORTRAYAL);
         NetworkPortrayal3D networkPortrayal = (NetworkPortrayal3D) this.getPortrayals().get(Scenario3DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.LINKS_PORTRAYAL);
         devicePortrayal.setPortrayalForClass(MyDevice.class, new MyDevice3DPortrayal());
         networkPortrayal.setPortrayalForAll(new MyLink3DPortrayal());
-
         
         this.scaleDisplay(Scenario3DPortrayal.MAIN_DISPLAY_ID, 1.5);
-        
+        this.getDisplay(MAIN_DISPLAY_ID).setShowsAxes(false);
     }
 
 }

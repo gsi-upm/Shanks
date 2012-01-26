@@ -24,14 +24,14 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusE
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyComplexScenario2DPortrayal;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyComplexScenario3DPortrayal;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyMegaComplexScenario2DPortrayal;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyMegaComplexScenario3DPortrayal;
 
 /**
  * @author a.carrera
  *
  */
-public class MyComplexScenario extends ComplexScenario {
+public class MyMegaComplexScenario extends ComplexScenario {
 
     /**
      * 
@@ -63,7 +63,7 @@ public class MyComplexScenario extends ComplexScenario {
      * @throws IllegalAccessException
      * @throws InvocationTargetException
      */
-    public MyComplexScenario(String type, String initialState,
+    public MyMegaComplexScenario(String type, String initialState,
             Properties properties)
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
@@ -76,13 +76,47 @@ public class MyComplexScenario extends ComplexScenario {
     }
 
     /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.ComplexScenario#addScenarios()
+     */
+    @Override
+    public void addScenarios() throws UnsupportedNetworkElementStatusException,
+            TooManyConnectionException, UnsupportedScenarioStatusException,
+            DuplicatedIDException, NonGatewayDeviceException,
+            AlreadyConnectedScenarioException, SecurityException,
+            IllegalArgumentException, NoSuchMethodException,
+            InstantiationException, IllegalAccessException,
+            InvocationTargetException {
+
+        this.addScenario(MySuperComplexScenario.class, "SuperComplexScenario1", MySuperComplexScenario.SUNNY, this.getProperties(), "SED1", "MEL1");
+        this.addScenario(MySuperComplexScenario.class, "SuperComplexScenario2", MySuperComplexScenario.SUNNY, this.getProperties(), "SED1", "MEL1");
+    }
+
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#createScenario2DPortrayal()
+     */
+    @Override
+    public Scenario2DPortrayal createScenario2DPortrayal()
+            throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
+        return new MyMegaComplexScenario2DPortrayal(this, 200, 200);
+    }
+
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#createScenario3DPortrayal()
+     */
+    @Override
+    public Scenario3DPortrayal createScenario3DPortrayal()
+            throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
+        return new MyMegaComplexScenario3DPortrayal(this, 100, 100, 100);
+    }
+
+    /* (non-Javadoc)
      * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#setPossibleStates()
      */
     @Override
     public void setPossibleStates() {
-        this.addPossibleStatus(MyComplexScenario.STORM);
-        this.addPossibleStatus(MyComplexScenario.EARTHQUAKE);
-        this.addPossibleStatus(MyComplexScenario.SUNNY);
+        this.addPossibleStatus(MyMegaComplexScenario.STORM);
+        this.addPossibleStatus(MyMegaComplexScenario.EARTHQUAKE);
+        this.addPossibleStatus(MyMegaComplexScenario.SUNNY);
     }
 
     /* (non-Javadoc)
@@ -92,16 +126,12 @@ public class MyComplexScenario extends ComplexScenario {
     public void addNetworkElements()
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException, DuplicatedIDException {
-        Link el1 = new MyLink("EL1", MyLink.OK_STATUS, 2);
-        Link el2 = new MyLink("EL2", MyLink.OK_STATUS, 2);
-        Device ed1 = new MyDevice("ED1", MyDevice.OK_STATUS, true);
+        Link mel1 = new MyLink("MEL1", MyLink.OK_STATUS, 3);
+        Device med1 = new MyDevice("MED1", MyDevice.OK_STATUS, true);
 
-        this.addNetworkElement(ed1);
-        ed1.connectToLink(el1);
-        ed1.connectToLink(el2);
-        this.addNetworkElement(el1);
-        this.addNetworkElement(el2);
-
+        this.addNetworkElement(med1);
+        med1.connectToLink(mel1);
+        this.addNetworkElement(mel1);
     }
 
     /* (non-Javadoc)
@@ -109,7 +139,7 @@ public class MyComplexScenario extends ComplexScenario {
      */
     @Override
     public void addPossibleFailures() {
-        this.addPossibleFailure(MyFailure.class, this.getNetworkElement("EL1"));
+        this.addPossibleFailure(MyFailure.class, this.getNetworkElement("MEL1"));
 
     }
 
@@ -120,11 +150,11 @@ public class MyComplexScenario extends ComplexScenario {
     public HashMap<Class<? extends Failure>, Double> getPenaltiesInStatus(
             String status) throws UnsupportedScenarioStatusException {
 
-        if (status.equals(MyComplexScenario.STORM)) {
+        if (status.equals(MyMegaComplexScenario.STORM)) {
             return this.getStormPenalties();
-        } else if (status.equals(MyComplexScenario.EARTHQUAKE)) {
+        } else if (status.equals(MyMegaComplexScenario.EARTHQUAKE)) {
             return this.getEarthquakePenalties();
-        } else if (status.equals(MyComplexScenario.SUNNY)) {
+        } else if (status.equals(MyMegaComplexScenario.SUNNY)) {
             return this.getSunnyPenalties();
         } else {
             throw new UnsupportedScenarioStatusException();
@@ -165,27 +195,6 @@ public class MyComplexScenario extends ComplexScenario {
         return penalties;
     }
 
-    /* (non-Javadoc)
-     * @see es.upm.dit.gsi.shanks.model.scenario.ComplexScenario#addScenarios()
-     */
-    @Override
-    public void addScenarios() throws UnsupportedNetworkElementStatusException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, NonGatewayDeviceException,
-            AlreadyConnectedScenarioException, SecurityException,
-            IllegalArgumentException, NoSuchMethodException,
-            InstantiationException, IllegalAccessException,
-            InvocationTargetException {
-
-        Properties p = this.getProperties();
-        p.put(MyScenario.CLOUDY_PROB, "10.0");
-        this.addScenario(MyScenario.class, "Scenario1", MyScenario.SUNNY, p,
-                "D5", "EL1");
-        p.put(MyScenario.CLOUDY_PROB, "50.0");
-        this.addScenario(MyScenario.class, "Scenario2", MyScenario.SUNNY, p,
-                "D5", "EL2");
-    }
-
     /**
      * @param args
      * @throws SecurityException
@@ -207,42 +216,22 @@ public class MyComplexScenario extends ComplexScenario {
             InvocationTargetException,
             UnsupportedNetworkElementStatusException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, DuplicatedPortrayalIDException,
-            ScenarioNotFoundException {
+            DuplicatedIDException, DuplicatedPortrayalIDException, ScenarioNotFoundException {
 
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "5");
-        // scenarioProperties.put(Scenario.SIMULATION_GUI,
-        // Scenario.SIMULATION_2D);
+//        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_2D);
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_3D);
-        // scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
+//         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
         Properties configProperties = new Properties();
         configProperties.put(MyShanksSimulation.CONFIGURATION, "1");
         MyShanksSimulation sim = new MyShanksSimulation(
-                System.currentTimeMillis(), MyComplexScenario.class,
-                "MyComplexScenario", MyComplexScenario.SUNNY,
+                System.currentTimeMillis(), MyMegaComplexScenario.class,
+                "MyMegaComplexScenario", MyMegaComplexScenario.SUNNY,
                 scenarioProperties, configProperties);
-        // MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
+//         MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
         MyShanksSimulation3DGUI gui = new MyShanksSimulation3DGUI(sim);
         gui.start();
-    }
-
-    /* (non-Javadoc)
-     * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#createScenario2DPortrayal()
-     */
-    @Override
-    public Scenario2DPortrayal createScenario2DPortrayal()
-            throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
-        return new MyComplexScenario2DPortrayal(this, 200, 200);
-    }
-
-    /* (non-Javadoc)
-     * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#createScenario3DPortrayal()
-     */
-    @Override
-    public Scenario3DPortrayal createScenario3DPortrayal()
-            throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
-        return new MyComplexScenario3DPortrayal(this, 100, 100, 100);
     }
 
 }

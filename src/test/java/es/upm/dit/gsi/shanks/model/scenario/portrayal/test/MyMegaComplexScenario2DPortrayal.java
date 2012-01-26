@@ -9,6 +9,7 @@ import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.portrayal.test.MyLink2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
+import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ComplexScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
@@ -20,7 +21,7 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
  * @author a.carrera
  *
  */
-public class MyComplexScenario2DPortrayal extends ComplexScenario2DPortrayal {
+public class MyMegaComplexScenario2DPortrayal extends ComplexScenario2DPortrayal {
 
     /**
      * @param scenario
@@ -29,7 +30,8 @@ public class MyComplexScenario2DPortrayal extends ComplexScenario2DPortrayal {
      * @throws DuplicatedPortrayalIDException
      * @throws ScenarioNotFoundException
      */
-    public MyComplexScenario2DPortrayal(ComplexScenario scenario, int width, int height) throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
+    public MyMegaComplexScenario2DPortrayal(Scenario scenario, int width,
+            int height) throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
         super(scenario, width, height);
     }
 
@@ -37,13 +39,10 @@ public class MyComplexScenario2DPortrayal extends ComplexScenario2DPortrayal {
      * @see es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal#placeElements()
      */
     @Override
-    public void placeElements() {
-        
-        ComplexScenario cs = (ComplexScenario) this.getScenario();       
-        this.situateDevice((Device)cs.getNetworkElement("ED1"), 60, 60);        
-        this.drawLink((Link)cs.getNetworkElement("EL1"));
-        this.drawLink((Link)cs.getNetworkElement("EL2"));
-        
+    public void placeElements() {       
+        ComplexScenario cs = (ComplexScenario) this.getScenario();
+        this.situateDevice((Device)cs.getNetworkElement("MED1"), 135, 70);
+        this.drawLink((Link)cs.getNetworkElement("MEL1"));
     }
 
     /* (non-Javadoc)
@@ -61,10 +60,11 @@ public class MyComplexScenario2DPortrayal extends ComplexScenario2DPortrayal {
      * @see es.upm.dit.gsi.shanks.model.scenario.portrayal.ComplexScenario2DPortrayal#placeScenarios()
      */
     @Override
-    public void placeScenarios() throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
+    public void placeScenarios() throws DuplicatedPortrayalIDException,
+            ScenarioNotFoundException {
         ComplexScenario cs = (ComplexScenario) this.getScenario();
-        this.situateScenario(cs.getScenario("Scenario1"), new Double2D(0,0), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
-        this.situateScenario(cs.getScenario("Scenario2"), new Double2D(120,0), ShanksMath.ANGLE_180, ShanksMath.ANGLE_180);
-        
+        this.situateScenario(cs.getScenario("SuperComplexScenario1"), new Double2D(0,0), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
+        this.situateScenario(cs.getScenario("SuperComplexScenario2"), new Double2D(270,0), ShanksMath.ANGLE_180, ShanksMath.ANGLE_180);
     }
+
 }

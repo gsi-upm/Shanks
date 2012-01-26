@@ -4,6 +4,8 @@
  */
 package es.upm.dit.gsi.shanks.model.scenario;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -22,6 +24,7 @@ import es.upm.dit.gsi.shanks.model.failure.exception.UnsupportedElementInFailure
 import es.upm.dit.gsi.shanks.model.scenario.exception.AlreadyConnectedScenarioException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.NonGatewayDeviceException;
+import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 
 /**
@@ -45,13 +48,19 @@ public abstract class ComplexScenario extends Scenario {
      * @throws DuplicatedIDException
      * @throws NonGatewayDeviceException
      * @throws AlreadyConnectedScenarioException
+     * @throws InvocationTargetException 
+     * @throws IllegalAccessException 
+     * @throws InstantiationException 
+     * @throws NoSuchMethodException 
+     * @throws IllegalArgumentException 
+     * @throws SecurityException 
      */
     public ComplexScenario(String type, String initialState,
             Properties properties)
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException, NonGatewayDeviceException,
-            AlreadyConnectedScenarioException {
+            AlreadyConnectedScenarioException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
         super(type, initialState, properties);
         this.scenarios = new HashMap<Scenario, List<Link>>();
 
@@ -67,28 +76,49 @@ public abstract class ComplexScenario extends Scenario {
      * @throws UnsupportedNetworkElementStatusException
      * @throws AlreadyConnectedScenarioException
      * @throws NonGatewayDeviceException
+     * @throws InvocationTargetException 
+     * @throws IllegalAccessException 
+     * @throws InstantiationException 
+     * @throws NoSuchMethodException 
+     * @throws IllegalArgumentException 
+     * @throws SecurityException 
      */
     abstract public void addScenarios()
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException, NonGatewayDeviceException,
-            AlreadyConnectedScenarioException;
+            AlreadyConnectedScenarioException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException;
 
     /**
      * Add the scenario to the complex scenario.
      * 
-     * @param scenario
-     * @param gateway
-     * @param externalLink
+     * @param scenarioClass
+     * @param scenarioID
+     * @param initialState
+     * @param properties
+     * @param gatewayDeviceID
+     * @param externalLinkID
      * @throws NonGatewayDeviceException
      * @throws TooManyConnectionException
      * @throws DuplicatedIDException
      * @throws AlreadyConnectedScenarioException
+     * @throws SecurityException
+     * @throws NoSuchMethodException
+     * @throws IllegalArgumentException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws InvocationTargetException
      */
-    public void addScenario(Scenario scenario, Device gateway, Link externalLink)
+    public void addScenario(Class<? extends Scenario> scenarioClass, String scenarioID, String initialState, Properties properties, String gatewayDeviceID, String externalLinkID)
             throws NonGatewayDeviceException, TooManyConnectionException,
-            DuplicatedIDException, AlreadyConnectedScenarioException {
-        if (!scenario.getCurrentElements().containsKey(gateway.getID())) {
+            DuplicatedIDException, AlreadyConnectedScenarioException, SecurityException, NoSuchMethodException, IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
+        Constructor<? extends Scenario> c  = scenarioClass.getConstructor(new Class[]{String.class,String.class,Properties.class});
+        
+        Scenario scenario = c.newInstance(scenarioID,initialState,properties);
+
+        Device gateway = (Device) scenario.getNetworkElement(gatewayDeviceID);
+        Link externalLink = (Link) this.getNetworkElement(externalLinkID);
+        if (!scenario.getCurrentElements().containsKey(gatewayDeviceID)) {
             throw new NonGatewayDeviceException(scenario, gateway, externalLink);
         } else {
             gateway.connectToLink(externalLink);
@@ -110,7 +140,7 @@ public abstract class ComplexScenario extends Scenario {
     }
 
     /**
-     * @return
+     * @return set of the scenarios that are in the complex scenario
      */
     public Set<Scenario> getScenarios() {
         return this.scenarios.keySet();
@@ -120,14 +150,15 @@ public abstract class ComplexScenario extends Scenario {
      * @param scenarioID
      * @return null if the ComplexScenario does not contains the searched
      *         scenarioID
+     * @throws ScenarioNotFoundException 
      */
-    public Scenario getScenario(String scenarioID) {
+    public Scenario getScenario(String scenarioID) throws ScenarioNotFoundException {
         for (Scenario s : this.scenarios.keySet()) {
             if (s.getID().equals(scenarioID)) {
                 return s;
             }
         }
-        return null;
+        throw new ScenarioNotFoundException(scenarioID,this.getID());
     }
 
     /*

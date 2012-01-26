@@ -22,24 +22,30 @@ import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
 
 /**
  * @author a.carrera
- * 
+ *
  */
 public class ScenarioTest {
 
     /**
-     * @throws java.lang.Exception
+     * @throws Exception
      */
     @Before
     public void setUp() throws Exception {
     }
 
     /**
-     * @throws java.lang.Exception
+     * @throws Exception
      */
     @After
     public void tearDown() throws Exception {
     }
 
+    /**
+     * @throws UnsupportedNetworkElementStatusException
+     * @throws TooManyConnectionException
+     * @throws UnsupportedScenarioStatusException
+     * @throws DuplicatedIDException
+     */
     @Test
     public void createScenario()
             throws UnsupportedNetworkElementStatusException,
@@ -53,6 +59,12 @@ public class ScenarioTest {
         Assert.assertEquals(MyScenario.SUNNY, s.getCurrentStatus());
     }
 
+    /**
+     * @throws UnsupportedNetworkElementStatusException
+     * @throws TooManyConnectionException
+     * @throws UnsupportedScenarioStatusException
+     * @throws DuplicatedIDException
+     */
     @Test
     public void createScenarioAndChangeState()
             throws UnsupportedNetworkElementStatusException,
@@ -66,6 +78,12 @@ public class ScenarioTest {
         Assert.assertEquals(MyScenario.CLOUDY, s.getCurrentStatus());
     }
 
+    /**
+     * @throws UnsupportedNetworkElementStatusException
+     * @throws TooManyConnectionException
+     * @throws UnsupportedScenarioStatusException
+     * @throws DuplicatedIDException
+     */
     @Test
     public void createScenarioAndChangeWrongState()
             throws UnsupportedNetworkElementStatusException,
@@ -84,6 +102,11 @@ public class ScenarioTest {
         Assert.assertTrue(catched);
     }
 
+    /**
+     * @throws UnsupportedNetworkElementStatusException
+     * @throws TooManyConnectionException
+     * @throws DuplicatedIDException
+     */
     @Test
     public void createScenarioWithWrongState()
             throws UnsupportedNetworkElementStatusException,
@@ -100,6 +123,16 @@ public class ScenarioTest {
         Assert.assertTrue(catched);
     }
 
+    /**
+     * @throws UnsupportedNetworkElementStatusException
+     * @throws TooManyConnectionException
+     * @throws UnsupportedScenarioStatusException
+     * @throws DuplicatedIDException
+     * @throws NoCombinationForFailureException
+     * @throws UnsupportedElementInFailureException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     */
     @Test
     public void createScenarioAndGenerateFailures()
             throws UnsupportedNetworkElementStatusException,

@@ -43,6 +43,9 @@ public abstract class Device3DPortrayal extends SimplePortrayal3D {
 
         Color3f colour;
         Sphere s = new Sphere(diameter);
+//        Cone s = new Cone(diameter, diameter);
+//        ColorCube s = new ColorCube(diameter);
+        
         colour = new Color3f(this.getDeviceColor(device));
 
         int FONT_SIZE = 48;

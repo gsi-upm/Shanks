@@ -13,11 +13,11 @@ import sim.portrayal3d.continuous.ContinuousPortrayal3D;
 import sim.portrayal3d.network.NetworkPortrayal3D;
 import sim.portrayal3d.network.SpatialNetwork3D;
 import sim.util.Double3D;
-import es.upm.dit.gsi.shanks.exception.DuplictaedDisplayID;
+import es.upm.dit.gsi.shanks.exception.DuplictaedDisplayIDException;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 
 /**
  * @author a.carrera
@@ -42,9 +42,9 @@ public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
      * @param length
      * @param width
      * @param height
-     * @throws DuplicatedPortrayalID 
+     * @throws DuplicatedPortrayalIDException 
      */
-    public Scenario3DPortrayal(Scenario scenario, long width, long height, long length) throws DuplicatedPortrayalID {
+    public Scenario3DPortrayal(Scenario scenario, long width, long height, long length) throws DuplicatedPortrayalIDException {
         super(scenario);
         this.scaled = new HashMap<String,Boolean>();
         this.devices = new Continuous3D(5, width, height, length);
@@ -65,7 +65,7 @@ public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
     }
 
     /**
-     * @return
+     * @return Map with key: Display name and value: Display3D object
      */
     public HashMap<String, Display3D> getDisplayList() {
         return displayList;
@@ -81,11 +81,11 @@ public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
     /**
      * @param displayID
      * @param display
-     * @throws DuplictaedDisplayID 
+     * @throws DuplictaedDisplayIDException 
      */
-    public void addDisplay(String displayID, Display3D display) throws DuplictaedDisplayID {
+    public void addDisplay(String displayID, Display3D display) throws DuplictaedDisplayIDException {
         if (this.displayList.containsKey(displayID)) {
-            throw new DuplictaedDisplayID(displayID);
+            throw new DuplictaedDisplayIDException(displayID);
         }
         this.displayList.put(displayID, display);
         this.scaled.put(displayID, false);
@@ -93,7 +93,7 @@ public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
     
     /**
      * @param displayID
-     * @return
+     * @return Display3D object
      */
     public Display3D getDisplay(String displayID) {
         return this.displayList.get(displayID);
@@ -107,7 +107,7 @@ public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
     }
 
     /**
-     * @return
+     * @return Map with key: JFrame name and value: JFrame object
      */
     public HashMap<String, JFrame> getFrameList() {
         return frameList;

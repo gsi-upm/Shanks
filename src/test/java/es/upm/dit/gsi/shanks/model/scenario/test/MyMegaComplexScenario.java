@@ -4,8 +4,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Properties;
 
-import es.upm.dit.gsi.shanks.model.MyShanksSimulation;
-import es.upm.dit.gsi.shanks.model.MyShanksSimulation3DGUI;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
@@ -26,6 +24,8 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyMegaComplexScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyMegaComplexScenario3DPortrayal;
+import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation;
+import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI;
 
 /**
  * @author a.carrera

@@ -27,6 +27,9 @@ import es.upm.dit.gsi.shanks.model.scenario.test.MyComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.test.MyMegaComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
 import es.upm.dit.gsi.shanks.model.scenario.test.MySuperComplexScenario;
+import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation;
+import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation2DGUI;
+import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI;
 
 
 /**

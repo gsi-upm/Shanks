@@ -17,15 +17,30 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ShanksMath;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 
+/**
+ * @author a.carrera
+ *
+ */
 public class MySuperComplexScenario3DPortrayal extends
         ComplexScenario3DPortrayal {
 
+    /**
+     * @param scenario
+     * @param width
+     * @param height
+     * @param length
+     * @throws DuplicatedPortrayalIDException
+     * @throws ScenarioNotFoundException
+     */
     public MySuperComplexScenario3DPortrayal(Scenario scenario, long width,
             long height, long length)
             throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
         super(scenario, width, height, length);
     }
 
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.portrayal.ComplexScenario3DPortrayal#placeScenarios()
+     */
     @Override
     public void placeScenarios() throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
         ComplexScenario cs = (ComplexScenario) this.getScenario();
@@ -33,6 +48,9 @@ public class MySuperComplexScenario3DPortrayal extends
         this.situateScenario(cs.getScenario("ComplexScenario2"), new Double3D(0,0,250), ShanksMath.ANGLE_0, ShanksMath.ANGLE_45, ShanksMath.ANGLE_0);
     }
 
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal#placeElements()
+     */
     @Override
     public void placeElements() {
         ComplexScenario cs = (ComplexScenario) this.getScenario();     
@@ -40,6 +58,9 @@ public class MySuperComplexScenario3DPortrayal extends
         this.drawLink((Link)cs.getNetworkElement("SEL1"));
     }
 
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal#setupPortrayals()
+     */
     @Override
     public void setupPortrayals() {
         

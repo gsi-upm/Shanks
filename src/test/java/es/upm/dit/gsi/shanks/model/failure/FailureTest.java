@@ -19,10 +19,14 @@ import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
 import es.upm.dit.gsi.shanks.model.failure.exception.UnsupportedElementInFailureException;
 import es.upm.dit.gsi.shanks.model.failure.test.MyFailure;
 
+/**
+ * @author a.carrera
+ *
+ */
 public class FailureTest {
 
     /**
-     * @throws java.lang.Exception
+     * @throws Exception
      */
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
@@ -32,14 +36,23 @@ public class FailureTest {
         
     }
 
+    /**
+     * @throws Exception
+     */
     @Before
     public void setUp() throws Exception {
     }
 
+    /**
+     * @throws Exception
+     */
     @After
     public void tearDown() throws Exception {
     }
 
+    /**
+     * @throws UnsupportedNetworkElementStatusException
+     */
     @Test
     public void createFailureAndNoActiveIt() throws UnsupportedNetworkElementStatusException {
         Failure f = new MyFailure();
@@ -56,6 +69,9 @@ public class FailureTest {
         }
     }
 
+    /**
+     * @throws UnsupportedNetworkElementStatusException
+     */
     @Test
     public void createFailureAndActiveIt() throws UnsupportedNetworkElementStatusException {
         Failure f = new MyFailure();
@@ -73,6 +89,9 @@ public class FailureTest {
         }
     }
 
+    /**
+     * @throws UnsupportedNetworkElementStatusException
+     */
     @Test
     public void createFailureAndDeactiveIt() throws UnsupportedNetworkElementStatusException {
         Failure f = new MyFailure();
@@ -91,6 +110,9 @@ public class FailureTest {
         }
     }
 
+    /**
+     * @throws UnsupportedNetworkElementStatusException
+     */
     @Test
     public void createFailureAndAddNonPossibleElement() throws UnsupportedNetworkElementStatusException {
         Failure f = new MyFailure();
@@ -105,6 +127,9 @@ public class FailureTest {
         Assert.assertTrue(catched);
     }
 
+    /**
+     * @throws UnsupportedNetworkElementStatusException
+     */
     @Test
     public void createFailureAndResolveIt() throws UnsupportedNetworkElementStatusException {
         Failure f = new MyFailure();

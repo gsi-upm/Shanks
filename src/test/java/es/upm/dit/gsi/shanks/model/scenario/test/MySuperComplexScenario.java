@@ -27,12 +27,42 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MySuperComplexScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MySuperComplexScenario3DPortrayal;
 
+/**
+ * @author a.carrera
+ *
+ */
 public class MySuperComplexScenario extends ComplexScenario {
 
+    /**
+     * 
+     */
     public static final String STORM = "STORM";
+    /**
+     * 
+     */
     public static final String EARTHQUAKE = "EARTHQUAKE";
+    /**
+     * 
+     */
     public static final String SUNNY = "SUNNY";
 
+    /**
+     * @param type
+     * @param initialState
+     * @param properties
+     * @throws UnsupportedNetworkElementStatusException
+     * @throws TooManyConnectionException
+     * @throws UnsupportedScenarioStatusException
+     * @throws DuplicatedIDException
+     * @throws NonGatewayDeviceException
+     * @throws AlreadyConnectedScenarioException
+     * @throws SecurityException
+     * @throws IllegalArgumentException
+     * @throws NoSuchMethodException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws InvocationTargetException
+     */
     public MySuperComplexScenario(String type, String initialState,
             Properties properties)
             throws UnsupportedNetworkElementStatusException,
@@ -42,6 +72,9 @@ public class MySuperComplexScenario extends ComplexScenario {
         super(type, initialState, properties);
     }
 
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.ComplexScenario#addScenarios()
+     */
     @Override
     public void addScenarios() throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
@@ -52,6 +85,9 @@ public class MySuperComplexScenario extends ComplexScenario {
         this.addScenario(MyComplexScenario.class, "ComplexScenario2", MyComplexScenario.SUNNY, this.getProperties(), "ED1", "SEL1");
     }
 
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#setPossibleStates()
+     */
     @Override
     public void setPossibleStates() {
         this.addPossibleStatus(MySuperComplexScenario.STORM);
@@ -59,6 +95,9 @@ public class MySuperComplexScenario extends ComplexScenario {
         this.addPossibleStatus(MySuperComplexScenario.SUNNY);
     }
 
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#addNetworkElements()
+     */
     @Override
     public void addNetworkElements()
             throws UnsupportedNetworkElementStatusException,
@@ -71,12 +110,18 @@ public class MySuperComplexScenario extends ComplexScenario {
         this.addNetworkElement(sel1);
     }
 
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#addPossibleFailures()
+     */
     @Override
     public void addPossibleFailures() {
         this.addPossibleFailure(MyFailure.class, this.getNetworkElement("SEL1"));
 
     }
 
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#getPenaltiesInStatus(java.lang.String)
+     */
     @Override
     public HashMap<Class<? extends Failure>, Double> getPenaltiesInStatus(
             String status) throws UnsupportedScenarioStatusException {
@@ -93,6 +138,9 @@ public class MySuperComplexScenario extends ComplexScenario {
 
     }
 
+    /**
+     * @return
+     */
     private HashMap<Class<? extends Failure>, Double> getSunnyPenalties() {
         HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
 
@@ -101,6 +149,9 @@ public class MySuperComplexScenario extends ComplexScenario {
         return penalties;
     }
 
+    /**
+     * @return
+     */
     private HashMap<Class<? extends Failure>, Double> getEarthquakePenalties() {
         HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
 
@@ -109,6 +160,9 @@ public class MySuperComplexScenario extends ComplexScenario {
         return penalties;
     }
 
+    /**
+     * @return
+     */
     private HashMap<Class<? extends Failure>, Double> getStormPenalties() {
         HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
 
@@ -117,6 +171,21 @@ public class MySuperComplexScenario extends ComplexScenario {
         return penalties;
     }
 
+    /**
+     * @param args
+     * @throws SecurityException
+     * @throws IllegalArgumentException
+     * @throws NoSuchMethodException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws InvocationTargetException
+     * @throws UnsupportedNetworkElementStatusException
+     * @throws TooManyConnectionException
+     * @throws UnsupportedScenarioStatusException
+     * @throws DuplicatedIDException
+     * @throws DuplicatedPortrayalIDException
+     * @throws ScenarioNotFoundException
+     */
     public static void main(String[] args) throws SecurityException,
             IllegalArgumentException, NoSuchMethodException,
             InstantiationException, IllegalAccessException,
@@ -141,12 +210,18 @@ public class MySuperComplexScenario extends ComplexScenario {
         gui.start();
     }
 
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#createScenario2DPortrayal()
+     */
     @Override
     public Scenario2DPortrayal createScenario2DPortrayal()
             throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
         return new MySuperComplexScenario2DPortrayal(this, 200, 200);
     }
 
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#createScenario3DPortrayal()
+     */
     @Override
     public Scenario3DPortrayal createScenario3DPortrayal()
             throws DuplicatedPortrayalIDException, ScenarioNotFoundException {

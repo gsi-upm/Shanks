@@ -3,6 +3,10 @@ package es.upm.dit.gsi.shanks.model.element.link.test;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 
+/**
+ * @author a.carrera
+ *
+ */
 public class MyLink extends Link {
 
     public static final String OK_STATUS = "OK";
@@ -11,6 +15,12 @@ public class MyLink extends Link {
     public static final String DISTANCE_PROPERTY = "Distance";
     public static final String LINK_TYPE_PROPERTY = "LinkType";
     
+    /**
+     * @param id
+     * @param initialState
+     * @param capacity
+     * @throws UnsupportedNetworkElementStatusException
+     */
     public MyLink(String id, String initialState, int capacity) throws UnsupportedNetworkElementStatusException {
         super(id, initialState, capacity);
     }

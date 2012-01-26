@@ -15,6 +15,9 @@ public class MyLink3DPortrayal extends Link3DPortrayal {
      */
     private static final long serialVersionUID = -7761302141125482551L;
 
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.element.link.portrayal.Link3DPortrayal#getModel(java.lang.Object, javax.media.j3d.TransformGroup)
+     */
     @Override
     public TransformGroup getModel(Object object, TransformGroup model) {
 

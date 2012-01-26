@@ -12,12 +12,26 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 
+/**
+ * @author a.carrera
+ *
+ */
 public class MyScenario3DPortrayal extends Scenario3DPortrayal {
     
+    /**
+     * @param scenario
+     * @param width
+     * @param height
+     * @param length
+     * @throws DuplicatedPortrayalIDException
+     */
     public MyScenario3DPortrayal(Scenario scenario, int width, int height, int length) throws DuplicatedPortrayalIDException {
         super(scenario, width, height, length);
     }
 
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal#placeElements()
+     */
     @Override
     public void placeElements() {
         
@@ -32,6 +46,9 @@ public class MyScenario3DPortrayal extends Scenario3DPortrayal {
         this.drawLink((Link)this.getScenario().getNetworkElement("L3"));
     }
 
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal#setupPortrayals()
+     */
     @Override
     public void setupPortrayals() {
         ContinuousPortrayal3D devicePortrayal = (ContinuousPortrayal3D) this.getPortrayals().get(Scenario3DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.DEVICES_PORTRAYAL);

@@ -17,15 +17,29 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ShanksMath;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 
+/**
+ * @author a.carrera
+ *
+ */
 public class MySuperComplexScenario2DPortrayal extends
         ComplexScenario2DPortrayal {
 
+    /**
+     * @param scenario
+     * @param width
+     * @param height
+     * @throws DuplicatedPortrayalIDException
+     * @throws ScenarioNotFoundException
+     */
     public MySuperComplexScenario2DPortrayal(Scenario scenario, int width,
             int height)
             throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
         super(scenario, width, height);
     }
 
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.portrayal.ComplexScenario2DPortrayal#placeScenarios()
+     */
     @Override
     public void placeScenarios() throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
         ComplexScenario cs = (ComplexScenario) this.getScenario();
@@ -33,6 +47,9 @@ public class MySuperComplexScenario2DPortrayal extends
         this.situateScenario(cs.getScenario("ComplexScenario2"), new Double2D(0,160), ShanksMath.ANGLE_0, ShanksMath.ANGLE_180);
     }
 
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal#placeElements()
+     */
     @Override
     public void placeElements() {       
         ComplexScenario cs = (ComplexScenario) this.getScenario();
@@ -40,6 +57,9 @@ public class MySuperComplexScenario2DPortrayal extends
         this.drawLink((Link)cs.getNetworkElement("SEL1"));
     }
 
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal#setupPortrayals()
+     */
     @Override
     public void setupPortrayals() {
         ContinuousPortrayal2D devicePortrayal = (ContinuousPortrayal2D) this.getPortrayals().get(Scenario2DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.DEVICES_PORTRAYAL);

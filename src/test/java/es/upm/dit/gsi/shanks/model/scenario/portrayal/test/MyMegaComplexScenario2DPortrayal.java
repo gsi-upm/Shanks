@@ -17,13 +17,27 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ShanksMath;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 
+/**
+ * @author a.carrera
+ *
+ */
 public class MyMegaComplexScenario2DPortrayal extends ComplexScenario2DPortrayal {
 
+    /**
+     * @param scenario
+     * @param width
+     * @param height
+     * @throws DuplicatedPortrayalIDException
+     * @throws ScenarioNotFoundException
+     */
     public MyMegaComplexScenario2DPortrayal(Scenario scenario, int width,
             int height) throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
         super(scenario, width, height);
     }
 
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal#placeElements()
+     */
     @Override
     public void placeElements() {       
         ComplexScenario cs = (ComplexScenario) this.getScenario();
@@ -31,6 +45,9 @@ public class MyMegaComplexScenario2DPortrayal extends ComplexScenario2DPortrayal
         this.drawLink((Link)cs.getNetworkElement("MEL1"));
     }
 
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal#setupPortrayals()
+     */
     @Override
     public void setupPortrayals() {
         ContinuousPortrayal2D devicePortrayal = (ContinuousPortrayal2D) this.getPortrayals().get(Scenario2DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.DEVICES_PORTRAYAL);
@@ -39,6 +56,9 @@ public class MyMegaComplexScenario2DPortrayal extends ComplexScenario2DPortrayal
         networkPortrayal.setPortrayalForAll(new MyLink2DPortrayal());
     }
 
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.portrayal.ComplexScenario2DPortrayal#placeScenarios()
+     */
     @Override
     public void placeScenarios() throws DuplicatedPortrayalIDException,
             ScenarioNotFoundException {

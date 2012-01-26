@@ -28,9 +28,9 @@ public class ShanksMath {
     
     /**
      * @param orig
-     * @param alpha XY
-     * @param beta XZ
-     * @param gamma YZ
+     * @param alpha is the angle in the plane XY
+     * @param beta is the angle in the plane XZ
+     * @param gamma is the angle in the plane YZ
      * @return Double3D object
      */
     public static Double3D rotate(Double3D orig, Double alpha, Double beta, Double gamma) {
@@ -46,7 +46,7 @@ public class ShanksMath {
     
     /**
      * @param orig
-     * @param alpha
+     * @param alpha is the angle in the plane XY 
      * @return Double2D object
      */
     public static Double2D rotate(Double2D orig, Double alpha) {
@@ -57,9 +57,9 @@ public class ShanksMath {
 
     /**
      * @param orig
-     * @param alpha XY
-     * @param beta XZ
-     * @param gamma YZ
+     * @param alpha is the angle in the plane XY
+     * @param beta is the angle in the plane XZ
+     * @param gamma is the angle in the plane YZ
      * @return Double3D object
      */
     public static Double3D rotate(Double3D orig, Double2D alpha, Double2D beta, Double2D gamma) {
@@ -75,7 +75,7 @@ public class ShanksMath {
 
     /**
      * @param orig
-     * @param alpha
+     * @param alpha is the angle in the plane XY 
      * @return Double2D object
      */
     public static Double2D rotate(Double2D orig, Double2D alpha) {
@@ -93,8 +93,8 @@ public class ShanksMath {
     
     /**
      * @param orig
-     * @param alpha
-     * @param beta
+     * @param alpha is the angle in the plane XY 
+     * @param beta is the angle in the plane YZ (only Y rotation will be shown in the 2D portrayal 
      * @return Double2D object
      */
     public static Double2D rotate(Double2D orig, Double2D alpha, Double2D beta) {

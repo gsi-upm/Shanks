@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks.model;
+package es.upm.dit.gsi.shanks.model.test;
 
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.ShanksSimulation3DGUI;

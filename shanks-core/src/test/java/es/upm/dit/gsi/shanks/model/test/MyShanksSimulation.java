@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks.model;
+package es.upm.dit.gsi.shanks.model.test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;

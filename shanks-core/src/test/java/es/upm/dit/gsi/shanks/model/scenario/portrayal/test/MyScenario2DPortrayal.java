@@ -10,11 +10,11 @@ import es.upm.dit.gsi.shanks.model.element.link.portrayal.test.MyLink2DPortrayal
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 
 public class MyScenario2DPortrayal extends Scenario2DPortrayal {
 
-    public MyScenario2DPortrayal(Scenario scenario, int width, int height) throws DuplicatedPortrayalID {
+    public MyScenario2DPortrayal(Scenario scenario, int width, int height) throws DuplicatedPortrayalIDException {
         super(scenario, width, height);
     }
 

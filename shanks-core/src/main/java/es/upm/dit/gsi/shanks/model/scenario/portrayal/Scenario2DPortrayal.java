@@ -13,11 +13,11 @@ import sim.portrayal.continuous.ContinuousPortrayal2D;
 import sim.portrayal.network.NetworkPortrayal2D;
 import sim.portrayal.network.SpatialNetwork2D;
 import sim.util.Double2D;
-import es.upm.dit.gsi.shanks.exception.DuplictaedDisplayID;
+import es.upm.dit.gsi.shanks.exception.DuplictaedDisplayIDException;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 
 /**
  * @author a.carrera
@@ -40,10 +40,10 @@ public abstract class Scenario2DPortrayal extends ScenarioPortrayal {
      * @param scenario
      * @param width
      * @param height
-     * @throws DuplicatedPortrayalID
+     * @throws DuplicatedPortrayalIDException
      */
     public Scenario2DPortrayal(Scenario scenario, int width, int height)
-            throws DuplicatedPortrayalID {
+            throws DuplicatedPortrayalIDException {
         super(scenario);
         this.devices = new Continuous2D(5, width, height);
         this.links = new Network();
@@ -82,12 +82,12 @@ public abstract class Scenario2DPortrayal extends ScenarioPortrayal {
     /**
      * @param displayID
      * @param display
-     * @throws DuplictaedDisplayID
+     * @throws DuplictaedDisplayIDException
      */
     public void addDisplay(String displayID, Display2D display)
-            throws DuplictaedDisplayID {
+            throws DuplictaedDisplayIDException {
         if (this.displayList.containsKey(displayID)) {
-            throw new DuplictaedDisplayID(displayID);
+            throw new DuplictaedDisplayIDException(displayID);
         }
         this.displayList.put(displayID, display);
     }

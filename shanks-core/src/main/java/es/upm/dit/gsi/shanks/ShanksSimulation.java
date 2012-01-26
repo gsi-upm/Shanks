@@ -15,7 +15,7 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 
 /**
  * Model class
@@ -54,10 +54,10 @@ public class ShanksSimulation extends SimState {
      * @throws TooManyConnectionException
      * @throws UnsupportedScenarioStatusException
      * @throws DuplicatedIDException
-     * @throws DuplicatedPortrayalID 
+     * @throws DuplicatedPortrayalIDException 
      * @throws ScenarioNotFoundException 
      */
-    public ShanksSimulation(long seed, Class<? extends Scenario> scenarioClass, String scenarioID, String initialState, Properties properties) throws SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException, UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException, DuplicatedPortrayalID, ScenarioNotFoundException {
+    public ShanksSimulation(long seed, Class<? extends Scenario> scenarioClass, String scenarioID, String initialState, Properties properties) throws SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException, UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException, DuplicatedPortrayalIDException, ScenarioNotFoundException {
         super(seed);
             this.scenarioManager = this.createScenarioManager(scenarioClass, scenarioID, initialState, properties);
     }
@@ -76,13 +76,13 @@ public class ShanksSimulation extends SimState {
      * @throws IllegalAccessException 
      * @throws InstantiationException 
      * @throws IllegalArgumentException 
-     * @throws DuplicatedPortrayalID 
+     * @throws DuplicatedPortrayalIDException 
      * @throws ScenarioNotFoundException 
      */
     private ScenarioManager createScenarioManager(Class<? extends Scenario> scenarioClass, String scenarioID, String initialState, Properties properties)
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, SecurityException, NoSuchMethodException, IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException, DuplicatedPortrayalID, ScenarioNotFoundException {
+            DuplicatedIDException, SecurityException, NoSuchMethodException, IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException, DuplicatedPortrayalIDException, ScenarioNotFoundException {
         
         Constructor<? extends Scenario> c  = scenarioClass.getConstructor(new Class[]{String.class,String.class,Properties.class});
        
@@ -112,10 +112,10 @@ public class ShanksSimulation extends SimState {
 
     /**
      * @return ScenarioPortrayal of the scenario of the simulation
-     * @throws DuplicatedPortrayalID 
+     * @throws DuplicatedPortrayalIDException 
      * @throws ScenarioNotFoundException 
      */
-    public ScenarioPortrayal getScenarioPortrayal() throws DuplicatedPortrayalID, ScenarioNotFoundException {
+    public ScenarioPortrayal getScenarioPortrayal() throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
         ScenarioPortrayal sp = this.scenarioManager.getPortrayal();
         while (sp==null) {
             sp = this.scenarioManager.getScenario().createScenarioPortrayal();

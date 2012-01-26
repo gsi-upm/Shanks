@@ -15,12 +15,12 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.ComplexScenario3DPortrayal
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ShanksMath;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 
 public class MyComplexScenario3DPortrayal extends ComplexScenario3DPortrayal {
 
     public MyComplexScenario3DPortrayal(Scenario scenario, long width,
-            long height, long length) throws DuplicatedPortrayalID, ScenarioNotFoundException {
+            long height, long length) throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
         super(scenario, width, height, length);
     }
 
@@ -48,7 +48,7 @@ public class MyComplexScenario3DPortrayal extends ComplexScenario3DPortrayal {
     }
 
     @Override
-    public void placeScenarios() throws DuplicatedPortrayalID, ScenarioNotFoundException {
+    public void placeScenarios() throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
         ComplexScenario cs = (ComplexScenario) this.getScenario();
         this.situateScenario(cs.getScenario("Scenario1"), new Double3D(0,0,0), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
         this.situateScenario(cs.getScenario("Scenario2"), new Double3D(0,0,0), ShanksMath.ANGLE_0, ShanksMath.ANGLE_270, ShanksMath.ANGLE_180);

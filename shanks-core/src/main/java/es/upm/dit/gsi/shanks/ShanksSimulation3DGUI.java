@@ -17,11 +17,11 @@ import sim.field.continuous.Continuous3D;
 import sim.portrayal.Portrayal;
 import sim.portrayal3d.FieldPortrayal3D;
 import sim.portrayal3d.continuous.ContinuousPortrayal3D;
-import es.upm.dit.gsi.shanks.exception.DuplictaedDisplayID;
+import es.upm.dit.gsi.shanks.exception.DuplictaedDisplayIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 
 /**
  * ShanksSimulation3DGUI class
@@ -117,7 +117,7 @@ public class ShanksSimulation3DGUI extends GUIState {
                             .get(portrayalID), portrayalID);
                 }
             }
-        } catch (DuplicatedPortrayalID e) {
+        } catch (DuplicatedPortrayalIDException e) {
             logger.severe(e.getMessage());
             e.printStackTrace();
         } catch (ScenarioNotFoundException e) {
@@ -131,7 +131,7 @@ public class ShanksSimulation3DGUI extends GUIState {
      * 
      * @see sim.display.GUIState#load(sim.engine.SimState)
      */
-    public void load(ShanksSimulation state) throws DuplicatedPortrayalID, ScenarioNotFoundException {
+    public void load(ShanksSimulation state) throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
         super.load(state);
         this.getSimulation().getScenarioPortrayal().setupPortrayals();
     }
@@ -177,10 +177,10 @@ public class ShanksSimulation3DGUI extends GUIState {
                 frame.setVisible(true);
                 display.getSelectionBehavior().setTolerance(10.0f);
             }
-        } catch (DuplictaedDisplayID e) {
+        } catch (DuplictaedDisplayIDException e) {
             logger.severe(e.getMessage());
             e.printStackTrace();
-        } catch (DuplicatedPortrayalID e) {
+        } catch (DuplicatedPortrayalIDException e) {
             logger.severe(e.getMessage());
             e.printStackTrace();
         } catch (ScenarioNotFoundException e) {
@@ -223,7 +223,7 @@ public class ShanksSimulation3DGUI extends GUIState {
                 }
 
             }
-        } catch (DuplicatedPortrayalID e) {
+        } catch (DuplicatedPortrayalIDException e) {
             logger.severe(e.getMessage());
             e.printStackTrace();
         } catch (ScenarioNotFoundException e) {

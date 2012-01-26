@@ -66,7 +66,7 @@ public abstract class Scenario2DPortrayal extends ScenarioPortrayal {
     }
 
     /**
-     * @return
+     * @return Map with key: Display name and value: Display2D
      */
     public HashMap<String, Display2D> getDisplayList() {
         return displayList;
@@ -94,7 +94,7 @@ public abstract class Scenario2DPortrayal extends ScenarioPortrayal {
 
     /**
      * @param displayID
-     * @return
+     * @return Display2D object
      */
     public Display2D getDisplay(String displayID) {
         return this.displayList.get(displayID);
@@ -108,7 +108,7 @@ public abstract class Scenario2DPortrayal extends ScenarioPortrayal {
     }
 
     /**
-     * @return
+     * @return Map with key: JFrame name and value: JFrame
      */
     public HashMap<String, JFrame> getFrameList() {
         return frameList;

@@ -133,7 +133,7 @@ public abstract class Failure {
     }
 
     /**
-     * @return
+     * @return true if failure is active, false if not
      */
     public boolean isActive() {
         return active;
@@ -203,18 +203,18 @@ public abstract class Failure {
     }
 
     /**
-     * @param c
+     * @param elementClass
      */
-    public void removePossibleAffectedElements(Class<? extends NetworkElement> c) {
-        if (this.possibleAffectedElements.containsKey(c)) {
-            this.possibleAffectedElements.remove(c);
+    public void removePossibleAffectedElements(Class<? extends NetworkElement> elementClass) {
+        if (this.possibleAffectedElements.containsKey(elementClass)) {
+            this.possibleAffectedElements.remove(elementClass);
         }
     }
 
     /**
      * To know if a failure is resolved, the
      * 
-     * @return
+     * @return true if the failure is resolved, false if not
      */
     public boolean isResolved() {
         // FIXME check this method, maybe... if two failures affect to one

@@ -8,30 +8,30 @@ public class ShanksMath {
     public static final Double3D origen3D = new Double3D(0, 0, 0);
     public static final Double2D origen2D = new Double2D(0, 0);
 
-    public static final Double2D A0 = new Double2D(0,0);
-    public static final Double2D A45 = new Double2D(1,1);
-    public static final Double2D A90 = new Double2D(0,1);
-    public static final Double2D A135 = new Double2D(-1,1);
-    public static final Double2D A180 = new Double2D(-1,0);
-    public static final Double2D A225 = new Double2D(-1,-1);
-    public static final Double2D A270 = new Double2D(0,-1);
-    public static final Double2D A315 = new Double2D(1,-1);
+    public static final Double2D ANGLE_0 = new Double2D(0,0);
+    public static final Double2D ANGLE_45 = new Double2D(1,1);
+    public static final Double2D ANGLE_90 = new Double2D(0,1);
+    public static final Double2D ANGLE_135 = new Double2D(-1,1);
+    public static final Double2D ANGLE_180 = new Double2D(-1,0);
+    public static final Double2D ANGLE_225 = new Double2D(-1,-1);
+    public static final Double2D ANGLE_270 = new Double2D(0,-1);
+    public static final Double2D ANGLE_315 = new Double2D(1,-1);
 
-    public static final Double RAD_A0 = 0.0;
-    public static final Double RAD_A45 = Math.PI/4;
-    public static final Double RAD_A90 = Math.PI/2;
-    public static final Double RAD_A135 = Math.PI*3/4;
-    public static final Double RAD_A180 = Math.PI;
-    public static final Double RAD_A225 = Math.PI*5/4;
-    public static final Double RAD_A270 = Math.PI*3/2;
-    public static final Double RAD_A315 = Math.PI*7/4;
+    public static final Double RAD_ANGLE_0 = 0.0;
+    public static final Double RAD_ANGLE_45 = Math.PI/4;
+    public static final Double RAD_ANGLE_90 = Math.PI/2;
+    public static final Double RAD_ANGLE_135 = Math.PI*3/4;
+    public static final Double RAD_ANGLE_180 = Math.PI;
+    public static final Double RAD_ANGLE_225 = Math.PI*5/4;
+    public static final Double RAD_ANGLE_270 = Math.PI*3/2;
+    public static final Double RAD_ANGLE_315 = Math.PI*7/4;
     
     /**
      * @param orig
      * @param alpha XY
      * @param beta XZ
      * @param gamma YZ
-     * @return
+     * @return Double3D object
      */
     public static Double3D rotate(Double3D orig, Double alpha, Double beta, Double gamma) {
         Double2D origXY = new Double2D(orig.x, orig.y);
@@ -47,7 +47,7 @@ public class ShanksMath {
     /**
      * @param orig
      * @param alpha
-     * @return
+     * @return Double2D object
      */
     public static Double2D rotate(Double2D orig, Double alpha) {
         Double finalX = Math.cos(alpha) * orig.x - Math.sin(alpha) * orig.y;
@@ -60,7 +60,7 @@ public class ShanksMath {
      * @param alpha XY
      * @param beta XZ
      * @param gamma YZ
-     * @return
+     * @return Double3D object
      */
     public static Double3D rotate(Double3D orig, Double2D alpha, Double2D beta, Double2D gamma) {
         Double2D origXY = new Double2D(orig.x, orig.y);
@@ -76,7 +76,7 @@ public class ShanksMath {
     /**
      * @param orig
      * @param alpha
-     * @return
+     * @return Double2D object
      */
     public static Double2D rotate(Double2D orig, Double2D alpha) {
         Double moduleA = alpha.distance(origen2D);
@@ -95,7 +95,7 @@ public class ShanksMath {
      * @param orig
      * @param alpha
      * @param beta
-     * @return
+     * @return Double2D object
      */
     public static Double2D rotate(Double2D orig, Double2D alpha, Double2D beta) {
         Double2D firstRotated = ShanksMath.rotate(orig, alpha);
@@ -106,7 +106,7 @@ public class ShanksMath {
     /**
      * @param orig
      * @param offset
-     * @return
+     * @return Double3D object
      */
     public static Double3D add(Double3D orig, Double3D offset) {
         return new Double3D(orig.x + offset.x, orig.y + offset.y, orig.z
@@ -116,7 +116,7 @@ public class ShanksMath {
     /**
      * @param orig
      * @param offset
-     * @return
+     * @return Double2D object
      */
     public static Double2D add(Double2D orig, Double2D offset) {
         return new Double2D(orig.x + offset.x, orig.y + offset.y);

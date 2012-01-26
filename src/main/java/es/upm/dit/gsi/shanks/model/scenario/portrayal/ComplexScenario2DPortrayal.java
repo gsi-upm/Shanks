@@ -38,7 +38,6 @@ public abstract class ComplexScenario2DPortrayal extends Scenario2DPortrayal {
      * @param position
      * @param alpha
      * @param beta
-     * @param gamma
      * @throws DuplicatedPortrayalID
      * @throws ScenarioNotFoundException
      */

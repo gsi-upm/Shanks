@@ -92,19 +92,22 @@ public abstract class ComplexScenario extends Scenario {
     /**
      * Add the scenario to the complex scenario.
      * 
-     * @param scenario
-     * @param gateway
-     * @param externalLink
+     * @param scenarioClass
+     * @param scenarioID
+     * @param initialState
+     * @param properties
+     * @param gatewayDeviceID
+     * @param externalLinkID
      * @throws NonGatewayDeviceException
      * @throws TooManyConnectionException
      * @throws DuplicatedIDException
      * @throws AlreadyConnectedScenarioException
-     * @throws NoSuchMethodException 
-     * @throws SecurityException 
-     * @throws InvocationTargetException 
-     * @throws IllegalAccessException 
-     * @throws InstantiationException 
-     * @throws IllegalArgumentException 
+     * @throws SecurityException
+     * @throws NoSuchMethodException
+     * @throws IllegalArgumentException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws InvocationTargetException
      */
     public void addScenario(Class<? extends Scenario> scenarioClass, String scenarioID, String initialState, Properties properties, String gatewayDeviceID, String externalLinkID)
             throws NonGatewayDeviceException, TooManyConnectionException,
@@ -137,7 +140,7 @@ public abstract class ComplexScenario extends Scenario {
     }
 
     /**
-     * @return
+     * @return set of the scenarios that are in the complex scenario
      */
     public Set<Scenario> getScenarios() {
         return this.scenarios.keySet();

@@ -153,7 +153,7 @@ public class MyScenario extends Scenario {
      */
     private HashMap<Class<? extends Failure>, Double> getCloudyPenalties() {
         HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
-        String probs = this.getProperty(MyScenario.CLOUDY_PROB);
+        String probs = (String) this.getProperty(MyScenario.CLOUDY_PROB);
         double prob = new Double(probs);
         penalties.put(MyFailure.class, prob);
 

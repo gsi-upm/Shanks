@@ -12,12 +12,12 @@ import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 
 public abstract class ComplexScenario2DPortrayal extends Scenario2DPortrayal {
 
     public ComplexScenario2DPortrayal(Scenario scenario, int width, int height)
-            throws DuplicatedPortrayalID, ScenarioNotFoundException {
+            throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
         super(scenario, width, height);
         this.placeScenarios();
     }
@@ -25,10 +25,10 @@ public abstract class ComplexScenario2DPortrayal extends Scenario2DPortrayal {
     /**
      * Place all scenarios of the ComplexScenario
      * 
-     * @throws DuplicatedPortrayalID
+     * @throws DuplicatedPortrayalIDException
      * @throws ScenarioNotFoundException
      */
-    abstract public void placeScenarios() throws DuplicatedPortrayalID,
+    abstract public void placeScenarios() throws DuplicatedPortrayalIDException,
             ScenarioNotFoundException;
 
     /**
@@ -38,11 +38,11 @@ public abstract class ComplexScenario2DPortrayal extends Scenario2DPortrayal {
      * @param position
      * @param alpha
      * @param beta
-     * @throws DuplicatedPortrayalID
+     * @throws DuplicatedPortrayalIDException
      * @throws ScenarioNotFoundException
      */
     public void situateScenario(Scenario scenario, Double2D position,
-            Double2D alpha, Double2D beta) throws DuplicatedPortrayalID,
+            Double2D alpha, Double2D beta) throws DuplicatedPortrayalIDException,
             ScenarioNotFoundException {
         Scenario2DPortrayal portrayal;
         try {
@@ -77,7 +77,7 @@ public abstract class ComplexScenario2DPortrayal extends Scenario2DPortrayal {
             if (scenario instanceof ComplexScenario) {
                 this.drawScenarioLinksLinks((ComplexScenario) scenario);
             }
-        } catch (DuplicatedPortrayalID e) {
+        } catch (DuplicatedPortrayalIDException e) {
             throw e;
         }
     }

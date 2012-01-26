@@ -22,7 +22,7 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusE
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 
 /**
  * Scenarios class
@@ -92,10 +92,10 @@ public abstract class Scenario {
      * Create the scenario portrayal (2D o 3D).
      *
      * @return Scenario2DPortrayal or Scenario3DPortrayal object
-     * @throws DuplicatedPortrayalID 
+     * @throws DuplicatedPortrayalIDException 
      * @throws ScenarioNotFoundException 
      */
-    public ScenarioPortrayal createScenarioPortrayal() throws DuplicatedPortrayalID, ScenarioNotFoundException {
+    public ScenarioPortrayal createScenarioPortrayal() throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
         logger.fine("Creating Scenario Portrayal...");
         String dimensions = (String) this.getProperty(Scenario.SIMULATION_GUI);
         if (dimensions.equals(Scenario.SIMULATION_2D)) {
@@ -113,17 +113,17 @@ public abstract class Scenario {
 
     /**
      * @return a Scenario3DPortrayal
-     * @throws DuplicatedPortrayalID 
+     * @throws DuplicatedPortrayalIDException 
      * @throws ScenarioNotFoundException 
      */
-    abstract public Scenario2DPortrayal createScenario2DPortrayal() throws DuplicatedPortrayalID, ScenarioNotFoundException;
+    abstract public Scenario2DPortrayal createScenario2DPortrayal() throws DuplicatedPortrayalIDException, ScenarioNotFoundException;
 
     /**
      * @return a Scenario2DPortrayal
-     * @throws DuplicatedPortrayalID 
+     * @throws DuplicatedPortrayalIDException 
      * @throws ScenarioNotFoundException 
      */
-    abstract public Scenario3DPortrayal createScenario3DPortrayal() throws DuplicatedPortrayalID, ScenarioNotFoundException;
+    abstract public Scenario3DPortrayal createScenario3DPortrayal() throws DuplicatedPortrayalIDException, ScenarioNotFoundException;
 
     /**
      * @return the id

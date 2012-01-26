@@ -13,12 +13,12 @@ import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 
 public abstract class ComplexScenario3DPortrayal extends Scenario3DPortrayal {
 
     public ComplexScenario3DPortrayal(Scenario scenario, long width,
-            long height, long length) throws DuplicatedPortrayalID,
+            long height, long length) throws DuplicatedPortrayalIDException,
             ScenarioNotFoundException {
         super(scenario, width, height, length);
         this.placeScenarios();
@@ -27,10 +27,10 @@ public abstract class ComplexScenario3DPortrayal extends Scenario3DPortrayal {
     /**
      * Place all scenarios of the ComplexScenario
      * 
-     * @throws DuplicatedPortrayalID
+     * @throws DuplicatedPortrayalIDException
      * @throws ScenarioNotFoundException
      */
-    abstract public void placeScenarios() throws DuplicatedPortrayalID,
+    abstract public void placeScenarios() throws DuplicatedPortrayalIDException,
             ScenarioNotFoundException;
 
     /**
@@ -41,12 +41,12 @@ public abstract class ComplexScenario3DPortrayal extends Scenario3DPortrayal {
      * @param alpha
      * @param beta
      * @param gamma
-     * @throws DuplicatedPortrayalID
+     * @throws DuplicatedPortrayalIDException
      * @throws ScenarioNotFoundException
      */
     public void situateScenario(Scenario scenario, Double3D position,
             Double2D alpha, Double2D beta, Double2D gamma)
-            throws DuplicatedPortrayalID, ScenarioNotFoundException {
+            throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
         Scenario3DPortrayal portrayal;
         try {
             portrayal = (Scenario3DPortrayal) scenario
@@ -81,7 +81,7 @@ public abstract class ComplexScenario3DPortrayal extends Scenario3DPortrayal {
             if (scenario instanceof ComplexScenario) {
                 this.drawScenarioLinksLinks((ComplexScenario) scenario);
             }
-        } catch (DuplicatedPortrayalID e) {
+        } catch (DuplicatedPortrayalIDException e) {
             throw e;
         }
     }

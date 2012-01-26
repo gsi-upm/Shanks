@@ -15,12 +15,12 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.ComplexScenario2DPortrayal
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ShanksMath;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 
 public class MyMegaComplexScenario2DPortrayal extends ComplexScenario2DPortrayal {
 
     public MyMegaComplexScenario2DPortrayal(Scenario scenario, int width,
-            int height) throws DuplicatedPortrayalID, ScenarioNotFoundException {
+            int height) throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
         super(scenario, width, height);
     }
 
@@ -40,7 +40,7 @@ public class MyMegaComplexScenario2DPortrayal extends ComplexScenario2DPortrayal
     }
 
     @Override
-    public void placeScenarios() throws DuplicatedPortrayalID,
+    public void placeScenarios() throws DuplicatedPortrayalIDException,
             ScenarioNotFoundException {
         ComplexScenario cs = (ComplexScenario) this.getScenario();
         this.situateScenario(cs.getScenario("SuperComplexScenario1"), new Double2D(0,0), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);

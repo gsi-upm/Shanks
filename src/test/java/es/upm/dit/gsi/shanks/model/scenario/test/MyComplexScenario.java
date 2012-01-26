@@ -23,7 +23,7 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyComplexScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyComplexScenario3DPortrayal;
 
@@ -141,7 +141,7 @@ public class MyComplexScenario extends ComplexScenario {
             InvocationTargetException,
             UnsupportedNetworkElementStatusException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, DuplicatedPortrayalID,
+            DuplicatedIDException, DuplicatedPortrayalIDException,
             ScenarioNotFoundException {
 
         Properties scenarioProperties = new Properties();
@@ -163,13 +163,13 @@ public class MyComplexScenario extends ComplexScenario {
 
     @Override
     public Scenario2DPortrayal createScenario2DPortrayal()
-            throws DuplicatedPortrayalID, ScenarioNotFoundException {
+            throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
         return new MyComplexScenario2DPortrayal(this, 200, 200);
     }
 
     @Override
     public Scenario3DPortrayal createScenario3DPortrayal()
-            throws DuplicatedPortrayalID, ScenarioNotFoundException {
+            throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
         return new MyComplexScenario3DPortrayal(this, 100, 100, 100);
     }
 

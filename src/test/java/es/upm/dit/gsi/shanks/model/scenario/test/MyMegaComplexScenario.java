@@ -23,7 +23,7 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyMegaComplexScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyMegaComplexScenario3DPortrayal;
 
@@ -60,13 +60,13 @@ public class MyMegaComplexScenario extends ComplexScenario {
 
     @Override
     public Scenario2DPortrayal createScenario2DPortrayal()
-            throws DuplicatedPortrayalID, ScenarioNotFoundException {
+            throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
         return new MyMegaComplexScenario2DPortrayal(this, 200, 200);
     }
 
     @Override
     public Scenario3DPortrayal createScenario3DPortrayal()
-            throws DuplicatedPortrayalID, ScenarioNotFoundException {
+            throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
         return new MyMegaComplexScenario3DPortrayal(this, 100, 100, 100);
     }
 
@@ -141,7 +141,7 @@ public class MyMegaComplexScenario extends ComplexScenario {
             InvocationTargetException,
             UnsupportedNetworkElementStatusException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, DuplicatedPortrayalID, ScenarioNotFoundException {
+            DuplicatedIDException, DuplicatedPortrayalIDException, ScenarioNotFoundException {
 
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "5");

@@ -15,11 +15,11 @@ import sim.display.Display2D;
 import sim.display.GUIState;
 import sim.portrayal.FieldPortrayal2D;
 import sim.portrayal.Portrayal;
-import es.upm.dit.gsi.shanks.exception.DuplictaedDisplayID;
+import es.upm.dit.gsi.shanks.exception.DuplictaedDisplayIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 
 /**
  * ShanksSimulation2DGUI class
@@ -115,7 +115,7 @@ public class ShanksSimulation2DGUI extends GUIState {
                             .get(portrayalID), portrayalID);
                 }
             }
-        } catch (DuplicatedPortrayalID e) {
+        } catch (DuplicatedPortrayalIDException e) {
             logger.severe(e.getMessage());
             e.printStackTrace();
         } catch (ScenarioNotFoundException e) {
@@ -129,7 +129,7 @@ public class ShanksSimulation2DGUI extends GUIState {
      * 
      * @see sim.display.GUIState#load(sim.engine.SimState)
      */
-    public void load(ShanksSimulation state) throws DuplicatedPortrayalID, ScenarioNotFoundException {
+    public void load(ShanksSimulation state) throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
         super.load(state);
         this.getSimulation().getScenarioPortrayal().setupPortrayals();
     }
@@ -164,10 +164,10 @@ public class ShanksSimulation2DGUI extends GUIState {
                 c.registerFrame(frame);
                 frame.setVisible(true);
             }
-        } catch (DuplictaedDisplayID e) {
+        } catch (DuplictaedDisplayIDException e) {
             logger.severe(e.getMessage());
             e.printStackTrace();
-        } catch (DuplicatedPortrayalID e) {
+        } catch (DuplicatedPortrayalIDException e) {
             logger.severe(e.getMessage());
             e.printStackTrace();
         } catch (ScenarioNotFoundException e) {
@@ -210,7 +210,7 @@ public class ShanksSimulation2DGUI extends GUIState {
                 }
 
             }
-        } catch (DuplicatedPortrayalID e) {
+        } catch (DuplicatedPortrayalIDException e) {
             logger.severe(e.getMessage());
             e.printStackTrace();
         } catch (ScenarioNotFoundException e) {

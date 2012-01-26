@@ -21,7 +21,7 @@ import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalID;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 
 public class MyShanksSimulation extends ShanksSimulation {
 
@@ -46,10 +46,10 @@ public class MyShanksSimulation extends ShanksSimulation {
      * @throws NoSuchMethodException 
      * @throws IllegalArgumentException 
      * @throws SecurityException 
-     * @throws DuplicatedPortrayalID 
+     * @throws DuplicatedPortrayalIDException 
      * @throws ScenarioNotFoundException 
      */
-    public MyShanksSimulation(long seed, Class<? extends Scenario> scenarioClass, String scenarioID, String initialState, Properties properties, Properties configPropertiesMyShanksSimulation) throws SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException, UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException, DuplicatedPortrayalID, ScenarioNotFoundException {
+    public MyShanksSimulation(long seed, Class<? extends Scenario> scenarioClass, String scenarioID, String initialState, Properties properties, Properties configPropertiesMyShanksSimulation) throws SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException, UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException, DuplicatedPortrayalIDException, ScenarioNotFoundException {
         super(seed, scenarioClass, scenarioID, initialState, properties);
         this.stepabbles = new ArrayList<Steppable>();
         this.config(configPropertiesMyShanksSimulation);

@@ -1,6 +1,7 @@
 package es.upm.dit.gsi.shanks.model.scenario.portrayal;
 
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import sim.field.continuous.Continuous2D;
 import sim.portrayal.continuous.ContinuousPortrayal2D;
@@ -68,10 +69,9 @@ public abstract class ComplexScenario2DPortrayal extends Scenario2DPortrayal {
             }
             HashMap<String, NetworkElement> elements = scenario
                     .getCurrentElements();
-            for (String id : elements.keySet()) {
-                NetworkElement element = elements.get(id);
-                if (element instanceof Link) {
-                    this.drawLink((Link) element);
+            for (Entry<String, NetworkElement> entry : elements.entrySet()) {
+                if (entry.getValue() instanceof Link) {
+                    this.drawLink((Link) entry.getValue());
                 }
             }
             if (scenario instanceof ComplexScenario) {
@@ -88,10 +88,9 @@ public abstract class ComplexScenario2DPortrayal extends Scenario2DPortrayal {
     private void drawScenarioLinksLinks(ComplexScenario complexScenario) {
         HashMap<String, NetworkElement> elements = complexScenario
                 .getCurrentElements();
-        for (String id : elements.keySet()) {
-            NetworkElement element = elements.get(id);
-            if (element instanceof Link) {
-                this.drawLink((Link) element);
+        for (Entry<String, NetworkElement> entry : elements.entrySet()) {
+            if (entry.getValue() instanceof Link) {
+                this.drawLink((Link) entry.getValue());
             }
         }
         for (Scenario scenario : complexScenario.getScenarios()) {

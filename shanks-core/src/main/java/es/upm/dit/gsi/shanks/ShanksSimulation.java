@@ -87,7 +87,7 @@ public class ShanksSimulation extends SimState {
         Constructor<? extends Scenario> c  = scenarioClass.getConstructor(new Class[]{String.class,String.class,Properties.class});
        
         Scenario s = c.newInstance(scenarioID,initialState,properties);
-        logger.warning("Scenario created");
+        logger.fine("Scenario created");
         ScenarioPortrayal sp = s.createScenarioPortrayal();
         if (sp==null) {
             logger.warning("ScenarioPortrayals is null");

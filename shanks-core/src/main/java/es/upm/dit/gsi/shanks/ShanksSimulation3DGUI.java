@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Image;
 import java.util.HashMap;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
@@ -107,14 +106,11 @@ public class ShanksSimulation3DGUI extends GUIState {
             sp = sim.getScenarioPortrayal();
             HashMap<String, HashMap<String, Portrayal>> portrayals = sp
                     .getPortrayals();
-            Set<String> set = portrayals.keySet();
-            for (String displayID : set) {
-                Display3D display = displays.get(displayID);
-                HashMap<String, Portrayal> displayPortrayals = portrayals
-                        .get(displayID);
-                for (String portrayalID : displayPortrayals.keySet()) {
-                    display.attach((FieldPortrayal3D) displayPortrayals
-                            .get(portrayalID), portrayalID);
+            for (Entry<String, HashMap<String, Portrayal>> displayEntry : portrayals.entrySet()) {
+                Display3D display = displays.get(displayEntry.getKey());
+                HashMap<String, Portrayal> displayPortrayals = displayEntry.getValue();
+                for (Entry<String, Portrayal> portrayalEntry : displayPortrayals.entrySet()) {
+                    display.attach((FieldPortrayal3D) portrayalEntry.getValue(), portrayalEntry.getKey());
                 }
             }
         } catch (DuplicatedPortrayalIDException e) {

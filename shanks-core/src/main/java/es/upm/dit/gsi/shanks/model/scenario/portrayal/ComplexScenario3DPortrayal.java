@@ -102,10 +102,9 @@ public abstract class ComplexScenario3DPortrayal extends Scenario3DPortrayal {
                 this.drawScenarioLinksLinks((ComplexScenario) scenario);
             } else {
                 elements = scenario.getCurrentElements();
-                for (String eid : elements.keySet()) {
-                    NetworkElement e = elements.get(eid);
-                    if (e instanceof Link) {
-                        this.drawLink((Link) e);
+                for (Entry<String, NetworkElement> entry : elements.entrySet()) {
+                    if (entry.getValue() instanceof Link) {
+                        this.drawLink((Link) entry.getValue());
                     }
 
                 }

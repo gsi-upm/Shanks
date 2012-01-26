@@ -3,6 +3,7 @@ package es.upm.dit.gsi.shanks;
 import java.awt.Color;
 import java.awt.Image;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -94,10 +95,9 @@ public class ShanksSimulation2DGUI extends GUIState {
                     .getSimulation().getScenarioPortrayal();
             HashMap<String, Display2D> displays = scenarioPortrayal
                     .getDisplayList();
-            for (String s : displays.keySet()) {
-                Display2D display = displays.get(s);
-                display.reset();
-                display.repaint();
+            for (Entry<String, Display2D> entry : displays.entrySet()) {
+                entry.getValue().reset();
+                entry.getValue().repaint();
             }
 
             ShanksSimulation sim = this.getSimulation();
@@ -155,12 +155,11 @@ public class ShanksSimulation2DGUI extends GUIState {
             
             this.addDisplays(scenarioPortrayal);
             
-            for (String displayID : displays.keySet()) {
-                Display2D display = displays.get(displayID);
-                display.setClipping(false);
-                JFrame frame = display.createFrame();
-                scenarioPortrayal.addFrame(displayID, frame);
-                frame.setTitle(displayID);
+            for (Entry<String, Display2D> displayEntry : displays.entrySet()) {
+                displayEntry.getValue().setClipping(false);
+                JFrame frame = displayEntry.getValue().createFrame();
+                scenarioPortrayal.addFrame(displayEntry.getKey(), frame);
+                frame.setTitle(displayEntry.getKey());
                 c.registerFrame(frame);
                 frame.setVisible(true);
             }
@@ -201,12 +200,11 @@ public class ShanksSimulation2DGUI extends GUIState {
             HashMap<String, Display2D> displays = scenarioPortrayal
                     .getDisplayList();
             HashMap<String, JFrame> frames = scenarioPortrayal.getFrameList();
-            for (String frameID : frames.keySet()) {
-                JFrame frame = frames.get(frameID);
-                if (frame != null) {
-                    frame.dispose();
-                    frames.remove(frameID);
-                    displays.remove(frameID);
+            for (Entry<String, JFrame> frameEntry : frames.entrySet()) {
+                if (frameEntry.getValue() != null) {
+                    frameEntry.getValue().dispose();
+                    frames.remove(frameEntry.getKey());
+                    displays.remove(frameEntry.getKey());
                 }
 
             }

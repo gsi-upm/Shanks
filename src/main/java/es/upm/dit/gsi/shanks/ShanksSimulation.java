@@ -2,11 +2,15 @@ package es.upm.dit.gsi.shanks;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.Properties;
 import java.util.logging.Logger;
 
 import sim.engine.Schedule;
 import sim.engine.SimState;
+import es.upm.dit.gsi.shanks.agent.ShanksAgent;
+import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
+import es.upm.dit.gsi.shanks.exception.UnkownAgentException;
 import es.upm.dit.gsi.shanks.model.ScenarioManager;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
@@ -35,9 +39,10 @@ public class ShanksSimulation extends SimState {
 
     private ScenarioManager scenarioManager;
 
+    private HashMap<String, ShanksAgent> agents;
+
     private int numOfResolvedFailures;
-    
-    
+
     /**
      * @param seed
      * @param scenarioClass
@@ -54,12 +59,22 @@ public class ShanksSimulation extends SimState {
      * @throws TooManyConnectionException
      * @throws UnsupportedScenarioStatusException
      * @throws DuplicatedIDException
-     * @throws DuplicatedPortrayalIDException 
-     * @throws ScenarioNotFoundException 
+     * @throws DuplicatedPortrayalIDException
+     * @throws ScenarioNotFoundException
      */
-    public ShanksSimulation(long seed, Class<? extends Scenario> scenarioClass, String scenarioID, String initialState, Properties properties) throws SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException, UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException, DuplicatedPortrayalIDException, ScenarioNotFoundException {
+    public ShanksSimulation(long seed, Class<? extends Scenario> scenarioClass,
+            String scenarioID, String initialState, Properties properties)
+            throws SecurityException, IllegalArgumentException,
+            NoSuchMethodException, InstantiationException,
+            IllegalAccessException, InvocationTargetException,
+            UnsupportedNetworkElementStatusException,
+            TooManyConnectionException, UnsupportedScenarioStatusException,
+            DuplicatedIDException, DuplicatedPortrayalIDException,
+            ScenarioNotFoundException {
         super(seed);
-            this.scenarioManager = this.createScenarioManager(scenarioClass, scenarioID, initialState, properties);
+        this.scenarioManager = this.createScenarioManager(scenarioClass,
+                scenarioID, initialState, properties);
+        this.agents = new HashMap<String, ShanksAgent>();
     }
 
     /**
@@ -70,26 +85,33 @@ public class ShanksSimulation extends SimState {
      * @throws UnsupportedScenarioStatusException
      * @throws TooManyConnectionException
      * @throws UnsupportedNetworkElementStatusException
-     * @throws NoSuchMethodException 
-     * @throws SecurityException 
-     * @throws InvocationTargetException 
-     * @throws IllegalAccessException 
-     * @throws InstantiationException 
-     * @throws IllegalArgumentException 
-     * @throws DuplicatedPortrayalIDException 
-     * @throws ScenarioNotFoundException 
+     * @throws NoSuchMethodException
+     * @throws SecurityException
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     * @throws IllegalArgumentException
+     * @throws DuplicatedPortrayalIDException
+     * @throws ScenarioNotFoundException
      */
-    private ScenarioManager createScenarioManager(Class<? extends Scenario> scenarioClass, String scenarioID, String initialState, Properties properties)
+    private ScenarioManager createScenarioManager(
+            Class<? extends Scenario> scenarioClass, String scenarioID,
+            String initialState, Properties properties)
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, SecurityException, NoSuchMethodException, IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException, DuplicatedPortrayalIDException, ScenarioNotFoundException {
-        
-        Constructor<? extends Scenario> c  = scenarioClass.getConstructor(new Class[]{String.class,String.class,Properties.class});
-       
-        Scenario s = c.newInstance(scenarioID,initialState,properties);
+            DuplicatedIDException, SecurityException, NoSuchMethodException,
+            IllegalArgumentException, InstantiationException,
+            IllegalAccessException, InvocationTargetException,
+            DuplicatedPortrayalIDException, ScenarioNotFoundException {
+
+        Constructor<? extends Scenario> c = scenarioClass
+                .getConstructor(new Class[] { String.class, String.class,
+                        Properties.class });
+
+        Scenario s = c.newInstance(scenarioID, initialState, properties);
         logger.fine("Scenario created");
         ScenarioPortrayal sp = s.createScenarioPortrayal();
-        if (sp==null) {
+        if (sp == null) {
             logger.warning("ScenarioPortrayals is null");
         }
         ScenarioManager sm = new ScenarioManager(s, sp);
@@ -112,12 +134,13 @@ public class ShanksSimulation extends SimState {
 
     /**
      * @return ScenarioPortrayal of the scenario of the simulation
-     * @throws DuplicatedPortrayalIDException 
-     * @throws ScenarioNotFoundException 
+     * @throws DuplicatedPortrayalIDException
+     * @throws ScenarioNotFoundException
      */
-    public ScenarioPortrayal getScenarioPortrayal() throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
+    public ScenarioPortrayal getScenarioPortrayal()
+            throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
         ScenarioPortrayal sp = this.scenarioManager.getPortrayal();
-        while (sp==null) {
+        while (sp == null) {
             sp = this.scenarioManager.getScenario().createScenarioPortrayal();
             this.scenarioManager.setPortrayal(sp);
         }
@@ -132,7 +155,8 @@ public class ShanksSimulation extends SimState {
     }
 
     /**
-     * @param numOfResolvedFailures the numOfResolvedFailures to set
+     * @param numOfResolvedFailures
+     *            the numOfResolvedFailures to set
      */
     public void setNumOfResolvedFailures(int numOfResolvedFailures) {
         this.numOfResolvedFailures = numOfResolvedFailures;
@@ -147,17 +171,59 @@ public class ShanksSimulation extends SimState {
     public void start() {
         super.start();
         logger.finer("-> start method");
-        startSimulation();
+        try {
+            startSimulation();
+        } catch (DuplicatedAgentIDException e) {
+            logger.warning("DuplicatedAgentIDException: " + e.getMessage() + ". Older agent has survived, new agent was not started.");
+        }
     }
 
     /**
      * The initial configuration of the scenario
+     * @throws DuplicatedAgentIDException 
      */
-    public void startSimulation() {
+    public void startSimulation() throws DuplicatedAgentIDException {
         schedule.scheduleRepeating(Schedule.EPOCH, 0, this.scenarioManager, 2);
+        this.agents.clear();
+        this.addAgents();
         this.addSteppables();
-        // schedule.scheduleRepeating(Schedule.EPOCH + 1, 2, a, 2);
 
+    }
+
+    /**
+     * Add ShanksAgent's to the simulation using registerShanksAgent method
+     */
+    public void addAgents() throws DuplicatedAgentIDException {
+        logger.info("No agents added...");
+    }
+
+    /**
+     * This method adds and registers the ShanksAgent
+     * 
+     * @param agent
+     *            The ShanksAgent
+     * @param order
+     *            The agent will be executed in this order
+     * @param interval
+     *            The agent will be executed every "x=interval" steps
+     * @throws DuplicatedAgentIDException 
+     */
+    public void registerShanksAgent(ShanksAgent agent, int order,
+            double interval) throws DuplicatedAgentIDException {
+        if (!this.agents.containsKey(agent.getID())) {
+            this.agents.put(agent.getID(), agent);
+            schedule.scheduleRepeating(Schedule.EPOCH, order, agent, interval);   
+        } else {
+            throw new DuplicatedAgentIDException(agent.getID());
+        }
+    }
+    
+    public ShanksAgent getAgent(String agentID) throws UnkownAgentException {
+        if (this.agents.containsKey(agentID)) {
+            return this.agents.get(agentID);   
+        } else {
+            throw new UnkownAgentException(agentID);
+        }
     }
 
     /**
@@ -173,6 +239,9 @@ public class ShanksSimulation extends SimState {
      * This method is called during the start phase of the simulation. The
      * command: schedule.scheduleRepeating(Schedule.EPOCH, 0,
      * this.scenarioManager, 2); is always executed in the first place.
+     * 
+     * In this method, for example, the steppable responsible of print graphics
+     * can be added.
      */
     public void addSteppables() {
         logger.info("No steppables added...");

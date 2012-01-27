@@ -7,10 +7,14 @@ import jason.asSemantics.Agent;
 import jason.asSemantics.Circumstance;
 import jason.asSemantics.Message;
 import jason.asSemantics.TransitionSystem;
+import jason.asSyntax.ASSyntax;
 import jason.asSyntax.Literal;
+import jason.asSyntax.Structure;
+import jason.asSyntax.Term;
 import jason.runtime.Settings;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -18,6 +22,9 @@ import sim.engine.SimState;
 import sim.engine.Steppable;
 import sim.engine.Stoppable;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
+import es.upm.dit.gsi.shanks.agent.action.ShanksAgentAction;
+import es.upm.dit.gsi.shanks.agent.action.exception.UnknownShanksAgentActionException;
+import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
 import es.upm.dit.gsi.shanks.exception.UnkownAgentException;
 
 /**
@@ -39,16 +46,20 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
     public List<Message> inbox;
     private ShanksJasonAgent agent;
     private String aslFilePath;
+    private HashMap<String, Class<? extends ShanksAgentAction>> actions;
 
     /**
      * Constructor of the agent
      * 
      * @param id
+     * @throws DuplicatedActionIDException 
      */
-    public ShanksAgent(String id, String aslFilePath) {
+    public ShanksAgent(String id, String aslFilePath) throws DuplicatedActionIDException {
         this.id = id;
         this.aslFilePath = aslFilePath;
         this.inbox = new ArrayList<Message>();
+        this.actions = new HashMap<String, Class<? extends ShanksAgentAction>>();
+        this.configActions();
     }
 
     /**
@@ -65,6 +76,22 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
      */
     public void putMessegaInInbox(Message message) {
         this.inbox.add(message);
+    }
+
+    /**
+     * Add all possible actions to the agent
+     * @throws DuplicatedActionIDException 
+     */
+    abstract public void configActions() throws DuplicatedActionIDException;
+
+    public void addAction(String actionID,
+            Class<? extends ShanksAgentAction> action)
+            throws DuplicatedActionIDException {
+        if (!this.actions.containsKey(actionID)) {
+            this.actions.put(actionID, action);
+        } else {
+            throw new DuplicatedActionIDException(actionID, this.getID());
+        }
     }
 
     /*
@@ -110,15 +137,65 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
      * 
      * @see jason.architecture.AgArch#perceive()
      */
-    abstract public List<Literal> perceive();
+    public List<Literal> perceive() {
+        if (!isRunning())
+            return null;
+        if (this.getSimulation() == null)
+            return null;
+        List<Literal> percepts = this.updateBeliefs(this.getSimulation());
+        percepts.add(ASSyntax.createLiteral("step", new Term[] { ASSyntax.createAtom(this.getID()) }));
+        return percepts;
+    }
 
+    /**
+     * Update beliefs of the agent
+     * 
+     * @param simulation
+     * @return new beliefs of the agent
+     */
+    abstract public List<Literal> updateBeliefs(ShanksSimulation simulation);
+    
     /*
      * (non-Javadoc)
      * 
      * @see jason.architecture.AgArch#act(jason.asSemantics.ActionExec,
      * java.util.List)
      */
-    abstract public void act(ActionExec action, List<ActionExec> feedback);
+    public void act(ActionExec action, List<ActionExec> feedback) {
+        if (!isRunning())
+            return;
+        if (this.getSimulation() == null)
+            return;
+
+        boolean result = false;
+
+        Structure actionStructure = action.getActionTerm();
+        String actionID = actionStructure.getFunctor();
+
+        try {
+            if (this.actions.containsKey(actionID)) {
+                ShanksAgentAction shanksAction = this.actions.get(actionID)
+                        .newInstance();
+                result = shanksAction.executeAction(this.getSimulation());
+            } else {
+                throw new UnknownShanksAgentActionException(actionID,
+                        this.getID());
+            }
+
+        } catch (UnknownShanksAgentActionException e) {
+            logger.severe("Action was not executed -> " + e.getMessage());
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            logger.severe("InstantiationException" + e.getMessage());
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            logger.severe("IllegalAccessException" + e.getMessage());
+            e.printStackTrace();
+        }
+
+        action.setResult(result);
+
+    }
 
     /*
      * (non-Javadoc)
@@ -150,21 +227,27 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
         }
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see jason.architecture.AgArch#canSleep()
      */
     public boolean canSleep() {
         return true;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see jason.architecture.AgArch#isRunning()
      */
     public boolean isRunning() {
         return true;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see jason.architecture.AgArch#sleep()
      */
     public void sleep() {
@@ -173,8 +256,10 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
         } catch (InterruptedException e) {
         }
     }
-    
-    /* (non-Javadoc)
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see jason.architecture.AgArch#getAgName()
      */
     public String getAgName() {

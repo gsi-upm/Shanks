@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import sim.engine.Schedule;
 import sim.engine.SimState;
 import es.upm.dit.gsi.shanks.agent.ShanksAgent;
+import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
 import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
 import es.upm.dit.gsi.shanks.exception.UnkownAgentException;
 import es.upm.dit.gsi.shanks.model.ScenarioManager;
@@ -172,7 +173,12 @@ public class ShanksSimulation extends SimState {
         super.start();
         logger.finer("-> start method");
         try {
-            startSimulation();
+            try {
+                startSimulation();
+            } catch (DuplicatedActionIDException e) {
+                logger.severe("DuplicatedActionIDException: " + e.getMessage());
+                e.printStackTrace();
+            }
         } catch (DuplicatedAgentIDException e) {
             logger.warning("DuplicatedAgentIDException: " + e.getMessage() + ". Older agent has survived, new agent was not started.");
         }
@@ -181,8 +187,9 @@ public class ShanksSimulation extends SimState {
     /**
      * The initial configuration of the scenario
      * @throws DuplicatedAgentIDException 
+     * @throws DuplicatedActionIDException 
      */
-    public void startSimulation() throws DuplicatedAgentIDException {
+    public void startSimulation() throws DuplicatedAgentIDException, DuplicatedActionIDException {
         schedule.scheduleRepeating(Schedule.EPOCH, 0, this.scenarioManager, 2);
         this.agents.clear();
         this.addAgents();
@@ -192,8 +199,9 @@ public class ShanksSimulation extends SimState {
 
     /**
      * Add ShanksAgent's to the simulation using registerShanksAgent method
+     * @throws DuplicatedActionIDException 
      */
-    public void addAgents() throws DuplicatedAgentIDException {
+    public void addAgents() throws DuplicatedAgentIDException, DuplicatedActionIDException {
         logger.info("No agents added...");
     }
 

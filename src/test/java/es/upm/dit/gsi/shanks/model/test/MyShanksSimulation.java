@@ -8,6 +8,7 @@ import java.util.Properties;
 import sim.engine.Schedule;
 import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
+import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
 import es.upm.dit.gsi.shanks.agent.test.MyShanksAgent;
 import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
@@ -81,7 +82,7 @@ public class MyShanksSimulation extends ShanksSimulation {
     /* (non-Javadoc)
      * @see es.upm.dit.gsi.shanks.ShanksSimulation#addAgents()
      */
-    public void addAgents() throws DuplicatedAgentIDException {
+    public void addAgents() throws DuplicatedAgentIDException, DuplicatedActionIDException {
         int conf = new Integer(this.configuration.getProperty(MyShanksSimulation.CONFIGURATION));
         if (conf==1){
             MyShanksAgent agent = new MyShanksAgent("ResolverAgent1_"+this.getScenario().getID(),"src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent.asl");

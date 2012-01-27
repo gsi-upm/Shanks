@@ -25,11 +25,11 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyComplexScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyComplexScenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation;
-import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI;
+import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation2DGUI;
 
 /**
  * @author a.carrera
- *
+ * 
  */
 public class MyComplexScenario extends ComplexScenario {
 
@@ -75,7 +75,9 @@ public class MyComplexScenario extends ComplexScenario {
         super(type, initialState, properties);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#setPossibleStates()
      */
     @Override
@@ -85,7 +87,9 @@ public class MyComplexScenario extends ComplexScenario {
         this.addPossibleStatus(MyComplexScenario.SUNNY);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#addNetworkElements()
      */
     @Override
@@ -104,7 +108,9 @@ public class MyComplexScenario extends ComplexScenario {
 
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#addPossibleFailures()
      */
     @Override
@@ -113,8 +119,12 @@ public class MyComplexScenario extends ComplexScenario {
 
     }
 
-    /* (non-Javadoc)
-     * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#getPenaltiesInStatus(java.lang.String)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * es.upm.dit.gsi.shanks.model.scenario.Scenario#getPenaltiesInStatus(java
+     * .lang.String)
      */
     @Override
     public HashMap<Class<? extends Failure>, Double> getPenaltiesInStatus(
@@ -165,7 +175,9 @@ public class MyComplexScenario extends ComplexScenario {
         return penalties;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see es.upm.dit.gsi.shanks.model.scenario.ComplexScenario#addScenarios()
      */
     @Override
@@ -212,9 +224,9 @@ public class MyComplexScenario extends ComplexScenario {
 
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "5");
+        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_2D);
         // scenarioProperties.put(Scenario.SIMULATION_GUI,
-        // Scenario.SIMULATION_2D);
-        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_3D);
+        // Scenario.SIMULATION_3D);
         // scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
         Properties configProperties = new Properties();
         configProperties.put(MyShanksSimulation.CONFIGURATION, "1");
@@ -222,13 +234,16 @@ public class MyComplexScenario extends ComplexScenario {
                 System.currentTimeMillis(), MyComplexScenario.class,
                 "MyComplexScenario", MyComplexScenario.SUNNY,
                 scenarioProperties, configProperties);
-        // MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
-        MyShanksSimulation3DGUI gui = new MyShanksSimulation3DGUI(sim);
+        MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
+        // MyShanksSimulation3DGUI gui = new MyShanksSimulation3DGUI(sim);
         gui.start();
     }
 
-    /* (non-Javadoc)
-     * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#createScenario2DPortrayal()
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * es.upm.dit.gsi.shanks.model.scenario.Scenario#createScenario2DPortrayal()
      */
     @Override
     public Scenario2DPortrayal createScenario2DPortrayal()
@@ -236,8 +251,11 @@ public class MyComplexScenario extends ComplexScenario {
         return new MyComplexScenario2DPortrayal(this, 200, 200);
     }
 
-    /* (non-Javadoc)
-     * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#createScenario3DPortrayal()
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * es.upm.dit.gsi.shanks.model.scenario.Scenario#createScenario3DPortrayal()
      */
     @Override
     public Scenario3DPortrayal createScenario3DPortrayal()

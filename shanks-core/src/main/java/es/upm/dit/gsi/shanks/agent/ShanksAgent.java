@@ -50,9 +50,10 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
      * Constructor of the agent
      * 
      * @param id
-     * @throws DuplicatedActionIDException 
+     * @throws DuplicatedActionIDException
      */
-    public ShanksAgent(String id, String aslFilePath) throws DuplicatedActionIDException {
+    public ShanksAgent(String id, String aslFilePath)
+            throws DuplicatedActionIDException {
         this.id = id;
         this.aslFilePath = aslFilePath;
         this.inbox = new ArrayList<Message>();
@@ -78,7 +79,8 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
 
     /**
      * Add all possible actions to the agent
-     * @throws DuplicatedActionIDException 
+     * 
+     * @throws DuplicatedActionIDException
      */
     abstract public void configActions() throws DuplicatedActionIDException;
 
@@ -102,7 +104,13 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
         this.simulation = (ShanksSimulation) simulation;
 
         agent = new ShanksJasonAgent();
-        new TransitionSystem(agent, new Circumstance(), new Settings(), this);
+        Circumstance cir;
+        if (this.getTS() == null || this.getTS().getC() == null) {
+            cir = new Circumstance();
+        } else {
+            cir = this.getTS().getC();
+        }
+        new TransitionSystem(agent, cir, new Settings(), this);
         try {
             agent.initAg(aslFilePath);
             TransitionSystem ts = this.getTS();
@@ -140,7 +148,7 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
             return null;
         if (this.getSimulation() == null)
             return null;
-        
+
         return this.updateBeliefs(this.getSimulation());
     }
 
@@ -151,7 +159,7 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
      * @return new beliefs of the agent
      */
     abstract public List<Literal> updateBeliefs(ShanksSimulation simulation);
-    
+
     /*
      * (non-Javadoc)
      * 

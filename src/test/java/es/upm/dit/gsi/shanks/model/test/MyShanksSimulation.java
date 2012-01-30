@@ -21,14 +21,14 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
 
 /**
  * @author a.carrera
- *
+ * 
  */
 public class MyShanksSimulation extends ShanksSimulation {
 
     private static final long serialVersionUID = 1778288778609950190L;
     private List<Steppable> stepabbles;
     private Properties configuration;
-    
+
     public static final String CONFIGURATION = "Configuration";
 
     /**
@@ -50,27 +50,44 @@ public class MyShanksSimulation extends ShanksSimulation {
      * @throws DuplicatedIDException
      * @throws DuplicatedPortrayalIDException
      * @throws ScenarioNotFoundException
+     * @throws DuplicatedActionIDException
+     * @throws DuplicatedAgentIDException
      */
-    public MyShanksSimulation(long seed, Class<? extends Scenario> scenarioClass, String scenarioID, String initialState, Properties properties, Properties configPropertiesMyShanksSimulation) throws SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException, UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException, DuplicatedPortrayalIDException, ScenarioNotFoundException {
+    public MyShanksSimulation(long seed,
+            Class<? extends Scenario> scenarioClass, String scenarioID,
+            String initialState, Properties properties,
+            Properties configPropertiesMyShanksSimulation)
+            throws SecurityException, IllegalArgumentException,
+            NoSuchMethodException, InstantiationException,
+            IllegalAccessException, InvocationTargetException,
+            UnsupportedNetworkElementStatusException,
+            TooManyConnectionException, UnsupportedScenarioStatusException,
+            DuplicatedIDException, DuplicatedPortrayalIDException,
+            ScenarioNotFoundException, DuplicatedAgentIDException,
+            DuplicatedActionIDException {
         super(seed, scenarioClass, scenarioID, initialState, properties);
         this.stepabbles = new ArrayList<Steppable>();
         this.configuration = configPropertiesMyShanksSimulation;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see es.upm.dit.gsi.shanks.ShanksSimulation#addSteppables()
      */
     @Override
     public void addSteppables() {
-        int conf = new Integer(this.configuration.getProperty(MyShanksSimulation.CONFIGURATION));
+        int conf = new Integer(
+                this.configuration
+                        .getProperty(MyShanksSimulation.CONFIGURATION));
         switch (conf) {
         case 0:
             logger.fine("Nothing todo here... No more steppables");
             break;
         case 1:
-            for (int i = 0; i<this.stepabbles.size(); i++) {
+            for (int i = 0; i < this.stepabbles.size(); i++) {
                 Steppable steppable = this.stepabbles.get(i);
-                schedule.scheduleRepeating(Schedule.EPOCH, i+1, steppable, 5);
+                schedule.scheduleRepeating(Schedule.EPOCH, i + 1, steppable, 5);
             }
             break;
         default:
@@ -78,19 +95,16 @@ public class MyShanksSimulation extends ShanksSimulation {
         }
 
     }
-    
-    /* (non-Javadoc)
-     * @see es.upm.dit.gsi.shanks.ShanksSimulation#addAgents()
-     */
-    public void addAgents() throws DuplicatedAgentIDException, DuplicatedActionIDException {
-        int conf = new Integer(this.configuration.getProperty(MyShanksSimulation.CONFIGURATION));
-        if (conf==1){
-            MyShanksAgent agent = new MyShanksAgent("ResolverAgent1_"+this.getScenario().getID(),"src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent.asl");
-            this.registerShanksAgent(agent, 0, 10);
-//            MyShanksAgent agent2 = new MyShanksAgent("ResolverAgent2_"+this.getScenario().getID(),"agent.asl");
-            MyShanksAgent agent2 = new MyShanksAgent("ResolverAgent2_"+this.getScenario().getID(),"src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent.asl");
-            this.registerShanksAgent(agent2, 0, 10);
-        }
+
+    @Override
+    public void registerShanksAgents() throws DuplicatedAgentIDException,
+            DuplicatedActionIDException {
+            MyShanksAgent agent = new MyShanksAgent("ResolverAgent1",
+                    "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent1.asl");
+            this.registerShanksAgent(agent);
+            MyShanksAgent agent2 = new MyShanksAgent("ResolverAgent2",
+                    "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent2.asl");
+            this.registerShanksAgent(agent2);
     }
 
 }

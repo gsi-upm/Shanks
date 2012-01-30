@@ -4,6 +4,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Properties;
 
+import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
+import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
@@ -212,6 +214,8 @@ public class MyComplexScenario extends ComplexScenario {
      * @throws DuplicatedIDException
      * @throws DuplicatedPortrayalIDException
      * @throws ScenarioNotFoundException
+     * @throws DuplicatedActionIDException 
+     * @throws DuplicatedAgentIDException 
      */
     public static void main(String[] args) throws SecurityException,
             IllegalArgumentException, NoSuchMethodException,
@@ -220,7 +224,7 @@ public class MyComplexScenario extends ComplexScenario {
             UnsupportedNetworkElementStatusException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException, DuplicatedPortrayalIDException,
-            ScenarioNotFoundException {
+            ScenarioNotFoundException, DuplicatedAgentIDException, DuplicatedActionIDException {
 
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "5");

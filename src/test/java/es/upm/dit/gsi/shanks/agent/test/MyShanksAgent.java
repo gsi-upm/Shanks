@@ -31,7 +31,7 @@ public class MyShanksAgent extends ShanksAgent {
     @Override
     public List<Literal> updateBeliefs(ShanksSimulation simulation) {        
         List<Literal> percepts = new ArrayList<Literal>();
-        percepts.add(ASSyntax.createLiteral("repair", new Term[] { ASSyntax.createNumber(1) }));
+            percepts.add(ASSyntax.createLiteral("repair", new Term[] { }));
         return percepts;
     }
 

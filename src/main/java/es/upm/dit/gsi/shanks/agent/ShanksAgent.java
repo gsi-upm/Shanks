@@ -7,10 +7,8 @@ import jason.asSemantics.Agent;
 import jason.asSemantics.Circumstance;
 import jason.asSemantics.Message;
 import jason.asSemantics.TransitionSystem;
-import jason.asSyntax.ASSyntax;
 import jason.asSyntax.Literal;
 import jason.asSyntax.Structure;
-import jason.asSyntax.Term;
 import jason.runtime.Settings;
 
 import java.util.ArrayList;
@@ -142,9 +140,8 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
             return null;
         if (this.getSimulation() == null)
             return null;
-        List<Literal> percepts = this.updateBeliefs(this.getSimulation());
-        percepts.add(ASSyntax.createLiteral("step", new Term[] { ASSyntax.createAtom(this.getID()) }));
-        return percepts;
+        
+        return this.updateBeliefs(this.getSimulation());
     }
 
     /**

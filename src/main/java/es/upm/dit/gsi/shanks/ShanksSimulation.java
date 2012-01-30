@@ -3,6 +3,7 @@ package es.upm.dit.gsi.shanks;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -62,6 +63,8 @@ public class ShanksSimulation extends SimState {
      * @throws DuplicatedIDException
      * @throws DuplicatedPortrayalIDException
      * @throws ScenarioNotFoundException
+     * @throws DuplicatedActionIDException
+     * @throws DuplicatedAgentIDException
      */
     public ShanksSimulation(long seed, Class<? extends Scenario> scenarioClass,
             String scenarioID, String initialState, Properties properties)
@@ -71,11 +74,24 @@ public class ShanksSimulation extends SimState {
             UnsupportedNetworkElementStatusException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException, DuplicatedPortrayalIDException,
-            ScenarioNotFoundException {
+            ScenarioNotFoundException, DuplicatedAgentIDException,
+            DuplicatedActionIDException {
         super(seed);
         this.scenarioManager = this.createScenarioManager(scenarioClass,
                 scenarioID, initialState, properties);
         this.agents = new HashMap<String, ShanksAgent>();
+        this.registerShanksAgents();
+    }
+
+    /**
+     * Register all agents to the scenario
+     * 
+     * @throws DuplicatedActionIDException
+     * @throws DuplicatedAgentIDException
+     */
+    public void registerShanksAgents() throws DuplicatedAgentIDException,
+            DuplicatedActionIDException {
+        logger.info("No agents to add...");
     }
 
     /**
@@ -180,18 +196,20 @@ public class ShanksSimulation extends SimState {
                 e.printStackTrace();
             }
         } catch (DuplicatedAgentIDException e) {
-            logger.warning("DuplicatedAgentIDException: " + e.getMessage() + ". Older agent has survived, new agent was not started.");
+            logger.warning("DuplicatedAgentIDException: " + e.getMessage()
+                    + ". Older agent has survived, new agent was not started.");
         }
     }
 
     /**
      * The initial configuration of the scenario
-     * @throws DuplicatedAgentIDException 
-     * @throws DuplicatedActionIDException 
+     * 
+     * @throws DuplicatedAgentIDException
+     * @throws DuplicatedActionIDException
      */
-    public void startSimulation() throws DuplicatedAgentIDException, DuplicatedActionIDException {
+    public void startSimulation() throws DuplicatedAgentIDException,
+            DuplicatedActionIDException {
         schedule.scheduleRepeating(Schedule.EPOCH, 0, this.scenarioManager, 2);
-        this.agents.clear();
         this.addAgents();
         this.addSteppables();
 
@@ -199,10 +217,14 @@ public class ShanksSimulation extends SimState {
 
     /**
      * Add ShanksAgent's to the simulation using registerShanksAgent method
-     * @throws DuplicatedActionIDException 
+     * 
+     * @throws DuplicatedActionIDException
      */
-    public void addAgents() throws DuplicatedAgentIDException, DuplicatedActionIDException {
-        logger.info("No agents added...");
+    private void addAgents() throws DuplicatedAgentIDException,
+            DuplicatedActionIDException {
+        for (Entry<String, ShanksAgent> agentEntry : this.agents.entrySet()) {
+            schedule.scheduleRepeating(Schedule.EPOCH, 2, agentEntry.getValue(), 1);
+        }
     }
 
     /**
@@ -214,21 +236,20 @@ public class ShanksSimulation extends SimState {
      *            The agent will be executed in this order
      * @param interval
      *            The agent will be executed every "x=interval" steps
-     * @throws DuplicatedAgentIDException 
+     * @throws DuplicatedAgentIDException
      */
-    public void registerShanksAgent(ShanksAgent agent, int order,
-            double interval) throws DuplicatedAgentIDException {
+    public void registerShanksAgent(ShanksAgent agent)
+            throws DuplicatedAgentIDException {
         if (!this.agents.containsKey(agent.getID())) {
             this.agents.put(agent.getID(), agent);
-            schedule.scheduleRepeating(Schedule.EPOCH, order, agent, interval);   
         } else {
             throw new DuplicatedAgentIDException(agent.getID());
         }
     }
-    
+
     public ShanksAgent getAgent(String agentID) throws UnkownAgentException {
         if (this.agents.containsKey(agentID)) {
-            return this.agents.get(agentID);   
+            return this.agents.get(agentID);
         } else {
             throw new UnkownAgentException(agentID);
         }

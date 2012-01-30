@@ -1,5 +1,7 @@
 package es.upm.dit.gsi.shanks.model.test;
 
+import jason.JasonException;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +54,7 @@ public class MyShanksSimulation extends ShanksSimulation {
      * @throws ScenarioNotFoundException
      * @throws DuplicatedActionIDException
      * @throws DuplicatedAgentIDException
+     * @throws JasonException 
      */
     public MyShanksSimulation(long seed,
             Class<? extends Scenario> scenarioClass, String scenarioID,
@@ -99,10 +102,10 @@ public class MyShanksSimulation extends ShanksSimulation {
     @Override
     public void registerShanksAgents() throws DuplicatedAgentIDException,
             DuplicatedActionIDException {
-            MyShanksAgent agent = new MyShanksAgent("ResolverAgent1",
+            MyShanksAgent agent = new MyShanksAgent("resolverAgent1",
                     "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent1.asl");
             this.registerShanksAgent(agent);
-            MyShanksAgent agent2 = new MyShanksAgent("ResolverAgent2",
+            MyShanksAgent agent2 = new MyShanksAgent("resolverAgent2",
                     "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent2.asl");
             this.registerShanksAgent(agent2);
     }

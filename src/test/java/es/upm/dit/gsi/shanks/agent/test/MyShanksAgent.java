@@ -17,9 +17,10 @@ public class MyShanksAgent extends ShanksAgent {
     /**
      * @param id
      * @param aslFilePath
-     * @throws DuplicatedActionIDException 
+     * @throws DuplicatedActionIDException
      */
-    public MyShanksAgent(String id, String aslFilePath) throws DuplicatedActionIDException {
+    public MyShanksAgent(String id, String aslFilePath)
+            throws DuplicatedActionIDException {
         super(id, aslFilePath);
     }
 
@@ -29,9 +30,21 @@ public class MyShanksAgent extends ShanksAgent {
     private static final long serialVersionUID = 2187089758395179991L;
 
     @Override
-    public List<Literal> updateBeliefs(ShanksSimulation simulation) {        
+    public List<Literal> updateBeliefs(ShanksSimulation simulation) {
         List<Literal> percepts = new ArrayList<Literal>();
-            percepts.add(ASSyntax.createLiteral("repair", new Term[] { }));
+        percepts.add(ASSyntax.createLiteral("myself",
+                new Term[] { Literal.parseLiteral(this.getID()) }));
+        if (simulation.getScenario().getCurrentFailures().size() > 4) {
+            percepts.add(ASSyntax.createLiteral("repair", new Term[] {}));
+        } else if (simulation.getScenario().getCurrentFailures().size() > 0) {
+            String coworker;
+            percepts.add(ASSyntax.createLiteral("ask", new Term[] {}));
+            coworker = "resolverAgent2";
+            percepts.add(ASSyntax.createLiteral("coworker",
+                    new Term[] { Literal.parseLiteral(coworker) }));
+        } else {
+            percepts.add(ASSyntax.createLiteral("relax", new Term[] {}));
+        }
         return percepts;
     }
 
@@ -39,6 +52,5 @@ public class MyShanksAgent extends ShanksAgent {
     public void configActions() throws DuplicatedActionIDException {
         this.addAction("fix", MyShanksAgentAction.class);
     }
-
 
 }

@@ -109,12 +109,15 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
 
         agent = new ShanksJasonAgent();
         Circumstance cir;
+        Settings settings;
         if (this.getTS() == null || this.getTS().getC() == null) {
             cir = new Circumstance();
+            settings = new Settings();
         } else {
             cir = this.getTS().getC();
+            settings = this.getTS().getSettings();
         }
-        new TransitionSystem(agent, cir, new Settings(), this);
+        new TransitionSystem(agent, cir, settings, this);
 
         try {
             agent.initAg(aslFilePath);
@@ -207,6 +210,7 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
         }
 
         action.setResult(result);
+        feedback.add(action);
 
     }
 

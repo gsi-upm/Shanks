@@ -2,6 +2,7 @@ package es.upm.dit.gsi.shanks;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Properties;
@@ -247,12 +248,24 @@ public class ShanksSimulation extends SimState {
         }
     }
 
+    /**
+     * @param agentID
+     * @return ShanksAgent with ID equals to agentID
+     * @throws UnkownAgentException
+     */
     public ShanksAgent getAgent(String agentID) throws UnkownAgentException {
         if (this.agents.containsKey(agentID)) {
             return this.agents.get(agentID);
         } else {
             throw new UnkownAgentException(agentID);
         }
+    }
+    
+    /**
+     * @return A collection with all agents
+     */
+    public Collection<ShanksAgent> getAgents() {
+        return this.agents.values();
     }
 
     /**

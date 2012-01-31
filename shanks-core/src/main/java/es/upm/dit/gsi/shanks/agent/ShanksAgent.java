@@ -7,8 +7,10 @@ import jason.asSemantics.Agent;
 import jason.asSemantics.Circumstance;
 import jason.asSemantics.Message;
 import jason.asSemantics.TransitionSystem;
+import jason.asSyntax.ASSyntax;
 import jason.asSyntax.Literal;
 import jason.asSyntax.Structure;
+import jason.asSyntax.Term;
 import jason.runtime.Settings;
 
 import java.util.ArrayList;
@@ -36,6 +38,8 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
 	 * 
 	 */
     private static final long serialVersionUID = 4744430503147830611L;
+
+    public static final String MYSELF = "myself";
 
     private Logger logger = Logger.getLogger(ShanksAgent.class.getName());
 
@@ -111,6 +115,7 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
             cir = this.getTS().getC();
         }
         new TransitionSystem(agent, cir, new Settings(), this);
+
         try {
             agent.initAg(aslFilePath);
             TransitionSystem ts = this.getTS();
@@ -148,8 +153,10 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
             return null;
         if (this.getSimulation() == null)
             return null;
-
-        return this.updateBeliefs(this.getSimulation());
+        List<Literal> percepts = this.updateBeliefs(this.getSimulation());
+        percepts.add(ASSyntax.createLiteral(ShanksAgent.MYSELF,
+                new Term[] { Literal.parseLiteral(this.getID()) }));
+        return percepts;
     }
 
     /**
@@ -181,7 +188,8 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
             if (this.actions.containsKey(actionID)) {
                 ShanksAgentAction shanksAction = this.actions.get(actionID)
                         .newInstance();
-                result = shanksAction.executeAction(this.getSimulation());
+                result = shanksAction.executeAction(this.getSimulation(),this.getID(),
+                        actionStructure.getTerms());
             } else {
                 throw new UnknownShanksAgentActionException(actionID,
                         this.getID());
@@ -213,6 +221,7 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
                     + m.getSender());
             getTS().getC().getMailBox().add(m);
         }
+        this.inbox.clear();
     }
 
     /*

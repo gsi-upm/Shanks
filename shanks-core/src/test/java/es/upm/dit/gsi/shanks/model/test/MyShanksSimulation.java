@@ -3,13 +3,13 @@ package es.upm.dit.gsi.shanks.model.test;
 import jason.JasonException;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 import sim.engine.Schedule;
+import sim.engine.SimState;
 import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
+import es.upm.dit.gsi.shanks.agent.ShanksAgent;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
 import es.upm.dit.gsi.shanks.agent.test.MyShanksAgent;
 import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
@@ -28,7 +28,6 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
 public class MyShanksSimulation extends ShanksSimulation {
 
     private static final long serialVersionUID = 1778288778609950190L;
-    private List<Steppable> stepabbles;
     private Properties configuration;
 
     public static final String CONFIGURATION = "Configuration";
@@ -54,7 +53,7 @@ public class MyShanksSimulation extends ShanksSimulation {
      * @throws ScenarioNotFoundException
      * @throws DuplicatedActionIDException
      * @throws DuplicatedAgentIDException
-     * @throws JasonException 
+     * @throws JasonException
      */
     public MyShanksSimulation(long seed,
             Class<? extends Scenario> scenarioClass, String scenarioID,
@@ -69,7 +68,6 @@ public class MyShanksSimulation extends ShanksSimulation {
             ScenarioNotFoundException, DuplicatedAgentIDException,
             DuplicatedActionIDException {
         super(seed, scenarioClass, scenarioID, initialState, properties);
-        this.stepabbles = new ArrayList<Steppable>();
         this.configuration = configPropertiesMyShanksSimulation;
     }
 
@@ -85,13 +83,29 @@ public class MyShanksSimulation extends ShanksSimulation {
                         .getProperty(MyShanksSimulation.CONFIGURATION));
         switch (conf) {
         case 0:
-            logger.fine("Nothing todo here... No more steppables");
+            logger.fine("Nothing to do here... No more steppables");
             break;
         case 1:
-            for (int i = 0; i < this.stepabbles.size(); i++) {
-                Steppable steppable = this.stepabbles.get(i);
-                schedule.scheduleRepeating(Schedule.EPOCH, i + 1, steppable, 5);
-            }
+            Steppable steppable = new Steppable() {
+
+                /**
+                 * 
+                 */
+                private static final long serialVersionUID = 2669002521740395423L;
+
+                @Override
+                public void step(SimState sim) {
+                    ShanksSimulation simulation = (ShanksSimulation) sim;
+                    for (ShanksAgent agent : simulation.getAgents()) {
+                        logger.info("Total failures resolved by Agent: "
+                                + agent.getID()
+                                + ": "
+                                + ((MyShanksAgent) agent)
+                                        .getNumberOfResolvedFailures());
+                    }
+                }
+            };
+            schedule.scheduleRepeating(Schedule.EPOCH, 3, steppable, 500);
             break;
         default:
             logger.info("No configuration for MyShanksSimulation. Configuration 0 loaded -> default");
@@ -102,12 +116,12 @@ public class MyShanksSimulation extends ShanksSimulation {
     @Override
     public void registerShanksAgents() throws DuplicatedAgentIDException,
             DuplicatedActionIDException {
-            MyShanksAgent agent = new MyShanksAgent("resolverAgent1",
-                    "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent1.asl");
-            this.registerShanksAgent(agent);
-            MyShanksAgent agent2 = new MyShanksAgent("resolverAgent2",
-                    "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent2.asl");
-            this.registerShanksAgent(agent2);
+        MyShanksAgent agent = new MyShanksAgent("resolverAgent1",
+                "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent1.asl");
+        this.registerShanksAgent(agent);
+        MyShanksAgent agent2 = new MyShanksAgent("resolverAgent2",
+                "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent2.asl");
+        this.registerShanksAgent(agent2);
     }
 
 }

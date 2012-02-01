@@ -6,16 +6,20 @@ import jason.asSyntax.Term;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.logging.Logger;
 
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.ShanksAgent;
 import es.upm.dit.gsi.shanks.agent.action.test.MyShanksAgentAction;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
+import es.upm.dit.gsi.shanks.model.failure.Failure;
 
 public class MyShanksAgent extends ShanksAgent {
 
     private int numberOfResolvedFailures;
-    
+    private Logger logger = Logger.getLogger(MyShanksAgent.class.getName());
+
     /**
      * @param id
      * @param aslFilePath
@@ -31,25 +35,22 @@ public class MyShanksAgent extends ShanksAgent {
 	 * 
 	 */
     private static final long serialVersionUID = 2187089758395179991L;
-    public static final String REPAIR = "repair";
-    public static final String ASK = "ask";
-    public static final String COWORKER = "coworker";
-    public static final String RELAX = "relax";
+    public static final String NUMOFFAILURES = "failures";
 
     @Override
     public List<Literal> updateBeliefs(ShanksSimulation simulation) {
         List<Literal> percepts = new ArrayList<Literal>();
-        if (simulation.getScenario().getCurrentFailures().size() > 4) {
-            percepts.add(ASSyntax.createLiteral(MyShanksAgent.REPAIR, new Term[] {}));
-        } else if ((this.getID().equals("resolverAgent1")) && (simulation.getScenario().getCurrentFailures().size() > 0)) {
-//            System.out.println("Agent " + this.getID() + " asking...");
-            String coworker;
-            percepts.add(ASSyntax.createLiteral(MyShanksAgent.ASK, new Term[] {}));
-            coworker = "resolverAgent2";
-            percepts.add(ASSyntax.createLiteral(MyShanksAgent.COWORKER,
-                    new Term[] { Literal.parseLiteral(coworker) }));
-        } else {
-            percepts.add(ASSyntax.createLiteral(MyShanksAgent.RELAX, new Term[] {}));
+        Set<Failure> currentFailures = simulation.getScenario()
+                .getCurrentFailures();
+        int numFailures = currentFailures.size();
+        logger.finer("Perceive() " + this.getID() + " Number of failures: "
+                + numFailures);
+        if (numFailures>3) {
+            percepts.add(ASSyntax.createLiteral(MyShanksAgent.NUMOFFAILURES,
+                    new Term[] { Literal.parseLiteral("many") }));
+        } else if (numFailures>0) {
+            percepts.add(ASSyntax.createLiteral(MyShanksAgent.NUMOFFAILURES,
+                    new Term[] { Literal.parseLiteral("few") }));            
         }
         return percepts;
     }
@@ -65,7 +66,7 @@ public class MyShanksAgent extends ShanksAgent {
     public int getNumberOfResolvedFailures() {
         return numberOfResolvedFailures;
     }
-    
+
     /**
      * Add 1 to resolved failures;
      */

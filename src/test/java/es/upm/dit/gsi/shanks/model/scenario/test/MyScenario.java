@@ -1,5 +1,6 @@
 package es.upm.dit.gsi.shanks.model.scenario.test;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -7,6 +8,8 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
+import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
+import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
@@ -18,12 +21,15 @@ import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.failure.test.MyFailure;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
+import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyScenario3DPortrayal;
+import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation;
+import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI;
 
 /**
  * @author a.carrera
@@ -185,6 +191,53 @@ public class MyScenario extends Scenario {
     @Override
     public Scenario3DPortrayal createScenario3DPortrayal() throws DuplicatedPortrayalIDException {
         return new MyScenario3DPortrayal(this, 100, 100, 100);
+    }
+    
+    /**
+     * @param args
+     * @throws SecurityException
+     * @throws IllegalArgumentException
+     * @throws NoSuchMethodException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws InvocationTargetException
+     * @throws UnsupportedNetworkElementStatusException
+     * @throws TooManyConnectionException
+     * @throws UnsupportedScenarioStatusException
+     * @throws DuplicatedIDException
+     * @throws DuplicatedPortrayalIDException
+     * @throws ScenarioNotFoundException
+     * @throws DuplicatedActionIDException 
+     * @throws DuplicatedAgentIDException 
+     */
+    public static void main(String[] args) throws SecurityException,
+            IllegalArgumentException, NoSuchMethodException,
+            InstantiationException, IllegalAccessException,
+            InvocationTargetException,
+            UnsupportedNetworkElementStatusException,
+            TooManyConnectionException, UnsupportedScenarioStatusException,
+            DuplicatedIDException, DuplicatedPortrayalIDException, ScenarioNotFoundException, DuplicatedAgentIDException, DuplicatedActionIDException {
+
+        Properties scenarioProperties = new Properties();
+        scenarioProperties.put(MyScenario.CLOUDY_PROB, "5");
+//        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_2D);
+        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_3D);
+//         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
+        Properties configProperties = new Properties();
+        configProperties.put(MyShanksSimulation.CONFIGURATION, "1");
+        MyShanksSimulation sim = new MyShanksSimulation(
+                System.currentTimeMillis(), MyScenario.class,
+                "MyScenario", MyScenario.SUNNY,
+                scenarioProperties, configProperties);
+//         MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
+        MyShanksSimulation3DGUI gui = new MyShanksSimulation3DGUI(sim);
+        gui.start();
+//        sim.start();
+//        do
+//            if (!sim.schedule.step(sim))
+//                break;
+//        while (sim.schedule.getSteps() < 2001);
+//        sim.finish();
     }
 
 }

@@ -16,6 +16,7 @@ import jason.runtime.Settings;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Queue;
 import java.util.logging.Logger;
 
 import sim.engine.SimState;
@@ -47,8 +48,9 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
     private String id;
     public List<Message> inbox;
     private ShanksJasonAgent agent;
-    private String aslFilePath;
     private HashMap<String, Class<? extends ShanksAgentAction>> actions;
+
+    private boolean reasoning;
 
     /**
      * Constructor of the agent
@@ -59,10 +61,23 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
     public ShanksAgent(String id, String aslFilePath)
             throws DuplicatedActionIDException {
         this.id = id;
-        this.aslFilePath = aslFilePath;
+        this.reasoning = false;
         this.inbox = new ArrayList<Message>();
         this.actions = new HashMap<String, Class<? extends ShanksAgentAction>>();
         this.configActions();
+        try {
+            Circumstance cir;
+            Settings settings;
+            cir = new Circumstance();
+            settings = new Settings();
+            agent = new ShanksJasonAgent();
+            new TransitionSystem(agent, cir, settings, this);
+            agent.initAg(aslFilePath);
+        } catch (JasonException e) {
+            logger.severe("JasonException was thrown when agent " + id
+                    + " was starting...");
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -106,28 +121,28 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
     @Override
     public void step(SimState simulation) {
         this.simulation = (ShanksSimulation) simulation;
-
-        agent = new ShanksJasonAgent();
-        Circumstance cir;
-        Settings settings;
-        if (this.getTS() == null || this.getTS().getC() == null) {
-            cir = new Circumstance();
-            settings = new Settings();
-        } else {
-            cir = this.getTS().getC();
-            settings = this.getTS().getSettings();
+        this.getTS().reasoningCycle();
+        while (this.isRunning()) {
+            this.getTS().reasoningCycle();
         }
-        new TransitionSystem(agent, cir, settings, this);
+    }
 
-        try {
-            agent.initAg(aslFilePath);
-            TransitionSystem ts = this.getTS();
-            ts.reasoningCycle();
-        } catch (JasonException e) {
-            logger.severe("JasonException was thrown when agent " + id
-                    + " was starting...");
-            e.printStackTrace();
-        }
+    /*
+     * (non-Javadoc)
+     * 
+     * @see jason.architecture.AgArch#reasoningCycleStarting()
+     */
+    public void reasoningCycleStarting() {
+        this.reasoning = true;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see jason.architecture.AgArch#isRunning()
+     */
+    public boolean isRunning() {
+        return this.reasoning;
     }
 
     /*
@@ -136,7 +151,7 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
      * @see jason.architecture.AgArch#stop()
      */
     public void stop() {
-
+        super.stop();
     }
 
     /**
@@ -191,8 +206,8 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
             if (this.actions.containsKey(actionID)) {
                 ShanksAgentAction shanksAction = this.actions.get(actionID)
                         .newInstance();
-                result = shanksAction.executeAction(this.getSimulation(),this.getID(),
-                        actionStructure.getTerms());
+                result = shanksAction.executeAction(this.getSimulation(),
+                        this.getID(), actionStructure.getTerms());
             } else {
                 throw new UnknownShanksAgentActionException(actionID,
                         this.getID());
@@ -210,8 +225,7 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
         }
 
         action.setResult(result);
-        feedback.add(action);
-
+        this.getTS().getC().addFeedbackAction(action);
     }
 
     /*
@@ -220,10 +234,11 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
      * @see jason.architecture.AgArch#checkMail()
      */
     public void checkMail() {
+        Queue<Message> mailBox = getTS().getC().getMailBox();
         for (Message m : this.inbox) {
             logger.fine("Received message -> ID: " + m.getMsgId() + " Sender: "
                     + m.getSender());
-            getTS().getC().getMailBox().add(m);
+            mailBox.offer(m);
         }
         this.inbox.clear();
     }
@@ -239,6 +254,8 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
             ShanksAgent receiver = this.simulation.getAgent(message
                     .getReceiver());
             receiver.putMessegaInInbox(message);
+            logger.fine("Sent message from Agent: " + this.getID()
+                    + "to Agent: " + message.getReceiver());
         } catch (UnkownAgentException e) {
             logger.severe("UnkownAgentException: " + e.getMessage());
             e.printStackTrace();
@@ -251,16 +268,7 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
      * @see jason.architecture.AgArch#canSleep()
      */
     public boolean canSleep() {
-        return true;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see jason.architecture.AgArch#isRunning()
-     */
-    public boolean isRunning() {
-        return true;
+        return this.getTS().getC().getMailBox().isEmpty() && isRunning();
     }
 
     /*
@@ -269,10 +277,7 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
      * @see jason.architecture.AgArch#sleep()
      */
     public void sleep() {
-        try {
-            Thread.sleep(1000L);
-        } catch (InterruptedException e) {
-        }
+        this.reasoning = false;
     }
 
     /*
@@ -289,6 +294,9 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
      * 
      */
     class ShanksJasonAgent extends Agent {
+        /* (non-Javadoc)
+         * @see jason.asSemantics.Agent#socAcc(jason.asSemantics.Message)
+         */
         public boolean socAcc(Message m) {
             return true;
         }

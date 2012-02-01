@@ -140,7 +140,7 @@ public class ScenarioManager implements Steppable {
     /**
      * @param sim
      */
-    private void checkFailures(ShanksSimulation sim) {
+    public void checkFailures(ShanksSimulation sim) {
         List<Failure> resolved = this.scenario.checkResolvedFailures();
         sim.setNumOfResolvedFailures(sim.getNumOfResolvedFailures()
                 + resolved.size());

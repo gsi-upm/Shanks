@@ -43,9 +43,8 @@ public class MyShanksAgentAction extends ShanksAgentAction {
                     } catch (UnsupportedNetworkElementStatusException e) {
                         e.printStackTrace();
                     }
-                }
+                }               
             }
-            // Resolve only 1 failure
 
             try {
                 ((MyShanksAgent)simulation.getAgent(agentID)).incrementNumberOfResolverFailures();
@@ -53,10 +52,12 @@ public class MyShanksAgentAction extends ShanksAgentAction {
                 logger.severe(e.getMessage());
                 e.printStackTrace();
             }
+            // Resolve only 1 failure
             break;
         }
         // END OF THE ACTION
-
+        simulation.getScenarioManager().checkFailures(simulation);
+        logger.finer("Number of current failures: " + simulation.getScenario().getCurrentFailures().size());
         return true;
     }
 

@@ -27,37 +27,38 @@ public class MyShanksAgentAction extends ShanksAgentAction {
             List<Term> arguments) {
 
         Set<Failure> failures = simulation.getScenario().getCurrentFailures();
-        for (Failure f : failures) {
-            HashMap<NetworkElement, String> elements = f.getAffectedElements();
-            for (NetworkElement element : elements.keySet()) {
-                Class<? extends NetworkElement> c = element.getClass();
-                if (c.equals(MyDevice.class)) {
-                    try {
-                        element.setCurrentStatus(MyDevice.OK_STATUS);
-                    } catch (UnsupportedNetworkElementStatusException e) {
-                        e.printStackTrace();
-                    }
-                } else if (c.equals(MyLink.class)) {
-                    try {
-                        element.setCurrentStatus(MyLink.OK_STATUS);
-                    } catch (UnsupportedNetworkElementStatusException e) {
-                        e.printStackTrace();
-                    }
-                }               
+        int number = failures.size();
+        int random = simulation.random.nextInt(number);
+        Failure f = (Failure) failures.toArray()[random];
+        HashMap<NetworkElement, String> elements = f.getAffectedElements();
+        for (NetworkElement element : elements.keySet()) {
+            Class<? extends NetworkElement> c = element.getClass();
+            if (c.equals(MyDevice.class)) {
+                try {
+                    element.setCurrentStatus(MyDevice.OK_STATUS);
+                } catch (UnsupportedNetworkElementStatusException e) {
+                    e.printStackTrace();
+                }
+            } else if (c.equals(MyLink.class)) {
+                try {
+                    element.setCurrentStatus(MyLink.OK_STATUS);
+                } catch (UnsupportedNetworkElementStatusException e) {
+                    e.printStackTrace();
+                }
             }
+        }
 
-            try {
-                ((MyShanksAgent)simulation.getAgent(agentID)).incrementNumberOfResolverFailures();
-            } catch (UnkownAgentException e) {
-                logger.severe(e.getMessage());
-                e.printStackTrace();
-            }
-            // Resolve only 1 failure
-            break;
+        try {
+            ((MyShanksAgent) simulation.getAgent(agentID))
+                    .incrementNumberOfResolverFailures();
+        } catch (UnkownAgentException e) {
+            logger.severe(e.getMessage());
+            e.printStackTrace();
         }
         // END OF THE ACTION
         simulation.getScenarioManager().checkFailures(simulation);
-        logger.finer("Number of current failures: " + simulation.getScenario().getCurrentFailures().size());
+        logger.finer("Number of current failures: "
+                + simulation.getScenario().getCurrentFailures().size());
         return true;
     }
 

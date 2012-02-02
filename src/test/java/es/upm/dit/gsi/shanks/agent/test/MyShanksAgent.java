@@ -3,6 +3,7 @@ package es.upm.dit.gsi.shanks.agent.test;
 import jason.asSyntax.ASSyntax;
 import jason.asSyntax.Literal;
 import jason.asSyntax.Term;
+import jason.bb.BeliefBase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,7 @@ public class MyShanksAgent extends ShanksAgent {
 	 */
     private static final long serialVersionUID = 2187089758395179991L;
     public static final String NUMOFFAILURES = "failures";
+    public static final String PENDING_FAILURES = "pending";
 
     @Override
     public List<Literal> updateBeliefs(ShanksSimulation simulation) {
@@ -45,13 +47,17 @@ public class MyShanksAgent extends ShanksAgent {
         int numFailures = currentFailures.size();
         logger.finer("Perceive() " + this.getID() + " Number of failures: "
                 + numFailures);
-        if (numFailures>3) {
+        if (numFailures>5) {
             percepts.add(ASSyntax.createLiteral(MyShanksAgent.NUMOFFAILURES,
                     new Term[] { Literal.parseLiteral("many") }));
         } else if (numFailures>0) {
             percepts.add(ASSyntax.createLiteral(MyShanksAgent.NUMOFFAILURES,
-                    new Term[] { Literal.parseLiteral("few") }));            
+                    new Term[] { Literal.parseLiteral("few") }));
+            percepts.add(ASSyntax.createLiteral(MyShanksAgent.PENDING_FAILURES,
+                    new Term[] {}));            
         }
+//        String agent = this.getID();
+//        BeliefBase bb = this.getTS().getAg().getBB();
         return percepts;
     }
 

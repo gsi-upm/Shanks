@@ -24,6 +24,7 @@ import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.test.MyComplexScenario;
+import es.upm.dit.gsi.shanks.model.scenario.test.MyHyperComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.test.MyMegaComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
 import es.upm.dit.gsi.shanks.model.scenario.test.MySuperComplexScenario;
@@ -691,6 +692,72 @@ public class ShanksSimulationTest {
             MyShanksSimulation sim = new MyShanksSimulation(
                     System.currentTimeMillis(), MyMegaComplexScenario.class,
                     "MyMegaComplexScenario", MyMegaComplexScenario.SUNNY,
+                    scenarioProperties, configProperties);
+            ShanksSimulation3DGUI gui = new ShanksSimulation3DGUI(sim);
+            gui.start();
+            do
+                if (!gui.getSimulation().schedule.step(sim))
+                    break;
+            while (gui.getSimulation().schedule.getSteps() < 2001);
+            gui.finish();
+        } catch (Exception e) {
+            catched = true;
+            e.printStackTrace();
+        }
+        Assert.assertFalse(catched);
+
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void ShanksSimulationResolvingProblemsWithHyperComplexScenario2DGUI() {
+        boolean catched = false;
+        try {
+            Properties scenarioProperties = new Properties();
+            scenarioProperties.put(MyScenario.CLOUDY_PROB, "50.0");
+            scenarioProperties.put(Scenario.SIMULATION_GUI,
+                    Scenario.SIMULATION_2D);
+
+            Properties configProperties = new Properties();
+            configProperties.put(MyShanksSimulation.CONFIGURATION, "1");
+            MyShanksSimulation sim = new MyShanksSimulation(
+                    System.currentTimeMillis(), MyHyperComplexScenario.class,
+                    "MyHyperComplexScenario", MyHyperComplexScenario.SUNNY,
+                    scenarioProperties, configProperties);
+            ShanksSimulation2DGUI gui = new ShanksSimulation2DGUI(sim);
+            gui.start();
+            do
+                if (!gui.getSimulation().schedule.step(sim))
+                    break;
+            while (gui.getSimulation().schedule.getSteps() < 2001);
+            gui.finish();
+        } catch (Exception e) {
+            catched = true;
+            e.printStackTrace();
+        }
+        Assert.assertFalse(catched);
+
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void ShanksSimulationResolvingProblemsWithHyperComplexScenario3DGUI() {
+        boolean catched = false;
+        try {
+            Properties scenarioProperties = new Properties();
+            scenarioProperties.put(MyScenario.CLOUDY_PROB, "50.0");
+            scenarioProperties.put(Scenario.SIMULATION_GUI,
+                    Scenario.SIMULATION_3D);
+
+            Properties configProperties = new Properties();
+            configProperties.put(MyShanksSimulation.CONFIGURATION, "1");
+            MyShanksSimulation sim = new MyShanksSimulation(
+                    System.currentTimeMillis(), MyHyperComplexScenario.class,
+                    "MyHyperComplexScenario", MyHyperComplexScenario.SUNNY,
                     scenarioProperties, configProperties);
             ShanksSimulation3DGUI gui = new ShanksSimulation3DGUI(sim);
             gui.start();

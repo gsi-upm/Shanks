@@ -1,5 +1,5 @@
 coworker(resolverAgent1).
 
-+failures(A) : A>3 <- +repair.
++failures(A) : A>5 <- +repair.
 +repair : myself(I) <- fix(I); -repair.
-+help(C,S)[source(A)] : myself(I) & (C == I) <- fix(I); .send(S,tell,done(I)); -help(C,S)[source(A)].
++help(C)[source(A)] : myself(I) & (C == I) <- ?coworker(F); fix(I); .send(F,tell,done(I)); -help(C)[source(A)].

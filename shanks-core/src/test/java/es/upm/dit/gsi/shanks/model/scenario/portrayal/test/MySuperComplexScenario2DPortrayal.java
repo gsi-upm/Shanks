@@ -68,4 +68,10 @@ public class MySuperComplexScenario2DPortrayal extends
         networkPortrayal.setPortrayalForAll(new MyLink2DPortrayal());
     }
 
+    @Override
+    public void addPortrayals() {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

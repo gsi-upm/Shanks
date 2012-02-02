@@ -76,4 +76,10 @@ public class MyComplexScenario3DPortrayal extends ComplexScenario3DPortrayal {
         
     }
 
+    @Override
+    public void addPortrayals() {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

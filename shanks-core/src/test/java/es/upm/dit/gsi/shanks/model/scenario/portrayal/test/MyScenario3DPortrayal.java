@@ -61,4 +61,10 @@ public class MyScenario3DPortrayal extends Scenario3DPortrayal {
         
     }
 
+    @Override
+    public void addPortrayals() {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

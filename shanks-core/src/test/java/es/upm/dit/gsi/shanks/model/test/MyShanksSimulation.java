@@ -4,10 +4,13 @@ import jason.JasonException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
+import java.util.Set;
 
 import sim.engine.Schedule;
 import sim.engine.SimState;
 import sim.engine.Steppable;
+import sim.field.grid.SparseGrid2D;
+import sim.portrayal.grid.SparseGridPortrayal2D;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.ShanksAgent;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
@@ -15,11 +18,13 @@ import es.upm.dit.gsi.shanks.agent.test.MyShanksAgent;
 import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyHyperComplexScenario2DPortrayal;
 
 /**
  * @author a.carrera
@@ -106,6 +111,56 @@ public class MyShanksSimulation extends ShanksSimulation {
                 }
             };
             schedule.scheduleRepeating(Schedule.EPOCH, 3, steppable, 500);
+            break;
+        case 2:
+            Steppable steppable2 = new Steppable() {
+
+                /**
+                 * 
+                 */
+                private static final long serialVersionUID = 2669002521740395423L;
+
+                @Override
+                public void step(SimState sim) {
+                    ShanksSimulation simulation = (ShanksSimulation) sim;
+                    for (ShanksAgent agent : simulation.getAgents()) {
+                        logger.info("Total failures resolved by Agent: "
+                                + agent.getID()
+                                + ": "
+                                + ((MyShanksAgent) agent)
+                                        .getNumberOfResolvedFailures());
+                    }
+                }
+            };
+            Steppable steppable3 = new Steppable() {
+                
+                /**
+                 * 
+                 */
+                private static final long serialVersionUID = -929835696282793943L;
+
+                @Override
+                public void step(SimState sim) {
+                    ShanksSimulation simulation = (ShanksSimulation) sim;
+                    Set<Failure> failures = simulation.getScenario().getCurrentFailures();
+                    try {
+                        SparseGridPortrayal2D failuresPortrayal = (SparseGridPortrayal2D) simulation.getScenarioPortrayal().getPortrayals().get(MyHyperComplexScenario2DPortrayal.FAILURE_DISPLAY_ID).get(MyHyperComplexScenario2DPortrayal.FAILURE_PORTRAYAL_ID);
+                        SparseGrid2D grid = (SparseGrid2D) failuresPortrayal.getField();
+                        grid.clear();
+                        int pos = 20;
+                        for (Failure f : failures) {
+                            grid.setObjectLocation(f, 10, pos);
+                            pos+=10;
+                        }
+                    } catch (DuplicatedPortrayalIDException e) {
+                        e.printStackTrace();
+                    } catch (ScenarioNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+            schedule.scheduleRepeating(Schedule.EPOCH, 4, steppable3, 10);
+            schedule.scheduleRepeating(Schedule.EPOCH, 3, steppable2, 500);
             break;
         default:
             logger.info("No configuration for MyShanksSimulation. Configuration 0 loaded -> default");

@@ -80,4 +80,10 @@ public class MyHyperComplexScenario3DPortrayal extends
 
     }
 
+    @Override
+    public void addPortrayals() {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

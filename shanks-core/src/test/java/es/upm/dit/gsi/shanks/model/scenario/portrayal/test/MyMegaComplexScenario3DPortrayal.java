@@ -85,4 +85,10 @@ public class MyMegaComplexScenario3DPortrayal extends
                 ShanksMath.ANGLE_0);
     }
 
+    @Override
+    public void addPortrayals() {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

@@ -13,7 +13,7 @@ import es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice2DPortr
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.portrayal.test.MyLink2DPortrayal;
-import es.upm.dit.gsi.shanks.model.failure.portrayal.FailurePortrayal;
+import es.upm.dit.gsi.shanks.model.failure.portrayal.Failure2DPortrayal;
 import es.upm.dit.gsi.shanks.model.failure.test.MyFailure;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
@@ -62,8 +62,7 @@ public class MyHyperComplexScenario2DPortrayal extends
         SparseGridPortrayal2D failuresPortrayal = (SparseGridPortrayal2D) this.getPortrayals().get(MyHyperComplexScenario2DPortrayal.FAILURE_DISPLAY_ID).get(MyHyperComplexScenario2DPortrayal.FAILURE_PORTRAYAL_ID);
         devicePortrayal.setPortrayalForClass(MyDevice.class, new MyDevice2DPortrayal());
         networkPortrayal.setPortrayalForAll(new MyLink2DPortrayal());
-        failuresPortrayal.setPortrayalForClass(MyFailure.class, new FailurePortrayal());
-
+        failuresPortrayal.setPortrayalForClass(MyFailure.class, new Failure2DPortrayal());
     }
 
     @Override
@@ -73,7 +72,6 @@ public class MyHyperComplexScenario2DPortrayal extends
         failuresPortrayal.setField(failuresGrid);
         try {
             this.addPortrayal(MyHyperComplexScenario2DPortrayal.FAILURE_DISPLAY_ID, MyHyperComplexScenario2DPortrayal.FAILURE_PORTRAYAL_ID, failuresPortrayal);
-            failuresPortrayal.setPortrayalForClass(MyFailure.class, new FailurePortrayal());
         } catch (DuplicatedPortrayalIDException e) {            
             e.printStackTrace();
         }

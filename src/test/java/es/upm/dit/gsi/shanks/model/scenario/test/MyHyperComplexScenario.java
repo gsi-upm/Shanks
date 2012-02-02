@@ -30,7 +30,7 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyHyperComplexScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyHyperComplexScenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation;
-import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation2DGUI;
+import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI;
 
 /**
  * @author a.carrera
@@ -207,8 +207,8 @@ public class MyHyperComplexScenario extends ComplexScenario {
 
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "5");
-        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_2D);
-//        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_3D);
+//        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_2D);
+        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_3D);
 //         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
         Properties configProperties = new Properties();
         configProperties.put(MyShanksSimulation.CONFIGURATION, "2");
@@ -216,8 +216,8 @@ public class MyHyperComplexScenario extends ComplexScenario {
                 System.currentTimeMillis(), MyHyperComplexScenario.class,
                 "MyHyperComplexScenario", MyHyperComplexScenario.SUNNY,
                 scenarioProperties, configProperties);
-         MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
-//        MyShanksSimulation3DGUI gui = new MyShanksSimulation3DGUI(sim);
+//         MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
+        MyShanksSimulation3DGUI gui = new MyShanksSimulation3DGUI(sim);
         gui.start();
     }
 

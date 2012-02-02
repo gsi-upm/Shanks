@@ -1,1 +1,1 @@
-+failures(A) : A==many & myself(I) <- fix(I).
++failures(A) : A>6 & myself(I) <- fix(I).

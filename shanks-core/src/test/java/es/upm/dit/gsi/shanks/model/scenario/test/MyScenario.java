@@ -224,7 +224,7 @@ public class MyScenario extends Scenario {
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_3D);
 //         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
         Properties configProperties = new Properties();
-        configProperties.put(MyShanksSimulation.CONFIGURATION, "1");
+        configProperties.put(MyShanksSimulation.CONFIGURATION, "2");
         MyShanksSimulation sim = new MyShanksSimulation(
                 System.currentTimeMillis(), MyScenario.class,
                 "MyScenario", MyScenario.SUNNY,

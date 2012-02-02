@@ -67,4 +67,10 @@ public class MyMegaComplexScenario2DPortrayal extends ComplexScenario2DPortrayal
         this.situateScenario(cs.getScenario("SuperComplexScenario2"), new Double2D(270,0), ShanksMath.ANGLE_180, ShanksMath.ANGLE_180);
     }
 
+    @Override
+    public void addPortrayals() {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

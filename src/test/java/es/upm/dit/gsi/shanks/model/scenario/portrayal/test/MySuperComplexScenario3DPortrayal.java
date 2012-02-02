@@ -74,4 +74,10 @@ public class MySuperComplexScenario3DPortrayal extends
         this.getDisplay(MAIN_DISPLAY_ID).setShowsAxes(false);
     }
 
+    @Override
+    public void addPortrayals() {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

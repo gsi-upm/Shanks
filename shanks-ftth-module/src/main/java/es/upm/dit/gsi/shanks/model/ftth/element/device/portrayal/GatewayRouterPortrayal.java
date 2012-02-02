@@ -38,7 +38,6 @@ public class GatewayRouterPortrayal extends SimplePortrayal3D {
 
     @Override
     public TransformGroup getModel(Object obj, TransformGroup j3dModel) {
-        if (j3dModel == null) { //TODO I don't know if this check is required...
             j3dModel = new TransformGroup();
             Sphere s = new Sphere(diameter);
             if (((Device) obj).getCurrentStatus() == DeviceDefinitions.HEALTHY_STATUS) {
@@ -78,7 +77,6 @@ public class GatewayRouterPortrayal extends SimplePortrayal3D {
     }
 
 }
-//LOOK this is the old version of DevicePortrayal, now one Portrayal class exists per DeviceType for scalability purpouses
 //
 //package es.upm.dit.gsi.shanks.model.element.device.portrayal;
 //

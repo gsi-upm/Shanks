@@ -11,7 +11,6 @@ import es.upm.dit.gsi.shanks.model.ftth.failure.ONTFailure;
 import es.upm.dit.gsi.shanks.model.scenario.ScenarioDefinitions;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 
-//LOOK una clase como esta es la que cualquiera debe implementar para crear su propio escenario
 
 public class ScenarioFTTH extends Scenario {
 
@@ -36,6 +35,5 @@ public class ScenarioFTTH extends Scenario {
         this.addPossibleFailure(ONTFailure.class);
     }
     
-    // TODO hay que añadir la manera de situarlos "en el espacio", ahora mismo eso esta hecho en Simulation.java
 
 }

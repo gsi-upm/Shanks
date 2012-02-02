@@ -10,8 +10,7 @@ import es.upm.dit.gsi.shanks.model.failure.FailureDefinitions;
  * @author a.carrera
  * 
  */
-public class ONTFailure extends ConfigurationFailure {
-    // LOOK una clase como esta es la que deben implementar para cada fallo
+public class ONTFailure {
     /**
 	 * 
 	 */

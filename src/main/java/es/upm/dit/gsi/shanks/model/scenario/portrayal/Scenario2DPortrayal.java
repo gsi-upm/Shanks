@@ -61,9 +61,15 @@ public abstract class Scenario2DPortrayal extends ScenarioPortrayal {
         this.addPortrayal(Scenario2DPortrayal.MAIN_DISPLAY_ID,
                 ScenarioPortrayal.LINKS_PORTRAYAL, linksPortrayal);
 
+        this.addPortrayals();
         this.placeElements();
 
     }
+
+    /**
+     * Add extra portrayals to one display of the simulation
+     */
+    abstract public void addPortrayals();
 
     /**
      * @return Map with key: Display name and value: Display2D

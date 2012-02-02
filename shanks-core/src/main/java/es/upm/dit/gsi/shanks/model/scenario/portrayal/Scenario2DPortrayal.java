@@ -54,7 +54,7 @@ public abstract class Scenario2DPortrayal extends ScenarioPortrayal {
         NetworkPortrayal2D linksPortrayal = new NetworkPortrayal2D();
 
         devicesPortrayal.setField(this.devices);
-        linksPortrayal.setField(deviceLinkNetwork);
+        linksPortrayal.setField(this.deviceLinkNetwork);
 
         this.addPortrayal(Scenario2DPortrayal.MAIN_DISPLAY_ID,
                 ScenarioPortrayal.DEVICES_PORTRAYAL, devicesPortrayal);

@@ -32,7 +32,7 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
  * @version 0.1
  * 
  */
-public class ShanksSimulation3DGUI extends GUIState {
+public abstract class ShanksSimulation3DGUI extends GUIState {
 
     private Logger logger = Logger.getLogger(ShanksSimulation3DGUI.class
             .getName());
@@ -188,9 +188,7 @@ public class ShanksSimulation3DGUI extends GUIState {
      * To create extra displays
      * @param scenarioPortrayal
      */
-    public void addDisplays(Scenario3DPortrayal scenarioPortrayal) {
-        logger.info("No extra display to show");
-    }
+    public abstract void addDisplays(Scenario3DPortrayal scenarioPortrayal);
 
     /*
      * (non-Javadoc)

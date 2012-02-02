@@ -122,6 +122,30 @@ public class MyShanksSimulation extends ShanksSimulation {
         MyShanksAgent agent2 = new MyShanksAgent("resolverAgent2",
                 "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent2.asl");
         this.registerShanksAgent(agent2);
+        MyShanksAgent agent3 = new MyShanksAgent("resolverAgent3",
+                "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent3.asl");
+        this.registerShanksAgent(agent3);
+        MyShanksAgent agent4 = new MyShanksAgent("resolverAgent4",
+                "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent3.asl");
+        this.registerShanksAgent(agent4);
+        MyShanksAgent agent5 = new MyShanksAgent("resolverAgent5",
+                "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent3.asl");
+        this.registerShanksAgent(agent5);
+        MyShanksAgent agent6 = new MyShanksAgent("resolverAgent6",
+                "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent3.asl");
+        this.registerShanksAgent(agent6);
+        MyShanksAgent agent7 = new MyShanksAgent("resolverAgent7",
+                "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent3.asl");
+        this.registerShanksAgent(agent7);
+        MyShanksAgent agent8 = new MyShanksAgent("resolverAgent8",
+                "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent3.asl");
+        this.registerShanksAgent(agent8);
+        MyShanksAgent agent9 = new MyShanksAgent("resolverAgent9",
+                "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent3.asl");
+        this.registerShanksAgent(agent9);
+        MyShanksAgent agent10 = new MyShanksAgent("resolverAgent10",
+                "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent3.asl");
+        this.registerShanksAgent(agent10);
     }
 
 }

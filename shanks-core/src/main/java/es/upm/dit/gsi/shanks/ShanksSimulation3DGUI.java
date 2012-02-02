@@ -212,11 +212,10 @@ public class ShanksSimulation3DGUI extends GUIState {
             for (Entry<String, JFrame> frameEntry : frames.entrySet()) {
                 if (frameEntry.getValue() != null) {
                     frameEntry.getValue().dispose();
-                    frames.remove(frameEntry.getKey());
-                    displays.remove(frameEntry.getKey());
                 }
-
             }
+            frames.clear();
+            displays.clear();
         } catch (DuplicatedPortrayalIDException e) {
             logger.severe(e.getMessage());
             e.printStackTrace();

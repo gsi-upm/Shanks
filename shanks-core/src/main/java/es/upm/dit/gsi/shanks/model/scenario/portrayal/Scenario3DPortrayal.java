@@ -61,8 +61,14 @@ public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
         this.addPortrayal(Scenario3DPortrayal.MAIN_DISPLAY_ID, ScenarioPortrayal.DEVICES_PORTRAYAL, devicesPortrayal);
         this.addPortrayal(Scenario3DPortrayal.MAIN_DISPLAY_ID, ScenarioPortrayal.LINKS_PORTRAYAL, linksPortrayal);
 
+        this.addPortrayals();
         this.placeElements();
     }
+
+    /**
+     * Add extra portrayals to one display of the simulation
+     */
+    abstract public void addPortrayals();
 
     /**
      * @return Map with key: Display name and value: Display3D object

@@ -3,6 +3,8 @@ package es.upm.dit.gsi.shanks.model.failure.portrayal;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+import es.upm.dit.gsi.shanks.model.failure.Failure;
+
 import sim.portrayal.DrawInfo2D;
 import sim.portrayal.SimplePortrayal2D;
 
@@ -22,17 +24,14 @@ public class FailurePortrayal extends SimplePortrayal2D {
     @Override
     public void draw(Object object, Graphics2D graphics, DrawInfo2D info) {
 
-        final double width = 20;
-        final double height = 20;
-
-        // Draw the devices
-        final int x = (int) (info.draw.x - width / 2.0);
-        final int y = (int) (info.draw.y - height / 2.0);
+        Failure failure = (Failure) object;
+        int x = (int) info.draw.x;
+        int y = (int) info.draw.y;
 
         // Draw the devices ID ID
         graphics.setColor(Color.black);
-        graphics.drawString("Problem generated ----> "
-                + this.getClass().getName(), x - 3, y);
+        graphics.drawString("Failure ID ----> "
+                + failure.getID(), x, y);
     }
 
 }

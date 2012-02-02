@@ -72,7 +72,10 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
             settings = new Settings();
             agent = new ShanksJasonAgent();
             new TransitionSystem(agent, cir, settings, this);
-            agent.initAg(aslFilePath);
+            agent.initAg();
+            agent.addInitialBel(ASSyntax.createLiteral(ShanksAgent.MYSELF,
+                    new Term[] { Literal.parseLiteral(this.getID()) }));
+            agent.load(aslFilePath);
         } catch (JasonException e) {
             logger.severe("JasonException was thrown when agent " + id
                     + " was starting...");
@@ -172,8 +175,6 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
         if (this.getSimulation() == null)
             return null;
         List<Literal> percepts = this.updateBeliefs(this.getSimulation());
-        percepts.add(ASSyntax.createLiteral(ShanksAgent.MYSELF,
-                new Term[] { Literal.parseLiteral(this.getID()) }));
         return percepts;
     }
 

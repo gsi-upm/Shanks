@@ -46,7 +46,7 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
 
     private ShanksSimulation simulation;
     private String id;
-    public List<Message> inbox;
+    private List<Message> inbox;
     private ShanksJasonAgent agent;
     private HashMap<String, Class<? extends ShanksAgentAction>> actions;
 
@@ -236,9 +236,9 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
     public void checkMail() {
         Queue<Message> mailBox = getTS().getC().getMailBox();
         for (Message m : this.inbox) {
+            mailBox.offer(m);
             logger.fine("Received message -> ID: " + m.getMsgId() + " Sender: "
                     + m.getSender());
-            mailBox.offer(m);
         }
         this.inbox.clear();
     }
@@ -279,6 +279,13 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
     public void sleep() {
         this.reasoning = false;
     }
+    
+    /* (non-Javadoc)
+     * @see jason.architecture.AgArch#wake()
+     */
+    public void wake() {
+        this.reasoning = true;
+    }
 
     /*
      * (non-Javadoc)
@@ -294,12 +301,6 @@ public abstract class ShanksAgent extends AgArch implements Steppable,
      * 
      */
     class ShanksJasonAgent extends Agent {
-        /* (non-Javadoc)
-         * @see jason.asSemantics.Agent#socAcc(jason.asSemantics.Message)
-         */
-        public boolean socAcc(Message m) {
-            return true;
-        }
     }
 
 }

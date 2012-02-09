@@ -231,42 +231,8 @@ public class HomeScenario extends Scenario{
 		//while (sim.schedule.getSteps() < 2001);
 		//sim.finish();
 	}
-	
-	
-//	public static void main(String[] args) throws SecurityException,
-//    IllegalArgumentException, NoSuchMethodException,
-//    InstantiationException, IllegalAccessException,
-//    InvocationTargetException,
-//    UnsupportedNetworkElementStatusException,
-//    TooManyConnectionException, UnsupportedScenarioStatusException,
-//    DuplicatedIDException, DuplicatedPortrayalIDException, ScenarioNotFoundException, DuplicatedAgentIDException, DuplicatedActionIDException {
-//
-//		Properties scenarioProperties = new Properties();
-//		scenarioProperties.put(MyScenario.CLOUDY_PROB, "5");
-//		scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_2D);
-//		//scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_3D);
-//		// scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
-//		Properties configProperties = new Properties();
-//		configProperties.put(MyShanksSimulation.CONFIGURATION, "2");
-//		MyShanksSimulation sim = new MyShanksSimulation(
-//				System.currentTimeMillis(), HomeScenario.class,
-//				"MyScenario", ScenarioDefinitions.SUNNY,
-//				scenarioProperties, configProperties);
-//		MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
-//		//MyShanksSimulation3DGUI gui = new MyShanksSimulation3DGUI(sim);
-//		gui.start();
-//		//sim.start();
-//		//do
-//		//    if (!sim.schedule.step(sim))
-//		//        break;
-//		//while (sim.schedule.getSteps() < 2001);
-//		//sim.finish();
-//	}
 
 }
-
-
-//}
 	
 
 

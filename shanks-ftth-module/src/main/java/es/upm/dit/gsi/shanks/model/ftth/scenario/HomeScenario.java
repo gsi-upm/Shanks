@@ -105,6 +105,11 @@ public class HomeScenario extends Scenario{
 			this.addNetworkElement(ont7);
 			this.addNetworkElement(ont8);
 			this.addNetworkElement(ont9);
+			
+			this.addNetworkElement(OLTtoSplitterLink);
+			this.addNetworkElement(userLink1);
+			this.addNetworkElement(userLink2);
+			this.addNetworkElement(userLink3);
 	
 	}
 
@@ -217,10 +222,8 @@ public class HomeScenario extends Scenario{
 		//scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
 		Properties configProperties = new Properties();
 		configProperties.put(FTTHSimulation.CONFIGURATION, "2");
-		FTTHSimulation sim = new FTTHSimulation(
-				System.currentTimeMillis(), HomeScenario.class,
-				"Home Scenario", ScenarioDefinitions.SUNNY,
-				scenarioProperties, configProperties);
+		FTTHSimulation sim = new FTTHSimulation( System.currentTimeMillis(), HomeScenario.class,
+				"Home Scenario", ScenarioDefinitions.SUNNY, scenarioProperties, configProperties);
 		//FTTHSimulation2D gui = new FTTHSimulation2D(sim);
 		FTTHSimulation3D gui = new FTTHSimulation3D(sim);
 		gui.start();

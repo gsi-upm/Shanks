@@ -1,0 +1,1 @@
++failures(A) : A>6 & myself(I) <- fix(I).

@@ -1,6 +1,7 @@
 package es.upm.dit.gsi.shanks.model.ftth.element.device;
 
 import es.upm.dit.gsi.shanks.model.element.device.Device;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 
 /**
  * Gateway class
@@ -12,8 +13,8 @@ import es.upm.dit.gsi.shanks.model.element.device.Device;
  * 
  */
 public class GatewayRouter extends Device {
-    public GatewayRouter(String id, String status) {
-        super(id);
+    public GatewayRouter(String id, String status, boolean isGateway) throws UnsupportedNetworkElementStatusException {
+        super(id, status, isGateway);
     }
 
     private int ipConfiguration;
@@ -45,5 +46,38 @@ public class GatewayRouter extends Device {
     public int getDHCProblem() {
         return DHCPProblem;
     }
+
+
+
+	@Override
+	public void checkProperties()
+			throws UnsupportedNetworkElementStatusException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void checkStatus() throws UnsupportedNetworkElementStatusException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void fillIntialProperties() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void setPossibleStates() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

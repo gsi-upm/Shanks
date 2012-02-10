@@ -78,15 +78,13 @@ public class HomeScenario extends Scenario{
 			Device ont7 = new ONT("ONT7", DeviceDefinitions.OK_STATUS, false);
 			Device ont8 = new ONT("ONT8", DeviceDefinitions.OK_STATUS, false);
 			Device ont9 = new ONT("ONT9", DeviceDefinitions.OK_STATUS, false);
-			Link OLTtoSplitterLink = new OLTtoSplitter("OLTtoSplitterLink", LinkDefinitions.OK_STATUS, 2);
+			Link OLTtoSplitterLink = new OLTtoSplitter("Link0", LinkDefinitions.OK_STATUS, 2);
 			Link userLink1 = new SplitterToONT("Link1", LinkDefinitions.OK_STATUS, 32);
 			Link userLink2 = new SplitterToONT("Link2", LinkDefinitions.OK_STATUS, 32);
 			Link userLink3 = new SplitterToONT("Link3", LinkDefinitions.OK_STATUS, 32);
 			
 			OLTtoSplitterLink.connectDevices(olt, splitter);
 			userLink1.connectDevices(splitter, ont1);
-			userLink1.connectDevices(splitter, ont2);
-			userLink1.connectDevices(splitter, ont3);
 			userLink2.connectDevices(splitter, ont4);
 			userLink2.connectDevices(splitter, ont5);
 			userLink2.connectDevices(splitter, ont6);
@@ -126,20 +124,6 @@ public class HomeScenario extends Scenario{
         seta.add(this.getNetworkElement("OLT"));
         seta.add(this.getNetworkElement("Splitter"));
         this.addPossibleFailure(OLTFailure.class, seta);
-        Set<NetworkElement> set = new HashSet<NetworkElement>();
-        set.add(this.getNetworkElement("ONT1"));
-        set.add(this.getNetworkElement("Link1"));
-        Set<NetworkElement> set2 = new HashSet<NetworkElement>();
-        set2.add(this.getNetworkElement("ONT4"));
-        set2.add(this.getNetworkElement("Link2"));
-        Set<NetworkElement> set3 = new HashSet<NetworkElement>();
-        set3.add(this.getNetworkElement("ONT7"));
-        set3.add(this.getNetworkElement("Link3"));
-        List<Set<NetworkElement>> possibleCombinations = new ArrayList<Set<NetworkElement>>();
-        possibleCombinations.add(set);
-        possibleCombinations.add(set2);
-        possibleCombinations.add(set3);
-        this.addPossibleFailure(ONTFailure.class, possibleCombinations);
 		
 	}
 	
@@ -232,15 +216,15 @@ public class HomeScenario extends Scenario{
 
 		Properties scenarioProperties = new Properties();
 		scenarioProperties.put(ScenarioDefinitions.CLOUDY_PROB, "5");
-		//scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_2D);
-		scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_3D);
+		scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_2D);
+		//scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_3D);
 		//scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
 		Properties configProperties = new Properties();
 		configProperties.put(FTTHSimulation.CONFIGURATION, "2");
 		FTTHSimulation sim = new FTTHSimulation( System.currentTimeMillis(), HomeScenario.class,
 				"Home Scenario", ScenarioDefinitions.SUNNY, scenarioProperties, configProperties);
-		//FTTHSimulation2D gui = new FTTHSimulation2D(sim);
-		FTTHSimulation3D gui = new FTTHSimulation3D(sim);
+		FTTHSimulation2D gui = new FTTHSimulation2D(sim);
+		//FTTHSimulation3D gui = new FTTHSimulation3D(sim);
 		gui.start();
 		//sim.start();
 		//do
@@ -249,6 +233,8 @@ public class HomeScenario extends Scenario{
 		//while (sim.schedule.getSteps() < 2001);
 		//sim.finish();
 	}
+	
+	
 
 }
 	

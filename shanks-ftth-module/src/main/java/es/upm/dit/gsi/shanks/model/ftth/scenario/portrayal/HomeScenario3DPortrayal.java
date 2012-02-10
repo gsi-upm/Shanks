@@ -60,7 +60,7 @@ public class HomeScenario3DPortrayal extends Scenario3DPortrayal{
 		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT8"), 600, 800, 0);
 		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT9"), 800, 800, 0);
 	
-		this.drawLink((Link)this.getScenario().getNetworkElement("OLTtoSplitterLink"));
+		this.drawLink((Link)this.getScenario().getNetworkElement("Link0"));
 		this.drawLink((Link)this.getScenario().getNetworkElement("Link1"));
 		this.drawLink((Link)this.getScenario().getNetworkElement("Link2"));
 		this.drawLink((Link)this.getScenario().getNetworkElement("Link3"));

@@ -26,7 +26,7 @@ public class SplitterToONT2DPortrayal extends Link2DPortrayal{
         Edge e = (Edge) object;
 
         Link link = (Link) e.getInfo();
-        this.drawComplexLink(link, object, graphics, info);
+        this.drawLink(link, object, graphics, info);
     }
 
     /**
@@ -35,7 +35,7 @@ public class SplitterToONT2DPortrayal extends Link2DPortrayal{
      * @param graphics
      * @param info
      */
-    private void drawComplexLink(Link link, Object object, Graphics2D graphics,
+    private void drawLink(Link link, Object object, Graphics2D graphics,
             DrawInfo2D info) {
 
         EdgeDrawInfo2D ei = (EdgeDrawInfo2D) info;

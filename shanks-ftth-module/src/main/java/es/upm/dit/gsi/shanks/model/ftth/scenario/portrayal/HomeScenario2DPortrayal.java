@@ -62,18 +62,18 @@ public class HomeScenario2DPortrayal extends Scenario2DPortrayal{
 	@Override
 	public void placeElements() {
 		this.situateDevice((Device)this.getScenario().getNetworkElement("OLT"), 20, 50);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("Splitter"), 35, 50);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT1"), 60, 25);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT2"), 80, 25);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT3"), 90, 25);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT4"), 60, 50);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT5"), 80, 50);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT6"), 90, 50);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT7"), 60, 75);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT8"), 80, 75);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT9"), 90, 75);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("Splitter"), 50, 50);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT1"), 80, 25);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT2"), 110, 25);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT3"), 140, 25);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT4"), 80, 50);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT5"), 110, 50);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT6"), 140, 50);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT7"), 80, 75);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT8"), 110, 75);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT9"), 140, 75);
 	
-		this.drawLink((Link)this.getScenario().getNetworkElement("OLTtoSplitterLink"));
+		this.drawLink((Link)this.getScenario().getNetworkElement("Link0"));
 		this.drawLink((Link)this.getScenario().getNetworkElement("Link1"));
 		this.drawLink((Link)this.getScenario().getNetworkElement("Link2"));
 		this.drawLink((Link)this.getScenario().getNetworkElement("Link3"));

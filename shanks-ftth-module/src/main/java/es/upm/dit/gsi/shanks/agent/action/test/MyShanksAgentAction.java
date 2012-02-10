@@ -16,6 +16,12 @@ import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
+import es.upm.dit.gsi.shanks.model.ftth.element.device.DeviceDefinitions;
+import es.upm.dit.gsi.shanks.model.ftth.element.device.OLT;
+import es.upm.dit.gsi.shanks.model.ftth.element.device.ONT;
+import es.upm.dit.gsi.shanks.model.ftth.element.device.Splitter;
+import es.upm.dit.gsi.shanks.model.ftth.element.link.LinkDefinitions;
+import es.upm.dit.gsi.shanks.model.ftth.element.link.OLTtoSplitter;
 
 public class MyShanksAgentAction extends ShanksAgentAction {
 
@@ -33,15 +39,15 @@ public class MyShanksAgentAction extends ShanksAgentAction {
         HashMap<NetworkElement, String> elements = f.getAffectedElements();
         for (NetworkElement element : elements.keySet()) {
             Class<? extends NetworkElement> c = element.getClass();
-            if (c.equals(MyDevice.class)) {
+            if (c.equals(OLT.class) || c.equals(ONT.class) || c.equals(Splitter.class)) {
                 try {
-                    element.setCurrentStatus(MyDevice.OK_STATUS);
+                    element.setCurrentStatus(DeviceDefinitions.OK_STATUS);
                 } catch (UnsupportedNetworkElementStatusException e) {
                     e.printStackTrace();
                 }
-            } else if (c.equals(MyLink.class)) {
+            } else if (c.equals(OLTtoSplitter.class)) {
                 try {
-                    element.setCurrentStatus(MyLink.OK_STATUS);
+                    element.setCurrentStatus(LinkDefinitions.OK_STATUS);
                 } catch (UnsupportedNetworkElementStatusException e) {
                     e.printStackTrace();
                 }

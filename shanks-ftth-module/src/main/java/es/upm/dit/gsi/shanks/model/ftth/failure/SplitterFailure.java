@@ -8,7 +8,7 @@ import es.upm.dit.gsi.shanks.model.ftth.element.link.SplitterToONT;
 
 public class SplitterFailure extends Failure{
 
-	public SplitterFailure(String id, double occurrenceProbability) {
+	public SplitterFailure() {
 		super(SplitterFailure.class.getName(), 0.05);
 	}
 

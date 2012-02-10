@@ -9,8 +9,8 @@ import es.upm.dit.gsi.shanks.model.ftth.element.link.SplitterToONT;
 
 public class LinkFailure extends Failure{
 	
-	public LinkFailure(String id, double occurrenceProbability) {
-		super("LinkFailure", 0.05);
+	public LinkFailure() {
+		super(LinkFailure.class.getName(), 0.05);
 		
 	}
 	

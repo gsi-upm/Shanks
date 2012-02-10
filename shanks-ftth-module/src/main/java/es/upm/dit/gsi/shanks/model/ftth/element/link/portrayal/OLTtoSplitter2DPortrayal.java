@@ -9,6 +9,7 @@ import sim.portrayal.network.EdgeDrawInfo2D;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.portrayal.Link2DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
+import es.upm.dit.gsi.shanks.model.ftth.element.link.LinkDefinitions;
 
 public class OLTtoSplitter2DPortrayal extends Link2DPortrayal{
 	
@@ -46,9 +47,9 @@ public class OLTtoSplitter2DPortrayal extends Link2DPortrayal{
 
         graphics.setColor(Color.black);
         String status = link.getCurrentStatus();
-        if (status.equals(MyLink.OK_STATUS)) {
+        if (status.equals(LinkDefinitions.OK_STATUS)) {
             graphics.setColor(Color.green);
-        } else if (status.equals(MyLink.BROKEN_STATUS)) {
+        } else if (status.equals(LinkDefinitions.BROKEN_STATUS)) {
             graphics.setColor(Color.red);
         }
         graphics.drawLine(startX, startY, endX, endY);

@@ -19,7 +19,7 @@ public class SplitterFailure extends Failure{
 	@Override
 	public void addPossibleAffectedElements() {
 		this.addPossibleAffectedElements(Splitter.class, DeviceDefinitions.NOK_STATUS);
-        this.addPossibleAffectedElements(SplitterToONT.class,LinkDefinitions.BROKEN_STATUS);
+        //this.addPossibleAffectedElements(SplitterToONT.class,LinkDefinitions.BROKEN_STATUS);
 	}
 
 }

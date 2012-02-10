@@ -7,6 +7,7 @@ import javax.media.j3d.TransformGroup;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.portrayal.Link3DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
+import es.upm.dit.gsi.shanks.model.ftth.element.link.LinkDefinitions;
 
 public class OLTtoSplitter3DPortrayal extends Link3DPortrayal{
 
@@ -33,9 +34,9 @@ public class OLTtoSplitter3DPortrayal extends Link3DPortrayal{
 	@Override
 	public Color getLabelColor(Link link) {
 		String status = link.getCurrentStatus();
-        if (status.equals(MyLink.OK_STATUS)) {
+        if (status.equals(LinkDefinitions.OK_STATUS)) {
             return Color.green;
-        } else if (status.equals(MyLink.BROKEN_STATUS)) {
+        } else if (status.equals(LinkDefinitions.BROKEN_STATUS)) {
             return Color.red;
         } else {
             return Color.gray;
@@ -49,9 +50,9 @@ public class OLTtoSplitter3DPortrayal extends Link3DPortrayal{
 	@Override
 	public Color getLinkColor(Link link) {
 		String status = link.getCurrentStatus();
-        if (status.equals(MyLink.OK_STATUS)) {
+        if (status.equals(LinkDefinitions.OK_STATUS)) {
             return Color.blue;
-        } else if (status.equals(MyLink.BROKEN_STATUS)) {
+        } else if (status.equals(LinkDefinitions.BROKEN_STATUS)) {
             return Color.red;
         } else {
             return Color.green;

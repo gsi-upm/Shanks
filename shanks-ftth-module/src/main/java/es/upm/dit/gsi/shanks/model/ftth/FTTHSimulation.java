@@ -188,5 +188,19 @@ public class FTTHSimulation extends ShanksSimulation{
         }
 
     }
+    
+    @Override
+    public void registerShanksAgents() throws DuplicatedAgentIDException,
+            DuplicatedActionIDException {
+        MyShanksAgent agent = new MyShanksAgent("resolverAgent1",
+                "src/main/java/es/upm/dit/gsi/shanks/agent/MyShanksAgent1.asl");
+        this.registerShanksAgent(agent);
+        MyShanksAgent agent2 = new MyShanksAgent("resolverAgent2",
+                "src/main/java/es/upm/dit/gsi/shanks/agent/MyShanksAgent2.asl");
+        this.registerShanksAgent(agent2);
+        MyShanksAgent agent3 = new MyShanksAgent("resolverAgent3",
+                "src/main/java/es/upm/dit/gsi/shanks/agent/MyShanksAgent3.asl");
+        this.registerShanksAgent(agent3);
+    }
 
 }

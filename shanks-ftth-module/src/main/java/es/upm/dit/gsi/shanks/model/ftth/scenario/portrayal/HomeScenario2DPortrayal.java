@@ -61,17 +61,17 @@ public class HomeScenario2DPortrayal extends Scenario2DPortrayal{
      */
 	@Override
 	public void placeElements() {
-		this.situateDevice((Device)this.getScenario().getNetworkElement("OLT"), 0, 0);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("Splitter"), 20, 0);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT1"), 40, 0);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT2"), 60, 0);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT3"), 80, 0);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT4"), 40, 20);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT5"), 60, 20);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT6"), 80, 20);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT7"), 40, 40);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT8"), 60, 40);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT9"), 80, 40);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("OLT"), 20, 50);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("Splitter"), 35, 50);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT1"), 60, 25);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT2"), 80, 25);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT3"), 90, 25);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT4"), 60, 50);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT5"), 80, 50);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT6"), 90, 50);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT7"), 60, 75);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT8"), 80, 75);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT9"), 90, 75);
 	
 		this.drawLink((Link)this.getScenario().getNetworkElement("OLTtoSplitterLink"));
 		this.drawLink((Link)this.getScenario().getNetworkElement("Link1"));

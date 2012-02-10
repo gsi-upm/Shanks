@@ -9,7 +9,7 @@ import es.upm.dit.gsi.shanks.model.ftth.element.link.OLTtoSplitter;
 public class OLTFailure extends Failure{
 
 	public OLTFailure(String id, double occurrenceProbability) {
-		super(OLTFailure.class.getName(), 0.1);
+		super("OLTFailures", 0.1);
 		
 	}
 	
@@ -19,7 +19,7 @@ public class OLTFailure extends Failure{
 	@Override
 	public void addPossibleAffectedElements() {
 		this.addPossibleAffectedElements(OLT.class, DeviceDefinitions.NOK_STATUS);
-        this.addPossibleAffectedElements(OLTtoSplitter.class, LinkDefinitions.BROKEN_STATUS);
+        //this.addPossibleAffectedElements(OLTtoSplitter.class, LinkDefinitions.BROKEN_STATUS);
 		
 	}
 

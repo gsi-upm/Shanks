@@ -1,8 +1,10 @@
 package es.upm.dit.gsi.shanks.model.ftth.scenario;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -27,6 +29,7 @@ import es.upm.dit.gsi.shanks.model.ftth.element.link.LinkDefinitions;
 import es.upm.dit.gsi.shanks.model.ftth.element.link.OLTtoSplitter;
 import es.upm.dit.gsi.shanks.model.ftth.element.link.SplitterToONT;
 import es.upm.dit.gsi.shanks.model.ftth.failure.OLTFailure;
+import es.upm.dit.gsi.shanks.model.ftth.failure.ONTFailure;
 import es.upm.dit.gsi.shanks.model.ftth.scenario.portrayal.HomeScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.ftth.scenario.portrayal.HomeScenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
@@ -81,18 +84,15 @@ public class HomeScenario extends Scenario{
 			Link userLink3 = new SplitterToONT("Link3", LinkDefinitions.OK_STATUS, 32);
 			
 			OLTtoSplitterLink.connectDevices(olt, splitter);
-			splitter.connectToLink(userLink1);
-			splitter.connectToLink(userLink2);
-			splitter.connectToLink(userLink3);
-			ont1.connectToLink(userLink1);
-			ont2.connectToLink(userLink1);
-			ont3.connectToLink(userLink1);
-			ont4.connectToLink(userLink2);
-			ont5.connectToLink(userLink2);
-			ont6.connectToLink(userLink2);
-			ont7.connectToLink(userLink3);
-			ont8.connectToLink(userLink3);
-			ont9.connectToLink(userLink3);
+			userLink1.connectDevices(splitter, ont1);
+			userLink1.connectDevices(splitter, ont2);
+			userLink1.connectDevices(splitter, ont3);
+			userLink2.connectDevices(splitter, ont4);
+			userLink2.connectDevices(splitter, ont5);
+			userLink2.connectDevices(splitter, ont6);
+			userLink3.connectDevices(splitter, ont7);
+			userLink3.connectDevices(splitter, ont8);
+			userLink3.connectDevices(splitter, ont9);
 			
 			this.addNetworkElement(olt);
 			this.addNetworkElement(splitter);
@@ -121,10 +121,25 @@ public class HomeScenario extends Scenario{
      */
 	@Override
 	public void addPossibleFailures() {
+		
 		Set<NetworkElement> seta = new HashSet<NetworkElement>();
         seta.add(this.getNetworkElement("OLT"));
         seta.add(this.getNetworkElement("Splitter"));
         this.addPossibleFailure(OLTFailure.class, seta);
+        Set<NetworkElement> set = new HashSet<NetworkElement>();
+        set.add(this.getNetworkElement("ONT1"));
+        set.add(this.getNetworkElement("Link1"));
+        Set<NetworkElement> set2 = new HashSet<NetworkElement>();
+        set2.add(this.getNetworkElement("ONT4"));
+        set2.add(this.getNetworkElement("Link2"));
+        Set<NetworkElement> set3 = new HashSet<NetworkElement>();
+        set3.add(this.getNetworkElement("ONT7"));
+        set3.add(this.getNetworkElement("Link3"));
+        List<Set<NetworkElement>> possibleCombinations = new ArrayList<Set<NetworkElement>>();
+        possibleCombinations.add(set);
+        possibleCombinations.add(set2);
+        possibleCombinations.add(set3);
+        this.addPossibleFailure(ONTFailure.class, possibleCombinations);
 		
 	}
 	
@@ -154,7 +169,7 @@ public class HomeScenario extends Scenario{
 			String status) throws UnsupportedScenarioStatusException {
 		if (status.equals(ScenarioDefinitions.CLOUDY)) {
             return this.getCloudyPenalties();
-        } else if (status.equals(MyScenario.SUNNY)) {
+        } else if (status.equals(ScenarioDefinitions.SUNNY)) {
             return this.getSunnyPenalties();
         } else {
             throw new UnsupportedScenarioStatusException();

@@ -8,6 +8,7 @@ import sim.portrayal.Portrayal;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device2DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
+import es.upm.dit.gsi.shanks.model.ftth.element.device.DeviceDefinitions;
 
 public class ONT2DPortrayal extends Device2DPortrayal implements Portrayal{
 
@@ -24,11 +25,11 @@ public class ONT2DPortrayal extends Device2DPortrayal implements Portrayal{
         final double height = 20;
 
         String status = device.getCurrentStatus();
-        if (status.equals(MyDevice.OK_STATUS)) {
+        if (status.equals(DeviceDefinitions.OK_STATUS)) {
             graphics.setColor(Color.green);
-        } else if (status.equals(MyDevice.NOK_STATUS)) {
+        } else if (status.equals(DeviceDefinitions.NOK_STATUS)) {
             graphics.setColor(Color.red);
-        } else if (status.equals(MyDevice.UNKOWN_STATUS)) {
+        } else if (status.equals(DeviceDefinitions.UNKOWN_STATUS)) {
             graphics.setColor(Color.blue);
         }
 

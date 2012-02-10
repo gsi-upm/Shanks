@@ -39,7 +39,7 @@ public class HomeScenario3DPortrayal extends Scenario3DPortrayal{
         ContinuousPortrayal3D failuresPortrayal = new ContinuousPortrayal3D();
         failuresPortrayal.setField(failuresGrid);
         try {
-            this.addPortrayal(MyHyperComplexScenario2DPortrayal.FAILURE_DISPLAY_ID, MyHyperComplexScenario2DPortrayal.FAILURE_PORTRAYAL_ID, failuresPortrayal);
+            this.addPortrayal(ScenarioDefinitions.FAILURE_DISPLAY_ID, ScenarioDefinitions.FAILURE_PORTRAYAL_ID, failuresPortrayal);
         } catch (DuplicatedPortrayalIDException e) {            
             e.printStackTrace();
         }
@@ -49,16 +49,16 @@ public class HomeScenario3DPortrayal extends Scenario3DPortrayal{
 	@Override
 	public void placeElements() {
 		this.situateDevice((Device)this.getScenario().getNetworkElement("OLT"), 0, 0, 0);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("Splitter"), 20, 0, 0);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT1"), 40, 0, 0);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT2"), 60, 0, 0);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT3"), 80, 0, 0);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT4"), 40, 20, 0);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT5"), 60, 20, 0);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT6"), 80, 20, 0);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT7"), 40, 40, 0);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT8"), 60, 40, 0);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT9"), 80, 40, 0);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("Splitter"), 200, 200, 0);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT1"), 400, 400, 0);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT2"), 600, 400, 0);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT3"), 800, 400, 0);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT4"), 400, 600, 0);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT5"), 600, 600, 0);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT6"), 800, 600, 0);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT7"), 400, 800, 0);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT8"), 600, 800, 0);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT9"), 800, 800, 0);
 	
 		this.drawLink((Link)this.getScenario().getNetworkElement("OLTtoSplitterLink"));
 		this.drawLink((Link)this.getScenario().getNetworkElement("Link1"));

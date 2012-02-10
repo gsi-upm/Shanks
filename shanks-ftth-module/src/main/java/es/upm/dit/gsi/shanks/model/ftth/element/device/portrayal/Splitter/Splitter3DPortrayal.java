@@ -7,6 +7,7 @@ import javax.media.j3d.TransformGroup;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device3DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
+import es.upm.dit.gsi.shanks.model.ftth.element.device.DeviceDefinitions;
 
 public class Splitter3DPortrayal extends Device3DPortrayal{
 
@@ -25,11 +26,11 @@ public class Splitter3DPortrayal extends Device3DPortrayal{
      */
     public Color getDeviceColor(Device device) {
         String status = device.getCurrentStatus();
-        if (status.equals(MyDevice.OK_STATUS)) {
+        if (status.equals(DeviceDefinitions.OK_STATUS)) {
             return Color.green;
-        } else if (status.equals(MyDevice.NOK_STATUS)) {
+        } else if (status.equals(DeviceDefinitions.NOK_STATUS)) {
             return Color.red;
-        } else if (status.equals(MyDevice.UNKOWN_STATUS)) {
+        } else if (status.equals(DeviceDefinitions.UNKOWN_STATUS)) {
             return Color.gray;
         } else {
             return Color.black;
@@ -40,11 +41,11 @@ public class Splitter3DPortrayal extends Device3DPortrayal{
      */
     public Color getLabelColor(Device device) {
         String status = device.getCurrentStatus();
-        if (status.equals(MyDevice.OK_STATUS)) {
+        if (status.equals(DeviceDefinitions.OK_STATUS)) {
             return Color.blue;
-        } else if (status.equals(MyDevice.NOK_STATUS)) {
+        } else if (status.equals(DeviceDefinitions.NOK_STATUS)) {
             return Color.red;
-        } else if (status.equals(MyDevice.UNKOWN_STATUS)) {
+        } else if (status.equals(DeviceDefinitions.UNKOWN_STATUS)) {
             return Color.gray;
         } else {
             return Color.black;

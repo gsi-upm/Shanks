@@ -4,25 +4,24 @@ import sim.field.grid.SparseGrid2D;
 import sim.portrayal.continuous.ContinuousPortrayal2D;
 import sim.portrayal.grid.SparseGridPortrayal2D;
 import sim.portrayal.network.NetworkPortrayal2D;
+import sim.util.Double2D;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.failure.portrayal.Failure2DPortrayal;
-import es.upm.dit.gsi.shanks.model.ftth.element.device.OLT;
-import es.upm.dit.gsi.shanks.model.ftth.element.device.ONT;
-import es.upm.dit.gsi.shanks.model.ftth.element.device.Splitter;
 import es.upm.dit.gsi.shanks.model.ftth.element.device.portrayal.OLT.OLT2DPortrayal;
-import es.upm.dit.gsi.shanks.model.ftth.element.device.portrayal.ONT.ONT2DPortrayal;
-import es.upm.dit.gsi.shanks.model.ftth.element.device.portrayal.Splitter.Splitter2DPortrayal;
 import es.upm.dit.gsi.shanks.model.ftth.element.link.portrayal.OLTtoSplitter2DPortrayal;
 import es.upm.dit.gsi.shanks.model.ftth.failure.OLTFailure;
 import es.upm.dit.gsi.shanks.model.ftth.scenario.ScenarioDefinitions;
+import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
+import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.ComplexScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.ShanksMath;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyHyperComplexScenario2DPortrayal;
 
-public class HomeScenario2DPortrayal extends Scenario2DPortrayal{
+public class FTTHComplexScenario2DGUI extends ComplexScenario2DPortrayal{
 
 	
 	/**
@@ -30,14 +29,28 @@ public class HomeScenario2DPortrayal extends Scenario2DPortrayal{
      * @param width
      * @param height
      * @throws DuplicatedPortrayalIDException
+     * @throws ScenarioNotFoundException
      */
-	public HomeScenario2DPortrayal(Scenario scenario, int width, int height)
-			throws DuplicatedPortrayalIDException {
+	public FTTHComplexScenario2DGUI(Scenario scenario, int width, int height)
+			throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
 		super(scenario, width, height);
+		
 	}
 
 	
-	
+	/* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.scenario.portrayal.ComplexScenario2DPortrayal#placeScenarios()
+     */
+	@Override
+	public void placeScenarios() throws DuplicatedPortrayalIDException,
+			ScenarioNotFoundException {
+		ComplexScenario cs = (ComplexScenario) this.getScenario();
+        this.situateScenario(cs.getScenario("HomeScenario"), new Double2D(0,0), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
+        this.situateScenario(cs.getScenario("OfficeScenario"), new Double2D(100,0), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
+        
+		
+	}
+
 	@Override
 	public void addPortrayals() {
 		SparseGrid2D failuresGrid = new SparseGrid2D(100, 100);
@@ -57,24 +70,14 @@ public class HomeScenario2DPortrayal extends Scenario2DPortrayal{
      */
 	@Override
 	public void placeElements() {
-		this.situateDevice((Device)this.getScenario().getNetworkElement("OLT"), 20, 50);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("Splitter"), 50, 50);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT1"), 80, 25);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT2"), 110, 25);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT3"), 140, 25);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT4"), 80, 50);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT5"), 110, 50);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT6"), 140, 50);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT7"), 80, 75);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT8"), 110, 75);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ONT9"), 140, 75);
-	
-		this.drawLink((Link)this.getScenario().getNetworkElement("Link0"));
-		this.drawLink((Link)this.getScenario().getNetworkElement("Link1"));
-		this.drawLink((Link)this.getScenario().getNetworkElement("Link2"));
-		this.drawLink((Link)this.getScenario().getNetworkElement("Link3"));
+		ComplexScenario cs = (ComplexScenario) this.getScenario();       
+        this.situateDevice((Device)cs.getNetworkElement("Cloud"), 20, 100);        
+        this.drawLink((Link)cs.getNetworkElement("OfficeLink"));
+        this.drawLink((Link)cs.getNetworkElement("HomeLink"));
+		
 	}
 
+	
 	/* (non-Javadoc)
      * @see es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal#setupPortrayals()
      */
@@ -82,13 +85,11 @@ public class HomeScenario2DPortrayal extends Scenario2DPortrayal{
 	public void setupPortrayals() {
 		ContinuousPortrayal2D devicePortrayal = (ContinuousPortrayal2D) this.getPortrayals().get(Scenario2DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.DEVICES_PORTRAYAL);
         NetworkPortrayal2D networkPortrayal = (NetworkPortrayal2D) this.getPortrayals().get(Scenario2DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.LINKS_PORTRAYAL);
-        SparseGridPortrayal2D failuresPortrayal = (SparseGridPortrayal2D) this.getPortrayals().get(MyHyperComplexScenario2DPortrayal.FAILURE_DISPLAY_ID).get(MyHyperComplexScenario2DPortrayal.FAILURE_PORTRAYAL_ID);
-        devicePortrayal.setPortrayalForClass(OLT.class, new OLT2DPortrayal());
-        devicePortrayal.setPortrayalForClass(ONT.class, new ONT2DPortrayal());
-        devicePortrayal.setPortrayalForClass(Splitter.class, new Splitter2DPortrayal());
-
+        SparseGridPortrayal2D failuresPortrayal = (SparseGridPortrayal2D) this.getPortrayals().get(ScenarioDefinitions.FAILURE_DISPLAY_ID).get(ScenarioDefinitions.FAILURE_PORTRAYAL_ID);
+        devicePortrayal.setPortrayalForAll(new OLT2DPortrayal());
         networkPortrayal.setPortrayalForAll(new OLTtoSplitter2DPortrayal());
         failuresPortrayal.setPortrayalForClass(OLTFailure.class, new Failure2DPortrayal());
+   
 		
 	}
 

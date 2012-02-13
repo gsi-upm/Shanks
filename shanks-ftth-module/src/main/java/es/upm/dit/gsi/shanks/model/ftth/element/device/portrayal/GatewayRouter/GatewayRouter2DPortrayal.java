@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks.model.ftth.element.device.portrayal.ONT;
+package es.upm.dit.gsi.shanks.model.ftth.element.device.portrayal.GatewayRouter;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -9,10 +9,13 @@ import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device2DPortrayal;
 import es.upm.dit.gsi.shanks.model.ftth.element.device.DeviceDefinitions;
 
-public class ONT2DPortrayal extends Device2DPortrayal implements Portrayal{
+public class GatewayRouter2DPortrayal extends Device2DPortrayal implements Portrayal{
 
-	private static final long serialVersionUID = -7201115272613038415L;
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3472755124501885019L;
+		
 	/* (non-Javadoc)
      * @see es.upm.dit.gsi.shanks.model.element.device.portrayal.Device2DPortrayal#draw(java.lang.Object, java.awt.Graphics2D, sim.portrayal.DrawInfo2D)
      */
@@ -44,5 +47,4 @@ public class ONT2DPortrayal extends Device2DPortrayal implements Portrayal{
         graphics.drawString(device.getID(), x - 3, y);
 
     }
-
 }

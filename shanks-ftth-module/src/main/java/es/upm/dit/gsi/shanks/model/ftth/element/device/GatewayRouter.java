@@ -47,36 +47,60 @@ public class GatewayRouter extends Device {
         return DHCPProblem;
     }
 
-
-
+    
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.element.NetworkElement#checkProperties()
+     */
+    //TODO "Complicarlo" más de momento es muy sencillo, en el futuro usar las caracteristicas reales de un OLT
 	@Override
 	public void checkProperties()
 			throws UnsupportedNetworkElementStatusException {
-		// TODO Auto-generated method stub
+		String status = this.getCurrentStatus();
+        if (status.equals(DeviceDefinitions.OK_STATUS)) {
+            this.changeProperty(DeviceDefinitions.TEMPERATURE_PROPERTY, 30);
+        } else if (status.equals(DeviceDefinitions.NOK_STATUS)) {
+            this.changeProperty(DeviceDefinitions.TEMPERATURE_PROPERTY, 90);
+        } else if (status.equals(DeviceDefinitions.UNKOWN_STATUS)) {
+            this.changeProperty(DeviceDefinitions.TEMPERATURE_PROPERTY, null);
+        }        
 		
 	}
 
 
-
+	/* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.element.NetworkElement#checkStatus()
+     */
+	 //TODO "Complicarlo" más de momento es muy sencillo, en el futuro usar las caracteristicas reales de un OLT
 	@Override
 	public void checkStatus() throws UnsupportedNetworkElementStatusException {
-		// TODO Auto-generated method stub
+		Integer temp = (Integer) this.getProperty(DeviceDefinitions.TEMPERATURE_PROPERTY);
+        if (temp<70) {
+            this.updateStatusTo(DeviceDefinitions.OK_STATUS);
+        }
 		
 	}
 
 
-
+	/* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.element.NetworkElement#fillInitialProperties()
+     */
 	@Override
 	public void fillIntialProperties() {
-		// TODO Auto-generated method stub
+		this.addProperty(DeviceDefinitions.OS_PROPERTY, "Linux");
+        this.addProperty(DeviceDefinitions.TEMPERATURE_PROPERTY, 20);
+		
 		
 	}
 
 
-
+	/* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.element.NetworkElement#setPossibleStates()
+     */
 	@Override
 	public void setPossibleStates() {
-		// TODO Auto-generated method stub
+		this.addPossibleStatus(DeviceDefinitions.OK_STATUS);
+        this.addPossibleStatus(DeviceDefinitions.NOK_STATUS);
+        this.addPossibleStatus(DeviceDefinitions.UNKOWN_STATUS);
 		
 	}
 

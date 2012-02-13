@@ -8,7 +8,6 @@ import sim.portrayal.DrawInfo2D;
 import sim.portrayal.network.EdgeDrawInfo2D;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.portrayal.Link2DPortrayal;
-import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
 import es.upm.dit.gsi.shanks.model.ftth.element.link.LinkDefinitions;
 
 public class SplitterToONT2DPortrayal extends Link2DPortrayal{

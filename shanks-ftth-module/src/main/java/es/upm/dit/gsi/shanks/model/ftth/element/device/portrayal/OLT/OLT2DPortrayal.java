@@ -7,7 +7,6 @@ import sim.portrayal.DrawInfo2D;
 import sim.portrayal.Portrayal;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device2DPortrayal;
-import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.ftth.element.device.DeviceDefinitions;
 
 public class OLT2DPortrayal extends Device2DPortrayal implements Portrayal{

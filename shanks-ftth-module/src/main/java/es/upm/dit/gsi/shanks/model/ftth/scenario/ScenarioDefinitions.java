@@ -4,6 +4,8 @@ public class ScenarioDefinitions {
 	
 	public static final String CLOUDY = "CLOUDY";
     public static final String SUNNY = "SUNNY";
+    public static final String STORM = "STORM";
+    public static final String EARTHQUAKE = "EARTHQUAKE";
 
     public static final String CLOUDY_PROB = "CLOUDY_PROB";
     

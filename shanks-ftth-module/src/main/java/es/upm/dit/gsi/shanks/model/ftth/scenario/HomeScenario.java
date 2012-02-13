@@ -1,14 +1,10 @@
 package es.upm.dit.gsi.shanks.model.ftth.scenario;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Properties;
 import java.util.Set;
-import java.util.logging.Logger;
-
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
 import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
@@ -17,10 +13,8 @@ import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
-import es.upm.dit.gsi.shanks.model.failure.test.MyFailure;
 import es.upm.dit.gsi.shanks.model.ftth.FTTHSimulation;
 import es.upm.dit.gsi.shanks.model.ftth.FTTHSimulation2D;
-import es.upm.dit.gsi.shanks.model.ftth.FTTHSimulation3D;
 import es.upm.dit.gsi.shanks.model.ftth.element.device.DeviceDefinitions;
 import es.upm.dit.gsi.shanks.model.ftth.element.device.OLT;
 import es.upm.dit.gsi.shanks.model.ftth.element.device.ONT;
@@ -29,7 +23,6 @@ import es.upm.dit.gsi.shanks.model.ftth.element.link.LinkDefinitions;
 import es.upm.dit.gsi.shanks.model.ftth.element.link.OLTtoSplitter;
 import es.upm.dit.gsi.shanks.model.ftth.element.link.SplitterToONT;
 import es.upm.dit.gsi.shanks.model.ftth.failure.OLTFailure;
-import es.upm.dit.gsi.shanks.model.ftth.failure.ONTFailure;
 import es.upm.dit.gsi.shanks.model.ftth.scenario.portrayal.HomeScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.ftth.scenario.portrayal.HomeScenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
@@ -39,14 +32,8 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusE
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
-import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
-import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation;
-import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation2DGUI;
-import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI;
 
 public class HomeScenario extends Scenario{
-
-	private Logger logger = Logger.getLogger(HomeScenario.class.getName());
 	
 	
 	
@@ -72,12 +59,12 @@ public class HomeScenario extends Scenario{
 			Device ont1 = new ONT("ONT1", DeviceDefinitions.OK_STATUS, false);
 			Device ont2 = new ONT("ONT2", DeviceDefinitions.OK_STATUS, false);
 			Device ont3 = new ONT("ONT3", DeviceDefinitions.OK_STATUS, false);
-			Device ont4 = new ONT("ONT4", DeviceDefinitions.OK_STATUS, false);
-			Device ont5 = new ONT("ONT5", DeviceDefinitions.OK_STATUS, false);
-			Device ont6 = new ONT("ONT6", DeviceDefinitions.OK_STATUS, false);
-			Device ont7 = new ONT("ONT7", DeviceDefinitions.OK_STATUS, false);
-			Device ont8 = new ONT("ONT8", DeviceDefinitions.OK_STATUS, false);
-			Device ont9 = new ONT("ONT9", DeviceDefinitions.OK_STATUS, false);
+//			Device ont4 = new ONT("ONT4", DeviceDefinitions.OK_STATUS, false);
+//			Device ont5 = new ONT("ONT5", DeviceDefinitions.OK_STATUS, false);
+//			Device ont6 = new ONT("ONT6", DeviceDefinitions.OK_STATUS, false);
+//			Device ont7 = new ONT("ONT7", DeviceDefinitions.OK_STATUS, false);
+//			Device ont8 = new ONT("ONT8", DeviceDefinitions.OK_STATUS, false);
+//			Device ont9 = new ONT("ONT9", DeviceDefinitions.OK_STATUS, false);
 			Link OLTtoSplitterLink = new OLTtoSplitter("Link0", LinkDefinitions.OK_STATUS, 2);
 			Link userLink1 = new SplitterToONT("Link1", LinkDefinitions.OK_STATUS, 32);
 			Link userLink2 = new SplitterToONT("Link2", LinkDefinitions.OK_STATUS, 32);
@@ -85,24 +72,20 @@ public class HomeScenario extends Scenario{
 			
 			OLTtoSplitterLink.connectDevices(olt, splitter);
 			userLink1.connectDevices(splitter, ont1);
-			userLink2.connectDevices(splitter, ont4);
-			userLink2.connectDevices(splitter, ont5);
-			userLink2.connectDevices(splitter, ont6);
-			userLink3.connectDevices(splitter, ont7);
-			userLink3.connectDevices(splitter, ont8);
-			userLink3.connectDevices(splitter, ont9);
+			userLink2.connectDevices(splitter, ont2);
+			userLink3.connectDevices(splitter, ont3);
 			
 			this.addNetworkElement(olt);
 			this.addNetworkElement(splitter);
 			this.addNetworkElement(ont1);
 			this.addNetworkElement(ont2);
 			this.addNetworkElement(ont3);
-			this.addNetworkElement(ont4);
-			this.addNetworkElement(ont5);
-			this.addNetworkElement(ont6);
-			this.addNetworkElement(ont7);
-			this.addNetworkElement(ont8);
-			this.addNetworkElement(ont9);
+//			this.addNetworkElement(ont4);
+//			this.addNetworkElement(ont5);
+//			this.addNetworkElement(ont6);
+//			this.addNetworkElement(ont7);
+//			this.addNetworkElement(ont8);
+//			this.addNetworkElement(ont9);
 			
 			this.addNetworkElement(OLTtoSplitterLink);
 			this.addNetworkElement(userLink1);

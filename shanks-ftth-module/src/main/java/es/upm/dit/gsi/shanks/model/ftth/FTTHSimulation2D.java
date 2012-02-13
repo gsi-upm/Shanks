@@ -7,7 +7,6 @@ import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.ShanksSimulation2DGUI;
 import es.upm.dit.gsi.shanks.model.ftth.scenario.ScenarioDefinitions;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyHyperComplexScenario2DPortrayal;
 
 public class FTTHSimulation2D extends ShanksSimulation2DGUI{
 

@@ -4,8 +4,6 @@ import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.ftth.element.device.DeviceDefinitions;
 import es.upm.dit.gsi.shanks.model.ftth.element.device.OLT;
 import es.upm.dit.gsi.shanks.model.ftth.element.device.Splitter;
-import es.upm.dit.gsi.shanks.model.ftth.element.link.LinkDefinitions;
-import es.upm.dit.gsi.shanks.model.ftth.element.link.OLTtoSplitter;
 
 public class OLTFailure extends Failure{
 

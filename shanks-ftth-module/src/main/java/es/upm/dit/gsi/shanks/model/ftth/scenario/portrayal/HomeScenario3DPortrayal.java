@@ -4,12 +4,8 @@ import sim.field.continuous.Continuous3D;
 import sim.portrayal3d.continuous.ContinuousPortrayal3D;
 import sim.portrayal3d.network.NetworkPortrayal3D;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
-import es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice3DPortrayal;
-import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
-import es.upm.dit.gsi.shanks.model.element.link.portrayal.test.MyLink3DPortrayal;
 import es.upm.dit.gsi.shanks.model.failure.portrayal.Failure3DPortrayal;
-import es.upm.dit.gsi.shanks.model.failure.test.MyFailure;
 import es.upm.dit.gsi.shanks.model.ftth.element.device.OLT;
 import es.upm.dit.gsi.shanks.model.ftth.element.device.ONT;
 import es.upm.dit.gsi.shanks.model.ftth.element.device.Splitter;
@@ -23,14 +19,12 @@ import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyHyperComplexScenario2DPortrayal;
 
 public class HomeScenario3DPortrayal extends Scenario3DPortrayal{
 
 	public HomeScenario3DPortrayal(Scenario scenario, long width, long height,
 			long length) throws DuplicatedPortrayalIDException {
 		super(scenario, width, height, length);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

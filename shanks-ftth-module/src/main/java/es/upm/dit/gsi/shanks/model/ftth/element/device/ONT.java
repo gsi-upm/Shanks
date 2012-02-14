@@ -24,60 +24,14 @@ public class ONT extends Device {
         super(id, status, isGateway);
     }
 
-    private int gatewayConnectionState;
-    private int fiberConnectionState;
-    private int emitedLaserPower;
-    private int receivedLaserPower;
-    private int inputBitrate;
-    private int outputBitrate;
+    private String gatewayConnectionState = "gatewayConnectionState";
+    private String fiberConnectionState = "fiberConnectionState";
+    private String emitedLaserPower = "emitedLaserPower";
+    private String receivedLaserPower = "receivedLaserPower";
+    private String inputBitrate = "inputBitrate";
+    private String outputBitrate = "outputBitrate";
 
-    public int getGatewayConnectionState() {
-        return gatewayConnectionState;
-    }
 
-    public void setGatewayConnectionState(int gatewayConnectionState) {
-        this.gatewayConnectionState = gatewayConnectionState;
-    }
-
-    public int getFiberConnectionState() {
-        return fiberConnectionState;
-    }
-
-    public void setFiberConnectionState(int fiberConnectionState) {
-        this.fiberConnectionState = fiberConnectionState;
-    }
-
-    public int getEmitedLaserPower() {
-        return emitedLaserPower;
-    }
-
-    public void setEmitedLaserPower(int emitedLaserPower) {
-        this.emitedLaserPower = emitedLaserPower;
-    }
-
-    public int getReceivedLaserPower() {
-        return receivedLaserPower;
-    }
-
-    public void setReceivedLaserPower(int receivedLaserPower) {
-        this.receivedLaserPower = receivedLaserPower;
-    }
-
-    public int getInputBitrate() {
-        return inputBitrate;
-    }
-
-    public void setInputBitrate(int inputBitrate) {
-        this.inputBitrate = inputBitrate;
-    }
-
-    public int getOutputBitrate() {
-        return outputBitrate;
-    }
-
-    public void setOutputBitrate(int outputBitrate) {
-        this.outputBitrate = outputBitrate;
-    }
 
     
     /* (non-Javadoc)
@@ -103,19 +57,34 @@ public class ONT extends Device {
 	 //TODO "Complicarlo" más de momento es muy sencillo, en el futuro usar las caracteristicas reales de un ONT
 	public void checkStatus() throws UnsupportedNetworkElementStatusException {
 		Integer temp = (Integer) this.getProperty(DeviceDefinitions.TEMPERATURE_PROPERTY);
-        if (temp<70) {
+		Integer inBitrate = (Integer) this.getProperty(inputBitrate);
+        Integer outBitrate = (Integer) this.getProperty(outputBitrate);
+        Integer emitedLaser = (Integer) this.getProperty(emitedLaserPower);
+        Integer receivedLaser = (Integer) this.getProperty(receivedLaserPower);
+		if (temp<70|| inBitrate >= 1000000000 || outBitrate >= 1000000000 
+				|| emitedLaser.equals(DeviceDefinitions.OK_STATUS) || receivedLaser.equals(DeviceDefinitions.OK_STATUS)){
             this.updateStatusTo(DeviceDefinitions.OK_STATUS);
+        }else if(temp>70 || inBitrate < 1000000000 || outBitrate < 1000000000 
+				|| emitedLaser.equals(DeviceDefinitions.NOK_STATUS) || receivedLaser.equals(DeviceDefinitions.NOK_STATUS)){
+        	this.updateStatusTo(DeviceDefinitions.NOK_STATUS);
+        }else{
+        	this.updateStatusTo(DeviceDefinitions.UNKOWN_STATUS);
         }
 		
 	}
 
-	
 	/* (non-Javadoc)
      * @see es.upm.dit.gsi.shanks.model.element.NetworkElement#fillInitialProperties()
      */
 	public void fillIntialProperties() {
 		this.addProperty(DeviceDefinitions.OS_PROPERTY, "Linux");
         this.addProperty(DeviceDefinitions.TEMPERATURE_PROPERTY, 20);
+        this.addProperty(gatewayConnectionState, DeviceDefinitions.OK_STATUS);
+        this.addProperty(fiberConnectionState, DeviceDefinitions.OK_STATUS);
+        this.addProperty(inputBitrate, 1000000);
+        this.addProperty(outputBitrate, 1000000);
+        this.addProperty(receivedLaserPower, 50);
+        this.addProperty(emitedLaserPower, 50);
 		
 	}
 

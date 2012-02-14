@@ -1,8 +1,10 @@
 package es.upm.dit.gsi.shanks.model.ftth.scenario;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
@@ -13,6 +15,7 @@ import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
+import es.upm.dit.gsi.shanks.model.failure.test.MyFailure;
 import es.upm.dit.gsi.shanks.model.ftth.FTTHSimulation;
 import es.upm.dit.gsi.shanks.model.ftth.FTTHSimulation2D;
 import es.upm.dit.gsi.shanks.model.ftth.element.device.DeviceDefinitions;
@@ -22,7 +25,9 @@ import es.upm.dit.gsi.shanks.model.ftth.element.device.Splitter;
 import es.upm.dit.gsi.shanks.model.ftth.element.link.LinkDefinitions;
 import es.upm.dit.gsi.shanks.model.ftth.element.link.OLTtoSplitter;
 import es.upm.dit.gsi.shanks.model.ftth.element.link.SplitterToONT;
+import es.upm.dit.gsi.shanks.model.ftth.failure.OLTEmitedLaserFailure;
 import es.upm.dit.gsi.shanks.model.ftth.failure.OLTFailure;
+import es.upm.dit.gsi.shanks.model.ftth.failure.OLTReceivedLaserFailure;
 import es.upm.dit.gsi.shanks.model.ftth.scenario.portrayal.HomeScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.ftth.scenario.portrayal.HomeScenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
@@ -105,8 +110,21 @@ public class HomeScenario extends Scenario{
 		
 		Set<NetworkElement> seta = new HashSet<NetworkElement>();
         seta.add(this.getNetworkElement("OLT"));
-        seta.add(this.getNetworkElement("Splitter"));
-        this.addPossibleFailure(OLTFailure.class, seta);
+        this.addPossibleFailure(OLTReceivedLaserFailure.class, seta);
+        Set<NetworkElement> set = new HashSet<NetworkElement>();
+        set.add(this.getNetworkElement("OLT"));
+        set.add(this.getNetworkElement("ONT1"));
+        Set<NetworkElement> set2 = new HashSet<NetworkElement>();
+        set2.add(this.getNetworkElement("OLT"));
+        set2.add(this.getNetworkElement("ONT2"));
+        Set<NetworkElement> set3 = new HashSet<NetworkElement>();
+        set3.add(this.getNetworkElement("OLT"));
+        set3.add(this.getNetworkElement("ONT3"));
+        List<Set<NetworkElement>> possibleCombinations = new ArrayList<Set<NetworkElement>>();
+        possibleCombinations.add(set);
+        possibleCombinations.add(set2);
+        possibleCombinations.add(set3);
+        this.addPossibleFailure(OLTEmitedLaserFailure.class, possibleCombinations);
 		
 	}
 	

@@ -8,5 +8,5 @@ public class DeviceDefinitions {
     
     public static final String OS_PROPERTY = "OS";
     public static final String TEMPERATURE_PROPERTY = "Temperature";
-
+    
 }

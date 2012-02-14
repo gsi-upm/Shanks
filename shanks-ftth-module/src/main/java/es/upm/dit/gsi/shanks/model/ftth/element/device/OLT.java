@@ -29,61 +29,13 @@ public class OLT extends Device {
         super(id, status, isGateway);
     }
 
-    private String coreConnectionState; //OK, NOK, BROKEN
-    private String ftthConnectionState; //OK, NOK, BROKEN
-    private boolean emitedLaserPower;
-    private boolean receivedLaserPower;
-    private int inputBitrate;
-    private int outputBitrate;
+    private static final String coreConnectionState = "coreConnectionState";
+    private static final String ftthConnectionState = "ftthConnectionState";
+    private static final String emitedLaserPower = "emitedLaserPower";
+    private static final String receivedLaserPower = "receivedLaserPower";
+    private static final String inputBitrate = "inputBitrate";
+    private static final String outputBitrate = "outputBitrate";
 
-    
-    public String getCoreConnectionState() {
-        return coreConnectionState;
-    }
-
-    public void setCoreConnectionState(String coreConnectionState) {
-        this.coreConnectionState = coreConnectionState;
-    }
-
-    public String getFtthConnectionState() {
-        return ftthConnectionState;
-    }
-
-    public void setFtthConnectionState(String ftthConnectionState) {
-        this.ftthConnectionState = ftthConnectionState;
-    }
-
-    public boolean getEmitedLaserPower() {
-        return emitedLaserPower;
-    }
-
-    public void setEmitedLaserPower(boolean emitedLaserPower) {
-        this.emitedLaserPower = emitedLaserPower;
-    }
-
-    public boolean getReceivedLaserPower() {
-        return receivedLaserPower;
-    }
-
-    public void setReceivedLaserPower(boolean receivedLaserPower) {
-        this.receivedLaserPower = receivedLaserPower;
-    }
-
-    public int getInputBitrate() {
-        return inputBitrate;
-    }
-
-    public void setInputBitrate(int inputBitrate) {
-        this.inputBitrate = inputBitrate;
-    }
-
-    public int getOutputBitrate() {
-        return outputBitrate;
-    }
-
-    public void setOutputBitrate(int outputBitrate) {
-        this.outputBitrate = outputBitrate;
-    }
 
     
     /* (non-Javadoc)
@@ -95,10 +47,28 @@ public class OLT extends Device {
 		String status = this.getCurrentStatus();
         if (status.equals(DeviceDefinitions.OK_STATUS)) {
             this.changeProperty(DeviceDefinitions.TEMPERATURE_PROPERTY, 30);
+            this.changeProperty(coreConnectionState, DeviceDefinitions.OK_STATUS);
+            this.changeProperty(ftthConnectionState, DeviceDefinitions.OK_STATUS);
+            this.changeProperty(emitedLaserPower, 50);
+            this.changeProperty(receivedLaserPower, 50);
+            this.changeProperty(inputBitrate, 1000000000); 
+            this.changeProperty(outputBitrate, 1000000000); 
         } else if (status.equals(DeviceDefinitions.NOK_STATUS)) {
             this.changeProperty(DeviceDefinitions.TEMPERATURE_PROPERTY, 90);
+            this.changeProperty(coreConnectionState, DeviceDefinitions.NOK_STATUS);
+            this.changeProperty(ftthConnectionState, DeviceDefinitions.NOK_STATUS);
+            this.changeProperty(emitedLaserPower, 10);
+            this.changeProperty(receivedLaserPower, 10);
+            this.changeProperty(inputBitrate, 10000);  //1Gbps
+            this.changeProperty(outputBitrate, 10000); //1Gbps
         } else if (status.equals(DeviceDefinitions.UNKOWN_STATUS)) {
             this.changeProperty(DeviceDefinitions.TEMPERATURE_PROPERTY, null);
+            this.changeProperty(coreConnectionState, null);
+            this.changeProperty(ftthConnectionState, null);
+            this.changeProperty(emitedLaserPower, null);
+            this.changeProperty(receivedLaserPower, null);
+            this.changeProperty(inputBitrate, null); 
+            this.changeProperty(outputBitrate, null); 
         }        
       
 		
@@ -111,8 +81,18 @@ public class OLT extends Device {
 	 //TODO "Complicarlo" más de momento es muy sencillo, en el futuro usar las caracteristicas reales de un OLT
 	public void checkStatus() throws UnsupportedNetworkElementStatusException {
 		Integer temp = (Integer) this.getProperty(DeviceDefinitions.TEMPERATURE_PROPERTY);
-        if (temp<70) {
+        Integer inBitrate = (Integer) this.getProperty(inputBitrate);
+        Integer outBitrate = (Integer) this.getProperty(outputBitrate);
+        Integer emitedLaser = (Integer) this.getProperty(emitedLaserPower);
+        Integer receivedLaser = (Integer) this.getProperty(receivedLaserPower);
+		if (temp<70 || inBitrate >= 1000000000 || outBitrate >= 1000000000 
+				|| emitedLaser > 45 || receivedLaser > 45) {
             this.updateStatusTo(DeviceDefinitions.OK_STATUS);
+        }else if(temp>70 || inBitrate < 1000000000 || outBitrate < 1000000000 
+				|| emitedLaser < 45 || receivedLaser < 45 ){
+        	this.updateStatusTo(DeviceDefinitions.NOK_STATUS);
+        }else{
+        	this.updateStatusTo(DeviceDefinitions.UNKOWN_STATUS);
         }
 		
 	}
@@ -124,6 +104,12 @@ public class OLT extends Device {
 	public void fillIntialProperties() {
 		this.addProperty(DeviceDefinitions.OS_PROPERTY, "Linux");
         this.addProperty(DeviceDefinitions.TEMPERATURE_PROPERTY, 20);
+        this.addProperty(coreConnectionState, DeviceDefinitions.OK_STATUS);
+        this.addProperty(ftthConnectionState, DeviceDefinitions.OK_STATUS);
+        this.addProperty(emitedLaserPower, 50);
+        this.addProperty(receivedLaserPower, 50);
+        this.addProperty(inputBitrate, 1000000000);  //1Gbps
+        this.addProperty(outputBitrate, 1000000000); //1Gbps
 		
 	}
 	

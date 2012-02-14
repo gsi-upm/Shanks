@@ -21,6 +21,7 @@ import es.upm.dit.gsi.shanks.model.ftth.element.link.LinkDefinitions;
 import es.upm.dit.gsi.shanks.model.ftth.element.link.OLTtoSplitter;
 import es.upm.dit.gsi.shanks.model.ftth.failure.OLTFailure;
 import es.upm.dit.gsi.shanks.model.ftth.scenario.portrayal.FTTHComplexScenario2DGUI;
+import es.upm.dit.gsi.shanks.model.ftth.scenario.portrayal.FTTHComplexScenario3DGUI;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.AlreadyConnectedScenarioException;
@@ -98,8 +99,7 @@ public class FTTHComplexScenario extends ComplexScenario {
 	@Override
 	public Scenario3DPortrayal createScenario3DPortrayal()
 			throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		return new FTTHComplexScenario3DGUI(this, 400, 400, 400);
 	}
 
 

@@ -87,10 +87,12 @@ public class OfficeScenario extends Scenario{
 		Link link4 = new SplitterToONT("Link4", LinkDefinitions.OK_STATUS, 24);
 		Link link5 = new SplitterToONT("Link5", LinkDefinitions.OK_STATUS, 24);
 		Link link6 = new SplitterToONT("Link6", LinkDefinitions.OK_STATUS, 24);
+		Link link7 = new SplitterToONT("Link7", LinkDefinitions.OK_STATUS, 24);
+		Link link8 = new SplitterToONT("Link8", LinkDefinitions.OK_STATUS, 24);
 		
 		link0.connectDevices(olt,splitter1);
-		link0.connectDevices(olt, splitter2);
-		link0.connectDevices(olt, splitter3);
+		link7.connectDevices(olt, splitter2);
+		link8.connectDevices(olt, splitter3);
 		link1.connectDevices(splitter1, ont1);
 		link2.connectDevices(splitter2, ont2);
 		link3.connectDevices(splitter3, ont3);
@@ -122,6 +124,8 @@ public class OfficeScenario extends Scenario{
 		this.addNetworkElement(link4);
 		this.addNetworkElement(link5);
 		this.addNetworkElement(link6);
+		this.addNetworkElement(link7);
+		this.addNetworkElement(link8);
 	}
 
 	@Override
@@ -180,15 +184,15 @@ public class OfficeScenario extends Scenario{
 
 		Properties scenarioProperties = new Properties();
 		scenarioProperties.put(ScenarioDefinitions.CLOUDY_PROB, "5");
-		scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_2D);
-		//scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_3D);
+		//scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_2D);
+		scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_3D);
 		//scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
 		Properties configProperties = new Properties();
 		configProperties.put(FTTHSimulation.CONFIGURATION, "2");
 		FTTHSimulation sim = new FTTHSimulation( System.currentTimeMillis(), OfficeScenario.class,
 				"Office Scenario", ScenarioDefinitions.SUNNY, scenarioProperties, configProperties);
-		FTTHSimulation2D gui = new FTTHSimulation2D(sim);
-		//FTTHSimulation3D gui = new FTTHSimulation3D(sim);
+		//FTTHSimulation2D gui = new FTTHSimulation2D(sim);
+		FTTHSimulation3D gui = new FTTHSimulation3D(sim);
 		gui.start();
 		//sim.start();
 		//do

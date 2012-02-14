@@ -74,6 +74,8 @@ public class OfficeScenario2DPortrayal extends Scenario2DPortrayal{
 		this.drawLink((Link)this.getScenario().getNetworkElement("Link4"));
 		this.drawLink((Link)this.getScenario().getNetworkElement("Link5"));
 		this.drawLink((Link)this.getScenario().getNetworkElement("Link6"));
+		this.drawLink((Link)this.getScenario().getNetworkElement("Link7"));
+		this.drawLink((Link)this.getScenario().getNetworkElement("Link8"));
 	}
 
 	@Override

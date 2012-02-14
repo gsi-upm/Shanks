@@ -11,8 +11,14 @@ import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.portrayal.test.MyLink3DPortrayal;
 import es.upm.dit.gsi.shanks.model.failure.portrayal.Failure3DPortrayal;
 import es.upm.dit.gsi.shanks.model.failure.test.MyFailure;
+import es.upm.dit.gsi.shanks.model.ftth.element.device.GatewayRouter;
 import es.upm.dit.gsi.shanks.model.ftth.element.device.OLT;
+import es.upm.dit.gsi.shanks.model.ftth.element.device.ONT;
+import es.upm.dit.gsi.shanks.model.ftth.element.device.Splitter;
+import es.upm.dit.gsi.shanks.model.ftth.element.device.portrayal.GatewayRouter.GatewayRouter3DPortrayal;
 import es.upm.dit.gsi.shanks.model.ftth.element.device.portrayal.OLT.OLT3DPortrayal;
+import es.upm.dit.gsi.shanks.model.ftth.element.device.portrayal.ONT.ONT3DPortrayal;
+import es.upm.dit.gsi.shanks.model.ftth.element.device.portrayal.Splitter.Splitter3DPortrayal;
 import es.upm.dit.gsi.shanks.model.ftth.element.link.portrayal.OLTtoSplitter3DPortrayal;
 import es.upm.dit.gsi.shanks.model.ftth.failure.OLTFailure;
 import es.upm.dit.gsi.shanks.model.ftth.scenario.ScenarioDefinitions;
@@ -92,12 +98,16 @@ public class FTTHComplexScenario3DGUI extends ComplexScenario3DPortrayal{
 		ContinuousPortrayal3D devicePortrayal = (ContinuousPortrayal3D) this.getPortrayals().get(Scenario3DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.DEVICES_PORTRAYAL);
         NetworkPortrayal3D networkPortrayal = (NetworkPortrayal3D) this.getPortrayals().get(Scenario3DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.LINKS_PORTRAYAL);
         ContinuousPortrayal3D failuresPortrayal = (ContinuousPortrayal3D) this.getPortrayals().get(ScenarioDefinitions.FAILURE_DISPLAY_ID).get(ScenarioDefinitions.FAILURE_PORTRAYAL_ID);
-        devicePortrayal.setPortrayalForAll(new OLT3DPortrayal());
+//        devicePortrayal.setPortrayalForAll(new OLT3DPortrayal());
+        devicePortrayal.setPortrayalForClass(OLT.class, new OLT3DPortrayal());
+        devicePortrayal.setPortrayalForClass(ONT.class, new ONT3DPortrayal());
+        devicePortrayal.setPortrayalForClass(Splitter.class, new Splitter3DPortrayal());
+        devicePortrayal.setPortrayalForClass(GatewayRouter.class, new GatewayRouter3DPortrayal());
         networkPortrayal.setPortrayalForAll(new OLTtoSplitter3DPortrayal());
         failuresPortrayal.setPortrayalForClass(OLTFailure.class, new Failure3DPortrayal());
         
         this.scaleDisplay(Scenario3DPortrayal.MAIN_DISPLAY_ID, 1.5);
-        this.getDisplay(MAIN_DISPLAY_ID).setShowsAxes(false);
+        this.getDisplay(MAIN_DISPLAY_ID).setShowsAxes(true);
 
 		
 	}

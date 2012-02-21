@@ -92,7 +92,7 @@ public abstract class Device extends NetworkElement {
             throws TooManyConnectionException {
         this.connectToLink(link);
         try {
-            this.connectToLink(link);
+            device.connectToLink(link);
         } catch (TooManyConnectionException e) {
             this.disconnectFromLink(link);
             throw e;

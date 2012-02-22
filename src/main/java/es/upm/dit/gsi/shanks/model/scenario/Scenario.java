@@ -405,13 +405,17 @@ public abstract class Scenario {
                 int numberOfCombinations = list.size();
                 int combinationNumber = randomizer.nextInt(numberOfCombinations);
                 try {
-                    // Apply penalty
-                    penalty = penalties.get(type);
-                    if (penalty > 0) {
-                        prob = failure.getOccurrenceProbability()
-                                * numberOfCombinations * penalty;
+                    if (penalties.containsKey(type)) {
+                        // Apply penalty
+                        penalty = penalties.get(type);
+                        if (penalty > 0) {
+                            prob = failure.getOccurrenceProbability()
+                                    * numberOfCombinations * penalty;
+                        } else {
+                            prob = -1.0; // Impossible failure
+                        }
                     } else {
-                        prob = -1.0; // Impossible failure
+                        prob = failure.getOccurrenceProbability()*numberOfCombinations;
                     }
                 } catch (Exception e) {
                     logger.fine("There is no penalty for failures: "

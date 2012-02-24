@@ -1,17 +1,21 @@
 package es.upm.dit.gsi.shanks.model.ftth.scenario;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
 import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
+import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
-import es.upm.dit.gsi.shanks.model.failure.test.MyFailure;
 import es.upm.dit.gsi.shanks.model.ftth.FTTHSimulation;
 import es.upm.dit.gsi.shanks.model.ftth.FTTHSimulation2D;
 import es.upm.dit.gsi.shanks.model.ftth.FTTHSimulation3D;
@@ -19,7 +23,11 @@ import es.upm.dit.gsi.shanks.model.ftth.element.device.DeviceDefinitions;
 import es.upm.dit.gsi.shanks.model.ftth.element.device.OLT;
 import es.upm.dit.gsi.shanks.model.ftth.element.link.LinkDefinitions;
 import es.upm.dit.gsi.shanks.model.ftth.element.link.OLTtoSplitter;
+import es.upm.dit.gsi.shanks.model.ftth.failure.OLTEmitedLaserFailure;
 import es.upm.dit.gsi.shanks.model.ftth.failure.OLTFailure;
+import es.upm.dit.gsi.shanks.model.ftth.failure.OLTReceivedLaserFailure;
+import es.upm.dit.gsi.shanks.model.ftth.failure.ONTEmitedLaserFailure;
+import es.upm.dit.gsi.shanks.model.ftth.failure.ONTReceivedLaserFailure;
 import es.upm.dit.gsi.shanks.model.ftth.scenario.portrayal.FTTHComplexScenario2DGUI;
 import es.upm.dit.gsi.shanks.model.ftth.scenario.portrayal.FTTHComplexScenario3DGUI;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
@@ -146,7 +154,38 @@ public class FTTHComplexScenario extends ComplexScenario {
      */
 	@Override
 	public void addPossibleFailures() {
-		this.addPossibleFailure(OLTFailure.class, this.getNetworkElement("EL1"));
+//		this.addPossibleFailure(OLTReceivedLaserFailure.class, this.getNetworkElement("OLT"));
+        
+		this.addPossibleFailure(OLTReceivedLaserFailure.class, 
+        		this.getNetworkElement("OLT"));
+        
+        Set<NetworkElement> set = new HashSet<NetworkElement>();
+        set.add(this.getNetworkElement("OLT"));
+        this.addPossibleFailure(OLTEmitedLaserFailure.class, set);
+        
+        Set<NetworkElement> setOnt1 = new HashSet<NetworkElement>();
+        setOnt1.add(this.getNetworkElement("ONT1"));
+        Set<NetworkElement> setOnt2 = new HashSet<NetworkElement>();
+        setOnt2.add(this.getNetworkElement("ONT2"));
+        Set<NetworkElement> setOnt3 = new HashSet<NetworkElement>();
+        setOnt3.add(this.getNetworkElement("ONT3"));
+        List<Set<NetworkElement>> possibleCombinations = new ArrayList<Set<NetworkElement>>();
+        possibleCombinations.add(setOnt1);
+        possibleCombinations.add(setOnt2);
+        possibleCombinations.add(setOnt3);
+        this.addPossibleFailure(ONTReceivedLaserFailure.class, possibleCombinations);        
+	
+        Set<NetworkElement> setOntEmt1 = new HashSet<NetworkElement>();
+        setOntEmt1.add(this.getNetworkElement("ONT1"));
+        Set<NetworkElement> setOntEmt2 = new HashSet<NetworkElement>();
+        setOntEmt2.add(this.getNetworkElement("ONT2"));
+        Set<NetworkElement> setOntEmt3 = new HashSet<NetworkElement>();
+        setOntEmt3.add(this.getNetworkElement("ONT3"));
+        List<Set<NetworkElement>> possibleCombinationsEmt = new ArrayList<Set<NetworkElement>>();
+        possibleCombinationsEmt.add(setOntEmt1);
+        possibleCombinationsEmt.add(setOntEmt2);
+        possibleCombinationsEmt.add(setOntEmt3);
+        this.addPossibleFailure(ONTEmitedLaserFailure.class, possibleCombinationsEmt);
 		
 	}
 
@@ -178,7 +217,7 @@ public class FTTHComplexScenario extends ComplexScenario {
     private HashMap<Class<? extends Failure>, Double> getSunnyPenalties() {
         HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
 
-        penalties.put(MyFailure.class, 1.0);
+        penalties.put(OLTReceivedLaserFailure.class, 1.0);
 
         return penalties;
     }
@@ -189,7 +228,7 @@ public class FTTHComplexScenario extends ComplexScenario {
     private HashMap<Class<? extends Failure>, Double> getEarthquakePenalties() {
         HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
 
-        penalties.put(MyFailure.class, 10.0);
+        penalties.put(OLTReceivedLaserFailure.class, 10.0);
 
         return penalties;
     }
@@ -200,7 +239,7 @@ public class FTTHComplexScenario extends ComplexScenario {
     private HashMap<Class<? extends Failure>, Double> getStormPenalties() {
         HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
 
-        penalties.put(MyFailure.class, 3.0);
+        penalties.put(OLTReceivedLaserFailure.class, 3.0);
 
         return penalties;
     }
@@ -234,8 +273,8 @@ public class FTTHComplexScenario extends ComplexScenario {
 
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(ScenarioDefinitions.CLOUDY_PROB, "5");
-        //scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_2D);
-        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_3D);
+        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_2D);
+        //scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_3D);
         // scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
         Properties configProperties = new Properties();
         configProperties.put(FTTHSimulation.CONFIGURATION, "1");
@@ -243,8 +282,8 @@ public class FTTHComplexScenario extends ComplexScenario {
                 System.currentTimeMillis(), FTTHComplexScenario.class,
                 "FTTHComplexScenario", ScenarioDefinitions.SUNNY,
                 scenarioProperties, configProperties);
-         //FTTHSimulation2D gui = new FTTHSimulation2D(sim);
-         FTTHSimulation3D gui = new FTTHSimulation3D(sim);
+         FTTHSimulation2D gui = new FTTHSimulation2D(sim);
+         //FTTHSimulation3D gui = new FTTHSimulation3D(sim);
         gui.start();
     }
 

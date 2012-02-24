@@ -18,7 +18,7 @@ import sim.util.Double3D;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.ShanksAgent;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
-import es.upm.dit.gsi.shanks.agent.test.MyShanksAgent;
+import es.upm.dit.gsi.shanks.agent.MyShanksAgent;
 import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
@@ -190,12 +190,12 @@ public class FTTHSimulation extends ShanksSimulation{
     @Override
     public void registerShanksAgents() throws DuplicatedAgentIDException,
             DuplicatedActionIDException {
-        MyShanksAgent agent = new MyShanksAgent("resolverAgent1",
-                "src/main/java/es/upm/dit/gsi/shanks/agent/MyShanksAgent1.asl");
-        this.registerShanksAgent(agent);
-        MyShanksAgent agent2 = new MyShanksAgent("resolverAgent2",
-                "src/main/java/es/upm/dit/gsi/shanks/agent/MyShanksAgent2.asl");
-        this.registerShanksAgent(agent2);
+//        MyShanksAgent agent = new MyShanksAgent("resolverAgent1",
+//                "src/main/java/es/upm/dit/gsi/shanks/agent/MyShanksAgent1.asl");
+//        this.registerShanksAgent(agent);
+//        MyShanksAgent agent2 = new MyShanksAgent("resolverAgent2",
+//                "src/main/java/es/upm/dit/gsi/shanks/agent/MyShanksAgent2.asl");
+//        this.registerShanksAgent(agent2);
         MyShanksAgent agent3 = new MyShanksAgent("resolverAgent3",
                 "src/main/java/es/upm/dit/gsi/shanks/agent/MyShanksAgent3.asl");
         this.registerShanksAgent(agent3);

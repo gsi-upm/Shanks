@@ -23,4 +23,10 @@ public class ONTFailure extends Failure {
 		
 	}
 
+	@Override
+	public boolean isResolved() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

@@ -8,6 +8,5 @@
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/jason.jar"/>
 	<classpathentry kind="lib" path="lib/mason.16.jar"/>
-	<classpathentry kind="src" path="/shanks-core"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

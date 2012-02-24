@@ -28,48 +28,126 @@ public class OLT extends Device {
     public OLT(String id, String status, boolean isGateway) throws UnsupportedNetworkElementStatusException {
         super(id, status, isGateway);
     }
+    
+    public static final String OK_STATUS = "OK";
+    public static final String NOK_STATUS = "NOK";
+    public static final String UNKNOWN_STATUS = "UNKNOWN";
+    public static final String HIGHTEMP_STATUS = "HIGHTEMP";
+    public static final String LOW_INPUT_BITRATE_STATUS = "LOW INPUT BITRATE";
+    public static final String LOW_OUTPUT_BITRATE_STATUS = "LOW OUTPUT BITRATE";
+    public static final String LOW_REC_LASER_POWER = "LOW RECEIVED LASER POWER";
+    public static final String LOW_EMI_LASER_POWER = "LOW EMITED LASER POWER";
+    public static final String LOST_CORE_CONNECTION_STATUS = "LOST CORE CONNECTION";
+    public static final String LOST_FTTH_CONNECTION_STATUS = "LOST FTTH CONNECTION";
 
-    private static final String coreConnectionState = "coreConnectionState";
-    private static final String ftthConnectionState = "ftthConnectionState";
-    private static final String emitedLaserPower = "emitedLaserPower";
-    private static final String receivedLaserPower = "receivedLaserPower";
-    private static final String inputBitrate = "inputBitrate";
-    private static final String outputBitrate = "outputBitrate";
+    public static final String coreConnectionState = "coreConnectionState";
+    public static final String ftthConnectionState = "ftthConnectionState";
+    public static final String emitedLaserPower = "emitedLaserPower";
+    public static final String receivedLaserPower = "receivedLaserPower";
+    public static final String inputBitrate = "inputBitrate";
+    public static final String outputBitrate = "outputBitrate";
+    public static final String OS_PROPERTY = "OS";
+    public static final String TEMPERATURE_PROPERTY = "Temperature";
 
 
     
     /* (non-Javadoc)
      * @see es.upm.dit.gsi.shanks.model.element.NetworkElement#checkProperties()
      */
-    //TODO "Complicarlo" más de momento es muy sencillo, en el futuro usar las caracteristicas reales de un OLT
 	public void checkProperties()
 			throws UnsupportedNetworkElementStatusException {
 		String status = this.getCurrentStatus();
-        if (status.equals(DeviceDefinitions.OK_STATUS)) {
-            this.changeProperty(DeviceDefinitions.TEMPERATURE_PROPERTY, 30);
-            this.changeProperty(coreConnectionState, DeviceDefinitions.OK_STATUS);
-            this.changeProperty(ftthConnectionState, DeviceDefinitions.OK_STATUS);
-            this.changeProperty(emitedLaserPower, 50);
-            this.changeProperty(receivedLaserPower, 50);
-            this.changeProperty(inputBitrate, 1000000000); 
-            this.changeProperty(outputBitrate, 1000000000); 
-        } else if (status.equals(DeviceDefinitions.NOK_STATUS)) {
-            this.changeProperty(DeviceDefinitions.TEMPERATURE_PROPERTY, 90);
-            this.changeProperty(coreConnectionState, DeviceDefinitions.NOK_STATUS);
-            this.changeProperty(ftthConnectionState, DeviceDefinitions.NOK_STATUS);
+		if (status.equals(DeviceDefinitions.OK_STATUS)) {
+        	this.changeProperty(TEMPERATURE_PROPERTY, 30);
+        	this.changeProperty(coreConnectionState, true);
+        	this.changeProperty(ftthConnectionState, true);
+        	this.changeProperty(emitedLaserPower, 50);
+        	this.changeProperty(receivedLaserPower, 50);
+        	this.changeProperty(inputBitrate, 1000000000); //1Gbps 
+        	this.changeProperty(outputBitrate, 1000000000); //1Gbps 
+        	
+        } else if (status.equals(NOK_STATUS)) {
+        	this.changeProperty(TEMPERATURE_PROPERTY, 90);
+            this.changeProperty(coreConnectionState, false);
+            this.changeProperty(ftthConnectionState, false);
             this.changeProperty(emitedLaserPower, 10);
             this.changeProperty(receivedLaserPower, 10);
-            this.changeProperty(inputBitrate, 10000);  //1Gbps
-            this.changeProperty(outputBitrate, 10000); //1Gbps
-        } else if (status.equals(DeviceDefinitions.UNKOWN_STATUS)) {
-            this.changeProperty(DeviceDefinitions.TEMPERATURE_PROPERTY, null);
+            this.changeProperty(inputBitrate, 10000000); //10Mbps
+            this.changeProperty(outputBitrate, 1000000); //1Mbps
+       
+        } else if (status.equals(UNKNOWN_STATUS)) {
+        	this.changeProperty(TEMPERATURE_PROPERTY, null);
             this.changeProperty(coreConnectionState, null);
             this.changeProperty(ftthConnectionState, null);
             this.changeProperty(emitedLaserPower, null);
             this.changeProperty(receivedLaserPower, null);
             this.changeProperty(inputBitrate, null); 
             this.changeProperty(outputBitrate, null); 
-        }        
+           
+        } else if (status.equals(HIGHTEMP_STATUS)){
+        	this.changeProperty(TEMPERATURE_PROPERTY, 90);
+//            this.changeProperty(coreConnectionState, true);
+//            this.changeProperty(ftthConnectionState, true);
+//            this.changeProperty(emitedLaserPower, 50);
+//            this.changeProperty(receivedLaserPower, 50);
+//            this.changeProperty(inputBitrate, 1000000000); //1Gbps
+//            this.changeProperty(outputBitrate, 1000000000); //1Gbps
+        	
+        } else if (status.equals(LOST_FTTH_CONNECTION_STATUS)){
+//        	this.changeProperty(TEMPERATURE_PROPERTY, 30);
+//            this.changeProperty(coreConnectionState, true);
+            this.changeProperty(ftthConnectionState, false);
+//            this.changeProperty(emitedLaserPower, 50);
+//            this.changeProperty(receivedLaserPower, 50);
+//            this.changeProperty(inputBitrate, 1000000000); //1Gbps
+//            this.changeProperty(outputBitrate, 1000000000); //1Gbps
+        	
+        } else if (status.equals(LOST_CORE_CONNECTION_STATUS)){
+//        	this.changeProperty(TEMPERATURE_PROPERTY, 30);
+            this.changeProperty(coreConnectionState, false);
+//            this.changeProperty(ftthConnectionState, true);
+//            this.changeProperty(emitedLaserPower, 50);
+//            this.changeProperty(receivedLaserPower, 50);
+//            this.changeProperty(inputBitrate, 1000000000); //1Gbps
+//            this.changeProperty(outputBitrate, 1000000000); //1Gbps
+        	
+        } else if (status.equals(LOW_EMI_LASER_POWER)){
+//        	this.changeProperty(TEMPERATURE_PROPERTY, 30);
+//            this.changeProperty(coreConnectionState, true);
+//            this.changeProperty(ftthConnectionState, true);
+            this.changeProperty(emitedLaserPower, 10);
+//            this.changeProperty(receivedLaserPower, 50);
+//            this.changeProperty(inputBitrate, 1000000000); //1Gbps
+//            this.changeProperty(outputBitrate, 1000000000); //1Gbps
+        	
+        } else if (status.equals(LOW_REC_LASER_POWER)){
+//        	this.changeProperty(TEMPERATURE_PROPERTY, 30);
+//            this.changeProperty(coreConnectionState, true);
+//            this.changeProperty(ftthConnectionState, true);
+//            this.changeProperty(emitedLaserPower, 50);
+            this.changeProperty(receivedLaserPower, 10);
+//            this.changeProperty(inputBitrate, 1000000000); //1Gbps
+//            this.changeProperty(outputBitrate, 1000000000); //1Gbps
+        	
+        } else if (status.equals(LOW_INPUT_BITRATE_STATUS)){
+//        	this.changeProperty(TEMPERATURE_PROPERTY, 30);
+//            this.changeProperty(coreConnectionState, true);
+//            this.changeProperty(ftthConnectionState, true);
+//            this.changeProperty(emitedLaserPower, 50);
+//            this.changeProperty(receivedLaserPower, 50);
+            this.changeProperty(inputBitrate, 1000000); //1Mbps
+//            this.changeProperty(outputBitrate, 1000000000); //1Gbps
+        	
+        } else if (status.equals(LOW_OUTPUT_BITRATE_STATUS)){
+//        	this.changeProperty(TEMPERATURE_PROPERTY, 30);
+//            this.changeProperty(coreConnectionState, true);
+//            this.changeProperty(ftthConnectionState, true);
+//            this.changeProperty(emitedLaserPower, 50);
+//            this.changeProperty(receivedLaserPower, 50);
+//            this.changeProperty(inputBitrate, 1000000000); //1Gbps 
+            this.changeProperty(outputBitrate, 1000000); //1Mbps
+        	
+        }
       
 		
 	}
@@ -78,22 +156,47 @@ public class OLT extends Device {
 	/* (non-Javadoc)
      * @see es.upm.dit.gsi.shanks.model.element.NetworkElement#checkStatus()
      */
-	 //TODO "Complicarlo" más de momento es muy sencillo, en el futuro usar las caracteristicas reales de un OLT
 	public void checkStatus() throws UnsupportedNetworkElementStatusException {
 		Integer temp = (Integer) this.getProperty(DeviceDefinitions.TEMPERATURE_PROPERTY);
         Integer inBitrate = (Integer) this.getProperty(inputBitrate);
         Integer outBitrate = (Integer) this.getProperty(outputBitrate);
-        Integer emitedLaser = (Integer) this.getProperty(emitedLaserPower);
-        Integer receivedLaser = (Integer) this.getProperty(receivedLaserPower);
-		if (temp<70 || inBitrate >= 1000000000 || outBitrate >= 1000000000 
-				|| emitedLaser > 45 || receivedLaser > 45) {
-            this.updateStatusTo(DeviceDefinitions.OK_STATUS);
-        }else if(temp>70 || inBitrate < 1000000000 || outBitrate < 1000000000 
-				|| emitedLaser < 45 || receivedLaser < 45 ){
-        	this.updateStatusTo(DeviceDefinitions.NOK_STATUS);
-        }else{
-        	this.updateStatusTo(DeviceDefinitions.UNKOWN_STATUS);
-        }
+        Integer emited = (Integer) this.getProperty(emitedLaserPower);
+        Integer received = (Integer) this.getProperty(receivedLaserPower);
+        boolean core = (Boolean) this.getProperty(coreConnectionState);
+		boolean ftth = (Boolean) this.getProperty(ftthConnectionState);
+		
+		if (temp < 70 && inBitrate >= 750000000 && outBitrate >= 750000000
+				&& emited >= 40 && received >= 40 && core && ftth){
+        	this.updateStatusTo(OK_STATUS);	
+        	
+		}else if(temp > 70 && inBitrate < 750000000 && outBitrate < 750000000
+				&& emited < 40 && received < 40 && !core && !ftth){
+        	this.updateStatusTo(NOK_STATUS);	
+        	
+		}else if(emited < 40){
+        	this.updateStatusTo(LOW_EMI_LASER_POWER);	
+        	
+		}else if(received < 40){
+        	this.updateStatusTo(LOW_REC_LASER_POWER);	
+        	
+		}else if(inBitrate < 750000000){
+        	this.updateStatusTo(LOW_INPUT_BITRATE_STATUS);	
+        	
+		}else if(outBitrate < 750000000){
+        	this.updateStatusTo(LOW_OUTPUT_BITRATE_STATUS);	
+        	
+		}else if(!core){
+        	this.updateStatusTo(LOST_CORE_CONNECTION_STATUS);
+        	
+		}else if(ftth){
+        	this.updateStatusTo(LOST_FTTH_CONNECTION_STATUS);
+        	
+		}else if(temp > 70){
+            this.updateStatusTo(HIGHTEMP_STATUS);	
+            
+		}else{
+			this.updateStatusTo(UNKNOWN_STATUS);
+		}
 		
 	}
 
@@ -102,10 +205,10 @@ public class OLT extends Device {
      * @see es.upm.dit.gsi.shanks.model.element.NetworkElement#fillInitialProperties()
      */
 	public void fillIntialProperties() {
-		this.addProperty(DeviceDefinitions.OS_PROPERTY, "Linux");
-        this.addProperty(DeviceDefinitions.TEMPERATURE_PROPERTY, 20);
-        this.addProperty(coreConnectionState, DeviceDefinitions.OK_STATUS);
-        this.addProperty(ftthConnectionState, DeviceDefinitions.OK_STATUS);
+		this.addProperty(OS_PROPERTY, "Linux");
+        this.addProperty(TEMPERATURE_PROPERTY, 20);
+        this.addProperty(coreConnectionState, true);
+        this.addProperty(ftthConnectionState, true);
         this.addProperty(emitedLaserPower, 50);
         this.addProperty(receivedLaserPower, 50);
         this.addProperty(inputBitrate, 1000000000);  //1Gbps
@@ -118,9 +221,16 @@ public class OLT extends Device {
      * @see es.upm.dit.gsi.shanks.model.element.NetworkElement#setPossibleStates()
      */
 	public void setPossibleStates() {
-		this.addPossibleStatus(DeviceDefinitions.OK_STATUS);
-        this.addPossibleStatus(DeviceDefinitions.NOK_STATUS);
-        this.addPossibleStatus(DeviceDefinitions.UNKOWN_STATUS);
+		this.addPossibleStatus(OK_STATUS);
+        this.addPossibleStatus(NOK_STATUS);
+        this.addPossibleStatus(UNKNOWN_STATUS);
+        this.addPossibleStatus(LOST_FTTH_CONNECTION_STATUS);
+        this.addPossibleStatus(LOST_CORE_CONNECTION_STATUS);
+        this.addPossibleStatus(LOW_EMI_LASER_POWER);
+        this.addPossibleStatus(LOW_REC_LASER_POWER);
+        this.addPossibleStatus(LOW_INPUT_BITRATE_STATUS);
+        this.addPossibleStatus(LOW_OUTPUT_BITRATE_STATUS);
+        this.addPossibleStatus(HIGHTEMP_STATUS);
 		
 	}
 

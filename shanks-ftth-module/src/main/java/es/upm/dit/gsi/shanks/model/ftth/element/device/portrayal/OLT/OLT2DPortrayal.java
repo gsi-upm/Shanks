@@ -8,6 +8,7 @@ import sim.portrayal.Portrayal;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device2DPortrayal;
 import es.upm.dit.gsi.shanks.model.ftth.element.device.DeviceDefinitions;
+import es.upm.dit.gsi.shanks.model.ftth.element.device.OLT;
 
 public class OLT2DPortrayal extends Device2DPortrayal implements Portrayal{
 
@@ -24,11 +25,13 @@ public class OLT2DPortrayal extends Device2DPortrayal implements Portrayal{
         final double height = 20;
 
         String status = device.getCurrentStatus();
-        if (status.equals(DeviceDefinitions.OK_STATUS)) {
+        if (status.equals(OLT.OK_STATUS)) {
             graphics.setColor(Color.green);
-        } else if (status.equals(DeviceDefinitions.NOK_STATUS)) {
+        } else if (status.equals(OLT.NOK_STATUS)) {
             graphics.setColor(Color.red);
-        } else if (status.equals(DeviceDefinitions.UNKOWN_STATUS)) {
+        } else if (status.equals(OLT.LOW_REC_LASER_POWER)) {
+            graphics.setColor(Color.black);
+        } else if (status.equals(OLT.LOW_EMI_LASER_POWER)) {
             graphics.setColor(Color.blue);
         }
 

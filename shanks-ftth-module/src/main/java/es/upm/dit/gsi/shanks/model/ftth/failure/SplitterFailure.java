@@ -20,4 +20,11 @@ public class SplitterFailure extends Failure{
         //this.addPossibleAffectedElements(SplitterToONT.class,LinkDefinitions.BROKEN_STATUS);
 	}
 
+
+	@Override
+	public boolean isResolved() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

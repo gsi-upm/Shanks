@@ -1,8 +1,10 @@
 package es.upm.dit.gsi.shanks.model.ftth.scenario;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
@@ -25,7 +27,11 @@ import es.upm.dit.gsi.shanks.model.ftth.element.device.Splitter;
 import es.upm.dit.gsi.shanks.model.ftth.element.link.LinkDefinitions;
 import es.upm.dit.gsi.shanks.model.ftth.element.link.OLTtoSplitter;
 import es.upm.dit.gsi.shanks.model.ftth.element.link.SplitterToONT;
+import es.upm.dit.gsi.shanks.model.ftth.failure.OLTEmitedLaserFailure;
 import es.upm.dit.gsi.shanks.model.ftth.failure.OLTFailure;
+import es.upm.dit.gsi.shanks.model.ftth.failure.OLTReceivedLaserFailure;
+import es.upm.dit.gsi.shanks.model.ftth.failure.ONTEmitedLaserFailure;
+import es.upm.dit.gsi.shanks.model.ftth.failure.ONTReceivedLaserFailure;
 import es.upm.dit.gsi.shanks.model.ftth.scenario.portrayal.OfficeScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.ftth.scenario.portrayal.OfficeScenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
@@ -130,12 +136,37 @@ public class OfficeScenario extends Scenario{
 
 	@Override
 	public void addPossibleFailures() {
-		Set<NetworkElement> seta = new HashSet<NetworkElement>();
-        seta.add(this.getNetworkElement("OLT"));
-        seta.add(this.getNetworkElement("Splitter1"));
-        seta.add(this.getNetworkElement("Splitter2"));
-        seta.add(this.getNetworkElement("Splitter3"));
-        this.addPossibleFailure(OLTFailure.class, seta);
+		this.addPossibleFailure(OLTReceivedLaserFailure.class, 
+        		this.getNetworkElement("OLT"));
+        
+        Set<NetworkElement> set = new HashSet<NetworkElement>();
+        set.add(this.getNetworkElement("OLT"));
+        this.addPossibleFailure(OLTEmitedLaserFailure.class, set);
+        
+        Set<NetworkElement> setOnt1 = new HashSet<NetworkElement>();
+        setOnt1.add(this.getNetworkElement("ONT1"));
+        Set<NetworkElement> setOnt2 = new HashSet<NetworkElement>();
+        setOnt2.add(this.getNetworkElement("ONT2"));
+        Set<NetworkElement> setOnt3 = new HashSet<NetworkElement>();
+        setOnt3.add(this.getNetworkElement("ONT3"));
+        List<Set<NetworkElement>> possibleCombinations = new ArrayList<Set<NetworkElement>>();
+        possibleCombinations.add(setOnt1);
+        possibleCombinations.add(setOnt2);
+        possibleCombinations.add(setOnt3);
+        this.addPossibleFailure(ONTReceivedLaserFailure.class, possibleCombinations);        
+	
+        Set<NetworkElement> setOntEmt1 = new HashSet<NetworkElement>();
+        setOntEmt1.add(this.getNetworkElement("ONT1"));
+        Set<NetworkElement> setOntEmt2 = new HashSet<NetworkElement>();
+        setOntEmt2.add(this.getNetworkElement("ONT2"));
+        Set<NetworkElement> setOntEmt3 = new HashSet<NetworkElement>();
+        setOntEmt3.add(this.getNetworkElement("ONT3"));
+        List<Set<NetworkElement>> possibleCombinationsEmt = new ArrayList<Set<NetworkElement>>();
+        possibleCombinationsEmt.add(setOntEmt1);
+        possibleCombinationsEmt.add(setOntEmt2);
+        possibleCombinationsEmt.add(setOntEmt3);
+        this.addPossibleFailure(ONTEmitedLaserFailure.class, possibleCombinationsEmt);    
+
 		
 	}
 
@@ -184,15 +215,15 @@ public class OfficeScenario extends Scenario{
 
 		Properties scenarioProperties = new Properties();
 		scenarioProperties.put(ScenarioDefinitions.CLOUDY_PROB, "5");
-		//scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_2D);
-		scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_3D);
+		scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_2D);
+		//scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_3D);
 		//scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
 		Properties configProperties = new Properties();
 		configProperties.put(FTTHSimulation.CONFIGURATION, "2");
 		FTTHSimulation sim = new FTTHSimulation( System.currentTimeMillis(), OfficeScenario.class,
 				"Office Scenario", ScenarioDefinitions.SUNNY, scenarioProperties, configProperties);
-		//FTTHSimulation2D gui = new FTTHSimulation2D(sim);
-		FTTHSimulation3D gui = new FTTHSimulation3D(sim);
+		FTTHSimulation2D gui = new FTTHSimulation2D(sim);
+		//FTTHSimulation3D gui = new FTTHSimulation3D(sim);
 		gui.start();
 		//sim.start();
 		//do

@@ -11,7 +11,6 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 import es.upm.dit.gsi.shanks.ShanksSimulation;
-import es.upm.dit.gsi.shanks.agent.ShanksAgent;
 import es.upm.dit.gsi.shanks.agent.action.test.MyShanksAgentAction;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
 import es.upm.dit.gsi.shanks.model.failure.Failure;

@@ -6,7 +6,6 @@ import javax.media.j3d.TransformGroup;
 
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device3DPortrayal;
-import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.ftth.element.device.DeviceDefinitions;
 
 public class OLT3DPortrayal extends Device3DPortrayal{

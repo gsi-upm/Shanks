@@ -6,7 +6,6 @@ import javax.media.j3d.TransformGroup;
 
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.portrayal.Link3DPortrayal;
-import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
 import es.upm.dit.gsi.shanks.model.ftth.element.link.LinkDefinitions;
 
 public class OLTtoSplitter3DPortrayal extends Link3DPortrayal{

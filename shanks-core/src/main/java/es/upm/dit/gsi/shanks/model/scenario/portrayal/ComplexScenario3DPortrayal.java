@@ -38,10 +38,10 @@ public abstract class ComplexScenario3DPortrayal extends Scenario3DPortrayal {
      * Situate the scenario in the complex scenario main display
      * 
      * @param scenario
-     * @param position
-     * @param alpha XY
-     * @param beta XZ
-     * @param gamma YZ
+     * @param position offset of the scenario
+     * @param alpha XY angle
+     * @param beta XZ angle
+     * @param gamma YZ angle
      * @throws DuplicatedPortrayalIDException
      * @throws ScenarioNotFoundException
      */

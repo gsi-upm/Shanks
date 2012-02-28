@@ -15,9 +15,11 @@ import sim.portrayal.grid.SparseGridPortrayal2D;
 import sim.portrayal3d.continuous.ContinuousPortrayal3D;
 import sim.util.Double3D;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
+import es.upm.dit.gsi.shanks.agent.JasonShanksAgent;
 import es.upm.dit.gsi.shanks.agent.ShanksAgent;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
-import es.upm.dit.gsi.shanks.agent.test.MyShanksAgent;
+import es.upm.dit.gsi.shanks.agent.test.MyJasonShanksAgent;
+import es.upm.dit.gsi.shanks.agent.test.MySimpleShanksAgent;
 import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
@@ -105,11 +107,13 @@ public class MyShanksSimulation extends ShanksSimulation {
                 public void step(SimState sim) {
                     ShanksSimulation simulation = (ShanksSimulation) sim;
                     for (ShanksAgent agent : simulation.getAgents()) {
-                        logger.info("Total failures resolved by Agent: "
-                                + agent.getID()
-                                + ": "
-                                + ((MyShanksAgent) agent)
-                                        .getNumberOfResolvedFailures());
+                        if (agent instanceof JasonShanksAgent) {
+                            logger.info("Total failures resolved by Agent: "
+                                    + agent.getID()
+                                    + ": "
+                                    + ((MyJasonShanksAgent) agent)
+                                            .getNumberOfResolvedFailures());
+                        }
                     }
                 }
             };
@@ -127,16 +131,18 @@ public class MyShanksSimulation extends ShanksSimulation {
                 public void step(SimState sim) {
                     ShanksSimulation simulation = (ShanksSimulation) sim;
                     for (ShanksAgent agent : simulation.getAgents()) {
-                        logger.info("Total failures resolved by Agent: "
-                                + agent.getID()
-                                + ": "
-                                + ((MyShanksAgent) agent)
-                                        .getNumberOfResolvedFailures());
+                        if (agent instanceof JasonShanksAgent) {
+                            logger.info("Total failures resolved by Agent: "
+                                    + agent.getID()
+                                    + ": "
+                                    + ((MyJasonShanksAgent) agent)
+                                            .getNumberOfResolvedFailures());
+                        }
                     }
                 }
             };
             Steppable steppable3 = new Steppable() {
-                
+
                 /**
                  * 
                  */
@@ -145,32 +151,48 @@ public class MyShanksSimulation extends ShanksSimulation {
                 @Override
                 public void step(SimState sim) {
                     ShanksSimulation simulation = (ShanksSimulation) sim;
-                    Set<Failure> failures = simulation.getScenario().getCurrentFailures();
+                    Set<Failure> failures = simulation.getScenario()
+                            .getCurrentFailures();
 
-                    if (simulation.getScenario().getProperty(Scenario.SIMULATION_GUI).equals(Scenario.SIMULATION_2D)) {
+                    if (simulation.getScenario()
+                            .getProperty(Scenario.SIMULATION_GUI)
+                            .equals(Scenario.SIMULATION_2D)) {
                         try {
-                            SparseGridPortrayal2D failuresPortrayal = (SparseGridPortrayal2D) simulation.getScenarioPortrayal().getPortrayals().get(MyHyperComplexScenario2DPortrayal.FAILURE_DISPLAY_ID).get(MyHyperComplexScenario2DPortrayal.FAILURE_PORTRAYAL_ID);
-                            SparseGrid2D grid = (SparseGrid2D) failuresPortrayal.getField();
+                            SparseGridPortrayal2D failuresPortrayal = (SparseGridPortrayal2D) simulation
+                                    .getScenarioPortrayal()
+                                    .getPortrayals()
+                                    .get(MyHyperComplexScenario2DPortrayal.FAILURE_DISPLAY_ID)
+                                    .get(MyHyperComplexScenario2DPortrayal.FAILURE_PORTRAYAL_ID);
+                            SparseGrid2D grid = (SparseGrid2D) failuresPortrayal
+                                    .getField();
                             grid.clear();
                             int pos = 20;
                             for (Failure f : failures) {
                                 grid.setObjectLocation(f, 10, pos);
-                                pos+=10;
+                                pos += 10;
                             }
                         } catch (DuplicatedPortrayalIDException e) {
                             e.printStackTrace();
                         } catch (ScenarioNotFoundException e) {
                             e.printStackTrace();
                         }
-                    } else if (simulation.getScenario().getProperty(Scenario.SIMULATION_GUI).equals(Scenario.SIMULATION_3D)) {
+                    } else if (simulation.getScenario()
+                            .getProperty(Scenario.SIMULATION_GUI)
+                            .equals(Scenario.SIMULATION_3D)) {
                         try {
-                            ContinuousPortrayal3D failuresPortrayal = (ContinuousPortrayal3D) simulation.getScenarioPortrayal().getPortrayals().get(MyHyperComplexScenario2DPortrayal.FAILURE_DISPLAY_ID).get(MyHyperComplexScenario2DPortrayal.FAILURE_PORTRAYAL_ID);
-                            Continuous3D grid = (Continuous3D) failuresPortrayal.getField();
+                            ContinuousPortrayal3D failuresPortrayal = (ContinuousPortrayal3D) simulation
+                                    .getScenarioPortrayal()
+                                    .getPortrayals()
+                                    .get(MyHyperComplexScenario2DPortrayal.FAILURE_DISPLAY_ID)
+                                    .get(MyHyperComplexScenario2DPortrayal.FAILURE_PORTRAYAL_ID);
+                            Continuous3D grid = (Continuous3D) failuresPortrayal
+                                    .getField();
                             grid.clear();
                             int pos = 20;
                             for (Failure f : failures) {
-                                grid.setObjectLocation(f, new Double3D(-110, 100-pos, 0));
-                                pos+=10;
+                                grid.setObjectLocation(f, new Double3D(-110,
+                                        100 - pos, 0));
+                                pos += 10;
                             }
                         } catch (DuplicatedPortrayalIDException e) {
                             e.printStackTrace();
@@ -192,15 +214,17 @@ public class MyShanksSimulation extends ShanksSimulation {
     @Override
     public void registerShanksAgents() throws DuplicatedAgentIDException,
             DuplicatedActionIDException {
-        MyShanksAgent agent = new MyShanksAgent("resolverAgent1",
+        MyJasonShanksAgent agent = new MyJasonShanksAgent("resolverAgent1",
                 "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent1.asl");
         this.registerShanksAgent(agent);
-        MyShanksAgent agent2 = new MyShanksAgent("resolverAgent2",
+        MyJasonShanksAgent agent2 = new MyJasonShanksAgent("resolverAgent2",
                 "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent2.asl");
         this.registerShanksAgent(agent2);
-        MyShanksAgent agent3 = new MyShanksAgent("resolverAgent3",
+        MyJasonShanksAgent agent3 = new MyJasonShanksAgent("resolverAgent3",
                 "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent3.asl");
         this.registerShanksAgent(agent3);
+        MySimpleShanksAgent agent4 = new MySimpleShanksAgent("simpleAgent1");
+        this.registerShanksAgent(agent4);
     }
 
 }

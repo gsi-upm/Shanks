@@ -36,14 +36,15 @@ public abstract class ComplexScenario2DPortrayal extends Scenario2DPortrayal {
      * Situate the scenario in the complex scenario main display
      * 
      * @param scenario
-     * @param position
-     * @param alpha
-     * @param beta
+     * @param position offset of the scenario
+     * @param alpha is the angle in the plane XY 
+     * @param beta is the angle in the plane XZ (only X rotation will be shown in the 2D portrayal
+     * @param gamma is the angle in the plane YZ (only Y rotation will be shown in the 2D portrayal
      * @throws DuplicatedPortrayalIDException
      * @throws ScenarioNotFoundException
      */
     public void situateScenario(Scenario scenario, Double2D position,
-            Double2D alpha, Double2D beta) throws DuplicatedPortrayalIDException,
+            Double2D alpha, Double2D beta, Double2D gamma) throws DuplicatedPortrayalIDException,
             ScenarioNotFoundException {
         Scenario2DPortrayal portrayal;
         try {
@@ -62,7 +63,7 @@ public abstract class ComplexScenario2DPortrayal extends Scenario2DPortrayal {
                     Double2D devicePosition = devicesSpace
                             .getObjectLocation(device);
                     Double2D rotated = ShanksMath.rotate(devicePosition, alpha,
-                            beta);
+                            beta, gamma);
                     Double2D finalPosition = ShanksMath.add(rotated, position);
                     this.situateDevice(device, finalPosition.x, finalPosition.y);
                 }

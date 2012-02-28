@@ -94,13 +94,15 @@ public class ShanksMath {
     /**
      * @param orig
      * @param alpha is the angle in the plane XY 
-     * @param beta is the angle in the plane YZ (only Y rotation will be shown in the 2D portrayal 
+     * @param beta is the angle in the plane XZ (only X rotation will be shown in the 2D portrayal)
+     * @param gamma is the angle in the plane YZ (only Y rotation will be shown in the 2D portrayal)
      * @return Double2D object
      */
-    public static Double2D rotate(Double2D orig, Double2D alpha, Double2D beta) {
+    public static Double2D rotate(Double2D orig, Double2D alpha, Double2D beta, Double2D gamma) {
         Double2D firstRotated = ShanksMath.rotate(orig, alpha);
-        Double2D secondRotated = ShanksMath.rotate(new Double2D(firstRotated.y,0.0), beta);
-        return new Double2D(firstRotated.x,secondRotated.x);
+        Double2D secondRotated = ShanksMath.rotate(new Double2D(firstRotated.x,0.0), beta);
+        Double2D thirdRotated = ShanksMath.rotate(new Double2D(firstRotated.y,0.0), gamma);
+        return new Double2D(secondRotated.x,thirdRotated.x);
     }
 
     /**

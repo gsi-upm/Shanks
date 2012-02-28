@@ -44,8 +44,8 @@ public class MyHyperComplexScenario2DPortrayal extends
     public void placeScenarios() throws DuplicatedPortrayalIDException,
             ScenarioNotFoundException {
         ComplexScenario cs = (ComplexScenario) this.getScenario();
-        this.situateScenario(cs.getScenario("MegaComplexScenario1"), new Double2D(0,0), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
-        this.situateScenario(cs.getScenario("MegaComplexScenario2"), new Double2D(0,400), ShanksMath.ANGLE_0, ShanksMath.ANGLE_180);
+        this.situateScenario(cs.getScenario("MegaComplexScenario1"), new Double2D(0,0), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
+        this.situateScenario(cs.getScenario("MegaComplexScenario2"), new Double2D(0,400), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0, ShanksMath.ANGLE_180);
     }
 
     @Override

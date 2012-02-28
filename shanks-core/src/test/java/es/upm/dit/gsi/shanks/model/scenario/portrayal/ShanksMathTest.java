@@ -39,7 +39,7 @@ public class ShanksMathTest {
     @Test
     public void ShanksMathRotate2D2() {
         Double2D orig = new Double2D(1, 0);
-        Double2D result = ShanksMath.rotate(orig, ShanksMath.ANGLE_90, ShanksMath.ANGLE_90);
+        Double2D result = ShanksMath.rotate(orig, ShanksMath.ANGLE_90, ShanksMath.ANGLE_0, ShanksMath.ANGLE_90);
         Assert.assertEquals(0.0, result.x);
         Assert.assertEquals(0.0, result.y);
     }
@@ -47,8 +47,40 @@ public class ShanksMathTest {
     @Test
     public void ShanksMathRotate2D3() {
         Double2D orig = new Double2D(1, 0);
-        Double2D result = ShanksMath.rotate(orig, ShanksMath.ANGLE_90, ShanksMath.ANGLE_180);
+        Double2D result = ShanksMath.rotate(orig, ShanksMath.ANGLE_90, ShanksMath.ANGLE_0, ShanksMath.ANGLE_180);
         Assert.assertEquals(0.0, result.x);
+        Assert.assertEquals(-1.0, result.y);
+    }
+
+    @Test
+    public void ShanksMathRotate2D4() {
+        Double2D orig = new Double2D(1, 0);
+        Double2D result = ShanksMath.rotate(orig, ShanksMath.ANGLE_90, ShanksMath.ANGLE_180, ShanksMath.ANGLE_90);
+        Assert.assertEquals(-0.0, result.x);
+        Assert.assertEquals(0.0, result.y);
+    }
+
+    @Test
+    public void ShanksMathRotate2D5() {
+        Double2D orig = new Double2D(0, 1);
+        Double2D result = ShanksMath.rotate(orig, ShanksMath.ANGLE_90, ShanksMath.ANGLE_90, ShanksMath.ANGLE_180);
+        Assert.assertEquals(-0.0, result.x);
+        Assert.assertEquals(-0.0, result.y);
+    }
+
+    @Test
+    public void ShanksMathRotate2D6() {
+        Double2D orig = new Double2D(1, 1);
+        Double2D result = ShanksMath.rotate(orig, ShanksMath.ANGLE_0, ShanksMath.ANGLE_90, ShanksMath.ANGLE_0);
+        Assert.assertEquals(0.0, result.x);
+        Assert.assertEquals(1.0, result.y);
+    }
+
+    @Test
+    public void ShanksMathRotate2D7() {
+        Double2D orig = new Double2D(1, 1);
+        Double2D result = ShanksMath.rotate(orig, ShanksMath.ANGLE_0, ShanksMath.ANGLE_180, ShanksMath.ANGLE_180);
+        Assert.assertEquals(-1.0, result.x);
         Assert.assertEquals(-1.0, result.y);
     }
 

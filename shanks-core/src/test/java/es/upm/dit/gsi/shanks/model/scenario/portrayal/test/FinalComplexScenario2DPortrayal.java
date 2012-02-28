@@ -91,14 +91,14 @@ public class FinalComplexScenario2DPortrayal extends ComplexScenario2DPortrayal 
     public void placeScenarios() throws DuplicatedPortrayalIDException,
             ScenarioNotFoundException {
         ComplexScenario cs = (ComplexScenario) this.getScenario();
-        this.situateScenario(cs.getScenario("HyperComplexScenario1"), new Double2D(0,0), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
-        this.situateScenario(cs.getScenario("HyperComplexScenario2"), new Double2D(350,0), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
-        this.situateScenario(cs.getScenario("HyperComplexScenario3"), new Double2D(700,0), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
-        this.situateScenario(cs.getScenario("HyperComplexScenario4"), new Double2D(0,450), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
-        this.situateScenario(cs.getScenario("HyperComplexScenario5"), new Double2D(700,450), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
-        this.situateScenario(cs.getScenario("HyperComplexScenario6"), new Double2D(0,900), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
-        this.situateScenario(cs.getScenario("HyperComplexScenario7"), new Double2D(350,900), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
-        this.situateScenario(cs.getScenario("HyperComplexScenario8"), new Double2D(700,900), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
+        this.situateScenario(cs.getScenario("HyperComplexScenario1"), new Double2D(0,0), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
+        this.situateScenario(cs.getScenario("HyperComplexScenario2"), new Double2D(350,0), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
+        this.situateScenario(cs.getScenario("HyperComplexScenario3"), new Double2D(700,0), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
+        this.situateScenario(cs.getScenario("HyperComplexScenario4"), new Double2D(0,450), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
+        this.situateScenario(cs.getScenario("HyperComplexScenario5"), new Double2D(700,450), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
+        this.situateScenario(cs.getScenario("HyperComplexScenario6"), new Double2D(0,900), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
+        this.situateScenario(cs.getScenario("HyperComplexScenario7"), new Double2D(350,900), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
+        this.situateScenario(cs.getScenario("HyperComplexScenario8"), new Double2D(700,900), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
     }
 
 }

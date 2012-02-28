@@ -39,9 +39,9 @@ public abstract class ComplexScenario3DPortrayal extends Scenario3DPortrayal {
      * 
      * @param scenario
      * @param position
-     * @param alpha
-     * @param beta
-     * @param gamma
+     * @param alpha XY
+     * @param beta XZ
+     * @param gamma YZ
      * @throws DuplicatedPortrayalIDException
      * @throws ScenarioNotFoundException
      */

@@ -6,7 +6,14 @@ import java.util.List;
 
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 
-public abstract class ShanksAgentAction {
+/**
+ * 
+ * Class to represent the actions that are executed by JasonShanksAgents
+ * 
+ * @author a.carrera
+ *
+ */
+public abstract class JasonShanksAgentAction {
 
     /**
      * @param simulation

@@ -46,4 +46,14 @@ public interface MobileShanksAgent {
      */
     public Location getTargetLocation();
 
+    /**
+     * Set the current location of the agent
+     */
+    public void setCurrentLocation(Location location);
+    
+    /**
+     * Set the target location of the agent
+     */
+    public void setTargetLocation(Location location);
+
 }

@@ -1,9 +1,9 @@
 /**
  * 
  */
-package es.upm.dit.gsi.shanks.agent.perception;
+package es.upm.dit.gsi.shanks.agent.capability.perception;
 
-import es.upm.dit.gsi.shanks.agent.movement.Location;
+import es.upm.dit.gsi.shanks.agent.capability.movement.Location;
 
 /**
  * @author a.carrera

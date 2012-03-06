@@ -1,7 +1,7 @@
 /**
  * 
  */
-package es.upm.dit.gsi.shanks.agent.movement;
+package es.upm.dit.gsi.shanks.agent.capability.movement;
 
 /**
  * @author a.carrera

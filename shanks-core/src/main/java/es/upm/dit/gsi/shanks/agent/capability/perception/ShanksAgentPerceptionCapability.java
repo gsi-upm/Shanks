@@ -1,7 +1,7 @@
 /**
  * 
  */
-package es.upm.dit.gsi.shanks.agent.perception;
+package es.upm.dit.gsi.shanks.agent.capability.perception;
 
 import sim.field.continuous.Continuous2D;
 import sim.field.continuous.Continuous3D;
@@ -11,7 +11,7 @@ import sim.util.Bag;
 import sim.util.Double2D;
 import sim.util.Double3D;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
-import es.upm.dit.gsi.shanks.agent.movement.Location;
+import es.upm.dit.gsi.shanks.agent.capability.movement.Location;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;

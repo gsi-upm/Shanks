@@ -1,7 +1,7 @@
 /**
  * 
  */
-package es.upm.dit.gsi.shanks.agent.movement;
+package es.upm.dit.gsi.shanks.agent.capability.movement;
 
 import sim.util.Double2D;
 import sim.util.Double3D;

@@ -205,7 +205,7 @@ public abstract class JasonShanksAgent extends AgArch implements ShanksAgent {
                 JasonShanksAgentAction shanksAction = this.actions.get(actionID)
                         .newInstance();
                 result = shanksAction.executeAction(this.getSimulation(),
-                        this.getID(), actionStructure.getTerms());
+                        this, actionStructure.getTerms());
             } else {
                 throw new UnknownShanksAgentActionException(actionID,
                         this.getID());

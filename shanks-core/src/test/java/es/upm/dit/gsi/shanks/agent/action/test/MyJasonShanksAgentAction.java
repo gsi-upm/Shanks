@@ -8,9 +8,9 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 import es.upm.dit.gsi.shanks.ShanksSimulation;
+import es.upm.dit.gsi.shanks.agent.ShanksAgent;
 import es.upm.dit.gsi.shanks.agent.action.JasonShanksAgentAction;
 import es.upm.dit.gsi.shanks.agent.test.MyJasonShanksAgent;
-import es.upm.dit.gsi.shanks.exception.UnkownAgentException;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
@@ -20,10 +20,11 @@ import es.upm.dit.gsi.shanks.model.failure.Failure;
 public class MyJasonShanksAgentAction extends JasonShanksAgentAction {
 
     public static final String FIX = "fix";
-    private Logger logger = Logger.getLogger(MyJasonShanksAgent.class.getName());
+    private Logger logger = Logger
+            .getLogger(MyJasonShanksAgent.class.getName());
 
-    public boolean executeAction(ShanksSimulation simulation, String agentID,
-            List<Term> arguments) {
+    public boolean executeAction(ShanksSimulation simulation,
+            ShanksAgent agent, List<Term> arguments) {
 
         Set<Failure> failures = simulation.getScenario().getCurrentFailures();
         int number = failures.size();
@@ -47,13 +48,7 @@ public class MyJasonShanksAgentAction extends JasonShanksAgentAction {
             }
         }
 
-        try {
-            ((MyJasonShanksAgent) simulation.getAgent(agentID))
-                    .incrementNumberOfResolverFailures();
-        } catch (UnkownAgentException e) {
-            logger.severe(e.getMessage());
-            e.printStackTrace();
-        }
+        ((MyJasonShanksAgent) agent).incrementNumberOfResolverFailures();
         // END OF THE ACTION
         simulation.getScenarioManager().checkFailures(simulation);
         logger.finer("Number of current failures: "

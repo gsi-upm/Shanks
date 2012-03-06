@@ -17,6 +17,11 @@ public interface MobileShanksAgent {
     public void setSpeed(Double speed);
     
     /**
+     * @return the speed of the agent
+     */
+    public double getSpeed();
+    
+    /**
      * Stop the agent
      */
     public void stopMovement();
@@ -27,8 +32,18 @@ public interface MobileShanksAgent {
     public void startMovement();
     
     /**
+     * @return true if the agent is allowed to move, false if not
+     */
+    public boolean isAllowedToMove();
+    
+    /**
      * @return the object Location of the agent
      */
-    public Location getLocation();
+    public Location getCurrentLocation();
+    
+    /**
+     * @return the object Location that represent the target location of the agent
+     */
+    public Location getTargetLocation();
 
 }

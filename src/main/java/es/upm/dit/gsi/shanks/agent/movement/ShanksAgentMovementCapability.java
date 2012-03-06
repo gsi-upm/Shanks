@@ -67,6 +67,24 @@ public class ShanksAgentMovementCapability {
         }
 
     }
+    
+    /**
+     * Move the agent to the target location with the specific speed. Call this method always you want to move.
+     * This method only moves the agent a fragment equals to the velocity.
+     * 
+     * @param simulation
+     * @param agent
+     * @param currentLocation
+     * @param tarLocation
+     * @param speed
+     */
+    public static void goTo(ShanksSimulation simulation, MobileShanksAgent agent, Location currentLocation, Location targetLocation, double speed) {
+        if (currentLocation.is2DLocation() && targetLocation.is2DLocation()) {
+            ShanksAgentMovementCapability.goTo(simulation, agent, currentLocation.getLocation2D(), targetLocation.getLocation2D(), speed);
+        } else if (currentLocation.is3DLocation() && targetLocation.is3DLocation()) {
+            ShanksAgentMovementCapability.goTo(simulation, agent, currentLocation.getLocation3D(), targetLocation.getLocation3D(), speed);
+        }
+    }
 
     /**
      * Move the agent to the target location with the specific speed. Call this method always you want to move.

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package es.upm.dit.gsi.shanks.agent.movement;
+package es.upm.dit.gsi.shanks.agent.capability.movement;
 
 import sim.field.continuous.Continuous2D;
 import sim.field.continuous.Continuous3D;

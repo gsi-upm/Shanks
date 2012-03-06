@@ -27,6 +27,22 @@ public class ShanksAgentMovementCapability {
      * @param location
      */
     public static void updateLocation(ShanksSimulation simulation,
+            MobileShanksAgent agent, Location location) {
+        if (location.is2DLocation()) {
+            ShanksAgentMovementCapability.updateLocation(simulation, agent, location.getLocation2D());
+        } else if (location.is3DLocation()) {
+            ShanksAgentMovementCapability.updateLocation(simulation, agent, location.getLocation3D());
+        }
+    }
+    
+    /**
+     * Update the location of the agent in the simulation
+     * 
+     * @param simulation
+     * @param agent
+     * @param location
+     */
+    private static void updateLocation(ShanksSimulation simulation,
             MobileShanksAgent agent, Double3D location) {
         agent.getCurrentLocation().setLocation3D(location);
         ContinuousPortrayal3D devicesPortrayal;
@@ -50,7 +66,7 @@ public class ShanksAgentMovementCapability {
      * @param agent
      * @param location
      */
-    public static void updateLocation(ShanksSimulation simulation,
+    private static void updateLocation(ShanksSimulation simulation,
             MobileShanksAgent agent, Double2D location) {
         agent.getCurrentLocation().setLocation2D(location);
         ContinuousPortrayal2D devicesPortrayal;
@@ -96,7 +112,7 @@ public class ShanksAgentMovementCapability {
      * @param targetLocation
      * @param speed
      */
-    public static void goTo(ShanksSimulation simulation,
+    private static void goTo(ShanksSimulation simulation,
             MobileShanksAgent agent, Double2D currentLocation,
             Double2D targetLocation, double speed) {
         if (!targetLocation.equals(currentLocation) && agent.isAllowedToMove()) {
@@ -118,7 +134,7 @@ public class ShanksAgentMovementCapability {
      * @param targetLocation
      * @param speed
      */
-    public static void goTo(ShanksSimulation simulation,
+    private static void goTo(ShanksSimulation simulation,
             MobileShanksAgent agent, Double3D currentLocation,
             Double3D targetLocation, double speed) {
         if (!targetLocation.equals(currentLocation) && agent.isAllowedToMove()) {

@@ -49,8 +49,7 @@ public class ShanksAgentPerceptionCapability {
             } catch (ScenarioNotFoundException e) {
                 e.printStackTrace();
             }
-        }
-        if (agentLocation.is2DLocation()) {
+        } else if (agentLocation.is2DLocation()) {
             try {
                 ContinuousPortrayal2D devicesPortrayal = (ContinuousPortrayal2D) simulation
                         .getScenarioPortrayal().getPortrayals()
@@ -124,7 +123,7 @@ public class ShanksAgentPerceptionCapability {
      * @return A random object location. This location never will be the
      *         location of the agent.
      */
-    public static Location getRandomObject(ShanksSimulation simulation,
+    public static Location getRandomObjectLocation(ShanksSimulation simulation,
             PercipientShanksAgent agent) {
         Location agentLocation = agent.getCurrentLocation();
         try {
@@ -202,5 +201,60 @@ public class ShanksAgentPerceptionCapability {
         return null;
 
     }
+
+    /**
+     * @param simulation
+     * @param agent
+     * @return A random object location within the perception range of the agent. This location never will be the
+     *         location of the agent.
+     */
+    public static Location getRandomObjectLocationInPerceptionRange(ShanksSimulation simulation,
+            PercipientShanksAgent agent) {
+        Location agentLocation = agent.getCurrentLocation();
+        try {
+            if (agentLocation.is3DLocation()) {
+                ContinuousPortrayal3D devicesPortrayal = (ContinuousPortrayal3D) simulation
+                        .getScenarioPortrayal().getPortrayals()
+                        .get(Scenario3DPortrayal.MAIN_DISPLAY_ID)
+                        .get(ScenarioPortrayal.DEVICES_PORTRAYAL);
+                Continuous3D devicesField = (Continuous3D) devicesPortrayal
+                        .getField();
+                Bag objects = devicesField.getObjectsWithinDistance(
+                        agentLocation.getLocation3D(),
+                        agent.getPerceptionRange(), false);
+                Object o;
+                Double3D newTarget = null;
+                do {
+                    int size = objects.size();
+                    o = objects.get(simulation.random.nextInt(size));
+                    newTarget = devicesField.getObjectLocation(o);
+                } while (o.equals(agent));
+                return new Location(newTarget);
+            } else if (agentLocation.is2DLocation()) {
+                ContinuousPortrayal2D devicesPortrayal = (ContinuousPortrayal2D) simulation
+                        .getScenarioPortrayal().getPortrayals()
+                        .get(Scenario2DPortrayal.MAIN_DISPLAY_ID)
+                        .get(ScenarioPortrayal.DEVICES_PORTRAYAL);
+                Continuous2D devicesField = (Continuous2D) devicesPortrayal
+                        .getField();
+                Bag objects = devicesField.getObjectsWithinDistance(
+                        agentLocation.getLocation2D(),
+                        agent.getPerceptionRange(), false);
+                Object o;
+                Double2D newTarget = null;
+                do {
+                    int size = objects.size();
+                    o = objects.get(simulation.random.nextInt(size));
+                    newTarget = devicesField.getObjectLocation(o);
+                } while (o.equals(agent));
+                return new Location(newTarget);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    //TODO add methods to get objects for a determined distance and for a determined region 
 
 }

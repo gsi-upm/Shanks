@@ -25,6 +25,9 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
 public class ShanksAgentPerceptionCapability {
 
     /**
+     * To obtain the percepts of the agent, it is required that the agent would
+     * implement PercipientShanksAgent interface
+     * 
      * @param simulation
      * @param agent
      * @return the objects that the agent percepts in its perception range
@@ -71,6 +74,8 @@ public class ShanksAgentPerceptionCapability {
     }
 
     /**
+     * Get the distance from the agent to an object in the simulation
+     * 
      * @param simulation
      * @param agent
      * @param o
@@ -118,6 +123,8 @@ public class ShanksAgentPerceptionCapability {
     }
 
     /**
+     * Get the location of a random object in the simulation.
+     * 
      * @param simulation
      * @param agent
      * @return A random object location. This location never will be the
@@ -167,6 +174,8 @@ public class ShanksAgentPerceptionCapability {
     }
 
     /**
+     * Get the location of an object in the simulation
+     * 
      * @param object
      * @return the Location object that represent the position of the object
      */
@@ -203,13 +212,15 @@ public class ShanksAgentPerceptionCapability {
     }
 
     /**
+     * Get a random object location in the perception range of the agent.
+     * 
      * @param simulation
      * @param agent
-     * @return A random object location within the perception range of the agent. This location never will be the
-     *         location of the agent.
+     * @return A random object location within the perception range of the
+     *         agent. This location never will be the location of the agent.
      */
-    public static Location getRandomObjectLocationInPerceptionRange(ShanksSimulation simulation,
-            PercipientShanksAgent agent) {
+    public static Location getRandomObjectLocationInPerceptionRange(
+            ShanksSimulation simulation, PercipientShanksAgent agent) {
         Location agentLocation = agent.getCurrentLocation();
         try {
             if (agentLocation.is3DLocation()) {
@@ -254,7 +265,52 @@ public class ShanksAgentPerceptionCapability {
         }
         return null;
     }
-    
-    //TODO add methods to get objects for a determined distance and for a determined region 
+
+    /**
+     * To obtain all objects in the simulation
+     * 
+     * @param simulation
+     * @param agent
+     * @return the objects that are in the simulation
+     */
+    public static Bag getAllObjects(ShanksSimulation simulation,
+            PercipientShanksAgent agent) {
+        Location agentLocation = agent.getCurrentLocation();
+        if (agentLocation.is3DLocation()) {
+            try {
+                ContinuousPortrayal3D devicesPortrayal = (ContinuousPortrayal3D) simulation
+                        .getScenarioPortrayal().getPortrayals()
+                        .get(Scenario3DPortrayal.MAIN_DISPLAY_ID)
+                        .get(ScenarioPortrayal.DEVICES_PORTRAYAL);
+                Continuous3D devicesField = (Continuous3D) devicesPortrayal
+                        .getField();
+                Bag objects = devicesField.getAllObjects();
+                return objects;
+            } catch (DuplicatedPortrayalIDException e) {
+                e.printStackTrace();
+            } catch (ScenarioNotFoundException e) {
+                e.printStackTrace();
+            }
+        } else if (agentLocation.is2DLocation()) {
+            try {
+                ContinuousPortrayal2D devicesPortrayal = (ContinuousPortrayal2D) simulation
+                        .getScenarioPortrayal().getPortrayals()
+                        .get(Scenario2DPortrayal.MAIN_DISPLAY_ID)
+                        .get(ScenarioPortrayal.DEVICES_PORTRAYAL);
+                Continuous2D devicesField = (Continuous2D) devicesPortrayal
+                        .getField();
+                Bag objects = devicesField.getAllObjects();
+                return objects;
+            } catch (DuplicatedPortrayalIDException e) {
+                e.printStackTrace();
+            } catch (ScenarioNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    // TODO add methods to get objects for a determined distance and for a
+    // determined region
 
 }

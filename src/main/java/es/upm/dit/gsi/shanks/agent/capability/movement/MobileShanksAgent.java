@@ -4,6 +4,8 @@
 package es.upm.dit.gsi.shanks.agent.capability.movement;
 
 /**
+ * Interface that an agent have to implement to use ShanksAgentMovementCapability
+ * 
  * @author a.carrera
  *
  */

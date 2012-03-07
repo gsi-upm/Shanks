@@ -153,6 +153,7 @@ public class ShanksAgentMovementCapability {
     }
 
     /**
+     * Normalize a Double3D object
      * 
      * @param vector
      * @return the normalized vector

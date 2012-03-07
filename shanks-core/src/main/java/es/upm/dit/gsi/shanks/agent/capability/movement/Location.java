@@ -21,7 +21,7 @@ public class Location {
     private boolean is3D;
 
     /**
-     * 
+     * Create an empty location
      */
     public Location() {
         this.location2D = null;
@@ -31,6 +31,8 @@ public class Location {
     }
 
     /**
+     * Create a 2D location
+     * 
      * @param location
      */
     public Location(Double2D location) {
@@ -41,6 +43,8 @@ public class Location {
     }
 
     /**
+     * Create a 3D location
+     * 
      * @param location
      */
     public Location(Double3D location) {
@@ -54,7 +58,11 @@ public class Location {
      * @return the location2D
      */
     public Double2D getLocation2D() {
-        return location2D;
+        if (this.is2DLocation()) {
+            return location2D;   
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -70,7 +78,11 @@ public class Location {
      * @return the location3D
      */
     public Double3D getLocation3D() {
-        return location3D;
+        if (this.is3DLocation()) {
+            return location3D;            
+        } else {
+            return null;   
+        }
     }
 
     /**

@@ -8,8 +8,11 @@ import javax.swing.JFrame;
 import sim.display3d.Display3D;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.ShanksSimulation3DGUI;
+import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedChartIDException;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyHyperComplexScenario2DPortrayal;
 
 /**
@@ -51,12 +54,9 @@ public class MyShanksSimulation3DGUI extends ShanksSimulation3DGUI {
      * @see es.upm.dit.gsi.shanks.ShanksSimulation3DGUI#addCharts(es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal)
      */
     @Override
-    public void addCharts(Scenario3DPortrayal scenarioPortrayal) {
-        try {
+    public void addCharts(Scenario3DPortrayal scenarioPortrayal)
+            throws DuplicatedChartIDException, DuplicatedPortrayalIDException, ScenarioNotFoundException {
             this.addTimeChart(MyShanksSimulation.RESOLVED_FAILURES_PER_AGENT_CHART_ID, "Time / Steps", "Resolved failures");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     /* (non-Javadoc)

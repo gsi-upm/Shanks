@@ -194,6 +194,8 @@ public abstract class ShanksSimulation2DGUI extends GUIState {
             e.printStackTrace();
         } catch (DuplictedFrameIDException e) {
             e.printStackTrace();
+        } catch (DuplicatedChartIDException e) {
+            e.printStackTrace();
         }
     }
 
@@ -209,7 +211,8 @@ public abstract class ShanksSimulation2DGUI extends GUIState {
      * 
      * @param scenarioPortrayal
      */
-    public abstract void addCharts(Scenario2DPortrayal scenarioPortrayal);
+    public abstract void addCharts(Scenario2DPortrayal scenarioPortrayal) 
+            throws DuplicatedChartIDException, DuplicatedPortrayalIDException, ScenarioNotFoundException;
 
     /**
      * To move the frame for the simulation

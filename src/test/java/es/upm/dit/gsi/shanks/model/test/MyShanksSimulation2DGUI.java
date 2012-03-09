@@ -7,7 +7,10 @@ import javax.swing.JFrame;
 import sim.display.Display2D;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.ShanksSimulation2DGUI;
+import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedChartIDException;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyHyperComplexScenario2DPortrayal;
 
 /**
@@ -58,12 +61,8 @@ public class MyShanksSimulation2DGUI extends ShanksSimulation2DGUI {
      * shanks.model.scenario.portrayal.Scenario2DPortrayal)
      */
     @Override
-    public void addCharts(Scenario2DPortrayal scenarioPortrayal) {
-        try {
+    public void addCharts(Scenario2DPortrayal scenarioPortrayal) throws DuplicatedChartIDException, DuplicatedPortrayalIDException, ScenarioNotFoundException {
             this.addTimeChart(MyShanksSimulation.RESOLVED_FAILURES_PER_AGENT_CHART_ID, "Time / Steps", "Resolved failures");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     /*

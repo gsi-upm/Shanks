@@ -13,7 +13,6 @@ import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedChartIDException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedDataSerieIDException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.UnknownDataSerieException;
 
 public abstract class ScenarioPortrayal {
     
@@ -207,15 +206,18 @@ public abstract class ScenarioPortrayal {
      * 
      * @param chartID
      * @param dataSerieID
-     * @param x Datum for X axis to this chart serie
-     * @param y Datum for Y axis to this chart serie
-     * @throws UnknownDataSerieException 
+     * @param x
+     * @param y
      */
-    public void addDataToSerie(String chartID, String dataSerieID, double x, double y) throws UnknownDataSerieException {
+    public void addDataToSerie(String chartID, String dataSerieID, double x, double y) {
         if (this.containsDataSerieInTimeChart(chartID, dataSerieID)) {
             this.timeChartData.get(chartID).get(dataSerieID).add(x, y, true);
         } else {
-            throw new UnknownDataSerieException(chartID, dataSerieID);
+            try {
+                this.addDataSerieToTimeChart(chartID, dataSerieID);
+            } catch (DuplicatedDataSerieIDException e) {
+                e.printStackTrace();
+            }
         }
     }
 

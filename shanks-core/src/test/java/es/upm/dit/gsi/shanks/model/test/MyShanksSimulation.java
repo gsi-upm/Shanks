@@ -31,7 +31,6 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusE
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedDataSerieIDException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.UnknownDataSerieException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyHyperComplexScenario2DPortrayal;
 
 /**
@@ -162,8 +161,6 @@ public class MyShanksSimulation extends ShanksSimulation {
                     } catch (DuplicatedPortrayalIDException e) {
                         e.printStackTrace();
                     } catch (ScenarioNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (UnknownDataSerieException e) {
                         e.printStackTrace();
                     } catch (DuplicatedDataSerieIDException e) {
                         e.printStackTrace();

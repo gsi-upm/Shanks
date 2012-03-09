@@ -217,19 +217,5 @@ public abstract class Failure {
      * @return true if the failure is resolved, false if not
      */
     abstract public boolean isResolved();
-//    public boolean isResolved() {
-//        // FIXME check this method, maybe... if two failures affect to one
-//        // element at the same time... the old status is a not valid check
-//        boolean resolved = false;
-//        for (NetworkElement element : this.affectedElements.keySet()) {
-//            if (element.getCurrentStatus().equals(
-//                    this.oldStatesOfAffectedElements.get(element))) {
-//                resolved = true;
-//            } else {
-//                resolved = false;
-//            }
-//        }
-//        return resolved;
-//    }
 
 }

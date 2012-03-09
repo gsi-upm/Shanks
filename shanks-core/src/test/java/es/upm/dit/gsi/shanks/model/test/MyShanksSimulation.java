@@ -28,7 +28,10 @@ import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedDataSerieIDException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.UnknownDataSerieException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyHyperComplexScenario2DPortrayal;
 
 /**
@@ -41,6 +44,7 @@ public class MyShanksSimulation extends ShanksSimulation {
     private Properties configuration;
 
     public static final String CONFIGURATION = "Configuration";
+    public static final String RESOLVED_FAILURES_PER_AGENT_CHART_ID = "Resolved failures per agent";
 
     /**
      * @param seed
@@ -130,14 +134,39 @@ public class MyShanksSimulation extends ShanksSimulation {
                 @Override
                 public void step(SimState sim) {
                     ShanksSimulation simulation = (ShanksSimulation) sim;
-                    for (ShanksAgent agent : simulation.getAgents()) {
-                        if (agent instanceof JasonShanksAgent) {
-                            logger.info("Total failures resolved by Agent: "
-                                    + agent.getID()
-                                    + ": "
-                                    + ((MyJasonShanksAgent) agent)
+                    try {
+                        ScenarioPortrayal scenarioPortrayal = simulation.getScenarioPortrayal();
+                        if (scenarioPortrayal != null) {
+                            double steps = simulation.schedule.getSteps();
+                            for (ShanksAgent agent : simulation.getAgents()) {
+                                if (agent instanceof JasonShanksAgent) {
+                                    if (!scenarioPortrayal.containsDataSerieInTimeChart(MyShanksSimulation.RESOLVED_FAILURES_PER_AGENT_CHART_ID, agent.getID())) {
+                                        scenarioPortrayal.addDataSerieToTimeChart(RESOLVED_FAILURES_PER_AGENT_CHART_ID, agent.getID());
+                                    }
+                                    scenarioPortrayal.addDataToSerie(RESOLVED_FAILURES_PER_AGENT_CHART_ID, agent.getID(), steps, ((MyJasonShanksAgent) agent)
                                             .getNumberOfResolvedFailures());
+                                      
+                                }
+                            }   
+                        } else {
+                            for (ShanksAgent agent : simulation.getAgents()) {
+                                if (agent instanceof JasonShanksAgent) {                                    
+                                    logger.info("Total failures resolved by Agent: "
+                                            + agent.getID()
+                                            + ": "
+                                            + ((MyJasonShanksAgent) agent)
+                                                    .getNumberOfResolvedFailures());
+                                }
+                            }                        
                         }
+                    } catch (DuplicatedPortrayalIDException e) {
+                        e.printStackTrace();
+                    } catch (ScenarioNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (UnknownDataSerieException e) {
+                        e.printStackTrace();
+                    } catch (DuplicatedDataSerieIDException e) {
+                        e.printStackTrace();
                     }
                 }
             };
@@ -203,7 +232,7 @@ public class MyShanksSimulation extends ShanksSimulation {
                 }
             };
             schedule.scheduleRepeating(Schedule.EPOCH, 4, steppable3, 1);
-            schedule.scheduleRepeating(Schedule.EPOCH, 3, steppable2, 500);
+            schedule.scheduleRepeating(Schedule.EPOCH, 3, steppable2, 50);
             break;
         default:
             logger.info("No configuration for MyShanksSimulation. Configuration 0 loaded -> default");

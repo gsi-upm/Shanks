@@ -17,11 +17,14 @@ import sim.field.continuous.Continuous3D;
 import sim.portrayal.Portrayal;
 import sim.portrayal3d.FieldPortrayal3D;
 import sim.portrayal3d.continuous.ContinuousPortrayal3D;
+import sim.util.media.chart.TimeSeriesChartGenerator;
 import es.upm.dit.gsi.shanks.exception.DuplictaedDisplayIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedChartIDException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplictedFrameIDException;
 
 /**
  * ShanksSimulation3DGUI class
@@ -95,7 +98,7 @@ public abstract class ShanksSimulation3DGUI extends GUIState {
             Scenario3DPortrayal scenarioPortrayal = (Scenario3DPortrayal) this
                     .getSimulation().getScenarioPortrayal();
             HashMap<String, Display3D> displays = scenarioPortrayal
-                    .getDisplayList();
+                    .getDisplays();
             for (Entry<String, Display3D> entry : displays.entrySet()) {
                 entry.getValue().reset();
                 entry.getValue().repaint();
@@ -149,7 +152,7 @@ public abstract class ShanksSimulation3DGUI extends GUIState {
                     .getSimulation().getScenarioPortrayal();
 
             HashMap<String, Display3D> displays = scenarioPortrayal
-                    .getDisplayList();
+                    .getDisplays();
             ContinuousPortrayal3D devicesPortrayal;
             devicesPortrayal = (ContinuousPortrayal3D) sim
                     .getScenarioPortrayal().getPortrayals()
@@ -163,6 +166,9 @@ public abstract class ShanksSimulation3DGUI extends GUIState {
                     mainDisplay);
             
             this.addDisplays(scenarioPortrayal);
+            this.addCharts(scenarioPortrayal);
+
+            HashMap<String, TimeSeriesChartGenerator> timeCharts = scenarioPortrayal.getTimeCharts();
             
             for (Entry<String, Display3D> displayEntry : displays.entrySet()) {
                 JFrame frame = displayEntry.getValue().createFrame();
@@ -172,6 +178,17 @@ public abstract class ShanksSimulation3DGUI extends GUIState {
                 frame.setVisible(true);
                 displayEntry.getValue().getSelectionBehavior().setTolerance(10.0f);
             }
+            
+            for (Entry<String, TimeSeriesChartGenerator> chartEntry : timeCharts.entrySet()) {
+                JFrame frame = chartEntry.getValue().createFrame();
+                scenarioPortrayal.addFrame(chartEntry.getKey(), frame);
+                frame.setTitle(chartEntry.getKey());
+                c.registerFrame(frame);
+                frame.setVisible(true);
+            }
+            
+            this.locateFrames(scenarioPortrayal);
+            
         } catch (DuplictaedDisplayIDException e) {
             logger.severe(e.getMessage());
             e.printStackTrace();
@@ -181,6 +198,8 @@ public abstract class ShanksSimulation3DGUI extends GUIState {
         } catch (ScenarioNotFoundException e) {
             logger.severe(e.getMessage());
             e.printStackTrace();
+        } catch (DuplictedFrameIDException e) {
+            e.printStackTrace();
         }
     }
 
@@ -189,6 +208,18 @@ public abstract class ShanksSimulation3DGUI extends GUIState {
      * @param scenarioPortrayal
      */
     public abstract void addDisplays(Scenario3DPortrayal scenarioPortrayal);
+    
+    /**
+     * To create charts
+     * @param scenarioPortrayal
+     */
+    public abstract void addCharts(Scenario3DPortrayal scenarioPortrayal);
+    
+    /**
+     * To move the frame for the simulation
+     * @param scenarioPortrayal
+     */
+    public abstract void locateFrames(Scenario3DPortrayal scenarioPortrayal);
 
     /*
      * (non-Javadoc)
@@ -205,7 +236,7 @@ public abstract class ShanksSimulation3DGUI extends GUIState {
                     .getScenarioPortrayal();
 
             HashMap<String, Display3D> displays = scenarioPortrayal
-                    .getDisplayList();
+                    .getDisplays();
             HashMap<String, JFrame> frames = scenarioPortrayal.getFrameList();
             for (Entry<String, JFrame> frameEntry : frames.entrySet()) {
                 if (frameEntry.getValue() != null) {
@@ -221,6 +252,72 @@ public abstract class ShanksSimulation3DGUI extends GUIState {
             logger.severe(e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Add a display to the simulation
+     * 
+     * @param displayID
+     * @param display
+     * @throws DuplictaedDisplayIDException
+     * @throws DuplicatedPortrayalIDException
+     * @throws ScenarioNotFoundException
+     */
+    public void addDisplay(String displayID, Display3D display)
+            throws DuplictaedDisplayIDException,
+            DuplicatedPortrayalIDException, ScenarioNotFoundException {
+        Scenario3DPortrayal scenarioPortrayal = (Scenario3DPortrayal) this
+                .getSimulation().getScenarioPortrayal();
+        HashMap<String, Display3D> displays = scenarioPortrayal.getDisplays();
+        if (!displays.containsKey(displayID)) {
+            displays.put(displayID, display);
+        } else {
+            throw new DuplictaedDisplayIDException(displayID);
+        }
+    }
+
+    /**
+     * Remove a display from the simulation
+     * 
+     * @param displayID
+     * @throws ScenarioNotFoundException
+     * @throws DuplicatedPortrayalIDException
+     */
+    public void removeDisplay(String displayID)
+            throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
+        Scenario3DPortrayal scenarioPortrayal = (Scenario3DPortrayal) this
+                .getSimulation().getScenarioPortrayal();
+        HashMap<String, Display3D> displays = scenarioPortrayal.getDisplays();
+        if (displays.containsKey(displayID)) {
+            displays.remove(displayID);
+        }
+    }
+    
+    /**
+     * Add a chart to the simulation
+     * 
+     * @param chartID
+     * @param xAxisLabel
+     * @param yAxisLabel
+     * @throws DuplicatedChartIDException
+     * @throws DuplicatedPortrayalIDException
+     * @throws ScenarioNotFoundException
+     */
+    public void addTimeChart(String chartID, String xAxisLabel, String yAxisLabel) throws DuplicatedChartIDException, DuplicatedPortrayalIDException, ScenarioNotFoundException {
+        Scenario3DPortrayal scenarioPortrayal = (Scenario3DPortrayal) this.getSimulation().getScenarioPortrayal();
+        scenarioPortrayal.addTimeChart(chartID, xAxisLabel, yAxisLabel);
+    }
+    
+    /**
+     * Remove a chart to the simulation
+     * 
+     * @param chartID
+     * @throws DuplicatedPortrayalIDException
+     * @throws ScenarioNotFoundException
+     */
+    public void removeTimeChart(String chartID) throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
+        Scenario3DPortrayal scenarioPortrayal = (Scenario3DPortrayal) this.getSimulation().getScenarioPortrayal();
+        scenarioPortrayal.removeTimeChart(chartID);
     }
 
 }

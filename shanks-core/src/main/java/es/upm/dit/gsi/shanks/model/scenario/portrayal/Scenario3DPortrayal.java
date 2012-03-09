@@ -18,6 +18,7 @@ import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplictedFrameIDException;
 
 /**
  * @author a.carrera
@@ -73,15 +74,15 @@ public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
     /**
      * @return Map with key: Display name and value: Display3D object
      */
-    public HashMap<String, Display3D> getDisplayList() {
+    public HashMap<String, Display3D> getDisplays() {
         return displayList;
     }
 
     /**
      * @param displayList
      */
-    public void setDisplayList(HashMap<String, Display3D> displayList) {
-        this.displayList = displayList;
+    public void setDisplayList(HashMap<String, Display3D> displays) {
+        this.displayList = displays;
     }
     
     /**
@@ -129,9 +130,14 @@ public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
     /**
      * @param frameID
      * @param frame
+     * @throws DuplictedFrameIDException 
      */
-    public void addFrame(String frameID, JFrame frame) {
-        this.frameList.put(frameID, frame);
+    public void addFrame(String frameID, JFrame frame) throws DuplictedFrameIDException {
+        if (this.frameList.containsKey(frameID)) {
+            throw new DuplictedFrameIDException(frameID);
+        } else {
+            this.frameList.put(frameID, frame);            
+        }
     }
     
     /**

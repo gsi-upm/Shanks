@@ -15,11 +15,14 @@ import sim.display.Display2D;
 import sim.display.GUIState;
 import sim.portrayal.FieldPortrayal2D;
 import sim.portrayal.Portrayal;
+import sim.util.media.chart.TimeSeriesChartGenerator;
 import es.upm.dit.gsi.shanks.exception.DuplictaedDisplayIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedChartIDException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplictedFrameIDException;
 
 /**
  * ShanksSimulation2DGUI class
@@ -93,7 +96,7 @@ public abstract class ShanksSimulation2DGUI extends GUIState {
             Scenario2DPortrayal scenarioPortrayal = (Scenario2DPortrayal) this
                     .getSimulation().getScenarioPortrayal();
             HashMap<String, Display2D> displays = scenarioPortrayal
-                    .getDisplayList();
+                    .getDisplays();
             for (Entry<String, Display2D> entry : displays.entrySet()) {
                 entry.getValue().reset();
                 entry.getValue().repaint();
@@ -104,11 +107,16 @@ public abstract class ShanksSimulation2DGUI extends GUIState {
             sp = sim.getScenarioPortrayal();
             HashMap<String, HashMap<String, Portrayal>> portrayals = sp
                     .getPortrayals();
-            for (Entry<String, HashMap<String, Portrayal>> displayEntry : portrayals.entrySet()) {
+            for (Entry<String, HashMap<String, Portrayal>> displayEntry : portrayals
+                    .entrySet()) {
                 Display2D display = displays.get(displayEntry.getKey());
-                HashMap<String, Portrayal> displayPortrayals = displayEntry.getValue();
-                for (Entry<String, Portrayal> portrayalEntry : displayPortrayals.entrySet()) {
-                    display.attach((FieldPortrayal2D) portrayalEntry.getValue(), portrayalEntry.getKey());
+                HashMap<String, Portrayal> displayPortrayals = displayEntry
+                        .getValue();
+                for (Entry<String, Portrayal> portrayalEntry : displayPortrayals
+                        .entrySet()) {
+                    display.attach(
+                            (FieldPortrayal2D) portrayalEntry.getValue(),
+                            portrayalEntry.getKey());
                 }
             }
         } catch (DuplicatedPortrayalIDException e) {
@@ -125,7 +133,8 @@ public abstract class ShanksSimulation2DGUI extends GUIState {
      * 
      * @see sim.display.GUIState#load(sim.engine.SimState)
      */
-    public void load(ShanksSimulation state) throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
+    public void load(ShanksSimulation state)
+            throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
         super.load(state);
         this.getSimulation().getScenarioPortrayal().setupPortrayals();
     }
@@ -147,10 +156,14 @@ public abstract class ShanksSimulation2DGUI extends GUIState {
                     mainDisplay);
 
             HashMap<String, Display2D> displays = scenarioPortrayal
-                    .getDisplayList();
-            
+                    .getDisplays();
+
             this.addDisplays(scenarioPortrayal);
-            
+            this.addCharts(scenarioPortrayal);
+
+            HashMap<String, TimeSeriesChartGenerator> timeCharts = scenarioPortrayal
+                    .getTimeCharts();
+
             for (Entry<String, Display2D> displayEntry : displays.entrySet()) {
                 displayEntry.getValue().setClipping(false);
                 JFrame frame = displayEntry.getValue().createFrame();
@@ -159,6 +172,17 @@ public abstract class ShanksSimulation2DGUI extends GUIState {
                 c.registerFrame(frame);
                 frame.setVisible(true);
             }
+
+            for (Entry<String, TimeSeriesChartGenerator> chartEntry : timeCharts.entrySet()) {
+                JFrame frame = chartEntry.getValue().createFrame();
+                scenarioPortrayal.addFrame(chartEntry.getKey(), frame);
+                frame.setTitle(chartEntry.getKey());
+                c.registerFrame(frame);
+                frame.setVisible(true);
+            }
+
+            this.locateFrames(scenarioPortrayal);
+
         } catch (DuplictaedDisplayIDException e) {
             logger.severe(e.getMessage());
             e.printStackTrace();
@@ -168,14 +192,31 @@ public abstract class ShanksSimulation2DGUI extends GUIState {
         } catch (ScenarioNotFoundException e) {
             logger.severe(e.getMessage());
             e.printStackTrace();
+        } catch (DuplictedFrameIDException e) {
+            e.printStackTrace();
         }
     }
 
     /**
      * To create extra displays
+     * 
      * @param scenarioPortrayal
      */
     public abstract void addDisplays(Scenario2DPortrayal scenarioPortrayal);
+
+    /**
+     * To create charts
+     * 
+     * @param scenarioPortrayal
+     */
+    public abstract void addCharts(Scenario2DPortrayal scenarioPortrayal);
+
+    /**
+     * To move the frame for the simulation
+     * 
+     * @param scenarioPortrayal
+     */
+    public abstract void locateFrames(Scenario2DPortrayal scenarioPortrayal);
 
     /*
      * (non-Javadoc)
@@ -192,7 +233,7 @@ public abstract class ShanksSimulation2DGUI extends GUIState {
                     .getScenarioPortrayal();
 
             HashMap<String, Display2D> displays = scenarioPortrayal
-                    .getDisplayList();
+                    .getDisplays();
             HashMap<String, JFrame> frames = scenarioPortrayal.getFrameList();
             for (Entry<String, JFrame> frameEntry : frames.entrySet()) {
                 if (frameEntry.getValue() != null) {
@@ -208,6 +249,71 @@ public abstract class ShanksSimulation2DGUI extends GUIState {
             logger.severe(e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Add a display to the simulation
+     * 
+     * @param displayID
+     * @param display
+     * @throws DuplictaedDisplayIDException
+     * @throws DuplicatedPortrayalIDException
+     * @throws ScenarioNotFoundException
+     */
+    public void addDisplay(String displayID, Display2D display)
+            throws DuplictaedDisplayIDException,
+            DuplicatedPortrayalIDException, ScenarioNotFoundException {
+        Scenario2DPortrayal scenarioPortrayal = (Scenario2DPortrayal) this
+                .getSimulation().getScenarioPortrayal();
+        HashMap<String, Display2D> displays = scenarioPortrayal.getDisplays();
+        if (!displays.containsKey(displayID)) {
+            displays.put(displayID, display);
+        } else {
+            throw new DuplictaedDisplayIDException(displayID);
+        }
+    }
+
+    /**
+     * Remove a display from the simulation
+     * 
+     * @param displayID
+     * @throws ScenarioNotFoundException
+     * @throws DuplicatedPortrayalIDException
+     */
+    public void removeDisplay(String displayID)
+            throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
+        Scenario2DPortrayal scenarioPortrayal = (Scenario2DPortrayal) this
+                .getSimulation().getScenarioPortrayal();
+        HashMap<String, Display2D> displays = scenarioPortrayal.getDisplays();
+        if (displays.containsKey(displayID)) {
+            displays.remove(displayID);
+        }
+    }
+    
+    /**
+     * Add a time chart to the simulation
+     * 
+     * @param chartID
+     * @param chart
+     * @throws DuplicatedChartIDException 
+     * @throws ScenarioNotFoundException 
+     * @throws DuplicatedPortrayalIDException 
+     */
+    public void addTimeChart(String chartID, String xAxisLabel, String yAxisLabel) throws DuplicatedChartIDException, DuplicatedPortrayalIDException, ScenarioNotFoundException {
+        Scenario2DPortrayal scenarioPortrayal = (Scenario2DPortrayal) this.getSimulation().getScenarioPortrayal();
+        scenarioPortrayal.addTimeChart(chartID, xAxisLabel, yAxisLabel);
+    }
+    
+    /**
+     * Remove a time chart to the simulation
+     * 
+     * @param chartID
+     * @throws ScenarioNotFoundException 
+     * @throws DuplicatedPortrayalIDException 
+     */
+    public void removeTimeChart(String chartID) throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
+        Scenario2DPortrayal scenarioPortrayal = (Scenario2DPortrayal) this.getSimulation().getScenarioPortrayal();
+        scenarioPortrayal.removeTimeChart(chartID);
     }
 
 }

@@ -227,6 +227,16 @@ public class ShanksAgentBayesianReasoningCapability {
     }
 
     /**
+     * Clear all evidences in the network 
+     * 
+     * @param bn
+     * @throws Exception 
+     */
+    public static void clearEvidences(ProbabilisticNetwork bn) throws Exception {
+        bn.initialize();
+    }
+
+    /**
      * Add information to the Bayesian network to reason with it.
      * 
      * @param agent
@@ -338,6 +348,16 @@ public class ShanksAgentBayesianReasoningCapability {
     
     public static HashMap<String, HashMap<String, Float>> getAllHypotheses(BayesianReasonerShanksAgent agent) throws UnknownNodeException {
         return ShanksAgentBayesianReasoningCapability.getAllHypotheses(agent.getBayesianNetwork());
+    }
+    
+    /**
+     * Clear all evidences in the Bayesian network of the agent
+     * 
+     * @param agent
+     * @throws Exception 
+     */
+    public static void clearEvidences(BayesianReasonerShanksAgent agent) throws Exception {
+        ShanksAgentBayesianReasoningCapability.clearEvidences(agent.getBayesianNetwork());
     }
 
 }

@@ -1,5 +1,7 @@
 package es.upm.dit.gsi.shanks.model.element.link.test;
 
+import java.util.HashMap;
+
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 
@@ -39,10 +41,10 @@ public class MyLink extends Link {
      */
     @Override
     public void checkProperties() throws UnsupportedNetworkElementStatusException {
-        String status = this.getCurrentStatus();
-        if (status.equals(MyLink.BROKEN_STATUS)) {
+        HashMap<String, Boolean> status = this.getStatus();
+        if (status.get(MyLink.BROKEN_STATUS)) {
             this.changeProperty(MyLink.DISTANCE_PROPERTY, 0.0);
-        } else if (status.equals(MyLink.OK_STATUS)) {
+        } else if (status.get(MyLink.OK_STATUS)) {
             this.changeProperty(MyLink.DISTANCE_PROPERTY, 3.5);
         }
     }
@@ -63,7 +65,8 @@ public class MyLink extends Link {
     public void checkStatus() throws UnsupportedNetworkElementStatusException {
         Double distance = (Double) this.getProperty(MyLink.DISTANCE_PROPERTY);
         if (distance>0){
-            this.updateStatusTo(MyLink.OK_STATUS);
+            this.updateStatusTo(MyLink.BROKEN_STATUS, false);
+            this.updateStatusTo(MyLink.OK_STATUS, true);
         }
     }
 

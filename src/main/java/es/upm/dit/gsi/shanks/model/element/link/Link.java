@@ -1,6 +1,7 @@
 package es.upm.dit.gsi.shanks.model.element.link;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 

@@ -1,11 +1,13 @@
 package es.upm.dit.gsi.shanks.model.failure.test;
 
+import java.util.List;
 import java.util.Set;
 
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
+import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
 
 /**
  * @author a.carrera
@@ -17,16 +19,21 @@ public class MyFailure extends Failure {
      * 
      */
     public MyFailure() {
-        super(MyFailure.class.getName(), 0.01);
+        super(MyFailure.class.getName(), 0.1);
     }
 
     /* (non-Javadoc)
      * @see es.upm.dit.gsi.shanks.model.failure.Failure#addPossibleAffectedElements()
      */
+    //TODO adaptarlo a poder ponerle valor
     @Override
     public void addPossibleAffectedElements() {
+        this.addPossibleAffectedElements(MyDevice.class, MyDevice.OK_STATUS);
         this.addPossibleAffectedElements(MyDevice.class, MyDevice.NOK_STATUS);
+        this.addPossibleAffectedElements(MyDevice.class, MyDevice.HIGH_TEMP_STATUS);
         this.addPossibleAffectedElements(MyLink.class, MyLink.BROKEN_STATUS);
+        this.addPossibleAffectedElements(MyLink.class, MyLink.OK_STATUS);
+        this.addPossibleAffectedElements(MyDevice.class, MyDevice.TEMPERATURE_PROPERTY);
     }
 
     /* (non-Javadoc)
@@ -34,12 +41,12 @@ public class MyFailure extends Failure {
      */
     @Override
     public boolean isResolved() {
-        Set<NetworkElement> affectedElements = this.getAffectedElements().keySet();
+        List<NetworkElement> affectedElements = this.getAffectedElements();
         boolean resolved = false;
         for (NetworkElement element : affectedElements) {
             if (element instanceof MyDevice) {
                 // Checking status / properties of the network element
-                if (element.getCurrentStatus().equals(MyDevice.OK_STATUS)) {
+                if (!element.getStatus().get(MyDevice.HIGH_TEMP_STATUS)) {
                     resolved = true;
                 } else {
                     resolved = false;
@@ -47,7 +54,7 @@ public class MyFailure extends Failure {
                 }
             } else if (element instanceof MyLink) {
                 // Checking status / properties of the network element
-                if (element.getCurrentStatus().equals(MyLink.OK_STATUS)) {
+                if(element.getStatus().get(MyLink.OK_STATUS)) {
                     resolved = true;
                 } else {
                     resolved = false;
@@ -57,5 +64,7 @@ public class MyFailure extends Failure {
         }
         return resolved;
     }
+
+
 
 }

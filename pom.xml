@@ -413,9 +413,9 @@
 		<dependency>
 			<groupId>br.unb.cic</groupId>
 			<artifactId>unbbayes</artifactId>
-			<version>4.11.4</version>
+			<version>4.0.0</version>
 			<scope>system</scope>
-			<systemPath>${basedir}/lib/unbbayes-4.11.4.jar</systemPath>
+			<systemPath>${basedir}/lib/unbbayes-4.0.0.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>jfree</groupId>

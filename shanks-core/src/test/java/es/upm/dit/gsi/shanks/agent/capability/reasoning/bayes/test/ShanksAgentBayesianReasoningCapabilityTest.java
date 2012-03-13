@@ -58,13 +58,13 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
         bn = ShanksAgentBayesianReasoningCapability
                 .loadNetwork("src/test/resources/alarm.net");
         agent = new BayesianReasonerShanksAgent() {
-            ProbabilisticNetwork bayes; 
-            
+            ProbabilisticNetwork bayes;
+
             @Override
             public String getBayesianNetworkFilePath() {
                 return "src/test/resources/alarm.net";
             }
-            
+
             @Override
             public ProbabilisticNetwork getBayesianNetwork() {
                 return bayes;
@@ -188,8 +188,8 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
             statesList.add(queryStatus);
             queries.put(queryNodeName, statesList);
 
-            HashMap<String, HashMap<String, Float>> queriesResult = ShanksAgentBayesianReasoningCapability.getHypotheses(
-                    this.bn, queries);
+            HashMap<String, HashMap<String, Float>> queriesResult = ShanksAgentBayesianReasoningCapability
+                    .getHypotheses(this.bn, queries);
             float value = queriesResult.get("TPR").get("Normal");
             Assert.assertEquals(0.4126F, value, 0.001F);
             value = queriesResult.get("TPR").get("Low");
@@ -228,7 +228,8 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
 
             // First node to query
             String queryNodeName = "TPR";
-            HashMap<String, Float> queriesResult = ShanksAgentBayesianReasoningCapability.getNodeStatesHypotheses(this.bn, queryNodeName);
+            HashMap<String, Float> queriesResult = ShanksAgentBayesianReasoningCapability
+                    .getNodeStatesHypotheses(this.bn, queryNodeName);
             float value = queriesResult.get("Normal");
             Assert.assertEquals(0.4126F, value, 0.001F);
             value = queriesResult.get("Low");
@@ -265,7 +266,8 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
             ShanksAgentBayesianReasoningCapability.addEvidences(this.bn,
                     evidences);
 
-            HashMap<String, HashMap<String, Float>> queriesResult = ShanksAgentBayesianReasoningCapability.getAllHypotheses(this.bn);
+            HashMap<String, HashMap<String, Float>> queriesResult = ShanksAgentBayesianReasoningCapability
+                    .getAllHypotheses(this.bn);
             float value = queriesResult.get("TPR").get("Normal");
             Assert.assertEquals(0.4126F, value, 0.001F);
             value = queriesResult.get("TPR").get("Low");
@@ -390,11 +392,11 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
     @Test
     public void AddBeliefInferAndQueryAgentBayesCapabilityTest() {
         try {
-            
+
             String nodeName = "MinVol";
             String status = "High";
-            ShanksAgentBayesianReasoningCapability.addEvidence(agent,
-                    nodeName, status);
+            ShanksAgentBayesianReasoningCapability.addEvidence(agent, nodeName,
+                    status);
             String queryNodeName = "TPR";
             String queryStatus = "Normal";
             float value = ShanksAgentBayesianReasoningCapability.getHypothesis(
@@ -402,8 +404,8 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
             Assert.assertEquals(0.3961F, value, 0.001F);
             queryNodeName = "ArtCO2";
             queryStatus = "Normal";
-            value = ShanksAgentBayesianReasoningCapability.getHypothesis(
-                    agent, queryNodeName, queryStatus);
+            value = ShanksAgentBayesianReasoningCapability.getHypothesis(agent,
+                    queryNodeName, queryStatus);
             Assert.assertEquals(0.2322F, value, 0.001F);
         } catch (UnknowkNodeStateException e) {
             e.printStackTrace();
@@ -439,8 +441,8 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
             Assert.assertEquals(0.4126F, value, 0.001F);
             queryNodeName = "ArtCO2";
             queryStatus = "Normal";
-            value = ShanksAgentBayesianReasoningCapability.getHypothesis(
-                    agent, queryNodeName, queryStatus);
+            value = ShanksAgentBayesianReasoningCapability.getHypothesis(agent,
+                    queryNodeName, queryStatus);
             Assert.assertEquals(0.2253F, value, 0.001F);
         } catch (UnknowkNodeStateException e) {
             e.printStackTrace();
@@ -488,8 +490,8 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
             statesList.add(queryStatus);
             queries.put(queryNodeName, statesList);
 
-            HashMap<String, HashMap<String, Float>> queriesResult = ShanksAgentBayesianReasoningCapability.getHypotheses(
-                    agent, queries);
+            HashMap<String, HashMap<String, Float>> queriesResult = ShanksAgentBayesianReasoningCapability
+                    .getHypotheses(agent, queries);
             float value = queriesResult.get("TPR").get("Normal");
             Assert.assertEquals(0.4126F, value, 0.001F);
             value = queriesResult.get("TPR").get("Low");
@@ -528,7 +530,8 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
 
             // First node to query
             String queryNodeName = "TPR";
-            HashMap<String, Float> queriesResult = ShanksAgentBayesianReasoningCapability.getNodeStatesHypotheses(agent, queryNodeName);
+            HashMap<String, Float> queriesResult = ShanksAgentBayesianReasoningCapability
+                    .getNodeStatesHypotheses(agent, queryNodeName);
             float value = queriesResult.get("Normal");
             Assert.assertEquals(0.4126F, value, 0.001F);
             value = queriesResult.get("Low");
@@ -565,7 +568,8 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
             ShanksAgentBayesianReasoningCapability.addEvidences(agent,
                     evidences);
 
-            HashMap<String, HashMap<String, Float>> queriesResult = ShanksAgentBayesianReasoningCapability.getAllHypotheses(agent);
+            HashMap<String, HashMap<String, Float>> queriesResult = ShanksAgentBayesianReasoningCapability
+                    .getAllHypotheses(agent);
             float value = queriesResult.get("TPR").get("Normal");
             Assert.assertEquals(0.4126F, value, 0.001F);
             value = queriesResult.get("TPR").get("Low");
@@ -600,8 +604,8 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
         try {
             String nodeName = "TESTTOFAIL";
             String status = "High";
-            ShanksAgentBayesianReasoningCapability.addEvidence(agent,
-                    nodeName, status);
+            ShanksAgentBayesianReasoningCapability.addEvidence(agent, nodeName,
+                    status);
             String queryNodeName = "TPR";
             String queryStatus = "Normal";
             float value = ShanksAgentBayesianReasoningCapability.getHypothesis(
@@ -609,8 +613,8 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
             Assert.assertEquals(0.3961F, value, 0.001F);
             queryNodeName = "ArtCO2";
             queryStatus = "Normal";
-            value = ShanksAgentBayesianReasoningCapability.getHypothesis(
-                    agent, queryNodeName, queryStatus);
+            value = ShanksAgentBayesianReasoningCapability.getHypothesis(agent,
+                    queryNodeName, queryStatus);
             Assert.assertEquals(0.2322F, value, 0.001F);
         } catch (UnknowkNodeStateException e) {
             e.printStackTrace();
@@ -631,8 +635,8 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
         try {
             String nodeName = "MinVol";
             String status = "TESTTOFAIL";
-            ShanksAgentBayesianReasoningCapability.addEvidence(agent,
-                    nodeName, status);
+            ShanksAgentBayesianReasoningCapability.addEvidence(agent, nodeName,
+                    status);
             String queryNodeName = "TPR";
             String queryStatus = "Normal";
             float value = ShanksAgentBayesianReasoningCapability.getHypothesis(
@@ -640,8 +644,8 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
             Assert.assertEquals(0.3961F, value, 0.001F);
             queryNodeName = "ArtCO2";
             queryStatus = "Normal";
-            value = ShanksAgentBayesianReasoningCapability.getHypothesis(
-                    agent, queryNodeName, queryStatus);
+            value = ShanksAgentBayesianReasoningCapability.getHypothesis(agent,
+                    queryNodeName, queryStatus);
             Assert.assertEquals(0.2322F, value, 0.001F);
         } catch (UnknowkNodeStateException e) {
             Assert.assertTrue(true);
@@ -670,14 +674,171 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
             Assert.assertEquals(0.3961F, value, 0.001F);
             queryNodeName = "ArtCO2";
             queryStatus = "Normal";
-            value = ShanksAgentBayesianReasoningCapability.getHypothesis(
-                    agent, queryNodeName, queryStatus);
+            value = ShanksAgentBayesianReasoningCapability.getHypothesis(agent,
+                    queryNodeName, queryStatus);
             Assert.assertEquals(0.2322F, value, 0.001F);
         } catch (UnknowkNodeStateException e) {
             e.printStackTrace();
             Assert.fail();
         } catch (UnknownNodeException e) {
             Assert.assertTrue(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail();
+        }
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void AddBeliefInferAndQueryAndResetEvidencesBayesCapabilityTest() {
+        try {
+            String nodeName = "MinVol";
+            String status = "High";
+            ShanksAgentBayesianReasoningCapability.addEvidence(this.bn,
+                    nodeName, status);
+            String queryNodeName = "TPR";
+            String queryStatus = "Normal";
+            float value = ShanksAgentBayesianReasoningCapability.getHypothesis(
+                    this.bn, queryNodeName, queryStatus);
+            Assert.assertEquals(0.3961F, value, 0.001F);
+            queryNodeName = "ArtCO2";
+            queryStatus = "Normal";
+            value = ShanksAgentBayesianReasoningCapability.getHypothesis(
+                    this.bn, queryNodeName, queryStatus);
+            Assert.assertEquals(0.2322F, value, 0.001F);
+            ShanksAgentBayesianReasoningCapability.clearEvidences(this.bn);
+            queryNodeName = "ArtCO2";
+            queryStatus = "Normal";
+            value = ShanksAgentBayesianReasoningCapability.getHypothesis(
+                    this.bn, queryNodeName, queryStatus);
+            Assert.assertEquals(0.6817F, value, 0.001F);
+            queryNodeName = "MinVol";
+            queryStatus = "High";
+            value = ShanksAgentBayesianReasoningCapability.getHypothesis(
+                    this.bn, queryNodeName, queryStatus);
+            Assert.assertEquals(0.0432F, value, 0.001F);
+            queryNodeName = "TPR";
+            queryStatus = "Normal";
+            value = ShanksAgentBayesianReasoningCapability.getHypothesis(
+                    this.bn, queryNodeName, queryStatus);
+            Assert.assertEquals(0.3961F, value, 0.001F);
+
+        } catch (UnknowkNodeStateException e) {
+            e.printStackTrace();
+            Assert.fail();
+        } catch (UnknownNodeException e) {
+            e.printStackTrace();
+            Assert.fail();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail();
+        }
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void AddBeliefInferAndQueryAndResetEvidencesAgentBayesCapabilityTest() {
+        try {
+            String nodeName = "MinVol";
+            String status = "High";
+            ShanksAgentBayesianReasoningCapability.addEvidence(agent, nodeName,
+                    status);
+            String queryNodeName = "TPR";
+            String queryStatus = "Normal";
+            float value = ShanksAgentBayesianReasoningCapability.getHypothesis(
+                    agent, queryNodeName, queryStatus);
+            Assert.assertEquals(0.3961F, value, 0.001F);
+            queryNodeName = "ArtCO2";
+            queryStatus = "Normal";
+            value = ShanksAgentBayesianReasoningCapability.getHypothesis(agent,
+                    queryNodeName, queryStatus);
+            Assert.assertEquals(0.2322F, value, 0.001F);
+            ShanksAgentBayesianReasoningCapability.clearEvidences(agent);
+            queryNodeName = "ArtCO2";
+            queryStatus = "Normal";
+            value = ShanksAgentBayesianReasoningCapability.getHypothesis(agent,
+                    queryNodeName, queryStatus);
+            Assert.assertEquals(0.6817F, value, 0.001F);
+            queryNodeName = "TPR";
+            queryStatus = "Normal";
+            value = ShanksAgentBayesianReasoningCapability.getHypothesis(agent,
+                    queryNodeName, queryStatus);
+            Assert.assertEquals(0.3961F, value, 0.001F);
+
+        } catch (UnknowkNodeStateException e) {
+            e.printStackTrace();
+            Assert.fail();
+        } catch (UnknownNodeException e) {
+            e.printStackTrace();
+            Assert.fail();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail();
+        }
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void AddBeliefInferAndQueryAndResetEvidencesAndAddFindingAgainBayesCapabilityTest() {
+        try {
+            String nodeName = "MinVol";
+            String status = "High";
+            ShanksAgentBayesianReasoningCapability.addEvidence(this.bn,
+                    nodeName, status);
+            String queryNodeName = "TPR";
+            String queryStatus = "Normal";
+            float value = ShanksAgentBayesianReasoningCapability.getHypothesis(
+                    this.bn, queryNodeName, queryStatus);
+            Assert.assertEquals(0.3961F, value, 0.001F);
+            queryNodeName = "ArtCO2";
+            queryStatus = "Normal";
+            value = ShanksAgentBayesianReasoningCapability.getHypothesis(
+                    this.bn, queryNodeName, queryStatus);
+            Assert.assertEquals(0.2322F, value, 0.001F);
+            ShanksAgentBayesianReasoningCapability.clearEvidences(this.bn);
+            queryNodeName = "ArtCO2";
+            queryStatus = "Normal";
+            value = ShanksAgentBayesianReasoningCapability.getHypothesis(
+                    this.bn, queryNodeName, queryStatus);
+            Assert.assertEquals(0.6817F, value, 0.001F);
+            queryNodeName = "MinVol";
+            queryStatus = "High";
+            value = ShanksAgentBayesianReasoningCapability.getHypothesis(
+                    this.bn, queryNodeName, queryStatus);
+            Assert.assertEquals(0.0432F, value, 0.001F);
+            queryNodeName = "TPR";
+            queryStatus = "Normal";
+            value = ShanksAgentBayesianReasoningCapability.getHypothesis(
+                    this.bn, queryNodeName, queryStatus);
+            Assert.assertEquals(0.3961F, value, 0.001F);
+
+            nodeName = "MinVol";
+            status = "Low";
+            ShanksAgentBayesianReasoningCapability.addEvidence(this.bn,
+                    nodeName, status);
+            queryNodeName = "ArtCO2";
+            queryStatus = "High";
+            value = ShanksAgentBayesianReasoningCapability.getHypothesis(
+                    this.bn, queryNodeName, queryStatus);
+            Assert.assertEquals(0.8434F, value, 0.001F);
+            queryNodeName = "ArtCO2";
+            queryStatus = "Normal";
+            value = ShanksAgentBayesianReasoningCapability.getHypothesis(
+                    this.bn, queryNodeName, queryStatus);
+            Assert.assertEquals(0.1274, value, 0.001F);
+
+        } catch (UnknowkNodeStateException e) {
+            e.printStackTrace();
+            Assert.fail();
+        } catch (UnknownNodeException e) {
+            e.printStackTrace();
+            Assert.fail();
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail();

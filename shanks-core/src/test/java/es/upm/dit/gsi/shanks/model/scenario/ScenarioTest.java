@@ -24,6 +24,7 @@ import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
  * @author a.carrera
  *
  */
+
 public class ScenarioTest {
 
     /**
@@ -134,6 +135,31 @@ public class ScenarioTest {
      * @throws IllegalAccessException
      */
     @Test
+    public void createScenarioAndNoGenerateFailures()
+            throws UnsupportedNetworkElementStatusException,
+            TooManyConnectionException, UnsupportedScenarioStatusException,
+            DuplicatedIDException, NoCombinationForFailureException, UnsupportedElementInFailureException, InstantiationException, IllegalAccessException {
+
+        Properties scenarioProperties = new Properties();
+        scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
+        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
+        Scenario s = new MyScenario("MyScenario", MyScenario.CLOUDY, scenarioProperties);
+        Assert.assertTrue(s.getCurrentFailures().size() == 0);
+    }
+    
+    
+    
+    /**
+     * @throws UnsupportedNetworkElementStatusException
+     * @throws TooManyConnectionException
+     * @throws UnsupportedScenarioStatusException
+     * @throws DuplicatedIDException
+     * @throws NoCombinationForFailureException
+     * @throws UnsupportedElementInFailureException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     */
+    @Test
     public void createScenarioAndGenerateFailures()
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
@@ -144,7 +170,7 @@ public class ScenarioTest {
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
         Scenario s = new MyScenario("MyScenario", MyScenario.CLOUDY, scenarioProperties);
         s.generateFailures();
-        Assert.assertTrue(s.getCurrentFailures().size() > 0);
+        Assert.assertTrue(s.getCurrentFailures().size() == 1);
     }
 
 }

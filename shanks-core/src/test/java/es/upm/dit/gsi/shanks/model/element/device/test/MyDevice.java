@@ -1,5 +1,8 @@
 package es.upm.dit.gsi.shanks.model.element.device.test;
 
+import java.util.HashMap;
+import java.util.List;
+
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 
@@ -22,6 +25,7 @@ public class MyDevice extends Device {
     public static final String OK_STATUS = "OK";
     public static final String NOK_STATUS = "NOK";
     public static final String UNKOWN_STATUS = "UNKOWN";
+    public static final String HIGH_TEMP_STATUS = "HIGH-TEMP";
     
     public static final String OS_PROPERTY = "OS";
     public static final String TEMPERATURE_PROPERTY = "Temperature";
@@ -34,6 +38,7 @@ public class MyDevice extends Device {
         this.addPossibleStatus(MyDevice.OK_STATUS);
         this.addPossibleStatus(MyDevice.NOK_STATUS);
         this.addPossibleStatus(MyDevice.UNKOWN_STATUS);
+        this.addPossibleStatus(MyDevice.HIGH_TEMP_STATUS);
 
     }
 
@@ -44,6 +49,7 @@ public class MyDevice extends Device {
     public void fillIntialProperties() {
         this.addProperty(MyDevice.OS_PROPERTY, "Windows");
         this.addProperty(MyDevice.TEMPERATURE_PROPERTY, 15.5);
+        
     }
 
     /* (non-Javadoc)
@@ -51,14 +57,17 @@ public class MyDevice extends Device {
      */
     @Override
     public void checkProperties() throws UnsupportedNetworkElementStatusException {
-        String status = this.getCurrentStatus();
-        if (status.equals(MyDevice.OK_STATUS)) {
-            this.changeProperty(MyDevice.TEMPERATURE_PROPERTY, 30);
-        } else if (status.equals(MyDevice.NOK_STATUS)) {
-            this.changeProperty(MyDevice.TEMPERATURE_PROPERTY, 90);
-        } else if (status.equals(MyDevice.UNKOWN_STATUS)) {
-            this.changeProperty(MyDevice.TEMPERATURE_PROPERTY, null);
-        }
+        HashMap<String, Boolean> status = this.getStatus();
+            if (status.get(MyDevice.OK_STATUS)) {
+                this.changeProperty(MyDevice.TEMPERATURE_PROPERTY, 30);
+            } else if (status.get(MyDevice.NOK_STATUS)) {
+                this.changeProperty(MyDevice.TEMPERATURE_PROPERTY, 90);
+            } else if (status.get(MyDevice.UNKOWN_STATUS)) {
+                this.changeProperty(MyDevice.TEMPERATURE_PROPERTY, null);
+            } else if(status.get(MyDevice.HIGH_TEMP_STATUS)){
+                this.changeProperty(MyDevice.TEMPERATURE_PROPERTY, 60);
+            }
+        
     }
 
     /* (non-Javadoc)
@@ -67,8 +76,21 @@ public class MyDevice extends Device {
     @Override
     public void checkStatus() throws UnsupportedNetworkElementStatusException {
         Integer temp = (Integer) this.getProperty(MyDevice.TEMPERATURE_PROPERTY);
-        if (temp<70) {
-            this.updateStatusTo(MyDevice.OK_STATUS);
+        if (temp <= 70 && temp >=50) {
+            this.updateStatusTo(MyDevice.OK_STATUS, true);
+            this.updateStatusTo(MyDevice.NOK_STATUS, false);
+            this.updateStatusTo(MyDevice.UNKOWN_STATUS, false);
+            this.updateStatusTo(MyDevice.HIGH_TEMP_STATUS, true);
+        } else if (temp > 70){
+            this.updateStatusTo(MyDevice.OK_STATUS, false);
+            this.updateStatusTo(MyDevice.NOK_STATUS, true);
+            this.updateStatusTo(MyDevice.UNKOWN_STATUS, false);
+            this.updateStatusTo(MyDevice.HIGH_TEMP_STATUS, true);
+        } else if(temp < 50){
+            this.updateStatusTo(MyDevice.OK_STATUS, true);
+            this.updateStatusTo(MyDevice.NOK_STATUS, false);
+            this.updateStatusTo(MyDevice.UNKOWN_STATUS, false);
+            this.updateStatusTo(MyDevice.HIGH_TEMP_STATUS, false);
         }
     }
 

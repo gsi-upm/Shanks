@@ -1,6 +1,7 @@
 package es.upm.dit.gsi.shanks.model.element.link.portrayal.test;
 
 import java.awt.Color;
+import java.util.HashMap;
 
 import javax.media.j3d.TransformGroup;
 
@@ -28,10 +29,10 @@ public class MyLink3DPortrayal extends Link3DPortrayal {
      * @see es.upm.dit.gsi.shanks.model.element.link.portrayal.Link3DPortrayal#getLabelColor(es.upm.dit.gsi.shanks.model.element.link.Link)
      */
     public Color getLabelColor(Link link) {
-        String status = link.getCurrentStatus();
-        if (status.equals(MyLink.OK_STATUS)) {
+        HashMap<String, Boolean> status = link.getStatus();
+        if (status.get(MyLink.OK_STATUS)) {
             return Color.green;
-        } else if (status.equals(MyLink.BROKEN_STATUS)) {
+        } else if (status.get(MyLink.BROKEN_STATUS)) {
             return Color.red;
         } else {
             return Color.gray;
@@ -42,10 +43,10 @@ public class MyLink3DPortrayal extends Link3DPortrayal {
      * @see es.upm.dit.gsi.shanks.model.element.link.portrayal.Link3DPortrayal#getLinkColor(es.upm.dit.gsi.shanks.model.element.link.Link)
      */
     public Color getLinkColor(Link link) {
-        String status = link.getCurrentStatus();
-        if (status.equals(MyLink.OK_STATUS)) {
+        HashMap<String, Boolean> status = link.getStatus();
+        if (status.get(MyLink.OK_STATUS)) {
             return Color.blue;
-        } else if (status.equals(MyLink.BROKEN_STATUS)) {
+        } else if (status.get(MyLink.BROKEN_STATUS)) {
             return Color.red;
         } else {
             return Color.green;

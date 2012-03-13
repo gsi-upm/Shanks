@@ -2,6 +2,7 @@ package es.upm.dit.gsi.shanks.model.element.link.portrayal.test;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.util.HashMap;
 
 import sim.field.network.Edge;
 import sim.portrayal.DrawInfo2D;
@@ -50,12 +51,12 @@ public class MyLink2DPortrayal extends Link2DPortrayal {
         final double width = 20;
         final double height = 20;
 
-        String status = link.getCurrentStatus();
+        HashMap<String, Boolean> status = link.getStatus();
 
         graphics.setColor(Color.black);
-        if (status.equals(MyLink.OK_STATUS)) {
+        if (status.get(MyLink.OK_STATUS)) {
             graphics.setColor(Color.green);
-        } else if (status.equals(MyLink.BROKEN_STATUS)) {
+        } else if (status.get(MyLink.BROKEN_STATUS)) {
             graphics.setColor(Color.red);
         }
 
@@ -94,10 +95,10 @@ public class MyLink2DPortrayal extends Link2DPortrayal {
         final int midY = (int) (ei.draw.y + ei.secondPoint.y) / 2;
 
         graphics.setColor(Color.black);
-        String status = link.getCurrentStatus();
-        if (status.equals(MyLink.OK_STATUS)) {
+        HashMap<String, Boolean> status = link.getStatus();
+        if (status.get(MyLink.OK_STATUS)) {
             graphics.setColor(Color.green);
-        } else if (status.equals(MyLink.BROKEN_STATUS)) {
+        } else if (status.get(MyLink.BROKEN_STATUS)) {
             graphics.setColor(Color.red);
         }
         graphics.drawLine(startX, startY, endX, endY);

@@ -1,6 +1,7 @@
 package es.upm.dit.gsi.shanks.model.element.device.portrayal.test;
 
 import java.awt.Color;
+import java.util.HashMap;
 
 import javax.media.j3d.TransformGroup;
 
@@ -31,12 +32,12 @@ public class MyDevice3DPortrayal extends Device3DPortrayal {
      * @see es.upm.dit.gsi.shanks.model.element.device.portrayal.Device3DPortrayal#getDeviceColor(es.upm.dit.gsi.shanks.model.element.device.Device)
      */
     public Color getDeviceColor(Device device) {
-        String status = device.getCurrentStatus();
-        if (status.equals(MyDevice.OK_STATUS)) {
+        HashMap<String, Boolean> status = device.getStatus();
+        if (status.get(MyDevice.OK_STATUS)) {
             return Color.green;
-        } else if (status.equals(MyDevice.NOK_STATUS)) {
+        } else if (status.get(MyDevice.NOK_STATUS)) {
             return Color.red;
-        } else if (status.equals(MyDevice.UNKOWN_STATUS)) {
+        } else if (status.get(MyDevice.HIGH_TEMP_STATUS)) {
             return Color.gray;
         } else {
             return Color.black;
@@ -46,12 +47,12 @@ public class MyDevice3DPortrayal extends Device3DPortrayal {
      * @see es.upm.dit.gsi.shanks.model.element.device.portrayal.Device3DPortrayal#getLabelColor(es.upm.dit.gsi.shanks.model.element.device.Device)
      */
     public Color getLabelColor(Device device) {
-        String status = device.getCurrentStatus();
+        HashMap<String, Boolean> status = device.getStatus();
         if (status.equals(MyDevice.OK_STATUS)) {
             return Color.blue;
         } else if (status.equals(MyDevice.NOK_STATUS)) {
             return Color.red;
-        } else if (status.equals(MyDevice.UNKOWN_STATUS)) {
+        } else if (status.equals(MyDevice.HIGH_TEMP_STATUS)) {
             return Color.gray;
         } else {
             return Color.black;

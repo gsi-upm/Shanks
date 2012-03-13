@@ -2,6 +2,9 @@ package es.upm.dit.gsi.shanks.model.element.device.portrayal.test;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import sim.portrayal.DrawInfo2D;
 import sim.portrayal.Portrayal;
@@ -30,8 +33,18 @@ public class MyDevice2DPortrayal extends Device2DPortrayal implements Portrayal 
         final double width = 20;
         final double height = 20;
 
-        String status = device.getCurrentStatus();
-        if (status.equals(MyDevice.OK_STATUS)) {
+        HashMap<String, Boolean> status = device.getStatus();
+        List<String> okStatus = new ArrayList<String>();
+        List<String> nokStatus = new ArrayList<String>();
+        
+        for(String s : status.keySet()){
+            if(status.get(s)){
+                nokStatus.add(s);
+            }else{
+                okStatus.add(s);
+            }
+        }
+        if (nokStatus.size() == 0) {
             graphics.setColor(Color.green);
         } else if (status.equals(MyDevice.NOK_STATUS)) {
             graphics.setColor(Color.red);

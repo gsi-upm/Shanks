@@ -16,6 +16,7 @@ import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementSt
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.failure.exception.NoCombinationForFailureException;
 import es.upm.dit.gsi.shanks.model.failure.exception.UnsupportedElementInFailureException;
+import es.upm.dit.gsi.shanks.model.failure.test.MyFailure;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
@@ -451,13 +452,21 @@ public abstract class Scenario {
      * @param elementsSet
      * @throws UnsupportedElementInFailureException
      */
+    
     private void setupFailure(Failure failure, Set<NetworkElement> elementsSet,
             int configurationNumber)
             throws UnsupportedElementInFailureException {
         for (NetworkElement element : elementsSet) {
             String statusToSet = failure.getPossibleAffectedElements().get(
                     element.getClass());
-            failure.addAffectedElement(element, statusToSet);
+            if(element.getStatus().containsKey(statusToSet)){
+                //String valueToSee = failure.getPossibleAffectedElements().get(element);
+                boolean value = element.getStatus().get(statusToSet);
+                failure.addAffectedElement(element, statusToSet, value);
+            }else if(element.getProperties().containsKey(statusToSet)){
+                Object value = element.getProperty(statusToSet);
+                failure.addAffectedPropertiesOfElement(element, statusToSet, value);
+            }
         }
         if (!this.generatedFailureConfigurations.containsKey(failure.getClass())) {
             this.generatedFailureConfigurations.put(failure.getClass(),

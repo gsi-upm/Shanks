@@ -8,8 +8,9 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 import es.upm.dit.gsi.shanks.ShanksSimulation;
-import es.upm.dit.gsi.shanks.agent.action.ShanksAgentAction;
-import es.upm.dit.gsi.shanks.agent.test.MyShanksAgent;
+import es.upm.dit.gsi.shanks.agent.ShanksAgent;
+import es.upm.dit.gsi.shanks.agent.action.JasonShanksAgentAction;
+import es.upm.dit.gsi.shanks.agent.test.MyJasonShanksAgent;
 import es.upm.dit.gsi.shanks.exception.UnkownAgentException;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
@@ -17,15 +18,48 @@ import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementSt
 import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 
-public class MyShanksAgentAction extends ShanksAgentAction {
+public class MyShanksAgentAction extends JasonShanksAgentAction {
 
     public static final String FIX = "fix";
-    private Logger logger = Logger.getLogger(MyShanksAgent.class.getName());
+    private Logger logger = Logger.getLogger(MyShanksAgentAction.class.getName());
+
+//    public boolean executeAction(ShanksSimulation simulation, String agentID,
+//            List<Term> arguments) {
+//
+//        Set<Failure> failures = simulation.getScenario().getCurrentFailures();
+//        int number = failures.size();
+//        int random = simulation.random.nextInt(number);
+//        Failure f = (Failure) failures.toArray()[random];
+//        List<NetworkElement> elements = f.getAffectedElements();
+//        for (NetworkElement element : elements){
+//            Class<? extends NetworkElement> c = element.getClass();
+//            if (c.equals(MyDevice.class)) {
+//                element.getStatus().put(MyDevice.OK_STATUS, true);
+//                element.getStatus().put(MyDevice.NOK_STATUS, false);
+//                element.getStatus().put(MyDevice.HIGH_TEMP_STATUS, false);
+//            } else if (c.equals(MyLink.class)) {
+//                element.getStatus().put(MyLink.OK_STATUS, true);
+//                element.getStatus().put(MyLink.BROKEN_STATUS, false);
+//            }
+//        }
+//
+//        try {
+//            ((MyShanksAgentAction) simulation.getAgent(agentID))
+//                    .incrementNumberOfResolverFailures();
+//        } catch (UnkownAgentException e) {
+//            logger.severe(e.getMessage());
+//            e.printStackTrace();
+//        }
+//        // END OF THE ACTION
+//        simulation.getScenarioManager().checkFailures(simulation);
+//        logger.finer("Number of current failures: "
+//                + simulation.getScenario().getCurrentFailures().size());
+//        return true;
+//    }
 
     @Override
-    public boolean executeAction(ShanksSimulation simulation, String agentID,
-            List<Term> arguments) {
-
+    public boolean executeAction(ShanksSimulation simulation,
+            ShanksAgent agent, List<Term> arguments) {
         Set<Failure> failures = simulation.getScenario().getCurrentFailures();
         int number = failures.size();
         int random = simulation.random.nextInt(number);
@@ -34,22 +68,19 @@ public class MyShanksAgentAction extends ShanksAgentAction {
         for (NetworkElement element : elements){
             Class<? extends NetworkElement> c = element.getClass();
             if (c.equals(MyDevice.class)) {
-                element.getStatus().put(MyDevice.OK_STATUS, true);
-                element.getStatus().put(MyDevice.NOK_STATUS, false);
-                element.getStatus().put(MyDevice.HIGH_TEMP_STATUS, false);
+                element.getProperties().put(MyDevice.TEMPERATURE_PROPERTY, 25);
+//                element.getStatus().put(MyDevice.OK_STATUS, true);
+//                element.getStatus().put(MyDevice.NOK_STATUS, false);
+//                element.getStatus().put(MyDevice.HIGH_TEMP_STATUS, false);
             } else if (c.equals(MyLink.class)) {
-                element.getStatus().put(MyLink.OK_STATUS, true);
-                element.getStatus().put(MyLink.BROKEN_STATUS, false);
+                element.getProperties().put(MyLink.DISTANCE_PROPERTY, 3.5);
+//                element.getStatus().put(MyLink.OK_STATUS, true);
+//                element.getStatus().put(MyLink.BROKEN_STATUS, false);
             }
         }
 
-        try {
-            ((MyShanksAgent) simulation.getAgent(agentID))
-                    .incrementNumberOfResolverFailures();
-        } catch (UnkownAgentException e) {
-            logger.severe(e.getMessage());
-            e.printStackTrace();
-        }
+
+        ((MyJasonShanksAgent) agent).incrementNumberOfResolverFailures();
         // END OF THE ACTION
         simulation.getScenarioManager().checkFailures(simulation);
         logger.finer("Number of current failures: "

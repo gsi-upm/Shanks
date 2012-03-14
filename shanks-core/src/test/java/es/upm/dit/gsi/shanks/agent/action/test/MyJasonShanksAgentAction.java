@@ -30,23 +30,21 @@ public class MyJasonShanksAgentAction extends JasonShanksAgentAction {
         int number = failures.size();
         int random = simulation.random.nextInt(number);
         Failure f = (Failure) failures.toArray()[random];
-        HashMap<NetworkElement, String> elements = f.getAffectedElements();
-        for (NetworkElement element : elements.keySet()) {
+        List<NetworkElement> elements = f.getAffectedElements();
+        for (NetworkElement element : elements){
             Class<? extends NetworkElement> c = element.getClass();
             if (c.equals(MyDevice.class)) {
-                try {
-                    element.setCurrentStatus(MyDevice.OK_STATUS);
-                } catch (UnsupportedNetworkElementStatusException e) {
-                    e.printStackTrace();
-                }
+                element.getProperties().put(MyDevice.TEMPERATURE_PROPERTY, 25);
+//                element.getStatus().put(MyDevice.OK_STATUS, true);
+//                element.getStatus().put(MyDevice.NOK_STATUS, false);
+//                element.getStatus().put(MyDevice.HIGH_TEMP_STATUS, false);
             } else if (c.equals(MyLink.class)) {
-                try {
-                    element.setCurrentStatus(MyLink.OK_STATUS);
-                } catch (UnsupportedNetworkElementStatusException e) {
-                    e.printStackTrace();
-                }
+                element.getProperties().put(MyLink.DISTANCE_PROPERTY, 3.5);
+//                element.getStatus().put(MyLink.OK_STATUS, true);
+//                element.getStatus().put(MyLink.BROKEN_STATUS, false);
             }
         }
+
 
         ((MyJasonShanksAgent) agent).incrementNumberOfResolverFailures();
         // END OF THE ACTION

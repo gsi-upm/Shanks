@@ -4,34 +4,24 @@ import jason.JasonException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
-import java.util.Set;
 
 import sim.engine.Schedule;
-import sim.engine.SimState;
 import sim.engine.Steppable;
-import sim.field.continuous.Continuous3D;
-import sim.field.grid.SparseGrid2D;
-import sim.portrayal.grid.SparseGridPortrayal2D;
-import sim.portrayal3d.continuous.ContinuousPortrayal3D;
-import sim.util.Double3D;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
-import es.upm.dit.gsi.shanks.agent.JasonShanksAgent;
-import es.upm.dit.gsi.shanks.agent.ShanksAgent;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
 import es.upm.dit.gsi.shanks.agent.test.MyJasonShanksAgent;
 import es.upm.dit.gsi.shanks.agent.test.MySimpleShanksAgent;
 import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
-import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedDataSerieIDException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyHyperComplexScenario2DPortrayal;
+import es.upm.dit.gsi.shanks.model.test.steppable.FailureLog;
+import es.upm.dit.gsi.shanks.model.test.steppable.FailuresChartPainter;
+import es.upm.dit.gsi.shanks.model.test.steppable.FailuresGUI;
 
 /**
  * @author a.carrera
@@ -43,7 +33,6 @@ public class MyShanksSimulation extends ShanksSimulation {
     private Properties configuration;
 
     public static final String CONFIGURATION = "Configuration";
-    public static final String RESOLVED_FAILURES_PER_AGENT_CHART_ID = "Resolved failures per agent";
 
     /**
      * @param seed
@@ -99,137 +88,18 @@ public class MyShanksSimulation extends ShanksSimulation {
             logger.fine("Nothing to do here... No more steppables");
             break;
         case 1:
-            Steppable steppable = new Steppable() {
-
-                /**
-                 * 
-                 */
-                private static final long serialVersionUID = 2669002521740395423L;
-
-                @Override
-                public void step(SimState sim) {
-                    ShanksSimulation simulation = (ShanksSimulation) sim;
-                    for (ShanksAgent agent : simulation.getAgents()) {
-                        if (agent instanceof JasonShanksAgent) {
-                            logger.info("Total failures resolved by Agent: "
-                                    + agent.getID()
-                                    + ": "
-                                    + ((MyJasonShanksAgent) agent)
-                                            .getNumberOfResolvedFailures());
-                        }
-                    }
-                }
-            };
+            Steppable steppable = new FailureLog();
             schedule.scheduleRepeating(Schedule.EPOCH, 3, steppable, 500);
             break;
         case 2:
-            Steppable steppable2 = new Steppable() {
-
-                /**
-                 * 
-                 */
-                private static final long serialVersionUID = 2669002521740395423L;
-
-                @Override
-                public void step(SimState sim) {
-                    ShanksSimulation simulation = (ShanksSimulation) sim;
-                    try {
-                        ScenarioPortrayal scenarioPortrayal = simulation.getScenarioPortrayal();
-                        if (scenarioPortrayal != null) {
-                            double steps = simulation.schedule.getSteps();
-                            for (ShanksAgent agent : simulation.getAgents()) {
-                                if (agent instanceof JasonShanksAgent) {
-                                    if (!scenarioPortrayal.containsDataSerieInTimeChart(MyShanksSimulation.RESOLVED_FAILURES_PER_AGENT_CHART_ID, agent.getID())) {
-                                        scenarioPortrayal.addDataSerieToTimeChart(RESOLVED_FAILURES_PER_AGENT_CHART_ID, agent.getID());
-                                    }
-                                    scenarioPortrayal.addDataToSerie(RESOLVED_FAILURES_PER_AGENT_CHART_ID, agent.getID(), steps, ((MyJasonShanksAgent) agent)
-                                            .getNumberOfResolvedFailures());
-                                      
-                                }
-                            }   
-                        } else {
-                            for (ShanksAgent agent : simulation.getAgents()) {
-                                if (agent instanceof JasonShanksAgent) {                                    
-                                    logger.info("Total failures resolved by Agent: "
-                                            + agent.getID()
-                                            + ": "
-                                            + ((MyJasonShanksAgent) agent)
-                                                    .getNumberOfResolvedFailures());
-                                }
-                            }                        
-                        }
-                    } catch (DuplicatedPortrayalIDException e) {
-                        e.printStackTrace();
-                    } catch (ScenarioNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (DuplicatedDataSerieIDException e) {
-                        e.printStackTrace();
-                    }
-                }
-            };
-            Steppable steppable3 = new Steppable() {
-
-                /**
-                 * 
-                 */
-                private static final long serialVersionUID = -929835696282793943L;
-
-                @Override
-                public void step(SimState sim) {
-                    ShanksSimulation simulation = (ShanksSimulation) sim;
-                    Set<Failure> failures = simulation.getScenario()
-                            .getCurrentFailures();
-
-                    if (simulation.getScenario()
-                            .getProperty(Scenario.SIMULATION_GUI)
-                            .equals(Scenario.SIMULATION_2D)) {
-                        try {
-                            SparseGridPortrayal2D failuresPortrayal = (SparseGridPortrayal2D) simulation
-                                    .getScenarioPortrayal()
-                                    .getPortrayals()
-                                    .get(MyHyperComplexScenario2DPortrayal.FAILURE_DISPLAY_ID)
-                                    .get(MyHyperComplexScenario2DPortrayal.FAILURE_PORTRAYAL_ID);
-                            SparseGrid2D grid = (SparseGrid2D) failuresPortrayal
-                                    .getField();
-                            grid.clear();
-                            int pos = 20;
-                            for (Failure f : failures) {
-                                grid.setObjectLocation(f, 10, pos);
-                                pos += 10;
-                            }
-                        } catch (DuplicatedPortrayalIDException e) {
-                            e.printStackTrace();
-                        } catch (ScenarioNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                    } else if (simulation.getScenario()
-                            .getProperty(Scenario.SIMULATION_GUI)
-                            .equals(Scenario.SIMULATION_3D)) {
-                        try {
-                            ContinuousPortrayal3D failuresPortrayal = (ContinuousPortrayal3D) simulation
-                                    .getScenarioPortrayal()
-                                    .getPortrayals()
-                                    .get(MyHyperComplexScenario2DPortrayal.FAILURE_DISPLAY_ID)
-                                    .get(MyHyperComplexScenario2DPortrayal.FAILURE_PORTRAYAL_ID);
-                            Continuous3D grid = (Continuous3D) failuresPortrayal
-                                    .getField();
-                            grid.clear();
-                            int pos = 20;
-                            for (Failure f : failures) {
-                                grid.setObjectLocation(f, new Double3D(-110,
-                                        100 - pos, 0));
-                                pos += 10;
-                            }
-                        } catch (DuplicatedPortrayalIDException e) {
-                            e.printStackTrace();
-                        } catch (ScenarioNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            };
-            schedule.scheduleRepeating(Schedule.EPOCH, 4, steppable3, 1);
-            schedule.scheduleRepeating(Schedule.EPOCH, 3, steppable2, 50);
+            Steppable failuresgui = new FailuresGUI();
+            schedule.scheduleRepeating(Schedule.EPOCH, 4, failuresgui, 1);
+            break;
+        case 3:
+            Steppable chart = new FailuresChartPainter();
+            schedule.scheduleRepeating(Schedule.EPOCH, 3, chart, 50);
+            Steppable failures = new FailuresGUI();
+            schedule.scheduleRepeating(Schedule.EPOCH, 4, failures, 1);
             break;
         default:
             logger.info("No configuration for MyShanksSimulation. Configuration 0 loaded -> default");

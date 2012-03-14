@@ -14,6 +14,7 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedChartIDException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyHyperComplexScenario2DPortrayal;
+import es.upm.dit.gsi.shanks.model.test.steppable.FailuresChartPainter;
 
 /**
  * @author a.carrera
@@ -56,7 +57,7 @@ public class MyShanksSimulation3DGUI extends ShanksSimulation3DGUI {
     @Override
     public void addCharts(Scenario3DPortrayal scenarioPortrayal)
             throws DuplicatedChartIDException, DuplicatedPortrayalIDException, ScenarioNotFoundException {
-            this.addTimeChart(MyShanksSimulation.RESOLVED_FAILURES_PER_AGENT_CHART_ID, "Time / Steps", "Resolved failures");
+            this.addTimeChart(FailuresChartPainter.RESOLVED_FAILURES_PER_AGENT_CHART_ID, "Time / Steps", "Resolved failures");
     }
 
     /* (non-Javadoc)
@@ -67,7 +68,7 @@ public class MyShanksSimulation3DGUI extends ShanksSimulation3DGUI {
         HashMap<String, JFrame> frames = scenarioPortrayal.getFrameList();
         JFrame mainFrame = frames.get(Scenario2DPortrayal.MAIN_DISPLAY_ID);
         JFrame failureFrame = frames.get(MyHyperComplexScenario2DPortrayal.FAILURE_DISPLAY_ID);
-        JFrame chartFrame = frames.get(MyShanksSimulation.RESOLVED_FAILURES_PER_AGENT_CHART_ID);
+        JFrame chartFrame = frames.get(FailuresChartPainter.RESOLVED_FAILURES_PER_AGENT_CHART_ID);
         
         mainFrame.setLocation(100, 100);
         failureFrame.setLocation(500, 0);

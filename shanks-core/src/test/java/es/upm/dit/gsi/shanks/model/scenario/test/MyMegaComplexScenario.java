@@ -228,7 +228,7 @@ public class MyMegaComplexScenario extends ComplexScenario {
 //        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_3D);
 //         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
         Properties configProperties = new Properties();
-        configProperties.put(MyShanksSimulation.CONFIGURATION, "1");
+        configProperties.put(MyShanksSimulation.CONFIGURATION, "3");
         MyShanksSimulation sim = new MyShanksSimulation(
                 System.currentTimeMillis(), MyMegaComplexScenario.class,
                 "MyMegaComplexScenario", MyMegaComplexScenario.SUNNY,

@@ -209,12 +209,13 @@ public abstract class ScenarioPortrayal {
      * @param x
      * @param y
      */
-    public void addDataToSerie(String chartID, String dataSerieID, double x, double y) {
+    public void addDataToDataSerieInTimeChart(String chartID, String dataSerieID, double x, double y) {
         if (this.containsDataSerieInTimeChart(chartID, dataSerieID)) {
             this.timeChartData.get(chartID).get(dataSerieID).add(x, y, true);
         } else {
             try {
                 this.addDataSerieToTimeChart(chartID, dataSerieID);
+                this.timeChartData.get(chartID).get(dataSerieID).add(x, y, true);
             } catch (DuplicatedDataSerieIDException e) {
                 e.printStackTrace();
             }

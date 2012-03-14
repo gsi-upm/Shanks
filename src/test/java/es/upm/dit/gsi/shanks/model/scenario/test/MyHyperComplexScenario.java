@@ -211,7 +211,7 @@ public class MyHyperComplexScenario extends ComplexScenario {
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_3D);
 //         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
         Properties configProperties = new Properties();
-        configProperties.put(MyShanksSimulation.CONFIGURATION, "2");
+        configProperties.put(MyShanksSimulation.CONFIGURATION, "3");
         MyShanksSimulation sim = new MyShanksSimulation(
                 System.currentTimeMillis(), MyHyperComplexScenario.class,
                 "MyHyperComplexScenario", MyHyperComplexScenario.SUNNY,

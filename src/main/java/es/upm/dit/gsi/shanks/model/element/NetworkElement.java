@@ -23,7 +23,7 @@ public abstract class NetworkElement {
     private String id;
     private HashMap<String,Boolean> states;
     private HashMap<String, Object> properties;
-    public HashMap<String, Object> universal;
+    public HashMap<String, Object> universal; //TODO rename this variable to global. Universal seems like whole simulation state.
     public List<String> possiblesStates;
     
     /**

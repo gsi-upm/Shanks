@@ -2,7 +2,6 @@ package es.upm.dit.gsi.shanks.model.failure;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.HashMap;
 import java.util.logging.LogManager;
 
 import junit.framework.Assert;

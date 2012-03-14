@@ -5,12 +5,12 @@ package es.upm.dit.gsi.shanks.model.test.steppable;
 
 import java.util.logging.Logger;
 
+import sim.engine.SimState;
+import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.JasonShanksAgent;
 import es.upm.dit.gsi.shanks.agent.ShanksAgent;
 import es.upm.dit.gsi.shanks.agent.test.MyJasonShanksAgent;
-import sim.engine.SimState;
-import sim.engine.Steppable;
 
 /**
  * @author a.carrera

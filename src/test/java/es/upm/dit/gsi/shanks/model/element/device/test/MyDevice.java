@@ -1,7 +1,6 @@
 package es.upm.dit.gsi.shanks.model.element.device.test;
 
 import java.util.HashMap;
-import java.util.List;
 
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;

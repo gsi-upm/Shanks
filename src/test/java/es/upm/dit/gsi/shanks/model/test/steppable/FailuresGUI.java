@@ -5,12 +5,6 @@ package es.upm.dit.gsi.shanks.model.test.steppable;
 
 import java.util.Set;
 
-import es.upm.dit.gsi.shanks.ShanksSimulation;
-import es.upm.dit.gsi.shanks.model.failure.Failure;
-import es.upm.dit.gsi.shanks.model.scenario.Scenario;
-import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyHyperComplexScenario2DPortrayal;
 import sim.engine.SimState;
 import sim.engine.Steppable;
 import sim.field.continuous.Continuous3D;
@@ -18,6 +12,12 @@ import sim.field.grid.SparseGrid2D;
 import sim.portrayal.grid.SparseGridPortrayal2D;
 import sim.portrayal3d.continuous.ContinuousPortrayal3D;
 import sim.util.Double3D;
+import es.upm.dit.gsi.shanks.ShanksSimulation;
+import es.upm.dit.gsi.shanks.model.failure.Failure;
+import es.upm.dit.gsi.shanks.model.scenario.Scenario;
+import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyHyperComplexScenario2DPortrayal;
 
 /**
  * @author a.carrera

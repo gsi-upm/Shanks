@@ -7,7 +7,6 @@ package es.upm.dit.gsi.shanks.model.element;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Logger;
 
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
@@ -26,7 +25,6 @@ public abstract class NetworkElement {
     private HashMap<String, Object> properties;
     public HashMap<String, Object> universal;
     public List<String> possiblesStates;
-    private boolean value;
     
     /**
      * @param id

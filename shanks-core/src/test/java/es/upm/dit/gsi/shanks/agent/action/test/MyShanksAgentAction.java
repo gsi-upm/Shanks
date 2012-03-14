@@ -2,7 +2,6 @@ package es.upm.dit.gsi.shanks.agent.action.test;
 
 import jason.asSyntax.Term;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -11,10 +10,8 @@ import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.ShanksAgent;
 import es.upm.dit.gsi.shanks.agent.action.JasonShanksAgentAction;
 import es.upm.dit.gsi.shanks.agent.test.MyJasonShanksAgent;
-import es.upm.dit.gsi.shanks.exception.UnkownAgentException;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 

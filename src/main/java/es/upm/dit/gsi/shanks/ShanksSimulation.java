@@ -158,7 +158,7 @@ public class ShanksSimulation extends SimState {
     public ScenarioPortrayal getScenarioPortrayal()
             throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
         ScenarioPortrayal sp = this.scenarioManager.getPortrayal();
-        while (sp == null) {
+        if (sp == null) {
             sp = this.scenarioManager.getScenario().createScenarioPortrayal();
             this.scenarioManager.setPortrayal(sp);
         }

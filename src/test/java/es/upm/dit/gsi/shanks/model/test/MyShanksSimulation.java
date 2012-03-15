@@ -119,7 +119,7 @@ public class MyShanksSimulation extends ShanksSimulation {
         MyJasonShanksAgent agent3 = new MyJasonShanksAgent("resolverAgent3",
                 "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent3.asl");
         this.registerShanksAgent(agent3);
-        MySimpleShanksAgent agent4 = new MySimpleShanksAgent("simpleAgent1");
+        MySimpleShanksAgent agent4 = new MySimpleShanksAgent("simpleAgent1", 5, 10);
         this.registerShanksAgent(agent4);
     }
 

@@ -91,45 +91,56 @@ public class MySimpleShanksAgent extends SimpleShanksAgent implements
                 }
             }
 
-        } catch (Exception e) {
-            logger.severe("Exception: " + e.getMessage());
-        }
-        // 1st step of the reasoning cycle -> It bites if it is near to
-        // a
-        // device
+            if (simulation.getScenarioPortrayal() != null) {
+                // 1st step of the reasoning cycle -> It bites if it is near to
+                // a
+                // device
 
-        Bag objects = ShanksAgentPerceptionCapability.getAllObjects(simulation,
-                this);
-        objects = ShanksAgentPerceptionCapability.getPercepts(simulation, this);
-        for (Object o : objects) {
-            if (o instanceof Device) {
-                Location objectLocation = ShanksAgentPerceptionCapability
-                        .getObjectLocation(simulation, this, o);
-                double distance = ShanksAgentPerceptionCapability.getDistanceTo(simulation, this, o);
-                if (this.currentLocation.isNearTo(objectLocation, 1) && distance <= 1.0) {
-                    if (!hasBeenNearToSomething) {
-                        this.hasBeenNearToSomething = true;
+                Bag objects = ShanksAgentPerceptionCapability.getAllObjects(
+                        simulation, this);
+                objects = ShanksAgentPerceptionCapability.getPercepts(
+                        simulation, this);
+                for (Object o : objects) {
+                    if (o instanceof Device) {
+                        Location objectLocation = ShanksAgentPerceptionCapability
+                                .getObjectLocation(simulation, this, o);
+                        double distance = ShanksAgentPerceptionCapability
+                                .getDistanceTo(simulation, this, o);
+                        if (this.currentLocation.isNearTo(objectLocation, 1)
+                                && distance <= 1.0) {
+                            if (!hasBeenNearToSomething) {
+                                this.hasBeenNearToSomething = true;
+                            }
+                        }
                     }
                 }
+
+                if (simulation.schedule.getSteps() % 1000 == 0) {
+                    Location randomObjLocation = ShanksAgentPerceptionCapability
+                            .getRandomObjectLocation(simulation, this);
+                    this.setTargetLocation(randomObjLocation);
+                }
+
+                if (simulation.schedule.getSteps() % 300 == 0) {
+                    Location randomObjLocation = ShanksAgentPerceptionCapability
+                            .getRandomObjectLocationInPerceptionRange(
+                                    simulation, this);
+                    if (randomObjLocation != null
+                            && this.currentLocation.isNearTo(randomObjLocation,
+                                    5.0)) {
+                        this.setTargetLocation(randomObjLocation);
+                    }
+                }
+
+                if (this.allowToMove) {
+                    ShanksAgentMovementCapability.goTo(simulation, this,
+                            this.currentLocation, this.targetLocation,
+                            this.speed);
+                }
+
             }
-        }
-
-        if (simulation.schedule.getSteps() % 1000 == 0) {
-            Location randomObjLocation = ShanksAgentPerceptionCapability
-                    .getRandomObjectLocation(simulation, this);
-            this.setTargetLocation(randomObjLocation);
-        }
-        
-        if (simulation.schedule.getSteps() % 300 == 0) {
-            Location randomObjLocation = ShanksAgentPerceptionCapability.getRandomObjectLocationInPerceptionRange(simulation, this);
-          if (randomObjLocation!=null && this.currentLocation.isNearTo(randomObjLocation, 5.0)) {
-              this.setTargetLocation(randomObjLocation);
-          }
-        }
-
-        if (this.allowToMove) {
-            ShanksAgentMovementCapability.goTo(simulation, this,
-                    this.currentLocation, this.targetLocation, this.speed);
+        } catch (Exception e) {
+            logger.severe("Exception: " + e.getMessage());
         }
     }
 

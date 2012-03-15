@@ -26,6 +26,9 @@ public class MyJasonShanksAgentAction extends JasonShanksAgentAction {
 
         Set<Failure> failures = simulation.getScenario().getCurrentFailures();
         int number = failures.size();
+        if (number==0) {
+            return true;
+        }
         int random = simulation.random.nextInt(number);
         Failure f = (Failure) failures.toArray()[random];
         List<NetworkElement> elements = f.getAffectedElements();

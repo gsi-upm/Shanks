@@ -796,7 +796,7 @@ public class ShanksSimulationTest {
             do
                 if (!gui.getSimulation().schedule.step(sim))
                     break;
-            while (gui.getSimulation().schedule.getSteps() < 2001);
+            while (gui.getSimulation().schedule.getSteps() < 100);
             gui.finish();
         } catch (Exception e) {
             catched = true;
@@ -829,7 +829,7 @@ public class ShanksSimulationTest {
             do
                 if (!gui.getSimulation().schedule.step(sim))
                     break;
-            while (gui.getSimulation().schedule.getSteps() < 2001);
+            while (gui.getSimulation().schedule.getSteps() < 100);
             gui.finish();
         } catch (Exception e) {
             catched = true;

@@ -218,6 +218,7 @@ public class ShanksAgentPerceptionCapability {
      * @param agent
      * @return A random object location within the perception range of the
      *         agent. This location never will be the location of the agent.
+     *         If the location is the unique object in the perception range, return null.
      */
     public static Location getRandomObjectLocationInPerceptionRange(
             ShanksSimulation simulation, PercipientShanksAgent agent) {
@@ -233,6 +234,9 @@ public class ShanksAgentPerceptionCapability {
                 Bag objects = devicesField.getObjectsWithinDistance(
                         agentLocation.getLocation3D(),
                         agent.getPerceptionRange(), false);
+                if (objects.size()==1 && objects.get(0).equals(agent)) {
+                    return null;
+                }
                 Object o;
                 Double3D newTarget = null;
                 do {

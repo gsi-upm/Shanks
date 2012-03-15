@@ -117,9 +117,9 @@ public class Location {
      */
     public boolean isNearTo(Location location, double distance) {
         if (this.is2DLocation() && location.is2DLocation()) {
-            return this.getLocation2D().distance(location.getLocation2D()) <= distance;
+            return this.isNearTo(location.getLocation2D(), distance);
         } else if (this.is3DLocation() && location.is3DLocation()) {
-            return this.getLocation3D().distance(location.getLocation3D()) <= distance;
+            return this.isNearTo(location.getLocation3D(), distance);
         } else {
             return false;
         }

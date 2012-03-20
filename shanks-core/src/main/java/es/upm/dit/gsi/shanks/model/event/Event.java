@@ -1,10 +1,9 @@
 package es.upm.dit.gsi.shanks.model.event;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Properties;
-
+import sim.engine.Steppable;
+import es.upm.dit.gsi.shanks.model.element.NetworkElement;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 
 //Under construction
@@ -12,100 +11,131 @@ import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 
 public abstract class Event {
 
+    /**
+     * Metodos para properties en NetworkElement
+     *     -changePropertiesOfNetworkElement(NetworkElement) --> A que elemento le cambiamos sus properties
+     *     estas properties vienen asignadas en la declaracion de cada evento
+     *     Se llama en las clases que extiendan de Scenario.
+     *     -addAfectedPropertiesOfElement(String, Object) --> Las properties de un elemento que
+     *     este evento es capaz de cambiar.
+     *   
+     *     
+     * Metodos para status en NetworkElement
+     *     -changeStatus(NetworkElement) --> A que elemento le cambiamos sus estados
+     *     estos estados modificados vienen asignados en la declaracion de cada evento
+     *     Se llama en las clases que extiendan de Scenario.
+     *     -addAffectedPropertiesOfElement(String, Boolean) --> Los estados de un elemento que
+     *     este evento es capaz de cambiar.
+     *   
+     *     
+     * Metodos para Properties de Scenario
+     *     -changePropertiesOfScenario(Scenario) --> A que scenario le cambiamos las properties
+     *     estas properties vienen asignadas en la declaracion del evento.
+     *     Se llama en las clases que extiendan de Scenario.
+     *     -addAffectedPropertiesOfScenario(String, Object) --> Las properties del scenario que
+     *     este evento es capaz de cambiar
+     */
     
-    private Object generator;
-    private String id;
+    private String name;
+    private Steppable generator;
     
-    public List<String> propertiesToAdd;
-    public List<String> propertiesToRemove;
-    public HashMap<String, Object> valueToSet;
+    private HashMap<String, Object> propertiesOfElementToChange;
+    private HashMap<String, Boolean> statusOfElementToChange;
+    private HashMap<String, Object> propertiesOfScenarioToChange;
     
-    public Event(String id, Object generator){
-        this.id = id;
+    public boolean launch;
+    
+    public Event(String name, Steppable generator){
+        this.name = name;
         this.generator = generator;
         
-        this.propertiesToAdd = new ArrayList<String>();
-        this.propertiesToRemove = new ArrayList<String>();
-        this.valueToSet = new HashMap<String, Object>();
-    }
-    
-    public String getID(){
-        return this.id;
-    }
-    
-    public Object getGenerator(){
-        return this.generator;
-    }
-    
-    public void changePropertyOfScenario(Scenario scenario, String property, Object value){
-        Properties scenarioProperties = scenario.getProperties();
-        if(scenarioProperties.contains(property)){
-            scenarioProperties.put(property, value);
-        }
-    }
-    
-    //Se da el scenario del cual este evento eliminaria esas properties
-    public void removePropertyOfScenario(Scenario scenario){
-        Properties scenProperties = scenario.getProperties();
-        for(String prop : propertiesToRemove){
-            if(scenProperties.contains(prop)){
-                scenProperties.remove(prop);
-            }else{
-                System.out.println("This scenario haven't that property");
-            }
-        }
-    }
-    
-    
-    //Se da el scenario del cual este evento añadiria properties
-    public void addPropertyToScenario(Scenario scenario){
-        Properties scenarioProperties = scenario.getProperties();
-        for(String prop :propertiesToAdd){
-            Object val = valueToSet.get(prop);
-            if(!scenarioProperties.contains(prop)){
-               scenarioProperties.put(prop, val);
-            }
-        }
-    }
-    
-    
-    //Todo en uno (añadir-eliminar)
-    public void modifyPropertyOfScenario(Scenario scenario){
-        Properties scenarioProperties = scenario.getProperties();
-        for(String prop :propertiesToAdd){
-            Object val = valueToSet.get(prop);
-            scenarioProperties.put(prop, val);
-        }
-        for(String property : propertiesToRemove){
-            if(scenarioProperties.contains(property)){
-                scenarioProperties.remove(property);
-            }
-        }
+        this.propertiesOfElementToChange = new HashMap<String, Object>();
+        this.statusOfElementToChange = new HashMap<String, Boolean>();
+        this.propertiesOfScenarioToChange = new HashMap<String, Object>();
         
-        
+        launch = false;
     }
     
-    public void changeGenerator(Object gen){
+    public void setGenerator(Steppable gen){
         this.generator = gen;
     }
     
-    public abstract void addAffectedProperties(); 
+    public Steppable getGenerator(){
+        return generator;
+    }
     
+    public String getName(){
+        return name;
+    }
     
+    public HashMap<String, Object> getPropertiesAffectedOfElement(){
+        return propertiesOfElementToChange;
+    }
     
+    public HashMap<String, Boolean> getStatusAffectedOfElement(){
+        return statusOfElementToChange;
+    }
     
-    //Properties que este elemento eliminaria
-    public void removeProperty(String property){
-        this.propertiesToRemove.add(property);
+    public HashMap<String, Object> getPropertiesAffectedOfScenario(){
+        return propertiesOfScenarioToChange;
+    }
+    
+    public boolean isLaunched(){
+        return launch;
+    }
+    
+    public void launchEvent(){
+        this.launch = true;
     }
     
     
-    //Properties que este elemento cambiaria
-    public void addProperty(String property, Object value){
-        this.propertiesToAdd.add(property);
-        this.valueToSet.put(property, value);
+    
+    public void changePropertiesOfScenario(Scenario scenario){
+        if(this.launch){
+            for(String property : propertiesOfScenarioToChange.keySet()){
+                if(scenario.getProperties().containsKey(property)){
+                    scenario.getProperties().put(property, 
+                            propertiesOfScenarioToChange.get(property));
+                }
+            }
+        }
     }
     
+    public void changeStatus(NetworkElement element) throws UnsupportedNetworkElementStatusException{
+        if(this.launch){
+            for(String state : statusOfElementToChange.keySet()){
+                if(element.getStatus().containsKey(state)){
+                    element.getStatus().put(state, statusOfElementToChange.get(state));
+                }
+            }
+        }
+        element.checkProperties();
+    }
+    
+    public void changePropertiesOfNetworkElement(NetworkElement element) throws UnsupportedNetworkElementStatusException{
+        if(this.launch){
+            for(String prop : propertiesOfElementToChange.keySet()){
+                if(element.getProperties().containsKey(prop)){
+                    element.getProperties().put(prop, propertiesOfElementToChange.get(prop));
+                }
+            } 
+        }
+        element.checkStatus();
+    }
+    
+    public void addAffectedPropertiesOfScenario(String property, Object value){
+        propertiesOfScenarioToChange.put(property, value);
+    }
+    
+    public void addAffectedPropertiesOfElement(String property, Object value){
+        propertiesOfElementToChange.put(property, value);
+    }
+    
+    public void addAffectedStatesOfElement(String state, Boolean value){
+        statusOfElementToChange.put(state, value);
+    }
+    
+    public abstract void addChanges();
     
     
 }

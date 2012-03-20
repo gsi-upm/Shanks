@@ -109,7 +109,6 @@ public abstract class Event {
                 }
             }
         }
-        element.checkProperties();
     }
     
     public void changePropertiesOfNetworkElement(NetworkElement element) throws UnsupportedNetworkElementStatusException{
@@ -120,7 +119,6 @@ public abstract class Event {
                 }
             } 
         }
-        element.checkStatus();
     }
     
     public void addAffectedPropertiesOfScenario(String property, Object value){

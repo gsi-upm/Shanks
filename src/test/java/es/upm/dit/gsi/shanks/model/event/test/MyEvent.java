@@ -14,6 +14,6 @@ public class MyEvent extends Event{
     @Override
     public void addChanges() {
         this.addAffectedPropertiesOfElement(MyDevice.TEMPERATURE_PROPERTY, 100);
-        this.addAffectedPropertiesOfScenario(MyScenario.CLOUDY_PROB, 0.80);
+        this.addAffectedPropertiesOfScenario(MyScenario.CLOUDY_PROB, "80");
     }
 }

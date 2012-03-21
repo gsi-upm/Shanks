@@ -6,35 +6,13 @@ import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 
-//Under construction
 
+/**
+ * @author dlara
+ *
+ */
 
 public abstract class Event {
-
-    /**
-     * Metodos para properties en NetworkElement
-     *     -changePropertiesOfNetworkElement(NetworkElement) --> A que elemento le cambiamos sus properties
-     *     estas properties vienen asignadas en la declaracion de cada evento
-     *     Se llama en las clases que extiendan de Scenario.
-     *     -addAfectedPropertiesOfElement(String, Object) --> Las properties de un elemento que
-     *     este evento es capaz de cambiar.
-     *   
-     *     
-     * Metodos para status en NetworkElement
-     *     -changeStatus(NetworkElement) --> A que elemento le cambiamos sus estados
-     *     estos estados modificados vienen asignados en la declaracion de cada evento
-     *     Se llama en las clases que extiendan de Scenario.
-     *     -addAffectedPropertiesOfElement(String, Boolean) --> Los estados de un elemento que
-     *     este evento es capaz de cambiar.
-     *   
-     *     
-     * Metodos para Properties de Scenario
-     *     -changePropertiesOfScenario(Scenario) --> A que scenario le cambiamos las properties
-     *     estas properties vienen asignadas en la declaracion del evento.
-     *     Se llama en las clases que extiendan de Scenario.
-     *     -addAffectedPropertiesOfScenario(String, Object) --> Las properties del scenario que
-     *     este evento es capaz de cambiar
-     */
     
     private String name;
     private Steppable generator;
@@ -45,6 +23,10 @@ public abstract class Event {
     
     public boolean launch;
     
+    /**
+     * @param name
+     * @param generator
+     */
     public Event(String name, Steppable generator){
         this.name = name;
         this.generator = generator;
@@ -56,40 +38,72 @@ public abstract class Event {
         launch = false;
     }
     
+    /**
+     * @param gen
+     */
     public void setGenerator(Steppable gen){
         this.generator = gen;
     }
     
+    /**
+     * @return generator
+     */
     public Steppable getGenerator(){
-        return generator;
+        return this.generator;
     }
     
+    /**
+     * @return name
+     */
     public String getName(){
-        return name;
+        return this.name;
     }
     
+    
+    /**
+     * @return propertiesOfElementToChange
+     */
     public HashMap<String, Object> getPropertiesAffectedOfElement(){
-        return propertiesOfElementToChange;
+        return this.propertiesOfElementToChange;
     }
     
+    
+    
+    /**
+     * @return statusOfElementToChange
+     */
     public HashMap<String, Boolean> getStatusAffectedOfElement(){
-        return statusOfElementToChange;
+        return this.statusOfElementToChange;
     }
     
+    /**
+     * @return propertiesOfScenarioToChange
+     */
     public HashMap<String, Object> getPropertiesAffectedOfScenario(){
-        return propertiesOfScenarioToChange;
+        return this.propertiesOfScenarioToChange;
     }
     
+    /**
+     * @return launch (if the event is already launched)
+     */
     public boolean isLaunched(){
         return launch;
     }
     
+    /**
+     * This method active the event
+     */
     public void launchEvent(){
         this.launch = true;
     }
     
     
     
+    /**
+     * This method change the properties of a scenario when the event is launched
+     * 
+     * @param scenario
+     */
     public void changePropertiesOfScenario(Scenario scenario){
         if(this.launch){
             for(String property : propertiesOfScenarioToChange.keySet()){
@@ -101,6 +115,12 @@ public abstract class Event {
         }
     }
     
+    /**
+     * This method change the status of a network element when the event is launched
+     * 
+     * @param element
+     * @throws UnsupportedNetworkElementStatusException
+     */
     public void changeStatus(NetworkElement element) throws UnsupportedNetworkElementStatusException{
         if(this.launch){
             for(String state : statusOfElementToChange.keySet()){
@@ -111,6 +131,12 @@ public abstract class Event {
         }
     }
     
+    /**
+     * This method change the properties of a network element when the event is launched
+     * 
+     * @param element
+     * @throws UnsupportedNetworkElementStatusException
+     */
     public void changePropertiesOfNetworkElement(NetworkElement element) throws UnsupportedNetworkElementStatusException{
         if(this.launch){
             for(String prop : propertiesOfElementToChange.keySet()){
@@ -121,17 +147,41 @@ public abstract class Event {
         }
     }
     
+    /**
+     * Add the properties of a scenario that the event will change
+     * 
+     * @param property
+     * @param value
+     */
     public void addAffectedPropertiesOfScenario(String property, Object value){
         propertiesOfScenarioToChange.put(property, value);
     }
     
+    
+    
+    /**
+     * Add the properties of a network element that the event will change
+     * 
+     * @param property
+     * @param value
+     */
     public void addAffectedPropertiesOfElement(String property, Object value){
         propertiesOfElementToChange.put(property, value);
     }
     
+    
+    
+    /**
+     * Add the states of a network element that the event will change
+     * 
+     * @param state
+     * @param value
+     */
     public void addAffectedStatesOfElement(String state, Boolean value){
         statusOfElementToChange.put(state, value);
     }
+    
+    
     
     public abstract void addChanges();
     

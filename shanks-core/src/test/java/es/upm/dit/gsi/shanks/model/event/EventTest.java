@@ -2,6 +2,7 @@ package es.upm.dit.gsi.shanks.model.event;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Properties;
 import java.util.logging.LogManager;
 
 import junit.framework.Assert;
@@ -16,8 +17,13 @@ import sim.engine.Steppable;
 
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
+import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.event.test.MyEvent;
+import es.upm.dit.gsi.shanks.model.scenario.Scenario;
+import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
+import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
+import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
 
 public class EventTest {
     /**
@@ -125,8 +131,69 @@ public class EventTest {
         Assert.assertEquals(100, d.getProperties().get(MyDevice.TEMPERATURE_PROPERTY));
         Assert.assertFalse(d.getStatus().get(MyDevice.OK_STATUS));
         Assert.assertTrue(d.getStatus().get(MyDevice.NOK_STATUS));
-    }   
+    }
     
+    
+    @Test
+    public void createEventAndNoChangeScenarioProperties() throws UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException{
+        Steppable generator = new Steppable() {
+            /**
+             * 
+             */
+            private static final long serialVersionUID = 1L;
+
+            public void step(SimState arg0) {
+                
+            }
+        };
+        
+        Properties scenarioProperties = new Properties();
+        scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
+        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
+        Scenario s = new MyScenario("MyScenario", MyScenario.SUNNY, scenarioProperties);
+        Assert.assertEquals("MyScenario", s.getID());
+        Assert.assertEquals(MyScenario.SUNNY, s.getCurrentStatus());
+        
+        Event event = new MyEvent("MyEvent", generator);
+        
+        event.addChanges();
+        event.changePropertiesOfScenario(s);
+        Assert.assertEquals("50", s.getProperties().get(MyScenario.CLOUDY_PROB));
+        
+        
+    }
+    
+    @Test
+    public void createEventAndChangeScenarioProperties() throws UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException{
+        Steppable generator = new Steppable() {
+            /**
+             * 
+             */
+            private static final long serialVersionUID = 1L;
+
+            public void step(SimState arg0) {
+                
+            }
+        };
+        
+        Properties scenarioProperties = new Properties();
+        scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
+        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
+        Scenario s = new MyScenario("MyScenario", MyScenario.SUNNY, scenarioProperties);
+        Assert.assertEquals("MyScenario", s.getID());
+        Assert.assertEquals(MyScenario.SUNNY, s.getCurrentStatus());
+        
+        Event event = new MyEvent("MyEvent", generator);
+        
+        event.addChanges();
+        event.changePropertiesOfScenario(s);    
+        Assert.assertEquals("50", s.getProperties().get(MyScenario.CLOUDY_PROB));
+        event.launchEvent();
+        event.changePropertiesOfScenario(s); 
+        Assert.assertEquals("80", s.getProperties().get(MyScenario.CLOUDY_PROB));
+        
+        
+    }
 }
     
     

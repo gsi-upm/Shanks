@@ -1,13 +1,21 @@
 package es.upm.dit.gsi.shanks.model.scenario.portrayal;
 
+import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 import org.jfree.data.general.Series;
 import org.jfree.data.xy.XYSeries;
+import org.jfree.util.ArrayUtilities;
 
 import sim.field.network.Network;
 import sim.portrayal.Portrayal;
 import sim.util.media.chart.ChartGenerator;
+import sim.util.media.chart.HistogramGenerator;
+import sim.util.media.chart.ScatterPlotGenerator;
 import sim.util.media.chart.TimeSeriesChartGenerator;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedChartIDException;
@@ -21,6 +29,11 @@ public abstract class ScenarioPortrayal {
     private HashMap<String,TimeSeriesChartGenerator> timeCharts;
     private HashMap<String, HashMap<String, XYSeries>> timeChartData;
     
+    private HashMap<String, ScatterPlotGenerator> scatterPlots;
+    private HashMap<String, double[][]> scatterPlotsData;
+    
+    private HashMap<String, HistogramGenerator> histograms;
+    
     public static final String DEVICES_PORTRAYAL = "Devices";
     public static final String LINKS_PORTRAYAL = "Links";
     
@@ -32,6 +45,9 @@ public abstract class ScenarioPortrayal {
         this.portrayals = new HashMap<String,HashMap<String, Portrayal>>();
         this.timeCharts = new HashMap<String, TimeSeriesChartGenerator>();
         this.timeChartData = new HashMap<String, HashMap<String,XYSeries>>();
+        this.scatterPlots = new HashMap<String, ScatterPlotGenerator>();
+        this.scatterPlotsData = new HashMap<String, double[][]>();
+        this.histograms = new HashMap<String, HistogramGenerator>();
     }
     
     /**
@@ -221,5 +237,248 @@ public abstract class ScenarioPortrayal {
             }
         }
     }
-
+    
+    /**
+     * Add a ScatterPlot to the simulation
+     * 
+     * @param String scatterID - An ID for the ScatterPlot
+     * @param String xAxisLabel - The name of the x axis
+     * @param String yAxisLabel - The name of the y axis 
+     * @throws DuplicatedChartIDException 
+     */
+    public void addScatterPlot(String scatterID, String xAxisLabel, String yAxisLabel) throws DuplicatedChartIDException {
+        if (!this.timeCharts.containsKey(scatterID)) {
+            ScatterPlotGenerator scatter = new ScatterPlotGenerator();
+            scatter.setTitle(scatterID);
+            scatter.setXAxisLabel(xAxisLabel);
+            scatter.setYAxisLabel(yAxisLabel);
+            this.scatterPlots.put(scatterID, scatter);
+        } else {
+            throw new DuplicatedChartIDException(scatterID);
+        }
+    }
+    
+    /**
+     * Remove a ScatterPlot from the simulation
+     * 
+     * @param scatterID
+     */
+    public void removeScatterPlot(String scatterID) {
+        if (this.scatterPlots.containsKey(scatterID)) this.scatterPlots.remove(scatterID);
+    }
+    
+    /**
+     * @return Map with all ScatterPlots of the simulation
+     */
+    public HashMap<String, ScatterPlotGenerator> getScatterPlots() {
+        return this.scatterPlots;
+    }
+    
+    /**
+     * @param scatterID
+     * @return the scatterPlot if it exists, null if the scatterPlot does not exist
+     */
+    public ChartGenerator getScatterPlot(String scatterID) {
+        if (this.scatterPlots.containsKey(scatterID)) 
+            return this.scatterPlots.get(scatterID);
+        return null;
+    }
+    
+    /**
+     * Sets the data for the scatterPlot.
+     * Should be used only the first time. Use 
+     * updateDataSerieOnScaterPlot to change the data
+     *
+     * 
+     * @param scatterID
+     * @param double[][] the data. The first dimension MUST BE 2 (double[2][whatever_int])
+     * @param String - the name of the serie
+     */
+    public void addDataSerieToScatterPlot(String scatterID, double[][] dataSerie){
+        if (this.scatterPlots.containsKey(scatterID)) {
+            this.scatterPlotsData.put(scatterID, dataSerie);
+            this.scatterPlots.get(scatterID).addSeries((double[][])this.scatterPlotsData.get(scatterID), scatterID, null);
+        }
+    }
+    
+    /**
+     * Updates the data in the scatterPlot
+     * 
+     * @param scatterID
+     * @param index - the data serie to modify
+     * @param double[] - the series data
+     */
+    public void updateDataSerieOnScatterPlot(String scatterID, int index, double[][] dataSerie){
+        if (this.scatterPlots.containsKey(scatterID)){
+            if (this.scatterPlotsData.containsKey(scatterID)) {
+                double[][] current = this.scatterPlotsData.get(scatterID);
+                this.scatterPlotsData.put(scatterID, concatenateArrays(current, dataSerie));
+            } else{
+                // Create the data.
+                addDataSerieToScatterPlot(scatterID, dataSerie);
+                return;
+            }
+            this.scatterPlots.get(scatterID).updateSeries(index, this.scatterPlotsData.get(scatterID));
+//            this.scatterPlots.get(scatterID).addSeries(this.scatterPlotsData.get(scatterID), scatterID, null);
+        }
+    }
+    
+    /**
+     * Add a chart to the simulation
+     * 
+     * @param HistogramID
+     * @param String xAxisLabel
+     * @param String yAxisLabel
+     * @throws DuplicatedChartIDException 
+     */
+    public void addHistogram(String histogramID, String xAxisLabel, String yAxisLabel) throws DuplicatedChartIDException {
+        if (!this.histograms.containsKey(histogramID)) {
+            HistogramGenerator histogram = new HistogramGenerator();
+            histogram.setTitle(histogramID);
+            histogram.setXAxisLabel(xAxisLabel);
+            histogram.setYAxisLabel(yAxisLabel);
+            this.histograms.put(histogramID, histogram);
+        } else {
+            throw new DuplicatedChartIDException(histogramID);
+        }
+    }
+    
+    /**
+     * Remove a histogram from the simulation
+     * 
+     * @param histogramID
+     */
+    public void removeHistogram(String histogramID) {
+        if (this.histograms.containsKey(histogramID)) {
+            this.histograms.remove(histogramID);
+        }
+    }
+    
+    /**
+     * @return Map with all histograms of the simulation
+     */
+    public HashMap<String, HistogramGenerator> getHistograms() {
+        return this.histograms;
+    }
+    
+    /**
+     * @param String histogramID
+     * @return the histogram if it exists, null if it does not
+     */
+    public HistogramGenerator getHistogram(String histogramID) {
+        if (this.histograms.containsKey(histogramID)) {
+            return this.histograms.get(histogramID);
+        } else {
+            return null;
+        }
+    }
+    
+    
+    /**
+     * Adds data to the histogram.
+     * Given the number of bins, this will show a count on the number of
+     * times a value is repeated. For example:
+     * [1,2,3,1,1,3], and bins = 3
+     * Will provide:
+     *   _
+     *  | |    _
+     *  | | _ | |
+     * _|_||_||_|_
+     * 
+     * If the number of different values is different from the number of bins,
+     * then each bin will represent the number of values in a range, evenly distributed
+     * between the minimum and the maximum value. For example:
+     * [1,2,3,1,1,3], and bins = 2
+     * Two ranges will be considered: [1,2) and [2,3].
+     * BE ADVISED The middle value would be assigned to the upper range.
+     * In this example, the histogram will look:
+     *   _  _
+     *  | || |
+     *  | || |
+     * _|_||_|_
+     * 
+     * 
+     * @param String - histogramID
+     * @param double[] - dataSerie the data
+     * @param int - the number of bins
+     */
+    public void addDataSerieToHistogram(String histogramID, double[] dataSerie, int binsCount){
+        if (this.histograms.containsKey(histogramID)) {
+            this.histograms.get(histogramID).addSeries(dataSerie, binsCount, histogramID, null);
+        }
+    }
+    /**
+     * Set the histogram range to be displayed
+     * 
+     * @param String - The histogram ID
+     * @param lower - The lower value for the histogram
+     * @param upper - The upper value for the histogram
+     */
+    public void setHistogramRange(String histogramID, int lower, int upper) {
+        if (this.histograms.containsKey(histogramID))
+            this.histograms.get(histogramID).setYAxisRange(lower, upper);
+    }
+    
+    /**
+     * Updates the given Histogram (index).
+     * The index will be the order of the histogram.
+     * 
+     * 
+     * @param histogramID
+     * @param dataSerie
+     * @param index
+     */
+    public void updateDataSerieToHistogram(String histogramID, double[] dataSerie, int index){
+        this.histograms.get(histogramID).updateSeries(index, dataSerie);
+    }
+    
+    /**
+     * Deletes a certain series of data from the histogram.
+     * The index will be the order of the histogram.
+     * 
+     * @param histogramID
+     * @param int index - the index of the data
+     */
+    public void removeDataSerieFromHistogram(String histogramID, int index) {
+        if (this.histograms.containsKey(histogramID)) {
+            this.histograms.get(histogramID).removeSeries(index);
+        }
+    }
+    
+    /**
+     * Add a datum in the chart
+     * 
+     * @param chartID
+     * @param dataSerieID
+     * @param x
+     * @param y
+     */
+    public void updateDataToDataSerieInTimeChart(String histogramID, int index, double[] dataSerie  ) {
+        if (this.histograms.containsKey(histogramID)) {
+            this.histograms.get(histogramID).updateSeries(index, dataSerie);
+        }
+    }
+    
+    /**
+     * Concatenate two two dimensional arrays.
+     * Both arrays must have the same dimensions.
+     * 
+     * @param first
+     * @param second
+     * @return
+     */
+    private double[][] concatenateArrays(double[][] first, double[][] second){
+        // I am sure as hell that should be a better way to do this...
+        double[][] result = new double[first.length][first[0].length + second[0].length];
+        for(int i = 0; i < first.length; i++){
+            for (int j = 0; j < (first[i].length + second[i].length); j++){
+                if( j < first[i].length){
+                    result[i][j] = first[i][j];
+                } else{
+                    result[i][j] = second[i][j - first[i].length];
+                }
+            }
+        }
+        return result;
+    }
 }

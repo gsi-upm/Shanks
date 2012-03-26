@@ -323,4 +323,58 @@ public abstract class ShanksSimulation3DGUI extends GUIState {
         scenarioPortrayal.removeTimeChart(chartID);
     }
 
+    /**
+     * Add a Scatter Plot to the simulation
+     * 
+     * @param scatterID - The name of the plot
+     * @param xAxisLabel - The name of the x axis
+     * @param yAxisLabel - The name of the y axis
+     * @throws DuplicatedPortrayalIDException
+     * @throws ScenarioNotFoundException
+     * @throws DuplicatedChartIDException
+     */
+    public void addScatterPlot(String scatterID, String xAxisLabel, String yAxisLabel) throws DuplicatedPortrayalIDException, ScenarioNotFoundException, DuplicatedChartIDException{
+        Scenario3DPortrayal scenarioPortrayal = (Scenario3DPortrayal) this.getSimulation().getScenarioPortrayal();
+        scenarioPortrayal.addScatterPlot(scatterID, xAxisLabel, yAxisLabel);
+    }
+    
+    /**
+     * Remove a Scatter plot from the simulation
+     * 
+     * @param scatterID - The name of the Scatter Plot
+     * @throws DuplicatedPortrayalIDException
+     * @throws ScenarioNotFoundException
+     */
+    public void removeScatterPlot(String scatterID) throws DuplicatedPortrayalIDException, ScenarioNotFoundException{
+        Scenario3DPortrayal scenarioPortrayal = (Scenario3DPortrayal) this.getSimulation().getScenarioPortrayal();
+        scenarioPortrayal.removeScatterPlot(scatterID);
+    }
+    
+    /**
+     * Add a Histogram to the simulation
+     * 
+     * @param histogramID - The name of the Histogram
+     * @param xAxisLabel - The label for the x axis
+     * @param yAxisLabel - The label fot the y axis
+     * @throws DuplicatedChartIDException
+     * @throws DuplicatedPortrayalIDException
+     * @throws ScenarioNotFoundException
+     */
+    public void addHistogram(String histogramID, String xAxisLabel, String yAxisLabel) throws DuplicatedChartIDException, DuplicatedPortrayalIDException, ScenarioNotFoundException{
+        Scenario3DPortrayal scenarioPortrayal = (Scenario3DPortrayal) this.getSimulation().getScenarioPortrayal();
+        scenarioPortrayal.addHistogram(histogramID , xAxisLabel, yAxisLabel);
+    }
+    
+    /**
+     * Remove a Histogram from the simulation
+     * 
+     * @param histogramID - The name of the histogram
+     * @throws DuplicatedChartIDException
+     * @throws DuplicatedPortrayalIDException
+     * @throws ScenarioNotFoundException
+     */
+    public void removeHistogram(String histogramID) throws DuplicatedChartIDException, DuplicatedPortrayalIDException, ScenarioNotFoundException{
+        Scenario3DPortrayal scenarioPortrayal = (Scenario3DPortrayal) this.getSimulation().getScenarioPortrayal();
+        scenarioPortrayal.removeHistogram(histogramID);
+    }
 }

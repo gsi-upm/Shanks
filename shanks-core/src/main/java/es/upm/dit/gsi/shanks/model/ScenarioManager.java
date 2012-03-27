@@ -11,12 +11,14 @@ package es.upm.dit.gsi.shanks.model;
  * 
  */
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.logging.Logger;
 
 import sim.engine.SimState;
 import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.failure.exception.NoCombinationForFailureException;
 import es.upm.dit.gsi.shanks.model.failure.exception.UnsupportedElementInFailureException;
@@ -93,6 +95,20 @@ public class ScenarioManager implements Steppable {
             logger.severe("InstantiationException: " + e.getMessage());
         } catch (IllegalAccessException e) {
             logger.severe("IllegalAccessException: " + e.getMessage());
+        } catch (UnsupportedNetworkElementStatusException e) {
+            logger.severe("UnsupportedNetworkElementStatusException: " + e.getMessage());
+        } catch (SecurityException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
 
@@ -105,24 +121,39 @@ public class ScenarioManager implements Steppable {
      * @throws IllegalAccessException 
      * @throws InstantiationException 
      * @throws UnsupportedElementInFailureException 
+     * @throws UnsupportedNetworkElementStatusException  
+ 
      */
-    public void stateMachine(ShanksSimulation sim) throws UnsupportedScenarioStatusException, NoCombinationForFailureException, UnsupportedElementInFailureException, InstantiationException, IllegalAccessException {
+    public void stateMachine(ShanksSimulation sim) throws UnsupportedScenarioStatusException, NoCombinationForFailureException, UnsupportedElementInFailureException, InstantiationException, IllegalAccessException, UnsupportedNetworkElementStatusException, SecurityException, IllegalArgumentException, NoSuchMethodException, InvocationTargetException{
         logger.fine("Using default state machine for ScenarioManager");
-        switch (this.simulationStateMachineStatus) {
-        case CHECK_FAILURES:
-            this.checkFailures(sim);
-            this.simulationStateMachineStatus = GENERATE_FAILURES;
-            break;
-        case GENERATE_FAILURES:
-            this.generateFailures(sim);
-            this.simulationStateMachineStatus = CHECK_FAILURES;
-            break;
-        }
-        long step = sim.getSchedule().getSteps();
-        if (step%500==0) {
-            logger.info("In step " + step + ", there are " + sim.getScenario().getCurrentFailures().size() + " current failures.");
-            logger.info("In step " + step + ", there are " + sim.getNumOfResolvedFailures() + " resolved failures.");
-        }
+//        switch (this.simulationStateMachineStatus) {
+//        case CHECK_FAILURES:
+//            this.checkFailures(sim);
+//            this.simulationStateMachineStatus = GENERATE_FAILURES;
+//            break;
+//        case GENERATE_FAILURES:
+//            this.generateFailures(sim);
+//            this.simulationStateMachineStatus = CHECK_PERIODIC_;
+//            break;
+//        case GENERATE_PERIODIC_EVENTS:
+//            this.generatePeriodicEvents(sim);
+//            this.simulationStateMachineStatus = CHECK_FAILURES;
+//            break;
+//        case GENERATE_RANDOM_EVENTS:
+//            this.generateRandomEvents(sim);
+//            this.simulationStateMachineStatus = CHECK_FAILURES;
+//            break;
+//        }
+
+        this.checkFailures(sim);
+        this.generateFailures(sim);
+        this.generateScenarioEvents(sim);
+        this.generateNetworkElementEvents(sim);
+//        long step = sim.getSchedule().getSteps();
+//        if (step%500==0) {
+//            logger.info("In step " + step + ", there are " + sim.getScenario().getCurrentFailures().size() + " current failures.");
+//            logger.info("In step " + step + ", there are " + sim.getNumOfResolvedFailures() + " resolved failures.");
+//        }
     }
 
     /**
@@ -135,6 +166,14 @@ public class ScenarioManager implements Steppable {
      */
     private void generateFailures(ShanksSimulation sim) throws UnsupportedScenarioStatusException, NoCombinationForFailureException, UnsupportedElementInFailureException, InstantiationException, IllegalAccessException {
         this.scenario.generateFailures();
+    }
+    
+    private void generateScenarioEvents(ShanksSimulation sim){
+        //TODO complete the method
+    }
+    
+    private void generateNetworkElementEvents(ShanksSimulation sim) throws UnsupportedScenarioStatusException, InstantiationException, IllegalAccessException, UnsupportedNetworkElementStatusException, SecurityException, IllegalArgumentException, NoSuchMethodException, InvocationTargetException{
+        this.scenario.generateNetworkElementEvents(sim);
     }
 
     /**

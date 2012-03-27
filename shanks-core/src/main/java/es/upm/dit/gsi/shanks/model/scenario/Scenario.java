@@ -1,5 +1,7 @@
 package es.upm.dit.gsi.shanks.model.scenario;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,10 +11,18 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import sim.engine.Steppable;
+
 import ec.util.MersenneTwisterFast;
+import es.upm.dit.gsi.shanks.ShanksSimulation;
+import es.upm.dit.gsi.shanks.model.ScenarioManager;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.event.Event;
+import es.upm.dit.gsi.shanks.model.event.PeriodicEvent;
+import es.upm.dit.gsi.shanks.model.event.ProbabilisticEvent;
+import es.upm.dit.gsi.shanks.model.event.ProbabilisticNetworkElementEvent;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.failure.exception.NoCombinationForFailureException;
 import es.upm.dit.gsi.shanks.model.failure.exception.UnsupportedElementInFailureException;
@@ -54,6 +64,8 @@ public abstract class Scenario {
     private HashMap<String, NetworkElement> currentElements;
     private HashMap<Failure, Integer> currentFailures;
     private HashMap<Class<? extends Failure>, List<Set<NetworkElement>>> possibleFailures;
+    private HashMap<Class<? extends Event>, List<Set<NetworkElement>>> possiblesEventsOnNE;
+    private HashMap<Class<? extends Event>, List<Set<Scenario>>> possiblesEventsOnScenario;
     private HashMap<Class<? extends Failure>, List<Integer>> generatedFailureConfigurations;
 
     /**
@@ -78,11 +90,14 @@ public abstract class Scenario {
         this.currentFailures = new HashMap<Failure, Integer>();
         this.possibleFailures = new HashMap<Class<? extends Failure>, List<Set<NetworkElement>>>();
         this.generatedFailureConfigurations = new HashMap<Class<? extends Failure>, List<Integer>>();
-
+        this.possiblesEventsOnNE = new HashMap<Class<? extends Event>, List<Set<NetworkElement>>>();
+        this.possiblesEventsOnScenario = new HashMap<Class<? extends Event>, List<Set<Scenario>>>();
+        
         this.setPossibleStates();
         this.addNetworkElements();
         this.addPossibleFailures();
-
+        this.addPossibleEvents();
+        
         this.setCurrentStatus(initialState);
         
         logger.info("Scenario " + this.getID() + " successfully created.");
@@ -304,7 +319,7 @@ public abstract class Scenario {
      */
     protected HashMap<Failure,Integer> getFullCurrentFailures() {
         return this.currentFailures;
-    }
+    } 
 
     /**
      * @param failure
@@ -338,6 +353,56 @@ public abstract class Scenario {
         list.add(set);
         this.possibleFailures.put(failure, list);
     }
+    
+    //
+    
+    public void addPossibleEventsOfNE(Class<? extends Event> event, NetworkElement element){
+        List<Set<NetworkElement>> list = new ArrayList<Set<NetworkElement>>();
+        Set<NetworkElement> set = new HashSet<NetworkElement>();
+        set.add(element);
+        list.add(set);
+        this.possiblesEventsOnNE.put(event, list);
+        
+    }
+    
+    
+    public void addPossibleEventsOfNE(Class<? extends Event> event,
+            Set<NetworkElement> set) {
+        List<Set<NetworkElement>> list = new ArrayList<Set<NetworkElement>>();
+        list.add(set);
+        this.possiblesEventsOnNE.put(event, list);
+    }
+    
+    
+    
+    public void addPossibleEventsOfNE(Class<? extends Event> event,
+            List<Set<NetworkElement>> possibleCombinations) {
+        this.possiblesEventsOnNE.put(event, possibleCombinations);
+    }
+    
+    public void addPossibleEventsOfScenario(Class<? extends Event> event, Scenario scen){
+        List<Set<Scenario>> list = new ArrayList<Set<Scenario>>();
+        Set<Scenario> set = new HashSet<Scenario>();
+        set.add(scen);
+        list.add(set);
+        this.possiblesEventsOnScenario.put(event, list);
+        
+    }
+    
+    
+    public void addPossibleEventsOfScenario(Class<? extends Event> event,
+            Set<Scenario> set) {
+        List<Set<Scenario>> list = new ArrayList<Set<Scenario>>();
+        list.add(set);
+        this.possiblesEventsOnScenario.put(event, list);
+    }
+    
+    
+    
+    public void addPossibleEventsOfScenario(Class<? extends Event> event,
+            List<Set<Scenario>> possibleCombinations) {
+        this.possiblesEventsOnScenario.put(event, possibleCombinations);
+    }
 
     /**
      * @param failureType
@@ -351,6 +416,14 @@ public abstract class Scenario {
      */
     public HashMap<Class<? extends Failure>, List<Set<NetworkElement>>> getPossibleFailures() {
         return this.possibleFailures;
+    }
+    
+    public HashMap<Class<? extends Event>, List<Set<NetworkElement>>> getPossibleEventsOfNE() {
+        return this.possiblesEventsOnNE;
+    }
+    
+    public HashMap<Class<? extends Event>, List<Set<Scenario>>> getPossibleEventsOfScenario() {
+        return this.possiblesEventsOnScenario;
     }
 
     /**
@@ -373,6 +446,8 @@ public abstract class Scenario {
      */
     abstract public void addPossibleFailures();
 
+    
+    abstract public void addPossibleEvents();
     /**
      * 
      * Algorithm used to generate failures during the simulation
@@ -382,105 +457,161 @@ public abstract class Scenario {
      * @throws UnsupportedElementInFailureException
      * @throws IllegalAccessException
      * @throws InstantiationException
+     * @throws UnsupportedNetworkElementStatusException 
+     * @throws NoSuchMethodException 
+     * @throws SecurityException 
+     * @throws InvocationTargetException 
+     * @throws IllegalArgumentException 
      * 
      */
+    
+    public void generateNetworkElementEvents(ShanksSimulation sim) throws UnsupportedScenarioStatusException, InstantiationException, IllegalAccessException, UnsupportedNetworkElementStatusException, SecurityException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException{
+        MersenneTwisterFast random = new MersenneTwisterFast();
+        Iterator<Class<? extends Event>> it = this.getPossibleEventsOfNE()
+            .keySet().iterator();
+        System.out.println("AQUI");
+        System.out.println(this.getPossibleEventsOfNE().size());
+        while (it.hasNext()) {
+            Class<? extends Event> type = it.next();
+            double prob = 0;
+            int period = 0;
+            Constructor<? extends Event> c = type.getConstructor(new Class[] {String.class, Steppable.class, Double.class});
+            Event event = c.newInstance(sim.getScenarioManager());
+            System.out.println("ESTOY AQUI");
+            if(event instanceof ProbabilisticNetworkElementEvent){
+                List<Set<NetworkElement>> list = this.getPossibleEventsOfNE()
+                .get(type);
+                int numberOfCombinations = list.size();
+                prob = ((ProbabilisticEvent) event).getProb();
+                System.out.println("prob " + prob);
+                double aux = Math.random();
+                int combinationNumber = random.nextInt(numberOfCombinations);
+                if(0 < prob){
+                    System.out.println("Dentro del if 0<prob");
+                    Set<NetworkElement> elementsSet;
+                    elementsSet = list.get(combinationNumber);
+                    this.setupNetworkElementEvent(event, elementsSet,
+                            combinationNumber);
+                    event.launchEvent();
+                }
+            }else if(event instanceof PeriodicEvent){
+                if(((PeriodicEvent) event).getPeriod() % sim.getSchedule().getSteps() == 0){
+                    event.launchEvent();
+                }
+            }
+        }
+    }
+    
+    public void setupNetworkElementEvent(Event event, Set<NetworkElement> elementsSet,
+            int configurationNumber){
+        for(NetworkElement ne : elementsSet){
+            event.addAffectedElement(ne);
+        }
+        
+    }
     public void generateFailures() throws UnsupportedScenarioStatusException,
             NoCombinationForFailureException,
             UnsupportedElementInFailureException, InstantiationException,
             IllegalAccessException {
-        MersenneTwisterFast randomizer = new MersenneTwisterFast();
-        String status = this.getCurrentStatus();
-        HashMap<Class<? extends Failure>, Double> penalties = this
-                .getPenaltiesInStatus(status);
-        Iterator<Class<? extends Failure>> it = this.getPossibleFailures()
-                .keySet().iterator();
-        while (it.hasNext()) {
-            Class<? extends Failure> type = it.next();
-            double penalty = 0;
-            double prob = 0;
-            try {
-                Failure failure = type.newInstance();
-                List<Set<NetworkElement>> list = this.getPossibleFailures()
-                        .get(type);
-                int numberOfCombinations = list.size();
-                int combinationNumber = randomizer.nextInt(numberOfCombinations);
-                try {
-                    if (penalties.containsKey(type)) {
-                        // Apply penalty
-                        penalty = penalties.get(type);
-                        if (penalty > 0) {
-                            prob = failure.getOccurrenceProbability()
-                                    * numberOfCombinations * penalty;
-                        } else {
-                            prob = -1.0; // Impossible failure
-                        }
-                    } else {
-                        prob = failure.getOccurrenceProbability()*numberOfCombinations;
-                    }
-                } catch (Exception e) {
-                    logger.fine("There is no penalty for failures: "
-                            + type.getName() + " in status " + status);
-                }
-//                double aux = randomizer.nextDouble(); // THIS OPTION GENERATE MANY FAULTS OF THE SAME TYPE AT THE SAME TIME
-                double aux = Math.random(); // THIS WORKS BETTER, MORE RANDOMLY
-                if (aux < prob) {
-                    // Generate failure
-                    Set<NetworkElement> elementsSet;
-                    if (numberOfCombinations >= 1) {
-                        elementsSet = list.get(combinationNumber);
-                        this.setupFailure(failure, elementsSet,
-                                combinationNumber);
-                    } else if (this.generatedFailureConfigurations.get(type).size() == 0) {
-                        throw new NoCombinationForFailureException(failure);
-                    }
-                }
-            } catch (NoCombinationForFailureException e) {
-                throw e;
-            } catch (UnsupportedElementInFailureException e) {
-                logger.severe("Impossible to instance failure: "
-                        + type.getName()
-                        + ". All failures must have a default constructor that calls other constructor Failure(String id, double occurrenceProbability)");
-                logger.severe("Exception: " + e.getMessage());
-                throw e;
-            }
-        }
+//        MersenneTwisterFast randomizer = new MersenneTwisterFast();
+//        String status = this.getCurrentStatus();
+//        HashMap<Class<? extends Failure>, Double> penalties = this
+//                .getPenaltiesInStatus(status);
+//        Iterator<Class<? extends Failure>> it = this.getPossibleFailures()
+//                .keySet().iterator();
+//        while (it.hasNext()) {
+//            Class<? extends Failure> type = it.next();
+//            double penalty = 0;
+//            double prob = 0;
+//            try {
+//                Failure failure = type.newInstance();
+//                List<Set<NetworkElement>> list = this.getPossibleFailures()
+//                        .get(type);
+//                int numberOfCombinations = list.size();
+//                //TODO mirar que esto funcione, cambio on the fly
+//                int numberOfAlreadyGeneratedCombinations = this.generatedFailureConfigurations.get(type).size();
+//                numberOfCombinations-=numberOfAlreadyGeneratedCombinations;
+//                //
+//                
+//                int combinationNumber = randomizer.nextInt(numberOfCombinations);
+//                try {
+//                    if (penalties.containsKey(type)) {
+//                        // Apply penalty
+//                        penalty = penalties.get(type);
+//                        if (penalty > 0) {
+//                            prob = failure.getOccurrenceProbability()
+//                                    * numberOfCombinations * penalty;
+//                        } else {
+//                            prob = -1.0; // Impossible failure
+//                        }
+//                    } else {
+//                        prob = failure.getOccurrenceProbability()*numberOfCombinations;
+//                    }
+//                } catch (Exception e) {
+//                    logger.fine("There is no penalty for failures: "
+//                            + type.getName() + " in status " + status);
+//                }
+////                double aux = randomizer.nextDouble(); // THIS OPTION GENERATE MANY FAULTS OF THE SAME TYPE AT THE SAME TIME
+//                double aux = Math.random(); // THIS WORKS BETTER, MORE RANDOMLY
+//                if (aux < prob) {
+//                    // Generate failure
+//                    Set<NetworkElement> elementsSet;
+//                    if (numberOfCombinations >= 1) {
+//                        elementsSet = list.get(combinationNumber);
+//                        this.setupFailure(failure, elementsSet,
+//                                combinationNumber);
+//                    } else if (this.generatedFailureConfigurations.get(type).size() == 0) {
+//                        throw new NoCombinationForFailureException(failure);
+//                    }
+//                }
+//            } catch (NoCombinationForFailureException e) {
+//                throw e;
+//            } catch (UnsupportedElementInFailureException e) {
+//                logger.severe("Impossible to instance failure: "
+//                        + type.getName()
+//                        + ". All failures must have a default constructor that calls other constructor Failure(String id, double occurrenceProbability)");
+//                logger.severe("Exception: " + e.getMessage());
+//                throw e;
+//            }
+//        }
     }
-
-    /**
-     * @param failure
-     * @param elementsSet
-     * @throws UnsupportedElementInFailureException
-     */
-    
-    private void setupFailure(Failure failure, Set<NetworkElement> elementsSet,
-            int configurationNumber)
-            throws UnsupportedElementInFailureException {
-        for (NetworkElement element : elementsSet) {
-            String statusToSet = failure.getPossibleAffectedElements().get(
-                    element.getClass());
-            if(element.getStatus().containsKey(statusToSet)){
-                //String valueToSee = failure.getPossibleAffectedElements().get(element);
-                boolean value = element.getStatus().get(statusToSet);
-                failure.addAffectedElement(element, statusToSet, value);
-            }else if(element.getProperties().containsKey(statusToSet)){
-                Object value = element.getProperty(statusToSet);
-                failure.addAffectedPropertiesOfElement(element, statusToSet, value);
-            }
-        }
-        if (!this.generatedFailureConfigurations.containsKey(failure.getClass())) {
-            this.generatedFailureConfigurations.put(failure.getClass(),
-                    new ArrayList<Integer>());
-        }
-        List<Integer> numList = this.generatedFailureConfigurations.get(failure.getClass());
-        if (!numList.contains(configurationNumber)) {
-            numList.add(configurationNumber);
-            this.generatedFailureConfigurations.put(failure.getClass(), numList);
-            failure.activateFailure();
-            this.addFailure(failure, configurationNumber);
-            logger.fine("Generated Failure " + failure.getID() + " with configuration " + configurationNumber);
-        }
-
-    }
+//
+//    /**
+//     * @param failure
+//     * @param elementsSet
+//     * @throws UnsupportedElementInFailureException
+//     */
+//    //TODO Retocar la manera de ver ahora los fallos (Lo hare cuando modifique escenario para adatarlo a eventos y acciones)
+//    //
+//    private void setupFailure(Failure failure, Set<NetworkElement> elementsSet,
+//            int configurationNumber)
+//            throws UnsupportedElementInFailureException {
+//        for (NetworkElement element : elementsSet) {
+//            String statusToSet = failure.getPossibleAffectedElements().get(
+//                    element.getClass());
+//            if(element.getStatus().containsKey(statusToSet)){
+//                //String valueToSee = failure.getPossibleAffectedElements().get(element);
+//                boolean value = element.getStatus().get(statusToSet);
+//                failure.addAffectedElement(element, statusToSet, value);
+//            }else if(element.getProperties().containsKey(statusToSet)){
+//                Object value = element.getProperty(statusToSet);
+//                failure.addAffectedPropertiesOfElement(element, statusToSet, value);
+//            }
+//        }
+//        if (!this.generatedFailureConfigurations.containsKey(failure.getClass())) {
+//            this.generatedFailureConfigurations.put(failure.getClass(),
+//                    new ArrayList<Integer>());
+//        }
+//        List<Integer> numList = this.generatedFailureConfigurations.get(failure.getClass());
+//        if (!numList.contains(configurationNumber)) {
+//            numList.add(configurationNumber);
+//            this.generatedFailureConfigurations.put(failure.getClass(), numList);
+//            failure.activateFailure();
+//            this.addFailure(failure, configurationNumber);
+//            logger.fine("Generated Failure " + failure.getID() + " with configuration " + configurationNumber);
+//        }
+//
+//    }
 
     /**
      * This method can return multipliers >1.0 (more probable failures) or

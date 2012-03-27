@@ -238,4 +238,10 @@ public class MyMegaComplexScenario extends ComplexScenario {
         gui.start();
     }
 
+    @Override
+    public void addPossibleEvents() {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

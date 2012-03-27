@@ -267,4 +267,10 @@ public class MyComplexScenario extends ComplexScenario {
         return new MyComplexScenario3DPortrayal(this, 100, 100, 100);
     }
 
+    @Override
+    public void addPossibleEvents() {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

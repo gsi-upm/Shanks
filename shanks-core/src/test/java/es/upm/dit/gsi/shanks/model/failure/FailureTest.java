@@ -64,9 +64,9 @@ public class FailureTest {
           
           Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
           
-          f.addPossibleAffectedElements(MyDevice.class, MyDevice.HIGH_TEMP_STATUS);
-          f.addAffectedElement(d, MyDevice.HIGH_TEMP_STATUS, true);
-          Assert.assertTrue(d.getStatus().get(MyDevice.HIGH_TEMP_STATUS));
+          f.addPossibleAffectedElements();
+          Assert.assertFalse((Boolean) f.getPossibleAffectedElements().get(d.getClass()).get(MyDevice.OK_STATUS));
+          Assert.assertFalse(d.getStatus().get(MyDevice.HIGH_TEMP_STATUS));
           Assert.assertTrue(d.getStatus().get(MyDevice.OK_STATUS));
           Assert.assertFalse(d.getStatus().get(MyDevice.NOK_STATUS));
     }
@@ -78,40 +78,31 @@ public class FailureTest {
     public void createFailureAndNoActiveIt() throws UnsupportedNetworkElementStatusException {
         Failure f = new MyFailure();
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
-        try {
-            f.addAffectedElement(d, MyDevice.NOK_STATUS, false);
-            Assert.assertTrue(d.getStatus().get(MyDevice.OK_STATUS));
-            Assert.assertEquals(false, f.isActive());
-            Assert.assertTrue(f.getAffectedElements().size()==1);
-            Assert.assertTrue(f.getCurrentAffectedElements().size()==0);
-        } catch (UnsupportedElementInFailureException e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+        f.addPossibleAffectedElements();
+        Assert.assertTrue(d.getStatus().get(MyDevice.OK_STATUS));
+        Assert.assertEquals(false, f.isActive());
+        Assert.assertTrue(f.getAffectedElements().size()==0);
+        Assert.assertTrue(f.getCurrentAffectedElements().size()==0);
     }
 
     /**
      * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedElementInFailureException 
      */
     @Test
-    public void createFailureAndActiveIt() throws UnsupportedNetworkElementStatusException {
+    public void createFailureAndActiveIt() throws UnsupportedNetworkElementStatusException, UnsupportedElementInFailureException {
         Failure f = new MyFailure();
         
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         
-        try {
-            f.addAffectedElement(d, MyDevice.OK_STATUS, false);
-            f.addAffectedElement(d, MyDevice.NOK_STATUS, true);
-            f.activateFailure();
-            Assert.assertTrue(d.getStatus().get(MyDevice.NOK_STATUS));
-            Assert.assertFalse(d.getStatus().get(MyDevice.OK_STATUS));
-            Assert.assertEquals(true, f.isActive());
-            Assert.assertTrue(f.getAffectedElements().size()==1);
-            Assert.assertTrue(f.getCurrentAffectedElements().size()==1);
-        } catch (UnsupportedElementInFailureException e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+        f.addAffectedElement(d, MyDevice.OK_STATUS, false);
+        f.addAffectedElement(d, MyDevice.NOK_STATUS, true);
+        f.activateFailure();
+        Assert.assertFalse(d.getStatus().get(MyDevice.NOK_STATUS));
+        Assert.assertFalse(d.getStatus().get(MyDevice.OK_STATUS));
+        Assert.assertEquals(true, f.isActive());
+        Assert.assertTrue(f.getAffectedElements().size()==1);
+        Assert.assertTrue(f.getCurrentAffectedElements().size()==1);
     }
 
 //    /**

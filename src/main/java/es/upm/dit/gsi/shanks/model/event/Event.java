@@ -1,189 +1,90 @@
 package es.upm.dit.gsi.shanks.model.event;
 
-import java.util.HashMap;
 import sim.engine.Steppable;
+
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
-
+import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 
 /**
- * @author dlara
- *
+ * Make the possible events
+ * 
+ * @author Daniel Lara
+ * 
  */
 
 public abstract class Event {
+
+    private String id;
+    private Steppable launcher;
     
-    private String name;
-    private Steppable generator;
     
-    private HashMap<String, Object> propertiesOfElementToChange;
-    private HashMap<String, Boolean> statusOfElementToChange;
-    private HashMap<String, Object> propertiesOfScenarioToChange;
-    
-    public boolean launch;
     
     /**
-     * @param name
-     * @param generator
+     * Constructor of the class
+     * 
+     * @param id
+     * @param launcher
      */
-    public Event(String name, Steppable generator){
-        this.name = name;
-        this.generator = generator;
+    public Event(String id, Steppable launcher) {
+        this.id = id;
+        this.launcher = launcher;     
         
-        this.propertiesOfElementToChange = new HashMap<String, Object>();
-        this.statusOfElementToChange = new HashMap<String, Boolean>();
-        this.propertiesOfScenarioToChange = new HashMap<String, Object>();
+    }
+
+    /**
+     * Add classes using addPossibleAffectedElements method
+     */
+    public abstract void addPossibleAffected();
+
+    /**
+     * @return the id
+     */
+    public String getID(){
+        return id;
+    }
+
+
+    /**
+     * @return the occurrenceProbability
+     */
+    public Steppable getLauncher(){
+        return launcher;
+    }
+
+
+
+
+    /**
+     * Used to generate the event.
+     * 
+     * @throws UnsupportedNetworkElementStatusException 
+     * @throws UnsupportedScenarioStatusException 
+     * 
+     */
+    public void launchEvent() throws UnsupportedNetworkElementStatusException, UnsupportedScenarioStatusException {
+        this.changeProperties();
+        this.changeStatus();
+        this.interactWithNE();
+        this.generateNotification();
+    }
+
+    private void generateNotification() {
         
-        launch = false;
+        
     }
     
-    /**
-     * @param gen
-     */
-    public void setGenerator(Steppable gen){
-        this.generator = gen;
-    }
+    public abstract void addAffectedElement(NetworkElement ne);
     
-    /**
-     * @return generator
-     */
-    public Steppable getGenerator(){
-        return this.generator;
-    }
+    public abstract void addAffectedScenario(Scenario scen);
     
-    /**
-     * @return name
-     */
-    public String getName(){
-        return this.name;
-    }
+    public abstract void changeProperties() throws UnsupportedNetworkElementStatusException;
     
+    public abstract void changeStatus() throws UnsupportedNetworkElementStatusException, UnsupportedScenarioStatusException;
     
-    /**
-     * @return propertiesOfElementToChange
-     */
-    public HashMap<String, Object> getPropertiesAffectedOfElement(){
-        return this.propertiesOfElementToChange;
-    }
-    
-    
-    
-    /**
-     * @return statusOfElementToChange
-     */
-    public HashMap<String, Boolean> getStatusAffectedOfElement(){
-        return this.statusOfElementToChange;
-    }
-    
-    /**
-     * @return propertiesOfScenarioToChange
-     */
-    public HashMap<String, Object> getPropertiesAffectedOfScenario(){
-        return this.propertiesOfScenarioToChange;
-    }
-    
-    /**
-     * @return launch (if the event is already launched)
-     */
-    public boolean isLaunched(){
-        return launch;
-    }
-    
-    /**
-     * This method active the event
-     */
-    public void launchEvent(){
-        this.launch = true;
-    }
-    
-    
-    
-    /**
-     * This method change the properties of a scenario when the event is launched
-     * 
-     * @param scenario
-     */
-    public void changePropertiesOfScenario(Scenario scenario){
-        if(this.launch){
-            for(String property : propertiesOfScenarioToChange.keySet()){
-                if(scenario.getProperties().containsKey(property)){
-                    scenario.getProperties().put(property, 
-                            propertiesOfScenarioToChange.get(property));
-                }
-            }
-        }
-    }
-    
-    /**
-     * This method change the status of a network element when the event is launched
-     * 
-     * @param element
-     * @throws UnsupportedNetworkElementStatusException
-     */
-    public void changeStatus(NetworkElement element) throws UnsupportedNetworkElementStatusException{
-        if(this.launch){
-            for(String state : statusOfElementToChange.keySet()){
-                if(element.getStatus().containsKey(state)){
-                    element.getStatus().put(state, statusOfElementToChange.get(state));
-                }
-            }
-        }
-    }
-    
-    /**
-     * This method change the properties of a network element when the event is launched
-     * 
-     * @param element
-     * @throws UnsupportedNetworkElementStatusException
-     */
-    public void changePropertiesOfNetworkElement(NetworkElement element) throws UnsupportedNetworkElementStatusException{
-        if(this.launch){
-            for(String prop : propertiesOfElementToChange.keySet()){
-                if(element.getProperties().containsKey(prop)){
-                    element.getProperties().put(prop, propertiesOfElementToChange.get(prop));
-                }
-            } 
-        }
-    }
-    
-    /**
-     * Add the properties of a scenario that the event will change
-     * 
-     * @param property
-     * @param value
-     */
-    public void addAffectedPropertiesOfScenario(String property, Object value){
-        propertiesOfScenarioToChange.put(property, value);
-    }
-    
-    
-    
-    /**
-     * Add the properties of a network element that the event will change
-     * 
-     * @param property
-     * @param value
-     */
-    public void addAffectedPropertiesOfElement(String property, Object value){
-        propertiesOfElementToChange.put(property, value);
-    }
-    
-    
-    
-    /**
-     * Add the states of a network element that the event will change
-     * 
-     * @param state
-     * @param value
-     */
-    public void addAffectedStatesOfElement(String state, Boolean value){
-        statusOfElementToChange.put(state, value);
-    }
-    
-    
-    
-    public abstract void addChanges();
-    
-    
+    public abstract void interactWithNE();
+
+
 }
+

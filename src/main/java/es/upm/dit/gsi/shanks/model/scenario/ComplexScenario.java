@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
+import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
@@ -166,13 +167,13 @@ public abstract class ComplexScenario extends Scenario {
      * 
      * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#generateFailures()
      */
-    public void generateFailures() throws UnsupportedScenarioStatusException,
+    public void generateNetworkElementsEvents(ShanksSimulation sim) throws UnsupportedScenarioStatusException,
             NoCombinationForFailureException,
             UnsupportedElementInFailureException, InstantiationException,
-            IllegalAccessException {
+            IllegalAccessException, SecurityException, IllegalArgumentException, UnsupportedNetworkElementStatusException, NoSuchMethodException, InvocationTargetException {
         super.generateFailures();
         for (Scenario scenario : this.scenarios.keySet()) {
-            scenario.generateFailures();
+            scenario.generateNetworkElementEvents(sim);
         }
     }
 

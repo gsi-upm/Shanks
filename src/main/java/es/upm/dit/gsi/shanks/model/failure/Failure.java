@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.failure.exception.UnsupportedElementInFailureException;
 
 /**
@@ -27,9 +28,10 @@ public abstract class Failure {
     private boolean active;
 
     private List<NetworkElement> affectedElements;
-    //private HashMap<NetworkElement, String> oldStatesOfAffectedElements;
-    private HashMap<Class<? extends NetworkElement>, String> possibleAffectedElements;
+    private HashMap<Class<? extends NetworkElement>, HashMap<String, Object>> possibleAffectedElements;
 
+    private HashMap<String, Object> hash = new HashMap<String, Object>();
+    
     private double occurrenceProbability;
 
     /**
@@ -42,8 +44,7 @@ public abstract class Failure {
         this.id = id+"_"+System.currentTimeMillis();
         this.occurrenceProbability = occurrenceProbability;
         this.affectedElements = new ArrayList<NetworkElement>();
-        //this.oldStatesOfAffectedElements = new HashMap<NetworkElement, String>();
-        this.possibleAffectedElements = new HashMap<Class<? extends NetworkElement>, String>();
+        this.possibleAffectedElements = new HashMap<Class<? extends NetworkElement>, HashMap<String, Object>>();
         this.active = false;
 
         this.addPossibleAffectedElements();
@@ -75,38 +76,65 @@ public abstract class Failure {
     public void setOccurrenceProbability(double occurrenceProbability) {
         this.occurrenceProbability = occurrenceProbability;
     }
-
-    /**
-     * Used to activate a failure. All elements will be set with the affected
-     * status.
-     * 
-     */
-    public void activateFailure(){
-        if (!this.active) {
+    
+    
+    
+    public void activateFailure() throws UnsupportedNetworkElementStatusException{
+        if(!this.active){
             List<? extends NetworkElement> elements = this.affectedElements;
-            List<String> status = new ArrayList<String>();
-            HashMap<String, Boolean> oldStatus = new HashMap<String, Boolean>();
-            for (NetworkElement element : elements) {
-                try{
-                        for(String s : element.getStatus().keySet()){
-                                status.add(s);
-                            }
-                        for(String state : status){
-                           oldStatus.put(state, element.getStatus().get(state)); 
-                        }
-                    }catch (Exception e) {
-                        logger.severe("Exception setting status: "
-                                + affectedElements.toString() + " in element "
-                                + element.getID() + ". Exception: "
-                                + e.getMessage());
+            for(NetworkElement e : elements){
+                for(Class c : possibleAffectedElements.keySet()){
+                    if(e.getClass().equals(c)){
+                       for(String s : possibleAffectedElements.get(c).keySet()){
+                           if(e.getStatus().containsKey(s)){
+                               e.updateStatusTo(s, (Boolean) possibleAffectedElements.get(c).get(s));
+                           }
+                       }
                     }
                 }
+            
+            }
             this.active = true;
-        } else {
-            logger.info("Failure " + this.getID() + " is already active.");
+      
         }
-
+        
+        
+        
+        
+        
     }
+
+//    /**
+//     * Used to activate a failure. All elements will be set with the affected
+//     * status.
+//     * 
+//     */
+//    public void activateFailure(){
+//        if (!this.active) {
+//            List<? extends NetworkElement> elements = this.affectedElements;
+//            List<String> status = new ArrayList<String>();
+//            HashMap<String, Boolean> oldStatus = new HashMap<String, Boolean>();
+//            for (NetworkElement element : elements) {
+//                try{
+//                        for(String s : element.getStatus().keySet()){
+//                                status.add(s);
+//                            }
+//                        for(String state : status){
+//                           oldStatus.put(state, element.getStatus().get(state)); 
+//                        }
+//                    }catch (Exception e) {
+//                        logger.severe("Exception setting status: "
+//                                + affectedElements.toString() + " in element "
+//                                + element.getID() + ". Exception: "
+//                                + e.getMessage());
+//                    }
+//                }
+//            this.active = true;
+//        } else {
+//            logger.info("Failure " + this.getID() + " is already active.");
+//        }
+//
+//    }
 
 //    /**
 //     * Used to deactivate a failure. All current affected elements will restore
@@ -167,7 +195,7 @@ public abstract class Failure {
      *            The element that will be affected by this failure when the
      *            failure will be active
      * @param status
-     *            The element status/property that will be set when the failure will be
+     *            The element status that will be set when the failure will be
      *            active
      * @throws UnsupportedElementInFailureException
      */
@@ -231,22 +259,23 @@ public abstract class Failure {
     /**
      * @return the possibleAffectedElements
      */
-    public HashMap<Class<? extends NetworkElement>, String> getPossibleAffectedElements() {
+    public HashMap<Class<? extends NetworkElement>, HashMap<String, Object>> getPossibleAffectedElements() {
         return possibleAffectedElements;
     }
 
     /**
      * @param c
      */
-    public void addPossibleAffectedElements(Class<? extends NetworkElement> c, String failureStatus) {
-        this.possibleAffectedElements.put(c, failureStatus);
+    public void addPossibleAffectedElements(Class<? extends NetworkElement> c, String status, boolean value) {
+        hash.put(status, value);
+        this.possibleAffectedElements.put(c, hash);
     }
     
     /**
      * @param c
      */
     public void addPossibleAffectedProperties(Class<? extends NetworkElement> c, String property, Object value) {
-        this.possibleAffectedElements.get(c.getName());
+        this.possibleAffectedElements.get(c).put(property, value);
     }
 
     /**

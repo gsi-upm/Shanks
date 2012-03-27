@@ -469,25 +469,20 @@ public abstract class Scenario {
         MersenneTwisterFast random = new MersenneTwisterFast();
         Iterator<Class<? extends Event>> it = this.getPossibleEventsOfNE()
             .keySet().iterator();
-        System.out.println("AQUI");
-        System.out.println(this.getPossibleEventsOfNE().size());
         while (it.hasNext()) {
             Class<? extends Event> type = it.next();
             double prob = 0;
-            int period = 0;
             Constructor<? extends Event> c = type.getConstructor(new Class[] {String.class, Steppable.class, Double.class});
             Event event = c.newInstance(sim.getScenarioManager());
-            System.out.println("ESTOY AQUI");
             if(event instanceof ProbabilisticNetworkElementEvent){
                 List<Set<NetworkElement>> list = this.getPossibleEventsOfNE()
                 .get(type);
                 int numberOfCombinations = list.size();
                 prob = ((ProbabilisticEvent) event).getProb();
-                System.out.println("prob " + prob);
+
                 double aux = Math.random();
                 int combinationNumber = random.nextInt(numberOfCombinations);
-                if(0 < prob){
-                    System.out.println("Dentro del if 0<prob");
+                if(aux < prob){
                     Set<NetworkElement> elementsSet;
                     elementsSet = list.get(combinationNumber);
                     this.setupNetworkElementEvent(event, elementsSet,
@@ -496,6 +491,53 @@ public abstract class Scenario {
                 }
             }else if(event instanceof PeriodicEvent){
                 if(((PeriodicEvent) event).getPeriod() % sim.getSchedule().getSteps() == 0){
+                    List<Set<NetworkElement>> list = this.getPossibleEventsOfNE()
+                    .get(type);
+                    int numberOfCombinations = list.size();
+                    int combinationNumber = random.nextInt(numberOfCombinations);
+                    Set<NetworkElement> elementSet;
+                    elementSet = list.get(combinationNumber);
+                    this.setupNetworkElementEvent(event, elementSet,
+                            combinationNumber);
+                    event.launchEvent();
+                }
+            }
+        }
+    }
+    
+    public void generateScenarioEvents(ShanksSimulation sim) throws UnsupportedScenarioStatusException, InstantiationException, IllegalAccessException, UnsupportedNetworkElementStatusException, SecurityException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException{
+        MersenneTwisterFast random = new MersenneTwisterFast();
+        Iterator<Class<? extends Event>> it = this.getPossibleEventsOfScenario()
+            .keySet().iterator();
+        while (it.hasNext()) {
+            Class<? extends Event> type = it.next();
+            double prob = 0;
+            Constructor<? extends Event> c = type.getConstructor(new Class[] {Steppable.class});
+            Event event = c.newInstance(sim.getScenarioManager());
+            if(event instanceof ProbabilisticNetworkElementEvent){
+                List<Set<Scenario>> list = this.getPossibleEventsOfScenario()
+                .get(type);
+                int numberOfCombinations = list.size();
+                prob = ((ProbabilisticEvent) event).getProb();
+                double aux = Math.random();
+                int combinationNumber = random.nextInt(numberOfCombinations);
+                if(aux < prob){
+                    Set<Scenario> scenarioSet;
+                    scenarioSet = list.get(combinationNumber);
+                    this.setupScenarioEvent(event, scenarioSet,
+                            combinationNumber);
+                    event.launchEvent();
+                }
+            }else if(event instanceof PeriodicEvent){
+                if(((PeriodicEvent) event).getPeriod() % sim.getSchedule().getSteps() == 0){
+                    List<Set<Scenario>> list = this.getPossibleEventsOfScenario()
+                    .get(type);
+                    int numberOfCombinations = list.size();
+                    int combinationNumber = random.nextInt(numberOfCombinations);
+                    Set<Scenario> scenarioSet;
+                    scenarioSet = list.get(combinationNumber);
+                    this.setupScenarioEvent(event, scenarioSet,
+                            combinationNumber);
                     event.launchEvent();
                 }
             }
@@ -506,9 +548,17 @@ public abstract class Scenario {
             int configurationNumber){
         for(NetworkElement ne : elementsSet){
             event.addAffectedElement(ne);
-        }
-        
+        }  
     }
+    
+    public void setupScenarioEvent(Event event, Set<Scenario> scenarioSet,
+            int configurationNumber){
+        for(Scenario ne : scenarioSet){
+            event.addAffectedScenario(ne);
+        }
+    }
+    
+    
     public void generateFailures() throws UnsupportedScenarioStatusException,
             NoCombinationForFailureException,
             UnsupportedElementInFailureException, InstantiationException,

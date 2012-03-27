@@ -103,6 +103,13 @@ public abstract class ProbabilisticScenarioEvent extends ProbabilisticEvent{
             this.possibleAffected.remove(elementClass);
         }
     }
+    
+    /**
+     * 
+     */
+    public List<?> getAffected() {
+        return this.getCurrentAffectedScenarios();
+    } 
 
 
 }

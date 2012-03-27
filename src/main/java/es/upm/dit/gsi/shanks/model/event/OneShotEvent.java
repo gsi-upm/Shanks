@@ -1,12 +1,12 @@
 package es.upm.dit.gsi.shanks.model.event;
 
+import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
-import sim.engine.Steppable;
 
-public class OneShotEvent extends Event{
+public abstract class OneShotEvent extends Event{
 
     public OneShotEvent(String id, Steppable launcher) {
         super(id, launcher);
@@ -50,5 +50,7 @@ public class OneShotEvent extends Event{
         // TODO Auto-generated method stub
         
     }
+
+
 
 }

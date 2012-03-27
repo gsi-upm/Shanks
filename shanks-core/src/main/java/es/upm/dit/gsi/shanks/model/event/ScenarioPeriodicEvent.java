@@ -102,5 +102,12 @@ public abstract class ScenarioPeriodicEvent extends PeriodicEvent{
             this.possibleAffected.remove(elementClass);
         }
     }
+     
+    /**
+     * 
+     */
+    public List<?> getAffected() {
+        return this.getCurrentAffectedScenarios();
+    } 
 
 }

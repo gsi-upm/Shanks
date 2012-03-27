@@ -1,5 +1,7 @@
 package es.upm.dit.gsi.shanks.model.event;
 
+import java.util.List;
+
 import sim.engine.Steppable;
 
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
@@ -84,6 +86,8 @@ public abstract class Event {
     public abstract void changeStatus() throws UnsupportedNetworkElementStatusException, UnsupportedScenarioStatusException;
     
     public abstract void interactWithNE();
+
+    public abstract List<?> getAffected();
 
 
 }

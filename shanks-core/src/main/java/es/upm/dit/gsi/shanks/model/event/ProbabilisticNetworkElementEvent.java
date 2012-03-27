@@ -122,7 +122,11 @@ public abstract class ProbabilisticNetworkElementEvent extends ProbabilisticEven
             this.possibleAffected.remove(elementClass);
         }
     }
-
+    
+    
+    public List<?> getAffected() {
+        return this.getCurrentAffectedElements();
+    }
         
 
 }

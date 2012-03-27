@@ -23,15 +23,14 @@ public class MyFailure extends Failure {
     /* (non-Javadoc)
      * @see es.upm.dit.gsi.shanks.model.failure.Failure#addPossibleAffectedElements()
      */
-    //TODO adaptarlo a poder ponerle valor
     @Override
     public void addPossibleAffectedElements() {
-        this.addPossibleAffectedElements(MyDevice.class, MyDevice.OK_STATUS);
-        this.addPossibleAffectedElements(MyDevice.class, MyDevice.NOK_STATUS);
-        this.addPossibleAffectedElements(MyDevice.class, MyDevice.HIGH_TEMP_STATUS);
-        this.addPossibleAffectedElements(MyLink.class, MyLink.BROKEN_STATUS);
-        this.addPossibleAffectedElements(MyLink.class, MyLink.OK_STATUS);
-        this.addPossibleAffectedElements(MyDevice.class, MyDevice.TEMPERATURE_PROPERTY);
+        this.addPossibleAffectedElements(MyDevice.class, MyDevice.OK_STATUS, false);
+        this.addPossibleAffectedElements(MyDevice.class, MyDevice.NOK_STATUS, false);
+        this.addPossibleAffectedElements(MyDevice.class, MyDevice.HIGH_TEMP_STATUS, true);
+        this.addPossibleAffectedElements(MyLink.class, MyLink.BROKEN_STATUS, false);
+        this.addPossibleAffectedElements(MyLink.class, MyDevice.OK_STATUS, false);
+        this.addPossibleAffectedProperties(MyDevice.class, MyDevice.TEMPERATURE_PROPERTY, 80);
     }
 
     /* (non-Javadoc)

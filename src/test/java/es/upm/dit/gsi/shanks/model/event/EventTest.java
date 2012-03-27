@@ -2,7 +2,6 @@ package es.upm.dit.gsi.shanks.model.event;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.Properties;
 import java.util.logging.LogManager;
 
 import junit.framework.Assert;
@@ -19,7 +18,10 @@ import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
-import es.upm.dit.gsi.shanks.model.event.test.MyEvent;
+import es.upm.dit.gsi.shanks.model.event.test.MyPeriodicNetElementEvent;
+import es.upm.dit.gsi.shanks.model.event.test.MyPeriodicScenarioEvent;
+import es.upm.dit.gsi.shanks.model.event.test.MyProbNetElementEvent;
+import es.upm.dit.gsi.shanks.model.event.test.MyProbScenarioEvent;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
@@ -53,164 +55,201 @@ public class EventTest {
     
     
     @Test
-    public void createEvent(){
+    public void createPeriodicNE(){
         Steppable generator = new Steppable() {
-            /**
-             * 
-             */
+         
             private static final long serialVersionUID = 1L;
 
             public void step(SimState arg0) {
+           
                 
             }
         };
-        Event event = new MyEvent("MyEvent", generator);
+        NetworkElementPeriodicEvent pe = new MyPeriodicNetElementEvent(generator);
         
-        Assert.assertEquals("MyEvent", event.getName());
+   
+        Assert.assertEquals(generator, pe.getLauncher());
+        Assert.assertEquals(500, pe.getPeriod());
+ 
     }
     
     @Test
-    public void createEventAndNoLaunch() throws UnsupportedNetworkElementStatusException{
+    public void createPeriodicNEAndLaunchIt() throws UnsupportedNetworkElementStatusException{
         Steppable generator = new Steppable() {
-            /**
-             * 
-             */
+            
             private static final long serialVersionUID = 1L;
 
             public void step(SimState arg0) {
+           
                 
             }
         };
+        NetworkElementPeriodicEvent pe = new MyPeriodicNetElementEvent(generator);
         
-        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
+
+        Assert.assertEquals(generator, pe.getLauncher());
+        Assert.assertEquals(500, pe.getPeriod());
         
-        Event event = new MyEvent("MyEvent", generator);
-        event.addChanges();
-        event.changePropertiesOfNetworkElement(d);
-        Assert.assertEquals("MyDevice", d.getID());
-        Assert.assertEquals(false, d.isGateway());
-        Assert.assertTrue(d.getStatus().keySet().contains(MyDevice.OK_STATUS));
-        Assert.assertTrue(d.getStatus().keySet().contains(MyDevice.NOK_STATUS));
-        Assert.assertTrue(d.getStatus().keySet().contains(MyDevice.UNKOWN_STATUS));
-        Assert.assertTrue(d.getStatus().keySet().contains(MyDevice.HIGH_TEMP_STATUS));
-        Assert.assertTrue(d.getStatus().get(MyDevice.OK_STATUS));
-        Assert.assertFalse(d.getStatus().get(MyDevice.NOK_STATUS));
+        Device dev = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
+        
+        Assert.assertEquals("MyDevice", dev.getID());
+        Assert.assertTrue(dev.getStatus().get(MyDevice.OK_STATUS));
+        Assert.assertFalse(dev.isGateway());
+        
+        pe.addAffectedElement(dev);
+        pe.changeProperties();
+        dev.checkStatus();
+        
+        Assert.assertEquals("MyDevice", dev.getID());
+        Assert.assertTrue(dev.getStatus().get(MyDevice.NOK_STATUS));
+        Assert.assertFalse(dev.getStatus().get(MyDevice.OK_STATUS));
+
     }
     
     @Test
-    public void createEventAndLaunch() throws UnsupportedNetworkElementStatusException {
+    public void createProbNE(){
         Steppable generator = new Steppable() {
-            /**
-             * 
-             */
+         
             private static final long serialVersionUID = 1L;
 
             public void step(SimState arg0) {
+           
                 
             }
         };
+        ProbabilisticNetworkElementEvent pe = new MyProbNetElementEvent(generator);
         
-        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
-        
-        Event event = new MyEvent("MyEvent", generator);
-        event.addChanges();
-        event.changePropertiesOfNetworkElement(d);
-        Assert.assertEquals("MyDevice", d.getID());
-        Assert.assertEquals(false, d.isGateway());
-        Assert.assertTrue(d.getStatus().keySet().contains(MyDevice.OK_STATUS));
-        Assert.assertTrue(d.getStatus().keySet().contains(MyDevice.NOK_STATUS));
-        Assert.assertTrue(d.getStatus().keySet().contains(MyDevice.UNKOWN_STATUS));
-        Assert.assertTrue(d.getStatus().keySet().contains(MyDevice.HIGH_TEMP_STATUS));
-        Assert.assertTrue(d.getStatus().get(MyDevice.OK_STATUS));
-        Assert.assertFalse(d.getStatus().get(MyDevice.NOK_STATUS));
-        
-        
-        event.launchEvent();
-        event.changePropertiesOfNetworkElement(d);
-        d.checkStatus();
-        Assert.assertEquals(100, d.getProperties().get(MyDevice.TEMPERATURE_PROPERTY));
-        Assert.assertFalse(d.getStatus().get(MyDevice.OK_STATUS));
-        Assert.assertTrue(d.getStatus().get(MyDevice.NOK_STATUS));
-    }
-    
-    
-    @Test
-    public void createEventAndNoChangeScenarioProperties() throws UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException{
-        Steppable generator = new Steppable() {
-            /**
-             * 
-             */
-            private static final long serialVersionUID = 1L;
 
-            public void step(SimState arg0) {
-                
-            }
-        };
-        
-        Properties scenarioProperties = new Properties();
-        scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
-        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
-        Scenario s = new MyScenario("MyScenario", MyScenario.SUNNY, scenarioProperties);
-        Assert.assertEquals("MyScenario", s.getID());
-        Assert.assertEquals(MyScenario.SUNNY, s.getCurrentStatus());
-        
-        Event event = new MyEvent("MyEvent", generator);
-        
-        event.addChanges();
-        event.changePropertiesOfScenario(s);
-        Assert.assertEquals("50", s.getProperties().get(MyScenario.CLOUDY_PROB));
-        
-        
+        Assert.assertEquals(generator, pe.getLauncher());
+        Assert.assertEquals(0.50, pe.getProb());
+ 
     }
     
     @Test
-    public void createEventAndChangeScenarioProperties() throws UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException{
+    public void createProbNEAndLaunchIt() throws UnsupportedNetworkElementStatusException{
         Steppable generator = new Steppable() {
-            /**
-             * 
-             */
+            
             private static final long serialVersionUID = 1L;
 
             public void step(SimState arg0) {
+           
+                
+            }
+        };
+        ProbabilisticNetworkElementEvent pe = new MyProbNetElementEvent(generator);
+        
+
+        Assert.assertEquals(generator, pe.getLauncher());
+        Assert.assertEquals(0.50, pe.getProb());
+ 
+        Device dev = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
+        Assert.assertEquals("MyDevice", dev.getID());
+        Assert.assertTrue(dev.getStatus().get(MyDevice.OK_STATUS));
+        Assert.assertFalse(dev.isGateway());
+        
+        pe.addAffectedElement(dev);
+        pe.changeProperties();
+        dev.checkStatus();
+        
+        Assert.assertEquals("MyDevice", dev.getID());
+        Assert.assertTrue(dev.getStatus().get(MyDevice.HIGH_TEMP_STATUS));
+        Assert.assertFalse(dev.getStatus().get(MyDevice.OK_STATUS));
+    }
+    
+    @Test
+    public void createProbScenarioEvent(){
+        Steppable generator = new Steppable() {
+            
+            private static final long serialVersionUID = 1L;
+
+            public void step(SimState arg0) {
+           
                 
             }
         };
         
-        Properties scenarioProperties = new Properties();
-        scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
-        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
-        Scenario s = new MyScenario("MyScenario", MyScenario.SUNNY, scenarioProperties);
-        Assert.assertEquals("MyScenario", s.getID());
-        Assert.assertEquals(MyScenario.SUNNY, s.getCurrentStatus());
-        
-        Event event = new MyEvent("MyEvent", generator);
-        
-        event.addChanges();
-        event.changePropertiesOfScenario(s);    
-        Assert.assertEquals("50", s.getProperties().get(MyScenario.CLOUDY_PROB));
-        event.launchEvent();
-        event.changePropertiesOfScenario(s); 
-        Assert.assertEquals("80", s.getProperties().get(MyScenario.CLOUDY_PROB));
+        ProbabilisticScenarioEvent pe = new MyProbScenarioEvent(generator);
+        Assert.assertEquals(generator, pe.getLauncher());
+        Assert.assertEquals(0.50, pe.getProb());
         
         
     }
+    
+    @Test
+    public void createProbScenarioEventAndLaunchaIt() throws UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException{
+        Steppable generator = new Steppable() {
+            
+            private static final long serialVersionUID = 1L;
+
+            public void step(SimState arg0) {
+           
+                
+            }
+        };
+        
+        ProbabilisticScenarioEvent pe = new MyProbScenarioEvent(generator);
+
+        Assert.assertEquals(generator, pe.getLauncher());
+        Assert.assertEquals(0.50, pe.getProb());
+        
+        Scenario scen = new MyScenario("MyScenario", MyScenario.SUNNY, null);
+        Assert.assertEquals("MyScenario", scen.getID());
+        Assert.assertEquals(MyScenario.SUNNY, scen.getCurrentStatus());
+        Assert.assertNull(scen.getProperties());
+        
+        pe.addAffectedScenario(scen);
+        pe.changeStatus();
+        Assert.assertEquals(MyScenario.CLOUDY, scen.getCurrentStatus());
+        
+    }
+    
+    @Test
+    public void createPeriodicScenarioEvent(){
+        Steppable generator = new Steppable() {
+            
+            private static final long serialVersionUID = 1L;
+
+            public void step(SimState arg0) {
+           
+                
+            }
+        };
+        
+        ScenarioPeriodicEvent pe = new MyPeriodicScenarioEvent(generator);
+
+        Assert.assertEquals(generator, pe.getLauncher());
+        Assert.assertEquals(500, pe.getPeriod());
+        
+        
+    }
+    
+    @Test
+    public void createPeriodicScenarioEventAndLaunchaIt() throws UnsupportedNetworkElementStatusException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException{
+        Steppable generator = new Steppable() {
+            
+            private static final long serialVersionUID = 1L;
+
+            public void step(SimState arg0) {
+           
+                
+            }
+        };
+        
+        ScenarioPeriodicEvent pe = new MyPeriodicScenarioEvent(generator);
+
+        Assert.assertEquals(generator, pe.getLauncher());
+        Assert.assertEquals(500, pe.getPeriod());
+        
+        Scenario scen = new MyScenario("MyScenario", MyScenario.SUNNY, null);
+        Assert.assertEquals("MyScenario", scen.getID());
+        Assert.assertEquals(MyScenario.SUNNY, scen.getCurrentStatus());
+        Assert.assertNull(scen.getProperties());
+        
+        pe.addAffectedScenario(scen);
+        pe.changeStatus();
+        Assert.assertEquals(MyScenario.CLOUDY, scen.getCurrentStatus());
+        
+    }
+    
+   
 }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-

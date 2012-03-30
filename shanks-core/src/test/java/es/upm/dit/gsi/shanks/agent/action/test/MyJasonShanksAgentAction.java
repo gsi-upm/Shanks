@@ -1,10 +1,13 @@
 package es.upm.dit.gsi.shanks.agent.action.test;
 
+import jason.asSyntax.NumberTermImpl;
 import jason.asSyntax.Term;
 
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
+
+import sim.engine.Steppable;
 
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.ShanksAgent;
@@ -14,8 +17,14 @@ import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
+import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 
 public class MyJasonShanksAgentAction extends JasonShanksAgentAction {
+
+    public MyJasonShanksAgentAction(String id, Steppable launcher) {
+        super(id, launcher);
+        // TODO Auto-generated constructor stub
+    }
 
     public static final String FIX = "fix";
     private Logger logger = Logger
@@ -53,6 +62,24 @@ public class MyJasonShanksAgentAction extends JasonShanksAgentAction {
         logger.finer("Number of current failures: "
                 + simulation.getScenario().getCurrentFailures().size());
         return true;
+    }
+
+    @Override
+    public void addPossibleAffected() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void addAffectedScenario(Scenario scen) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void interactWithNE() {
+        // TODO Auto-generated method stub
+        
     }
 
 }

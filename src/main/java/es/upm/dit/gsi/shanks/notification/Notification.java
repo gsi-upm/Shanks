@@ -1,8 +1,7 @@
-package es.upm.dit.gsi.shanks.model.notifications;
+package es.upm.dit.gsi.shanks.notification;
 
 import java.util.List;
 
-import es.upm.dit.gsi.shanks.model.event.Event;
 import es.upm.dit.gsi.shanks.model.event.OneShotEvent;
 import es.upm.dit.gsi.shanks.model.event.PeriodicEvent;
 import es.upm.dit.gsi.shanks.model.event.ProbabilisticEvent;

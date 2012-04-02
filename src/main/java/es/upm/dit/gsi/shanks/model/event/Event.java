@@ -8,6 +8,7 @@ import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
+import es.upm.dit.gsi.shanks.notification.NotificationManager;
 
 /**
  * Make the possible events
@@ -73,8 +74,7 @@ public abstract class Event {
     }
 
     private void generateNotification() {
-        
-        
+        NotificationManager.addNotification(this);
     }
     
     public abstract void addAffectedElement(NetworkElement ne);

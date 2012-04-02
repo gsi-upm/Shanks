@@ -5,9 +5,8 @@ import java.util.List;
 
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.model.event.Event;
-import es.upm.dit.gsi.shanks.notification.Notification;
 
-public class NotificationManager {
+public class NotificationManager {//extends Steppable {
 
     private static List<Notification> ln;
     private static ShanksSimulation sim;

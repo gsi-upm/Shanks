@@ -6,10 +6,6 @@ package es.upm.dit.gsi.shanks.notification;
 
 import java.util.List;
 
-import es.upm.dit.gsi.shanks.model.event.OneShotEvent;
-import es.upm.dit.gsi.shanks.model.event.PeriodicEvent;
-import es.upm.dit.gsi.shanks.model.event.ProbabilisticEvent;
-
 /**
  * A InteractionNotification store information of Events, cause in SHANKS all interactions
  * between two elements are defined by them. This information have a relational

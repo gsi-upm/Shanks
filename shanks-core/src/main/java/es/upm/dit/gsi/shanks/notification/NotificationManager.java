@@ -6,6 +6,7 @@ package es.upm.dit.gsi.shanks.notification;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import sim.engine.SimState;
 import sim.engine.Steppable;
@@ -40,12 +41,16 @@ public class NotificationManager implements Steppable {
      * Notification Identifier counter. 
      */
     private static int ID_COUNTER;
+    
+    private static Logger logger = Logger.getLogger(NotificationManager.class.getName());
 
     /**
      * Constructor with predefined  notification list. 
      * 
      * @param lNotifications 
-     *          the predefined list of notifications, probably a list of and old simulation.  
+     *          the predefined list of notifications, probably a list from an old simulation.
+     * @param lNotifables
+     *          the predefined list of notifables elements, probably a list from an old simulation.    
      * @param simulation
      *                  a reference to the simulation object, needed to obtain information 
      *                  for each notification.
@@ -56,6 +61,9 @@ public class NotificationManager implements Steppable {
         NotificationManager.notifables = lNotifables;
         NotificationManager.sim = simulation;
         NotificationManager.ID_COUNTER = 0;
+        logger.info("NotificationManager set with custom initial fields..." +
+        		"\nNotifications List: "+lNotifications+"\nNotifable elements"+lNotifables +
+        		"\nCurrent simulation: "+simulation+"\nNotification idetifiers counter: "+ID_COUNTER);
     }
 
 
@@ -72,6 +80,8 @@ public class NotificationManager implements Steppable {
         NotificationManager.notifables = new ArrayList<Notifable>();
         NotificationManager.sim = simulation;
         NotificationManager.ID_COUNTER = 0;
+        logger.info("NotificationManager set with default initial fields.\nNotification " +
+        		"identifiers counter: "+ID_COUNTER);
     }
     
     /**
@@ -87,6 +97,8 @@ public class NotificationManager implements Steppable {
                                         NotificationManager.sim.getSchedule().getSteps(), 
                                         e.getLauncher(), e.getClass().getName(), 
                                         (List<Object>) e.getAffected()));
+        logger.fine("New notification added to the Notifications List: " +
+                                notifications.get(notifications.size()));
     }
     
     /**
@@ -95,6 +107,7 @@ public class NotificationManager implements Steppable {
      */
     public static void addNotifable(Notifable notifable) {
         NotificationManager.notifables.add(notifable);
+        logger.fine("New notifable element added to the notifables list: "+ notifable);
     }
 
     /**
@@ -105,6 +118,7 @@ public class NotificationManager implements Steppable {
      *          a notification ID corresponding with the number of notifications saved on this simulation.  
      */
     private static String getNotificationID() {
+        logger.fine("Notifications identifier counter: "+ID_COUNTER+1);
         return "Notification#" + NotificationManager.ID_COUNTER++;
     }
     
@@ -120,9 +134,11 @@ public class NotificationManager implements Steppable {
         //TODO maybe SORT_By_ID then make a better array searching algorithm
         for (Notification n: NotificationManager.notifications){
             if(n.getId().equals(id)){
+                logger.fine("...found a match for getByID query. With id: "+id);
                 return n;
             }
         }
+        logger.fine("There is no notification that match the given ID: "+id);
         return null;
     }
     
@@ -137,8 +153,10 @@ public class NotificationManager implements Steppable {
     public List<Notification> getByStep(int step) {
         List<Notification> found = new ArrayList<Notification>();
         for (Notification n: NotificationManager.notifications)
-            if (n.getWhen() == step) 
+            if (n.getWhen() == step){
+                logger.fine("...found a match for getByStep query. With step: "+step);
                 found.add(n);
+            }
         if(found.size()>0)        
             return found;
         return null;
@@ -154,8 +172,10 @@ public class NotificationManager implements Steppable {
     public List<Notification> getBySource(Object source) {
         List<Notification> found = new ArrayList<Notification>();
         for (Notification n: NotificationManager.notifications)
-            if (n.getSource().equals(source)) 
+            if (n.getSource().equals(source)) {
+                logger.fine("...found a match for getBySource query. With source: "+source);
                 found.add(n);
+            }
         if(found.size()>0)        
             return found;
         return null;
@@ -172,8 +192,11 @@ public class NotificationManager implements Steppable {
     public List<Notification> getByInteraction(Class<?> interaction) {
         List<Notification> found = new ArrayList<Notification>();
         for (Notification n: NotificationManager.notifications)
-            if (((InteractionNotification)n).getInteraction().equals(interaction.getName())) 
+            if (((InteractionNotification)n).getInteraction().equals(interaction.getName())){ 
+                logger.fine("...found a match for getByInteraction query. With interaction: " +
+                            interaction.getName());
                 found.add(n);
+            }
         if(found.size()>0)        
             return found;
         return null;
@@ -192,8 +215,10 @@ public class NotificationManager implements Steppable {
         List<Notification> found = new ArrayList<Notification>();
         for (Notification n: NotificationManager.notifications) {
             for (Object t : ((InteractionNotification)n).getTarget()) {
-                if (t.equals(target)) 
+                if (t.equals(target)){ 
+                    logger.fine("...found a match for getByTarget query. With target: "+target);
                     found.add(n);
+                }
             }
         }
         if(found.size()>0)        
@@ -204,15 +229,17 @@ public class NotificationManager implements Steppable {
     /**
      * Search for notifications of ElementValue type that match the given element identifier.
      * @param elementID
-     *                  the identifier of the element that was notfied. 
+     *                  the identifier of the element that was notified. 
      * @return
      *          A list with the notifications saved for the given element identifier.  
      */
     public List<Notification> getByElementID(String elementID) {
         List<Notification> found = new ArrayList<Notification>();
         for (Notification n: NotificationManager.notifications)
-            if (((ElementValueNotification)n).getElementID().equals(elementID)) 
+            if (((ElementValueNotification)n).getElementID().equals(elementID)) {
+                logger.fine("...found a match for getByElementID query. With elementID: "+elementID);
                 found.add(n);
+            }
         if(found.size()>0)        
             return found;
         return null;
@@ -243,7 +270,8 @@ public class NotificationManager implements Steppable {
             else if (n.getClass().isAssignableFrom(ElementValueNotification.class))
                 evnList.add(n);
             else {
-                //TODO Warning
+                logger.warning("There is a notification from non-suppported type or the " +
+                		"notification type is missing .\nNotification: "+n);
             }
         }
         ArrayList<ArrayList<Notification>> byType = new ArrayList<ArrayList<Notification>>();
@@ -258,6 +286,7 @@ public class NotificationManager implements Steppable {
      */
     @Override
     public void step(SimState arg0) {
+        logger.info("Notifying each element of the notifable element list...");
         for(Notifable n: NotificationManager.notifables){
             NotificationManager.addNotification(n);
         }
@@ -277,7 +306,9 @@ public class NotificationManager implements Steppable {
                 n.getSource(), 
                 n.getID(), 
                 n.getElementValue()));
+        logger.fine("Notification added. Element: "+ n.getID()+". Value ="+n.getElementValue());
     }
     
     private static final long serialVersionUID = 1528691206423084650L;
+    
 }

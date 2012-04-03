@@ -22,32 +22,21 @@ import es.upm.dit.gsi.shanks.model.event.ProbabilisticEvent;
  */
 public class InteractionNotification extends Notification {
     
-    public static final String ONE_SHOOT_EVENT_TYPE = OneShotEvent.class.getName();
-    public static final String PERIODIC_EVENT_TYPE = PeriodicEvent.class.getName();
-    public static final String PROBABILISTIC_EVENT_TYPE = ProbabilisticEvent.class.getName();
-    
     /**
      * Name of the class that define the interaction itself. 
      */
     private String interaction = null;
     
     /**
-     * Interaction target objects.
+     * Interaction's target objects.
      */
     private List<Object> target = null;
     
     /**
-     * 
-     * @param id
-     * @param when
-     * @param source
-     */
-    public InteractionNotification(String id, long when, Object source) {
-        super(id, when, source);
-        // TODO Auto-generated constructor stub
-    }
-
-    /**
+     * Default constructor. A InteractionNotification needs the parameters to set up a 
+     * notification plus a the name of the class that defines the interaction and the 
+     * target object that the interactions affect. 
+     *   
      * @param id
      * @param when
      * @param source
@@ -62,14 +51,16 @@ public class InteractionNotification extends Notification {
     }
 
     /**
-     * @return the name of the class that defines the  interaction.
+     * @return 
+     *          the name of the class that defines the  interaction.
      */
     public String getInteraction() {
         return interaction;
     }
 
     /**
-     * @return a list of interaction's target objects 
+     * @return 
+     *          a list of interaction's target objects 
      */
     public List<Object> getTarget() {
         return target;

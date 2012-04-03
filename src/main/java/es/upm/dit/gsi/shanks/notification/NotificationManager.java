@@ -19,11 +19,27 @@ import es.upm.dit.gsi.shanks.model.event.Event;
  */
 public class NotificationManager implements Steppable {
 
+    /**
+     * List of notifications saved trough the hole simulation. 
+     */
     private static List<Notification> notifications;
+    
+    /**
+     * List of elements defined for the user to be notified automatically when 
+     * NotificationManager step its called. 
+     */
     private static List<Notifable> notifables;
+    
+    /**
+     * The object simulation needed to get some information for the current state 
+     * of the simulation. 
+     */
     private static ShanksSimulation sim;
+    
+    /**
+     * Notification Identifier counter. 
+     */
     private static int ID_COUNTER;
-
 
     /**
      * Constructor with predefined  notification list. 
@@ -218,7 +234,6 @@ public class NotificationManager implements Steppable {
         return (ArrayList<Notification>) byType.get(1);
     }
     
-    
     private List<?> getByType() {
         ArrayList <Notification> inList = new ArrayList<Notification>();
         ArrayList <Notification> evnList = new ArrayList<Notification>();
@@ -237,7 +252,10 @@ public class NotificationManager implements Steppable {
         return byType;
     }
 
-
+    /**
+     * When the setp of NotificationManager its called generates a notification for each notifable 
+     * that has been added to it. 
+     */
     @Override
     public void step(SimState arg0) {
         for(Notifable n: NotificationManager.notifables){
@@ -246,8 +264,11 @@ public class NotificationManager implements Steppable {
     }
     
     /**
+     * Add a new notification of the ElementValueNotification type. The ones that are defined
+     * by the user. 
      * 
      * @param n
+     *          the notifable element to be recorded as a notification. 
      */
     private static void addNotification(Notifable n) {
         NotificationManager.notifications.add(new ElementValueNotification(
@@ -256,9 +277,7 @@ public class NotificationManager implements Steppable {
                 n.getSource(), 
                 n.getID(), 
                 n.getElementValue()));
-        
     }
-    
     
     private static final long serialVersionUID = 1528691206423084650L;
 }

@@ -5,53 +5,64 @@
 package es.upm.dit.gsi.shanks.notification;
 
 /**
+ * This interface defines an object that will be saved automatically each time
+ * the NotificationManager step its trigger. 
+ * 
+ * Ha sido creado con la intención de que los usuarios puedan crear variables 
+ * tipo pensadas para medir estadisticas en la simulación. dichas variables 
+ * implementarán esta interfaz, lo que les otorga el comportamiento automático 
+ * de generar una notificación cada vez que el paso NotificationManager se ejecute. 
  * 
  * @author darofar
- *
  */
 public abstract class Notifable {
     
     /**
-     * 
+     * the variable identifier.  
      */
     String id;
     
     /**
-     * 
+     * current variable value. 
      */
     Object elementValue;
     
+    /**
+     * Default constructor. It subscribes this object on the Notifables list of 
+     * NotificationManager.   
+     */
     public Notifable() {
         NotificationManager.addNotifable(this);
     }
 
     /**
-     * 
-     * @return the id
+     * @return 
+     *      the variable identifier. 
      */
     abstract public String getID();
 
     /**
-     * @param id the id to set
+     * @param id 
+     *          the variable identifier.
      */
     abstract public void setId(String id);
 
     /**
-     * 
-     * @return the elementValue
+     * @return 
+     *          the current value of the variable.
      */
     abstract public Object getElementValue();
 
     /**
-     * @param elementValue the elementValue to set
+     * @param elementValue
+     *         sets the current value of the variable to the given value. 
      */
     abstract public void setElementValue(Object elementValue);
 
     /**
-     * 
      * @return
+     *          the object that originates the variable notification. 
      */
     abstract public Object getSource();
-    
 
 }

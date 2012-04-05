@@ -189,12 +189,12 @@ public class NotificationManager implements Steppable {
      * @return
      *          a List with the notifications founded that match the given class name. 
      */
-    public List<Notification> getByInteraction(Class<?> interaction) {
+    public List<Notification> getByInteraction(String interaction) {
         List<Notification> found = new ArrayList<Notification>();
         for (Notification n: NotificationManager.notifications)
-            if (((InteractionNotification)n).getInteraction().equals(interaction.getName())){ 
+            if (((InteractionNotification)n).getInteraction().equals(interaction)){ 
                 logger.fine("...found a match for getByInteraction query. With interaction: " +
-                            interaction.getName());
+                            interaction);
                 found.add(n);
             }
         if(found.size()>0)        
@@ -234,6 +234,8 @@ public class NotificationManager implements Steppable {
      *          A list with the notifications saved for the given element identifier.  
      */
     public List<Notification> getByElementID(String elementID) {
+//        if(elementID == null)
+//            return null;
         List<Notification> found = new ArrayList<Notification>();
         for (Notification n: NotificationManager.notifications)
             if (((ElementValueNotification)n).getElementID().equals(elementID)) {

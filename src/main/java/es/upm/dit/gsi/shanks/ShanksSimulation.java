@@ -23,6 +23,7 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
+import es.upm.dit.gsi.shanks.notification.NotificationManager;
 
 /**
  * Model class
@@ -41,6 +42,8 @@ public class ShanksSimulation extends SimState {
     public Logger logger = Logger.getLogger(ShanksSimulation.class.getName());
 
     private ScenarioManager scenarioManager;
+    
+    private NotificationManager notificationManager;
 
     private HashMap<String, ShanksAgent> agents;
 
@@ -80,6 +83,7 @@ public class ShanksSimulation extends SimState {
         super(seed);
         this.scenarioManager = this.createScenarioManager(scenarioClass,
                 scenarioID, initialState, properties);
+        this.notificationManager = this.createNotificationManager();
         this.agents = new HashMap<String, ShanksAgent>();
         this.registerShanksAgents();
     }
@@ -134,6 +138,14 @@ public class ShanksSimulation extends SimState {
         }
         ScenarioManager sm = new ScenarioManager(s, sp);
         return sm;
+    }
+    
+    private NotificationManager createNotificationManager() {
+        // Class<? extends Scenario> scenarioClass, String scenarioID,
+        // String initialState, Properties properties) {
+        //TODO add the way to create the NM with initial values taken from properties. 
+        NotificationManager nm = new NotificationManager(this);
+        return nm;
     }
 
     /**
@@ -211,9 +223,9 @@ public class ShanksSimulation extends SimState {
     public void startSimulation() throws DuplicatedAgentIDException,
             DuplicatedActionIDException {
         schedule.scheduleRepeating(Schedule.EPOCH, 0, this.scenarioManager, 2);
+        schedule.scheduleRepeating(Schedule.EPOCH, 1, this.notificationManager, 10);
         this.addAgents();
         this.addSteppables();
-
     }
 
     /**
@@ -297,4 +309,10 @@ public class ShanksSimulation extends SimState {
         System.exit(0);
     }
 
+    /**
+     * @return the notificationManager
+     */
+    public NotificationManager getNotificationManager() {
+        return notificationManager;
+    }
 }

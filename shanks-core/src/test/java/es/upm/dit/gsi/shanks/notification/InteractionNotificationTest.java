@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.model.event.OneShotEvent;
 import es.upm.dit.gsi.shanks.model.event.PeriodicEvent;
 import es.upm.dit.gsi.shanks.model.event.ProbabilisticEvent;
@@ -84,7 +85,7 @@ public class InteractionNotificationTest {
         }
         
         try {
-            NotificationManager nm = new NotificationManager(ln, null, TestDefinitions.getSimulation());
+            NotificationManager nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
             Assert.assertEquals(ln, (nm.getByType(InteractionNotification.class)));
             ln.add(new InteractionNotification(null, 0, nm, null, null));
             Assert.assertNotSame(ln, (nm.getByType(InteractionNotification.class)));
@@ -112,7 +113,7 @@ public class InteractionNotificationTest {
         ArrayList<Notification> obtained_ln = new ArrayList<Notification>();
         NotificationManager nm = null;
         try {
-            nm = new NotificationManager(ln, null, TestDefinitions.getSimulation());
+            nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
             obtained_ln= nm.getByType(InteractionNotification.class);
             Assert.assertEquals(ln, obtained_ln);
             for (Notification expected: ln){
@@ -148,7 +149,7 @@ public class InteractionNotificationTest {
         
         NotificationManager nm = null;
         try {
-            nm = new NotificationManager(ln, null, TestDefinitions.getSimulation());
+            nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
             Assert.assertEquals(ln, nm.getByType(InteractionNotification.class));
             
             for(String step:stepCount.keySet()){
@@ -213,7 +214,7 @@ public class InteractionNotificationTest {
         }
         NotificationManager nm = null;
         try {
-            nm = new NotificationManager(ln, null, TestDefinitions.getSimulation());
+            nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
             Assert.assertEquals(ln, nm.getByType(InteractionNotification.class));
             
             for(Object source:sourceCount.keySet()){
@@ -263,7 +264,7 @@ public class InteractionNotificationTest {
         
         NotificationManager nm = null;
         try {
-            nm = new NotificationManager(ln, null, TestDefinitions.getSimulation());
+            nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
             Assert.assertEquals(ln, nm.getByType(InteractionNotification.class));
             
             for(String interaction:interactionCount.keySet()){
@@ -331,7 +332,7 @@ public class InteractionNotificationTest {
             }
             
             NotificationManager nm = null;
-            nm = new NotificationManager(ln, null, TestDefinitions.getSimulation());
+            nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
             Assert.assertEquals(ln, nm.getByType(InteractionNotification.class));
             
             for(Object target:targetCount.keySet()){
@@ -362,7 +363,7 @@ public class InteractionNotificationTest {
                     TestDefinitions.IN_INTERACTION, TestDefinitions.IN_TARGET));
         }
         try {
-            NotificationManager nm = new NotificationManager(ln, null, TestDefinitions.getSimulation());
+            NotificationManager nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
             Assert.assertEquals(ln, (nm.getByType(InteractionNotification.class)));
             ln.add(new InteractionNotification(null, 0, nm, null, null));
             Assert.assertNotSame(ln, (nm.getByType(InteractionNotification.class)));
@@ -378,6 +379,23 @@ public class InteractionNotificationTest {
      */
     @Test
     public void createNotificationsFromEvents() {
+        
+        try {
+            ShanksSimulation sim = TestDefinitions.getSimulation(1);
+            
+            
+            
+            sim.start();
+            do
+                if (!sim.schedule.step(sim))
+                    break;
+            while (sim.schedule.getSteps() < 2001);
+            sim.finish();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail();
+        }
+        
 
 //        Assert.assertTrue(catched);
     }

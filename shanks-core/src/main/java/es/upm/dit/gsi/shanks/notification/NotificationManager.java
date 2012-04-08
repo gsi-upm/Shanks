@@ -97,8 +97,10 @@ public class NotificationManager implements Steppable {
                                         NotificationManager.sim.getSchedule().getSteps(), 
                                         e.getLauncher(), e.getClass().getName(), 
                                         (List<Object>) e.getAffected()));
-        logger.fine("New notification added to the Notifications List: " +
-                                notifications.get(notifications.size()));
+        logger.fine("New notification added to notifications list. There is currently: " +
+                                notifications.get(notifications.size())+" notifications." +
+                                "\n Notification added: "+NotificationManager.notifications
+                                .get(NotificationManager.notifications.size()-1));
     }
     
     /**

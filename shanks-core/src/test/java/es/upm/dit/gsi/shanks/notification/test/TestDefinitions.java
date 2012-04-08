@@ -17,7 +17,6 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
-import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation;
 
 public class TestDefinitions {
 
@@ -46,7 +45,7 @@ public class TestDefinitions {
      * @return
      *          a test simulation. 
      */
-    public static ShanksSimulation getSimulation() throws SecurityException,
+    public static ShanksSimulation getSimulation(int conf) throws SecurityException,
             IllegalArgumentException, NoSuchMethodException,
             InstantiationException, IllegalAccessException,
             InvocationTargetException,
@@ -58,8 +57,8 @@ public class TestDefinitions {
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
         Properties configProperties = new Properties();
-        configProperties.put(MyShanksSimulation.CONFIGURATION, "0");
-        MyShanksSimulation sim = new MyShanksSimulation(
+        configProperties.put(TestSimulation.CONFIGURATION, conf);
+        TestSimulation sim = new TestSimulation(
                 System.currentTimeMillis(), MyScenario.class, "MyScenario",
                 MyScenario.SUNNY, scenarioProperties, configProperties);
         return sim;

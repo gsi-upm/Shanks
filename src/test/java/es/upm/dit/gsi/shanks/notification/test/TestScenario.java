@@ -16,6 +16,8 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
 
 public class TestScenario extends Scenario{
 
+    public static final String TEST_STATE = "sunny";
+
     public TestScenario(String id, String initialState, Properties properties)
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException, UnsupportedScenarioStatusException,

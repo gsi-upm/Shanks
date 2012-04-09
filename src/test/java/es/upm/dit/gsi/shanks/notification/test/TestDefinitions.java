@@ -16,7 +16,6 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
-import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
 
 public class TestDefinitions {
 
@@ -58,9 +57,9 @@ public class TestDefinitions {
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
         Properties configProperties = new Properties();
         configProperties.put(TestSimulation.CONFIGURATION, conf);
-        TestSimulation sim = new TestSimulation(
-                System.currentTimeMillis(), MyScenario.class, "MyScenario",
-                MyScenario.SUNNY, scenarioProperties, configProperties);
+        TestSimulation sim = new TestSimulation(System.currentTimeMillis(), 
+                TestScenario.class, "TestScenario", TestScenario.TEST_STATE, 
+                scenarioProperties, configProperties);
         return sim;
     }
 

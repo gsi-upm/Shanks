@@ -17,7 +17,7 @@ import org.junit.Test;
 import es.upm.dit.gsi.shanks.notification.test.TestAgent;
 import es.upm.dit.gsi.shanks.notification.test.TestDefinitions;
 
-public class ElementValueNotificationTest {
+public class ValueNotificationTest {
 
     /**
      * @throws Exception
@@ -50,19 +50,19 @@ public class ElementValueNotificationTest {
     @Test
     public void createNotification() {
 
-        ElementValueNotification iNotification = new ElementValueNotification(
+        ValueNotification iNotification = new ValueNotification(
                 TestDefinitions.NOTIFICATION_ID, TestDefinitions.NOTIFICATION_WHEN,
-                TestDefinitions.NOTIFICATION_SOURCE, TestDefinitions.EVN_ELEMENT_ID,
-                TestDefinitions.EVN_VALUE);
+                TestDefinitions.NOTIFICATION_SOURCE, TestDefinitions.VN_ELEMENT_ID,
+                TestDefinitions.VN_VALUE);
 
         Assert.assertTrue(iNotification.getId().equals(TestDefinitions.NOTIFICATION_ID));
         Assert.assertTrue(iNotification.getWhen() == TestDefinitions.NOTIFICATION_WHEN);
         Assert.assertTrue(iNotification.getSource().equals(
                 TestDefinitions.NOTIFICATION_SOURCE));
         Assert.assertTrue(iNotification.getElementID().equals(
-                TestDefinitions.EVN_ELEMENT_ID));
+                TestDefinitions.VN_ELEMENT_ID));
         Assert.assertTrue(iNotification.getValue().equals(
-                TestDefinitions.EVN_VALUE));
+                TestDefinitions.VN_VALUE));
     }
 
     /**
@@ -74,15 +74,15 @@ public class ElementValueNotificationTest {
         ArrayList<Notification> ln = new ArrayList<Notification>();
         
         for (int i = 0; i < TestDefinitions.NOTIFICATIONS_SIZE; i++) {
-            ln.add(new ElementValueNotification(TestDefinitions.NOTIFICATION_ID+i, 
+            ln.add(new ValueNotification(TestDefinitions.NOTIFICATION_ID+i, 
                     TestDefinitions.NOTIFICATION_WHEN, TestDefinitions.NOTIFICATION_SOURCE, 
-                    TestDefinitions.EVN_ELEMENT_ID, TestDefinitions.EVN_VALUE));
+                    TestDefinitions.VN_ELEMENT_ID, TestDefinitions.VN_VALUE));
         }
         try {
             NotificationManager nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
-            Assert.assertEquals(ln, (nm.getByType(ElementValueNotification.class)));
-            ln.add(new ElementValueNotification(null, 0, nm, null, null));
-            Assert.assertNotSame(ln, (nm.getByType(ElementValueNotification.class)));
+            Assert.assertEquals(ln, (nm.getByType(ValueNotification.class)));
+            ln.add(new ValueNotification(null, 0, nm, null, null));
+            Assert.assertNotSame(ln, (nm.getByType(ValueNotification.class)));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(""+e);
@@ -99,16 +99,16 @@ public class ElementValueNotificationTest {
         ArrayList<Notification> ln = new ArrayList<Notification>();
         
         for (int i = 0; i < TestDefinitions.NOTIFICATIONS_SIZE; i++) {
-            ln.add(new ElementValueNotification(TestDefinitions.NOTIFICATION_ID+i, 
+            ln.add(new ValueNotification(TestDefinitions.NOTIFICATION_ID+i, 
                     TestDefinitions.NOTIFICATION_WHEN, TestDefinitions.NOTIFICATION_SOURCE, 
-                    TestDefinitions.EVN_ELEMENT_ID, TestDefinitions.EVN_VALUE));
+                    TestDefinitions.VN_ELEMENT_ID, TestDefinitions.VN_VALUE));
         }
         
         ArrayList<Notification> obtained_ln = new ArrayList<Notification>();
         NotificationManager nm = null;
         try {
             nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
-            obtained_ln = nm.getByType(ElementValueNotification.class);
+            obtained_ln = nm.getByType(ValueNotification.class);
             Assert.assertEquals(ln, obtained_ln);
             for (Notification expected: ln){
                 Assert.assertEquals(expected, nm.getByID(expected.getId()));
@@ -136,15 +136,15 @@ public class ElementValueNotificationTest {
             } else {
                 stepCount.put(step.toString(), 1);
             }
-            ln.add(new ElementValueNotification(TestDefinitions.NOTIFICATION_ID+i, step, 
-                    TestDefinitions.NOTIFICATION_SOURCE, TestDefinitions.EVN_ELEMENT_ID, 
-                    TestDefinitions.EVN_VALUE));
+            ln.add(new ValueNotification(TestDefinitions.NOTIFICATION_ID+i, step, 
+                    TestDefinitions.NOTIFICATION_SOURCE, TestDefinitions.VN_ELEMENT_ID, 
+                    TestDefinitions.VN_VALUE));
         }
         
         NotificationManager nm = null;
         try {
             nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
-            Assert.assertEquals(ln, nm.getByType(ElementValueNotification.class));
+            Assert.assertEquals(ln, nm.getByType(ValueNotification.class));
             
             for(String step:stepCount.keySet()){
                 List<Notification> obtained = nm.getByStep(Integer.parseInt(step));
@@ -202,14 +202,14 @@ public class ElementValueNotificationTest {
             } else {
                 sourceCount.put(source, 1);
             }
-            ln.add(new ElementValueNotification(TestDefinitions.NOTIFICATION_ID+i,
-                    TestDefinitions.NOTIFICATION_WHEN, source, TestDefinitions.EVN_ELEMENT_ID, 
-                    TestDefinitions.EVN_VALUE));
+            ln.add(new ValueNotification(TestDefinitions.NOTIFICATION_ID+i,
+                    TestDefinitions.NOTIFICATION_WHEN, source, TestDefinitions.VN_ELEMENT_ID, 
+                    TestDefinitions.VN_VALUE));
         }
         NotificationManager nm = null;
         try {
             nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
-            Assert.assertEquals(ln, nm.getByType(ElementValueNotification.class));
+            Assert.assertEquals(ln, nm.getByType(ValueNotification.class));
             
             for(Object source:sourceCount.keySet()){
                 List<Notification> obtained = nm.getBySource(source);
@@ -233,14 +233,14 @@ public class ElementValueNotificationTest {
         
         ArrayList<Notification> ln = new ArrayList<Notification>();
         for (int i = 0; i < TestDefinitions.NOTIFICATIONS_SIZE; i++) {
-            ln.add(new ElementValueNotification(TestDefinitions.NOTIFICATION_ID+i, 
+            ln.add(new ValueNotification(TestDefinitions.NOTIFICATION_ID+i, 
                     TestDefinitions.NOTIFICATION_WHEN, TestDefinitions.NOTIFICATION_SOURCE, 
-                    TestDefinitions.EVN_ELEMENT_ID, TestDefinitions.EVN_VALUE));
+                    TestDefinitions.VN_ELEMENT_ID, TestDefinitions.VN_VALUE));
         }
         NotificationManager nm = null;
         try {
             nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
-            Assert.assertEquals(ln, nm.getByType(ElementValueNotification.class));
+            Assert.assertEquals(ln, nm.getByType(ValueNotification.class));
             @SuppressWarnings("unused")
             List<Notification> obtained = nm.getByInteraction(TestDefinitions.IN_INTERACTION);
             Assert.fail();
@@ -256,14 +256,14 @@ public class ElementValueNotificationTest {
     public void checkTargetQueries() {
         ArrayList<Notification> ln = new ArrayList<Notification>();
         for (int i = 0; i < TestDefinitions.NOTIFICATIONS_SIZE; i++) {
-            ln.add(new ElementValueNotification(TestDefinitions.NOTIFICATION_ID+i, 
+            ln.add(new ValueNotification(TestDefinitions.NOTIFICATION_ID+i, 
                     TestDefinitions.NOTIFICATION_WHEN, TestDefinitions.NOTIFICATION_SOURCE, 
-                    TestDefinitions.EVN_ELEMENT_ID, TestDefinitions.EVN_VALUE));
+                    TestDefinitions.VN_ELEMENT_ID, TestDefinitions.VN_VALUE));
         }
         NotificationManager nm = null;
         try {
             nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
-            Assert.assertEquals(ln, nm.getByType(ElementValueNotification.class));
+            Assert.assertEquals(ln, nm.getByType(ValueNotification.class));
             @SuppressWarnings("unused")
             List<Notification> obtained = nm.getByTarget(TestDefinitions.IN_INTERACTION);
             Assert.fail();
@@ -283,7 +283,7 @@ public class ElementValueNotificationTest {
         ArrayList<String> allElementIDs = new ArrayList<String>();
         
         for(int i=0; i<=TestDefinitions.ELEMENT_ID_SIZE; i++)
-            allElementIDs.add(TestDefinitions.EVN_ELEMENT_ID+i);
+            allElementIDs.add(TestDefinitions.VN_ELEMENT_ID+i);
         
         for (int i=0; i<TestDefinitions.NOTIFICATIONS_SIZE; i++) {
             String elementID = allElementIDs.get((int)
@@ -293,13 +293,13 @@ public class ElementValueNotificationTest {
             } else {
                 elementIDCount.put(elementID, 1);
             }
-            ln.add(new ElementValueNotification(TestDefinitions.NOTIFICATION_ID+i, 
+            ln.add(new ValueNotification(TestDefinitions.NOTIFICATION_ID+i, 
                     TestDefinitions.NOTIFICATION_WHEN, TestDefinitions.NOTIFICATION_SOURCE, 
-                    elementID, TestDefinitions.EVN_VALUE));
+                    elementID, TestDefinitions.VN_VALUE));
         }
         try {
             NotificationManager nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
-            Assert.assertEquals(ln, (nm.getByType(ElementValueNotification.class)));
+            Assert.assertEquals(ln, (nm.getByType(ValueNotification.class)));
             for(String elementID:elementIDCount.keySet()){
                 List<Notification> obtained = nm.getByElementID(elementID);
                 Assert.assertTrue(obtained.size()==elementIDCount.get(elementID).intValue());

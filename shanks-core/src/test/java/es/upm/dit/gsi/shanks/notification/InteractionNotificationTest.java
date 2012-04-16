@@ -367,7 +367,7 @@ public class InteractionNotificationTest {
             Assert.assertEquals(ln, (nm.getByType(InteractionNotification.class)));
             ln.add(new InteractionNotification(null, 0, nm, null, null));
             Assert.assertNotSame(ln, (nm.getByType(InteractionNotification.class)));
-            List<Notification> obtained = nm.getByElementID(TestDefinitions.EVN_ELEMENT_ID);
+            List<Notification> obtained = nm.getByElementID(TestDefinitions.VN_ELEMENT_ID);
             Assert.assertEquals(null, obtained);
             Assert.fail();
         } catch (Exception e) {
@@ -382,22 +382,17 @@ public class InteractionNotificationTest {
         
         try {
             ShanksSimulation sim = TestDefinitions.getSimulation(1);
-            
-            
-            
             sim.start();
             do
                 if (!sim.schedule.step(sim))
                     break;
             while (sim.schedule.getSteps() < 2001);
+            NotificationManager nm = sim.getNotificationManager();
             sim.finish();
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail();
         }
-        
-
-//        Assert.assertTrue(catched);
     }
     
 

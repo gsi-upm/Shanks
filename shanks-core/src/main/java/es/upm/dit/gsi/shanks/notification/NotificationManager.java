@@ -92,7 +92,7 @@ public class NotificationManager implements Steppable {
      *          the event that for the notification. 
      */
     @SuppressWarnings("unchecked")
-    static public void addNotification(Event e) {
+     public static void addNotification(Event e) {
         NotificationManager.notifications.add(new InteractionNotification(getNotificationID(),
                                         NotificationManager.sim.getSchedule().getSteps(), 
                                         e.getLauncher(), e.getClass().getName(), 
@@ -240,7 +240,7 @@ public class NotificationManager implements Steppable {
 //            return null;
         List<Notification> found = new ArrayList<Notification>();
         for (Notification n: NotificationManager.notifications)
-            if (((ElementValueNotification)n).getElementID().equals(elementID)) {
+            if (((ValueNotification)n).getElementID().equals(elementID)) {
                 logger.fine("...found a match for getByElementID query. With elementID: "+elementID);
                 found.add(n);
             }
@@ -271,7 +271,7 @@ public class NotificationManager implements Steppable {
         for (Notification n: NotificationManager.notifications) {
             if(n.getClass().isAssignableFrom(InteractionNotification.class))
                 inList.add(n);
-            else if (n.getClass().isAssignableFrom(ElementValueNotification.class))
+            else if (n.getClass().isAssignableFrom(ValueNotification.class))
                 evnList.add(n);
             else {
                 logger.warning("There is a notification from non-suppported type or the " +
@@ -304,7 +304,7 @@ public class NotificationManager implements Steppable {
      *          the notifable element to be recorded as a notification. 
      */
     private static void addNotification(Notifable n) {
-        NotificationManager.notifications.add(new ElementValueNotification(
+        NotificationManager.notifications.add(new ValueNotification(
                 getNotificationID(),
                 NotificationManager.sim.getSchedule().getSteps(), 
                 n.getSource(), 

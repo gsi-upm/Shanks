@@ -472,7 +472,7 @@ public abstract class Scenario {
         while (it.hasNext()) {
             Class<? extends Event> type = it.next();
             double prob = 0;
-            Constructor<? extends Event> c = type.getConstructor(new Class[] {String.class, Steppable.class, Double.class});
+            Constructor<? extends Event> c = type.getConstructor(new Class[] {String.class, Steppable.class, Integer.class});
             Event event = c.newInstance(sim.getScenarioManager());
             if(event instanceof ProbabilisticNetworkElementEvent){
                 List<Set<NetworkElement>> list = this.getPossibleEventsOfNE()

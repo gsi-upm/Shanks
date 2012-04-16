@@ -5,6 +5,9 @@ import java.util.Properties;
 
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.event.NetworkElementPeriodicEvent;
+import es.upm.dit.gsi.shanks.model.event.OneShotEvent;
+import es.upm.dit.gsi.shanks.model.event.ScenarioPeriodicEvent;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
@@ -29,47 +32,60 @@ public class TestScenario extends Scenario{
     @Override
     public Scenario2DPortrayal createScenario2DPortrayal()
             throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public Scenario3DPortrayal createScenario3DPortrayal()
             throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public void setPossibleStates() {
-        // TODO Auto-generated method stub
-        
+        this.addPossibleStatus(TestScenario.TEST_STATE);
     }
 
     @Override
     public void addNetworkElements()
             throws UnsupportedNetworkElementStatusException,
             TooManyConnectionException, DuplicatedIDException {
-        // TODO Auto-generated method stub
-        
     }
 
     @Override
     public void addPossibleFailures() {
-        // TODO Auto-generated method stub
-        
     }
 
     @Override
     public void addPossibleEvents() {
-        // TODO Auto-generated method stub
-        
+        TestDevice neped = null;
+        try {
+            neped = new TestDevice(TestDefinitions.DEVICE_ID+"NEPE", null, false);
+        } catch (UnsupportedNetworkElementStatusException e1) {
+            e1.printStackTrace();
+        }
+        this.addPossibleEventsOfNE(NetworkElementPeriodicEvent.class, neped);
+//        TestDevice sped = null;
+//        try {
+//            sped = new TestDevice(TestDefinitions.DEVICE_ID+"SPE", null, false);
+//        } catch (UnsupportedNetworkElementStatusException e1) {
+//            e1.printStackTrace();
+//        }
+//        this.addPossibleEventsOfNE(ScenarioPeriodicEvent.class, sped);
+//        TestDevice osed = null;
+//        try {
+//            osed = new TestDevice(TestDefinitions.DEVICE_ID+"SPE", null, false);
+//        } catch (UnsupportedNetworkElementStatusException e1) {
+//            e1.printStackTrace();
+//        }
+//        this.addPossibleEventsOfNE(OneShotEvent.class, osed);
+//        this.addPossibleEventsOfScenario(ScenarioPeriodicEvent.class, this);
+//        this.addPossibleEventsOfScenario(OneShotEvent.class, this);
     }
 
     @Override
     public HashMap<Class<? extends Failure>, Double> getPenaltiesInStatus(
             String status) throws UnsupportedScenarioStatusException {
-        // TODO Auto-generated method stub
         return null;
     }
 

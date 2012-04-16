@@ -5,7 +5,7 @@
 package es.upm.dit.gsi.shanks.notification;
 
 /**
- * ElementValueNotifactions are user-made notifications that trace the value of certain 
+ * ValueNotifactions are user-made notifications that trace the value of certain 
  * field, variable or whatever it wants to save for consult later. In this case  a 
  * notification has the form:
  * 
@@ -14,7 +14,7 @@ package es.upm.dit.gsi.shanks.notification;
  * @author darofar
  *
  */
-public class ElementValueNotification extends Notification {
+public class ValueNotification extends Notification {
 
     /**
      * The identifier of the element to trace.
@@ -37,7 +37,7 @@ public class ElementValueNotification extends Notification {
      * @param elementID
      * @param value
      */
-    public ElementValueNotification(String id, long when, Object source,
+    public ValueNotification(String id, long when, Object source,
             String elementID, Object value) {
         super(id, when, source);
         this.elementID = elementID;

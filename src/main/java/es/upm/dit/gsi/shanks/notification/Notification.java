@@ -37,9 +37,14 @@ public abstract class Notification {
     private long when = -1;
     
     /**
-     * Interaction source object.   
+     * Notification source object.   
      */
     private Object source;
+    
+    /**
+     * Notification target object.   
+     */
+    private Object target;
 
     /**
      * @param id
@@ -73,4 +78,12 @@ public abstract class Notification {
     public long getWhen() {
         return when;
     }
+
+    /**
+     * @return the target
+     */
+    public Object getTarget() {
+        return target;
+    }
+
 }

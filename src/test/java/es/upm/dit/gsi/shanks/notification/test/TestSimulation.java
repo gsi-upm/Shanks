@@ -6,13 +6,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
 
 import sim.engine.Schedule;
-import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
-import es.upm.dit.gsi.shanks.agent.test.MyJasonShanksAgent;
-import es.upm.dit.gsi.shanks.agent.test.MySimpleShanksAgent;
 import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
-import es.upm.dit.gsi.shanks.model.ScenarioManager;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
@@ -74,7 +70,8 @@ public class TestSimulation extends ShanksSimulation {
      */
     @Override
     public void addSteppables() {
-        int conf = new Integer(this.configuration.getProperty(TestSimulation.CONFIGURATION));
+        int conf = (new Integer(this.configuration.getProperty(TestSimulation.CONFIGURATION))).intValue();
+//        int conf = 1;
         switch (conf) {
         case 0:
             logger.fine("Nothing to do here... No more steppables");
@@ -98,21 +95,21 @@ public class TestSimulation extends ShanksSimulation {
 
     }
 
-    @Override
-    public void registerShanksAgents() throws DuplicatedAgentIDException,
-            DuplicatedActionIDException {
-        MyJasonShanksAgent agent = new MyJasonShanksAgent("resolverAgent1",
-                "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent1.asl");
-        this.registerShanksAgent(agent);
-        MyJasonShanksAgent agent2 = new MyJasonShanksAgent("resolverAgent2",
-                "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent2.asl");
-        this.registerShanksAgent(agent2);
-        MyJasonShanksAgent agent3 = new MyJasonShanksAgent("resolverAgent3",
-                "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent3.asl");
-        this.registerShanksAgent(agent3);
-        MySimpleShanksAgent agent4 = new MySimpleShanksAgent("simpleAgent1", 5, 10);
-        this.registerShanksAgent(agent4);
-    }
+//    @Override
+//    public void registerShanksAgents() throws DuplicatedAgentIDException,
+//            DuplicatedActionIDException {
+//        MyJasonShanksAgent agent = new MyJasonShanksAgent("resolverAgent1",
+//                "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent1.asl");
+//        this.registerShanksAgent(agent);
+//        MyJasonShanksAgent agent2 = new MyJasonShanksAgent("resolverAgent2",
+//                "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent2.asl");
+//        this.registerShanksAgent(agent2);
+//        MyJasonShanksAgent agent3 = new MyJasonShanksAgent("resolverAgent3",
+//                "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent3.asl");
+//        this.registerShanksAgent(agent3);
+//        MySimpleShanksAgent agent4 = new MySimpleShanksAgent("simpleAgent1", 5, 10);
+//        this.registerShanksAgent(agent4);
+//    }
     
     private static final long serialVersionUID = -4791498585683932164L;
 

@@ -26,8 +26,8 @@ public class TestDefinitions {
     public static final String IN_INTERACTION = Event.class.getName();
     public static final List<Object> IN_TARGET = new ArrayList<Object>();
     
-    public static final String EVN_ELEMENT_ID = "ElementID";
-    public static final Object EVN_VALUE = new Object();
+    public static final String VN_ELEMENT_ID = "ElementID";
+    public static final Object VN_VALUE = new Object();
     
     public static final int NOTIFICATIONS_SIZE = 10;
     public static final int SOURCES_SIZE = 5;
@@ -56,7 +56,7 @@ public class TestDefinitions {
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
         Properties configProperties = new Properties();
-        configProperties.put(TestSimulation.CONFIGURATION, conf);
+        configProperties.put(TestSimulation.CONFIGURATION, ""+conf);
         TestSimulation sim = new TestSimulation(System.currentTimeMillis(), 
                 TestScenario.class, "TestScenario", TestScenario.TEST_STATE, 
                 scenarioProperties, configProperties);

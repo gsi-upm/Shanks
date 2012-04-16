@@ -168,8 +168,9 @@ public class ScenarioManager implements Steppable {
         this.scenario.generateFailures();
     }
     
-    private void generateScenarioEvents(ShanksSimulation sim){
-        //TODO complete the method
+    private void generateScenarioEvents(ShanksSimulation sim) throws SecurityException, IllegalArgumentException, UnsupportedScenarioStatusException, InstantiationException, IllegalAccessException, UnsupportedNetworkElementStatusException, NoSuchMethodException, InvocationTargetException{
+//        this.scenario.generateScenarioEvents(sim);
+        //TODO this method doesn't work properly.
     }
     
     private void generateNetworkElementEvents(ShanksSimulation sim) throws UnsupportedScenarioStatusException, InstantiationException, IllegalAccessException, UnsupportedNetworkElementStatusException, SecurityException, IllegalArgumentException, NoSuchMethodException, InvocationTargetException{

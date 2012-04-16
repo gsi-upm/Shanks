@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import sim.engine.Schedule;
 import sim.engine.SimState;
+import sim.engine.Stoppable;
 import es.upm.dit.gsi.shanks.agent.ShanksAgent;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
 import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
@@ -46,6 +47,8 @@ public class ShanksSimulation extends SimState {
     private NotificationManager notificationManager;
 
     private HashMap<String, ShanksAgent> agents;
+    
+    private HashMap<String, Stoppable> stoppables;
 
     private int numOfResolvedFailures;
 
@@ -85,6 +88,7 @@ public class ShanksSimulation extends SimState {
                 scenarioID, initialState, properties);
         this.notificationManager = this.createNotificationManager();
         this.agents = new HashMap<String, ShanksAgent>();
+        this.stoppables = new HashMap<String, Stoppable>();
         this.registerShanksAgents();
     }
 
@@ -236,7 +240,7 @@ public class ShanksSimulation extends SimState {
     private void addAgents() throws DuplicatedAgentIDException,
             DuplicatedActionIDException {
         for (Entry<String, ShanksAgent> agentEntry : this.agents.entrySet()) {
-            schedule.scheduleRepeating(Schedule.EPOCH, 2, agentEntry.getValue(), 1);
+            stoppables.put(agentEntry.getKey(), schedule.scheduleRepeating(Schedule.EPOCH, 2, agentEntry.getValue(), 1));
         }
     }
 
@@ -257,6 +261,25 @@ public class ShanksSimulation extends SimState {
             this.agents.put(agent.getID(), agent);
         } else {
             throw new DuplicatedAgentIDException(agent.getID());
+        }
+    }
+    
+    /**
+     * Unregisters an agent.
+     * 
+     * @param agentID - The ID for the agent
+     */
+    public void unregisterShanksAgent(String agentID){
+        if (this.agents.containsKey(agentID)) {
+            //  this.agents.get(agentID).stop();
+            if (stoppables.containsKey(agentID)) {
+                this.agents.remove(agentID);
+                this.stoppables.remove(agentID).stop();
+            } else {
+                //No stoppable, stops the agent
+                logger.warning("No stoppable found while trying to stop the agent. Attempting direct stop...");
+                this.agents.remove(agentID).stop();
+            }
         }
     }
 

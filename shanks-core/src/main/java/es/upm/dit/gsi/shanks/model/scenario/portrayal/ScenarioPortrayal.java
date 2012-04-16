@@ -324,7 +324,7 @@ public abstract class ScenarioPortrayal {
     }
     
     /**
-     * Add a chart to the simulation
+     * Add a histogram to the simulation
      * 
      * @param HistogramID
      * @param String xAxisLabel

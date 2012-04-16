@@ -33,6 +33,8 @@ public class MyShanksSimulation extends ShanksSimulation {
     private Properties configuration;
 
     public static final String CONFIGURATION = "Configuration";
+    
+    public int counter = 0;
 
     /**
      * @param seed
@@ -71,6 +73,7 @@ public class MyShanksSimulation extends ShanksSimulation {
             DuplicatedActionIDException {
         super(seed, scenarioClass, scenarioID, initialState, properties);
         this.configuration = configPropertiesMyShanksSimulation;
+        this.counter++;
     }
 
     /*
@@ -121,6 +124,16 @@ public class MyShanksSimulation extends ShanksSimulation {
         this.registerShanksAgent(agent3);
         MySimpleShanksAgent agent4 = new MySimpleShanksAgent("simpleAgent1", 5, 10);
         this.registerShanksAgent(agent4);
+        MySimpleShanksAgent agent5 = new MySimpleShanksAgent("toBeRemovedAgent", 5, 10);
+        this.registerShanksAgent(agent5);
     }
 
+    
+    public int getCounter(){
+        return this.counter;
+    }
+    
+    public void increaseCounter(){
+        this.counter++;
+    }
 }

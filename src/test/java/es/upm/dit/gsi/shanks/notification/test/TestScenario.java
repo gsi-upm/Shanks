@@ -6,8 +6,6 @@ import java.util.Properties;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.event.NetworkElementPeriodicEvent;
-import es.upm.dit.gsi.shanks.model.event.OneShotEvent;
-import es.upm.dit.gsi.shanks.model.event.ScenarioPeriodicEvent;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;

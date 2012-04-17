@@ -235,14 +235,14 @@ public class NotificationManager implements Steppable {
      * @return
      *          A list with the notifications saved for the given element identifier.  
      */
-    public List<Notification> getByElementID(String elementID) {
-//        if(elementID == null)
-//            return null;
-        List<Notification> found = new ArrayList<Notification>();
+    public List<ValueNotification> getByElementID(String elementID) {
+        if(elementID == null)
+            return null;
+        List<ValueNotification> found = new ArrayList<ValueNotification>();
         for (Notification n: NotificationManager.notifications)
             if (((ValueNotification)n).getElementID().equals(elementID)) {
                 logger.fine("...found a match for getByElementID query. With elementID: "+elementID);
-                found.add(n);
+                found.add((ValueNotification) n);
             }
         if(found.size()>0)        
             return found;
@@ -262,7 +262,9 @@ public class NotificationManager implements Steppable {
         List<?> byType = this.getByType();
         if (type.isAssignableFrom(InteractionNotification.class))
             return (ArrayList<Notification>) byType.get(0);
-        return (ArrayList<Notification>) byType.get(1);
+        if (type.isAssignableFrom(ValueNotification.class))
+            return (ArrayList<Notification>) byType.get(1);
+        return null;
     }
     
     private List<?> getByType() {
@@ -314,5 +316,9 @@ public class NotificationManager implements Steppable {
     }
     
     private static final long serialVersionUID = 1528691206423084650L;
+
+    public static String getNotifableID() {
+        return "notifable#"+notifables.size();
+    }
     
 }

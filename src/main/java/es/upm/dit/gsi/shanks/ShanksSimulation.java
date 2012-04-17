@@ -227,7 +227,7 @@ public class ShanksSimulation extends SimState {
     public void startSimulation() throws DuplicatedAgentIDException,
             DuplicatedActionIDException {
         schedule.scheduleRepeating(Schedule.EPOCH, 0, this.scenarioManager, 2);
-        schedule.scheduleRepeating(Schedule.EPOCH, 1, this.notificationManager, 10);
+        schedule.scheduleRepeating(Schedule.EPOCH, 1, this.notificationManager, 1);
         this.addAgents();
         this.addSteppables();
     }

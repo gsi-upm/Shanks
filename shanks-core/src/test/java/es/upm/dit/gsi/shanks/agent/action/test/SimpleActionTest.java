@@ -135,9 +135,10 @@ public class SimpleActionTest {
                 MyScenario.SUNNY, scenarioProperties, configProperties);
         
         act.executeAction(sim, agent, arguments);
+        d.checkProperties();
         Assert.assertTrue(d.getStatus().get(MyDevice.OK_STATUS));
         Assert.assertFalse(d.getStatus().get(MyDevice.NOK_STATUS));
-        Assert.assertEquals(15.5, d.getProperty(MyDevice.TEMPERATURE_PROPERTY));
+        Assert.assertEquals(30, d.getProperty(MyDevice.TEMPERATURE_PROPERTY));
         
     }
 }

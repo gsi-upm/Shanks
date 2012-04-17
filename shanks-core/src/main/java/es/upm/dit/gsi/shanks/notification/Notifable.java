@@ -15,26 +15,8 @@ package es.upm.dit.gsi.shanks.notification;
  * 
  * @author darofar
  */
-public abstract class Notifable {
+public abstract interface Notifable {
     
-    /**
-     * the variable identifier.  
-     */
-    String id;
-    
-    /**
-     * current variable value. 
-     */
-    Object elementValue;
-    
-    /**
-     * Default constructor. It subscribes this object on the Notifables list of 
-     * NotificationManager.   
-     */
-    public Notifable() {
-        NotificationManager.addNotifable(this);
-    }
-
     /**
      * @return 
      *      the variable identifier. 
@@ -64,5 +46,11 @@ public abstract class Notifable {
      *          the object that originates the variable notification. 
      */
     abstract public Object getSource();
+    
+    /**
+     * @return
+     *          the object that originates the variable notification. 
+     */
+    abstract public void setSource(Object source);
 
 }

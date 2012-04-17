@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
 import java.util.logging.LogManager;
 
 import junit.framework.Assert;
@@ -14,8 +15,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.notification.test.TestAgent;
 import es.upm.dit.gsi.shanks.notification.test.TestDefinitions;
+import es.upm.dit.gsi.shanks.notification.test.TestScenario;
+import es.upm.dit.gsi.shanks.notification.test.TestSimulation;
 
 public class ValueNotificationTest {
 
@@ -301,7 +305,7 @@ public class ValueNotificationTest {
             NotificationManager nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
             Assert.assertEquals(ln, (nm.getByType(ValueNotification.class)));
             for(String elementID:elementIDCount.keySet()){
-                List<Notification> obtained = nm.getByElementID(elementID);
+                List<ValueNotification> obtained = nm.getByElementID(elementID);
                 Assert.assertTrue(obtained.size()==elementIDCount.get(elementID).intValue());
                 for (Notification n: obtained){
                     Assert.assertTrue(ln.contains(n));
@@ -318,7 +322,41 @@ public class ValueNotificationTest {
      */
     @Test
     public void createCustomUserNotifications() {
+        try {
+            Properties scenarioProperties = new Properties();
+            scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
+            Properties configProperties = new Properties();
+            configProperties.put(TestSimulation.CONFIGURATION, "1");
+            TestSimulation sim = new TestSimulation(
+                    System.currentTimeMillis(), TestScenario.class, "TestScenario",
+                    TestScenario.TEST_STATE, scenarioProperties, configProperties);
+            sim.start();
+            double firstSpeed = 1;
+            double lastSpeed = 0;
+            TestAgent agent = new TestAgent(TestDefinitions.AGENT_ID, firstSpeed);
 
-//        Assert.assertTrue(catched);
+            do {
+                if (sim.schedule.getSteps() > TestDefinitions.ITEARTIONS-2){
+                    agent.setAgentState(TestAgent.TEST_AGENT_STATUS_NOK);
+                    lastSpeed = 20*Math.random();
+                    agent.setSpeed(lastSpeed);
+                }
+                if (!sim.schedule.step(sim)){
+                    break;
+                }
+            }
+            while (sim.schedule.getSteps() < TestDefinitions.ITEARTIONS);
+            NotificationManager nm = sim.getNotificationManager();
+            List<ValueNotification> asList = nm.getByElementID(TestDefinitions.AGENT_STATE_ID);
+            Assert.assertEquals(TestAgent.TEST_AGENT_STATUS_OK, (String)(asList.get(10).getValue()));
+            Assert.assertEquals(TestAgent.TEST_AGENT_STATUS_NOK, (String)(asList.get(asList.size()-1).getValue()));
+            List<ValueNotification> sList = nm.getByElementID(TestDefinitions.SPEED_ID);
+            Assert.assertEquals(firstSpeed, (Double)(sList.get(10).getValue()));
+            Assert.assertEquals(lastSpeed, (Double)(sList.get(sList.size()-1).getValue()));
+            sim.finish();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail(e.toString());
+        }
     }
 }

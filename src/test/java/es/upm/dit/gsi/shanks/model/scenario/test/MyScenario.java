@@ -1,17 +1,23 @@
 package es.upm.dit.gsi.shanks.model.scenario.test;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
 import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
+import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
+import es.upm.dit.gsi.shanks.model.event.test.MyPeriodicNetElementEvent;
 import es.upm.dit.gsi.shanks.model.event.test.MyProbNetElementEvent;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.failure.test.MyFailure;
@@ -98,47 +104,47 @@ public class MyScenario extends Scenario {
      */
 //    @Override
     public void addPossibleFailures() {
-//        Set<NetworkElement> seta = new HashSet<NetworkElement>();
-//        seta.add(this.getNetworkElement("D1"));
-//        seta.add(this.getNetworkElement("L1"));
-//        this.addPossibleFailure(MyFailure.class, seta);
-//        Set<NetworkElement> set = new HashSet<NetworkElement>();
-//        set.add(this.getNetworkElement("D1"));
-//        set.add(this.getNetworkElement("L1"));
-//        Set<NetworkElement> set2 = new HashSet<NetworkElement>();
-//        set2.add(this.getNetworkElement("D5"));
-//        set2.add(this.getNetworkElement("L3"));
-//        Set<NetworkElement> set3 = new HashSet<NetworkElement>();
-//        set3.add(this.getNetworkElement("D4"));
-//        set3.add(this.getNetworkElement("L2"));
-//        List<Set<NetworkElement>> possibleCombinations = new ArrayList<Set<NetworkElement>>();
-//        possibleCombinations.add(set);
-//        possibleCombinations.add(set2);
-//        possibleCombinations.add(set3);
-//        this.addPossibleFailure(MyFailure.class, possibleCombinations);
+        Set<NetworkElement> seta = new HashSet<NetworkElement>();
+        seta.add(this.getNetworkElement("D1"));
+        seta.add(this.getNetworkElement("L1"));
+        this.addPossibleFailure(MyFailure.class, seta);
+        Set<NetworkElement> set = new HashSet<NetworkElement>();
+        set.add(this.getNetworkElement("D1"));
+        set.add(this.getNetworkElement("L1"));
+        Set<NetworkElement> set2 = new HashSet<NetworkElement>();
+        set2.add(this.getNetworkElement("D5"));
+        set2.add(this.getNetworkElement("L3"));
+        Set<NetworkElement> set3 = new HashSet<NetworkElement>();
+        set3.add(this.getNetworkElement("D4"));
+        set3.add(this.getNetworkElement("L2"));
+        List<Set<NetworkElement>> possibleCombinations = new ArrayList<Set<NetworkElement>>();
+        possibleCombinations.add(set);
+        possibleCombinations.add(set2);
+        possibleCombinations.add(set3);
+        this.addPossibleFailure(MyFailure.class, possibleCombinations);
     }
     
     @Override
     public void addPossibleEvents() {
-//          Set<NetworkElement> seta = new HashSet<NetworkElement>();
-//          seta.add(this.getNetworkElement("D1"));
-//          seta.add(this.getNetworkElement("L1"));
-//          this.addPossibleEventsOfNE(MyProbNetElementEvent.class, seta);
-//          Set<NetworkElement> set = new HashSet<NetworkElement>();
-//          set.add(this.getNetworkElement("D1"));
-//          set.add(this.getNetworkElement("L1"));
-//          Set<NetworkElement> set2 = new HashSet<NetworkElement>();
-//          set2.add(this.getNetworkElement("D5"));
-//          set2.add(this.getNetworkElement("L3"));
-//          Set<NetworkElement> set3 = new HashSet<NetworkElement>();
-//          set3.add(this.getNetworkElement("D4"));
-//          set3.add(this.getNetworkElement("L2"));
-//          List<Set<NetworkElement>> possibleCombinations = new ArrayList<Set<NetworkElement>>();
-//          possibleCombinations.add(set);
-//          possibleCombinations.add(set2);
-//          possibleCombinations.add(set3);
-//          this.addPossibleEventsOfNE(MyProbNetElementEvent.class, possibleCombinations);
-            this.addPossibleEventsOfNE(MyProbNetElementEvent.class, this.getNetworkElement("D1"));
+          Set<NetworkElement> seta = new HashSet<NetworkElement>();
+          seta.add(this.getNetworkElement("D1"));
+          seta.add(this.getNetworkElement("L1"));
+          this.addPossibleEventsOfNE(MyProbNetElementEvent.class, seta);
+          Set<NetworkElement> set = new HashSet<NetworkElement>();
+          set.add(this.getNetworkElement("D1"));
+          set.add(this.getNetworkElement("L1"));
+          Set<NetworkElement> set2 = new HashSet<NetworkElement>();
+          set2.add(this.getNetworkElement("D5"));
+          set2.add(this.getNetworkElement("L3"));
+          Set<NetworkElement> set3 = new HashSet<NetworkElement>();
+          set3.add(this.getNetworkElement("D4"));
+          set3.add(this.getNetworkElement("L2"));
+          List<Set<NetworkElement>> possibleCombinations = new ArrayList<Set<NetworkElement>>();
+          possibleCombinations.add(set);
+          possibleCombinations.add(set2);
+          possibleCombinations.add(set3);
+          this.addPossibleEventsOfNE(MyProbNetElementEvent.class, possibleCombinations);
+          this.addPossibleEventsOfNE(MyProbNetElementEvent.class, this.getNetworkElement("D1"));
     }
 
     /*
@@ -258,6 +264,10 @@ public class MyScenario extends Scenario {
 //        while (sim.schedule.getSteps() < 2001);
 //        sim.finish();
     }
+
+
+
+
 
 
 }

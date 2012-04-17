@@ -68,6 +68,8 @@ public abstract class Scenario {
     private HashMap<Class<? extends Event>, List<Set<Scenario>>> possiblesEventsOnScenario;
     private HashMap<Class<? extends Failure>, List<Integer>> generatedFailureConfigurations;
 
+    private static List<Event> events = new ArrayList<Event>();
+    
     /**
      * Constructor of scenario
      * 
@@ -102,6 +104,8 @@ public abstract class Scenario {
         
         logger.info("Scenario " + this.getID() + " successfully created.");
     }
+    
+    
 
     /**
      * Create the scenario portrayal (2D o 3D).
@@ -472,7 +476,7 @@ public abstract class Scenario {
         while (it.hasNext()) {
             Class<? extends Event> type = it.next();
             double prob = 0;
-            Constructor<? extends Event> c = type.getConstructor(new Class[] {String.class, Steppable.class, Integer.class});
+            Constructor<? extends Event> c = type.getConstructor(new Class[] {Steppable.class});
             Event event = c.newInstance(sim.getScenarioManager());
             if(event instanceof ProbabilisticNetworkElementEvent){
                 List<Set<NetworkElement>> list = this.getPossibleEventsOfNE()
@@ -512,7 +516,7 @@ public abstract class Scenario {
         while (it.hasNext()) {
             Class<? extends Event> type = it.next();
             double prob = 0;
-            Constructor<? extends Event> c = type.getConstructor(new Class[] {Steppable.class});
+            Constructor<? extends Event> c = type.getConstructor(Steppable.class);
             Event event = c.newInstance(sim.getScenarioManager());
             if(event instanceof ProbabilisticNetworkElementEvent){
                 List<Set<Scenario>> list = this.getPossibleEventsOfScenario()
@@ -562,106 +566,107 @@ public abstract class Scenario {
     public void generateFailures() throws UnsupportedScenarioStatusException,
             NoCombinationForFailureException,
             UnsupportedElementInFailureException, InstantiationException,
-            IllegalAccessException {
-//        MersenneTwisterFast randomizer = new MersenneTwisterFast();
-//        String status = this.getCurrentStatus();
-//        HashMap<Class<? extends Failure>, Double> penalties = this
-//                .getPenaltiesInStatus(status);
-//        Iterator<Class<? extends Failure>> it = this.getPossibleFailures()
-//                .keySet().iterator();
-//        while (it.hasNext()) {
-//            Class<? extends Failure> type = it.next();
-//            double penalty = 0;
-//            double prob = 0;
-//            try {
-//                Failure failure = type.newInstance();
-//                List<Set<NetworkElement>> list = this.getPossibleFailures()
-//                        .get(type);
-//                int numberOfCombinations = list.size();
-//                //TODO mirar que esto funcione, cambio on the fly
-//                int numberOfAlreadyGeneratedCombinations = this.generatedFailureConfigurations.get(type).size();
-//                numberOfCombinations-=numberOfAlreadyGeneratedCombinations;
-//                //
-//                
-//                int combinationNumber = randomizer.nextInt(numberOfCombinations);
-//                try {
-//                    if (penalties.containsKey(type)) {
-//                        // Apply penalty
-//                        penalty = penalties.get(type);
-//                        if (penalty > 0) {
-//                            prob = failure.getOccurrenceProbability()
-//                                    * numberOfCombinations * penalty;
-//                        } else {
-//                            prob = -1.0; // Impossible failure
-//                        }
-//                    } else {
-//                        prob = failure.getOccurrenceProbability()*numberOfCombinations;
-//                    }
-//                } catch (Exception e) {
-//                    logger.fine("There is no penalty for failures: "
-//                            + type.getName() + " in status " + status);
-//                }
-////                double aux = randomizer.nextDouble(); // THIS OPTION GENERATE MANY FAULTS OF THE SAME TYPE AT THE SAME TIME
-//                double aux = Math.random(); // THIS WORKS BETTER, MORE RANDOMLY
-//                if (aux < prob) {
-//                    // Generate failure
-//                    Set<NetworkElement> elementsSet;
-//                    if (numberOfCombinations >= 1) {
-//                        elementsSet = list.get(combinationNumber);
-//                        this.setupFailure(failure, elementsSet,
-//                                combinationNumber);
-//                    } else if (this.generatedFailureConfigurations.get(type).size() == 0) {
-//                        throw new NoCombinationForFailureException(failure);
-//                    }
-//                }
-//            } catch (NoCombinationForFailureException e) {
-//                throw e;
-//            } catch (UnsupportedElementInFailureException e) {
-//                logger.severe("Impossible to instance failure: "
-//                        + type.getName()
-//                        + ". All failures must have a default constructor that calls other constructor Failure(String id, double occurrenceProbability)");
-//                logger.severe("Exception: " + e.getMessage());
-//                throw e;
-//            }
-//        }
+            IllegalAccessException, UnsupportedNetworkElementStatusException {
+        MersenneTwisterFast randomizer = new MersenneTwisterFast();
+        String status = this.getCurrentStatus();
+        HashMap<Class<? extends Failure>, Double> penalties = this
+                .getPenaltiesInStatus(status);
+        Iterator<Class<? extends Failure>> it = this.getPossibleFailures()
+                .keySet().iterator();
+        while (it.hasNext()) {
+            Class<? extends Failure> type = it.next();
+            double penalty = 0;
+            double prob = 0;
+            try {
+                Failure failure = type.newInstance();
+                List<Set<NetworkElement>> list = this.getPossibleFailures()
+                        .get(type);
+                int numberOfCombinations = list.size();
+                //TODO mirar que esto funcione, cambio on the fly
+                int numberOfAlreadyGeneratedCombinations = this.generatedFailureConfigurations.get(type).size();
+                numberOfCombinations-=numberOfAlreadyGeneratedCombinations;
+                //
+                
+                int combinationNumber = randomizer.nextInt(numberOfCombinations);
+                try {
+                    if (penalties.containsKey(type)) {
+                        // Apply penalty
+                        penalty = penalties.get(type);
+                        if (penalty > 0) {
+                            prob = failure.getOccurrenceProbability()
+                                    * numberOfCombinations * penalty;
+                        } else {
+                            prob = -1.0; // Impossible failure
+                        }
+                    } else {
+                        prob = failure.getOccurrenceProbability()*numberOfCombinations;
+                    }
+                } catch (Exception e) {
+                    logger.fine("There is no penalty for failures: "
+                            + type.getName() + " in status " + status);
+                }
+//                double aux = randomizer.nextDouble(); // THIS OPTION GENERATE MANY FAULTS OF THE SAME TYPE AT THE SAME TIME
+                double aux = Math.random(); // THIS WORKS BETTER, MORE RANDOMLY
+                if (aux < prob) {
+                    // Generate failure
+                    Set<NetworkElement> elementsSet;
+                    if (numberOfCombinations >= 1) {
+                        elementsSet = list.get(combinationNumber);
+                        this.setupFailure(failure, elementsSet,
+                                combinationNumber);
+                    } else if (this.generatedFailureConfigurations.get(type).size() == 0) {
+                        throw new NoCombinationForFailureException(failure);
+                    }
+                }
+            } catch (NoCombinationForFailureException e) {
+                throw e;
+            } catch (UnsupportedElementInFailureException e) {
+                logger.severe("Impossible to instance failure: "
+                        + type.getName()
+                        + ". All failures must have a default constructor that calls other constructor Failure(String id, double occurrenceProbability)");
+                logger.severe("Exception: " + e.getMessage());
+                throw e;
+            }
+        }
     }
-//
-//    /**
-//     * @param failure
-//     * @param elementsSet
-//     * @throws UnsupportedElementInFailureException
-//     */
-//    //TODO Retocar la manera de ver ahora los fallos (Lo hare cuando modifique escenario para adatarlo a eventos y acciones)
-//    //
-//    private void setupFailure(Failure failure, Set<NetworkElement> elementsSet,
-//            int configurationNumber)
-//            throws UnsupportedElementInFailureException {
-//        for (NetworkElement element : elementsSet) {
-//            String statusToSet = failure.getPossibleAffectedElements().get(
-//                    element.getClass());
-//            if(element.getStatus().containsKey(statusToSet)){
-//                //String valueToSee = failure.getPossibleAffectedElements().get(element);
-//                boolean value = element.getStatus().get(statusToSet);
-//                failure.addAffectedElement(element, statusToSet, value);
-//            }else if(element.getProperties().containsKey(statusToSet)){
-//                Object value = element.getProperty(statusToSet);
-//                failure.addAffectedPropertiesOfElement(element, statusToSet, value);
-//            }
-//        }
-//        if (!this.generatedFailureConfigurations.containsKey(failure.getClass())) {
-//            this.generatedFailureConfigurations.put(failure.getClass(),
-//                    new ArrayList<Integer>());
-//        }
-//        List<Integer> numList = this.generatedFailureConfigurations.get(failure.getClass());
-//        if (!numList.contains(configurationNumber)) {
-//            numList.add(configurationNumber);
-//            this.generatedFailureConfigurations.put(failure.getClass(), numList);
-//            failure.activateFailure();
-//            this.addFailure(failure, configurationNumber);
-//            logger.fine("Generated Failure " + failure.getID() + " with configuration " + configurationNumber);
-//        }
-//
-//    }
+
+    /**
+     * @param failure
+     * @param elementsSet
+     * @throws UnsupportedElementInFailureException
+     * @throws UnsupportedNetworkElementStatusException 
+     */
+    //TODO Retocar la manera de ver ahora los fallos (Lo hare cuando modifique escenario para adatarlo a eventos y acciones)
+    //
+    private void setupFailure(Failure failure, Set<NetworkElement> elementsSet,
+            int configurationNumber)
+            throws UnsupportedElementInFailureException, UnsupportedNetworkElementStatusException {
+        for (NetworkElement element : elementsSet) {
+            for(String statusToSet : element.getStatus().keySet()){
+                if(element.getStatus().containsKey(statusToSet)){
+                    //String valueToSee = failure.getPossibleAffectedElements().get(element);
+                    boolean value = element.getStatus().get(statusToSet);
+                    failure.addAffectedElement(element, statusToSet, value);
+                }else if(element.getProperties().containsKey(statusToSet)){
+                    Object value = element.getProperty(statusToSet);
+                    failure.addAffectedPropertiesOfElement(element, statusToSet, value);
+                }
+            }
+        }
+        if (!this.generatedFailureConfigurations.containsKey(failure.getClass())) {
+            this.generatedFailureConfigurations.put(failure.getClass(),
+                    new ArrayList<Integer>());
+        }
+        List<Integer> numList = this.generatedFailureConfigurations.get(failure.getClass());
+        if (!numList.contains(configurationNumber)) {
+            numList.add(configurationNumber);
+            this.generatedFailureConfigurations.put(failure.getClass(), numList);
+            failure.activateFailure();
+            this.addFailure(failure, configurationNumber);
+            logger.fine("Generated Failure " + failure.getID() + " with configuration " + configurationNumber);
+        }
+
+    }
 
     /**
      * This method can return multipliers >1.0 (more probable failures) or

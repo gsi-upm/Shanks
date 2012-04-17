@@ -35,6 +35,7 @@ public abstract class JasonShanksAgentAction extends Action {
             if (e instanceof StringTermImpl) {
                 StringTermImpl s = (StringTermImpl) e;
                 String name = s.getString();
+                simulation.getScenario().getCurrentElements().get(name);
             }
         }
         //add elements as affected

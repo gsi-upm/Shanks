@@ -317,7 +317,7 @@ public class ValueNotificationTest {
      * Create a list of notifications making different events get launched. 
      */
     @Test
-    public void createNotificationsFromEvents() {
+    public void createCustomUserNotifications() {
 
 //        Assert.assertTrue(catched);
     }

@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks.model.event;
+package es.upm.dit.gsi.shanks.model.event.agent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,34 +6,47 @@ import java.util.List;
 
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.event.OneShotEvent;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import sim.engine.Steppable;
 
-public abstract class ProbabilisticNetworkElementEvent extends ProbabilisticEvent{
-    
-    private List<NetworkElement> affectedElements;
-    private HashMap<Class<? extends NetworkElement>, HashMap<String, Object>> possibleAffected;
+public abstract class Action extends OneShotEvent{
 
+    private HashMap <Class<? extends NetworkElement>, HashMap<String, Object>> possibleAffected;
+    private List<NetworkElement> affectedElements;
     private HashMap<String, Object> properties;
     private HashMap<String, Object> status;
-
-    public ProbabilisticNetworkElementEvent(String name, Steppable generator,
-            double prob) {
-        super(name, generator, prob);
+    
+    public Action(String id, Steppable launcher) {
+        super(id, launcher);
         
-        this.affectedElements = new ArrayList<NetworkElement>();
         this.possibleAffected = new HashMap<Class<? extends NetworkElement>, HashMap<String,Object>>();
+        this.affectedElements = new ArrayList<NetworkElement>();
         this.properties = new HashMap<String, Object>();
         this.status = new HashMap<String, Object>();
         
         this.addPossibleAffected();
     }
-
+    
     public abstract void addPossibleAffected();
-        
+    
+    public void changeStatus() throws UnsupportedNetworkElementStatusException{
+        List<? extends NetworkElement> elements = this.affectedElements;
 
-    @Override
-    public void changeProperties() throws UnsupportedNetworkElementStatusException {
+        for(NetworkElement el : elements){
+            for(Class<?> c : possibleAffected.keySet()){
+                if(c.equals(el.getClass())){  
+                    for(String s : possibleAffected.get(c).keySet()){
+                        if(el.getStatus().containsKey(s)){
+                            el.updateStatusTo(s, (Boolean) possibleAffected.get(c).get(s));
+                        }
+                    }
+                }   
+            }
+        }
+    }
+    
+    public void changeProperties() throws UnsupportedNetworkElementStatusException{
         List<? extends NetworkElement> elements = this.affectedElements;
         for(NetworkElement el : elements){
             for(Class<?> c : possibleAffected.keySet()){
@@ -46,49 +59,18 @@ public abstract class ProbabilisticNetworkElementEvent extends ProbabilisticEven
                 }
             }   
         }
-        
     }
-
-    public void changeStatus() throws UnsupportedNetworkElementStatusException {
-        List<? extends NetworkElement> elements = this.affectedElements;
-        for(NetworkElement el : elements){
-            for(Class<?> c : possibleAffected.keySet()){
-                if(c.equals(el.getClass())){                        
-                    for(String s : possibleAffected.get(c).keySet()){
-                        if(el.getStatus().containsKey(s)){
-                            el.updateStatusTo(s, (Boolean) possibleAffected.get(c).get(s));
-                        }
-                    }
-                }   
-            }
-        }
-        
-    }
-
-    public abstract void interactWithNE();
     
-    /**
-     * @return the currentAffectedElements if the failure is active, null if not
-     */
     public List<NetworkElement> getCurrentAffectedElements() {
-            return affectedElements;
+        return affectedElements;
     }
 
-    
-    
+
+
     public void addAffectedElement(NetworkElement el){
         affectedElements.add(el);
     }
     
-    public void addAffectedScenario(Scenario scen){
-        
-    }
-    /**
-     * Remove this element, but not modify the status. When the failure will be
-     * deactive, this removed element will keep the actual status
-     * 
-     * @param element
-     */
     public void removeAffectedElement(NetworkElement element) {
         this.affectedElements.remove(element);
     }
@@ -123,10 +105,10 @@ public abstract class ProbabilisticNetworkElementEvent extends ProbabilisticEven
         }
     }
     
-    
-    public List<?> getAffected() {
+
+    public List<NetworkElement> getAffected() {
         return this.getCurrentAffectedElements();
     }
-        
+    
 
 }

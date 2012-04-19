@@ -5,7 +5,8 @@ import java.util.Properties;
 
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
-import es.upm.dit.gsi.shanks.model.event.NetworkElementPeriodicEvent;
+import es.upm.dit.gsi.shanks.model.event.networkelement.PeriodicNetworkElementEvent;
+import es.upm.dit.gsi.shanks.model.event.networkelement.ProbabilisticNetworkElementEvent;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
@@ -62,20 +63,20 @@ public class TestScenario extends Scenario{
         } catch (UnsupportedNetworkElementStatusException e1) {
             e1.printStackTrace();
         }
-        this.addPossibleEventsOfNE(NetworkElementPeriodicEvent.class, neped);
-//        TestDevice sped = null;
-//        try {
-//            sped = new TestDevice(TestDefinitions.DEVICE_ID+"SPE", null, false);
-//        } catch (UnsupportedNetworkElementStatusException e1) {
-//            e1.printStackTrace();
-//        }
-//        this.addPossibleEventsOfNE(ScenarioPeriodicEvent.class, sped);
-//        TestDevice osed = null;
-//        try {
-//            osed = new TestDevice(TestDefinitions.DEVICE_ID+"SPE", null, false);
-//        } catch (UnsupportedNetworkElementStatusException e1) {
-//            e1.printStackTrace();
-//        }
+        this.addPossibleEventsOfNE(PeriodicNetworkElementEvent.class, neped);
+        TestDevice sped = null;
+        try {
+            sped = new TestDevice(TestDefinitions.DEVICE_ID+"PNEE", null, false);
+        } catch (UnsupportedNetworkElementStatusException e1) {
+            e1.printStackTrace();
+        }
+        this.addPossibleEventsOfNE(ProbabilisticNetworkElementEvent.class, sped);
+        TestDevice osed = null;
+        try {
+            osed = new TestDevice(TestDefinitions.DEVICE_ID+"SPE", null, false);
+        } catch (UnsupportedNetworkElementStatusException e1) {
+            e1.printStackTrace();
+        }
 //        this.addPossibleEventsOfNE(OneShotEvent.class, osed);
 //        this.addPossibleEventsOfScenario(ScenarioPeriodicEvent.class, this);
 //        this.addPossibleEventsOfScenario(OneShotEvent.class, this);

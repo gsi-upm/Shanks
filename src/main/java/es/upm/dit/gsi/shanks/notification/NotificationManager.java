@@ -60,7 +60,7 @@ public class NotificationManager implements Steppable {
         NotificationManager.notifications = lNotifications;
         NotificationManager.notifables = lNotifables;
         NotificationManager.sim = simulation;
-        NotificationManager.ID_COUNTER = 0;
+        NotificationManager.ID_COUNTER = NotificationManager.notifications.size();
         logger.info("NotificationManager set with custom initial fields..." +
         		"\nNotifications List: "+lNotifications+"\nNotifable elements"+lNotifables +
         		"\nCurrent simulation: "+simulation+"\nNotification idetifiers counter: "+ID_COUNTER);
@@ -120,8 +120,9 @@ public class NotificationManager implements Steppable {
      *          a notification ID corresponding with the number of notifications saved on this simulation.  
      */
     private static String getNotificationID() {
-        logger.fine("Notifications identifier counter: "+ID_COUNTER+1);
-        return "Notification#" + NotificationManager.ID_COUNTER++;
+        NotificationManager.ID_COUNTER = NotificationManager.ID_COUNTER+1;
+        logger.fine("Notifications identifier counter: "+ID_COUNTER);
+        return "Notification#" + (NotificationManager.ID_COUNTER);
     }
     
     /**

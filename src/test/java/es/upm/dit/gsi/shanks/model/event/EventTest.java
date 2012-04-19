@@ -18,6 +18,10 @@ import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.event.networkelement.PeriodicNetworkElementEvent;
+import es.upm.dit.gsi.shanks.model.event.networkelement.ProbabilisticNetworkElementEvent;
+import es.upm.dit.gsi.shanks.model.event.scenario.PeriodicScenarioEvent;
+import es.upm.dit.gsi.shanks.model.event.scenario.ProbabilisticScenarioEvent;
 import es.upm.dit.gsi.shanks.model.event.test.MyPeriodicNetElementEvent;
 import es.upm.dit.gsi.shanks.model.event.test.MyPeriodicScenarioEvent;
 import es.upm.dit.gsi.shanks.model.event.test.MyProbNetElementEvent;
@@ -65,7 +69,7 @@ public class EventTest {
                 
             }
         };
-        NetworkElementPeriodicEvent pe = new MyPeriodicNetElementEvent(generator);
+        PeriodicNetworkElementEvent pe = new MyPeriodicNetElementEvent(generator);
         
    
         Assert.assertEquals(generator, pe.getLauncher());
@@ -84,7 +88,7 @@ public class EventTest {
                 
             }
         };
-        NetworkElementPeriodicEvent pe = new MyPeriodicNetElementEvent(generator);
+        PeriodicNetworkElementEvent pe = new MyPeriodicNetElementEvent(generator);
         
 
         Assert.assertEquals(generator, pe.getLauncher());
@@ -215,7 +219,7 @@ public class EventTest {
             }
         };
         
-        ScenarioPeriodicEvent pe = new MyPeriodicScenarioEvent(generator);
+        PeriodicScenarioEvent pe = new MyPeriodicScenarioEvent(generator);
 
         Assert.assertEquals(generator, pe.getLauncher());
         Assert.assertEquals(500, pe.getPeriod());
@@ -235,7 +239,7 @@ public class EventTest {
             }
         };
         
-        ScenarioPeriodicEvent pe = new MyPeriodicScenarioEvent(generator);
+        PeriodicScenarioEvent pe = new MyPeriodicScenarioEvent(generator);
 
         Assert.assertEquals(generator, pe.getLauncher());
         Assert.assertEquals(500, pe.getPeriod());

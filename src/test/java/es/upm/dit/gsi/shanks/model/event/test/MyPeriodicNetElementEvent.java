@@ -2,9 +2,9 @@ package es.upm.dit.gsi.shanks.model.event.test;
 
 import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
-import es.upm.dit.gsi.shanks.model.event.NetworkElementPeriodicEvent;
+import es.upm.dit.gsi.shanks.model.event.networkelement.PeriodicNetworkElementEvent;
 
-public class MyPeriodicNetElementEvent extends NetworkElementPeriodicEvent{
+public class MyPeriodicNetElementEvent extends PeriodicNetworkElementEvent{
 
     public MyPeriodicNetElementEvent(Steppable generator) {
         super(MyPeriodicNetElementEvent.class.getName(), generator, 500);

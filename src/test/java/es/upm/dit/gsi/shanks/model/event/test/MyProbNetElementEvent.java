@@ -2,7 +2,7 @@ package es.upm.dit.gsi.shanks.model.event.test;
 
 import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
-import es.upm.dit.gsi.shanks.model.event.ProbabilisticNetworkElementEvent;
+import es.upm.dit.gsi.shanks.model.event.networkelement.ProbabilisticNetworkElementEvent;
 import es.upm.dit.gsi.shanks.model.failure.test.MyFailure;
 
 public class MyProbNetElementEvent extends ProbabilisticNetworkElementEvent{

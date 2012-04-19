@@ -476,7 +476,16 @@ public abstract class Scenario {
         while (it.hasNext()) {
             Class<? extends Event> type = it.next();
             double prob = 0;
-            Constructor<? extends Event> c = type.getConstructor(new Class[] {Steppable.class});
+            Constructor<? extends Event> c = null;
+            if (type.isAssignableFrom(ProbabilisticEvent.class)){
+                c = type.getConstructor(new Class[] {String.class, Steppable.class, Double.class});
+            } else if (type.isAssignableFrom(PeriodicEvent.class)){
+                c = type.getConstructor(new Class[] {String.class, Steppable.class, Integer.class});
+            } else {
+                //TODO ¿generate an exception? 
+                logger.warning("No NE.Events where generated.");
+                return;
+            }
             Event event = c.newInstance(sim.getScenarioManager());
             if(event instanceof ProbabilisticNetworkElementEvent){
                 List<Set<NetworkElement>> list = this.getPossibleEventsOfNE()

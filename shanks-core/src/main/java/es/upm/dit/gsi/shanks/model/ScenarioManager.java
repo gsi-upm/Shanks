@@ -113,7 +113,7 @@ public class ScenarioManager implements Steppable {
     }
 
     /**
-     * This method implements the state machine of the scneario manager
+     * This method implements the state machine of the scenario manager
      * 
      * @param sim
      * @throws UnsupportedScenarioStatusException 

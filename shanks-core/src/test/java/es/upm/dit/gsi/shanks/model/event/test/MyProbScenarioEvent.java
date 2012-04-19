@@ -1,7 +1,7 @@
 package es.upm.dit.gsi.shanks.model.event.test;
 
 import sim.engine.Steppable;
-import es.upm.dit.gsi.shanks.model.event.ProbabilisticScenarioEvent;
+import es.upm.dit.gsi.shanks.model.event.scenario.ProbabilisticScenarioEvent;
 import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
 
 public class MyProbScenarioEvent extends ProbabilisticScenarioEvent{

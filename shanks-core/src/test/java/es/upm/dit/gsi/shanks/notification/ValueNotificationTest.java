@@ -336,7 +336,7 @@ public class ValueNotificationTest {
             TestAgent agent = new TestAgent(TestDefinitions.AGENT_ID, firstSpeed);
 
             do {
-                if (sim.schedule.getSteps() > TestDefinitions.ITEARTIONS-2){
+                if (sim.schedule.getSteps() > TestDefinitions.VN_ITERATIONS-2){
                     agent.setAgentState(TestAgent.TEST_AGENT_STATUS_NOK);
                     lastSpeed = 20*Math.random();
                     agent.setSpeed(lastSpeed);
@@ -345,7 +345,7 @@ public class ValueNotificationTest {
                     break;
                 }
             }
-            while (sim.schedule.getSteps() < TestDefinitions.ITEARTIONS);
+            while (sim.schedule.getSteps() < TestDefinitions.VN_ITERATIONS);
             NotificationManager nm = sim.getNotificationManager();
             List<ValueNotification> asList = nm.getByElementID(TestDefinitions.AGENT_STATE_ID);
             Assert.assertEquals(TestAgent.TEST_AGENT_STATUS_OK, (String)(asList.get(10).getValue()));

@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks.model.event;
+package es.upm.dit.gsi.shanks.model.event.scenario;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,16 +7,17 @@ import java.util.List;
 import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.event.PeriodicEvent;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 
-public abstract class ScenarioPeriodicEvent extends PeriodicEvent{
+public abstract class PeriodicScenarioEvent extends PeriodicEvent{
     private List<Scenario> affectedScenarios;
     private HashMap<Class<? extends Scenario>, String> possibleAffected;
 
 
 
-    public ScenarioPeriodicEvent(String name, Steppable generator,
+    public PeriodicScenarioEvent(String name, Steppable generator,
             int period) {
         super(name, generator, period);
         

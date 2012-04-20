@@ -69,7 +69,7 @@ public class EventTest {
                 
             }
         };
-        PeriodicNetworkElementEvent pe = new MyPeriodicNetElementEvent(generator);
+        PeriodicNetworkElementEvent pe = new MyPeriodicNetElementEvent(null, generator, 0);
         
    
         Assert.assertEquals(generator, pe.getLauncher());
@@ -88,7 +88,7 @@ public class EventTest {
                 
             }
         };
-        PeriodicNetworkElementEvent pe = new MyPeriodicNetElementEvent(generator);
+        PeriodicNetworkElementEvent pe = new MyPeriodicNetElementEvent(null, generator, 0);
         
 
         Assert.assertEquals(generator, pe.getLauncher());
@@ -121,7 +121,7 @@ public class EventTest {
                 
             }
         };
-        ProbabilisticNetworkElementEvent pe = new MyProbNetElementEvent(generator);
+        ProbabilisticNetworkElementEvent pe = new MyProbNetElementEvent(null, generator, 0);
         
 
         Assert.assertEquals(generator, pe.getLauncher());
@@ -140,7 +140,7 @@ public class EventTest {
                 
             }
         };
-        ProbabilisticNetworkElementEvent pe = new MyProbNetElementEvent(generator);
+        ProbabilisticNetworkElementEvent pe = new MyProbNetElementEvent(null, generator, 0);
         
 
         Assert.assertEquals(generator, pe.getLauncher());
@@ -172,7 +172,7 @@ public class EventTest {
             }
         };
         
-        ProbabilisticScenarioEvent pe = new MyProbScenarioEvent(generator);
+        ProbabilisticScenarioEvent pe = new MyProbScenarioEvent(null, generator, 0);
         Assert.assertEquals(generator, pe.getLauncher());
         Assert.assertEquals(0.50, pe.getProb());
         
@@ -191,7 +191,7 @@ public class EventTest {
             }
         };
         
-        ProbabilisticScenarioEvent pe = new MyProbScenarioEvent(generator);
+        ProbabilisticScenarioEvent pe = new MyProbScenarioEvent(null, generator, 0);
 
         Assert.assertEquals(generator, pe.getLauncher());
         Assert.assertEquals(0.50, pe.getProb());
@@ -219,7 +219,7 @@ public class EventTest {
             }
         };
         
-        PeriodicScenarioEvent pe = new MyPeriodicScenarioEvent(generator);
+        PeriodicScenarioEvent pe = new MyPeriodicScenarioEvent(null, generator, 0);
 
         Assert.assertEquals(generator, pe.getLauncher());
         Assert.assertEquals(500, pe.getPeriod());
@@ -239,7 +239,7 @@ public class EventTest {
             }
         };
         
-        PeriodicScenarioEvent pe = new MyPeriodicScenarioEvent(generator);
+        PeriodicScenarioEvent pe = new MyPeriodicScenarioEvent(null, generator, 0);
 
         Assert.assertEquals(generator, pe.getLauncher());
         Assert.assertEquals(500, pe.getPeriod());

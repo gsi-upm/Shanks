@@ -22,8 +22,6 @@ public abstract class Event {
     private String id;
     private Steppable launcher;
     
-    
-    
     /**
      * Constructor of the class
      * 
@@ -33,7 +31,9 @@ public abstract class Event {
     public Event(String id, Steppable launcher) {
         this.id = id;
         this.launcher = launcher;     
-        
+    }
+    
+    public Event() {
     }
 
     /**
@@ -48,7 +48,6 @@ public abstract class Event {
         return id;
     }
 
-
     /**
      * @return the occurrenceProbability
      */
@@ -56,6 +55,13 @@ public abstract class Event {
         return launcher;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setLauncher(Steppable launcher) {
+        this.launcher = launcher;
+    }
 
 
 

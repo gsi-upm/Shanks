@@ -270,7 +270,7 @@ public class ShanksSimulationTest {
         boolean catched = false;
         try {
             Properties scenarioProperties = new Properties();
-            scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
+            scenarioProperties.put(MyScenario.CLOUDY_PROB, "50.0");
             scenarioProperties.put(Scenario.SIMULATION_GUI,
                     Scenario.SIMULATION_3D);
 

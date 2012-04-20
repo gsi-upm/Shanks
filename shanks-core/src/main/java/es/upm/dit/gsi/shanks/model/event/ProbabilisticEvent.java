@@ -18,6 +18,9 @@ public abstract class ProbabilisticEvent extends Event{
     public double getProb(){
         return prob;
     }
+    public void setProb(double prob) {
+        this.prob = prob;
+    }
     
     public abstract void addPossibleAffected();
     

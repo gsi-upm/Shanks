@@ -382,8 +382,8 @@ public class InteractionNotificationTest {
             Assert.assertNotSame(ln, (nm.getByType(InteractionNotification.class)));
             List<ValueNotification> obtained = nm.getByElementID(TestDefinitions.VN_ELEMENT_ID);
             Assert.assertEquals(null, obtained);
-            Assert.fail();
         } catch (Exception e) {
+            Assert.fail();
         }
     }
     
@@ -460,7 +460,7 @@ public class InteractionNotificationTest {
                         interaction.equals(TestProbNEE.class.getName()) ||
                         interaction.equals(TestPerSE.class.getName()) ||
                         interaction.equals(TestPerNEE.class.getName()) ||
-                        interaction.equals(TestAction.class.getName())) {
+                        interaction.equals(TestAgent.class.getName())) {
                 } else {
                     Assert.fail();
                 }

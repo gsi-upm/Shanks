@@ -17,7 +17,7 @@ public class MyFailure extends Failure {
      * 
      */
     public MyFailure() {
-        super(MyFailure.class.getName(), 0.1);
+        super(MyFailure.class.getName(), 0.9);
     }
 
     /* (non-Javadoc)

@@ -12,11 +12,9 @@ import es.upm.dit.gsi.shanks.model.event.PeriodicEvent;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 
 public abstract class PeriodicNetworkElementEvent extends PeriodicEvent{
+    
     private List<NetworkElement> affectedElements;
-
-
     private HashMap<Class<? extends NetworkElement>, HashMap<String, Object>> possibleAffected;
-
     private HashMap<String, Object> properties;
     private HashMap<String, Object> status;
 
@@ -30,6 +28,10 @@ public abstract class PeriodicNetworkElementEvent extends PeriodicEvent{
         this.status = new HashMap<String, Object>();
         
         this.addPossibleAffected();
+    }
+    
+    public PeriodicNetworkElementEvent() {
+        super(PeriodicNetworkElementEvent.class.getName(), null, 0);
     }
 
     public abstract void addPossibleAffected();

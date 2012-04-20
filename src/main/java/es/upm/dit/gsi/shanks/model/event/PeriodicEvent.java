@@ -18,6 +18,9 @@ public abstract class PeriodicEvent extends Event{
     public int getPeriod(){
         return period;
     }
+    public void setPeriod(int period) {
+        this.period = period;
+    }
     
     public abstract void addPossibleAffected();
 

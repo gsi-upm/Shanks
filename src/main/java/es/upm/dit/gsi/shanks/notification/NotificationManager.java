@@ -239,11 +239,16 @@ public class NotificationManager implements Steppable {
         if(elementID == null)
             return null;
         List<ValueNotification> found = new ArrayList<ValueNotification>();
-        for (Notification n: NotificationManager.notifications)
-            if (((ValueNotification)n).getElementID().equals(elementID)) {
-                logger.fine("...found a match for getByElementID query. With elementID: "+elementID);
-                found.add((ValueNotification) n);
+        for (Notification n: NotificationManager.notifications){
+            try{
+                if (((ValueNotification)n).getElementID().equals(elementID)) {
+                    logger.fine("...found a match for getByElementID query. With elementID: "+elementID);
+                    found.add((ValueNotification) n);
+                }
+            } catch (ClassCastException e) {
+                // Nothing to do. Its normal when comparts value an interaction notifications.  
             }
+        }
         if(found.size()>0)        
             return found;
         return null;

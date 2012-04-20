@@ -22,6 +22,7 @@ import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementSt
 import es.upm.dit.gsi.shanks.model.event.Event;
 import es.upm.dit.gsi.shanks.model.event.PeriodicEvent;
 import es.upm.dit.gsi.shanks.model.event.ProbabilisticEvent;
+import es.upm.dit.gsi.shanks.model.event.networkelement.PeriodicNetworkElementEvent;
 import es.upm.dit.gsi.shanks.model.event.networkelement.ProbabilisticNetworkElementEvent;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.failure.exception.NoCombinationForFailureException;
@@ -51,11 +52,13 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
 public abstract class Scenario {
 
     private Logger logger = Logger.getLogger(Scenario.class.getName());
-    
+
     public static final String SIMULATION_GUI = "SIMULATION GUI";
     public static final String SIMULATION_2D = "2D";
     public static final String SIMULATION_3D = "3D";
     public static final String NO_GUI = "NO GUI";
+    
+    private static int eventCounter;
 
     private String id;
     private Properties properties;
@@ -69,7 +72,7 @@ public abstract class Scenario {
     private HashMap<Class<? extends Failure>, List<Integer>> generatedFailureConfigurations;
 
     private static List<Event> events = new ArrayList<Event>();
-    
+
     /**
      * Constructor of scenario
      * 
@@ -94,55 +97,57 @@ public abstract class Scenario {
         this.generatedFailureConfigurations = new HashMap<Class<? extends Failure>, List<Integer>>();
         this.possiblesEventsOnNE = new HashMap<Class<? extends Event>, List<Set<NetworkElement>>>();
         this.possiblesEventsOnScenario = new HashMap<Class<? extends Event>, List<Set<Scenario>>>();
-        
+        eventCounter = 0;
+
         this.setPossibleStates();
         this.addNetworkElements();
         this.addPossibleFailures();
         this.addPossibleEvents();
-        
+
         this.setCurrentStatus(initialState);
-        
+
         logger.info("Scenario " + this.getID() + " successfully created.");
     }
-    
-    
 
     /**
      * Create the scenario portrayal (2D o 3D).
-     *
+     * 
      * @return Scenario2DPortrayal or Scenario3DPortrayal object
-     * @throws DuplicatedPortrayalIDException 
-     * @throws ScenarioNotFoundException 
+     * @throws DuplicatedPortrayalIDException
+     * @throws ScenarioNotFoundException
      */
-    public ScenarioPortrayal createScenarioPortrayal() throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
+    public ScenarioPortrayal createScenarioPortrayal()
+            throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
         logger.fine("Creating Scenario Portrayal...");
         String dimensions = (String) this.getProperty(Scenario.SIMULATION_GUI);
         if (dimensions.equals(Scenario.SIMULATION_2D)) {
             logger.fine("Creating Scenario2DPortrayal");
-            return this.createScenario2DPortrayal();   
-        } else if (dimensions.equals(Scenario.SIMULATION_3D)){
+            return this.createScenario2DPortrayal();
+        } else if (dimensions.equals(Scenario.SIMULATION_3D)) {
             logger.fine("Creating Scenario3DPortrayal");
             return this.createScenario3DPortrayal();
         } else if (dimensions.equals(Scenario.NO_GUI)) {
-            return null;   
+            return null;
         }
         return null;
-        
+
     }
 
     /**
      * @return a Scenario3DPortrayal
-     * @throws DuplicatedPortrayalIDException 
-     * @throws ScenarioNotFoundException 
+     * @throws DuplicatedPortrayalIDException
+     * @throws ScenarioNotFoundException
      */
-    abstract public Scenario2DPortrayal createScenario2DPortrayal() throws DuplicatedPortrayalIDException, ScenarioNotFoundException;
+    abstract public Scenario2DPortrayal createScenario2DPortrayal()
+            throws DuplicatedPortrayalIDException, ScenarioNotFoundException;
 
     /**
      * @return a Scenario2DPortrayal
-     * @throws DuplicatedPortrayalIDException 
-     * @throws ScenarioNotFoundException 
+     * @throws DuplicatedPortrayalIDException
+     * @throws ScenarioNotFoundException
      */
-    abstract public Scenario3DPortrayal createScenario3DPortrayal() throws DuplicatedPortrayalIDException, ScenarioNotFoundException;
+    abstract public Scenario3DPortrayal createScenario3DPortrayal()
+            throws DuplicatedPortrayalIDException, ScenarioNotFoundException;
 
     /**
      * @return the id
@@ -258,12 +263,13 @@ public abstract class Scenario {
     }
 
     /**
-     * @param properties the properties to set
+     * @param properties
+     *            the properties to set
      */
     public void setProperties(Properties properties) {
         this.properties = properties;
     }
-    
+
     /**
      * @param propertyKey
      * @return the property value
@@ -271,7 +277,7 @@ public abstract class Scenario {
     public Object getProperty(String propertyKey) {
         return this.properties.getProperty(propertyKey);
     }
-    
+
     /**
      * @param propertyKey
      * @param propertyValue
@@ -279,7 +285,7 @@ public abstract class Scenario {
     public void addProperty(String propertyKey, String propertyValue) {
         this.properties.put(propertyKey, propertyValue);
     }
-    
+
     /**
      * @param propertyKey
      */
@@ -321,9 +327,9 @@ public abstract class Scenario {
     /**
      * @return Map with key: Failure object and value: Combination Number
      */
-    protected HashMap<Failure,Integer> getFullCurrentFailures() {
+    protected HashMap<Failure, Integer> getFullCurrentFailures() {
         return this.currentFailures;
-    } 
+    }
 
     /**
      * @param failure
@@ -357,52 +363,48 @@ public abstract class Scenario {
         list.add(set);
         this.possibleFailures.put(failure, list);
     }
-    
+
     //
-    
-    public void addPossibleEventsOfNE(Class<? extends Event> event, NetworkElement element){
+
+    public void addPossibleEventsOfNE(Class<? extends Event> event,
+            NetworkElement element) {
         List<Set<NetworkElement>> list = new ArrayList<Set<NetworkElement>>();
         Set<NetworkElement> set = new HashSet<NetworkElement>();
         set.add(element);
         list.add(set);
         this.possiblesEventsOnNE.put(event, list);
-        
+
     }
-    
-    
+
     public void addPossibleEventsOfNE(Class<? extends Event> event,
             Set<NetworkElement> set) {
         List<Set<NetworkElement>> list = new ArrayList<Set<NetworkElement>>();
         list.add(set);
         this.possiblesEventsOnNE.put(event, list);
     }
-    
-    
-    
+
     public void addPossibleEventsOfNE(Class<? extends Event> event,
             List<Set<NetworkElement>> possibleCombinations) {
         this.possiblesEventsOnNE.put(event, possibleCombinations);
     }
-    
-    public void addPossibleEventsOfScenario(Class<? extends Event> event, Scenario scen){
+
+    public void addPossibleEventsOfScenario(Class<? extends Event> event,
+            Scenario scen) {
         List<Set<Scenario>> list = new ArrayList<Set<Scenario>>();
         Set<Scenario> set = new HashSet<Scenario>();
         set.add(scen);
         list.add(set);
         this.possiblesEventsOnScenario.put(event, list);
-        
+
     }
-    
-    
+
     public void addPossibleEventsOfScenario(Class<? extends Event> event,
             Set<Scenario> set) {
         List<Set<Scenario>> list = new ArrayList<Set<Scenario>>();
         list.add(set);
         this.possiblesEventsOnScenario.put(event, list);
     }
-    
-    
-    
+
     public void addPossibleEventsOfScenario(Class<? extends Event> event,
             List<Set<Scenario>> possibleCombinations) {
         this.possiblesEventsOnScenario.put(event, possibleCombinations);
@@ -416,16 +418,17 @@ public abstract class Scenario {
     }
 
     /**
-     * @return Map with key: Concrete Failure Class and value: List of combinations of the failure
+     * @return Map with key: Concrete Failure Class and value: List of
+     *         combinations of the failure
      */
     public HashMap<Class<? extends Failure>, List<Set<NetworkElement>>> getPossibleFailures() {
         return this.possibleFailures;
     }
-    
+
     public HashMap<Class<? extends Event>, List<Set<NetworkElement>>> getPossibleEventsOfNE() {
         return this.possiblesEventsOnNE;
     }
-    
+
     public HashMap<Class<? extends Event>, List<Set<Scenario>>> getPossibleEventsOfScenario() {
         return this.possiblesEventsOnScenario;
     }
@@ -450,8 +453,8 @@ public abstract class Scenario {
      */
     abstract public void addPossibleFailures();
 
-    
     abstract public void addPossibleEvents();
+
     /**
      * 
      * Algorithm used to generate failures during the simulation
@@ -461,47 +464,62 @@ public abstract class Scenario {
      * @throws UnsupportedElementInFailureException
      * @throws IllegalAccessException
      * @throws InstantiationException
-     * @throws UnsupportedNetworkElementStatusException 
-     * @throws NoSuchMethodException 
-     * @throws SecurityException 
-     * @throws InvocationTargetException 
-     * @throws IllegalArgumentException 
+     * @throws UnsupportedNetworkElementStatusException
+     * @throws NoSuchMethodException
+     * @throws SecurityException
+     * @throws InvocationTargetException
+     * @throws IllegalArgumentException
      * 
      */
-    
-    public void generateNetworkElementEvents(ShanksSimulation sim) throws UnsupportedScenarioStatusException, InstantiationException, IllegalAccessException, UnsupportedNetworkElementStatusException, SecurityException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException{
+
+    public void generateNetworkElementEvents(ShanksSimulation sim)
+            throws UnsupportedScenarioStatusException, InstantiationException,
+            IllegalAccessException, UnsupportedNetworkElementStatusException,
+            SecurityException, NoSuchMethodException, IllegalArgumentException,
+            InvocationTargetException {
         MersenneTwisterFast random = new MersenneTwisterFast();
         Iterator<Class<? extends Event>> it = this.getPossibleEventsOfNE()
-            .keySet().iterator();
+                .keySet().iterator();
         while (it.hasNext()) {
             Class<? extends Event> type = it.next();
             double prob = 0;
             Constructor<? extends Event> c = null;
-            if (type.isAssignableFrom(ProbabilisticEvent.class)){
-                c = type.getConstructor(new Class[] {String.class, Steppable.class, Double.class});
-                Event event = c.newInstance(sim.getScenarioManager());
+            if (type.isAssignableFrom(ProbabilisticEvent.class)
+                    || ProbabilisticEvent.class.isAssignableFrom(type)) {
+              //TODO this MUST CHANGE! we need to get the parameters.
+                c = type.getConstructor(new Class[] { String.class,
+                        Steppable.class, Double.class });
+                Event event = c.newInstance(type.getClass().getName()+"#"+eventCounter,
+                        sim.getScenarioManager(), 1.0);
                 List<Set<NetworkElement>> list = this.getPossibleEventsOfNE()
-                .get(type);
+                        .get(type);
                 int numberOfCombinations = list.size();
                 prob = ((ProbabilisticEvent) event).getProb();
 
                 double aux = Math.random();
                 int combinationNumber = random.nextInt(numberOfCombinations);
-                if(aux < prob){
+                if (aux < prob) {
                     Set<NetworkElement> elementsSet;
                     elementsSet = list.get(combinationNumber);
                     this.setupNetworkElementEvent(event, elementsSet,
                             combinationNumber);
                     event.launchEvent();
+                    eventCounter++;
                 }
-            } else if (type.isAssignableFrom(PeriodicEvent.class)){
-                c = type.getConstructor(new Class[] {String.class, Steppable.class, Integer.class});
-                Event event = c.newInstance(sim.getScenarioManager());
-                if(((PeriodicEvent) event).getPeriod() % sim.getSchedule().getSteps() == 0){
-                    List<Set<NetworkElement>> list = this.getPossibleEventsOfNE()
-                    .get(type);
+            } else if (type.isAssignableFrom(PeriodicEvent.class)
+                    || PeriodicEvent.class.isAssignableFrom(type)) {
+                c = type.getConstructor(new Class[] { String.class,
+                        Steppable.class, Integer.class });
+              //TODO this MUST CHANGE! we need to get the parameters.
+                Event event = c.newInstance(type.getClass().getName()+"#"+eventCounter,
+                        sim.getScenarioManager(), 5);
+                if (((PeriodicEvent) event).getPeriod()
+                        % sim.getSchedule().getSteps() == 0) {
+                    List<Set<NetworkElement>> list = this
+                            .getPossibleEventsOfNE().get(type);
                     int numberOfCombinations = list.size();
-                    int combinationNumber = random.nextInt(numberOfCombinations);
+                    int combinationNumber = random
+                            .nextInt(numberOfCombinations);
                     Set<NetworkElement> elementSet;
                     elementSet = list.get(combinationNumber);
                     this.setupNetworkElementEvent(event, elementSet,
@@ -510,80 +528,101 @@ public abstract class Scenario {
                 }
 
             } else {
-                //TODO ¿generate an exception? 
+                // TODO ¿generate an exception?
                 logger.warning("No NE.Events where generated.");
                 return;
             }
-            
 
         }
     }
-    
-    public void generateScenarioEvents(ShanksSimulation sim) throws UnsupportedScenarioStatusException, InstantiationException, IllegalAccessException, UnsupportedNetworkElementStatusException, SecurityException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException{
+
+    public void generateScenarioEvents(ShanksSimulation sim)
+            throws UnsupportedScenarioStatusException, InstantiationException,
+            IllegalAccessException, UnsupportedNetworkElementStatusException,
+            SecurityException, NoSuchMethodException, IllegalArgumentException,
+            InvocationTargetException {
         MersenneTwisterFast random = new MersenneTwisterFast();
-        Iterator<Class<? extends Event>> it = this.getPossibleEventsOfScenario()
-            .keySet().iterator();
+        Iterator<Class<? extends Event>> it = this
+                .getPossibleEventsOfScenario().keySet().iterator();
         while (it.hasNext()) {
             Class<? extends Event> type = it.next();
             double prob = 0;
             Constructor<? extends Event> c = null;
-            if (type.isAssignableFrom(ProbabilisticEvent.class)||ProbabilisticEvent.class.isAssignableFrom(type)){
-                c = type.getConstructor(new Class[] {String.class, Steppable.class, double.class});
-            } else if (type.isAssignableFrom(PeriodicEvent.class)||PeriodicEvent.class.isAssignableFrom(type)){
-                c = type.getConstructor(new Class[] {String.class, Steppable.class, int.class});
+            if (type.isAssignableFrom(ProbabilisticEvent.class)
+                    || ProbabilisticEvent.class.isAssignableFrom(type)) {
+                c = type.getConstructor(new Class[] { String.class,
+                        Steppable.class, double.class });
+                //TODO this MUST CHANGE! we need to get the parameters.
+                ProbabilisticNetworkElementEvent event = (ProbabilisticNetworkElementEvent) type.newInstance();
+                event.setId(type.getClass().getName()+"#"+eventCounter);
+                event.setLauncher(sim.getScenarioManager());
+                event.setProb(0.5);
+//                ProbabilisticEvent event = (ProbabilisticEvent) c.newInstance(name, launcher, initProb);
+//                Event event = c.newInstance(type.getClass().getName()+"#"+eventCounter,
+//                        sim.getScenarioManager(), 0.5);
+                List<Set<Scenario>> list = this.getPossibleEventsOfScenario()
+                        .get(type);
+                int numberOfCombinations = list.size();
+                prob = ((ProbabilisticEvent) event).getProb();
+                double aux = Math.random();
+                int combinationNumber = random.nextInt(numberOfCombinations);
+                if (aux < prob) {
+                    Set<Scenario> scenarioSet;
+                    scenarioSet = list.get(combinationNumber);
+                    this.setupScenarioEvent(event, scenarioSet,
+                            combinationNumber);
+                    event.launchEvent();
+                    eventCounter++;
+                }
+            } else if (type.isAssignableFrom(PeriodicEvent.class)
+                    || PeriodicEvent.class.isAssignableFrom(type)) {
+                c = type.getConstructor(new Class[] { String.class,
+                        Steppable.class, int.class });
+                //TODO this MUST CHANGE! we need to get the parameters.
+                PeriodicNetworkElementEvent event = (PeriodicNetworkElementEvent) type.newInstance();
+                event.setId(type.getClass().getName()+"#"+eventCounter);
+                event.setLauncher(sim.getScenarioManager());
+                event.setPeriod(5);
+//                PeriodicEvent event = (PeriodicEvent) c.newInstance(type.getClass().getName()+"#"+eventCounter,
+//                        sim.getScenarioManager(), 5);
+                if (((PeriodicEvent) event).getPeriod()
+                        % sim.getSchedule().getSteps() == 0) {
+                    List<Set<Scenario>> list = this
+                            .getPossibleEventsOfScenario().get(type);
+                    int numberOfCombinations = list.size();
+                    int combinationNumber = random
+                            .nextInt(numberOfCombinations);
+                    Set<Scenario> scenarioSet;
+                    scenarioSet = list.get(combinationNumber);
+                    this.setupScenarioEvent(event, scenarioSet,
+                            combinationNumber);
+                    event.launchEvent();
+                    eventCounter++;
+                }
             } else {
-                //TODO ¿generate an exception? 
+                // TODO ¿generate an exception?
                 logger.warning("No NE.Events where generated.");
             }
             if (c == null) {
                 return;
             }
-            Event event = c.newInstance(sim.getScenarioManager());
-            if(event instanceof ProbabilisticNetworkElementEvent){
-                List<Set<Scenario>> list = this.getPossibleEventsOfScenario()
-                .get(type);
-                int numberOfCombinations = list.size();
-                prob = ((ProbabilisticEvent) event).getProb();
-                double aux = Math.random();
-                int combinationNumber = random.nextInt(numberOfCombinations);
-                if(aux < prob){
-                    Set<Scenario> scenarioSet;
-                    scenarioSet = list.get(combinationNumber);
-                    this.setupScenarioEvent(event, scenarioSet,
-                            combinationNumber);
-                    event.launchEvent();
-                }
-            }else if(event instanceof PeriodicEvent){
-                if(((PeriodicEvent) event).getPeriod() % sim.getSchedule().getSteps() == 0){
-                    List<Set<Scenario>> list = this.getPossibleEventsOfScenario()
-                    .get(type);
-                    int numberOfCombinations = list.size();
-                    int combinationNumber = random.nextInt(numberOfCombinations);
-                    Set<Scenario> scenarioSet;
-                    scenarioSet = list.get(combinationNumber);
-                    this.setupScenarioEvent(event, scenarioSet,
-                            combinationNumber);
-                    event.launchEvent();
-                }
-            }
         }
     }
-    
-    public void setupNetworkElementEvent(Event event, Set<NetworkElement> elementsSet,
-            int configurationNumber){
-        for(NetworkElement ne : elementsSet){
+
+    public void setupNetworkElementEvent(Event event,
+            Set<NetworkElement> elementsSet, int configurationNumber) {
+        for (NetworkElement ne : elementsSet) {
             event.addAffectedElement(ne);
-        }  
+        }
     }
-    
+
     public void setupScenarioEvent(Event event, Set<Scenario> scenarioSet,
-            int configurationNumber){
-        for(Scenario ne : scenarioSet){
+            int configurationNumber) {
+        for (Scenario ne : scenarioSet) {
             event.addAffectedScenario(ne);
         }
     }
-    
-    
+
     public void generateFailures() throws UnsupportedScenarioStatusException,
             NoCombinationForFailureException,
             UnsupportedElementInFailureException, InstantiationException,
@@ -603,7 +642,8 @@ public abstract class Scenario {
                 List<Set<NetworkElement>> list = this.getPossibleFailures()
                         .get(type);
                 int numberOfCombinations = list.size();
-                int combinationNumber = randomizer.nextInt(numberOfCombinations);
+                int combinationNumber = randomizer
+                        .nextInt(numberOfCombinations);
                 try {
                     if (penalties.containsKey(type)) {
                         // Apply penalty
@@ -615,13 +655,15 @@ public abstract class Scenario {
                             prob = -1.0; // Impossible failure
                         }
                     } else {
-                        prob = failure.getOccurrenceProbability()*numberOfCombinations;
+                        prob = failure.getOccurrenceProbability()
+                                * numberOfCombinations;
                     }
                 } catch (Exception e) {
                     logger.fine("There is no penalty for failures: "
                             + type.getName() + " in status " + status);
                 }
-//                double aux = randomizer.nextDouble(); // THIS OPTION GENERATE MANY FAULTS OF THE SAME TYPE AT THE SAME TIME
+                // double aux = randomizer.nextDouble(); // THIS OPTION GENERATE
+                // MANY FAULTS OF THE SAME TYPE AT THE SAME TIME
                 double aux = Math.random(); // THIS WORKS BETTER, MORE RANDOMLY
                 if (aux < prob) {
                     // Generate failure
@@ -630,7 +672,8 @@ public abstract class Scenario {
                         elementsSet = list.get(combinationNumber);
                         this.setupFailure(failure, elementsSet,
                                 combinationNumber);
-                    } else if (this.generatedFailureConfigurations.get(type).size() == 0) {
+                    } else if (this.generatedFailureConfigurations.get(type)
+                            .size() == 0) {
                         throw new NoCombinationForFailureException(failure);
                     }
                 }
@@ -650,36 +693,44 @@ public abstract class Scenario {
      * @param failure
      * @param elementsSet
      * @throws UnsupportedElementInFailureException
-     * @throws UnsupportedNetworkElementStatusException 
+     * @throws UnsupportedNetworkElementStatusException
      */
-    //TODO Retocar la manera de ver ahora los fallos (Lo hare cuando modifique escenario para adatarlo a eventos y acciones)
+    // TODO Retocar la manera de ver ahora los fallos (Lo hare cuando modifique
+    // escenario para adatarlo a eventos y acciones)
     //
     private void setupFailure(Failure failure, Set<NetworkElement> elementsSet,
             int configurationNumber)
-            throws UnsupportedElementInFailureException, UnsupportedNetworkElementStatusException {
+            throws UnsupportedElementInFailureException,
+            UnsupportedNetworkElementStatusException {
         for (NetworkElement element : elementsSet) {
-            for(String statusToSet : element.getStatus().keySet()){
-                if(element.getStatus().containsKey(statusToSet)){
-                    //String valueToSee = failure.getPossibleAffectedElements().get(element);
+            for (String statusToSet : element.getStatus().keySet()) {
+                if (element.getStatus().containsKey(statusToSet)) {
+                    // String valueToSee =
+                    // failure.getPossibleAffectedElements().get(element);
                     boolean value = element.getStatus().get(statusToSet);
                     failure.addAffectedElement(element, statusToSet, value);
-                }else if(element.getProperties().containsKey(statusToSet)){
+                } else if (element.getProperties().containsKey(statusToSet)) {
                     Object value = element.getProperty(statusToSet);
-                    failure.addAffectedPropertiesOfElement(element, statusToSet, value);
+                    failure.addAffectedPropertiesOfElement(element,
+                            statusToSet, value);
                 }
             }
         }
-        if (!this.generatedFailureConfigurations.containsKey(failure.getClass())) {
+        if (!this.generatedFailureConfigurations
+                .containsKey(failure.getClass())) {
             this.generatedFailureConfigurations.put(failure.getClass(),
                     new ArrayList<Integer>());
         }
-        List<Integer> numList = this.generatedFailureConfigurations.get(failure.getClass());
+        List<Integer> numList = this.generatedFailureConfigurations.get(failure
+                .getClass());
         if (!numList.contains(configurationNumber)) {
             numList.add(configurationNumber);
-            this.generatedFailureConfigurations.put(failure.getClass(), numList);
+            this.generatedFailureConfigurations
+                    .put(failure.getClass(), numList);
             failure.activateFailure();
             this.addFailure(failure, configurationNumber);
-            logger.fine("Generated Failure " + failure.getID() + " with configuration " + configurationNumber);
+            logger.fine("Generated Failure " + failure.getID()
+                    + " with configuration " + configurationNumber);
         }
 
     }
@@ -704,12 +755,15 @@ public abstract class Scenario {
         for (Failure failure : this.currentFailures.keySet()) {
             if (failure.isResolved()) {
                 resolvedFailures.add(failure);
-                List<Integer> numList = this.generatedFailureConfigurations.get(failure
-                        .getClass());
+                List<Integer> numList = this.generatedFailureConfigurations
+                        .get(failure.getClass());
                 Integer conf = this.currentFailures.get(failure);
                 numList.remove((Integer) this.currentFailures.get(failure));
-                this.generatedFailureConfigurations.put(failure.getClass(), numList);
-                logger.fine("Resolved failure " + failure.getID() + ". Failure class: " + failure.getClass().getName() + " with configuration " + conf);
+                this.generatedFailureConfigurations.put(failure.getClass(),
+                        numList);
+                logger.fine("Resolved failure " + failure.getID()
+                        + ". Failure class: " + failure.getClass().getName()
+                        + " with configuration " + conf);
             }
         }
         for (Failure resolved : resolvedFailures) {

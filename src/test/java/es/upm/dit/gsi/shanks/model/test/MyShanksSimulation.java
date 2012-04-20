@@ -9,6 +9,7 @@ import sim.engine.Schedule;
 import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
+import es.upm.dit.gsi.shanks.agent.test.MyFixAgent;
 import es.upm.dit.gsi.shanks.agent.test.MyJasonShanksAgent;
 import es.upm.dit.gsi.shanks.agent.test.MySimpleShanksAgent;
 import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
@@ -126,6 +127,8 @@ public class MyShanksSimulation extends ShanksSimulation {
         this.registerShanksAgent(agent4);
         MySimpleShanksAgent agent5 = new MySimpleShanksAgent("toBeRemovedAgent", 5, 10);
         this.registerShanksAgent(agent5);
+        MyFixAgent agent6 = new MyFixAgent("FixAgent");
+        this.registerShanksAgent(agent6);
     }
 
     

@@ -1,17 +1,21 @@
 /**
  * 
  */
-package es.upm.dit.gsi.shanks.notification.test;
+package es.upm.dit.gsi.shanks.notification.util.test;
 
-import es.upm.dit.gsi.shanks.ShanksSimulation;
-import es.upm.dit.gsi.shanks.agent.SimpleShanksAgent;
+import jason.asSemantics.Message;
+import sim.engine.SimState;
+import sim.engine.Steppable;
+import es.upm.dit.gsi.shanks.agent.ShanksAgent;
 import es.upm.dit.gsi.shanks.agent.capability.movement.Location;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 
 /**
  * @author darofar
  * 
  */
-public class TestAgent extends SimpleShanksAgent {
+public class TestAgent extends TestAction implements ShanksAgent {
 
     private Location currentLocation;
     private NotifiedDouble speed = null;
@@ -21,11 +25,8 @@ public class TestAgent extends SimpleShanksAgent {
     public static final String TEST_AGENT_STATUS_OK = "OK";
     public static final String TEST_AGENT_STATUS_NOK = "NOK";
 
-    public TestAgent(String id) {
-        super(id);
-    }
-    public TestAgent(String id, double speed) {
-        super(id);
+    public TestAgent(String id, double speed, Steppable launcher) {
+        super(id, launcher);
         this.speed = new NotifiedDouble(TestDefinitions.SPEED_ID, this);
         this.agentState= new NotifiedString(TestDefinitions.AGENT_STATE_ID, this);
         this.hasBeenNearToSomething = new NotifiedBoolean(TestDefinitions.BOOLEAN_ID, this);
@@ -36,34 +37,12 @@ public class TestAgent extends SimpleShanksAgent {
         this.setAgentState(TEST_AGENT_STATUS_OK);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see es.upm.dit.gsi.shanks.agent.ShanksAgent#checkMail()
-     */
-    @Override
-    public void checkMail() {
-        this.getInbox();
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * es.upm.dit.gsi.shanks.agent.SimpleShanksAgent#executeReasoningCycle(es
-     * .upm.dit.gsi.shanks.ShanksSimulation)
-     */
-    @Override
-    public void executeReasoningCycle(ShanksSimulation simulation) {
-    }
-
     /**
      * @param agentState the agentState to set
      */
     public void setAgentState(String agentState) {
         this.agentState.set(agentState);
     }
-
 
     /**
      * @param currentLocation the currentLocation to set
@@ -72,14 +51,12 @@ public class TestAgent extends SimpleShanksAgent {
         this.currentLocation = currentLocation;
     }
 
-
     /**
      * @param speed the speed to set
      */
     public void setSpeed(Double speed) {
         this.speed.set(speed);
     }
-
 
     /**
      * @return the agentState
@@ -88,14 +65,12 @@ public class TestAgent extends SimpleShanksAgent {
         return agentState.get();
     }
 
-
     /**
      * @return the currentLocation
      */
     public Location getCurrentLocation() {
         return currentLocation;
     }
-
 
     /**
      * @return the speed
@@ -112,6 +87,34 @@ public class TestAgent extends SimpleShanksAgent {
         return this.hasBeenNearToSomething.get();
     }
 
-
+    @Override
+    public void step(SimState arg0) {
+        try {
+            this.launchEvent();
+        } catch (UnsupportedNetworkElementStatusException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (UnsupportedScenarioStatusException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    @Override
+    public void stop() {
+    }
+    
+    @Override
+    public void putMessegaInInbox(Message message) {
+    }
+    @Override
+    public void sendMsg(Message message) {
+    }
+    @Override
+    public String getID() {
+        return null;
+    }
+    @Override
+    public void checkMail() {
+    }
     private static final long serialVersionUID = -7213543937419402679L;
 }

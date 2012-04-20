@@ -90,17 +90,16 @@ public class NotificationManager implements Steppable {
      *   
      * @param e
      *          the event that for the notification. 
+     * @param interaction 
      */
     @SuppressWarnings("unchecked")
-     public static void addNotification(Event e) {
+     public static void addNotification(Event e, String interaction) {
         NotificationManager.notifications.add(new InteractionNotification(getNotificationID(),
-                                        NotificationManager.sim.getSchedule().getSteps(), 
-                                        e.getLauncher(), e.getClass().getName(), 
-                                        (List<Object>) e.getAffected()));
+                                        NotificationManager.sim.getSchedule().getSteps(), e.getLauncher(), 
+                                        interaction, (List<Object>) e.getAffected()));
         logger.fine("New notification added to notifications list. There is currently: " +
-                                notifications.get(notifications.size()-1)+" notifications." +
-                                "\n Notification added: "+NotificationManager.notifications
-                                .get(NotificationManager.notifications.size()-1));
+                    notifications.get(notifications.size()-1)+" notifications\n Notification added: "
+                    +NotificationManager.notifications.get(NotificationManager.notifications.size()-1));
     }
     
     /**

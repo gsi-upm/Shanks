@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks.notification.test;
+package es.upm.dit.gsi.shanks.notification.util.test;
 
 import jason.JasonException;
 
@@ -79,38 +79,19 @@ public class TestSimulation extends ShanksSimulation {
         case 1:
             schedule.scheduleRepeating(Schedule.EPOCH, 3, new NotificationManager(this), 10);
             break;
-//        case 2:
-//            Steppable failuresgui = new FailuresGUI();
-//            schedule.scheduleRepeating(Schedule.EPOCH, 4, failuresgui, 1);
-//            break;
-//        case 3:
-//            Steppable chart = new FailuresChartPainter();
-//            schedule.scheduleRepeating(Schedule.EPOCH, 3, chart, 50);
-//            Steppable failures = new FailuresGUI();
-//            schedule.scheduleRepeating(Schedule.EPOCH, 4, failures, 1);
-//            break;
+        case 2:
+            schedule.scheduleRepeating(Schedule.EPOCH, 3, new NotificationManager(this), 10);
+            break;
         default:
             logger.info("No configuration for TestSimulation. Configuration 0 loaded -> default");
         }
-
     }
 
-//    @Override
-//    public void registerShanksAgents() throws DuplicatedAgentIDException,
-//            DuplicatedActionIDException {
-//        MyJasonShanksAgent agent = new MyJasonShanksAgent("resolverAgent1",
-//                "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent1.asl");
-//        this.registerShanksAgent(agent);
-//        MyJasonShanksAgent agent2 = new MyJasonShanksAgent("resolverAgent2",
-//                "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent2.asl");
-//        this.registerShanksAgent(agent2);
-//        MyJasonShanksAgent agent3 = new MyJasonShanksAgent("resolverAgent3",
-//                "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent3.asl");
-//        this.registerShanksAgent(agent3);
-//        MySimpleShanksAgent agent4 = new MySimpleShanksAgent("simpleAgent1", 5, 10);
-//        this.registerShanksAgent(agent4);
-//    }
-    
+    @Override
+    public void registerShanksAgents() throws DuplicatedAgentIDException,
+            DuplicatedActionIDException {
+        TestAgent agent = new TestAgent(TestDefinitions.AGENT_ID, 0, this.getScenarioManager());
+        this.registerShanksAgent(agent);
+    }
     private static final long serialVersionUID = -4791498585683932164L;
-
 }

@@ -1,20 +1,9 @@
-package es.upm.dit.gsi.shanks.notification.test;
+package es.upm.dit.gsi.shanks.notification.util.test;
 
 import es.upm.dit.gsi.shanks.notification.Notifable;
 import es.upm.dit.gsi.shanks.notification.NotificationManager;
 
-public class NotifiedString implements Notifable {
-
-    
-    /**
-     * @param id
-     * @param source
-     */
-    public NotifiedString(String id, Object source) {
-        NotificationManager.addNotifable(this);
-        this.id = id;
-        this.source = source;
-    }
+public class NotifiedDouble implements Notifable{
 
     /**
      * the variable identifier.  
@@ -24,8 +13,18 @@ public class NotifiedString implements Notifable {
     /**
      * current variable value. 
      */
-    String elementValue;
+    Double elementValue;
     
+    /**
+     * @param id
+     * @param source
+     */
+    public NotifiedDouble(String id, Object source) {
+        NotificationManager.addNotifable(this);
+        this.id = id;
+        this.source = source;
+    }
+
     /**
      * the generated notification source.
      */
@@ -48,7 +47,7 @@ public class NotifiedString implements Notifable {
 
     @Override
     public void setElementValue(Object elementValue) {
-        this.elementValue = (String) elementValue;
+        this.elementValue = (Double) elementValue;
     }
 
     @Override
@@ -61,11 +60,11 @@ public class NotifiedString implements Notifable {
         this.source = source;
     }
     
-    public String get() {
-        return (String) this.getElementValue();
+    public Double get() {
+        return (Double) this.getElementValue();
     }
 
-    public void set(String value) {
+    public void set(Double value) {
         this.setElementValue(value);
     }
 

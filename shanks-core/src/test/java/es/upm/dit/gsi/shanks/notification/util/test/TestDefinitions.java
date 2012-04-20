@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks.notification.test;
+package es.upm.dit.gsi.shanks.notification.util.test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;

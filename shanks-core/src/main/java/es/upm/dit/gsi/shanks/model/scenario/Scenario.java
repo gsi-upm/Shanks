@@ -603,11 +603,6 @@ public abstract class Scenario {
                 List<Set<NetworkElement>> list = this.getPossibleFailures()
                         .get(type);
                 int numberOfCombinations = list.size();
-                //TODO mirar que esto funcione, cambio on the fly
-                int numberOfAlreadyGeneratedCombinations = this.generatedFailureConfigurations.get(type).size();
-                numberOfCombinations-=numberOfAlreadyGeneratedCombinations;
-                //
-                
                 int combinationNumber = randomizer.nextInt(numberOfCombinations);
                 try {
                     if (penalties.containsKey(type)) {

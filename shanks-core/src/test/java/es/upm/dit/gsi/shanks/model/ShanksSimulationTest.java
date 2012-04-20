@@ -124,6 +124,7 @@ public class ShanksSimulationTest {
                 if (!sim.schedule.step(sim))
                     break;
             while (sim.schedule.getSteps() < 2001);
+            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
             sim.finish();
         } catch (Exception e) {
             catched = true;
@@ -220,6 +221,7 @@ public class ShanksSimulationTest {
                     break;
             while (gui.getSimulation().schedule.getSteps() < 2001);
             gui.finish();
+            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
         } catch (Exception e) {
             catched = true;
             e.printStackTrace();
@@ -283,6 +285,7 @@ public class ShanksSimulationTest {
                 if (!gui.getSimulation().schedule.step(sim))
                     break;
             while (gui.getSimulation().schedule.getSteps() < 2001);
+            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
             gui.finish();
         } catch (Exception e) {
             catched = true;
@@ -316,6 +319,7 @@ public class ShanksSimulationTest {
                 if (!gui.getSimulation().schedule.step(sim))
                     break;
             while (gui.getSimulation().schedule.getSteps() < 2001);
+            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
             gui.finish();
         } catch (Exception e) {
             catched = true;
@@ -349,6 +353,7 @@ public class ShanksSimulationTest {
                 if (!gui.getSimulation().schedule.step(sim))
                     break;
             while (gui.getSimulation().schedule.getSteps() < 2001);
+            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
             gui.finish();
         } catch (Exception e) {
             catched = true;
@@ -399,6 +404,7 @@ public class ShanksSimulationTest {
                 if (!sim.schedule.step(sim))
                     break;
             while (sim.schedule.getSteps() < 2001);
+            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
             sim.finish();
         } catch (Exception e) {
             catched = true;
@@ -449,6 +455,7 @@ public class ShanksSimulationTest {
                 if (!gui.getSimulation().schedule.step(sim))
                     break;
             while (gui.getSimulation().schedule.getSteps() < 2001);
+            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
             gui.finish();
         } catch (Exception e) {
             catched = true;
@@ -500,6 +507,7 @@ public class ShanksSimulationTest {
                 if (!gui.getSimulation().schedule.step(sim))
                     break;
             while (gui.getSimulation().schedule.getSteps() < 2001);
+            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
             gui.finish();
         } catch (Exception e) {
             catched = true;
@@ -533,6 +541,7 @@ public class ShanksSimulationTest {
                 if (!gui.getSimulation().schedule.step(sim))
                     break;
             while (gui.getSimulation().schedule.getSteps() < 2001);
+            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
             gui.finish();
         } catch (Exception e) {
             catched = true;
@@ -566,6 +575,7 @@ public class ShanksSimulationTest {
                 if (!gui.getSimulation().schedule.step(sim))
                     break;
             while (gui.getSimulation().schedule.getSteps() < 2001);
+            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
             gui.finish();
         } catch (Exception e) {
             catched = true;
@@ -599,6 +609,7 @@ public class ShanksSimulationTest {
                 if (!gui.getSimulation().schedule.step(sim))
                     break;
             while (gui.getSimulation().schedule.getSteps() < 2001);
+            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
             gui.finish();
         } catch (Exception e) {
             catched = true;
@@ -632,6 +643,7 @@ public class ShanksSimulationTest {
                 if (!gui.getSimulation().schedule.step(sim))
                     break;
             while (gui.getSimulation().schedule.getSteps() < 2001);
+            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
             gui.finish();
         } catch (Exception e) {
             catched = true;
@@ -665,6 +677,7 @@ public class ShanksSimulationTest {
                 if (!gui.getSimulation().schedule.step(sim))
                     break;
             while (gui.getSimulation().schedule.getSteps() < 2001);
+            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
             gui.finish();
         } catch (Exception e) {
             catched = true;
@@ -699,6 +712,7 @@ public class ShanksSimulationTest {
                     break;
             while (gui.getSimulation().schedule.getSteps() < 2001);
             gui.finish();
+            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
         } catch (Exception e) {
             catched = true;
             e.printStackTrace();
@@ -731,6 +745,7 @@ public class ShanksSimulationTest {
                 if (!gui.getSimulation().schedule.step(sim))
                     break;
             while (gui.getSimulation().schedule.getSteps() < 2001);
+            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
             gui.finish();
         } catch (Exception e) {
             catched = true;
@@ -764,6 +779,7 @@ public class ShanksSimulationTest {
                 if (!gui.getSimulation().schedule.step(sim))
                     break;
             while (gui.getSimulation().schedule.getSteps() < 2001);
+            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
             gui.finish();
         } catch (Exception e) {
             catched = true;
@@ -797,6 +813,7 @@ public class ShanksSimulationTest {
                 if (!gui.getSimulation().schedule.step(sim))
                     break;
             while (gui.getSimulation().schedule.getSteps() < 100);
+            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
             gui.finish();
         } catch (Exception e) {
             catched = true;
@@ -830,6 +847,7 @@ public class ShanksSimulationTest {
                 if (!gui.getSimulation().schedule.step(sim))
                     break;
             while (gui.getSimulation().schedule.getSteps() < 100);
+            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
             gui.finish();
         } catch (Exception e) {
             catched = true;

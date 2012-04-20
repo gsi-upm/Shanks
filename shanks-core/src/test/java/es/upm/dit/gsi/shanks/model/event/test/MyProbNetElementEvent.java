@@ -7,7 +7,7 @@ import es.upm.dit.gsi.shanks.model.failure.test.MyFailure;
 
 public class MyProbNetElementEvent extends ProbabilisticNetworkElementEvent{
 
-    public MyProbNetElementEvent(Steppable generator) {
+    public MyProbNetElementEvent(String name, Steppable generator, double prob) {
         super(MyFailure.class.getName(), generator, 0.50);
         // TODO Auto-generated constructor stub
     }

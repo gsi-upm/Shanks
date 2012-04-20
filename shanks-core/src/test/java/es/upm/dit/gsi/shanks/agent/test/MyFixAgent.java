@@ -34,7 +34,11 @@ public class MyFixAgent extends SimpleShanksAgent{
         for(String s : simulation.getScenario().getCurrentElements().keySet()){
             ne.add(simulation.getScenario().getCurrentElements().get(s));
         }
-        n = ne.size();
+        for(NetworkElement networkel : ne){
+            if(networkel.getStatus().get(MyDevice.OK_STATUS)){
+                n++;
+            }
+        }  
         if(!simulation.getScenario().getCurrentFailures().isEmpty()){
             try {
                 act.executeAction(simulation, this, ne);

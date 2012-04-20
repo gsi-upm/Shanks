@@ -19,7 +19,7 @@ public abstract class ProbabilisticNetworkElementEvent extends ProbabilisticEven
     private HashMap<String, Object> status;
 
     public ProbabilisticNetworkElementEvent(String name, Steppable generator,
-            double prob) {
+            Double prob) {
         super(name, generator, prob);
         
         this.affectedElements = new ArrayList<NetworkElement>();
@@ -29,9 +29,6 @@ public abstract class ProbabilisticNetworkElementEvent extends ProbabilisticEven
         
         this.addPossibleAffected();
     }
-
-    public abstract void addPossibleAffected();
-        
 
     @Override
     public void changeProperties() throws UnsupportedNetworkElementStatusException {
@@ -128,6 +125,4 @@ public abstract class ProbabilisticNetworkElementEvent extends ProbabilisticEven
     public List<?> getAffected() {
         return this.getCurrentAffectedElements();
     }
-        
-
 }

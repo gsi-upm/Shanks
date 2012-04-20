@@ -21,7 +21,7 @@ public abstract class PeriodicNetworkElementEvent extends PeriodicEvent{
     private HashMap<String, Object> status;
 
     public PeriodicNetworkElementEvent(String name, Steppable generator,
-            int period) {
+            Integer period) {
         super(name, generator, period);
         
         this.affectedElements = new ArrayList<NetworkElement>();

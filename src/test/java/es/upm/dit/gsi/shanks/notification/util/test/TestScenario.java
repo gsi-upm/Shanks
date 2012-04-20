@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks.notification.test;
+package es.upm.dit.gsi.shanks.notification.util.test;
 
 import java.util.HashMap;
 import java.util.Properties;
@@ -7,6 +7,8 @@ import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.event.networkelement.PeriodicNetworkElementEvent;
 import es.upm.dit.gsi.shanks.model.event.networkelement.ProbabilisticNetworkElementEvent;
+import es.upm.dit.gsi.shanks.model.event.scenario.PeriodicScenarioEvent;
+import es.upm.dit.gsi.shanks.model.event.scenario.ProbabilisticScenarioEvent;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
@@ -59,27 +61,18 @@ public class TestScenario extends Scenario{
     public void addPossibleEvents() {
         TestDevice neped = null;
         try {
-            neped = new TestDevice(TestDefinitions.DEVICE_ID+"NEPE", null, false);
+            neped = new TestDevice(TestDefinitions.DEVICE_ID+"NEProbE", null, false);
+            this.addPossibleEventsOfNE(PeriodicNetworkElementEvent.class, neped);
+            
+            TestDevice sped = new TestDevice(TestDefinitions.DEVICE_ID+"NEPerE", null, false);
+            this.addPossibleEventsOfNE(ProbabilisticNetworkElementEvent.class, sped);
+            
+            this.addPossibleEventsOfScenario(ProbabilisticScenarioEvent.class, this);
+            this.addPossibleEventsOfScenario(PeriodicScenarioEvent.class, this);
+            
         } catch (UnsupportedNetworkElementStatusException e1) {
             e1.printStackTrace();
         }
-        this.addPossibleEventsOfNE(PeriodicNetworkElementEvent.class, neped);
-        TestDevice sped = null;
-        try {
-            sped = new TestDevice(TestDefinitions.DEVICE_ID+"PNEE", null, false);
-        } catch (UnsupportedNetworkElementStatusException e1) {
-            e1.printStackTrace();
-        }
-        this.addPossibleEventsOfNE(ProbabilisticNetworkElementEvent.class, sped);
-        TestDevice osed = null;
-        try {
-            osed = new TestDevice(TestDefinitions.DEVICE_ID+"SPE", null, false);
-        } catch (UnsupportedNetworkElementStatusException e1) {
-            e1.printStackTrace();
-        }
-//        this.addPossibleEventsOfNE(OneShotEvent.class, osed);
-//        this.addPossibleEventsOfScenario(ScenarioPeriodicEvent.class, this);
-//        this.addPossibleEventsOfScenario(OneShotEvent.class, this);
     }
 
     @Override
@@ -87,6 +80,4 @@ public class TestScenario extends Scenario{
             String status) throws UnsupportedScenarioStatusException {
         return null;
     }
-
-
 }

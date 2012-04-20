@@ -74,7 +74,7 @@ public abstract class Event {
     }
 
     private void generateNotification() {
-        NotificationManager.addNotification(this);
+        NotificationManager.addNotification(this, this.getClass().getName());
     }
     
     public abstract void addAffectedElement(NetworkElement ne);

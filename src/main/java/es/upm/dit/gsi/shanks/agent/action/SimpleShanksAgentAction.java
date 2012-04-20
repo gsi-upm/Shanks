@@ -18,18 +18,12 @@ public abstract class SimpleShanksAgentAction extends Action{
     public SimpleShanksAgentAction(String id, Steppable launcher) {
         super(id, launcher);
         this.affected = new ArrayList<NetworkElement>();
-        
     }
     
     public void executeAction(ShanksSimulation simulation, ShanksAgent agent, List<NetworkElement> arguments) throws UnsupportedNetworkElementStatusException, UnsupportedScenarioStatusException {
         for(NetworkElement ne : arguments){
             this.addAffectedElement(ne);
-            
         }
         this.launchEvent(); 
-
     }
-
-    
-    
 }

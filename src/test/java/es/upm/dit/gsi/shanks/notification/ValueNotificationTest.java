@@ -16,10 +16,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
-import es.upm.dit.gsi.shanks.notification.test.TestAgent;
-import es.upm.dit.gsi.shanks.notification.test.TestDefinitions;
-import es.upm.dit.gsi.shanks.notification.test.TestScenario;
-import es.upm.dit.gsi.shanks.notification.test.TestSimulation;
+import es.upm.dit.gsi.shanks.notification.util.test.TestAgent;
+import es.upm.dit.gsi.shanks.notification.util.test.TestDefinitions;
+import es.upm.dit.gsi.shanks.notification.util.test.TestScenario;
+import es.upm.dit.gsi.shanks.notification.util.test.TestSimulation;
 
 public class ValueNotificationTest {
 
@@ -169,49 +169,51 @@ public class ValueNotificationTest {
      */
     @Test
     public void checkSourceQueries() {
-        
-        ArrayList<Notification> ln = new ArrayList<Notification>();
-        HashMap<Object, Integer> sourceCount = new HashMap<Object, Integer>();
-        ArrayList<Object> allSources = new ArrayList<Object>();
-        
-        for(int i=0; i<TestDefinitions.SOURCES_SIZE+1; i++)
-            allSources.add(new TestAgent(TestDefinitions.AGENT_ID+i));
-        
-        for (int i=0; i < TestDefinitions.NOTIFICATIONS_SIZE; i++) {
-            Object source = null;
-            switch((int)(Math.round(TestDefinitions.SOURCES_SIZE*Math.random()))) {
-            case 0:
-                source = allSources.get(0);
-                break;
-            case 1:
-                source = allSources.get(1);
-                break;    
-            case 2:
-                source = allSources.get(2);
-                break;
-            case 3:
-                source = allSources.get(3);
-                break;
-            case 4:
-                source = allSources.get(4);
-                break;
-            case 5:
-                source = allSources.get(5);
-                break;
-            default:
-                break;
-            }
-            if(sourceCount.containsKey(source)){
-                sourceCount.put(source, sourceCount.get(source)+1);
-            } else {
-                sourceCount.put(source, 1);
-            }
-            ln.add(new ValueNotification(TestDefinitions.NOTIFICATION_ID+i,
-                    TestDefinitions.NOTIFICATION_WHEN, source, TestDefinitions.VN_ELEMENT_ID, 
-                    TestDefinitions.VN_VALUE));
-        }
-        NotificationManager nm = null;
         try {
+            
+            ArrayList<Notification> ln = new ArrayList<Notification>();
+            HashMap<Object, Integer> sourceCount = new HashMap<Object, Integer>();
+            ArrayList<Object> allSources = new ArrayList<Object>();
+            
+            for(int i=0; i<TestDefinitions.SOURCES_SIZE+1; i++)
+                allSources.add(new TestAgent(TestDefinitions.AGENT_ID+i, 0, 
+                        new NotificationManager(TestDefinitions.getSimulation(0))));
+            
+            for (int i=0; i < TestDefinitions.NOTIFICATIONS_SIZE; i++) {
+                Object source = null;
+                switch((int)(Math.round(TestDefinitions.SOURCES_SIZE*Math.random()))) {
+                case 0:
+                    source = allSources.get(0);
+                    break;
+                case 1:
+                    source = allSources.get(1);
+                    break;    
+                case 2:
+                    source = allSources.get(2);
+                    break;
+                case 3:
+                    source = allSources.get(3);
+                    break;
+                case 4:
+                    source = allSources.get(4);
+                    break;
+                case 5:
+                    source = allSources.get(5);
+                    break;
+                default:
+                    break;
+                }
+                if(sourceCount.containsKey(source)){
+                    sourceCount.put(source, sourceCount.get(source)+1);
+                } else {
+                    sourceCount.put(source, 1);
+                }
+                ln.add(new ValueNotification(TestDefinitions.NOTIFICATION_ID+i,
+                        TestDefinitions.NOTIFICATION_WHEN, source, TestDefinitions.VN_ELEMENT_ID, 
+                        TestDefinitions.VN_VALUE));
+            }
+            NotificationManager nm = null;
+        
             nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
             Assert.assertEquals(ln, nm.getByType(ValueNotification.class));
             
@@ -333,7 +335,7 @@ public class ValueNotificationTest {
             sim.start();
             double firstSpeed = 1;
             double lastSpeed = 0;
-            TestAgent agent = new TestAgent(TestDefinitions.AGENT_ID, firstSpeed);
+            TestAgent agent = new TestAgent(TestDefinitions.AGENT_ID, firstSpeed, sim.getNotificationManager());
 
             do {
                 if (sim.schedule.getSteps() > TestDefinitions.VN_ITERATIONS-2){

@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks.notification.test;
+package es.upm.dit.gsi.shanks.notification.util.test;
 
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;

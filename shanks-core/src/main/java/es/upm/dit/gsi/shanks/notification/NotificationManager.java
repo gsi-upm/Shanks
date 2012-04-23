@@ -297,7 +297,7 @@ public class NotificationManager implements Steppable {
      */
     @Override
     public void step(SimState arg0) {
-        logger.info("Notifying each element of the notifable element list...");
+        logger.finest("Notifying each element of the notifable element list...");
         for(Notifable n: NotificationManager.notifables){
             NotificationManager.addNotification(n);
         }

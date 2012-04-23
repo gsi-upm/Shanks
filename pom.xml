@@ -1,9 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>es.upm.dit.gsi.shanks</groupId>
 	<artifactId>shanks-core</artifactId>
-	<version>0.2.2-SNAPSHOT</version>
+	<version>0.3</version>
 	<packaging>jar</packaging>
 	<name>SHANKS core with MASON</name>
 	<description>Simulation for Heterogeneous and Autonomic Networks with MASON.
@@ -61,9 +60,9 @@
 	</organization>
 
 	<scm>
-		<connection>scm:svn:http://shanks-with-mason.googlecode.com/svn/trunk/shanks-core</connection>
-		<developerConnection>scm:svn:https://shanks-with-mason.googlecode.com/svn/trunk/shanks-core</developerConnection>
-		<url>http://shanks-with-mason.googlecode.com/svn/trunk/shanks-core</url>
+		<connection>scm:svn:http://shanks-with-mason.googlecode.com/svn/tags/shanks-core-0.3</connection>
+		<developerConnection>scm:svn:https://shanks-with-mason.googlecode.com/svn/tags/shanks-core-0.3</developerConnection>
+		<url>http://shanks-with-mason.googlecode.com/svn/tags/shanks-core-0.3</url>
 	</scm>
 
 	<properties>

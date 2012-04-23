@@ -33,12 +33,12 @@ public class ScenarioManager implements Steppable {
     private static final long serialVersionUID = -7448202235281457216L;
 
     // DEFAULT STATES OF SCENARIO MANAGER
-    private static final int CHECK_FAILURES = 0;
-    private static final int GENERATE_FAILURES = 1;
+//    private static final int CHECK_FAILURES = 0;
+//    private static final int GENERATE_FAILURES = 1;
 
     private Scenario scenario;
     private ScenarioPortrayal portrayal;
-    private int simulationStateMachineStatus;
+//    private int simulationStateMachineStatus;
 
     /**
      * @param scenario

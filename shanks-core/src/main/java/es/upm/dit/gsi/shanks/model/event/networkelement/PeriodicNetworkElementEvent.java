@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import sim.engine.Steppable;
-import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.event.PeriodicEvent;

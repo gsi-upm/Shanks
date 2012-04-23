@@ -13,7 +13,6 @@ import org.junit.Test;
 
 import sim.engine.SimState;
 import sim.engine.Steppable;
-
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;

@@ -15,6 +15,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import sim.engine.SimState;
+import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.agent.action.SimpleShanksAgentAction;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
 import es.upm.dit.gsi.shanks.agent.test.MySimpleShanksAgent;
@@ -32,9 +34,6 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusE
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
 import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation;
-
-import sim.engine.SimState;
-import sim.engine.Steppable;
 
 public class SimpleActionTest {
 
@@ -64,10 +63,9 @@ public class SimpleActionTest {
     public void createAction(){
         Steppable launcher = new Steppable() {
             
+            private static final long serialVersionUID = -4367866152160465962L;
             @Override
             public void step(SimState arg0) {
-                // TODO Auto-generated method stub
-                
             }
         };
         Action act = new MyShanksAgentAction("Action", launcher);
@@ -78,12 +76,10 @@ public class SimpleActionTest {
     
     @Test
     public void createActionAndNoExecuteAction() throws UnsupportedNetworkElementStatusException{
+        @SuppressWarnings("serial")
         Steppable launcher = new Steppable() {
-            
             @Override
             public void step(SimState arg0) {
-                // TODO Auto-generated method stub
-                
             }
         };
         Action act = new MyShanksAgentAction("Action", launcher);
@@ -102,12 +98,10 @@ public class SimpleActionTest {
     
     @Test
     public void createActionAndExecuteAction() throws UnsupportedNetworkElementStatusException, UnsupportedScenarioStatusException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException, TooManyConnectionException, DuplicatedIDException, DuplicatedPortrayalIDException, ScenarioNotFoundException, DuplicatedAgentIDException, DuplicatedActionIDException{
+        @SuppressWarnings("serial")
         Steppable launcher = new Steppable() {
-            
             @Override
             public void step(SimState arg0) {
-                // TODO Auto-generated method stub
-                
             }
         };
         SimpleShanksAgentAction act = new MyShanksAgentAction("Action", launcher);

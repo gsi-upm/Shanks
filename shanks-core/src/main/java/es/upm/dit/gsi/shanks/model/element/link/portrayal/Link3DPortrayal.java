@@ -31,6 +31,7 @@ import es.upm.dit.gsi.shanks.model.element.link.Link;
  * @version 0.1
  * 
  */
+@SuppressWarnings("restriction")
 public abstract class Link3DPortrayal extends SimpleEdgePortrayal3D {
 
     /**

@@ -89,5 +89,5 @@ public class MyFixAgent extends SimpleShanksAgent{
 //        }
 //        
 //    }
-
+    private static final long serialVersionUID = -5688450551132532194L;
 }

@@ -1,10 +1,10 @@
 package es.upm.dit.gsi.shanks.model.event;
 
+import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
-import sim.engine.Steppable;
 
 public abstract class PeriodicEvent extends Event{
 

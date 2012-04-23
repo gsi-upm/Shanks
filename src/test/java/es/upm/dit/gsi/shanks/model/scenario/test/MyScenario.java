@@ -17,7 +17,6 @@ import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
-import es.upm.dit.gsi.shanks.model.event.test.MyPeriodicNetElementEvent;
 import es.upm.dit.gsi.shanks.model.event.test.MyProbNetElementEvent;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.failure.test.MyFailure;

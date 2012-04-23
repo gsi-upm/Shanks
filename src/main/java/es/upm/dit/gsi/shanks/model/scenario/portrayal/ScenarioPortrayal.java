@@ -1,15 +1,9 @@
 package es.upm.dit.gsi.shanks.model.scenario.portrayal;
 
-import java.awt.Dimension;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 
 import org.jfree.data.general.Series;
 import org.jfree.data.xy.XYSeries;
-import org.jfree.util.ArrayUtilities;
 
 import sim.field.network.Network;
 import sim.portrayal.Portrayal;

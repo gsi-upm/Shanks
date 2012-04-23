@@ -1,9 +1,6 @@
 package es.upm.dit.gsi.shanks.agent.action.test;
 
-import java.util.logging.Logger;
-
 import sim.engine.Steppable;
-
 import es.upm.dit.gsi.shanks.agent.action.SimpleShanksAgentAction;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;

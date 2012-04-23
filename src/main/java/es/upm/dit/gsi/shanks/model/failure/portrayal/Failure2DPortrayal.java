@@ -3,10 +3,9 @@ package es.upm.dit.gsi.shanks.model.failure.portrayal;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import es.upm.dit.gsi.shanks.model.failure.Failure;
-
 import sim.portrayal.DrawInfo2D;
 import sim.portrayal.SimplePortrayal2D;
+import es.upm.dit.gsi.shanks.model.failure.Failure;
 
 public class Failure2DPortrayal extends SimplePortrayal2D {
 

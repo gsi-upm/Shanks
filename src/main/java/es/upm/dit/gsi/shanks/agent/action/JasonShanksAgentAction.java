@@ -6,7 +6,6 @@ import jason.asSyntax.Term;
 import java.util.List;
 
 import sim.engine.Steppable;
-
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.ShanksAgent;
 import es.upm.dit.gsi.shanks.model.event.agent.Action;

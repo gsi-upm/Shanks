@@ -12,18 +12,14 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 import sim.engine.Steppable;
-
 import ec.util.MersenneTwisterFast;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
-import es.upm.dit.gsi.shanks.model.ScenarioManager;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.event.Event;
 import es.upm.dit.gsi.shanks.model.event.PeriodicEvent;
 import es.upm.dit.gsi.shanks.model.event.ProbabilisticEvent;
-import es.upm.dit.gsi.shanks.model.event.networkelement.PeriodicNetworkElementEvent;
-import es.upm.dit.gsi.shanks.model.event.networkelement.ProbabilisticNetworkElementEvent;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.failure.exception.NoCombinationForFailureException;
 import es.upm.dit.gsi.shanks.model.failure.exception.UnsupportedElementInFailureException;
@@ -58,8 +54,6 @@ public abstract class Scenario {
     public static final String SIMULATION_3D = "3D";
     public static final String NO_GUI = "NO GUI";
     
-    private static int eventCounter;
-
     private String id;
     private Properties properties;
     private List<String> possibleStates;
@@ -70,8 +64,6 @@ public abstract class Scenario {
     private HashMap<Class<? extends Event>, List<Set<NetworkElement>>> possiblesEventsOnNE;
     private HashMap<Class<? extends Event>, List<Set<Scenario>>> possiblesEventsOnScenario;
     private HashMap<Class<? extends Failure>, List<Integer>> generatedFailureConfigurations;
-
-    private static List<Event> events = new ArrayList<Event>();
 
     /**
      * Constructor of scenario
@@ -97,7 +89,6 @@ public abstract class Scenario {
         this.generatedFailureConfigurations = new HashMap<Class<? extends Failure>, List<Integer>>();
         this.possiblesEventsOnNE = new HashMap<Class<? extends Event>, List<Set<NetworkElement>>>();
         this.possiblesEventsOnScenario = new HashMap<Class<? extends Event>, List<Set<Scenario>>>();
-        eventCounter = 0;
 
         this.setPossibleStates();
         this.addNetworkElements();
@@ -499,7 +490,6 @@ public abstract class Scenario {
                     this.setupNetworkElementEvent(event, elementsSet,
                             combinationNumber);
                     event.launchEvent();
-                    eventCounter++;
                 }
             } else if (PeriodicEvent.class.isAssignableFrom(type)) {
                 c = type.getConstructor(new Class[] {Steppable.class});
@@ -516,7 +506,6 @@ public abstract class Scenario {
                     this.setupNetworkElementEvent(event, elementSet,
                             combinationNumber);
                     event.launchEvent();
-                    eventCounter++;
                 }
             } else {
                 // TODO ¿generate an exception?
@@ -553,7 +542,6 @@ public abstract class Scenario {
                     this.setupScenarioEvent(event, scenarioSet,
                             combinationNumber);
                     event.launchEvent();
-                    eventCounter++;
                 }
             } else if (PeriodicEvent.class.isAssignableFrom(type)) {
                 c = type.getConstructor(new Class[] {Steppable.class});
@@ -570,7 +558,6 @@ public abstract class Scenario {
                     this.setupScenarioEvent(event, scenarioSet,
                             combinationNumber);
                     event.launchEvent();
-                    eventCounter++;
                 }
             } else {
                 // TODO ¿generate an exception?

@@ -1,6 +1,5 @@
 package es.upm.dit.gsi.shanks.agent.action.test;
 
-import jason.asSyntax.NumberTermImpl;
 import jason.asSyntax.Term;
 
 import java.util.List;
@@ -8,7 +7,6 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 import sim.engine.Steppable;
-
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.ShanksAgent;
 import es.upm.dit.gsi.shanks.agent.action.JasonShanksAgentAction;

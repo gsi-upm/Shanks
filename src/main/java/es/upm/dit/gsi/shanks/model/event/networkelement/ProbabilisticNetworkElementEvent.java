@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.event.ProbabilisticEvent;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
-import sim.engine.Steppable;
 
 public abstract class ProbabilisticNetworkElementEvent extends ProbabilisticEvent{
     

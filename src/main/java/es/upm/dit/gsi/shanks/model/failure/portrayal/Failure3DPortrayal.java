@@ -21,6 +21,7 @@ import es.upm.dit.gsi.shanks.model.failure.Failure;
  * @author a.carrera
  *
  */
+@SuppressWarnings("restriction")
 public class Failure3DPortrayal extends SimplePortrayal3D {/**
      * 
      */

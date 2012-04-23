@@ -48,6 +48,7 @@ public abstract class Failure {
         this.active = false;
 
         this.addPossibleAffectedElements();
+        logger.finer("New Failure: "+this);
     }
 
     /**
@@ -83,7 +84,7 @@ public abstract class Failure {
         if(!this.active){
             List<? extends NetworkElement> elements = this.affectedElements;
             for(NetworkElement e : elements){
-                for(Class c : possibleAffectedElements.keySet()){
+                for(Class<?> c : possibleAffectedElements.keySet()){
                     if(e.getClass().equals(c)){
                        for(String s : possibleAffectedElements.get(c).keySet()){
                            if(e.getStatus().containsKey(s)){

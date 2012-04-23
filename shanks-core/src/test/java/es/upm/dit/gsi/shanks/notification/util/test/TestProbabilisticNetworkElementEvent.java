@@ -3,10 +3,11 @@ package es.upm.dit.gsi.shanks.notification.util.test;
 import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.model.event.networkelement.ProbabilisticNetworkElementEvent;
 
-public class TestProbNEE extends ProbabilisticNetworkElementEvent{
+public class TestProbabilisticNetworkElementEvent extends ProbabilisticNetworkElementEvent{
 
-    public TestProbNEE(String name, Steppable generator, double prob) {
-        super(name, generator, prob);
+    public TestProbabilisticNetworkElementEvent(Steppable generator) {
+        super(TestDefinitions.EVENT_ID+TestProbabilisticNetworkElementEvent.class, 
+                generator, TestDefinitions.EVENT_PROBABILITY);
         // TODO Auto-generated constructor stub
     }
 

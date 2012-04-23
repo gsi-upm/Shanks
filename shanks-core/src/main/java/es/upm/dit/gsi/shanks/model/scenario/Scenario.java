@@ -484,18 +484,13 @@ public abstract class Scenario {
             Class<? extends Event> type = it.next();
             double prob = 0;
             Constructor<? extends Event> c = null;
-            if (type.isAssignableFrom(ProbabilisticEvent.class)
-                    || ProbabilisticEvent.class.isAssignableFrom(type)) {
-              //TODO this MUST CHANGE! we need to get the parameters.
-                c = type.getConstructor(new Class[] { String.class,
-                        Steppable.class, Double.class });
-                Event event = c.newInstance(type.getClass().getName()+"#"+eventCounter,
-                        sim.getScenarioManager(), 1.0);
+            if (ProbabilisticEvent.class.isAssignableFrom(type)) {
+                c = type.getConstructor(new Class[] {Steppable.class});
+                Event event = c.newInstance(sim.getScenarioManager());
                 List<Set<NetworkElement>> list = this.getPossibleEventsOfNE()
                         .get(type);
                 int numberOfCombinations = list.size();
                 prob = ((ProbabilisticEvent) event).getProb();
-
                 double aux = Math.random();
                 int combinationNumber = random.nextInt(numberOfCombinations);
                 if (aux < prob) {
@@ -506,15 +501,11 @@ public abstract class Scenario {
                     event.launchEvent();
                     eventCounter++;
                 }
-            } else if (type.isAssignableFrom(PeriodicEvent.class)
-                    || PeriodicEvent.class.isAssignableFrom(type)) {
-                c = type.getConstructor(new Class[] { String.class,
-                        Steppable.class, Integer.class });
-              //TODO this MUST CHANGE! we need to get the parameters.
-                Event event = c.newInstance(type.getClass().getName()+"#"+eventCounter,
-                        sim.getScenarioManager(), 5);
-                if (((PeriodicEvent) event).getPeriod()
-                        % sim.getSchedule().getSteps() == 0) {
+            } else if (PeriodicEvent.class.isAssignableFrom(type)) {
+                c = type.getConstructor(new Class[] {Steppable.class});
+                Event event = c.newInstance(sim.getScenarioManager());
+                if ( (sim.getSchedule().getSteps() != 0) && 
+                        (((PeriodicEvent) event).getPeriod()% sim.getSchedule().getSteps() == 0)) {
                     List<Set<NetworkElement>> list = this
                             .getPossibleEventsOfNE().get(type);
                     int numberOfCombinations = list.size();
@@ -525,8 +516,8 @@ public abstract class Scenario {
                     this.setupNetworkElementEvent(event, elementSet,
                             combinationNumber);
                     event.launchEvent();
+                    eventCounter++;
                 }
-
             } else {
                 // TODO ¿generate an exception?
                 logger.warning("No NE.Events where generated.");
@@ -547,18 +538,9 @@ public abstract class Scenario {
             Class<? extends Event> type = it.next();
             double prob = 0;
             Constructor<? extends Event> c = null;
-            if (type.isAssignableFrom(ProbabilisticEvent.class)
-                    || ProbabilisticEvent.class.isAssignableFrom(type)) {
-                c = type.getConstructor(new Class[] { String.class,
-                        Steppable.class, double.class });
-                //TODO this MUST CHANGE! we need to get the parameters.
-                ProbabilisticNetworkElementEvent event = (ProbabilisticNetworkElementEvent) type.newInstance();
-                event.setId(type.getClass().getName()+"#"+eventCounter);
-                event.setLauncher(sim.getScenarioManager());
-                event.setProb(0.5);
-//                ProbabilisticEvent event = (ProbabilisticEvent) c.newInstance(name, launcher, initProb);
-//                Event event = c.newInstance(type.getClass().getName()+"#"+eventCounter,
-//                        sim.getScenarioManager(), 0.5);
+            if (ProbabilisticEvent.class.isAssignableFrom(type)) {
+                c = type.getConstructor(new Class[] {Steppable.class});
+                Event event = c.newInstance(sim.getScenarioManager());
                 List<Set<Scenario>> list = this.getPossibleEventsOfScenario()
                         .get(type);
                 int numberOfCombinations = list.size();
@@ -573,19 +555,11 @@ public abstract class Scenario {
                     event.launchEvent();
                     eventCounter++;
                 }
-            } else if (type.isAssignableFrom(PeriodicEvent.class)
-                    || PeriodicEvent.class.isAssignableFrom(type)) {
-                c = type.getConstructor(new Class[] { String.class,
-                        Steppable.class, int.class });
-                //TODO this MUST CHANGE! we need to get the parameters.
-                PeriodicNetworkElementEvent event = (PeriodicNetworkElementEvent) type.newInstance();
-                event.setId(type.getClass().getName()+"#"+eventCounter);
-                event.setLauncher(sim.getScenarioManager());
-                event.setPeriod(5);
-//                PeriodicEvent event = (PeriodicEvent) c.newInstance(type.getClass().getName()+"#"+eventCounter,
-//                        sim.getScenarioManager(), 5);
-                if (((PeriodicEvent) event).getPeriod()
-                        % sim.getSchedule().getSteps() == 0) {
+            } else if (PeriodicEvent.class.isAssignableFrom(type)) {
+                c = type.getConstructor(new Class[] {Steppable.class});
+                Event event = c.newInstance(sim.getScenarioManager());
+                if ( (sim.getSchedule().getSteps() != 0) && 
+                        (((PeriodicEvent) event).getPeriod()% sim.getSchedule().getSteps() == 0)) {
                     List<Set<Scenario>> list = this
                             .getPossibleEventsOfScenario().get(type);
                     int numberOfCombinations = list.size();
@@ -601,8 +575,6 @@ public abstract class Scenario {
             } else {
                 // TODO ¿generate an exception?
                 logger.warning("No NE.Events where generated.");
-            }
-            if (c == null) {
                 return;
             }
         }

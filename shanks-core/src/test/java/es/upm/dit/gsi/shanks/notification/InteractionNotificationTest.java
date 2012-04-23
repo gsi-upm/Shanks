@@ -29,10 +29,10 @@ import es.upm.dit.gsi.shanks.notification.util.test.TestAction;
 import es.upm.dit.gsi.shanks.notification.util.test.TestAgent;
 import es.upm.dit.gsi.shanks.notification.util.test.TestDefinitions;
 import es.upm.dit.gsi.shanks.notification.util.test.TestDevice;
-import es.upm.dit.gsi.shanks.notification.util.test.TestPerNEE;
-import es.upm.dit.gsi.shanks.notification.util.test.TestPerSE;
-import es.upm.dit.gsi.shanks.notification.util.test.TestProbNEE;
-import es.upm.dit.gsi.shanks.notification.util.test.TestProbSE;
+import es.upm.dit.gsi.shanks.notification.util.test.TestPeriodicNetworkElementEvent;
+import es.upm.dit.gsi.shanks.notification.util.test.TestPeriodicScenarioEvent;
+import es.upm.dit.gsi.shanks.notification.util.test.TestProbabilisticNetworkElementEvent;
+import es.upm.dit.gsi.shanks.notification.util.test.TestProbabilisticScenarioEvent;
 import es.upm.dit.gsi.shanks.notification.util.test.TestScenario;
 
 public class InteractionNotificationTest {
@@ -398,19 +398,16 @@ public class InteractionNotificationTest {
             NotificationManager nm = new NotificationManager(TestDefinitions.getSimulation(0));
             
             // Network Element Events           
-            ProbabilisticNetworkElementEvent probNEE = new TestProbNEE(TestDefinitions.EVENT_ID+
-                    ProbabilisticNetworkElementEvent.class.getName(), sm, 0.5);
+            ProbabilisticNetworkElementEvent probNEE = new TestProbabilisticNetworkElementEvent(sm);
             probNEE.launchEvent();
-            PeriodicNetworkElementEvent perNEE = (PeriodicNetworkElementEvent)new TestPerNEE(
-                    TestDefinitions.EVENT_ID+PeriodicNetworkElementEvent.class.getName(), sm, 5);
+            PeriodicNetworkElementEvent perNEE = (PeriodicNetworkElementEvent)new TestPeriodicNetworkElementEvent(
+                    sm);
             perNEE.launchEvent();
             
             //Scenario Events
-            ProbabilisticScenarioEvent probSE = new TestProbSE(TestDefinitions.EVENT_ID+
-                    ProbabilisticNetworkElementEvent.class.getName(), sm, 0.5);
+            ProbabilisticScenarioEvent probSE = new TestProbabilisticScenarioEvent(sm);
             probSE.launchEvent();
-            PeriodicScenarioEvent perSE = new TestPerSE(TestDefinitions.EVENT_ID+
-                    PeriodicNetworkElementEvent.class.getName(), sm, 5);
+            PeriodicScenarioEvent perSE = new TestPeriodicScenarioEvent(sm);
             perSE.launchEvent();
             
             // Action Event
@@ -420,10 +417,10 @@ public class InteractionNotificationTest {
             ArrayList<Notification> ln = nm.getByType(InteractionNotification.class);
             for (Notification in: ln){
                 String interaction = ((InteractionNotification)in).getInteraction();
-                if( interaction.equals(TestProbSE.class.getName()) ||
-                        interaction.equals(TestProbNEE.class.getName()) ||
-                        interaction.equals(TestPerSE.class.getName()) ||
-                        interaction.equals(TestPerNEE.class.getName()) ||
+                if( interaction.equals(TestProbabilisticScenarioEvent.class.getName()) ||
+                        interaction.equals(TestProbabilisticNetworkElementEvent.class.getName()) ||
+                        interaction.equals(TestPeriodicScenarioEvent.class.getName()) ||
+                        interaction.equals(TestPeriodicNetworkElementEvent.class.getName()) ||
                         interaction.equals(TestAction.class.getName())) {
                     break;
                 } else {
@@ -455,11 +452,10 @@ public class InteractionNotificationTest {
             sim.finish();
             for (Notification in: ln){
                 String interaction = ((InteractionNotification)in).getInteraction();
-                System.out.println(interaction);
-                if( interaction.equals(TestProbSE.class.getName()) ||
-                        interaction.equals(TestProbNEE.class.getName()) ||
-                        interaction.equals(TestPerSE.class.getName()) ||
-                        interaction.equals(TestPerNEE.class.getName()) ||
+                if( interaction.equals(TestProbabilisticScenarioEvent.class.getName()) ||
+                        interaction.equals(TestProbabilisticNetworkElementEvent.class.getName()) ||
+                        interaction.equals(TestPeriodicScenarioEvent.class.getName()) ||
+                        interaction.equals(TestPeriodicNetworkElementEvent.class.getName()) ||
                         interaction.equals(TestAgent.class.getName())) {
                 } else {
                     Assert.fail();

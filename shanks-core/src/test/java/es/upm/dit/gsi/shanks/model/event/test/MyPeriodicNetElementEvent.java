@@ -6,7 +6,7 @@ import es.upm.dit.gsi.shanks.model.event.networkelement.PeriodicNetworkElementEv
 
 public class MyPeriodicNetElementEvent extends PeriodicNetworkElementEvent{
 
-    public MyPeriodicNetElementEvent(String name, Steppable generator, int period) {
+    public MyPeriodicNetElementEvent(Steppable generator) {
         super(MyPeriodicNetElementEvent.class.getName(), generator, 500);
         // TODO Auto-generated constructor stub
     }

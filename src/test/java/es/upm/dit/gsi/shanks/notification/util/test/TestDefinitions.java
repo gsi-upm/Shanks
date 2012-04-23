@@ -22,6 +22,7 @@ public class TestDefinitions {
     public static final String NOTIFICATION_ID = "Notification#";
     public static final long NOTIFICATION_WHEN = 5;
     public static final Object NOTIFICATION_SOURCE = new Object();
+    public static final int NOTIFICATIONS_SIZE = 10;
     
     public static final String IN_INTERACTION = Event.class.getName();
     public static final List<Object> IN_TARGET = new ArrayList<Object>();
@@ -30,8 +31,7 @@ public class TestDefinitions {
     public static final String VN_ELEMENT_ID = "ElementID";
     public static final Object VN_VALUE = new Object();
     public static final long VN_ITERATIONS = 200;
-    
-    public static final int NOTIFICATIONS_SIZE = 10;
+
     public static final int SOURCES_SIZE = 5;
     public static final int TARGETS_SIZE = 5;
     public static final int ELEMENT_ID_SIZE = 5;
@@ -43,6 +43,8 @@ public class TestDefinitions {
     public static final String SPEED_ID = "speed";
     public static final String AGENT_STATE_ID = "agentState";
     public static final String BOOLEAN_ID = "boolean";
+    public static final double EVENT_PROBABILITY = 0.5;
+    public static final int EVENT_PERIOD = 10;
     
     /**
      * Accessory method that creates a test simulation. 

@@ -98,7 +98,7 @@ public class ScenarioManager implements Steppable {
         } catch (UnsupportedNetworkElementStatusException e) {
             logger.severe("UnsupportedNetworkElementStatusException: " + e.getMessage());
         } catch (SecurityException e) {
-            // TODO Auto-generated catch block
+            logger.severe("SecurityException: " + e.getMessage());
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
             // TODO Auto-generated catch block

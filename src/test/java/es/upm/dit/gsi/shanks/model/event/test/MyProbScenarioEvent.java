@@ -6,7 +6,7 @@ import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
 
 public class MyProbScenarioEvent extends ProbabilisticScenarioEvent{
 
-    public MyProbScenarioEvent(String name, Steppable generator, double prob) {
+    public MyProbScenarioEvent(Steppable generator) {
         super(MyProbScenarioEvent.class.getName(), generator, 0.50);
        
     }

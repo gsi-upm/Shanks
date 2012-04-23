@@ -6,7 +6,7 @@ import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
 
 public class MyPeriodicScenarioEvent extends PeriodicScenarioEvent{
 
-    public MyPeriodicScenarioEvent(String name, Steppable generator, int period) {
+    public MyPeriodicScenarioEvent(Steppable generator) {
         super(MyPeriodicScenarioEvent.class.getName(), generator, 500);
         
     }

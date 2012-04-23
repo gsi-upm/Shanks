@@ -13,6 +13,8 @@ import jason.asSyntax.Structure;
 import jason.asSyntax.Term;
 import jason.runtime.Settings;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +22,7 @@ import java.util.Queue;
 import java.util.logging.Logger;
 
 import sim.engine.SimState;
+import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.action.JasonShanksAgentAction;
 import es.upm.dit.gsi.shanks.agent.action.exception.UnknownShanksAgentActionException;
@@ -202,8 +205,12 @@ public abstract class JasonShanksAgent extends AgArch implements ShanksAgent {
 
         try {
             if (this.actions.containsKey(actionID)) {
-                JasonShanksAgentAction shanksAction = this.actions.get(actionID)
-                        .newInstance();
+                
+                Constructor<? extends JasonShanksAgentAction> c = this.actions.get(actionID)
+                        .getConstructor(new Class[] { String.class, Steppable.class });
+
+                JasonShanksAgentAction shanksAction = c.newInstance(this.getID(), this);
+                
                 result = shanksAction.executeAction(this.getSimulation(),
                         this, actionStructure.getTerms());
             } else {
@@ -219,6 +226,18 @@ public abstract class JasonShanksAgent extends AgArch implements ShanksAgent {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             logger.severe("IllegalAccessException" + e.getMessage());
+            e.printStackTrace();
+        } catch (SecurityException e) {
+            logger.severe("SecurityException" + e.getMessage());
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            logger.severe("NoSuchMethodException" + e.getMessage());
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            logger.severe("IllegalArgumentException" + e.getMessage());
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            logger.severe("InvocationTargetException" + e.getMessage());
             e.printStackTrace();
         }
 

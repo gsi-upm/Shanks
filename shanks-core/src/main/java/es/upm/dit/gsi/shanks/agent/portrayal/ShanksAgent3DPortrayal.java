@@ -22,7 +22,6 @@ import com.sun.j3d.utils.geometry.Sphere;
 import es.upm.dit.gsi.shanks.agent.ShanksAgent;
 
 
-@SuppressWarnings("restriction")
 public abstract class ShanksAgent3DPortrayal extends SimplePortrayal3D {
 
 

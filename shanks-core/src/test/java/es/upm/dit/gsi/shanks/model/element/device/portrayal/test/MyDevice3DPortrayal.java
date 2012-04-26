@@ -13,7 +13,6 @@ import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
  * @author a.carrera
  *
  */
-@SuppressWarnings("restriction")
 public class MyDevice3DPortrayal extends Device3DPortrayal {
 
     /**

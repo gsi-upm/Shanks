@@ -22,7 +22,6 @@ import com.sun.j3d.utils.geometry.Sphere;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 
 
-@SuppressWarnings("restriction")
 public abstract class Device3DPortrayal extends SimplePortrayal3D {
 
 

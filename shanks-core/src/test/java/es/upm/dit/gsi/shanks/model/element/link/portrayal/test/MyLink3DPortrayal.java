@@ -9,7 +9,6 @@ import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.portrayal.Link3DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
 
-@SuppressWarnings("restriction")
 public class MyLink3DPortrayal extends Link3DPortrayal {
 
     /**

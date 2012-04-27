@@ -17,7 +17,7 @@ import javax.vecmath.Vector3d;
 
 import com.sun.j3d.utils.geometry.Box;
 
-import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.Smartphone;
+import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.WirelessDevice;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device3DPortrayal;
 
@@ -118,11 +118,11 @@ public class Smartphone3DPortrayal extends Device3DPortrayal{
 	public Color getDeviceColor(Device device) {
 		// TODO Adapt the hole thing to HashMap String/boolean. 
         HashMap<String, Boolean> status = device.getStatus();
-		if (status.equals(Smartphone.STATUS_OK)) {
+		if (status.equals(WirelessDevice.STATUS_OK)) {
 			return Color.green;
-		} else if (status.equals(Smartphone.STATUS_OUT_OF_RANGE)) {
+		} else if (status.equals(WirelessDevice.STATUS_OUT_OF_RANGE)) {
 			return Color.yellow;
-		} else if (status.equals(Smartphone.STATUS_DISCONNECTED)||status.equals(Smartphone.STATUS_DISCHARGED)) {
+		} else if (status.equals(WirelessDevice.STATUS_DISCONNECTED)||status.equals(WirelessDevice.STATUS_DISCHARGED)) {
 			return Color.gray;
 		} else {
 			return Color.black;
@@ -140,11 +140,11 @@ public class Smartphone3DPortrayal extends Device3DPortrayal{
 	public Color getLabelColor(Device device) {
 		// TODO Adapt the hole thing to HashMap String/boolean. 
         HashMap<String, Boolean> status = device.getStatus();
-		if (status.equals(Smartphone.STATUS_OK)) {
+		if (status.equals(WirelessDevice.STATUS_OK)) {
 			return Color.blue;
-		} else if (status.equals(Smartphone.STATUS_OUT_OF_RANGE)) {
+		} else if (status.equals(WirelessDevice.STATUS_OUT_OF_RANGE)) {
 			return Color.red;
-		} else if (status.equals(Smartphone.STATUS_DISCONNECTED)) {
+		} else if (status.equals(WirelessDevice.STATUS_DISCONNECTED)) {
 			return Color.gray;
 		} else {
 			return Color.black;

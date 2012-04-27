@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 import java.util.HashMap;
 
 import sim.portrayal.DrawInfo2D;
-import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.Smartphone;
+import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.WirelessDevice;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device2DPortrayal;
 
@@ -24,13 +24,13 @@ public class Smartphone2DPortrayal extends Device2DPortrayal {
 
      // TODO Adapt the hole thing to HashMap String/boolean. 
         HashMap<String, Boolean> status = device.getStatus();
-        if (status.equals(Smartphone.STATUS_OK)) {
+        if (status.equals(WirelessDevice.STATUS_OK)) {
             graphics.setColor(Color.green);
-        } else if (status.equals(Smartphone.STATUS_OFF)) {
+        } else if (status.equals(WirelessDevice.STATUS_OFF)) {
             graphics.setColor(Color.black);
-        } else if (status.equals(Smartphone.STATUS_DISCONNECTED)||status.equals(Smartphone.STATUS_DISCHARGED)) {
+        } else if (status.equals(WirelessDevice.STATUS_DISCONNECTED)||status.equals(WirelessDevice.STATUS_DISCHARGED)) {
             graphics.setColor(Color.gray);
-        } else if (status.equals(Smartphone.STATUS_OUT_OF_RANGE)) {
+        } else if (status.equals(WirelessDevice.STATUS_OUT_OF_RANGE)) {
         	graphics.setColor(Color.yellow);
         }
 

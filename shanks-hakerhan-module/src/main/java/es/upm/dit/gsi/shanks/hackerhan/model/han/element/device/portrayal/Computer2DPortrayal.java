@@ -30,7 +30,7 @@ public class Computer2DPortrayal extends Device2DPortrayal {
 
         // TODO Adapt the hole thing to HashMap String/boolean. 
         HashMap<String, Boolean> status = device.getStatus();
-        if (status.equals(Computer.STATUS_OK)) {
+        if (status.get(Computer.STATUS_OK)) {
             graphics.setColor(Color.green);
         } else if (status.equals(Computer.STATUS_OFF)) {
             graphics.setColor(Color.black);

@@ -18,16 +18,12 @@ import javax.vecmath.Vector3d;
 
 import com.sun.j3d.utils.geometry.Sphere;
 
-import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.EthernetRouter;
+import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.WifiRouterADSL;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device3DPortrayal;
 
-/**
- * @author a.carrera
- *
- */
 @SuppressWarnings("restriction")
-public class EthernetRouter3DPortrayal extends Device3DPortrayal {
+public class WifiRouterADSL3DPortrayal extends Device3DPortrayal {
 
 	/**
      * 
@@ -129,13 +125,13 @@ public class EthernetRouter3DPortrayal extends Device3DPortrayal {
 	public Color getDeviceColor(Device device) {
     	// TODO Adapt the hole thing to HashMap String/boolean. 
         HashMap<String, Boolean> status = device.getStatus();
-        if (status.equals(EthernetRouter.STATUS_OK)) {
+        if (status.equals(WifiRouterADSL.STATUS_OK)) {
             return Color.green;
-        } else if (status.equals(EthernetRouter.STATUS_NOISP_SERVICE)||status.equals(EthernetRouter.STATUS_DISCONNECTED)) {
+        } else if (status.equals(WifiRouterADSL.STATUS_NOISP_SERVICE)||status.equals(WifiRouterADSL.STATUS_DISCONNECTED)) {
             return Color.red;
-        } else if (status.equals(EthernetRouter.STATUS_CONGESTED)) {
+        } else if (status.equals(WifiRouterADSL.STATUS_CONGESTED)) {
             return Color.yellow;
-        } else if (status.equals(EthernetRouter.STATUS_OFF)) {
+        } else if (status.equals(WifiRouterADSL.STATUS_OFF)) {
             return Color.black;
         } else {
         	return Color.black;
@@ -148,13 +144,13 @@ public class EthernetRouter3DPortrayal extends Device3DPortrayal {
 	public Color getLabelColor(Device device) {
     	// TODO Adapt the hole thing to HashMap String/boolean. 
         HashMap<String, Boolean> status = device.getStatus();
-        if (status.equals(EthernetRouter.STATUS_OK)) {
+        if (status.equals(WifiRouterADSL.STATUS_OK)) {
             return Color.green;
-        } else if (status.equals(EthernetRouter.STATUS_NOISP_SERVICE)||status.equals(EthernetRouter.STATUS_DISCONNECTED)) {
+        } else if (status.equals(WifiRouterADSL.STATUS_NOISP_SERVICE)||status.equals(WifiRouterADSL.STATUS_DISCONNECTED)) {
             return Color.red;
-        } else if (status.equals(EthernetRouter.STATUS_CONGESTED)) {
+        } else if (status.equals(WifiRouterADSL.STATUS_CONGESTED)) {
             return Color.yellow;
-        } else if (status.equals(EthernetRouter.STATUS_OFF)) {
+        } else if (status.equals(WifiRouterADSL.STATUS_OFF)) {
             return Color.black;
         } else {
         	return Color.black;

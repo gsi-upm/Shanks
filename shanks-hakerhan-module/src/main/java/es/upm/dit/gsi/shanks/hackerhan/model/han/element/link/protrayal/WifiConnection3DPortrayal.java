@@ -1,7 +1,7 @@
 package es.upm.dit.gsi.shanks.hackerhan.model.han.element.link.protrayal;
 
-public class WifiConnection2DPortrayal {
+public class WifiConnection3DPortrayal {
 	
-	//TODO make it real... 
+	//TODO make it real
 
 }

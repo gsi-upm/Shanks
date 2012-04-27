@@ -31,13 +31,13 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
  * @author a.carrera
  * 
  */
-public class HANScenario extends Scenario {
+public class HackerHANScenario extends Scenario {
 
 	public static final String STATUS_SUNNY = "Sunny";
 	public static final String STATUS_RAINY = "Rainy";
 	public static final String STATUS_SNOWY = "Snowy";
 	
-	public HANScenario(String id, String initialState, Properties properties)
+	public HackerHANScenario(String id, String initialState, Properties properties)
 			throws UnsupportedNetworkElementStatusException,
 			TooManyConnectionException, UnsupportedScenarioStatusException,
 			DuplicatedIDException {
@@ -143,11 +143,11 @@ public class HANScenario extends Scenario {
 	@Override
 	public HashMap<Class<? extends Failure>, Double> getPenaltiesInStatus(
 			String status) throws UnsupportedScenarioStatusException {
-		if (status.equals(HANScenario.STATUS_RAINY)) {
+		if (status.equals(HackerHANScenario.STATUS_RAINY)) {
             return this.getRainyPenalties();
-        } else if (status.equals(HANScenario.STATUS_SNOWY)) {
+        } else if (status.equals(HackerHANScenario.STATUS_SNOWY)) {
             return this.getSnowyPenalties();
-        } else if (status.equals(HANScenario.STATUS_SUNNY)){
+        } else if (status.equals(HackerHANScenario.STATUS_SUNNY)){
         	return this.getSunnyPenalties();
         } else {
             throw new UnsupportedScenarioStatusException();
@@ -189,9 +189,9 @@ public class HANScenario extends Scenario {
 	 */
 	@Override
 	public void setPossibleStates() {
-		this.addPossibleStatus(HANScenario.STATUS_SUNNY);
-		this.addPossibleStatus(HANScenario.STATUS_RAINY);
-		this.addPossibleStatus(HANScenario.STATUS_SNOWY);
+		this.addPossibleStatus(HackerHANScenario.STATUS_SUNNY);
+		this.addPossibleStatus(HackerHANScenario.STATUS_RAINY);
+		this.addPossibleStatus(HackerHANScenario.STATUS_SNOWY);
 	}
 
 	@Override

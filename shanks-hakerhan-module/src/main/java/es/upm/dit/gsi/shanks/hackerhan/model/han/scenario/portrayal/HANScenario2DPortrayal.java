@@ -3,19 +3,11 @@ package es.upm.dit.gsi.shanks.hackerhan.model.han.scenario.portrayal;
 import sim.portrayal.continuous.ContinuousPortrayal2D;
 import sim.portrayal.network.NetworkPortrayal2D;
 import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.Computer;
-import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.EthernetRouter;
-import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.ModemADSL;
-import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.Smartphone;
-import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.WifiAccessPoint;
+import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.WifiRouterADSL;
 import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.portrayal.Computer2DPortrayal;
-import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.portrayal.EthernetRouter2DPortrayal;
-import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.portrayal.ModemADSL2DPortrayal;
-import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.portrayal.Smartphone2DPortrayal;
-import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.portrayal.WifiAccessPoint2DPortrayal;
+import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.portrayal.WifiRouterADSL2DPortrayal;
 import es.upm.dit.gsi.shanks.hackerhan.model.han.element.link.EthernetCable;
-import es.upm.dit.gsi.shanks.hackerhan.model.han.element.link.InternalBus;
 import es.upm.dit.gsi.shanks.hackerhan.model.han.element.link.protrayal.EthernetCable2DPortrayal;
-import es.upm.dit.gsi.shanks.hackerhan.model.han.element.link.protrayal.InternalBus2DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
@@ -62,13 +54,13 @@ public class HANScenario2DPortrayal extends Scenario2DPortrayal {
         NetworkPortrayal2D linksPortrayal = (NetworkPortrayal2D) this.getPortrayals().get(Scenario2DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.LINKS_PORTRAYAL);
                 
         devicesPortrayal.setPortrayalForClass(Computer.class, new Computer2DPortrayal());
-        devicesPortrayal.setPortrayalForClass(EthernetRouter.class, new EthernetRouter2DPortrayal());
-        devicesPortrayal.setPortrayalForClass(ModemADSL.class, new ModemADSL2DPortrayal());
-        devicesPortrayal.setPortrayalForClass(WifiAccessPoint.class, new WifiAccessPoint2DPortrayal());
-        devicesPortrayal.setPortrayalForClass(Smartphone.class, new Smartphone2DPortrayal());
+        devicesPortrayal.setPortrayalForClass(WifiRouterADSL.class, new WifiRouterADSL2DPortrayal());
+//        devicesPortrayal.setPortrayalForClass(ModemADSL.class, new ModemADSL2DPortrayal());
+//        devicesPortrayal.setPortrayalForClass(WifiAccessPoint.class, new WifiAccessPoint2DPortrayal());
+//        devicesPortrayal.setPortrayalForClass(WirelessDevice.class, new Smartphone2DPortrayal());
                 
         linksPortrayal.setPortrayalForClass(EthernetCable.class, new EthernetCable2DPortrayal());
-        linksPortrayal.setPortrayalForClass(InternalBus.class, new InternalBus2DPortrayal());
+//        linksPortrayal.setPortrayalForClass(InternalBus.class, new InternalBus2DPortrayal());
         
 	}
 

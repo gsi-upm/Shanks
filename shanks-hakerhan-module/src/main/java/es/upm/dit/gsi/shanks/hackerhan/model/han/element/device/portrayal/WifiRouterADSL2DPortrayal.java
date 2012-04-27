@@ -1,6 +1,3 @@
-/**
- * 
- */
 package es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.portrayal;
 
 import java.awt.Color;
@@ -8,15 +5,11 @@ import java.awt.Graphics2D;
 import java.util.HashMap;
 
 import sim.portrayal.DrawInfo2D;
-import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.EthernetRouter;
+import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.WifiRouterADSL;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device2DPortrayal;
 
-/**
- * @author a.carrera
- *
- */
-public class EthernetRouter2DPortrayal extends Device2DPortrayal {
+public class WifiRouterADSL2DPortrayal extends Device2DPortrayal {
 
 	/* (non-Javadoc)
      * @see es.upm.dit.gsi.shanks.model.element.device.portrayal.Device2DPortrayal#draw(java.lang.Object, java.awt.Graphics2D, sim.portrayal.DrawInfo2D)
@@ -30,13 +23,13 @@ public class EthernetRouter2DPortrayal extends Device2DPortrayal {
 
      // TODO Adapt the hole thing to HashMap String/boolean. 
         HashMap<String, Boolean> status = device.getStatus();
-        if (status.equals(EthernetRouter.STATUS_OK)) {
+        if (status.equals(WifiRouterADSL.STATUS_OK)) {
             graphics.setColor(Color.green);
-        } else if (status.equals(EthernetRouter.STATUS_OFF)) {
+        } else if (status.equals(WifiRouterADSL.STATUS_OFF)) {
             graphics.setColor(Color.black);
-        } else if (status.equals(EthernetRouter.STATUS_CONGESTED)) {
+        } else if (status.equals(WifiRouterADSL.STATUS_CONGESTED)) {
             graphics.setColor(Color.yellow);
-        } else if (status.equals(EthernetRouter.STATUS_NOISP_SERVICE)||status.equals(EthernetRouter.STATUS_DISCONNECTED)) {
+        } else if (status.equals(WifiRouterADSL.STATUS_NOISP_SERVICE)||status.equals(WifiRouterADSL.STATUS_DISCONNECTED)) {
             graphics.setColor(Color.red);
         }
 

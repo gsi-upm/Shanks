@@ -4,7 +4,7 @@ import java.util.Properties;
 
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.ShanksSimulation2DGUI;
-import es.upm.dit.gsi.shanks.hackerhan.model.adsl.scenario.ADSLAccesNetworkScenario;
+import es.upm.dit.gsi.shanks.hackerhan.model.han.scenario.HackerHANScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
@@ -34,7 +34,9 @@ public class HackerHanModelComplexSimulation2DGUI extends ShanksSimulation2DGUI{
 	        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_2D);
 //	        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_3D);
 //	         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
-			HackerHanModelComplexSimulation tut = new HackerHanModelComplexSimulation(System.currentTimeMillis(), ADSLAccesNetworkScenario.class, "ADSL scenario", ADSLAccesNetworkScenario.SUNNY, scenarioProperties);
+			HackerHanModelComplexSimulation tut = new HackerHanModelComplexSimulation(
+					System.currentTimeMillis(), HackerHANScenario.class,
+					"ADSL scenario", HackerHANScenario.STATUS_SUNNY, scenarioProperties);
 			HackerHanModelSimulation2DGUI gui = new HackerHanModelSimulation2DGUI(tut);
 			gui.start();
 

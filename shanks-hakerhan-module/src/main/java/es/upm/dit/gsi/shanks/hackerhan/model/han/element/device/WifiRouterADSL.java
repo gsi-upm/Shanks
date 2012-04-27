@@ -51,26 +51,26 @@ public class WifiRouterADSL extends Device {
 			throws UnsupportedNetworkElementStatusException {
 		// TODO Adapt the hole thing to HashMap String/boolean. 
         HashMap<String, Boolean> status = this.getStatus();
-		if (status.get(EthernetRouter.STATUS_OFF)) {
+		if (status.get(WifiRouterADSL.STATUS_OFF)) {
 			this.shutdown();
 		} else {
-			this.updatePropertyTo(EthernetRouter.PROPERTY_POWER, Values.ON);
+			this.updatePropertyTo(WifiRouterADSL.PROPERTY_POWER, Values.ON);
 			if(status.get(WifiRouterADSL.STATUS_STEALING_CONNECTION)) {
 				this.updatePropertyTo(WifiRouterADSL.PROPERTY_CONNECTION_TYPE, WifiRouterADSL.CONNECTION_TYPE_STEAL);
 			} else {
 				this.updatePropertyTo(WifiRouterADSL.PROPERTY_CONNECTION_TYPE, WifiRouterADSL.CONNECTION_TYPE_ISP);
 			}
-			if (status.get(EthernetRouter.STATUS_OK)) {
-				this.updatePropertyTo(EthernetRouter.PROPERTY_EXTERNAL_CONNECTION, Values.CONNECTED);
+			if (status.get(WifiRouterADSL.STATUS_OK)) {
+				this.updatePropertyTo(WifiRouterADSL.PROPERTY_EXTERNAL_CONNECTION, Values.CONNECTED);
 				this.updatePropertyTo(PROPERTY_CONGESTION, Math.random()*10);
-			} else if (status.get(EthernetRouter.STATUS_CONGESTED)) {
-				this.updatePropertyTo(EthernetRouter.PROPERTY_EXTERNAL_CONNECTION, Values.CONNECTED);
-				this.updatePropertyTo(EthernetRouter.PROPERTY_CONGESTION, 30+Math.random()*60);
-			} else if (status.equals(EthernetRouter.STATUS_DISCONNECTED)){
-				this.updatePropertyTo(EthernetRouter.PROPERTY_EXTERNAL_CONNECTION, "DISCONNECTED");
+			} else if (status.get(WifiRouterADSL.STATUS_CONGESTED)) {
+				this.updatePropertyTo(WifiRouterADSL.PROPERTY_EXTERNAL_CONNECTION, Values.CONNECTED);
+				this.updatePropertyTo(WifiRouterADSL.PROPERTY_CONGESTION, 30+Math.random()*60);
+			} else if (status.equals(WifiRouterADSL.STATUS_DISCONNECTED)){
+				this.updatePropertyTo(WifiRouterADSL.PROPERTY_EXTERNAL_CONNECTION, "DISCONNECTED");
 				this.updatePropertyTo(PROPERTY_CONNECTION_TYPE, Values.NA);
-			} else if (status.equals(EthernetRouter.STATUS_NOISP_SERVICE)){
-				this.updatePropertyTo(EthernetRouter.PROPERTY_EXTERNAL_CONNECTION, "NO-IP");
+			} else if (status.equals(WifiRouterADSL.STATUS_NOISP_SERVICE)){
+				this.updatePropertyTo(WifiRouterADSL.PROPERTY_EXTERNAL_CONNECTION, "NO-IP");
 			} 
 		}
 	}

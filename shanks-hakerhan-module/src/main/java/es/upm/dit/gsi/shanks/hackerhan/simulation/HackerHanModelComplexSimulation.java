@@ -6,7 +6,7 @@ import java.util.Properties;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
 import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
-import es.upm.dit.gsi.shanks.hackerhan.model.adsl.scenario.ADSLAccesNetworkScenario;
+import es.upm.dit.gsi.shanks.hackerhan.model.han.scenario.HackerHANScenario;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
@@ -36,8 +36,8 @@ public class HackerHanModelComplexSimulation extends ShanksSimulation {
 			Properties scenarioProperties = new Properties();
 			scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
 			HackerHanModelComplexSimulation tut = new HackerHanModelComplexSimulation(
-					System.currentTimeMillis(), ADSLAccesNetworkScenario.class,
-					"MyADSLNetworkAccess", ADSLAccesNetworkScenario.SUNNY,
+					System.currentTimeMillis(), HackerHANScenario.class,
+					"MyADSLNetworkAccess", HackerHANScenario.STATUS_SUNNY,
 					scenarioProperties);
 			tut.start();
 			do

@@ -84,7 +84,7 @@ public class Printer extends Device{
 		HashMap<String, Boolean> status = this.getStatus();
 		if(status.get(Printer.STATUS_OK)){
 			this.changeProperty(Printer.PROPERTY_ETHERNET_CONNECTION, true);
-			this.changeProperty(Printer.PROPERTY_INK, 1);
+			this.changeProperty(Printer.PROPERTY_INK, 1.0);
 			this.changeProperty(Printer.PROPERTY_PAPER, 500);
 			this.changeProperty(Printer.PROPERTY_POWER, true);
 		}
@@ -98,7 +98,7 @@ public class Printer extends Device{
 			this.changeProperty(Printer.PROPERTY_PAPER, 25);
 		}
 		if(status.get(Printer.STATUS_NOINK)){
-			this.changeProperty(Printer.PROPERTY_INK, 0);
+			this.changeProperty(Printer.PROPERTY_INK, 0.0);
 		}
 		if(status.get(Printer.STATUS_NOPAPER)){
 			this.changeProperty(Printer.PROPERTY_PAPER, 0);
@@ -113,7 +113,7 @@ public class Printer extends Device{
 	
 	@Override
 	public void fillIntialProperties() {
-		this.addProperty(Printer.PROPERTY_INK, 1);
+		this.addProperty(Printer.PROPERTY_INK, 1.0);
 		this.addProperty(Printer.PROPERTY_ETHERNET_CONNECTION, true);
 		this.addProperty(Printer.PROPERTY_PAPER, 500);
 		this.addProperty(Printer.PROPERTY_POWER, true);
@@ -130,5 +130,34 @@ public class Printer extends Device{
 		this.addPossibleStatus(Printer.STATUS_OFF);
 		
 	}
+	
+	public double getInkLevel(){
+		return (Double) this.getProperty(PROPERTY_INK);
+	}
+	
+	public void setInkLevel(double ink) throws UnsupportedNetworkElementStatusException{
+		this.changeProperty(PROPERTY_INK, ink);
+	}
+	
+	public void decreaseInk(double percentaje) throws UnsupportedNetworkElementStatusException{
+		double newInk = this.getInkLevel() - percentaje;
+		this.setInkLevel(newInk);
+	}
+	
+	public double getPaperLevel(){
+		return (Integer) this.getProperty(PROPERTY_PAPER);
+	}
+	
+	public void setPaperLevel(double paper) throws UnsupportedNetworkElementStatusException{
+		this.changeProperty(PROPERTY_PAPER, paper);
+	}
+	
+	public void decreasePaper(double paper) throws UnsupportedNetworkElementStatusException{
+		double newPaper = this.getPaperLevel() - paper;
+		this.setPaperLevel(newPaper);
+	}
+	
+
+	
 
 }

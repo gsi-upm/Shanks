@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite failures="0" time="0.048" errors="0" skipped="0" tests="1" name="jar.AppTest">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="/home/dlara/jdk1.6.0_27/jre/lib/i386"/>
+    <property name="java.vm.version" value="20.2-b01"/>
+    <property name="java.vm.vendor" value="Sun Microsystems Inc."/>
+    <property name="java.vendor.url" value="http://java.sun.com/"/>
+    <property name="path.separator" value=":"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.country" value="ES"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="/home/dlara/ShanksFinalProject/shanks-worker_room-module"/>
+    <property name="java.runtime.version" value="1.6.0_27-ea-b01"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
+    <property name="basedir" value="/home/dlara/ShanksFinalProject/shanks-worker_room-module"/>
+    <property name="java.endorsed.dirs" value="/home/dlara/jdk1.6.0_27/jre/lib/endorsed"/>
+    <property name="os.arch" value="i386"/>
+    <property name="surefire.real.class.path" value="/home/dlara/ShanksFinalProject/shanks-worker_room-module/target/surefire/surefirebooter1951865006304089852.jar"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="os.name" value="Linux"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/home/dlara/jdk1.6.0_27/jre/lib/i386/server:/home/dlara/jdk1.6.0_27/jre/lib/i386:/home/dlara/jdk1.6.0_27/jre/../lib/i386:/home/dlara/jdk1.6.0_27/jre/lib/i386/client:/home/dlara/jdk1.6.0_27/jre/lib/i386::/usr/java/packages/lib/i386:/lib:/usr/lib"/>
+    <property name="surefire.test.class.path" value="/home/dlara/ShanksFinalProject/shanks-worker_room-module/target/test-classes:/home/dlara/ShanksFinalProject/shanks-worker_room-module/target/classes:/home/dlara/.m2/repository/junit/junit/4.8.2/junit-4.8.2.jar:/home/dlara/.m2/repository/es/upm/dit/gsi/shanks/shanks-core/0.3.0/shanks-core-0.3.0-jar-with-dependencies.jar:/home/dlara/ShanksFinalProject/shanks-worker_room-module/lib/mason.16.jar:/home/dlara/ShanksFinalProject/shanks-worker_room-module/lib/jason.jar:/home/dlara/ShanksFinalProject/shanks-worker_room-module/lib/jpf-1.5.jar:/home/dlara/ShanksFinalProject/shanks-worker_room-module/lib/unbbayes-4.0.0.jar:/home/dlara/.m2/repository/jfree/jfreechart/1.0.13/jfreechart-1.0.13.jar:/home/dlara/.m2/repository/jfree/jcommon/1.0.16/jcommon-1.0.16.jar:/home/dlara/.m2/repository/com/lowagie/itext/1.2.3/itext-1.2.3.jar:/home/dlara/.m2/repository/javax/media/jmf/2.1.1e/jmf-2.1.1e.jar:/home/dlara/.m2/repository/org/apache/directory/studio/org.apache.commons.logging/1.1.1/org.apache.commons.logging-1.1.1.jar:/home/dlara/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar:"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="50.0"/>
+    <property name="sun.management.compiler" value="HotSpot Tiered Compilers"/>
+    <property name="os.version" value="2.6.35-22-generic"/>
+    <property name="user.home" value="/home/dlara"/>
+    <property name="user.timezone" value=""/>
+    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.specification.version" value="1.6"/>
+    <property name="user.name" value="dlara"/>
+    <property name="java.class.path" value="/home/dlara/ShanksFinalProject/shanks-worker_room-module/target/test-classes:/home/dlara/ShanksFinalProject/shanks-worker_room-module/target/classes:/home/dlara/.m2/repository/junit/junit/4.8.2/junit-4.8.2.jar:/home/dlara/.m2/repository/es/upm/dit/gsi/shanks/shanks-core/0.3.0/shanks-core-0.3.0-jar-with-dependencies.jar:/home/dlara/ShanksFinalProject/shanks-worker_room-module/lib/mason.16.jar:/home/dlara/ShanksFinalProject/shanks-worker_room-module/lib/jason.jar:/home/dlara/ShanksFinalProject/shanks-worker_room-module/lib/jpf-1.5.jar:/home/dlara/ShanksFinalProject/shanks-worker_room-module/lib/unbbayes-4.0.0.jar:/home/dlara/.m2/repository/jfree/jfreechart/1.0.13/jfreechart-1.0.13.jar:/home/dlara/.m2/repository/jfree/jcommon/1.0.16/jcommon-1.0.16.jar:/home/dlara/.m2/repository/com/lowagie/itext/1.2.3/itext-1.2.3.jar:/home/dlara/.m2/repository/javax/media/jmf/2.1.1e/jmf-2.1.1e.jar:/home/dlara/.m2/repository/org/apache/directory/studio/org.apache.commons.logging/1.1.1/org.apache.commons.logging-1.1.1.jar:/home/dlara/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar:"/>
+    <property name="java.vm.specification.version" value="1.0"/>
+    <property name="sun.arch.data.model" value="32"/>
+    <property name="java.home" value="/home/dlara/jdk1.6.0_27/jre"/>
+    <property name="sun.java.command" value="/home/dlara/ShanksFinalProject/shanks-worker_room-module/target/surefire/surefirebooter1951865006304089852.jar /home/dlara/ShanksFinalProject/shanks-worker_room-module/target/surefire/surefire5518906420043691603tmp /home/dlara/ShanksFinalProject/shanks-worker_room-module/target/surefire/surefire7503384852825755587tmp"/>
+    <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="user.language" value="es"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.6.0_27-ea"/>
+    <property name="java.ext.dirs" value="/home/dlara/jdk1.6.0_27/jre/lib/ext:/usr/java/packages/lib/ext"/>
+    <property name="sun.boot.class.path" value="/home/dlara/jdk1.6.0_27/jre/lib/resources.jar:/home/dlara/jdk1.6.0_27/jre/lib/rt.jar:/home/dlara/jdk1.6.0_27/jre/lib/sunrsasign.jar:/home/dlara/jdk1.6.0_27/jre/lib/jsse.jar:/home/dlara/jdk1.6.0_27/jre/lib/jce.jar:/home/dlara/jdk1.6.0_27/jre/lib/charsets.jar:/home/dlara/jdk1.6.0_27/jre/lib/modules/jdk.boot.jar:/home/dlara/jdk1.6.0_27/jre/classes"/>
+    <property name="java.vendor" value="Sun Microsystems Inc."/>
+    <property name="localRepository" value="/home/dlara/.m2/repository"/>
+    <property name="file.separator" value="/"/>
+    <property name="java.vendor.url.bug" value="http://java.sun.com/cgi-bin/bugreport.cgi"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.desktop" value="gnome"/>
+    <property name="sun.cpu.isalist" value=""/>
+  </properties>
+  <testcase time="0.002" classname="jar.AppTest" name="testApp"/>
+</testsuite>

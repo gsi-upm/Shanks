@@ -11,13 +11,17 @@ import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementSt
  */
 public class Computer extends Device {
 
+	
+	// It is simplified at there is a failure or not. Not in detail what 
+	// type of failure. 
 	public static final String STATUS_OFF = "OFF";
 	public static final String STATUS_OK = "OK";
+	public static final String STATUS_NOK = "NOK";
 	public static final String STATUS_HIGHTEMP = "High Temperature";
 	public static final String STATUS_DISCONNECTED = "Disconnected";
 
 	public static final String PROPERTY_CPUFREQ = "CPU Frequency"; // In MHz
-	public static final String PROPERTY_TEMPERATURE = "Temperature"; // In �C
+	public static final String PROPERTY_TEMPERATURE = "Temperature"; // In ªC
 	public static final String PROPERTY_POWER = "Power";
 	public static final String PROPERTY_ETHERNET_CONNECTION = "Connection";
 
@@ -34,12 +38,11 @@ public class Computer extends Device {
 	@Override
 	public void checkProperties()
 			throws UnsupportedNetworkElementStatusException {
-		
 		// TODO Adapt the hole thing to HashMap String/boolean. 
         HashMap<String, Boolean> status = this.getStatus();		
-		if (status.equals(Computer.STATUS_OFF)) {
+		if (status.get(Computer.STATUS_OFF)) {
 			this.shutdown();
-		} else if (status.equals(Computer.STATUS_HIGHTEMP)) {
+		} else if (status.get(Computer.STATUS_HIGHTEMP)) {
 			this.addProperty(Computer.PROPERTY_TEMPERATURE, 60.0);
 			this.addProperty(Computer.PROPERTY_POWER, "ON");
 		} else if (status.equals(Computer.STATUS_OK)) {

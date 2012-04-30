@@ -12,7 +12,6 @@ import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.WifiRouterADSL;
 import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.WirelessDevice;
 import es.upm.dit.gsi.shanks.hackerhan.model.han.element.link.EthernetCable;
 import es.upm.dit.gsi.shanks.hackerhan.model.han.element.link.WifiConnection;
-import es.upm.dit.gsi.shanks.hackerhan.model.han.failure.BrokenFanFailure;
 import es.upm.dit.gsi.shanks.hackerhan.model.han.failure.NoIPFailure;
 import es.upm.dit.gsi.shanks.hackerhan.model.han.scenario.portrayal.HANScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
@@ -104,7 +103,6 @@ public class HANScenario extends Scenario {
         this.addPossibleFailure(NoIPFailure.class, router);
         
         NetworkElement pc = this.getNetworkElement("PC");
-        this.addPossibleFailure(BrokenFanFailure.class, pc);
 	}
 
 	/*
@@ -157,7 +155,6 @@ public class HANScenario extends Scenario {
 	private HashMap<Class<? extends Failure>, Double> getSunnyPenalties() {
         HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
 
-        penalties.put(BrokenFanFailure.class, 1.0);
         penalties.put(NoIPFailure.class, 1.0);
 
         
@@ -167,7 +164,6 @@ public class HANScenario extends Scenario {
 	private HashMap<Class<? extends Failure>, Double> getSnowyPenalties() {
         HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
 
-        penalties.put(BrokenFanFailure.class, 5.0);
         penalties.put(NoIPFailure.class, 1.0);
 
         return penalties;
@@ -176,7 +172,6 @@ public class HANScenario extends Scenario {
 	private HashMap<Class<? extends Failure>, Double> getRainyPenalties() {
         HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
 
-        penalties.put(BrokenFanFailure.class, 1.0);
         penalties.put(NoIPFailure.class, 1.0);
 
         return penalties;

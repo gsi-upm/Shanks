@@ -11,5 +11,8 @@ public class Values {
 	//whenever the value of an state or property is Not Applicable.
 	public static final String NA = "not-aplicable";
 	
+	//
+	public static final Object NO_IP = "no-ip";
+	
 	
 }

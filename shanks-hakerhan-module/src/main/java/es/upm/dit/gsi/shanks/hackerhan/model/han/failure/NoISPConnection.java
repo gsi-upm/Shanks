@@ -1,24 +1,47 @@
 package es.upm.dit.gsi.shanks.hackerhan.model.han.failure;
 
+import java.util.HashMap;
+import java.util.List;
+
+import es.upm.dit.gsi.shanks.hackerhan.model.han.element.Values;
+import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.Computer;
+import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.WifiRouterADSL;
+import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.WirelessDevice;
+import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 
 public class NoISPConnection extends Failure {
 
 	public NoISPConnection(String id, double occurrenceProbability) {
 		super(id, occurrenceProbability);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void addPossibleAffectedElements() {
-		// TODO Auto-generated method stub
-		
+		this.addPossibleAffectedElements(WifiRouterADSL.class, WifiRouterADSL.STATUS_DISCONNECTED, true);
+		this.addPossibleAffectedProperties(Computer.class, Computer.PROPERTY_ETHERNET_CONNECTION, Values.DISCONNECTED);
+		this.addPossibleAffectedProperties(Computer.class, WirelessDevice.PROPERTY_CONNECTION, Values.DISCONNECTED);
 	}
 
 	@Override
 	public boolean isResolved() {
-		// TODO Auto-generated method stub
-		return false;
+		List<NetworkElement> affected = this.getAffectedElements();
+		for (NetworkElement e : affected){
+			HashMap<String, Boolean> state = e.getStatus();
+			if (state.containsKey(WifiRouterADSL.STATUS_DISCONNECTED)){
+				if(state.get(WifiRouterADSL.STATUS_DISCONNECTED)){
+					return false;
+				}
+			} else if(state.containsKey(Computer.STATUS_DISCONNECTED)) {
+				if(state.get(Computer.STATUS_DISCONNECTED)){
+					return false;
+				}
+			} else if(state.containsKey(WirelessDevice.STATUS_DISCONNECTED)) {
+				if(state.get(WirelessDevice.STATUS_DISCONNECTED)){
+					return false;
+				}
+			}
+		}
+		return true;
 	}
-
 }

@@ -58,22 +58,24 @@ public class WirelessDevice extends Device{
 		if(status.get(WirelessDevice.STATUS_OFF)) {
 			this.shutdown();
 		} else { 
-			if (status.get(WirelessDevice.STATUS_STEALING_CONNECTION)){
-				this.updatePropertyTo(WirelessDevice.PROPERTY_CONNECTION_TYPE, WirelessDevice.CONNECTION_TYPE_STEAL);
-			} else {
-				this.updatePropertyTo(WirelessDevice.PROPERTY_CONNECTION_TYPE, WirelessDevice.CONNECTION_TYPE_ISP);
-			}
 			this.updatePropertyTo(WirelessDevice.PROPERTY_POWER, Values.ON);
-			if(status.get(WirelessDevice.STATUS_OK)) {
+			if (status.get(WirelessDevice.STATUS_STEALING_CONNECTION))
+				this.updatePropertyTo(WirelessDevice.PROPERTY_CONNECTION_TYPE, WirelessDevice.CONNECTION_TYPE_STEAL);
+			else 
+				this.updatePropertyTo(WirelessDevice.PROPERTY_CONNECTION_TYPE, WirelessDevice.CONNECTION_TYPE_ISP);
+			if(status.get(WirelessDevice.STATUS_NOK)) {
+				this.updatePropertyTo(WirelessDevice.PROPERTY_BATTERY_CAPACITY, 1.0);
+				this.updatePropertyTo(WirelessDevice.PROPERTY_SIGNAL, 1.0);
+			}
+			if(status.get(Computer.STATUS_DISCONNECTED)){
+				this.updatePropertyTo(WirelessDevice.PROPERTY_CONNECTION, Values.DISCONNECTED);
+			} 
+			if(status.get(Computer.STATUS_OK)){
 				this.updatePropertyTo(WirelessDevice.PROPERTY_BATTERY_CAPACITY,
 						50 + Math.random() * 50);
 				this.updatePropertyTo(WirelessDevice.PROPERTY_SIGNAL,
 						70 + Math.random() * 30);
 				this.updatePropertyTo(WirelessDevice.PROPERTY_CONNECTION, Values.CONNECTED);
-			} else {
-				this.updatePropertyTo(WirelessDevice.PROPERTY_BATTERY_CAPACITY, 1.0);
-				this.updatePropertyTo(WirelessDevice.PROPERTY_CONNECTION, Values.DISCONNECTED);
-				this.updatePropertyTo(WirelessDevice.PROPERTY_SIGNAL, 1.0);
 			}
 		}
 	}
@@ -103,9 +105,15 @@ public class WirelessDevice extends Device{
 			if ((battery <= 5)||(signal <= 20)||(connection.equals(Values.DISCONNECTED))) {
 				this.updateStatusTo(WirelessDevice.STATUS_NOK, true);
 				this.updateStatusTo(WirelessDevice.STATUS_OK, false);
+				if(connection.equals(Values.DISCONNECTED)){
+					this.updateStatusTo(WirelessDevice.STATUS_DISCONNECTED, true);
+				} else {
+					this.updateStatusTo(WirelessDevice.STATUS_DISCONNECTED, false);
+				}
 			} else {
 				this.updateStatusTo(WirelessDevice.STATUS_NOK, false);
 				this.updateStatusTo(WirelessDevice.STATUS_OK, true);
+				this.updateStatusTo(WirelessDevice.STATUS_DISCONNECTED, false);
 			}
 		}
 	}
@@ -131,6 +139,7 @@ public class WirelessDevice extends Device{
 		this.addPossibleStatus(WirelessDevice.STATUS_OFF);
 		this.addPossibleStatus(WirelessDevice.STATUS_OK);
 		this.addPossibleStatus(WirelessDevice.STATUS_NOK);
+		this.addPossibleStatus(WirelessDevice.STATUS_DISCONNECTED);
 	}
 	
 	/**
@@ -146,5 +155,6 @@ public class WirelessDevice extends Device{
 		this.updateStatusTo(WirelessDevice.STATUS_OK, false);
 		this.updateStatusTo(WirelessDevice.STATUS_NOK, false);
 		this.updateStatusTo(WirelessDevice.STATUS_STEALING_CONNECTION, false);
+		this.updateStatusTo(WirelessDevice.STATUS_DISCONNECTED, true);
 	}
 }

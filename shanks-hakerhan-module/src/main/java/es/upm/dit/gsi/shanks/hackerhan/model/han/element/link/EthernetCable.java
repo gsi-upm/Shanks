@@ -15,11 +15,12 @@ import es.upm.dit.gsi.shanks.model.element.link.Link;
 public class EthernetCable extends Link {
 
 	public static final String STATUS_OK = "OK";
+	public static final String STATUS_NOK = "NOK";
 	public static final String STATUS_CUT = "CUT";
 	public static final String STATUS_DAMAGED = "DAMAGED";
 
 	public static final String PROPERTY_LENGTH = "Length"; // In meters
-	public static final String PROPERTY_PACKETLOSSRATIO = "Packet loss ratio";
+	public static final String PROPERTY_PACKETLOSSRATIO = "Packet loss ratio"; //in %
 
 	/**
 	 * Constructor ethernet cable
@@ -31,7 +32,7 @@ public class EthernetCable extends Link {
 	public EthernetCable(String id, double length)
 			throws UnsupportedNetworkElementStatusException {
 		super(id, EthernetCable.STATUS_OK, 2);
-		this.addProperty(EthernetCable.PROPERTY_LENGTH, length);
+		this.updatePropertyTo(EthernetCable.PROPERTY_LENGTH, length);
 	}
 
 	/*
@@ -42,14 +43,11 @@ public class EthernetCable extends Link {
 	@Override
 	public void checkProperties()
 			throws UnsupportedNetworkElementStatusException {
-        // TODO Adapt the hole thing to hasMapa String/Boolean.
     	HashMap<String, Boolean> status = this.getStatus();
-		if (status.equals(EthernetCable.STATUS_OK)) {
-			this.changeProperty(EthernetCable.PROPERTY_PACKETLOSSRATIO, 0.001);
-		} else if (status.equals(EthernetCable.STATUS_CUT)) {
-			this.changeProperty(EthernetCable.PROPERTY_PACKETLOSSRATIO, 1.0);
-		} else if (status.equals(EthernetCable.STATUS_DAMAGED)) {
-			this.changeProperty(EthernetCable.PROPERTY_PACKETLOSSRATIO, 0.3);
+		if (status.get(EthernetCable.STATUS_OK)) {
+			this.updatePropertyTo(EthernetCable.PROPERTY_PACKETLOSSRATIO, 0.001);
+		} else if (status.get(EthernetCable.STATUS_NOK)) {
+			this.updatePropertyTo(EthernetCable.PROPERTY_PACKETLOSSRATIO, 100.0);
 		}
 	}
 
@@ -61,12 +59,12 @@ public class EthernetCable extends Link {
 	@Override
 	public void checkStatus() throws UnsupportedNetworkElementStatusException {
 		double ratio = (Double) this.getProperty(EthernetCable.PROPERTY_PACKETLOSSRATIO);
-		if (ratio < 0.01) {
+		if (ratio < 0.1) {
 			this.updateStatusTo(EthernetCable.STATUS_OK, true);
-		} else if (ratio >= 1) {
-			this.updateStatusTo(EthernetCable.STATUS_CUT, true);
-		} else {
-			this.updateStatusTo(EthernetCable.STATUS_DAMAGED, true);
+			this.updateStatusTo(EthernetCable.STATUS_NOK, false);
+		} else if (ratio >= 10) {
+			this.updateStatusTo(EthernetCable.STATUS_OK, false);
+			this.updateStatusTo(EthernetCable.STATUS_NOK, true);
 		}
 	}
 
@@ -91,8 +89,7 @@ public class EthernetCable extends Link {
 	@Override
 	public void setPossibleStates() {
 		this.addPossibleStatus(EthernetCable.STATUS_OK);
-		this.addPossibleStatus(EthernetCable.STATUS_CUT);
-		this.addPossibleStatus(EthernetCable.STATUS_DAMAGED);
+		this.addPossibleStatus(EthernetCable.STATUS_NOK);
 	}
 
 }

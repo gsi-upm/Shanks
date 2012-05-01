@@ -1,3 +1,7 @@
+/**
+ * es.upm.dit.gsi
+ * 01/05/2012
+ */
 package es.upm.dit.gsi.shanks.hackerhan.model.han.element.link.protrayal;
 
 import java.awt.Color;
@@ -25,15 +29,12 @@ import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.portrayal.Link3DPortrayal;
 
 /**
- * @author a.carrera
+ * 
+ * @author darofar
  *
  */
+@SuppressWarnings("restriction")
 public class EthernetCable3DPortrayal extends Link3DPortrayal {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2475894301234684469L;
 
 	@Override
     public TransformGroup getModel(Object object, TransformGroup model) {
@@ -147,11 +148,10 @@ public class EthernetCable3DPortrayal extends Link3DPortrayal {
      * @see es.upm.dit.gsi.shanks.model.element.link.portrayal.Link3DPortrayal#getLabelColor(es.upm.dit.gsi.shanks.model.element.link.Link)
      */
     public Color getLabelColor(Link link) {
-        // TODO Adapt the hole thing to hasMapa String/Boolean.
     	HashMap<String, Boolean> status = link.getStatus();
-        if (status.equals(EthernetCable.STATUS_OK)) {
+        if (status.get(EthernetCable.STATUS_OK)) {
             return Color.green;
-        } else if (status.equals(EthernetCable.STATUS_DAMAGED)) {
+        } else if (status.get(EthernetCable.STATUS_NOK)) {
             return Color.red;
         } else {
             return Color.black;
@@ -162,15 +162,14 @@ public class EthernetCable3DPortrayal extends Link3DPortrayal {
      * @see es.upm.dit.gsi.shanks.model.element.link.portrayal.Link3DPortrayal#getLinkColor(es.upm.dit.gsi.shanks.model.element.link.Link)
      */
     public Color getLinkColor(Link link) {
-        // TODO Adapt the hole thing to hasMapa String/Boolean.
     	HashMap<String, Boolean> status = link.getStatus();
-        if (status.equals(EthernetCable.STATUS_OK)) {
+        if (status.get(EthernetCable.STATUS_OK)) {
             return Color.blue;
-        } else if (status.equals(EthernetCable.STATUS_DAMAGED)) {
+        } else if (status.get(EthernetCable.STATUS_NOK)) {
             return Color.red;
         } else {
             return Color.black;
         }
     }
-
+	private static final long serialVersionUID = 2475894301234684469L;
 }

@@ -56,17 +56,23 @@ public class Computer extends Device {
         HashMap<String, Boolean> status = this.getStatus();		
 		if (status.get(Computer.STATUS_OFF)) {
 			this.shutdown();
-		} else if (status.get(Computer.STATUS_NOK)) {
-			this.updatePropertyTo(Computer.PROPERTY_POWER, "ON");
-			this.updatePropertyTo(Computer.PROPERTY_CPUFREQ, 99);
-			this.updatePropertyTo(Computer.PROPERTY_TEMPERATURE, 70.0);
-			this.updatePropertyTo(Computer.PROPERTY_ETHERNET_CONNECTION, Values.DISCONNECTED);
 		} else {
-			this.updatePropertyTo(Computer.PROPERTY_POWER, "ON");
-			this.updatePropertyTo(Computer.PROPERTY_CPUFREQ, 10);
-			this.updatePropertyTo(Computer.PROPERTY_TEMPERATURE, 40.0);
-			this.updatePropertyTo(Computer.PROPERTY_ETHERNET_CONNECTION, Values.CONNECTED);
-			this.updateStatusTo(Computer.STATUS_OK, true);
+			this.updatePropertyTo(Computer.PROPERTY_POWER, Values.ON);
+			if (status.get(Computer.STATUS_NOK)||status.get(Computer.STATUS_DISCONNECTED)) {
+				this.updatePropertyTo(Computer.PROPERTY_POWER, "ON");
+				this.updatePropertyTo(Computer.PROPERTY_CPUFREQ, 99);
+				this.updatePropertyTo(Computer.PROPERTY_TEMPERATURE, 70.0);
+			} 
+			if (status.get(Computer.STATUS_DISCONNECTED)){
+					this.updatePropertyTo(Computer.PROPERTY_ETHERNET_CONNECTION, Values.DISCONNECTED);
+			}
+			if (status.get(Computer.STATUS_OK)){
+				this.updatePropertyTo(Computer.PROPERTY_POWER, "ON");
+				this.updatePropertyTo(Computer.PROPERTY_CPUFREQ, 10);
+				this.updatePropertyTo(Computer.PROPERTY_TEMPERATURE, 40.0);
+				this.updatePropertyTo(Computer.PROPERTY_ETHERNET_CONNECTION, Values.CONNECTED);
+				this.updateStatusTo(Computer.STATUS_OK, true);
+			}
 		}
 	}
 
@@ -85,12 +91,21 @@ public class Computer extends Device {
 		if (power.equals(Values.OFF)) {
 			this.updateStatusTo(Computer.STATUS_OFF, true);
 			this.shutdown();
-		} else if ((temp >= 80)||(freq > 90)||(connection.equals(Values.DISCONNECTED))) {
+		} else {
+			this.updateStatusTo(Computer.STATUS_OFF, false);
+			if ((temp >= 80)||(freq > 90)||(connection.equals(Values.DISCONNECTED))) {
 				this.updateStatusTo(Computer.STATUS_NOK, true);
 				this.updateStatusTo(Computer.STATUS_OK, false);
-		} else {
-			this.updateStatusTo(Computer.STATUS_OK, true);
-			this.updateStatusTo(Computer.STATUS_NOK, false);
+				if(connection.equals(Values.DISCONNECTED)){
+					this.updateStatusTo(Computer.STATUS_DISCONNECTED, true);
+				} else {
+					this.updateStatusTo(Computer.STATUS_DISCONNECTED, false);
+				}
+			} else {
+				this.updateStatusTo(Computer.STATUS_OK, true);
+				this.updateStatusTo(Computer.STATUS_NOK, false);
+				this.updateStatusTo(Computer.STATUS_DISCONNECTED, false);
+			}
 		}
 	}
 	
@@ -119,6 +134,7 @@ public class Computer extends Device {
 		this.addPossibleStatus(Computer.STATUS_NOK);
 		this.addPossibleStatus(Computer.STATUS_OK);
 		this.addPossibleStatus(Computer.STATUS_OFF);
+		this.addPossibleStatus(Computer.STATUS_DISCONNECTED);
 	}
 
 	/**
@@ -133,5 +149,6 @@ public class Computer extends Device {
 		this.updatePropertyTo(Computer.PROPERTY_ETHERNET_CONNECTION, Values.DISCONNECTED);
 		this.updateStatusTo(Computer.STATUS_OK, false);
 		this.updateStatusTo(Computer.STATUS_NOK, false);
+		this.updateStatusTo(Computer.STATUS_DISCONNECTED, true);
 	}
 }

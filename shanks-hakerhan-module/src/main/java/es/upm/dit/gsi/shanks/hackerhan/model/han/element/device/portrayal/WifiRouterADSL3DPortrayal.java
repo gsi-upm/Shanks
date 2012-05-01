@@ -25,10 +25,7 @@ import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device3DPortrayal;
 @SuppressWarnings("restriction")
 public class WifiRouterADSL3DPortrayal extends Device3DPortrayal {
 
-	/**
-     * 
-     */
-    private static final long serialVersionUID = 6319038986129405512L;
+	//TODO Make the animation for stealing connection.
     public Logger log = Logger.getLogger(Device3DPortrayal.class.getName());
 
     @Override
@@ -73,9 +70,6 @@ public class WifiRouterADSL3DPortrayal extends Device3DPortrayal {
         clearPickableFlags(model);
         model.setPickable(true);
         
-        
-
-
         // draw the device labels if the user wants
         Transform3D offset = new Transform3D();
         offset.setTranslation(new Vector3d(5+diameter/2,5+diameter/2,5+diameter/2));
@@ -123,16 +117,15 @@ public class WifiRouterADSL3DPortrayal extends Device3DPortrayal {
      */
     @Override
 	public Color getDeviceColor(Device device) {
-    	// TODO Adapt the hole thing to HashMap String/boolean. 
         HashMap<String, Boolean> status = device.getStatus();
-        if (status.equals(WifiRouterADSL.STATUS_OK)) {
+        if (status.get(WifiRouterADSL.STATUS_OK)) {
             return Color.green;
-        } else if (status.equals(WifiRouterADSL.STATUS_NOISP_SERVICE)||status.equals(WifiRouterADSL.STATUS_DISCONNECTED)) {
+        } else if (status.get(WifiRouterADSL.STATUS_NOISP_SERVICE)||status.get(WifiRouterADSL.STATUS_DISCONNECTED)) {
             return Color.red;
-        } else if (status.equals(WifiRouterADSL.STATUS_CONGESTED)) {
+        } else if (status.get(WifiRouterADSL.STATUS_CONGESTED)) {
             return Color.yellow;
-        } else if (status.equals(WifiRouterADSL.STATUS_OFF)) {
-            return Color.black;
+        } else if (status.get(WifiRouterADSL.STATUS_OFF)) {
+            return Color.gray;
         } else {
         	return Color.black;
         }
@@ -142,19 +135,18 @@ public class WifiRouterADSL3DPortrayal extends Device3DPortrayal {
      */
     @Override
 	public Color getLabelColor(Device device) {
-    	// TODO Adapt the hole thing to HashMap String/boolean. 
         HashMap<String, Boolean> status = device.getStatus();
-        if (status.equals(WifiRouterADSL.STATUS_OK)) {
+        if (status.get(WifiRouterADSL.STATUS_OK)) {
             return Color.green;
-        } else if (status.equals(WifiRouterADSL.STATUS_NOISP_SERVICE)||status.equals(WifiRouterADSL.STATUS_DISCONNECTED)) {
+        } else if (status.get(WifiRouterADSL.STATUS_NOISP_SERVICE)||status.get(WifiRouterADSL.STATUS_DISCONNECTED)) {
             return Color.red;
-        } else if (status.equals(WifiRouterADSL.STATUS_CONGESTED)) {
+        } else if (status.get(WifiRouterADSL.STATUS_CONGESTED)) {
             return Color.yellow;
-        } else if (status.equals(WifiRouterADSL.STATUS_OFF)) {
-            return Color.black;
+        } else if (status.get(WifiRouterADSL.STATUS_OFF)) {
+            return Color.gray;
         } else {
         	return Color.black;
         }
     }
-
+    private static final long serialVersionUID = 6319038986129405512L;
 }

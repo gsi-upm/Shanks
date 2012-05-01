@@ -22,9 +22,8 @@ import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device3DPortrayal;
 
 @SuppressWarnings("restriction")
-public class Smartphone3DPortrayal extends Device3DPortrayal{
-	
-	
+public class Smartphone3DPortrayal extends Device3DPortrayal {
+
 	@Override
 	public String getLabel(Device device) {
 		return device.getID();
@@ -37,13 +36,14 @@ public class Smartphone3DPortrayal extends Device3DPortrayal{
 		int size = 3;
 		Color3f colour;
 		Box Smartphone3D;
-		
-		//Get the device color based on status
+
+		// Get the device color based on status
 		colour = new Color3f(this.getDeviceColor(device));
 
 		model.removeAllChildren();
 		Appearance appearance = new Appearance();
-		appearance.setColoringAttributes(new ColoringAttributes(colour, ColoringAttributes.SHADE_GOURAUD));
+		appearance.setColoringAttributes(new ColoringAttributes(colour,
+				ColoringAttributes.SHADE_GOURAUD));
 		Material m = new Material();
 		m.setAmbientColor(colour);
 		m.setEmissiveColor(0f, 0f, 0f);
@@ -51,9 +51,9 @@ public class Smartphone3DPortrayal extends Device3DPortrayal{
 		m.setSpecularColor(1f, 1f, 1f);
 		m.setShininess(128f);
 		appearance.setMaterial(m);
-		
+
 		Smartphone3D = new Box(size, size, size, appearance);
-		
+
 		model.addChild(Smartphone3D);
 		model.setName(device.getID());
 		clearPickableFlags(model);
@@ -116,13 +116,12 @@ public class Smartphone3DPortrayal extends Device3DPortrayal{
 	 */
 	@Override
 	public Color getDeviceColor(Device device) {
-		// TODO Adapt the hole thing to HashMap String/boolean. 
-        HashMap<String, Boolean> status = device.getStatus();
-		if (status.equals(WirelessDevice.STATUS_OK)) {
+		HashMap<String, Boolean> status = device.getStatus();
+		if (status.get(WirelessDevice.STATUS_OK)) {
 			return Color.green;
-		} else if (status.equals(WirelessDevice.STATUS_OUT_OF_RANGE)) {
-			return Color.yellow;
-		} else if (status.equals(WirelessDevice.STATUS_DISCONNECTED)||status.equals(WirelessDevice.STATUS_DISCHARGED)) {
+		} else if (status.get(WirelessDevice.STATUS_NOK)) {
+			return Color.red;
+		} else if (status.get(WirelessDevice.STATUS_OFF)) {
 			return Color.gray;
 		} else {
 			return Color.black;
@@ -138,19 +137,17 @@ public class Smartphone3DPortrayal extends Device3DPortrayal{
 	 */
 	@Override
 	public Color getLabelColor(Device device) {
-		// TODO Adapt the hole thing to HashMap String/boolean. 
-        HashMap<String, Boolean> status = device.getStatus();
-		if (status.equals(WirelessDevice.STATUS_OK)) {
+		HashMap<String, Boolean> status = device.getStatus();
+		if (status.get(WirelessDevice.STATUS_OK)) {
 			return Color.blue;
-		} else if (status.equals(WirelessDevice.STATUS_OUT_OF_RANGE)) {
+		} else if (status.get(WirelessDevice.STATUS_NOK)) {
 			return Color.red;
-		} else if (status.equals(WirelessDevice.STATUS_DISCONNECTED)) {
+		} else if (status.get(WirelessDevice.STATUS_OFF)) {
 			return Color.gray;
 		} else {
 			return Color.black;
 		}
 	}
-	
+
 	private static final long serialVersionUID = 8836363281132965027L;
-	
 }

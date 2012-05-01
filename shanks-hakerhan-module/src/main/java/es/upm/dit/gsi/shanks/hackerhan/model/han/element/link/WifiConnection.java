@@ -1,5 +1,6 @@
 /**
- * 
+ * es.upm.dit.gsi
+ * 01/05/2012
  */
 package es.upm.dit.gsi.shanks.hackerhan.model.han.element.link;
 
@@ -9,12 +10,13 @@ import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementSt
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 
 /**
- * @author a.carrera
+ * @author darofar
  *
  */
 public class WifiConnection extends Link {
 	
 	public static final String STATUS_OK = "OK";
+	public static final String STATUS_NOK = "NOK";
 	public static final String STATUS_INTERFEARENCES = "Interfearences";
 	public static final String STATUS_HIGH_BER = "High BER";
 
@@ -33,15 +35,13 @@ public class WifiConnection extends Link {
 	@Override
 	public void checkProperties()
 			throws UnsupportedNetworkElementStatusException {
-        // TODO Adapt the hole thing to hasMapa String/Boolean.
     	HashMap<String, Boolean> status = this.getStatus();
-		if (status.equals(WifiConnection.STATUS_OK)) {
-			this.changeProperty(WifiConnection.PROPERTY_PACKETLOSSRATIO, 0.001);
-			this.changeProperty(WifiConnection.PROPERTY_INTERFEARENCE, 0.01);
-		} else if (status.equals(WifiConnection.STATUS_INTERFEARENCES)) {
-			this.changeProperty(WifiConnection.PROPERTY_INTERFEARENCE, 0.90);
-		} else if (status.equals(WifiConnection.STATUS_HIGH_BER)) {
-			this.changeProperty(WifiConnection.PROPERTY_PACKETLOSSRATIO, 0.5);
+		if (status.get(WifiConnection.STATUS_OK)) {
+			this.updatePropertyTo(WifiConnection.PROPERTY_PACKETLOSSRATIO, 0.001);
+			this.updatePropertyTo(WifiConnection.PROPERTY_INTERFEARENCE, 0.01);
+		} else if (status.get(WifiConnection.STATUS_NOK)) {
+			this.updatePropertyTo(WifiConnection.PROPERTY_INTERFEARENCE, 90);
+			this.updatePropertyTo(WifiConnection.PROPERTY_PACKETLOSSRATIO, 90);
 		}
 	}
 
@@ -54,12 +54,12 @@ public class WifiConnection extends Link {
 	public void checkStatus() throws UnsupportedNetworkElementStatusException {
 		double pklratio = (Double) this.getProperty(WifiConnection.PROPERTY_PACKETLOSSRATIO);
 		double interference = (Double) this.getProperty(WifiConnection.PROPERTY_INTERFEARENCE);
-		if (interference > 0.2) {
-			this.updateStatusTo(WifiConnection.STATUS_INTERFEARENCES, true);
-		} else if (pklratio >= 0.2) {
-			this.updateStatusTo(WifiConnection.STATUS_HIGH_BER, true);
-		} else {
+		if ((interference > 1)||(pklratio > 1)) {
 			this.updateStatusTo(WifiConnection.STATUS_OK, true);
+			this.updateStatusTo(WifiConnection.STATUS_NOK, false);
+		} else {
+			this.updateStatusTo(WifiConnection.STATUS_OK, false);
+			this.updateStatusTo(WifiConnection.STATUS_NOK, true);
 		}
 	}
 
@@ -84,8 +84,6 @@ public class WifiConnection extends Link {
 	@Override
 	public void setPossibleStates() {
 		this.addPossibleStatus(WifiConnection.STATUS_OK);
-		this.addPossibleStatus(WifiConnection.STATUS_HIGH_BER);
-		this.addPossibleStatus(WifiConnection.STATUS_INTERFEARENCES);
+		this.addPossibleStatus(WifiConnection.STATUS_NOK);
 	}
-
 }

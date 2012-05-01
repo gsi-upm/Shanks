@@ -31,16 +31,19 @@ import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device3DPortrayal;
 @SuppressWarnings("restriction")
 public class Computer3DPortrayal extends Device3DPortrayal {
 
-	/**
-	 * 
+	/*
+	 * (non-Javadoc)
+	 * @see es.upm.dit.gsi.shanks.model.element.device.portrayal.Device3DPortrayal#getLabel(es.upm.dit.gsi.shanks.model.element.device.Device)
 	 */
-	private static final long serialVersionUID = 1595363335332962239L;
-
 	@Override
 	public String getLabel(Device device) {
 		return device.getID();
 	}
-
+	
+	/*
+	 * (non-Javadoc)
+	 * @see es.upm.dit.gsi.shanks.model.element.device.portrayal.Device3DPortrayal#getModel(java.lang.Object, javax.media.j3d.TransformGroup)
+	 */
 	public TransformGroup getModel(Object object, TransformGroup model) {
 
 		Device device = (Device) object;
@@ -133,13 +136,12 @@ public class Computer3DPortrayal extends Device3DPortrayal {
 	 */
 	@Override
 	public Color getDeviceColor(Device device) {
-		// TODO Adapt the hole thing to HashMap String/boolean. 
         HashMap<String, Boolean> status = device.getStatus();
-        if (status.equals(Computer.STATUS_OK)) {
+        if (status.get(Computer.STATUS_OK)) {
 			return Color.green;
-		} else if (status.equals(Computer.STATUS_HIGHTEMP)) {
+		} else if (status.get(Computer.STATUS_NOK)) {
 			return Color.red;
-		} else if (status.equals(Computer.STATUS_DISCONNECTED)) {
+		} else if (status.get(Computer.STATUS_OFF)) {
 			return Color.gray;
 		} else {
 			return Color.black;
@@ -155,17 +157,16 @@ public class Computer3DPortrayal extends Device3DPortrayal {
 	 */
 	@Override
 	public Color getLabelColor(Device device) {
-		// TODO Adapt the hole thing to HashMap String/boolean. 
         HashMap<String, Boolean> status = device.getStatus();
-        if (status.equals(Computer.STATUS_OK)) {
+        if (status.get(Computer.STATUS_OK)) {
 			return Color.blue;
-		} else if (status.equals(Computer.STATUS_HIGHTEMP)) {
+		} else if (status.get(Computer.STATUS_NOK)) {
 			return Color.red;
-		} else if (status.equals(Computer.STATUS_DISCONNECTED)) {
+		} else if (status.get(Computer.STATUS_OFF)) {
 			return Color.gray;
 		} else {
 			return Color.black;
 		}
 	}
-
+	private static final long serialVersionUID = 1595363335332962239L;
 }

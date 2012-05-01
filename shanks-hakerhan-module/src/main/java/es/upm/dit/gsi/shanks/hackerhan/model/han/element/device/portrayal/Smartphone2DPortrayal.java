@@ -1,3 +1,7 @@
+/**
+ * es.upm.dit.gsi.shanks
+ * 01/05/2012
+ */
 package es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.portrayal;
 
 import java.awt.Color;
@@ -9,8 +13,24 @@ import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.WirelessDevice;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device2DPortrayal;
 
-
+/**
+ * Portrayal for wireless device implementing a Smartphone.
+ *  
+ * @author Danny
+ *
+ */
 public class Smartphone2DPortrayal extends Device2DPortrayal {
+
+	private int number;
+	public Smartphone2DPortrayal() {
+		super();
+		this.number=0;
+	}
+
+	public Smartphone2DPortrayal(int number) {
+		super();
+		this.number = number;
+	}
 
 	/* (non-Javadoc)
      * @see es.upm.dit.gsi.shanks.model.element.device.portrayal.Device2DPortrayal#draw(java.lang.Object, java.awt.Graphics2D, sim.portrayal.DrawInfo2D)
@@ -22,20 +42,17 @@ public class Smartphone2DPortrayal extends Device2DPortrayal {
         final double width = 5;
         final double height = 5;
 
-     // TODO Adapt the hole thing to HashMap String/boolean. 
         HashMap<String, Boolean> status = device.getStatus();
-        if (status.equals(WirelessDevice.STATUS_OK)) {
+        if (status.get(WirelessDevice.STATUS_OK)) {
             graphics.setColor(Color.green);
-        } else if (status.equals(WirelessDevice.STATUS_OFF)) {
-            graphics.setColor(Color.black);
-        } else if (status.equals(WirelessDevice.STATUS_DISCONNECTED)||status.equals(WirelessDevice.STATUS_DISCHARGED)) {
+        } else if (status.get(WirelessDevice.STATUS_OFF)) {
             graphics.setColor(Color.gray);
-        } else if (status.equals(WirelessDevice.STATUS_OUT_OF_RANGE)) {
-        	graphics.setColor(Color.yellow);
-        }
+        } else if (status.get(WirelessDevice.STATUS_NOK)) {
+            graphics.setColor(Color.red);
+        } 
 
         // Draw the devices
-        final int x = (int) (info.draw.x - width / 2.0);
+        final int x = (int) (info.draw.x - width / 2.0)*(1+this.number);
         final int y = (int) (info.draw.y - height / 2.0);
         final int w = (int) (width);
         final int h = (int) (height);
@@ -43,7 +60,7 @@ public class Smartphone2DPortrayal extends Device2DPortrayal {
 
         // Draw the devices ID
         graphics.setColor(Color.black);
-        graphics.drawString(device.getID(), x - 3, y);
+        graphics.drawString(device.getID(), x - 3, y+1);
 
     }
 	

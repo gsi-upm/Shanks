@@ -1,3 +1,7 @@
+/**
+ * es.upm.dit.gsi
+ * 01/05/2012
+ */
 package es.upm.dit.gsi.shanks.hackerhan.model.han.element.link.protrayal;
 
 import java.awt.Color;
@@ -12,15 +16,10 @@ import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.portrayal.Link2DPortrayal;
 
 /**
- * @author a.carrera
+ * @author darofar
  *
  */
 public class EthernetCable2DPortrayal extends Link2DPortrayal {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2831575801338555947L;
 
 	/* (non-Javadoc)
      * @see es.upm.dit.gsi.shanks.model.element.link.portrayal.Link2DPortrayal#draw(java.lang.Object, java.awt.Graphics2D, sim.portrayal.DrawInfo2D)
@@ -35,7 +34,6 @@ public class EthernetCable2DPortrayal extends Link2DPortrayal {
         } else if (link.getCapacity() > 2) {
             this.drawComplexLink(link, object, graphics, info);
         }
-
     }
 
     /**
@@ -51,14 +49,13 @@ public class EthernetCable2DPortrayal extends Link2DPortrayal {
         final double width = 20;
         final double height = 20;
 
-        // TODO Adapt the hole thing to hasMapa String/Boolean.
     	HashMap<String, Boolean> status = link.getStatus();
         graphics.setColor(Color.black);
-        if (status.equals(EthernetCable.STATUS_OK)) {
+        if (status.get(EthernetCable.STATUS_OK)) {
             graphics.setColor(Color.green);
-        } else if (status.equals(EthernetCable.STATUS_DAMAGED)) {
+        } else if (status.get(EthernetCable.STATUS_NOK)) {
             graphics.setColor(Color.red);
-        } else if (status.equals(EthernetCable.STATUS_CUT)) {
+        } else {
         	graphics.setColor(Color.black);
         }
 
@@ -96,14 +93,13 @@ public class EthernetCable2DPortrayal extends Link2DPortrayal {
         final int midX = (int) (ei.draw.x + ei.secondPoint.x) / 2;
         final int midY = (int) (ei.draw.y + ei.secondPoint.y) / 2;
 
-        // TODO Adapt the hole thing to hasMapa String/Boolean.
     	HashMap<String, Boolean> status = link.getStatus();
         graphics.setColor(Color.black);
-        if (status.equals(EthernetCable.STATUS_OK)) {
+        if (status.get(EthernetCable.STATUS_OK)) {
             graphics.setColor(Color.green);
-        } else if (status.equals(EthernetCable.STATUS_DAMAGED)) {
+        } else if (status.get(EthernetCable.STATUS_NOK)) {
             graphics.setColor(Color.red);
-        } else if (status.equals(EthernetCable.STATUS_CUT)) {
+        } else {
         	graphics.setColor(Color.black);
         }
         graphics.drawLine(startX, startY, endX, endY);
@@ -113,5 +109,5 @@ public class EthernetCable2DPortrayal extends Link2DPortrayal {
         int width = graphics.getFontMetrics().stringWidth(link.getID());
         graphics.drawString(link.getID(), midX - width / 2, midY);
     }
-
+	private static final long serialVersionUID = -2831575801338555947L;
 }

@@ -1,35 +1,59 @@
 /**
- * 
+ * es.upm.dit.gsi
+ * 01/05/2012
  */
 package es.upm.dit.gsi.shanks.hackerhan.model.han.failure;
 
+import java.util.HashMap;
+import java.util.List;
+
+import es.upm.dit.gsi.shanks.hackerhan.model.han.element.Values;
 import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.Computer;
 import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.WifiRouterADSL;
+import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.WirelessDevice;
+import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 
 /**
- * @author a.carrera
+ * 
+ * @author darofar
  *
  */
 public class NoIPFailure extends Failure {
 
-	public NoIPFailure() {
-		super(NoIPFailure.class.getName(), 0.01);
+	public NoIPFailure(String id, double occurrenceProbability) {
+		super(id, occurrenceProbability);
 	}
 
 	/* (non-Javadoc)
 	 * @see es.upm.dit.gsi.shanks.model.failure.Failure#addPossibleAffectedElements()
 	 */
 	@Override
-	public void addPossibleAffectedElements() {
+	public void addPossibleAffectedElements() {	
 		this.addPossibleAffectedElements(WifiRouterADSL.class, WifiRouterADSL.STATUS_NOISP_SERVICE, true);
-		this.addPossibleAffectedElements(Computer.class, Computer.STATUS_DISCONNECTED, true);
+		this.addPossibleAffectedProperties(Computer.class, Computer.PROPERTY_ETHERNET_CONNECTION, Values.DISCONNECTED);
+		this.addPossibleAffectedProperties(WirelessDevice.class, WirelessDevice.PROPERTY_CONNECTION, Values.DISCONNECTED);
 	}
 
 	@Override
 	public boolean isResolved() {
-		// TODO Auto-generated method stub
-		return false;
+		List<NetworkElement> affected = this.getAffectedElements();
+		for (NetworkElement e : affected){
+			HashMap<String, Boolean> state = e.getStatus();
+			if (state.containsKey(WifiRouterADSL.STATUS_NOISP_SERVICE)){
+				if(state.get(WifiRouterADSL.STATUS_NOISP_SERVICE)){
+					return false;
+				}
+			} else if(state.containsKey(Computer.STATUS_DISCONNECTED)) {
+				if(state.get(Computer.STATUS_DISCONNECTED)){
+					return false;
+				}
+			} else if(state.containsKey(WirelessDevice.STATUS_DISCONNECTED)) {
+				if(state.get(WirelessDevice.STATUS_DISCONNECTED)){
+					return false;
+				}
+			}
+		}
+		return true;
 	}
-
 }

@@ -13,7 +13,9 @@ import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
 import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
+import es.upm.dit.gsi.shanks.hackerhan.agent.Hacker;
 import es.upm.dit.gsi.shanks.hackerhan.model.han.scenario.HANScenario;
+import es.upm.dit.gsi.shanks.hackerhan.model.han.scenario.HackerHANScenario;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
@@ -27,8 +29,6 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
  * 
  */
 public class HackerHANModelSimulation extends ShanksSimulation {
-
-	private static final long serialVersionUID = 8840504113460201366L;
 
 	public HackerHANModelSimulation(long seed,
 			Class<? extends Scenario> scenarioClass, String scenarioID,
@@ -49,8 +49,8 @@ public class HackerHANModelSimulation extends ShanksSimulation {
 			Properties scenarioProperties = new Properties();
 			scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
 			HackerHANModelSimulation tut = new HackerHANModelSimulation(
-					System.currentTimeMillis(), HANScenario.class,
-					"MyHomeAreaNetwork", HANScenario.STATUS_SUNNY,
+					System.currentTimeMillis(), HackerHANScenario.class,
+					"HackerHomeAreaNetwork", HackerHANScenario.STATUS_ATTACKING,
 					scenarioProperties);
 			tut.start();
 			do
@@ -79,10 +79,12 @@ public class HackerHANModelSimulation extends ShanksSimulation {
 		};
 		schedule.scheduleRepeating(Schedule.EPOCH, 3, steppable, 500);
 	}
-//
-//	@Override
-//	public void registerShanksAgents() throws DuplicatedAgentIDException,
-//			DuplicatedActionIDException {
-//		// TODO
-//	}
+
+	@Override
+	public void registerShanksAgents() throws DuplicatedAgentIDException,
+			DuplicatedActionIDException {
+		Hacker hacker = new Hacker("Hacker");
+		this.registerShanksAgent(hacker);
+	}
+	private static final long serialVersionUID = -2546286073637681966L;
 }

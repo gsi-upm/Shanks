@@ -6,7 +6,7 @@ package es.upm.dit.gsi.shanks.hackerhan.model.han.element.device;
 
 import java.util.HashMap;
 
-import es.upm.dit.gsi.shanks.hackerhan.model.han.element.Values;
+import es.upm.dit.gsi.shanks.hackerhan.model.Values;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 

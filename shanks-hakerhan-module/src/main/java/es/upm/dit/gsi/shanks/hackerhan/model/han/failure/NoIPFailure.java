@@ -7,7 +7,7 @@ package es.upm.dit.gsi.shanks.hackerhan.model.han.failure;
 import java.util.HashMap;
 import java.util.List;
 
-import es.upm.dit.gsi.shanks.hackerhan.model.han.element.Values;
+import es.upm.dit.gsi.shanks.hackerhan.model.Values;
 import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.Computer;
 import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.WifiRouterADSL;
 import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.WirelessDevice;
@@ -23,6 +23,15 @@ public class NoIPFailure extends Failure {
 
 	public NoIPFailure(String id, double occurrenceProbability) {
 		super(id, occurrenceProbability);
+	}
+	
+	public NoIPFailure(String id) {
+		super(id, Values.NO_IP_FAILURE_PROB);
+	}
+	
+	public NoIPFailure() {
+		super(NoIPFailure.class.getName()+System.currentTimeMillis(),
+				Values.NO_IP_FAILURE_PROB);
 	}
 
 	/* (non-Javadoc)

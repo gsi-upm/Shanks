@@ -3,7 +3,7 @@ package es.upm.dit.gsi.shanks.hackerhan.model.han.failure;
 import java.util.HashMap;
 import java.util.List;
 
-import es.upm.dit.gsi.shanks.hackerhan.model.han.element.Values;
+import es.upm.dit.gsi.shanks.hackerhan.model.Values;
 import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.Computer;
 import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.WifiRouterADSL;
 import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.WirelessDevice;
@@ -16,6 +16,15 @@ public class NoISPConnection extends Failure {
 		super(id, occurrenceProbability);
 	}
 
+	public NoISPConnection(String id) {
+		super(id, Values.NO_ISP_FAILURE_PROB);
+	}
+	
+	public NoISPConnection() {
+		super(NoISPConnection.class.getName()+System.currentTimeMillis(),
+				Values.NO_ISP_FAILURE_PROB);
+	}
+	
 	@Override
 	public void addPossibleAffectedElements() {
 		this.addPossibleAffectedElements(WifiRouterADSL.class, WifiRouterADSL.STATUS_DISCONNECTED, true);

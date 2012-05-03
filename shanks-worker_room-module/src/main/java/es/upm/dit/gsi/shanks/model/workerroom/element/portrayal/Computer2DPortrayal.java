@@ -10,6 +10,7 @@ import sim.portrayal.DrawInfo2D;
 import sim.portrayal.Portrayal;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device2DPortrayal;
+import es.upm.dit.gsi.shanks.model.workerroom.element.device.Computer;
 
 public class Computer2DPortrayal extends Device2DPortrayal implements Portrayal {
 
@@ -33,13 +34,12 @@ public class Computer2DPortrayal extends Device2DPortrayal implements Portrayal 
         List<String> nokStatus = new ArrayList<String>();
         
         for(String s : status.keySet()){
-            if(status.get(s)){
-                nokStatus.add(s);
-            }else{
-                okStatus.add(s);
+            if(s.equals(Computer.STATUS_OK)){
+            	if(status.get(s))
+            		okStatus.add(s);
             }
         }
-        if (nokStatus.size() == 0) {
+        if (okStatus.size() == 1) {
             graphics.setColor(Color.green);
         } else{
             graphics.setColor(Color.red); 

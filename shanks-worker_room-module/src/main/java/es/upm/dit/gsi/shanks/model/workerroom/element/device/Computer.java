@@ -35,9 +35,9 @@ public class Computer extends Device{
 	public static final String PROPERTY_FIREWALL = "Firewall Situation"; //true activated, false deactivated
 		
 
-	public Computer(String id)
+	public Computer(String id, String status, boolean isGateway)
 			throws UnsupportedNetworkElementStatusException {
-		super(id, Computer.STATUS_OK, false);
+		super(id, status, isGateway);
 	}
 
 	@Override

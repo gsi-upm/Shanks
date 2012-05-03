@@ -40,8 +40,10 @@ public class NoIPFailure extends Failure {
 	@Override
 	public void addPossibleAffectedElements() {	
 		this.addPossibleAffectedElements(WifiRouterADSL.class, WifiRouterADSL.STATUS_NOISP_SERVICE, true);
-		this.addPossibleAffectedProperties(Computer.class, Computer.PROPERTY_ETHERNET_CONNECTION, Values.DISCONNECTED);
-		this.addPossibleAffectedProperties(WirelessDevice.class, WirelessDevice.PROPERTY_CONNECTION, Values.DISCONNECTED);
+		this.addPossibleAffectedElements(Computer.class, Computer.STATUS_DISCONNECTED, true);
+		this.addPossibleAffectedElements(WirelessDevice.class, WirelessDevice.STATUS_DISCONNECTED, true);
+//		this.addPossibleAffectedProperties(Computer.class, Computer.PROPERTY_ETHERNET_CONNECTION, Values.DISCONNECTED);
+//		this.addPossibleAffectedProperties(WirelessDevice.class, WirelessDevice.PROPERTY_CONNECTION, Values.DISCONNECTED);
 	}
 
 	@Override

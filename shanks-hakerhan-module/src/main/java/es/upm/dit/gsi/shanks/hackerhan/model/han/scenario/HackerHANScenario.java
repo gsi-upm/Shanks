@@ -39,6 +39,7 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
 public class HackerHANScenario extends Scenario {
 	
 	//TODO make that the status has influence. 
+	public static final String STATUS_NORMAL = "Normal";
 	public static final String STATUS_MONITORIZED = "Monitorized";
 	public static final String STATUS_BLOCKED = "Blocked";
 	public static final String STATUS_ATTACKING = "Attacking";
@@ -159,22 +160,20 @@ public class HackerHANScenario extends Scenario {
 	@Override
 	public HashMap<Class<? extends Failure>, Double> getPenaltiesInStatus(
 			String status) throws UnsupportedScenarioStatusException {
+
 		HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
-		penalties.put(ComputerFailure.class, Values.COMPUTER_FAILURE_PROB);
-		penalties.put(NoIPFailure.class, Values.NO_IP_FAILURE_PROB);
-		penalties.put(NoISPConnection.class, Values.NO_ISP_FAILURE_PROB);
-		penalties.put(RouterFailure.class, Values.ROUTER_FAILURE_PROB);
-		penalties.put(WirelessDeviceFailure.class, Values.WIRELESSD_FAILURE_PROB);
+		penalties.put(ComputerFailure.class, 1.0);
+		penalties.put(NoIPFailure.class, 1.0);
+		penalties.put(NoISPConnection.class, 1.0);
+		penalties.put(RouterFailure.class, 1.0);
+		penalties.put(WirelessDeviceFailure.class, 1.0);
+		
+//		penalties.put(ComputerFailure.class, Values.COMPUTER_FAILURE_PROB);
+//		penalties.put(NoIPFailure.class, Values.NO_IP_FAILURE_PROB);
+//		penalties.put(NoISPConnection.class, Values.NO_ISP_FAILURE_PROB);
+//		penalties.put(RouterFailure.class, Values.ROUTER_FAILURE_PROB);
+//		penalties.put(WirelessDeviceFailure.class, Values.WIRELESSD_FAILURE_PROB);
 		return penalties;
-//		if (status.equals(HackerHANScenario.STATUS_BLOCKED)) {
-//            return this.getRainyPenalties();
-//        } else if (status.equals(HackerHANScenario.STATUS_ATTACKING)) {
-//            return this.getSnowyPenalties();
-//        } else if (status.equals(HackerHANScenario.STATUS_MONITORIZED)){
-//        	return this.getSunnyPenalties();
-//        } else {
-//            throw new UnsupportedScenarioStatusException();
-//        }
 	}
 
 	/*

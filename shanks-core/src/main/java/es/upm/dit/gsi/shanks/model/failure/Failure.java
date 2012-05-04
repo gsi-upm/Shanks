@@ -89,11 +89,13 @@ public abstract class Failure {
                        for(String s : possibleAffectedElements.get(c).keySet()){
                            if(e.getStatus().containsKey(s)){
                                e.updateStatusTo(s, (Boolean) possibleAffectedElements.get(c).get(s));
+                           }else if(e.getProperties().containsKey(s)){
+                               e.updatePropertyTo(s, possibleAffectedElements.get(c).get(s));
                            }
                        }
                     }
                 }
-            
+            e.checkStatus();
             }
             this.active = true;
       

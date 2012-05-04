@@ -4,12 +4,15 @@ import java.util.HashMap;
 
 import javax.swing.JFrame;
 
+import sim.display.Display2D;
+
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.ShanksSimulation2DGUI;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedChartIDException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
+import es.upm.dit.gsi.shanks.model.workerroom.scenario.portrayal.WorkerRoomScenario2DPortrayal;
 
 public class WorkerRoom2DSimulationGUI extends ShanksSimulation2DGUI{
 
@@ -28,10 +31,16 @@ public class WorkerRoom2DSimulationGUI extends ShanksSimulation2DGUI{
         return "Worker Room Simulation";
     }
 
-	@Override
 	public void addDisplays(Scenario2DPortrayal scenarioPortrayal) {
-		
-	}
+        Display2D failureDisplay = new Display2D(600, 100, this);
+        try {
+            this.addDisplay(
+                    WorkerRoomScenario2DPortrayal.FAILURE_DISPLAY_ID,
+                    failureDisplay);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 	@Override
 	public void locateFrames(Scenario2DPortrayal scenarioPortrayal) {

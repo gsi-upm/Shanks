@@ -49,13 +49,16 @@ public class WorkerRoomScenario2DPortrayal extends Scenario2DPortrayal{
 		this.situateDevice((Device)this.getScenario().getNetworkElement("PC3"), 10, 40);
 		this.situateDevice((Device)this.getScenario().getNetworkElement("PC4"), 10, 50);
 		this.situateDevice((Device)this.getScenario().getNetworkElement("PC5"), 10, 60);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("PC6"), 10, 70);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("PC7"), 10, 80);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("PC8"), 10, 90);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("Printer"), 30, 50);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("Printer"), 50, 20);
 		this.situateDevice((Device)this.getScenario().getNetworkElement("Router"), 50, 50);
 		
-		this.drawLink((Link)this.getScenario().getNetworkElement("EthernetLink"));
+		this.drawLink((Link)this.getScenario().getNetworkElement("EthernetLink1"));
+		this.drawLink((Link)this.getScenario().getNetworkElement("EthernetLink2"));
+		this.drawLink((Link)this.getScenario().getNetworkElement("EthernetLink3"));
+		this.drawLink((Link)this.getScenario().getNetworkElement("EthernetLink4"));
+		this.drawLink((Link)this.getScenario().getNetworkElement("EthernetLink5"));
+		this.drawLink((Link)this.getScenario().getNetworkElement("EthernetLink6"));
+
 		
 	}
 

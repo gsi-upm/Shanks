@@ -40,7 +40,7 @@ public class Printer2DPortrayal extends Device2DPortrayal implements Portrayal{
             		okStatus.add(s);
             }
         }
-        if (nokStatus.size() == 1) {
+        if (okStatus.size() == 1) {
             graphics.setColor(Color.green);
         } else{
             graphics.setColor(Color.red);

@@ -27,7 +27,6 @@
                 <artifactId>shanks-core</artifactId>
                 <version>0.3.0</version>
                 <type>jar</type>
-                <classifier>jar-with-dependencies</classifier>
         </dependency>
 		<dependency>
 			<groupId>jfree</groupId>

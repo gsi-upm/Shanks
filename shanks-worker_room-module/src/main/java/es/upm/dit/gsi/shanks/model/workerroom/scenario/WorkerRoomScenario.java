@@ -53,25 +53,29 @@ public class WorkerRoomScenario extends Scenario{
 		Device pc3 = new Computer("PC3", Computer.STATUS_OK, false);
 		Device pc4 = new Computer("PC4", Computer.STATUS_OK, false);
 		Device pc5 = new Computer("PC5", Computer.STATUS_OK, false);
-		Device pc6 = new Computer("PC6", Computer.STATUS_OK, false);
-		Device pc7 = new Computer("PC7", Computer.STATUS_OK, false);
-		Device pc8 = new Computer("PC8", Computer.STATUS_OK, false);
 		Device printer = new Printer("Printer", Printer.STATUS_OK, false);
 		Device router = new Router("Router", Router.STATUS_OK, true);
-		Link ethernetLink = new EthernetLink("EthernetLink", EthernetLink.STATUS_OK, 10);
+		Link ethernetLink1 = new EthernetLink("EthernetLink1", EthernetLink.STATUS_OK, 2);
+		Link ethernetLink2 = new EthernetLink("EthernetLink2", EthernetLink.STATUS_OK, 2);
+		Link ethernetLink3 = new EthernetLink("EthernetLink3", EthernetLink.STATUS_OK, 2);
+		Link ethernetLink4 = new EthernetLink("EthernetLink4", EthernetLink.STATUS_OK, 2);
+		Link ethernetLink5 = new EthernetLink("EthernetLink5", EthernetLink.STATUS_OK, 2);
+		Link ethernetLink6 = new EthernetLink("EthernetLink6", EthernetLink.STATUS_OK, 2);
+
 		
-		pc1.connectToLink(ethernetLink);
-		pc2.connectToLink(ethernetLink);
-		pc3.connectToLink(ethernetLink);
-		pc4.connectToLink(ethernetLink);
-		pc5.connectToLink(ethernetLink);
-		pc6.connectToLink(ethernetLink);
-		pc7.connectToLink(ethernetLink);
-		pc8.connectToLink(ethernetLink);
-		printer.connectToLink(ethernetLink);
-		router.connectToLink(ethernetLink);
+		ethernetLink1.connectDevices(pc1, router);
+		ethernetLink2.connectDevices(pc2, router);
+		ethernetLink3.connectDevices(pc3, router);
+		ethernetLink4.connectDevices(pc4, router);
+		ethernetLink5.connectDevices(pc5, router);
+		ethernetLink6.connectDevices(printer, router);
 		
-		this.addNetworkElement(ethernetLink);
+		this.addNetworkElement(ethernetLink1);
+		this.addNetworkElement(ethernetLink2);
+		this.addNetworkElement(ethernetLink3);
+		this.addNetworkElement(ethernetLink4);
+		this.addNetworkElement(ethernetLink5);
+		this.addNetworkElement(ethernetLink6);
 		this.addNetworkElement(router);
 		this.addNetworkElement(printer);
 		this.addNetworkElement(pc1);	
@@ -79,9 +83,6 @@ public class WorkerRoomScenario extends Scenario{
 		this.addNetworkElement(pc3);
 		this.addNetworkElement(pc4);
 		this.addNetworkElement(pc5);
-		this.addNetworkElement(pc6);
-		this.addNetworkElement(pc7);
-		this.addNetworkElement(pc8);
 		
 	}
 
@@ -133,8 +134,8 @@ public class WorkerRoomScenario extends Scenario{
 
 		Properties scenarioProperties = new Properties();
 		scenarioProperties.put(CLOUDY_PROB, "5");
-		//scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_2D);
-		scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_3D);
+		scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_2D);
+		//scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_3D);
 		//scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
 		Properties configProperties = new Properties();
 		configProperties.put(WorkerRoomSimulation.CONFIGURATION, "3");
@@ -142,8 +143,8 @@ public class WorkerRoomScenario extends Scenario{
 		        System.currentTimeMillis(), WorkerRoomScenario.class,
 		        "MyScenario", SUNNY,
 		        scenarioProperties, configProperties);
-		//WorkerRoom2DSimulationGUI gui = new WorkerRoom2DSimulationGUI(sim);
-		WorkerRoom3DSimulationGUI gui = new WorkerRoom3DSimulationGUI(sim);
+		WorkerRoom2DSimulationGUI gui = new WorkerRoom2DSimulationGUI(sim);
+		//WorkerRoom3DSimulationGUI gui = new WorkerRoom3DSimulationGUI(sim);
 		gui.start();
 		//sim.start();
 		//do

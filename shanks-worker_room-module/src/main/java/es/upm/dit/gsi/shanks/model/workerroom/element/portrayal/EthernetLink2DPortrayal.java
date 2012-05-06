@@ -93,6 +93,7 @@ public class EthernetLink2DPortrayal extends Link2DPortrayal implements Portraya
 
         graphics.setColor(Color.black);
         HashMap<String, Boolean> status = link.getStatus();
+        HashMap<String, Object> properties = link.getProperties();
         if (status.get(EthernetLink.STATUS_OK)) {
             graphics.setColor(Color.green);
         } else if (status.get(EthernetLink.STATUS_DAMAGED)) {

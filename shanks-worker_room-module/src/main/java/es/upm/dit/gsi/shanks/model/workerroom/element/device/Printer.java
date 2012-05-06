@@ -44,37 +44,37 @@ public class Printer extends Device{
 		Boolean power = (Boolean) this.getProperty(Printer.PROPERTY_POWER);
 		
 		if(paper >= 25 && ink >= 0.10 && ethernet && power){
-			this.setCurrentStatus(Printer.STATUS_OK, true);
-			this.setCurrentStatus(Printer.STATUS_DISCONNECTED, false);
-			this.setCurrentStatus(Printer.STATUS_LOWINK, false);
-			this.setCurrentStatus(Printer.STATUS_LOWPAPER, false);
-			this.setCurrentStatus(Printer.STATUS_NOINK, false);
-			this.setCurrentStatus(Printer.STATUS_NOPAPER, false);
-			this.setCurrentStatus(Printer.STATUS_OFF, false);
+			this.updateStatusTo(Printer.STATUS_OK, true);
+			this.updateStatusTo(Printer.STATUS_DISCONNECTED, false);
+			this.updateStatusTo(Printer.STATUS_LOWINK, false);
+			this.updateStatusTo(Printer.STATUS_LOWPAPER, false);
+			this.updateStatusTo(Printer.STATUS_NOINK, false);
+			this.updateStatusTo(Printer.STATUS_NOPAPER, false);
+			this.updateStatusTo(Printer.STATUS_OFF, false);
 		}
 		if(!ethernet){
-			this.setCurrentStatus(Printer.STATUS_OK, false);
-			this.setCurrentStatus(Printer.STATUS_DISCONNECTED, true);
+			this.updateStatusTo(Printer.STATUS_OK, false);
+			this.updateStatusTo(Printer.STATUS_DISCONNECTED, true);
 		}
 		if(!power){
-			this.setCurrentStatus(Printer.STATUS_OK, false);
-			this.setCurrentStatus(Printer.STATUS_OFF, true);
+			this.updateStatusTo(Printer.STATUS_OK, false);
+			this.updateStatusTo(Printer.STATUS_OFF, true);
 		}
 		if(paper < 25 && paper > 0){
-			this.setCurrentStatus(Printer.STATUS_OK, false);
-			this.setCurrentStatus(Printer.STATUS_LOWPAPER, true);
+			this.updateStatusTo(Printer.STATUS_OK, false);
+			this.updateStatusTo(Printer.STATUS_LOWPAPER, true);
 		}
 		if(paper == 0){
-			this.setCurrentStatus(Printer.STATUS_OK, false);
-			this.setCurrentStatus(Printer.STATUS_NOPAPER, true);
+			this.updateStatusTo(Printer.STATUS_OK, false);
+			this.updateStatusTo(Printer.STATUS_NOPAPER, true);
 		}
 		if(ink < 0.10 && ink > 0){
-			this.setCurrentStatus(Printer.STATUS_OK, false);
-			this.setCurrentStatus(Printer.STATUS_LOWINK, false);
+			this.updateStatusTo(Printer.STATUS_OK, false);
+			this.updateStatusTo(Printer.STATUS_LOWINK, false);
 		}
 		if(ink == 0){
-			this.setCurrentStatus(Printer.STATUS_OK, false);
-			this.setCurrentStatus(Printer.STATUS_NOINK, false);
+			this.updateStatusTo(Printer.STATUS_OK, false);
+			this.updateStatusTo(Printer.STATUS_NOINK, false);
 		}
 		
 	}
@@ -83,28 +83,28 @@ public class Printer extends Device{
 	public void checkStatus() throws UnsupportedNetworkElementStatusException {	
 		HashMap<String, Boolean> status = this.getStatus();
 		if(status.get(Printer.STATUS_OK)){
-			this.changeProperty(Printer.PROPERTY_ETHERNET_CONNECTION, true);
-			this.changeProperty(Printer.PROPERTY_INK, 1.0);
-			this.changeProperty(Printer.PROPERTY_PAPER, 500);
-			this.changeProperty(Printer.PROPERTY_POWER, true);
+			this.updatePropertyTo(Printer.PROPERTY_ETHERNET_CONNECTION, true);
+			this.updatePropertyTo(Printer.PROPERTY_INK, 1.0);
+			this.updatePropertyTo(Printer.PROPERTY_PAPER, 500);
+			this.updatePropertyTo(Printer.PROPERTY_POWER, true);
 		}
 		if(status.get(Printer.STATUS_DISCONNECTED)){
-			this.changeProperty(Printer.PROPERTY_ETHERNET_CONNECTION, false);
+			this.updatePropertyTo(Printer.PROPERTY_ETHERNET_CONNECTION, false);
 		}
 		if(status.get(Printer.STATUS_LOWINK)){
-			this.changeProperty(Printer.PROPERTY_INK, 0.10);
+			this.updatePropertyTo(Printer.PROPERTY_INK, 0.10);
 		}
 		if(status.get(Printer.STATUS_LOWPAPER)){
-			this.changeProperty(Printer.PROPERTY_PAPER, 25);
+			this.updatePropertyTo(Printer.PROPERTY_PAPER, 25);
 		}
 		if(status.get(Printer.STATUS_NOINK)){
-			this.changeProperty(Printer.PROPERTY_INK, 0.0);
+			this.updatePropertyTo(Printer.PROPERTY_INK, 0.0);
 		}
 		if(status.get(Printer.STATUS_NOPAPER)){
-			this.changeProperty(Printer.PROPERTY_PAPER, 0);
+			this.updatePropertyTo(Printer.PROPERTY_PAPER, 0);
 		}
 		if(status.get(Printer.STATUS_OFF)){
-			this.changeProperty(Printer.PROPERTY_POWER, false);
+			this.updatePropertyTo(Printer.PROPERTY_POWER, false);
 		}
 	}
 
@@ -136,7 +136,7 @@ public class Printer extends Device{
 	}
 	
 	public void setInkLevel(double ink) throws UnsupportedNetworkElementStatusException{
-		this.changeProperty(PROPERTY_INK, ink);
+		this.updatePropertyTo(PROPERTY_INK, ink);
 	}
 	
 	public void decreaseInk(double percentaje) throws UnsupportedNetworkElementStatusException{
@@ -149,7 +149,7 @@ public class Printer extends Device{
 	}
 	
 	public void setPaperLevel(double paper) throws UnsupportedNetworkElementStatusException{
-		this.changeProperty(PROPERTY_PAPER, paper);
+		this.updatePropertyTo(PROPERTY_PAPER, paper);
 	}
 	
 	public void decreasePaper(double paper) throws UnsupportedNetworkElementStatusException{

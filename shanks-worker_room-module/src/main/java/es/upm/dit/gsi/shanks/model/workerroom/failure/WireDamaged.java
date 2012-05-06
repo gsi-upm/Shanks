@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks.model.workerroom.events;
+package es.upm.dit.gsi.shanks.model.workerroom.failure;
 
 import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.model.event.networkelement.ProbabilisticNetworkElementEvent;

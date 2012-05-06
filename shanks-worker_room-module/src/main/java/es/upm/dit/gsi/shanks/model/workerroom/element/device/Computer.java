@@ -45,39 +45,39 @@ public class Computer extends Device{
 			throws UnsupportedNetworkElementStatusException {
 		HashMap<String, Boolean> status = this.getStatus();
 		if(status.get(Computer.STATUS_OK)){
-			this.changeProperty(Computer.PROPERTY_ANTIVIRUS, true);
-			this.changeProperty(Computer.PROPERTY_CPUFREQ, 3000);
-			this.changeProperty(Computer.PROPERTY_ETHERNET_CONNECTION, true);
-			this.changeProperty(Computer.PROPERTY_FANSPEED, 2000);
-			this.changeProperty(Computer.PROPERTY_FIREWALL, true);
-			this.changeProperty(Computer.PROPERTY_POWER, true);
-			this.changeProperty(Computer.PROPERTY_PROCESSES, 55);
-			this.changeProperty(Computer.PROPERTY_RAM, 0.25);
-			this.changeProperty(Computer.PROPERTY_TEMPERATURE, 35);
+			this.updatePropertyTo(Computer.PROPERTY_ANTIVIRUS, true);
+			this.updatePropertyTo(Computer.PROPERTY_CPUFREQ, 3000);
+			this.updatePropertyTo(Computer.PROPERTY_ETHERNET_CONNECTION, true);
+			this.updatePropertyTo(Computer.PROPERTY_FANSPEED, 2000);
+			this.updatePropertyTo(Computer.PROPERTY_FIREWALL, true);
+			this.updatePropertyTo(Computer.PROPERTY_POWER, true);
+			this.updatePropertyTo(Computer.PROPERTY_PROCESSES, 55);
+			this.updatePropertyTo(Computer.PROPERTY_RAM, 0.25);
+			this.updatePropertyTo(Computer.PROPERTY_TEMPERATURE, 35);
 		}
 		if(status.get(Computer.STATUS_OFF)){
-			this.changeProperty(Computer.PROPERTY_POWER, false);
+			this.updatePropertyTo(Computer.PROPERTY_POWER, false);
 		}
 		if(status.get(Computer.STATUS_BUSSYRAM)){
-			this.changeProperty(Computer.PROPERTY_RAM, 0.95);
+			this.updatePropertyTo(Computer.PROPERTY_RAM, 0.95);
 		}
 		if(status.get(Computer.STATUS_DISCONNECTED)){
-			this.changeProperty(Computer.PROPERTY_ETHERNET_CONNECTION, false);
+			this.updatePropertyTo(Computer.PROPERTY_ETHERNET_CONNECTION, false);
 		}
 		if(status.get(Computer.STATUS_HIGHTEMP)){
-			this.changeProperty(PROPERTY_TEMPERATURE, 90);
+			this.updatePropertyTo(PROPERTY_TEMPERATURE, 90);
 		}
 		if(status.get(Computer.STATUS_NOANTIVIRUS)){
-			this.changeProperty(PROPERTY_ANTIVIRUS, false);
+			this.updatePropertyTo(PROPERTY_ANTIVIRUS, false);
 		}
 		if(status.get(Computer.STATUS_NOFIREWALL)){
-			this.changeProperty(PROPERTY_FIREWALL, false);
+			this.updatePropertyTo(PROPERTY_FIREWALL, false);
 		}
 		if(status.get(Computer.STATUS_OVERCLOCKING)){
-			this.changeProperty(PROPERTY_CPUFREQ, 5000);
+			this.updatePropertyTo(PROPERTY_CPUFREQ, 5000);
 		}
 		if(status.get(Computer.STATUS_UNDERCLOCKING)){
-			this.changeProperty(Computer.STATUS_UNDERCLOCKING, 1000);
+			this.updatePropertyTo(Computer.STATUS_UNDERCLOCKING, 1000);
 		}
 	}
 
@@ -95,47 +95,47 @@ public class Computer extends Device{
 		
 		if(antivirus && 3500 > cpuFrequ && cpuFrequ > 2500 && ethernet && fanSpeed > 1500
 				&& firewall && power && processes < 65 && ram < 0.85 && temperature < 80){
-			this.setCurrentStatus(Computer.STATUS_OK, true);
-			this.setCurrentStatus(Computer.STATUS_BUSSYRAM, false);
-			this.setCurrentStatus(Computer.STATUS_DISCONNECTED, false);
-			this.setCurrentStatus(Computer.STATUS_HIGHTEMP, false);
-			this.setCurrentStatus(Computer.STATUS_NOANTIVIRUS, false);
-			this.setCurrentStatus(Computer.STATUS_NOFIREWALL, false);
-			this.setCurrentStatus(Computer.STATUS_OFF, false);
-			this.setCurrentStatus(Computer.STATUS_OVERCLOCKING, false);
-			this.setCurrentStatus(Computer.STATUS_UNDERCLOCKING, false);
+			this.updateStatusTo(Computer.STATUS_OK, true);
+			this.updateStatusTo(Computer.STATUS_BUSSYRAM, false);
+			this.updateStatusTo(Computer.STATUS_DISCONNECTED, false);
+			this.updateStatusTo(Computer.STATUS_HIGHTEMP, false);
+			this.updateStatusTo(Computer.STATUS_NOANTIVIRUS, false);
+			this.updateStatusTo(Computer.STATUS_NOFIREWALL, false);
+			this.updateStatusTo(Computer.STATUS_OFF, false);
+			this.updateStatusTo(Computer.STATUS_OVERCLOCKING, false);
+			this.updateStatusTo(Computer.STATUS_UNDERCLOCKING, false);
 		}
 		if(!antivirus){
-			this.setCurrentStatus(Computer.STATUS_OK, false);
-			this.setCurrentStatus(Computer.STATUS_NOANTIVIRUS, true);
+			this.updateStatusTo(Computer.STATUS_OK, false);
+			this.updateStatusTo(Computer.STATUS_NOANTIVIRUS, true);
 		}
 		if(cpuFrequ <= 2500){
-			this.setCurrentStatus(Computer.STATUS_OK, false);
-			this.setCurrentStatus(Computer.STATUS_UNDERCLOCKING, true);
+			this.updateStatusTo(Computer.STATUS_OK, false);
+			this.updateStatusTo(Computer.STATUS_UNDERCLOCKING, true);
 		}
 		if(cpuFrequ >= 3500){
-			this.setCurrentStatus(Computer.STATUS_OK, false);
-			this.setCurrentStatus(Computer.STATUS_OVERCLOCKING, true);
+			this.updateStatusTo(Computer.STATUS_OK, false);
+			this.updateStatusTo(Computer.STATUS_OVERCLOCKING, true);
 		}
 		if(!ethernet){
-			this.setCurrentStatus(Computer.STATUS_OK, false);
-			this.setCurrentStatus(Computer.STATUS_DISCONNECTED, true);
+			this.updateStatusTo(Computer.STATUS_OK, false);
+			this.updateStatusTo(Computer.STATUS_DISCONNECTED, true);
 		}
 		if(!firewall){
-			this.setCurrentStatus(Computer.STATUS_OK, false);
-			this.setCurrentStatus(Computer.STATUS_NOFIREWALL, true);
+			this.updateStatusTo(Computer.STATUS_OK, false);
+			this.updateStatusTo(Computer.STATUS_NOFIREWALL, true);
 		}
 		if(!power){
-			this.setCurrentStatus(Computer.STATUS_OK, false);
-			this.setCurrentStatus(Computer.STATUS_OFF, true);
+			this.updateStatusTo(Computer.STATUS_OK, false);
+			this.updateStatusTo(Computer.STATUS_OFF, true);
 		}
 		if(ram <= 0.85){
-			this.setCurrentStatus(Computer.STATUS_OK, false);
-			this.setCurrentStatus(Computer.STATUS_BUSSYRAM, true);
+			this.updateStatusTo(Computer.STATUS_OK, false);
+			this.updateStatusTo(Computer.STATUS_BUSSYRAM, true);
 		}
 		if(temperature >= 80){
-			this.setCurrentStatus(Computer.STATUS_OK, false);
-			this.setCurrentStatus(Computer.STATUS_HIGHTEMP, false);
+			this.updateStatusTo(Computer.STATUS_OK, false);
+			this.updateStatusTo(Computer.STATUS_HIGHTEMP, false);
 		}
 	}
 

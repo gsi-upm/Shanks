@@ -1,16 +1,22 @@
 package es.upm.dit.gsi.shanks.model.workerroom.scenario;
 
+import java.util.List;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Properties;
+import java.util.Set;
 
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
 import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
+import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
+import es.upm.dit.gsi.shanks.model.failure.test.MyFailure;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
@@ -18,6 +24,7 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusE
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
+import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
 import es.upm.dit.gsi.shanks.model.workerroom.WorkerRoom2DSimulationGUI;
 import es.upm.dit.gsi.shanks.model.workerroom.WorkerRoom3DSimulationGUI;
 import es.upm.dit.gsi.shanks.model.workerroom.WorkerRoomSimulation;
@@ -25,6 +32,9 @@ import es.upm.dit.gsi.shanks.model.workerroom.element.device.Computer;
 import es.upm.dit.gsi.shanks.model.workerroom.element.device.Printer;
 import es.upm.dit.gsi.shanks.model.workerroom.element.device.Router;
 import es.upm.dit.gsi.shanks.model.workerroom.element.link.EthernetLink;
+import es.upm.dit.gsi.shanks.model.workerroom.events.ConsumeInk;
+import es.upm.dit.gsi.shanks.model.workerroom.events.ConsumePaper;
+import es.upm.dit.gsi.shanks.model.workerroom.failure.WireBroken;
 import es.upm.dit.gsi.shanks.model.workerroom.scenario.portrayal.WorkerRoomScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.workerroom.scenario.portrayal.WorkerRoomScenario3DPortrayal;
 
@@ -83,19 +93,38 @@ public class WorkerRoomScenario extends Scenario{
 		this.addNetworkElement(pc3);
 		this.addNetworkElement(pc4);
 		this.addNetworkElement(pc5);
-		
+				
 	}
 
 	@Override
 	public void addPossibleEvents() {
-		// TODO Auto-generated method stub
-		
+//		this.addPossibleEventsOfNE(ConsumeInk.class, this.getNetworkElement("Printer"));
+//		this.addPossibleEventsOfNE(ConsumePaper.class, this.getNetworkElement("Printer"));
+//		this.addPossibleEventsOfNE(Prueba.class, this.getNetworkElement("PC1"));
 	}
 
 	@Override
 	public void addPossibleFailures() {
-		// TODO Auto-generated method stub
-		
+		Set<NetworkElement> set1 = new HashSet<NetworkElement>();
+		set1.add(this.getNetworkElement("EthernetLink1"));
+		Set<NetworkElement> set2 = new HashSet<NetworkElement>();
+		set2.add(this.getNetworkElement("EthernetLink2"));
+		Set<NetworkElement> set3 = new HashSet<NetworkElement>();
+		set3.add(this.getNetworkElement("EthernetLink3"));
+		Set<NetworkElement> set4 = new HashSet<NetworkElement>();
+		set4.add(this.getNetworkElement("EthernetLink4"));
+		Set<NetworkElement> set5 = new HashSet<NetworkElement>();
+		set5.add(this.getNetworkElement("EthernetLink5"));
+		Set<NetworkElement> set6 = new HashSet<NetworkElement>();
+		set6.add(this.getNetworkElement("EthernetLink6"));
+        List<Set<NetworkElement>> possibleCombinations = new ArrayList<Set<NetworkElement>>();
+		possibleCombinations.add(set1);
+		possibleCombinations.add(set2);
+		possibleCombinations.add(set3);
+		possibleCombinations.add(set4);
+		possibleCombinations.add(set5);
+		possibleCombinations.add(set6);
+		this.addPossibleFailure(WireBroken.class, possibleCombinations);
 	}
 
 	@Override
@@ -112,10 +141,38 @@ public class WorkerRoomScenario extends Scenario{
 
 	@Override
 	public HashMap<Class<? extends Failure>, Double> getPenaltiesInStatus(
-			String arg0) throws UnsupportedScenarioStatusException {
-		// TODO Auto-generated method stub
-		return null;
+			String status) throws UnsupportedScenarioStatusException {
+		 if (status.equals(CLOUDY)) {
+	            return this.getCloudyPenalties();
+	        } else if (status.equals(SUNNY)) {
+	            return this.getSunnyPenalties();
+	        } else {
+	            throw new UnsupportedScenarioStatusException();
+	        }
 	}
+	
+	/**
+     * @return
+     */
+    private HashMap<Class<? extends Failure>, Double> getSunnyPenalties() {
+        HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
+
+        penalties.put(WireBroken.class, 1.0);
+
+        return penalties;
+    }
+
+    /**
+     * @return
+     */
+    private HashMap<Class<? extends Failure>, Double> getCloudyPenalties() {
+        HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
+        String probs = (String) this.getProperty(MyScenario.CLOUDY_PROB);
+        double prob = new Double(probs);
+        penalties.put(WireBroken.class, prob);
+
+        return penalties;
+    }
 
 	@Override
 	public void setPossibleStates() {
@@ -141,7 +198,7 @@ public class WorkerRoomScenario extends Scenario{
 		configProperties.put(WorkerRoomSimulation.CONFIGURATION, "3");
 		WorkerRoomSimulation sim = new WorkerRoomSimulation(
 		        System.currentTimeMillis(), WorkerRoomScenario.class,
-		        "MyScenario", SUNNY,
+		        "WorkerRoomScenario", SUNNY,
 		        scenarioProperties, configProperties);
 		WorkerRoom2DSimulationGUI gui = new WorkerRoom2DSimulationGUI(sim);
 		//WorkerRoom3DSimulationGUI gui = new WorkerRoom3DSimulationGUI(sim);

@@ -46,11 +46,11 @@ public class WorkerRoom2DSimulationGUI extends ShanksSimulation2DGUI{
 	public void locateFrames(Scenario2DPortrayal scenarioPortrayal) {
 		HashMap<String, JFrame> frames = scenarioPortrayal.getFrameList();
         JFrame mainFrame = frames.get(Scenario2DPortrayal.MAIN_DISPLAY_ID);
-//        JFrame failureFrame = frames.get(MyHyperComplexScenario2DPortrayal.FAILURE_DISPLAY_ID);
+        JFrame failureFrame = frames.get(WorkerRoomScenario2DPortrayal.FAILURE_DISPLAY_ID);
 //        JFrame chartFrame = frames.get(FailuresChartPainter.RESOLVED_FAILURES_PER_AGENT_CHART_ID);
         
         mainFrame.setLocation(100, 100);
-//        failureFrame.setLocation(500, 0);
+        failureFrame.setLocation(500, 0);
 //        chartFrame.setLocation(600, 200);
 
     }

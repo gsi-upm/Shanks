@@ -18,6 +18,7 @@ import es.upm.dit.gsi.shanks.model.workerroom.element.portrayal.Computer2DPortra
 import es.upm.dit.gsi.shanks.model.workerroom.element.portrayal.EthernetLink2DPortrayal;
 import es.upm.dit.gsi.shanks.model.workerroom.element.portrayal.Printer2DPortrayal;
 import es.upm.dit.gsi.shanks.model.workerroom.element.portrayal.Router2DPortrayal;
+import es.upm.dit.gsi.shanks.model.workerroom.failure.WireBroken;
 
 public class WorkerRoomScenario2DPortrayal extends Scenario2DPortrayal{
 
@@ -73,7 +74,7 @@ public class WorkerRoomScenario2DPortrayal extends Scenario2DPortrayal{
         printerPortrayal.setPortrayalForClass(Printer.class, new Printer2DPortrayal());
         routerPortrayal.setPortrayalForClass(Router.class, new Router2DPortrayal());
         networkPortrayal.setPortrayalForAll(new EthernetLink2DPortrayal());
-        //failuresPortrayal.setPortrayalForClass(MyFailure.class, new Failure2DPortrayal());
+        failuresPortrayal.setPortrayalForClass(WireBroken.class, new Failure2DPortrayal());
 		
 	}
 

@@ -39,27 +39,27 @@ public class Router extends Device{
 		Double congestion = (Double) this.getProperty(Router.PROPERTY_CONGESTION);
 		
 		if(power && connection.equals("OK") && congestion < 30){
-			this.setCurrentStatus(Router.STATUS_OK, true);
-			this.setCurrentStatus(Router.STATUS_OFF, false);
-			this.setCurrentStatus(Router.STATUS_CONGESTED, false);
-			this.setCurrentStatus(Router.STATUS_NOISP_SERVICE, false);
-			this.setCurrentStatus(Router.STATUS_DISCONNECTED, false);
+			this.updateStatusTo(Router.STATUS_OK, true);
+			this.updateStatusTo(Router.STATUS_OFF, false);
+			this.updateStatusTo(Router.STATUS_CONGESTED, false);
+			this.updateStatusTo(Router.STATUS_NOISP_SERVICE, false);
+			this.updateStatusTo(Router.STATUS_DISCONNECTED, false);
 		}
 		if(!power){
-			this.setCurrentStatus(Router.STATUS_OK, false);
-			this.setCurrentStatus(Router.STATUS_OFF, true);
+			this.updateStatusTo(Router.STATUS_OK, false);
+			this.updateStatusTo(Router.STATUS_OFF, true);
 		}
 		if(connection.equals("DISCONNECTED")){
-			this.setCurrentStatus(Router.STATUS_OK, false);
-			this.setCurrentStatus(Router.STATUS_DISCONNECTED, true);
+			this.updateStatusTo(Router.STATUS_OK, false);
+			this.updateStatusTo(Router.STATUS_DISCONNECTED, true);
 		}
 		if(connection.equals("NO-IP")){
-			this.setCurrentStatus(Router.STATUS_OK, false);
-			this.setCurrentStatus(Router.STATUS_NOISP_SERVICE, true);
+			this.updateStatusTo(Router.STATUS_OK, false);
+			this.updateStatusTo(Router.STATUS_NOISP_SERVICE, true);
 		}
 		if(congestion > 30){
-			this.setCurrentStatus(Router.STATUS_OK, false);
-			this.setCurrentStatus(Router.STATUS_CONGESTED, true);
+			this.updateStatusTo(Router.STATUS_OK, false);
+			this.updateStatusTo(Router.STATUS_CONGESTED, true);
 		}
 		
 	}
@@ -68,21 +68,21 @@ public class Router extends Device{
 	public void checkStatus() throws UnsupportedNetworkElementStatusException {
 		HashMap<String, Boolean> status = this.getStatus();
 		if(status.get(Router.STATUS_OK)){
-			this.changeProperty(Router.PROPERTY_CONGESTION, 0);
-			this.changeProperty(Router.PROPERTY_EXTERNAL_CONNECTION, "OK");
-			this.changeProperty(Router.PROPERTY_POWER, true);
+			this.updatePropertyTo(Router.PROPERTY_CONGESTION, 0);
+			this.updatePropertyTo(Router.PROPERTY_EXTERNAL_CONNECTION, "OK");
+			this.updatePropertyTo(Router.PROPERTY_POWER, true);
 		}
 		if(status.get(Router.STATUS_CONGESTED)){
-			this.changeProperty(Router.PROPERTY_CONGESTION, 30+Math.random()*70);
+			this.updatePropertyTo(Router.PROPERTY_CONGESTION, 30+Math.random()*70);
 		}
 		if(status.get(Router.STATUS_DISCONNECTED)){
-			this.changeProperty(Router.PROPERTY_EXTERNAL_CONNECTION, "DISCONNECTED");
+			this.updatePropertyTo(Router.PROPERTY_EXTERNAL_CONNECTION, "DISCONNECTED");
 		}
 		if(status.get(Router.STATUS_NOISP_SERVICE)){
-			this.changeProperty(Router.PROPERTY_EXTERNAL_CONNECTION, "NO_IP");
+			this.updatePropertyTo(Router.PROPERTY_EXTERNAL_CONNECTION, "NO_IP");
 		}
 		if(status.get(Router.STATUS_OFF)){
-			this.changeProperty(Router.PROPERTY_POWER, false);
+			this.updatePropertyTo(Router.PROPERTY_POWER, false);
 		}
 	}
 

@@ -30,6 +30,7 @@ public abstract class Failure {
     private List<NetworkElement> affectedElements;
     private HashMap<Class<? extends NetworkElement>, HashMap<String, Object>> possibleAffectedElements;
 
+    private HashMap<String, Object> properties;
     private HashMap<String, Object> hash = new HashMap<String, Object>();
     
     private double occurrenceProbability;
@@ -46,6 +47,8 @@ public abstract class Failure {
         this.affectedElements = new ArrayList<NetworkElement>();
         this.possibleAffectedElements = new HashMap<Class<? extends NetworkElement>, HashMap<String, Object>>();
         this.active = false;
+        this.properties = new HashMap<String, Object>();
+
 
         this.addPossibleAffectedElements();
         logger.finer("New Failure: "+this);
@@ -278,7 +281,8 @@ public abstract class Failure {
      * @param c
      */
     public void addPossibleAffectedProperties(Class<? extends NetworkElement> c, String property, Object value) {
-        this.possibleAffectedElements.get(c).put(property, value);
+        this.properties.put(property, value);
+        this.possibleAffectedElements.put(c, properties);
     }
 
     /**

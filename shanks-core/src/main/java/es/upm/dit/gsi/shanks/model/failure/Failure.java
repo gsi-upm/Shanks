@@ -103,11 +103,6 @@ public abstract class Failure {
             this.active = true;
       
         }
-        
-        
-        
-        
-        
     }
 
 //    /**

@@ -4,9 +4,10 @@
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/jason.jar"/>
-	<classpathentry kind="lib" path="lib/jpf-1.5.jar"/>
-	<classpathentry kind="lib" path="lib/mason.16.jar"/>
-	<classpathentry kind="lib" path="lib/unbbayes-4.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/William Wallace/.m2/repository/jason.jar"/>
+	<classpathentry kind="lib" path="C:/Users/William Wallace/.m2/repository/jpf-1.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/William Wallace/.m2/repository/mason.16.jar"/>
+	<classpathentry kind="lib" path="C:/Users/William Wallace/.m2/repository/unbbayes-4.0.0.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/shanks-core"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

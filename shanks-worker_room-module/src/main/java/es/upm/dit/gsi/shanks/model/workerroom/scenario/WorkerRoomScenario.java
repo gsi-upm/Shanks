@@ -16,7 +16,6 @@ import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
-import es.upm.dit.gsi.shanks.model.failure.test.MyFailure;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
@@ -24,7 +23,6 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusE
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
-import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
 import es.upm.dit.gsi.shanks.model.workerroom.WorkerRoom2DSimulationGUI;
 import es.upm.dit.gsi.shanks.model.workerroom.WorkerRoom3DSimulationGUI;
 import es.upm.dit.gsi.shanks.model.workerroom.WorkerRoomSimulation;
@@ -167,7 +165,7 @@ public class WorkerRoomScenario extends Scenario{
      */
     private HashMap<Class<? extends Failure>, Double> getCloudyPenalties() {
         HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
-        String probs = (String) this.getProperty(MyScenario.CLOUDY_PROB);
+        String probs = (String) this.getProperty(CLOUDY_PROB);
         double prob = new Double(probs);
         penalties.put(WireBroken.class, prob);
 

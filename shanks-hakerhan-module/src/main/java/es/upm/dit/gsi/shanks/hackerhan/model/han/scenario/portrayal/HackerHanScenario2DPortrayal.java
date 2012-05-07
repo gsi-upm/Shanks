@@ -6,6 +6,7 @@ package es.upm.dit.gsi.shanks.hackerhan.model.han.scenario.portrayal;
 
 import sim.portrayal.continuous.ContinuousPortrayal2D;
 import sim.portrayal.network.NetworkPortrayal2D;
+import es.upm.dit.gsi.shanks.hackerhan.model.Values;
 import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.Computer;
 import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.WifiRouterADSL;
 import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.WirelessDevice;
@@ -55,12 +56,12 @@ public class HackerHanScenario2DPortrayal extends Scenario2DPortrayal{
 	 */
 	@Override
 	public void placeElements() {
-		this.situateDevice((Device)this.getScenario().getNetworkElement("PC"), 5, 20);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("Router"), 30, 30);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("Android"), 25, 5);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("Tablet"), 15, 5);
+		this.situateDevice((Device)this.getScenario().getNetworkElement(Values.COMPUTER_ID+"@"+this.getScenario().getID()), 5, 20);
+		this.situateDevice((Device)this.getScenario().getNetworkElement(Values.WIFI_ROUTER_ID+"@"+this.getScenario().getID()), 30, 30);
+		this.situateDevice((Device)this.getScenario().getNetworkElement(Values.ANDROID_ID+"@"+this.getScenario().getID()), 25, 5);
+		this.situateDevice((Device)this.getScenario().getNetworkElement(Values.TABLET_ID+"@"+this.getScenario().getID()), 15, 5);
 		
-		this.drawLink((Link)this.getScenario().getNetworkElement("Ethernet"));
+		this.drawLink((Link)this.getScenario().getNetworkElement(Values.ETHERNET_ID+"@"+this.getScenario().getID()));
 	}
 
 	@Override

@@ -41,8 +41,7 @@ public class ComputerFailure extends Failure {
 	 */
 	@Override
 	public void addPossibleAffectedElements() {
-		this.addPossibleAffectedElements(Computer.class, Computer.STATUS_NOK,
-				true);
+		this.addPossibleAffectedProperties(Computer.class, Computer.PROPERTY_CPUFREQ, 99.9);
 	}
 
 	/*

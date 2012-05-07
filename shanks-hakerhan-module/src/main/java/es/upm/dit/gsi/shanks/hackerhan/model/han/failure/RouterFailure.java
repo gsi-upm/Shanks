@@ -39,7 +39,7 @@ public class RouterFailure extends Failure{
 	 */
 	@Override
 	public void addPossibleAffectedElements() {
-		this.addPossibleAffectedElements(WifiRouterADSL.class, WifiRouterADSL.STATUS_CONGESTED, true);
+		this.addPossibleAffectedProperties(WifiRouterADSL.class, WifiRouterADSL.PROPERTY_CONGESTION, 50.0);
 	}
 	
 	/*

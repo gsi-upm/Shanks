@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
+import es.upm.dit.gsi.shanks.hackerhan.model.Values;
 import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.Computer;
 import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.WifiRouterADSL;
 import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.WirelessDevice;
@@ -60,13 +61,13 @@ public class HackerHANScenario extends Scenario {
 			throws UnsupportedNetworkElementStatusException,
 			TooManyConnectionException, DuplicatedIDException {
 		
-		Computer computer = new Computer("PC");
-		WifiRouterADSL router = new WifiRouterADSL("Router");
-		WirelessDevice android = new WirelessDevice("Android");
-		WirelessDevice tablet = new WirelessDevice("Tablet");
+		Computer computer = new Computer(Values.COMPUTER_ID+"@"+this.getID());
+		WifiRouterADSL router = new WifiRouterADSL(Values.WIFI_ROUTER_ID+"@"+this.getID());
+		WirelessDevice android = new WirelessDevice(Values.ANDROID_ID+"@"+this.getID());
+		WirelessDevice tablet = new WirelessDevice(Values.TABLET_ID+"@"+this.getID());
 		
-		EthernetCable ethernetCable = new EthernetCable("Ethernet", 2.5);
-		WifiConnection wifi = new WifiConnection("Wifi", WifiConnection.STATUS_OK, 64);
+		EthernetCable ethernetCable = new EthernetCable(Values.ETHERNET_ID+"@"+this.getID(), Values.ETHERNET_LENGHT);
+		WifiConnection wifi = new WifiConnection(Values.WIFI_ID+"@"+this.getID(), WifiConnection.STATUS_OK, Values.WIFI_CHANNELS);
 		computer.connectToDeviceWithLink(router, ethernetCable);
 		android.connectToDeviceWithLink(router, wifi);
 		tablet.connectToDeviceWithLink(router, wifi);
@@ -86,10 +87,10 @@ public class HackerHANScenario extends Scenario {
 	 */
 	@Override
 	public void addPossibleFailures() {
-		NetworkElement computer = this.getNetworkElement("PC");
-		NetworkElement router = this.getNetworkElement("Router");
-		NetworkElement android = this.getNetworkElement("Android");
-		NetworkElement tablet = this.getNetworkElement("Tablet");
+		NetworkElement computer = this.getNetworkElement(Values.COMPUTER_ID+"@"+this.getID());
+		NetworkElement router = this.getNetworkElement(Values.WIFI_ROUTER_ID+"@"+this.getID());
+		NetworkElement android = this.getNetworkElement(Values.ANDROID_ID+"@"+this.getID());
+		NetworkElement tablet = this.getNetworkElement(Values.TABLET_ID+"@"+this.getID());
 //		NetworkElement ethernet = this.getNetworkElement("Ethernet");
 //		NetworkElement wifi= this.getNetworkElement("Wifi");
 		
@@ -185,6 +186,7 @@ public class HackerHANScenario extends Scenario {
 		this.addPossibleStatus(HackerHANScenario.STATUS_MONITORIZED);
 		this.addPossibleStatus(HackerHANScenario.STATUS_BLOCKED);
 		this.addPossibleStatus(HackerHANScenario.STATUS_ATTACKING);
+		this.addPossibleStatus(HackerHANScenario.STATUS_NORMAL);
 	}
 
 	@Override

@@ -8,7 +8,7 @@ import java.util.Properties;
 
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.ShanksSimulation2DGUI;
-import es.upm.dit.gsi.shanks.hackerhan.model.han.scenario.HANScenario;
+import es.upm.dit.gsi.shanks.hackerhan.model.han.scenario.HackerHANScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
@@ -36,7 +36,7 @@ public class HackerHanModelSimulation2DGUI extends ShanksSimulation2DGUI {
      * @return
      */
     public static String getName() {
-        return "Tutorial Shanks - Home Area Nertwork - 2D";
+        return "Network Security Simulation - Home Area Nertwork - 2D";
     }
 
 
@@ -46,7 +46,7 @@ public class HackerHanModelSimulation2DGUI extends ShanksSimulation2DGUI {
 	        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_2D);
 //	        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_3D);
 //	         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
-			HackerHANModelSimulation tut = new HackerHANModelSimulation(System.currentTimeMillis(), HANScenario.class, "ADSL scenario", HANScenario.STATUS_SUNNY, scenarioProperties);
+			HackerHANModelSimulation tut = new HackerHANModelSimulation(System.currentTimeMillis(), HackerHANScenario.class, "HackerHAN scenario", HackerHANScenario.STATUS_ATTACKING, scenarioProperties);
 			HackerHanModelSimulation2DGUI gui = new HackerHanModelSimulation2DGUI(tut);
 			gui.start();
 

@@ -39,11 +39,9 @@ public class NoIPFailure extends Failure {
 	 */
 	@Override
 	public void addPossibleAffectedElements() {	
-		this.addPossibleAffectedElements(WifiRouterADSL.class, WifiRouterADSL.STATUS_NOISP_SERVICE, true);
-		this.addPossibleAffectedElements(Computer.class, Computer.STATUS_DISCONNECTED, true);
-		this.addPossibleAffectedElements(WirelessDevice.class, WirelessDevice.STATUS_DISCONNECTED, true);
-//		this.addPossibleAffectedProperties(Computer.class, Computer.PROPERTY_ETHERNET_CONNECTION, Values.DISCONNECTED);
-//		this.addPossibleAffectedProperties(WirelessDevice.class, WirelessDevice.PROPERTY_CONNECTION, Values.DISCONNECTED);
+		this.addPossibleAffectedProperties(WifiRouterADSL.class, WifiRouterADSL.PROPERTY_CONNECTION, Values.NO_IP);
+		this.addPossibleAffectedProperties(Computer.class, Computer.PROPERTY_ETHERNET_CONNECTION, Values.NO_IP);
+		this.addPossibleAffectedProperties(WirelessDevice.class, WirelessDevice.PROPERTY_CONNECTION, Values.NO_IP);
 	}
 
 	@Override
@@ -55,12 +53,12 @@ public class NoIPFailure extends Failure {
 				if(state.get(WifiRouterADSL.STATUS_NOISP_SERVICE)){
 					return false;
 				}
-			} else if(state.containsKey(Computer.STATUS_DISCONNECTED)) {
-				if(state.get(Computer.STATUS_DISCONNECTED)){
+			} else if(state.containsKey(Computer.STATUS_NO_ISP_SERVICE)) {
+				if(state.get(Computer.STATUS_NO_ISP_SERVICE)){
 					return false;
 				}
-			} else if(state.containsKey(WirelessDevice.STATUS_DISCONNECTED)) {
-				if(state.get(WirelessDevice.STATUS_DISCONNECTED)){
+			} else if(state.containsKey(WirelessDevice.STATUS_NO_ISP_CONNECTION)) {
+				if(state.get(WirelessDevice.STATUS_NO_ISP_CONNECTION)){
 					return false;
 				}
 			}

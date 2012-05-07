@@ -58,7 +58,7 @@ public class WifiRouterADSL extends Device {
 		this.addProperty(WifiRouterADSL.PROPERTY_POWER, Values.ON);
 		this.addProperty(WifiRouterADSL.PROPERTY_CONNECTION, Values.CONNECTED);
 		this.addProperty(WifiRouterADSL.PROPERTY_CONNECTION_TYPE, WifiRouterADSL.CONNECTION_TYPE_ISP);
-		this.addProperty(WifiRouterADSL.PROPERTY_CONGESTION, 0);
+		this.addProperty(WifiRouterADSL.PROPERTY_CONGESTION, 0.0);
 	}
 	
 	/*
@@ -121,7 +121,7 @@ public class WifiRouterADSL extends Device {
 				this.updateStatusTo(WifiRouterADSL.STATUS_NOISP_SERVICE, false);
 				this.updateStatusTo(WifiRouterADSL.STATUS_OK, false);
 			} else  {
-				this.updateStatusTo(WifiRouterADSL.STATUS_DISCONNECTED, true);
+				this.updateStatusTo(WifiRouterADSL.STATUS_DISCONNECTED, false);
 				if (cStatus.equals(Values.NO_IP)){
 					this.updateStatusTo(WifiRouterADSL.STATUS_NOISP_SERVICE, true);
 					this.updateStatusTo(WifiRouterADSL.STATUS_CONGESTED, false);
@@ -166,7 +166,7 @@ public class WifiRouterADSL extends Device {
 		this.updatePropertyTo(WifiRouterADSL.PROPERTY_CONNECTION, Values.DISCONNECTED);
 		this.updatePropertyTo(WifiRouterADSL.PROPERTY_CONGESTION, 0);
 		this.updateStatusTo(WifiRouterADSL.STATUS_CONGESTED, false);
-		this.updateStatusTo(WifiRouterADSL.STATUS_DISCONNECTED, true);
+		this.updateStatusTo(WifiRouterADSL.STATUS_DISCONNECTED, false);
 		this.updateStatusTo(WifiRouterADSL.STATUS_NOISP_SERVICE, false);
 		this.updateStatusTo(WifiRouterADSL.STATUS_OK, false);
 		this.updateStatusTo(WifiRouterADSL.STATUS_STEALING_CONNECTION, false);

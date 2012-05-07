@@ -4,12 +4,14 @@
  */
 package es.upm.dit.gsi.shanks.hackerhan.model.han.failure;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import es.upm.dit.gsi.shanks.hackerhan.model.Values;
 import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.WirelessDevice;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 
 /**
@@ -38,7 +40,7 @@ public class WirelessDeviceFailure extends Failure{
 	 */
 	@Override
 	public void addPossibleAffectedElements() {
-		this.addPossibleAffectedElements(WirelessDevice.class, WirelessDevice.STATUS_NOK, true);
+		this.addPossibleAffectedProperties(WirelessDevice.class, WirelessDevice.PROPERTY_BATTERY_CAPACITY, 1.0);
 	}
 
 	/*
@@ -57,5 +59,23 @@ public class WirelessDeviceFailure extends Failure{
 			}
 		}
 		return true;
+	}
+	
+	@Override
+	public void activateFailure() throws UnsupportedNetworkElementStatusException {
+		List<NetworkElement> before = new ArrayList<NetworkElement>(this.getAffectedElements());
+		super.activateFailure();
+		List<NetworkElement> after = this.getAffectedElements();
+		for(NetworkElement be: before){
+			for(String status: be.getStatus().keySet()){
+				System.out.println(status+" "+be.getStatus().get(status));
+			}
+		}
+		
+		for(NetworkElement ae: after){
+			for(String status: ae.getStatus().keySet()){
+				System.out.println(status+" "+ae.getStatus().get(status));
+			}
+		}
 	}
 }

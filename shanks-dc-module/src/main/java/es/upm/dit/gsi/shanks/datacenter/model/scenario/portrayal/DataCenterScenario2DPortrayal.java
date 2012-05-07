@@ -53,9 +53,9 @@ public class DataCenterScenario2DPortrayal extends Scenario2DPortrayal{
 	@Override
 	public void placeElements() {
 		this.situateDevice((Device)this.getScenario().getNetworkElement(Values.COMPUTER_ID+"@"+this.getScenario().getID()), 5, 20);
-		this.situateDevice((Device)this.getScenario().getNetworkElement(Values.WIFI_ROUTER_ID+"@"+this.getScenario().getID()), 30, 30);
-		this.situateDevice((Device)this.getScenario().getNetworkElement(Values.ANDROID_ID+"@"+this.getScenario().getID()), 25, 5);
-		this.situateDevice((Device)this.getScenario().getNetworkElement(Values.TABLET_ID+"@"+this.getScenario().getID()), 15, 5);
+//		this.situateDevice((Device)this.getScenario().getNetworkElement(Values.WIFI_ROUTER_ID+"@"+this.getScenario().getID()), 30, 30);
+//		this.situateDevice((Device)this.getScenario().getNetworkElement(Values.ANDROID_ID+"@"+this.getScenario().getID()), 25, 5);
+//		this.situateDevice((Device)this.getScenario().getNetworkElement(Values.TABLET_ID+"@"+this.getScenario().getID()), 15, 5);
 		
 		this.drawLink((Link)this.getScenario().getNetworkElement(Values.ETHERNET_ID+"@"+this.getScenario().getID()));
 	}
@@ -67,9 +67,9 @@ public class DataCenterScenario2DPortrayal extends Scenario2DPortrayal{
         NetworkPortrayal2D linksPortrayal = (NetworkPortrayal2D) this.getPortrayals().get(Scenario2DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.LINKS_PORTRAYAL);
                 
         devicesPortrayal.setPortrayalForClass(Computer.class, new Computer2DPortrayal());
-        devicesPortrayal.setPortrayalForClass(WifiRouterADSL.class, new WifiRouterADSL2DPortrayal());
-        devicesPortrayal.setPortrayalForClass(WirelessDevice.class, new Smartphone2DPortrayal());
-                
+//        devicesPortrayal.setPortrayalForClass(WifiRouterADSL.class, new WifiRouterADSL2DPortrayal());
+//        devicesPortrayal.setPortrayalForClass(WirelessDevice.class, new Smartphone2DPortrayal());
+//                
         linksPortrayal.setPortrayalForClass(EthernetCable.class, new EthernetCable2DPortrayal());
 	}
 

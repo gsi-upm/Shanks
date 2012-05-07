@@ -9,6 +9,8 @@ import es.upm.dit.gsi.shanks.datacenter.model.element.device.Computer;
 import es.upm.dit.gsi.shanks.datacenter.model.element.device.Router;
 import es.upm.dit.gsi.shanks.datacenter.model.element.device.Server;
 import es.upm.dit.gsi.shanks.datacenter.model.element.link.EthernetCable;
+import es.upm.dit.gsi.shanks.datacenter.model.scenario.portrayal.DataCenterScenario2DPortrayal;
+import es.upm.dit.gsi.shanks.datacenter.model.scenario.portrayal.DataCenterScenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
@@ -37,20 +39,19 @@ public class DataCenterScenario extends Scenario {
 	@Override
 	public Scenario2DPortrayal createScenario2DPortrayal()
 			throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
-		return new DataCenterScenario2DPortrayal;
+		return new DataCenterScenario2DPortrayal(this, 100, 100);
 	}
 
 	@Override
 	public Scenario3DPortrayal createScenario3DPortrayal()
 			throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		return new DataCenterScenario3DPortrayal(this, 100, 100, 100);
 	}
 
 	@Override
 	public void setPossibleStates() {
-		// TODO Auto-generated method stub
-
+		this.addPossibleStatus(DataCenterScenario.STATUS_UNDER_ATTACK);
+		this.addPossibleStatus(DataCenterScenario.STATUS_NORMAL);
 	}
 
 	@Override
@@ -108,13 +109,11 @@ public class DataCenterScenario extends Scenario {
 	@Override
 	public void addPossibleFailures() {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void addPossibleEvents() {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override

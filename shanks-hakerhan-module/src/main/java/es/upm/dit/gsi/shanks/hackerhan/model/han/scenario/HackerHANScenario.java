@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
-import es.upm.dit.gsi.shanks.hackerhan.model.Values;
 import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.Computer;
 import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.WifiRouterADSL;
 import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.WirelessDevice;

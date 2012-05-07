@@ -59,10 +59,10 @@ public class WirelessDevice extends Device{
 			this.shutdown();
 		} else { 
 			this.updatePropertyTo(WirelessDevice.PROPERTY_POWER, Values.ON);
-			if (status.get(WirelessDevice.STATUS_STEALING_CONNECTION))
-				this.updatePropertyTo(WirelessDevice.PROPERTY_CONNECTION_TYPE, WirelessDevice.CONNECTION_TYPE_STEAL);
-			else 
-				this.updatePropertyTo(WirelessDevice.PROPERTY_CONNECTION_TYPE, WirelessDevice.CONNECTION_TYPE_ISP);
+//			if (status.get(WirelessDevice.STATUS_STEALING_CONNECTION))
+//				this.updatePropertyTo(WirelessDevice.PROPERTY_CONNECTION_TYPE, WirelessDevice.CONNECTION_TYPE_STEAL);
+//			else 
+//				this.updatePropertyTo(WirelessDevice.PROPERTY_CONNECTION_TYPE, WirelessDevice.CONNECTION_TYPE_ISP);
 			if(status.get(WirelessDevice.STATUS_NOK)) {
 				this.updatePropertyTo(WirelessDevice.PROPERTY_BATTERY_CAPACITY, 1.0);
 				this.updatePropertyTo(WirelessDevice.PROPERTY_SIGNAL, 1.0);

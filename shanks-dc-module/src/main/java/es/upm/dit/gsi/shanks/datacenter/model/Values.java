@@ -23,15 +23,14 @@ public class Values {
 	public static final Double WIRELESSD_FAILURE_PROB = 0.1;
 	
 	// Network Elements names. 
-	public static final String COMPUTER_ID = "Computer#";
-	public static final String WIFI_ROUTER_ID = "WifiRouter#";
-	public static final String ANDROID_ID = "Android#";
-	public static final String TABLET_ID = "Tablet#";
+	public static final String COMPUTER_ID = "ITCrowComputer#";
+	public static final String INTRANET_ROUTER_ID = "IntranetRouter#";
+	public static final String SERVER_ID = "Server#";
 	public static final String ETHERNET_ID = "Ethernet#";
-	public static final String WIFI_ID = "Wifi#";
 	
 	// Scenario Values. 
 	public static final double ETHERNET_LENGHT = 2.5;
 	public static final int WIFI_CHANNELS = 64;
+	public static final int NUMBER_OF_ITCROW = 3;
 
 }

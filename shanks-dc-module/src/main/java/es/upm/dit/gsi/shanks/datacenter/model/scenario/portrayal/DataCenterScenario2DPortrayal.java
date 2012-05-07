@@ -57,7 +57,17 @@ public class DataCenterScenario2DPortrayal extends Scenario2DPortrayal{
 //		this.situateDevice((Device)this.getScenario().getNetworkElement(Values.ANDROID_ID+"@"+this.getScenario().getID()), 25, 5);
 //		this.situateDevice((Device)this.getScenario().getNetworkElement(Values.TABLET_ID+"@"+this.getScenario().getID()), 15, 5);
 		
-		this.drawLink((Link)this.getScenario().getNetworkElement(Values.ETHERNET_ID+"@"+this.getScenario().getID()));
+		this.drawLink((Link)this.getScenario().getNetworkElement(Values.ETHERNET_ID +"0"));
+		this.drawLink((Link)this.getScenario().getNetworkElement(Values.ETHERNET_ID +"1"));
+		this.drawLink((Link)this.getScenario().getNetworkElement(Values.ETHERNET_ID +"2"));
+		this.drawLink((Link)this.getScenario().getNetworkElement(Values.ETHERNET_ID +"4"));
+		this.drawLink((Link)this.getScenario().getNetworkElement(Values.ETHERNET_ID +"5"));
+		this.drawLink((Link)this.getScenario().getNetworkElement(Values.ETHERNET_ID +"6"));
+		this.drawLink((Link)this.getScenario().getNetworkElement(Values.ETHERNET_ID +"7"));
+
+		
+		
+
 	}
 
 	@Override

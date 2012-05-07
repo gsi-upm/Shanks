@@ -59,43 +59,37 @@ public class DataCenterScenario extends Scenario {
 			throws UnsupportedNetworkElementStatusException,
 			TooManyConnectionException, DuplicatedIDException {
 
-		Router intranetRouter = new Router(Values.INTRANET_ROUTER_ID + "@"
-				+ this.getID());
+		Router intranetRouter = new Router("DataCenterRouter");
 		addNetworkElement(intranetRouter);
 
 		// IT Crow terminals.
 		ArrayList<EthernetCable> links = new ArrayList<EthernetCable>();
 		for (int i = 0; i < Values.NUMBER_OF_ITCROW; i++) {
-			Computer computer = (new Computer(Values.COMPUTER_ID + i + "@"+ this.getID()));
-			links.add(new EthernetCable(Values.ETHERNET_ID + i + "@"
-					+ this.getID(), Values.ETHERNET_LENGHT));
+			Computer computer = (new Computer(Values.COMPUTER_ID + i));
+			links.add(new EthernetCable(Values.ETHERNET_ID + i, Values.ETHERNET_LENGHT));
 			computer.connectToDeviceWithLink(intranetRouter, links.get(i));
 			addNetworkElement(computer);
 		}
 
 		
 		// Servers
-		Server ldap = new Server(Values.SERVER_ID + "LDAP@" + this.getID());
-		links.add(new EthernetCable(Values.ETHERNET_ID + (links.size() - 1)
-				+ "@" + this.getID(), Values.ETHERNET_LENGHT));
+		Server ldap = new Server(Values.SERVER_ID + "LDAP@");
+		links.add(new EthernetCable(Values.ETHERNET_ID + "4", Values.ETHERNET_LENGHT));
 		ldap.connectToDeviceWithLink(intranetRouter, links.get(links.size()-1));
 		addNetworkElement(ldap);
 		
-		Server external = new Server(Values.SERVER_ID+"External@"+this.getID());
-		links.add(new EthernetCable(Values.ETHERNET_ID + (links.size() - 1)
-				+ "@" + this.getID(), Values.ETHERNET_LENGHT));
+		Server external = new Server(Values.SERVER_ID+"External@");
+		links.add(new EthernetCable(Values.ETHERNET_ID + "5", Values.ETHERNET_LENGHT));
 		external.connectToDeviceWithLink(intranetRouter, links.get(links.size()-1));
 		addNetworkElement(external);
 		
-		Server bbdd = new Server(Values.SERVER_ID+"BBDD@"+this.getID());
-		links.add(new EthernetCable(Values.ETHERNET_ID + (links.size() - 1)
-				+ "@" + this.getID(), Values.ETHERNET_LENGHT));
+		Server bbdd = new Server(Values.SERVER_ID+"BBDD@");
+		links.add(new EthernetCable(Values.ETHERNET_ID + "6", Values.ETHERNET_LENGHT));
 		bbdd.connectToDeviceWithLink(intranetRouter, links.get(links.size()-1));
 		addNetworkElement(bbdd);
 		
-		Server bbddReplica = new Server(Values.SERVER_ID+"BBDD@"+this.getID());
-		links.add(new EthernetCable(Values.ETHERNET_ID + (links.size() - 1)
-				+ "@" + this.getID(), Values.ETHERNET_LENGHT));
+		Server bbddReplica = new Server(Values.SERVER_ID+"BBDDReplica@");
+		links.add(new EthernetCable(Values.ETHERNET_ID + "7", Values.ETHERNET_LENGHT));
 		bbddReplica.connectToDeviceWithLink(bbdd, links.get(links.size()-1));
 		addNetworkElement(bbddReplica);
 

@@ -34,6 +34,4 @@ public class Values {
 	public static final double ETHERNET_LENGHT = 2.5;
 	public static final int WIFI_CHANNELS = 64;
 	
-	
-	
 }

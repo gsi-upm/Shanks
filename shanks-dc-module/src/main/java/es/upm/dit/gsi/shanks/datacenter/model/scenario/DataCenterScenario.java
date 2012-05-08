@@ -2,17 +2,25 @@ package es.upm.dit.gsi.shanks.datacenter.model.scenario;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import es.upm.dit.gsi.shanks.datacenter.model.Values;
 import es.upm.dit.gsi.shanks.datacenter.model.element.device.Computer;
 import es.upm.dit.gsi.shanks.datacenter.model.element.device.Router;
 import es.upm.dit.gsi.shanks.datacenter.model.element.device.Server;
 import es.upm.dit.gsi.shanks.datacenter.model.element.link.EthernetCable;
+import es.upm.dit.gsi.shanks.datacenter.model.failure.ComputerFailure;
+import es.upm.dit.gsi.shanks.datacenter.model.failure.RouterFailure;
+import es.upm.dit.gsi.shanks.datacenter.model.failure.ServerFailure;
 import es.upm.dit.gsi.shanks.datacenter.model.scenario.portrayal.DataCenterScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.datacenter.model.scenario.portrayal.DataCenterScenario3DPortrayal;
+import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
@@ -102,7 +110,33 @@ public class DataCenterScenario extends Scenario {
 
 	@Override
 	public void addPossibleFailures() {
-		// TODO Auto-generated method stub
+		
+		HashMap<String, NetworkElement> addedElements = this.getCurrentElements();
+		Set<NetworkElement> routerSet = new HashSet<NetworkElement>();
+		List<Set<NetworkElement>> computers = new ArrayList<Set<NetworkElement>>();
+		List<Set<NetworkElement>> servers = new ArrayList<Set<NetworkElement>>();
+		
+		for(String eName: addedElements.keySet()){
+			Set<NetworkElement> computerSet = new HashSet<NetworkElement>();
+			Set<NetworkElement> serverSet = new HashSet<NetworkElement>();
+			NetworkElement e = addedElements.get(eName);
+			if(!(e instanceof Link)){
+				routerSet.add(e);
+				if((e instanceof Computer)) {
+					if((e instanceof Server)){
+						serverSet.add(e);
+						servers.add(serverSet);
+					} else {
+						computerSet.add(e);
+						computers.add(computerSet);
+					}
+				}
+			}
+		}
+		this.addPossibleFailure(RouterFailure.class, routerSet);
+		this.addPossibleFailure(ComputerFailure.class, computers);
+		this.addPossibleFailure(ServerFailure.class, servers);
+		
 	}
 
 	@Override

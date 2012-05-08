@@ -51,5 +51,7 @@ public class RepairWireAgent extends SimpleShanksAgent{
         		
         }
 	}
+	
+	private static final long serialVersionUID = 8549991416825517733L;
 
 }

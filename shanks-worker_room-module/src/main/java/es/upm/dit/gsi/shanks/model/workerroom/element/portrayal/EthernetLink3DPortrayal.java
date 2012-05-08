@@ -5,8 +5,6 @@ import java.util.HashMap;
 
 import javax.media.j3d.TransformGroup;
 
-import es.upm.dit.gsi.shanks.model.element.device.Device;
-import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device3DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.portrayal.Link3DPortrayal;
 import es.upm.dit.gsi.shanks.model.workerroom.element.link.EthernetLink;

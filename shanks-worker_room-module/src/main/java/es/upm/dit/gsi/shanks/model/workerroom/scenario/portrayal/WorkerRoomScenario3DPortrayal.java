@@ -5,7 +5,6 @@ import sim.portrayal3d.continuous.ContinuousPortrayal3D;
 import sim.portrayal3d.network.NetworkPortrayal3D;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
-import es.upm.dit.gsi.shanks.model.failure.portrayal.Failure3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
@@ -15,10 +14,8 @@ import es.upm.dit.gsi.shanks.model.workerroom.element.device.Printer;
 import es.upm.dit.gsi.shanks.model.workerroom.element.device.Router;
 import es.upm.dit.gsi.shanks.model.workerroom.element.portrayal.Computer3DPortrayal;
 import es.upm.dit.gsi.shanks.model.workerroom.element.portrayal.EthernetLink3DPortrayal;
-import es.upm.dit.gsi.shanks.model.workerroom.element.portrayal.Printer2DPortrayal;
 import es.upm.dit.gsi.shanks.model.workerroom.element.portrayal.Printer3DPortrayal;
 import es.upm.dit.gsi.shanks.model.workerroom.element.portrayal.Router3DPortrayal;
-import es.upm.dit.gsi.shanks.model.workerroom.scenario.WorkerRoomScenario;
 
 public class WorkerRoomScenario3DPortrayal extends Scenario3DPortrayal{
 

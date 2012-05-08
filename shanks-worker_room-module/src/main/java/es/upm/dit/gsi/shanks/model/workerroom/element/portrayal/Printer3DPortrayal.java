@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device3DPortrayal;
-import es.upm.dit.gsi.shanks.model.workerroom.element.device.Computer;
 import es.upm.dit.gsi.shanks.model.workerroom.element.device.Printer;
 
 public class Printer3DPortrayal extends Device3DPortrayal{

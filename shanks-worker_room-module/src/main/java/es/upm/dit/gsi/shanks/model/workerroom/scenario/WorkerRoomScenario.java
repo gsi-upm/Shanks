@@ -1,10 +1,10 @@
 package es.upm.dit.gsi.shanks.model.workerroom.scenario;
 
-import java.util.List;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
@@ -24,14 +24,11 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 import es.upm.dit.gsi.shanks.model.workerroom.WorkerRoom2DSimulationGUI;
-import es.upm.dit.gsi.shanks.model.workerroom.WorkerRoom3DSimulationGUI;
 import es.upm.dit.gsi.shanks.model.workerroom.WorkerRoomSimulation;
 import es.upm.dit.gsi.shanks.model.workerroom.element.device.Computer;
 import es.upm.dit.gsi.shanks.model.workerroom.element.device.Printer;
 import es.upm.dit.gsi.shanks.model.workerroom.element.device.Router;
 import es.upm.dit.gsi.shanks.model.workerroom.element.link.EthernetLink;
-import es.upm.dit.gsi.shanks.model.workerroom.events.ConsumeInk;
-import es.upm.dit.gsi.shanks.model.workerroom.events.ConsumePaper;
 import es.upm.dit.gsi.shanks.model.workerroom.failure.WireBroken;
 import es.upm.dit.gsi.shanks.model.workerroom.scenario.portrayal.WorkerRoomScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.workerroom.scenario.portrayal.WorkerRoomScenario3DPortrayal;

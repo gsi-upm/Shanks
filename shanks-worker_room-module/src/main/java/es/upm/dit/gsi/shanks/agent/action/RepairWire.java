@@ -1,7 +1,6 @@
 package es.upm.dit.gsi.shanks.agent.action;
 
 import sim.engine.Steppable;
-import es.upm.dit.gsi.shanks.model.event.agent.Action;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.workerroom.element.link.EthernetLink;
 

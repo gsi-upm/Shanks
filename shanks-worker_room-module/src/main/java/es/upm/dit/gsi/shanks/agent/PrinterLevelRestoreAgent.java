@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
-import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.workerroom.element.device.Printer;
 
 public class PrinterLevelRestoreAgent extends SimpleShanksAgent{

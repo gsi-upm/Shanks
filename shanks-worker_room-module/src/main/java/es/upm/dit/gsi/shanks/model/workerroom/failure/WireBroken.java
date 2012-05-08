@@ -2,11 +2,8 @@ package es.upm.dit.gsi.shanks.model.workerroom.failure;
 
 import java.util.List;
 
-import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
-import es.upm.dit.gsi.shanks.model.event.networkelement.ProbabilisticNetworkElementEvent;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
-import es.upm.dit.gsi.shanks.model.workerroom.element.device.Computer;
 import es.upm.dit.gsi.shanks.model.workerroom.element.link.EthernetLink;
 
 public class WireBroken extends Failure{

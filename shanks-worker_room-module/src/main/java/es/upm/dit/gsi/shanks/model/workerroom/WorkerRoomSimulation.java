@@ -3,9 +3,6 @@ package es.upm.dit.gsi.shanks.model.workerroom;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
 
-import sim.engine.Schedule;
-import sim.engine.Steppable;
-
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.RepairWireAgent;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
@@ -42,8 +39,6 @@ public class WorkerRoomSimulation extends ShanksSimulation{
 
 	}
 	
-
-    
     @Override
     public void registerShanksAgents() throws DuplicatedAgentIDException,
             DuplicatedActionIDException {

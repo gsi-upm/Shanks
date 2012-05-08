@@ -5,7 +5,6 @@ import java.util.HashMap;
 import javax.swing.JFrame;
 
 import sim.display.Display2D;
-
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.ShanksSimulation2DGUI;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;

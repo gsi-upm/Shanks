@@ -42,6 +42,9 @@ public class WorkerRoomScenario extends Scenario{
 	 public static final String SUNNY = "SUNNY";
 
 	 public static final String CLOUDY_PROB = "CLOUDY_PROB";
+	 
+		public static final String STATUS_NORMAL = "Normal";
+		public static final String STATUS_UNDER_ATTACK = "UnderAttack";
 
 	public WorkerRoomScenario(String id, String initialState,
 			Properties properties)
@@ -176,6 +179,8 @@ public class WorkerRoomScenario extends Scenario{
 	public void setPossibleStates() {
 		this.addPossibleStatus(SUNNY);
 		this.addPossibleStatus(CLOUDY);
+		this.addPossibleStatus(STATUS_NORMAL);
+		this.addPossibleStatus(STATUS_UNDER_ATTACK);
 		
 	}
 	

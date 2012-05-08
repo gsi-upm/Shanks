@@ -26,12 +26,9 @@ public class EthernetLink2DPortrayal extends Link2DPortrayal implements Portraya
         Edge e = (Edge) object;
 
         Link link = (Link) e.getInfo();
-        if (link.getCapacity() == 2) {
+        
             this.drawSimpleLink(link, object, graphics, info);
-        } else if (link.getCapacity() > 2) {
-            this.drawComplexLink(link, object, graphics, info);
-        }
-
+        
     }
 
     /**

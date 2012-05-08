@@ -12,16 +12,13 @@ import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device2DPortrayal;
 public class Router2DPortrayal extends Device2DPortrayal {
 
 	// TODO make the animation for stealing connection.
-	private int number;
 
 	public Router2DPortrayal() {
 		super();
-		this.number = 0;
 	}
 
 	public Router2DPortrayal(int number) {
 		super();
-		this.number = number;
 	}
 
 	/*
@@ -51,7 +48,7 @@ public class Router2DPortrayal extends Device2DPortrayal {
 		}
 
 		// Draw the devices
-		final int x = (int) (info.draw.x - width / 2.0)*(1+this.number);
+		final int x = (int) (info.draw.x - width / 2.0);
 		final int y = (int) (info.draw.y - height / 2.0);
 		final int w = (int) (width);
 		final int h = (int) (height);

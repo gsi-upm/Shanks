@@ -24,13 +24,25 @@ public class Values {
 	
 	// Network Elements names. 
 	public static final String COMPUTER_ID = "ITCrowComputer#";
-	public static final String INTRANET_ROUTER_ID = "IntranetRouter#";
+	public static final String DATA_CENTER_ROUTER_ID = "DataCenterRouter#";
 	public static final String SERVER_ID = "Server#";
+	public static final String LDAP_SERVER_ID = "LDAPServer";
+	public static final String EXTERNAL_SERVER_ID = "ExternalServer";
+	public static final String BBDD_SERVER_ID = "BBDDServer";
+	public static final String BBDD_REPLICA_ID = "BBDDReplica";
 	public static final String ETHERNET_ID = "Ethernet#";
 	
 	// Scenario Values. 
 	public static final double ETHERNET_LENGHT = 2.5;
 	public static final int WIFI_CHANNELS = 64;
 	public static final int NUMBER_OF_ITCROW = 3;
+	
+	// Portrayals Values.
+	public static final double Computer2DSide = 25;
+	public static final double Server2DHeight = 50;
+
+
+
+	
 
 }

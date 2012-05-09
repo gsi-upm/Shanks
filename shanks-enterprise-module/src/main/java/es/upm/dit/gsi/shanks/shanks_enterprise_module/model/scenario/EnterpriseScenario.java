@@ -1,11 +1,16 @@
 package es.upm.dit.gsi.shanks.shanks_enterprise_module.model.scenario;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import es.upm.dit.gsi.shanks.datacenter.model.Values;
 import es.upm.dit.gsi.shanks.datacenter.model.scenario.DataCenterScenario;
+import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
@@ -22,6 +27,8 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
 import es.upm.dit.gsi.shanks.model.workerroom.element.link.EthernetLink;
+import es.upm.dit.gsi.shanks.model.workerroom.failure.ComputerPruebaFailure;
+import es.upm.dit.gsi.shanks.model.workerroom.failure.WireBroken;
 import es.upm.dit.gsi.shanks.model.workerroom.scenario.WorkerRoomScenario;
 import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.element.IntranetRouter;
 import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.scenario.portrayal.EnterpriseScenario2DPortrayal;
@@ -109,7 +116,21 @@ public class EnterpriseScenario extends ComplexScenario{
 	}
 
 	@Override
-	public void addPossibleFailures() {
+	public void addPossibleFailures(){
+		Set<NetworkElement> set1 = new HashSet<NetworkElement>();
+		set1.add(this.getNetworkElement("EL1"));
+		Set<NetworkElement> set2 = new HashSet<NetworkElement>();
+		set2.add(this.getNetworkElement("EL2"));
+		Set<NetworkElement> set3 = new HashSet<NetworkElement>();
+		set3.add(this.getNetworkElement("EL3"));
+		Set<NetworkElement> set4 = new HashSet<NetworkElement>();
+		set4.add(this.getNetworkElement("EL4"));
+        List<Set<NetworkElement>> possibleCombinations = new ArrayList<Set<NetworkElement>>();
+		possibleCombinations.add(set1);
+		possibleCombinations.add(set2);
+		possibleCombinations.add(set3);
+		possibleCombinations.add(set4);
+		this.addPossibleFailure(WireBroken.class, possibleCombinations);
 		
 	}
 

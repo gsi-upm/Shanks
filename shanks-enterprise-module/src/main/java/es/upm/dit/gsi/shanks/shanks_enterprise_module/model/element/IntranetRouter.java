@@ -9,16 +9,20 @@ public class IntranetRouter extends Device{
 	public static final String STATUS_OFF ="Off";
 	
 	public static final String PROPERTY_POWER = "Power";
+	public static final String PROPERTY_PORTS = "Ports";
+	
+	private boolean[] ports;
 	
 	public IntranetRouter(String id, String initialState, boolean isGateway)
 			throws UnsupportedNetworkElementStatusException {
 		super(id, initialState, isGateway);
+		this.initPorts();
 	}
 
 	@Override
 	public void fillIntialProperties() {
 		this.addProperty(PROPERTY_POWER, true);
-		
+		this.addProperty(PROPERTY_PORTS, ports);
 	}
 
 	@Override
@@ -42,6 +46,13 @@ public class IntranetRouter extends Device{
 	public void setPossibleStates() {
 		this.addPossibleStatus(STATUS_OFF);
 		this.addPossibleStatus(STATUS_OK);
+	}
+	
+	private void initPorts(){
+		this.ports = new boolean[1000];
+		for(int i = 0; i < ports.length; i++){
+			this.ports[i] = true;
+		}
 	}
 
 }

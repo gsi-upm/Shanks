@@ -7,9 +7,9 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/shanks-core"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/shanks-dc-module"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/shanks-worker_room-module"/>
-	<classpathentry kind="lib" path="C:/Users/William Wallace/.m2/repository/jason.jar"/>
-	<classpathentry kind="lib" path="C:/Users/William Wallace/.m2/repository/jpf-1.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/William Wallace/.m2/repository/mason.16.jar"/>
-	<classpathentry kind="lib" path="C:/Users/William Wallace/.m2/repository/unbbayes-4.0.0.jar"/>
+	<classpathentry kind="lib" path="/home/dlara/ShanksFinalProject/shanks-core/lib/unbbayes-4.0.0.jar"/>
+	<classpathentry kind="lib" path="/home/dlara/ShanksFinalProject/shanks-core/lib/mason.16.jar"/>
+	<classpathentry kind="lib" path="/home/dlara/ShanksFinalProject/shanks-core/lib/jpf-1.5.jar"/>
+	<classpathentry kind="lib" path="/home/dlara/ShanksFinalProject/shanks-core/lib/jason.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

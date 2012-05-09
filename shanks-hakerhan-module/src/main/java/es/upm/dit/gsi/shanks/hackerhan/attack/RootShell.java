@@ -1,11 +1,8 @@
 package es.upm.dit.gsi.shanks.hackerhan.attack;
 
-import java.nio.channels.GatheringByteChannel;
-
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.capability.creation.CreationShanksAgentCapability;
 import es.upm.dit.gsi.shanks.hackerhan.agent.Hacker;
-import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.datacenter.model.element.device.Gateway;
 
 /**
@@ -41,23 +38,11 @@ public class RootShell implements Attack {
 		 * a vulnerability can be exploit.
 		 * 
 		 */
-		
-		// TODO: proceed from here.
-		// if(port_is_open){
-			this.attackThread = new Thread(new Runnable() {
-				
-				@Override
-				public void run() {
-					Gateway gateway = (Gateway) sim.getScenario().getNetworkElement("Gateway"); 
-					int port = sim.random.nextInt(ports);
-					if(gateway.isPortOpen(hacker.getID(), port)){
-						// Try to attack it.
-					}
-					// If it's not open, does nothing.
-					
-				}
-			});
-		//}
+		Gateway gateway = (Gateway) sim.getScenario().getNetworkElement("Gateway"); 
+		int port = sim.random.nextInt(ports);
+		if(gateway.isPortOpen(hacker.getID(), port)){
+			// Try to attack it.
+		}
 	}
 
 	@Override

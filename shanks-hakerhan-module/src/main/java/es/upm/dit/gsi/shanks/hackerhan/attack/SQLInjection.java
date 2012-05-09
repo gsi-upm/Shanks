@@ -1,5 +1,9 @@
 package es.upm.dit.gsi.shanks.hackerhan.attack;
 
+import java.util.ArrayList;
+
+import es.upm.dit.gsi.shanks.ShanksSimulation;
+import es.upm.dit.gsi.shanks.datacenter.model.element.device.Gateway;
 import es.upm.dit.gsi.shanks.hackerhan.agent.Hacker;
 
 /**
@@ -10,27 +14,45 @@ public class SQLInjection implements Attack {
 
 	private Hacker hacker;
 	
-	private int[] 
+	private ShanksSimulation sim;
 	
-	public SQLInjection(Hacker hacker){
+	private ArrayList<Integer> ports;
+	
+	private boolean running;
+	private boolean success;
+	
+	public SQLInjection(Hacker hacker, ShanksSimulation sim){
 		super();
 		this.hacker = hacker;
+		this.sim = sim;
+		this.ports = new ArrayList<Integer>();
+		this.ports.add(80); // HTTP
+		this.ports.add(443); // Default SQL
+		this.ports.add(8080); // Tomcat
+		this.ports.add(3306); // Default SQL
+		this.running = false;
+		this.success = false;
 	}
+	
 	@Override
 	public void execute() {
-		
+		this.running = true;
+		Gateway gateway = (Gateway)sim.getScenario().getNetworkElement("Gateway");
+		for (int port : ports){
+			if(gateway.isPortOpen(this.hacker.getID(), port)){
+				// TODO: Try to make the injection.
+			}
+		}
 	}
 
 	@Override
 	public boolean isSuccessful() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.success;
 	}
 
 	@Override
 	public boolean isRunning() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.running;
 	}
 
 }

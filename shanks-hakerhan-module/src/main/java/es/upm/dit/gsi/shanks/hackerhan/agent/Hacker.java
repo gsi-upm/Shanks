@@ -171,7 +171,7 @@ public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksA
 				} else if((types.get(ATTACK_DDOS) + types.get(ATTACK_ROOT_SHELL))*100 < type &&
 						type <= (types.get(ATTACK_DDOS) + types.get(ATTACK_ROOT_SHELL) + types.get(ATTACK_SQL_INJECTION))*100) {
 					// SQL Injection
-					this.attack = new SQLInjection(this);
+					this.attack = new SQLInjection(this, simulation);
 					this.attack.execute();
 				} else {
 					// NONE
@@ -224,4 +224,5 @@ public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksA
 	public String getBayesianNetworkFilePath() {
 		return this.bayesianNetworkPath;
 	}
+	
 }

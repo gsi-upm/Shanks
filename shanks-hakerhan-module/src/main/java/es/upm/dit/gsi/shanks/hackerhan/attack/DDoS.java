@@ -5,6 +5,7 @@ import jason.asSemantics.Message;
 import java.util.ArrayList;
 
 import es.upm.dit.gsi.shanks.hackerhan.agent.Hacker;
+import es.upm.dit.gsi.shanks.hackerhan.model.Values;
 
 /**
  * Class to represent a DDoS attack
@@ -18,12 +19,19 @@ public class DDoS implements Attack {
 	private Hacker hacker;
 
 	/**
+	 * The target of the attack
+	 */
+	private String targetID;
+	
+	/**
 	 * Constructor
 	 * 
+	 * @param hacker - The hacker launching the attack.
 	 */
-	public DDoS(Hacker hacker){
+	public DDoS(Hacker hacker, String targetID){
 		super();
 		this.hacker = hacker;
+		this.targetID = targetID;
 	}
 	/**
 	 * Launchs the attack.
@@ -38,7 +46,7 @@ public class DDoS implements Attack {
 			Message msg = new Message();
 			msg.setReceiver(bot);
 			msg.setMsgId("Start");
-			msg.setPropCont("StartAttack");
+			msg.setPropCont(Values.ATTACK_ORDER + ":" + this.targetID);
 			hacker.sendMsg(msg);
 		}
 	}

@@ -38,11 +38,15 @@ public class RootShell implements Attack {
 		 * a vulnerability can be exploit.
 		 * 
 		 */
-		Gateway gateway = (Gateway) sim.getScenario().getNetworkElement("Gateway"); 
-		int port = sim.random.nextInt(ports);
-		if(gateway.isPortOpen(hacker.getID(), port)){
-			// Try to attack it.
-		}
+		
+		//ISPDNS dns = sim.getScenario().getNetworkElement("DNS");
+		//Gateway gateway = dns.getRouter("Gateway");
+		
+		//Gateway gateway = (Gateway) sim.getScenario().getNetworkElement("Gateway");
+//		int port = sim.random.nextInt(ports);
+//		if(gateway.isPortOpen(hacker.getID(), port)){
+//			// Try to attack it.
+//		}
 	}
 
 	@Override
@@ -51,10 +55,14 @@ public class RootShell implements Attack {
 	}
 	
 	public void installBot(ShanksSimulation sim){
-		Bot bot = new Bot("Bot" + hacker.getBotCount());
-		hacker.addBot(bot.getID());
 		try {
-			CreationShanksAgentCapability.addNewAgent(sim,bot);
+			//ISPDNS dns = sim.getScenario().getNetworkElement("DNS");
+			
+			// TODO: find a han to attack
+			
+//			Bot bot = new Bot(dns.getRouterID("") + hacker.getID() + hacker.getBotCount());
+//			hacker.addBot(bot.getID());
+//			CreationShanksAgentCapability.addNewAgent(sim,bot);
 		} catch (Exception e) {
 			sim.logger.warning("Could not create bot:");
 			sim.logger.warning(e.getMessage());

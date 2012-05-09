@@ -13,6 +13,7 @@ import es.upm.dit.gsi.shanks.hackerhan.attack.Attack;
 import es.upm.dit.gsi.shanks.hackerhan.attack.DDoS;
 import es.upm.dit.gsi.shanks.hackerhan.attack.RootShell;
 import es.upm.dit.gsi.shanks.hackerhan.attack.SQLInjection;
+import es.upm.dit.gsi.shanks.hackerhan.model.Values;
 
 /**
  * Hacker agent is a malicious agent that investigate security failures and try
@@ -33,16 +34,11 @@ import es.upm.dit.gsi.shanks.hackerhan.attack.SQLInjection;
  * 
  */
 public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksAgent {
-
-	public static final String ACTION_NONE = "NONE";
-	public static final String ACTION_GET_BOT = "GET_BOT";
-	public static final String ACTION_PROXY_ATTACK = "PROXY_ATTACK";
-	public static final String ACTION_DIRECT_ATTACK = "DIRECT_ATTACK";
-
-	public static final String ATTACK_NONE = "NONE";
-	public static final String ATTACK_DDOS = "DDOS";
-	public static final String ATTACK_ROOT_SHELL = "ROOT_SHELL";
-	public static final String ATTACK_SQL_INJECTION = "SQL_INJECTION";
+	
+	/**
+	 * The gateway target
+	 */
+	private ArrayList<String> targetsID;
 
 	/**
 	 * The bot network available to the hacker
@@ -99,7 +95,7 @@ public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksA
 			// Find out which attack I am supposed to do.
 			int result = simulation.random.nextInt(100);
 
-			String action = ACTION_NONE;
+			String action = Values.ACTION_NONE;
 
 			/*
 			 * This could be a little confusing, so let me explain: I generate a
@@ -126,27 +122,27 @@ public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksA
 			 * I am sure as hell there is a better way of doing this, but I have
 			 * not been able to find it.
 			 */
-			if (0 <= result && result > accionStatus.get(ACTION_NONE) * 100) {
+			if (0 <= result && result > accionStatus.get(Values.ACTION_NONE) * 100) {
 				// No action
-				action = ACTION_NONE;
-			} else if (accionStatus.get(ACTION_NONE) * 100 <= result
-					&& result < (accionStatus.get(ACTION_NONE) + accionStatus.get(ACTION_PROXY_ATTACK)) * 100) {
+				action = Values.ACTION_NONE;
+			} else if (accionStatus.get(Values.ACTION_NONE) * 100 <= result
+					&& result < (accionStatus.get(Values.ACTION_NONE) + accionStatus.get(Values.ACTION_PROXY_ATTACK)) * 100) {
 				// Proxied attack
-				action = ACTION_PROXY_ATTACK;
-			} else if ((accionStatus.get(ACTION_NONE) + accionStatus.get(ACTION_PROXY_ATTACK)) * 100 <= result &&
-					result < (accionStatus.get(ACTION_NONE) + accionStatus.get(ACTION_PROXY_ATTACK) + accionStatus.get(ACTION_DIRECT_ATTACK)) * 100) {
+				action = Values.ACTION_PROXY_ATTACK;
+			} else if ((accionStatus.get(Values.ACTION_NONE) + accionStatus.get(Values.ACTION_PROXY_ATTACK)) * 100 <= result &&
+					result < (accionStatus.get(Values.ACTION_NONE) + accionStatus.get(Values.ACTION_PROXY_ATTACK) + accionStatus.get(Values.ACTION_DIRECT_ATTACK)) * 100) {
 				// Direct attack
-				action = ACTION_DIRECT_ATTACK;
+				action = Values.ACTION_DIRECT_ATTACK;
 			} else {
 				// Get bot
-				action = ACTION_GET_BOT;
+				action = Values.ACTION_GET_BOT;
 			}
 			
 			// I tell the bayesian network what am I doing.
 			ShanksAgentBayesianReasoningCapability.addEvidence(this, "Accion", action);
 			this.bayesianNetwork.updateEvidences();
 			
-			if (!action.equals(ACTION_NONE)) {
+			if (!action.equals(Values.ACTION_NONE)) {
 
 				// I need to repeat the same thing than previously, to find out
 				// which attack I am launching
@@ -160,16 +156,16 @@ public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksA
 				 * DDos, RootShell, SQLInjection, None.
 				 */
 				
-				if(0 < type && type <= types.get(ATTACK_DDOS)*100){
+				if(0 < type && type <= types.get(Values.ATTACK_DDOS)*100){
 					// DDoS
-					this.attack = new DDoS(this);
-					this.attack.execute(); // New Thread??
-				} else if (types.get(ATTACK_DDOS)*100 < type &&
-						type <= (types.get(ATTACK_DDOS) + types.get(ATTACK_ROOT_SHELL))*100) {
+					this.attack = new DDoS(this, targetsID.get(0));
+					this.attack.execute();
+				} else if (types.get(Values.ATTACK_DDOS)*100 < type &&
+						type <= (types.get(Values.ATTACK_DDOS) + types.get(Values.ATTACK_ROOT_SHELL))*100) {
 					this.attack = new RootShell(this, simulation);
 					this.attack.execute();
-				} else if((types.get(ATTACK_DDOS) + types.get(ATTACK_ROOT_SHELL))*100 < type &&
-						type <= (types.get(ATTACK_DDOS) + types.get(ATTACK_ROOT_SHELL) + types.get(ATTACK_SQL_INJECTION))*100) {
+				} else if((types.get(Values.ATTACK_DDOS) + types.get(Values.ATTACK_ROOT_SHELL))*100 < type &&
+						type <= (types.get(Values.ATTACK_DDOS) + types.get(Values.ATTACK_ROOT_SHELL) + types.get(Values.ATTACK_SQL_INJECTION))*100) {
 					// SQL Injection
 					this.attack = new SQLInjection(this, simulation);
 					this.attack.execute();

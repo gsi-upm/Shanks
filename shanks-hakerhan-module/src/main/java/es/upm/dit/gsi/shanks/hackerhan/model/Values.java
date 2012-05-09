@@ -34,4 +34,17 @@ public class Values {
 	public static final double ETHERNET_LENGHT = 2.5;
 	public static final int WIFI_CHANNELS = 64;
 	
+	// Hacker status
+	public static final String ACTION_NONE = "NONE";
+	public static final String ACTION_GET_BOT = "GET_BOT";
+	public static final String ACTION_PROXY_ATTACK = "PROXY_ATTACK";
+	public static final String ACTION_DIRECT_ATTACK = "DIRECT_ATTACK";
+
+	public static final String ATTACK_NONE = "NONE";
+	public static final String ATTACK_DDOS = "DDOS";
+	public static final String ATTACK_ROOT_SHELL = "ROOT_SHELL";
+	public static final String ATTACK_SQL_INJECTION = "SQL_INJECTION";
+	
+	public static final String ATTACK_ORDER = "StartAttack";
+	
 }

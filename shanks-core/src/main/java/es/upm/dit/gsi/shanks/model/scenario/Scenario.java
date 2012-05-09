@@ -490,6 +490,9 @@ public abstract class Scenario {
                     this.setupNetworkElementEvent(event, elementsSet,
                             combinationNumber);
                     event.launchEvent();
+                    for(NetworkElement e : elementsSet){
+                        e.checkStatus();
+                    }
                 }
             } else if (PeriodicEvent.class.isAssignableFrom(type)) {
                 c = type.getConstructor(new Class[] {Steppable.class});
@@ -506,6 +509,9 @@ public abstract class Scenario {
                     this.setupNetworkElementEvent(event, elementSet,
                             combinationNumber);
                     event.launchEvent();
+                    for(NetworkElement e : elementSet){
+                        e.checkStatus();
+                    }
                 }
             } else {
                 // TODO ¿generate an exception?

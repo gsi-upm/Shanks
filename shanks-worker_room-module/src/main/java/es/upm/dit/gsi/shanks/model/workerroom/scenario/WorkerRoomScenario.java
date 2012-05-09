@@ -29,7 +29,10 @@ import es.upm.dit.gsi.shanks.model.workerroom.element.device.Computer;
 import es.upm.dit.gsi.shanks.model.workerroom.element.device.Printer;
 import es.upm.dit.gsi.shanks.model.workerroom.element.device.Router;
 import es.upm.dit.gsi.shanks.model.workerroom.element.link.EthernetLink;
+import es.upm.dit.gsi.shanks.model.workerroom.failure.ComputerPruebaFailure;
+import es.upm.dit.gsi.shanks.model.workerroom.failure.RouterCongestion;
 import es.upm.dit.gsi.shanks.model.workerroom.failure.WireBroken;
+import es.upm.dit.gsi.shanks.model.workerroom.failure.WireDamaged;
 import es.upm.dit.gsi.shanks.model.workerroom.scenario.portrayal.WorkerRoomScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.workerroom.scenario.portrayal.WorkerRoomScenario3DPortrayal;
 
@@ -96,9 +99,7 @@ public class WorkerRoomScenario extends Scenario{
 
 	@Override
 	public void addPossibleEvents() {
-//		this.addPossibleEventsOfNE(ConsumeInk.class, this.getNetworkElement("Printer"));
-//		this.addPossibleEventsOfNE(ConsumePaper.class, this.getNetworkElement("Printer"));
-//		this.addPossibleEventsOfNE(Prueba.class, this.getNetworkElement("PC1"));
+		this.addPossibleEventsOfNE(RouterCongestion.class, this.getNetworkElement("Router"));
 	}
 
 	@Override
@@ -123,6 +124,27 @@ public class WorkerRoomScenario extends Scenario{
 		possibleCombinations.add(set5);
 		possibleCombinations.add(set6);
 		this.addPossibleFailure(WireBroken.class, possibleCombinations);
+		this.addPossibleFailure(WireDamaged.class, possibleCombinations);
+		
+//		this.addPossibleFailure(RouterCongestion.class, this.getNetworkElement("Router"));
+		
+		Set<NetworkElement> set10 = new HashSet<NetworkElement>();
+		set10.add(this.getNetworkElement("PC1"));
+		Set<NetworkElement> set11 = new HashSet<NetworkElement>();
+		set11.add(this.getNetworkElement("PC2"));
+		Set<NetworkElement> set12 = new HashSet<NetworkElement>();
+		set12.add(this.getNetworkElement("PC3"));
+		Set<NetworkElement> set13 = new HashSet<NetworkElement>();
+		set13.add(this.getNetworkElement("PC4"));
+		Set<NetworkElement> set14 = new HashSet<NetworkElement>();
+		set14.add(this.getNetworkElement("PC5"));		
+		List<Set<NetworkElement>> possibleCombinations1 = new ArrayList<Set<NetworkElement>>();
+		possibleCombinations1.add(set10);
+		possibleCombinations1.add(set11);
+		possibleCombinations1.add(set12);
+		possibleCombinations1.add(set13);
+		possibleCombinations1.add(set14);
+		this.addPossibleFailure(ComputerPruebaFailure.class, possibleCombinations1);
 	}
 
 	@Override

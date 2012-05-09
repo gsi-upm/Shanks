@@ -34,6 +34,29 @@ public class Router extends Device{
 	@Override
 	public void checkProperties()
 			throws UnsupportedNetworkElementStatusException {
+		HashMap<String, Boolean> status = this.getStatus();
+		if(status.get(Router.STATUS_OK)){
+			this.updatePropertyTo(Router.PROPERTY_CONGESTION, 0);
+			this.updatePropertyTo(Router.PROPERTY_EXTERNAL_CONNECTION, "OK");
+			this.updatePropertyTo(Router.PROPERTY_POWER, true);
+		}
+		if(status.get(Router.STATUS_CONGESTED)){
+			this.updatePropertyTo(Router.PROPERTY_CONGESTION, 30+Math.random()*70);
+		}
+		if(status.get(Router.STATUS_DISCONNECTED)){
+			this.updatePropertyTo(Router.PROPERTY_EXTERNAL_CONNECTION, "DISCONNECTED");
+		}
+		if(status.get(Router.STATUS_NOISP_SERVICE)){
+			this.updatePropertyTo(Router.PROPERTY_EXTERNAL_CONNECTION, "NO_IP");
+		}
+		if(status.get(Router.STATUS_OFF)){
+			this.updatePropertyTo(Router.PROPERTY_POWER, false);
+		}
+		
+	}
+
+	@Override
+	public void checkStatus() throws UnsupportedNetworkElementStatusException {
 		Boolean power = (Boolean) this.getProperty(Router.PROPERTY_POWER);
 		String connection = (String) this.getProperty(Router.PROPERTY_EXTERNAL_CONNECTION);
 		Double congestion = (Double) this.getProperty(Router.PROPERTY_CONGESTION);
@@ -60,29 +83,6 @@ public class Router extends Device{
 		if(congestion > 30){
 			this.updateStatusTo(Router.STATUS_OK, false);
 			this.updateStatusTo(Router.STATUS_CONGESTED, true);
-		}
-		
-	}
-
-	@Override
-	public void checkStatus() throws UnsupportedNetworkElementStatusException {
-		HashMap<String, Boolean> status = this.getStatus();
-		if(status.get(Router.STATUS_OK)){
-			this.updatePropertyTo(Router.PROPERTY_CONGESTION, 0);
-			this.updatePropertyTo(Router.PROPERTY_EXTERNAL_CONNECTION, "OK");
-			this.updatePropertyTo(Router.PROPERTY_POWER, true);
-		}
-		if(status.get(Router.STATUS_CONGESTED)){
-			this.updatePropertyTo(Router.PROPERTY_CONGESTION, 30+Math.random()*70);
-		}
-		if(status.get(Router.STATUS_DISCONNECTED)){
-			this.updatePropertyTo(Router.PROPERTY_EXTERNAL_CONNECTION, "DISCONNECTED");
-		}
-		if(status.get(Router.STATUS_NOISP_SERVICE)){
-			this.updatePropertyTo(Router.PROPERTY_EXTERNAL_CONNECTION, "NO_IP");
-		}
-		if(status.get(Router.STATUS_OFF)){
-			this.updatePropertyTo(Router.PROPERTY_POWER, false);
 		}
 	}
 

@@ -11,6 +11,7 @@ import sim.portrayal.Portrayal;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device2DPortrayal;
 import es.upm.dit.gsi.shanks.model.workerroom.element.device.Computer;
+import es.upm.dit.gsi.shanks.model.workerroom.element.device.Router;
 
 public class Router2DPortrayal extends Device2DPortrayal implements Portrayal{
 	
@@ -35,10 +36,12 @@ public class Router2DPortrayal extends Device2DPortrayal implements Portrayal{
             		okStatus.add(s);
             }
         }
-        if (nokStatus.size() == 0) {
+        if (status.get(Router.STATUS_OK)) {
             graphics.setColor(Color.green);
-        } else{
-            graphics.setColor(Color.red);
+        }else if(status.get(Router.STATUS_CONGESTED)){
+        	graphics.setColor(Color.blue);
+        }else{
+            graphics.setColor(Color.black);
         }
 
         // Draw the devices

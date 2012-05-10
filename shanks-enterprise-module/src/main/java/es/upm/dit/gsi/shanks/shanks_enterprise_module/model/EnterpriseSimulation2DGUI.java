@@ -20,12 +20,8 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusE
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedChartIDException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyHyperComplexScenario2DPortrayal;
-import es.upm.dit.gsi.shanks.model.scenario.test.MyComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
 import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation;
-import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation2DGUI;
-import es.upm.dit.gsi.shanks.model.test.steppable.FailuresChartPainter;
 import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.scenario.EnterpriseScenario;
 import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.scenario.portrayal.EnterpriseScenario2DPortrayal;
 

@@ -9,7 +9,6 @@ import java.util.List;
 import sim.portrayal.DrawInfo2D;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device2DPortrayal;
-import es.upm.dit.gsi.shanks.model.workerroom.element.device.Computer;
 import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.element.IntranetRouter;
 
 public class IntranetRouter2DPortrayal extends Device2DPortrayal{

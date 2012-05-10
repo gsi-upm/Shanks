@@ -8,7 +8,7 @@ import java.util.Properties;
 
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.ShanksSimulation2DGUI;
-import es.upm.dit.gsi.shanks.hackerhan.model.han.scenario.HackerHANScenario;
+import es.upm.dit.gsi.shanks.hackerhan.model.scenario.HackerHANScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;

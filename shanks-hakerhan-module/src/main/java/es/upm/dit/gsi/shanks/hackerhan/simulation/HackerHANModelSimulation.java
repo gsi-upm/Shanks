@@ -14,7 +14,7 @@ import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
 import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
 import es.upm.dit.gsi.shanks.hackerhan.agent.Hacker;
-import es.upm.dit.gsi.shanks.hackerhan.model.han.scenario.HackerHANScenario;
+import es.upm.dit.gsi.shanks.hackerhan.model.scenario.HackerHANScenario;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;

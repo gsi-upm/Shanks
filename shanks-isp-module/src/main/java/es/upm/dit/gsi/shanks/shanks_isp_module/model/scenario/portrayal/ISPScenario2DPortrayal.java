@@ -10,6 +10,14 @@ import sim.util.Double2D;
 
 import com.sun.media.rtsp.Server;
 
+import es.upm.dit.gsi.shanks.datacenter.model.element.device.Router;
+import es.upm.dit.gsi.shanks.datacenter.model.element.device.portrayal.Computer2DPortrayal;
+import es.upm.dit.gsi.shanks.datacenter.model.element.device.portrayal.Router2DPortrayal;
+import es.upm.dit.gsi.shanks.datacenter.model.element.device.portrayal.Server2DPortrayal;
+import es.upm.dit.gsi.shanks.hackerhan.model.element.device.WifiRouterADSL;
+import es.upm.dit.gsi.shanks.hackerhan.model.element.device.WirelessDevice;
+import es.upm.dit.gsi.shanks.hackerhan.model.element.device.portrayal.Smartphone2DPortrayal;
+import es.upm.dit.gsi.shanks.hackerhan.model.element.device.portrayal.WifiRouterADSL2DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.failure.portrayal.Failure2DPortrayal;
@@ -22,8 +30,13 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ShanksMath;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
+import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.element.IntranetRouter;
+import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.element.portrayal.IntranetRouter2DPortrayal;
 import es.upm.dit.gsi.shanks.shanks_isp_module.model.element.device.ISPGateway;
 import es.upm.dit.gsi.shanks.shanks_isp_module.model.element.portrayal.ISPGateway2DPortrayal;
+import es.upm.dit.gsi.shanks.workerroom.model.element.device.Printer;
+import es.upm.dit.gsi.shanks.workerroom.model.element.portrayal.EthernetLink2DPortrayal;
+import es.upm.dit.gsi.shanks.workerroom.model.element.portrayal.Printer2DPortrayal;
 
 public class ISPScenario2DPortrayal extends ComplexScenario2DPortrayal{
 
@@ -68,14 +81,14 @@ public class ISPScenario2DPortrayal extends ComplexScenario2DPortrayal{
 		
 		SparseGridPortrayal2D failuresPortrayal = (SparseGridPortrayal2D) this.getPortrayals().get(FAILURE_DISPLAY_ID).get(FAILURE_PORTRAYAL_ID);
         devicePortrayal.setPortrayalForClass(IntranetRouter.class, new IntranetRouter2DPortrayal());
-        devicePortrayal.setPortrayalForClass(Computer.class, new es.upm.dit.gsi.shanks.model.workerroom.element.portrayal.Computer2DPortrayal());
+        devicePortrayal.setPortrayalForClass(Computer.class, new es.upm.dit.gsi.shanks.workerroom.model.element.portrayal.Computer2DPortrayal());
         devicePortrayal.setPortrayalForClass(Printer.class, new Printer2DPortrayal());
         devicePortrayal.setPortrayalForClass(Router.class, new Router2DPortrayal());
         devicePortrayal.setPortrayalForClass(Server.class, new Server2DPortrayal());
         devicePortrayal.setPortrayalForClass(es.upm.dit.gsi.shanks.datacenter.model.element.device.Computer.class, new Computer2DPortrayal());
         devicePortrayal.setPortrayalForClass(es.upm.dit.gsi.shanks.datacenter.model.element.device.Router.class, new es.upm.dit.gsi.shanks.datacenter.model.element.device.portrayal.Router2DPortrayal());
         devicePortrayal.setPortrayalForClass(ISPGateway.class, new ISPGateway2DPortrayal());
-        devicePortrayal.setPortrayalForClass(es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.Computer.class, new es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.portrayal.Computer2DPortrayal());
+        devicePortrayal.setPortrayalForClass(es.upm.dit.gsi.shanks.hackerhan.model.element.device.Computer.class, new es.upm.dit.gsi.shanks.hackerhan.model.element.device.portrayal.Computer2DPortrayal());
         devicePortrayal.setPortrayalForClass(WifiRouterADSL.class, new WifiRouterADSL2DPortrayal());
         devicePortrayal.setPortrayalForClass(WirelessDevice.class, new Smartphone2DPortrayal());
           

@@ -4,8 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Properties;
 
-import org.jfree.data.Values;
-
+import es.upm.dit.gsi.shanks.hackerhan.model.scenario.HackerHANScenario;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
@@ -20,8 +19,12 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusE
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
+import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.scenario.EnterpriseScenario;
+import es.upm.dit.gsi.shanks.shanks_isp_module.model.Values;
 import es.upm.dit.gsi.shanks.shanks_isp_module.model.element.device.ISPGateway;
 import es.upm.dit.gsi.shanks.shanks_isp_module.model.scenario.portrayal.ISPScenario2DPortrayal;
+import es.upm.dit.gsi.shanks.workerroom.model.element.link.EthernetLink;
+import es.upm.dit.gsi.shanks.workerroom.model.scenario.WorkerRoomScenario;
 
 public class ISPScenario extends ComplexScenario{
 
@@ -51,9 +54,9 @@ public class ISPScenario extends ComplexScenario{
 		Properties p = this.getProperties();
 	    p.put(WorkerRoomScenario.CLOUDY_PROB, "10.0");
 	    this.addScenario(EnterpriseScenario.class, "Enterprise", EnterpriseScenario.STATUS_NORMAL, p, "Intranet Router", "LINK1");
-	    this.addScenario(HackerHANScenario.class, "Hacker HAN 1", HackerHANScenario.STATUS_NORMAL, p, Values.WIFI_ROUTER_ID+"@", "LINK2");
-	    this.addScenario(HackerHANScenario.class, "Hacker HAN 2", HackerHANScenario.STATUS_NORMAL, p, Values.WIFI_ROUTER_ID+"@", "LINK3");
-	    this.addScenario(HackerHANScenario.class, "Hacker HAN 3", HackerHANScenario.STATUS_NORMAL, p, Values.WIFI_ROUTER_ID+"@", "LINK4");
+	    this.addScenario(HackerHANScenario.class, "Hacker HAN 1", HackerHANScenario.STATUS_NORMAL, p, Values.WIFI_ROUTER_ID, "LINK2");
+	    this.addScenario(HackerHANScenario.class, "Hacker HAN 2", HackerHANScenario.STATUS_NORMAL, p, Values.WIFI_ROUTER_ID, "LINK3");
+	    this.addScenario(HackerHANScenario.class, "Hacker HAN 3", HackerHANScenario.STATUS_NORMAL, p, Values.WIFI_ROUTER_ID, "LINK4");
 
 	}
 

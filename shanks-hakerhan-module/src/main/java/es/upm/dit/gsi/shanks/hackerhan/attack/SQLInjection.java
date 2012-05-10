@@ -3,7 +3,6 @@ package es.upm.dit.gsi.shanks.hackerhan.attack;
 import java.util.ArrayList;
 
 import es.upm.dit.gsi.shanks.ShanksSimulation;
-import es.upm.dit.gsi.shanks.datacenter.model.element.device.Gateway;
 import es.upm.dit.gsi.shanks.hackerhan.agent.Hacker;
 
 /**
@@ -37,12 +36,12 @@ public class SQLInjection implements Attack {
 	@Override
 	public void execute() {
 		this.running = true;
-		Gateway gateway = (Gateway)sim.getScenario().getNetworkElement("Gateway");
-		for (int port : ports){
-			if(gateway.isPortOpen(this.hacker.getID(), port)){
-				// TODO: Try to make the injection.
-			}
-		}
+//		Gateway gateway = (Gateway)sim.getScenario().getNetworkElement("Gateway");
+//		for (int port : ports){
+//			if(gateway.isPortOpen(this.hacker.getID(), port)){
+//				// TODO: Try to make the injection.
+//			}
+//		}
 	}
 
 	@Override

@@ -6,7 +6,6 @@ import java.util.List;
 
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.SimpleShanksAgent;
-import es.upm.dit.gsi.shanks.datacenter.model.element.device.Gateway;
 import es.upm.dit.gsi.shanks.hackerhan.model.Values;
 
 /**
@@ -48,7 +47,7 @@ public class Bot extends SimpleShanksAgent{
 	public void executeReasoningCycle(ShanksSimulation simulation) {
 		if(attacking){
 			// Jaffa, Tal shak! 
-			Gateway gateway = (Gateway)simulation.getScenario().getNetworkElement(target);
+//			Gateway gateway = (Gateway)simulation.getScenario().getNetworkElement(target);
 			// TODO: increase load count.
 		}
 	}

@@ -1,9 +1,7 @@
 package es.upm.dit.gsi.shanks.hackerhan.attack;
 
 import es.upm.dit.gsi.shanks.ShanksSimulation;
-import es.upm.dit.gsi.shanks.agent.capability.creation.CreationShanksAgentCapability;
 import es.upm.dit.gsi.shanks.hackerhan.agent.Hacker;
-import es.upm.dit.gsi.shanks.datacenter.model.element.device.Gateway;
 
 /**
  * Class to represent a "RootShell" attack,

@@ -11,7 +11,6 @@ import es.upm.dit.gsi.shanks.datacenter.model.element.device.portrayal.Server2DP
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.failure.portrayal.Failure2DPortrayal;
-import es.upm.dit.gsi.shanks.model.failure.test.MyFailure;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
@@ -20,15 +19,15 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ShanksMath;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
-import es.upm.dit.gsi.shanks.model.workerroom.element.device.Computer;
-import es.upm.dit.gsi.shanks.model.workerroom.element.device.Printer;
-import es.upm.dit.gsi.shanks.model.workerroom.element.device.Router;
-import es.upm.dit.gsi.shanks.model.workerroom.element.portrayal.EthernetLink2DPortrayal;
-import es.upm.dit.gsi.shanks.model.workerroom.element.portrayal.Printer2DPortrayal;
-import es.upm.dit.gsi.shanks.model.workerroom.element.portrayal.Router2DPortrayal;
-import es.upm.dit.gsi.shanks.model.workerroom.failure.WireBroken;
 import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.element.IntranetRouter;
 import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.element.portrayal.IntranetRouter2DPortrayal;
+import es.upm.dit.gsi.shanks.workerroom.model.element.device.Computer;
+import es.upm.dit.gsi.shanks.workerroom.model.element.device.Printer;
+import es.upm.dit.gsi.shanks.workerroom.model.element.device.Router;
+import es.upm.dit.gsi.shanks.workerroom.model.element.portrayal.EthernetLink2DPortrayal;
+import es.upm.dit.gsi.shanks.workerroom.model.element.portrayal.Printer2DPortrayal;
+import es.upm.dit.gsi.shanks.workerroom.model.element.portrayal.Router2DPortrayal;
+import es.upm.dit.gsi.shanks.workerroom.model.failure.WireBroken;
 
 public class EnterpriseScenario2DPortrayal extends ComplexScenario2DPortrayal{
 
@@ -81,7 +80,7 @@ public class EnterpriseScenario2DPortrayal extends ComplexScenario2DPortrayal{
 		NetworkPortrayal2D networkPortrayal = (NetworkPortrayal2D) this.getPortrayals().get(Scenario2DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.LINKS_PORTRAYAL);
         SparseGridPortrayal2D failuresPortrayal = (SparseGridPortrayal2D) this.getPortrayals().get(FAILURE_DISPLAY_ID).get(FAILURE_PORTRAYAL_ID);
         devicePortrayal.setPortrayalForClass(IntranetRouter.class, new IntranetRouter2DPortrayal());
-        devicePortrayal.setPortrayalForClass(Computer.class, new es.upm.dit.gsi.shanks.model.workerroom.element.portrayal.Computer2DPortrayal());
+        devicePortrayal.setPortrayalForClass(Computer.class, new es.upm.dit.gsi.shanks.workerroom.model.element.portrayal.Computer2DPortrayal());
         devicePortrayal.setPortrayalForClass(Printer.class, new Printer2DPortrayal());
         devicePortrayal.setPortrayalForClass(Router.class, new Router2DPortrayal());
         devicePortrayal.setPortrayalForClass(Server.class, new Server2DPortrayal());

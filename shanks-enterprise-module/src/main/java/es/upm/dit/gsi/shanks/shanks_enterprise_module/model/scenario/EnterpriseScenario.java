@@ -16,7 +16,6 @@ import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
-import es.upm.dit.gsi.shanks.model.failure.test.MyFailure;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.AlreadyConnectedScenarioException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
@@ -26,13 +25,11 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusE
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
-import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
-import es.upm.dit.gsi.shanks.model.workerroom.element.link.EthernetLink;
-import es.upm.dit.gsi.shanks.model.workerroom.failure.ComputerPruebaFailure;
-import es.upm.dit.gsi.shanks.model.workerroom.failure.WireBroken;
-import es.upm.dit.gsi.shanks.model.workerroom.scenario.WorkerRoomScenario;
 import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.element.IntranetRouter;
 import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.scenario.portrayal.EnterpriseScenario2DPortrayal;
+import es.upm.dit.gsi.shanks.workerroom.model.element.link.EthernetLink;
+import es.upm.dit.gsi.shanks.workerroom.model.failure.WireBroken;
+import es.upm.dit.gsi.shanks.workerroom.model.scenario.WorkerRoomScenario;
 
 public class EnterpriseScenario extends ComplexScenario{
 	

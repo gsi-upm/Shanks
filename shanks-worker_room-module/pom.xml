@@ -8,7 +8,7 @@
   <packaging>jar</packaging>
 
   <name>shanks-worker_room-module</name>
-	<url>http://www.gsi.dit.upm.es</url>
+  <url>http://www.gsi.dit.upm.es</url>
 	<organization>
 		<name>Escuela Técnica Superior de Ingenieria de Telecomunicaciones - Universidad Politécnica de Madrid</name>
 		<url>http://www.etsit.upm.es</url>

@@ -3,9 +3,9 @@ package es.upm.dit.gsi.shanks.datacenter.agent;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.SimpleShanksAgent;
 
-public class ITCrow extends SimpleShanksAgent {
+public class ITCrowd extends SimpleShanksAgent {
 
-	public ITCrow(String id) {
+	public ITCrowd(String id) {
 		super(id);
 	}
 

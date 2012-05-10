@@ -9,7 +9,8 @@ import es.upm.dit.gsi.shanks.model.workerroom.element.link.EthernetLink;
 public class WireBroken extends Failure{
 
 	public WireBroken() {
-		super(WireBroken.class.getName(), 0.01);
+		super(WireBroken.class.getName(), 1);
+		System.out.println("FALLO WIRE BROKEN CONSTRUIDO");
 	}
 
 	@Override

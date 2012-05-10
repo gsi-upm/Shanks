@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
 
 import es.upm.dit.gsi.shanks.ShanksSimulation;
+import es.upm.dit.gsi.shanks.agent.RepairWireAgent;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
 import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
@@ -35,6 +36,12 @@ public class EnterpriseSimulation extends ShanksSimulation{
 			DuplicatedActionIDException {
 		super(seed, scenarioClass, scenarioID, initialState, properties);
 		this.configuration = configPropertiesEnterpriseSimulation;
+	}
+	
+	public void registerShanksAgents() throws DuplicatedAgentIDException,
+    		DuplicatedActionIDException {
+		RepairWireAgent worker = new RepairWireAgent("Repair Wire Worker");
+		this.registerShanksAgent(worker);
 	}
 
 }

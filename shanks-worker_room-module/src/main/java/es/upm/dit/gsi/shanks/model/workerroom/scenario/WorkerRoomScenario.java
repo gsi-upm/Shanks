@@ -144,7 +144,7 @@ public class WorkerRoomScenario extends Scenario{
 		possibleCombinations1.add(set12);
 		possibleCombinations1.add(set13);
 		possibleCombinations1.add(set14);
-		this.addPossibleFailure(ComputerPruebaFailure.class, possibleCombinations1);
+		this.addPossibleFailure(ComputerPruebaFailure.class, possibleCombinations1);	
 	}
 
 	@Override

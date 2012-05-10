@@ -18,7 +18,10 @@ import es.upm.dit.gsi.shanks.model.workerroom.element.portrayal.Computer2DPortra
 import es.upm.dit.gsi.shanks.model.workerroom.element.portrayal.EthernetLink2DPortrayal;
 import es.upm.dit.gsi.shanks.model.workerroom.element.portrayal.Printer2DPortrayal;
 import es.upm.dit.gsi.shanks.model.workerroom.element.portrayal.Router2DPortrayal;
+import es.upm.dit.gsi.shanks.model.workerroom.failure.ComputerPruebaFailure;
+import es.upm.dit.gsi.shanks.model.workerroom.failure.RouterCongestion;
 import es.upm.dit.gsi.shanks.model.workerroom.failure.WireBroken;
+import es.upm.dit.gsi.shanks.model.workerroom.failure.portrayal.FailuresPortrayal;
 
 public class WorkerRoomScenario2DPortrayal extends Scenario2DPortrayal{
 
@@ -66,16 +69,13 @@ public class WorkerRoomScenario2DPortrayal extends Scenario2DPortrayal{
 	@Override
 	public void setupPortrayals() {
 		ContinuousPortrayal2D devicePortrayal = (ContinuousPortrayal2D) this.getPortrayals().get(Scenario2DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.DEVICES_PORTRAYAL);
-		ContinuousPortrayal2D printerPortrayal = (ContinuousPortrayal2D) this.getPortrayals().get(Scenario2DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.DEVICES_PORTRAYAL);
-		ContinuousPortrayal2D routerPortrayal = (ContinuousPortrayal2D) this.getPortrayals().get(Scenario2DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.DEVICES_PORTRAYAL);
 		NetworkPortrayal2D networkPortrayal = (NetworkPortrayal2D) this.getPortrayals().get(Scenario2DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.LINKS_PORTRAYAL);
         SparseGridPortrayal2D failuresPortrayal = (SparseGridPortrayal2D) this.getPortrayals().get(FAILURE_DISPLAY_ID).get(FAILURE_PORTRAYAL_ID);
         devicePortrayal.setPortrayalForClass(Computer.class, new Computer2DPortrayal());
-        printerPortrayal.setPortrayalForClass(Printer.class, new Printer2DPortrayal());
-        routerPortrayal.setPortrayalForClass(Router.class, new Router2DPortrayal());
+        devicePortrayal.setPortrayalForClass(Printer.class, new Printer2DPortrayal());
+        devicePortrayal.setPortrayalForClass(Router.class, new Router2DPortrayal());
         networkPortrayal.setPortrayalForAll(new EthernetLink2DPortrayal());
-        failuresPortrayal.setPortrayalForClass(WireBroken.class, new Failure2DPortrayal());
-		
+        failuresPortrayal.setPortrayalForAll(new FailuresPortrayal());
 	}
 
 }

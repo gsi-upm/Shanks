@@ -7,6 +7,8 @@ import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.action.RepairWire;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
+import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 import es.upm.dit.gsi.shanks.model.workerroom.element.link.EthernetLink;
 
@@ -24,7 +26,15 @@ public class RepairWireAgent extends SimpleShanksAgent{
 		RepairWire repair = new RepairWire("Repair Wire", this);
 		List <NetworkElement> ne = new ArrayList<NetworkElement>();
 		List<NetworkElement> linksDamaged = new ArrayList<NetworkElement>();
-        for(String s : simulation.getScenario().getCurrentElements().keySet()){
+//		ComplexScenario comp = (ComplexScenario) simulation.getScenario();
+//		try {
+//			System.out.println("CURRENT FAILURES " + comp.getScenario("Worker Room 1").getCurrentFailures().size());
+//		} catch (ScenarioNotFoundException e2) {
+//			// TODO Auto-generated catch block
+//			e2.printStackTrace();
+//		}
+
+		for(String s : simulation.getScenario().getCurrentElements().keySet()){
             ne.add(simulation.getScenario().getCurrentElements().get(s));
         }
         for(NetworkElement e : ne){

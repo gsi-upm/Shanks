@@ -16,6 +16,7 @@ import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
+import es.upm.dit.gsi.shanks.model.failure.test.MyFailure;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.AlreadyConnectedScenarioException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
@@ -68,7 +69,6 @@ public class EnterpriseScenario extends ComplexScenario{
 		this.addScenario(WorkerRoomScenario.class, "Worker Room 2", WorkerRoomScenario.STATUS_NORMAL, p, "Router", "EL2");
 		this.addScenario(WorkerRoomScenario.class, "Worker Room 3", WorkerRoomScenario.STATUS_NORMAL, p, "Router", "EL3");
 		this.addScenario(DataCenterScenario.class, "Data Center", DataCenterScenario.STATUS_NORMAL, p, Values.DATA_CENTER_ROUTER_ID, "EL4");
-
 		
 	}
 
@@ -132,6 +132,8 @@ public class EnterpriseScenario extends ComplexScenario{
 		possibleCombinations.add(set4);
 		this.addPossibleFailure(WireBroken.class, possibleCombinations);
 		
+		
+		
 	}
 
 	@Override
@@ -142,7 +144,11 @@ public class EnterpriseScenario extends ComplexScenario{
 	@Override
 	public HashMap<Class<? extends Failure>, Double> getPenaltiesInStatus(
 			String status) throws UnsupportedScenarioStatusException {
-		return null;
+        HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
+
+		penalties.put(WireBroken.class, 1.0);
+
+        return penalties;
 	}
 
 }

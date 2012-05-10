@@ -4,12 +4,5 @@
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/shanks-core"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/shanks-dc-module"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/shanks-worker_room-module"/>
-	<classpathentry kind="lib" path="/home/dlara/ShanksFinalProject/shanks-core/lib/unbbayes-4.0.0.jar"/>
-	<classpathentry kind="lib" path="/home/dlara/ShanksFinalProject/shanks-core/lib/mason.16.jar"/>
-	<classpathentry kind="lib" path="/home/dlara/ShanksFinalProject/shanks-core/lib/jpf-1.5.jar"/>
-	<classpathentry kind="lib" path="/home/dlara/ShanksFinalProject/shanks-core/lib/jason.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

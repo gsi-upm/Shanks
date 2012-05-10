@@ -1,21 +1,15 @@
 package es.upm.dit.gsi.shanks.shanks_isp_module.model.scenario.portrayal;
 
+import org.junit.runner.Computer;
+
 import sim.field.grid.SparseGrid2D;
 import sim.portrayal.continuous.ContinuousPortrayal2D;
 import sim.portrayal.grid.SparseGridPortrayal2D;
 import sim.portrayal.network.NetworkPortrayal2D;
 import sim.util.Double2D;
-import es.upm.dit.gsi.shanks.datacenter.model.element.device.Server;
-import es.upm.dit.gsi.shanks.datacenter.model.element.device.portrayal.Computer2DPortrayal;
-import es.upm.dit.gsi.shanks.datacenter.model.element.device.portrayal.Server2DPortrayal;
-import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.WifiRouterADSL;
-import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.WirelessDevice;
-import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.portrayal.Smartphone2DPortrayal;
-import es.upm.dit.gsi.shanks.hackerhan.model.han.element.device.portrayal.WifiRouterADSL2DPortrayal;
-import es.upm.dit.gsi.shanks.hackerhan.model.han.element.link.EthernetCable;
-import es.upm.dit.gsi.shanks.hackerhan.model.han.element.link.WifiConnection;
-import es.upm.dit.gsi.shanks.hackerhan.model.han.element.link.protrayal.EthernetCable2DPortrayal;
-import es.upm.dit.gsi.shanks.hackerhan.model.han.element.link.protrayal.WifiConnection2DPortrayal;
+
+import com.sun.media.rtsp.Server;
+
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.failure.portrayal.Failure2DPortrayal;
@@ -28,15 +22,6 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ShanksMath;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
-import es.upm.dit.gsi.shanks.model.workerroom.element.device.Computer;
-import es.upm.dit.gsi.shanks.model.workerroom.element.device.Printer;
-import es.upm.dit.gsi.shanks.model.workerroom.element.device.Router;
-import es.upm.dit.gsi.shanks.model.workerroom.element.link.EthernetLink;
-import es.upm.dit.gsi.shanks.model.workerroom.element.portrayal.EthernetLink2DPortrayal;
-import es.upm.dit.gsi.shanks.model.workerroom.element.portrayal.Printer2DPortrayal;
-import es.upm.dit.gsi.shanks.model.workerroom.element.portrayal.Router2DPortrayal;
-import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.element.IntranetRouter;
-import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.element.portrayal.IntranetRouter2DPortrayal;
 import es.upm.dit.gsi.shanks.shanks_isp_module.model.element.device.ISPGateway;
 import es.upm.dit.gsi.shanks.shanks_isp_module.model.element.portrayal.ISPGateway2DPortrayal;
 

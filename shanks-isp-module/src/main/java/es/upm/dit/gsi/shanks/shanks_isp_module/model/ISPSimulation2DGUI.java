@@ -22,10 +22,6 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedChartI
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
 import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation;
-import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.EnterpriseSimulation;
-import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.EnterpriseSimulation2DGUI;
-import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.scenario.EnterpriseScenario;
-import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.scenario.portrayal.EnterpriseScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.shanks_isp_module.model.scenario.ISPScenario;
 import es.upm.dit.gsi.shanks.shanks_isp_module.model.scenario.portrayal.ISPScenario2DPortrayal;
 

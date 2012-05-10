@@ -4,15 +4,14 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Properties;
 
-import es.upm.dit.gsi.shanks.hackerhan.model.Values;
-import es.upm.dit.gsi.shanks.hackerhan.model.han.scenario.HackerHANScenario;
+import org.jfree.data.Values;
+
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
-import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.AlreadyConnectedScenarioException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.NonGatewayDeviceException;
@@ -21,11 +20,7 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusE
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
-import es.upm.dit.gsi.shanks.model.workerroom.element.link.EthernetLink;
-import es.upm.dit.gsi.shanks.model.workerroom.scenario.WorkerRoomScenario;
-import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.scenario.EnterpriseScenario;
 import es.upm.dit.gsi.shanks.shanks_isp_module.model.element.device.ISPGateway;
-import es.upm.dit.gsi.shanks.shanks_isp_module.model.element.link.CupperLink;
 import es.upm.dit.gsi.shanks.shanks_isp_module.model.scenario.portrayal.ISPScenario2DPortrayal;
 
 public class ISPScenario extends ComplexScenario{

@@ -8,13 +8,37 @@
   <packaging>jar</packaging>
 
   <name>shanks-isp-module</name>
-  <url>http://maven.apache.org</url>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-
-<distributionManagement>
+  <url>http://www.gsi.dit.upm.es</url>
+	<organization>
+		<name>Escuela Técnica Superior de Ingenieria de Telecomunicaciones - Universidad Politécnica de Madrid</name>
+		<url>http://www.etsit.upm.es</url>
+	</organization>
+	<developers>
+		<developer>
+			<id>darofar</id>
+			<name>Danny Rolando Fonseca Arboleda</name>
+			<email>darofar@gmail.com</email>
+		</developer>
+		<developer>
+			<id>a.carrera</id>
+			<name>Álvaro Carrera Barroso</name>
+			<email>carrerabarroso@gmail.com</email>
+		</developer>
+		
+	</developers>
+	<licenses>
+		<license>
+			<name>GNU General Public License, version 2</name>
+			<url>http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt</url>
+		</license>
+	</licenses>
+	
+	<scm>
+  		<url>http://shanks-with-mason.googlecode.com/svn/trunk/shanks-isp-module</url>
+  		<connection>scm:svn:http://shanks-with-mason.googlecode.com/svn/trunk/shanks-isp-module</connection>
+		<developerConnection>scm:svn:https://shanks-with-mason.googlecode.com/svn/trunk/shanks-isp-module</developerConnection>
+	</scm>
+	<distributionManagement>
 		<repository>
 			<uniqueVersion>false</uniqueVersion>
 			<id>sonatype-nexus-staging</id>
@@ -29,20 +53,14 @@
 			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
 			<layout>default</layout>
 		</snapshotRepository>
-		<site>
-			<id>shanks-site-gsi-web</id>
-			<url>scp://minsky.gsi.dit.upm.es/home/a.carrera/public_html/shanks/shanks-core/site</url>
-		</site>
 	</distributionManagement>
-
 	<pluginRepositories>
 		<pluginRepository>
 			<id>Codehaus repository</id>
 			<url>http://repository.codehaus.org/</url>
 		</pluginRepository>
 	</pluginRepositories>
-
-	<profiles>
+		<profiles>
 		<profile>
 			<id>release-sign-artifacts</id>
 			<activation>
@@ -73,21 +91,6 @@
 	</profiles>
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-site-plugin</artifactId>
-				<version>3.0</version>
-				<configuration>
-					<locales>en</locales>
-				</configuration>
-				<dependencies>
-					<dependency><!-- add support for ssh/scp -->
-						<groupId>org.apache.maven.wagon</groupId>
-						<artifactId>wagon-ssh</artifactId>
-						<version>1.0</version>
-					</dependency>
-				</dependencies>
-			</plugin>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>2.2.2</version>
@@ -217,13 +220,20 @@
 				<version>2.4.1</version>
 			</plugin>
 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<locales>en</locales>
+				</configuration>
+			</plugin>
+
 		</plugins>
 
 	</build>
 	<reporting>
-
 		<plugins>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -347,9 +357,68 @@
 		</plugins>
 
 	</reporting>
-
-
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 	<dependencies>
+		<dependency>
+		 	<groupId>es.upm.dit.gsi.shanks</groupId>
+	  		<artifactId>shanks-core</artifactId>
+	      	<version>0.3.1-SNAPSHOT</version>
+	     	<type>jar</type>
+	 	 </dependency>
+		<dependency>
+		 	<groupId>es.upm.dit.gsi.shanks</groupId>
+	  		<artifactId>shanks-dc-module</artifactId>
+	      	<version>0.0.1-SNAPSHOT</version>
+	     	<type>jar</type>
+	 	 </dependency>
+		<dependency>
+		 	<groupId>es.upm.dit.gsi.shanks</groupId>
+	  		<artifactId>shanks-worker_room-module</artifactId>
+	      	<version>0.0.1-SNAPSHOT</version>
+	     	<type>jar</type>
+	 	 </dependency>
+	 	 <dependency>
+		 	<groupId>es.upm.dit.gsi.shanks</groupId>
+	  		<artifactId>shanks-hakerhan-module</artifactId>
+	      	<version>0.0.1-SNAPSHOT</version>
+	     	<type>jar</type>
+	 	 </dependency>
+	 	 <dependency>
+		 	<groupId>es.upm.dit.gsi.shanks</groupId>
+	  		<artifactId>shanks-enterprise-module</artifactId>
+	      	<version>0.0.1-SNAPSHOT</version>
+	     	<type>jar</type>
+	 	 </dependency>
+		<dependency>
+			<groupId>net.sourceforge.jason</groupId>
+			<artifactId>jason</artifactId>
+			<version>1.3.6</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/jason.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>edu.gmu.cs</groupId>
+			<artifactId>mason</artifactId>
+			<version>16.0</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/mason.16.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>jpf</groupId>
+			<artifactId>jpf</artifactId>
+			<version>1.5</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/jpf-1.5.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>br.unb.cic</groupId>
+			<artifactId>unbbayes</artifactId>
+			<version>4.0.0</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/unbbayes-4.0.0.jar</systemPath>
+		</dependency>
 		<dependency>
 			<groupId>jfree</groupId>
 			<artifactId>jfreechart</artifactId>
@@ -383,5 +452,4 @@
 			<version>1.1.1</version>
 		</dependency>
 	</dependencies>
-
 </project>

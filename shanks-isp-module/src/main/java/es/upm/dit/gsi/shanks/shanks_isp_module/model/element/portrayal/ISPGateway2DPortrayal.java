@@ -2,9 +2,7 @@ package es.upm.dit.gsi.shanks.shanks_isp_module.model.element.portrayal;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import sim.portrayal.DrawInfo2D;
 import es.upm.dit.gsi.shanks.model.element.device.Device;

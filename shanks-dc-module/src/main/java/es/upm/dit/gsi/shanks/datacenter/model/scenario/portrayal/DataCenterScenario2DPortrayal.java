@@ -63,13 +63,13 @@ public class DataCenterScenario2DPortrayal extends Scenario2DPortrayal {
 
 		this.situateDevice(
 				(Device) this.getScenario().getNetworkElement(
-						Values.BBDD_REPLICA_ID), 5, 5);
+						Values.BBDD_REPLICA_ID), 5, 60);
 		this.situateDevice(
 				(Device) this.getScenario().getNetworkElement(
-						Values.BBDD_SERVER_ID), 5, 60);
+						Values.BBDD_SERVER_ID), 5, 5);
 		this.situateDevice(
 				(Device) this.getScenario().getNetworkElement(
-						Values.LDAP_SERVER_ID), 35, 5);
+						Values.LDAP_SERVER_ID), 35, 60);
 		this.situateDevice(
 				(Device) this.getScenario().getNetworkElement(
 						Values.EXTERNAL_SERVER_ID), 65, 5);
@@ -80,12 +80,19 @@ public class DataCenterScenario2DPortrayal extends Scenario2DPortrayal {
 		}
 		this.situateDevice(
 				(Device) this.getScenario().getNetworkElement(
-						Values.DATA_CENTER_ROUTER_ID), 75, 85);
+						Values.DATA_CENTER_ROUTER_ID), 50, 5);
 
-		for (int i = 0; i < Values.NUMBER_OF_ITCROW + 4; i++) {
+		for (int i = 0; i < Values.NUMBER_OF_ITCROW; i++) {
+			this.drawLink((Link) this.getScenario().getNetworkElement(
+					Values.ETHERNET_ID + i+10));
+		}
+		
+		for(int i = 0; i < 5; i++){
 			this.drawLink((Link) this.getScenario().getNetworkElement(
 					Values.ETHERNET_ID + i));
 		}
+		this.situateDevice((Device) this.getScenario().getNetworkElement(Values.WEB_PROXY_ID), 50, 60);
+		this.situateDevice((Device) this.getScenario().getNetworkElement(Values.WEB_APP_ID), 35, 5);
 		// this.drawLink((Link)this.getScenario().getNetworkElement(Values.ETHERNET_ID
 		// +"1"));
 		// this.drawLink((Link)this.getScenario().getNetworkElement(Values.ETHERNET_ID

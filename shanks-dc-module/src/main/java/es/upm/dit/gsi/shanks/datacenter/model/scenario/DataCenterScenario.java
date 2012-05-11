@@ -66,38 +66,49 @@ public class DataCenterScenario extends Scenario {
 	public void addNetworkElements()
 			throws UnsupportedNetworkElementStatusException,
 			TooManyConnectionException, DuplicatedIDException {
-
+		ArrayList<EthernetCable> links = new ArrayList<EthernetCable>();
+		
 		Router intranetRouter = new Router(Values.DATA_CENTER_ROUTER_ID);
 		addNetworkElement(intranetRouter);
+		
+		Router webProxy = new Router(Values.WEB_PROXY_ID);
+		links.add(new EthernetCable(Values.ETHERNET_ID+"0", Values.ETHERNET_LENGHT));
+		webProxy.connectToDeviceWithLink(intranetRouter, links.get(links.size()-1));
+		addNetworkElement(webProxy);
 
 		// IT Crow terminals.
-		ArrayList<EthernetCable> links = new ArrayList<EthernetCable>();
+		
 		for (int i = 0; i < Values.NUMBER_OF_ITCROW; i++) {
 			Computer computer = (new Computer(Values.COMPUTER_ID + i));
-			links.add(new EthernetCable(Values.ETHERNET_ID+i, Values.ETHERNET_LENGHT));
-			computer.connectToDeviceWithLink(intranetRouter, links.get(i));
+			links.add(new EthernetCable(Values.ETHERNET_ID+i+10, Values.ETHERNET_LENGHT));
+			computer.connectToDeviceWithLink(webProxy, links.get(i+1));
 			addNetworkElement(computer);
 		}
 
 		
 		// Servers
 		Server ldap = new Server(Values.LDAP_SERVER_ID);
-		links.add(new EthernetCable(Values.ETHERNET_ID+(links.size()), Values.ETHERNET_LENGHT));
-		ldap.connectToDeviceWithLink(intranetRouter, links.get(links.size()-1));
+		links.add(new EthernetCable(Values.ETHERNET_ID+"1", Values.ETHERNET_LENGHT));
+		ldap.connectToDeviceWithLink(webProxy, links.get(links.size()-1));
 		addNetworkElement(ldap);
 		
-		Server external = new Server(Values.EXTERNAL_SERVER_ID);
-		links.add(new EthernetCable(Values.ETHERNET_ID+links.size(), Values.ETHERNET_LENGHT));
-		external.connectToDeviceWithLink(intranetRouter, links.get(links.size()-1));
-		addNetworkElement(external);
+		Server webApp = new Server(Values.WEB_APP_ID);
+		links.add(new EthernetCable(Values.ETHERNET_ID+"2", Values.ETHERNET_LENGHT));
+		webApp.connectToDeviceWithLink(intranetRouter, links.get(links.size()-1));
+		addNetworkElement(webApp);
+		
+//		Server external = new Server(Values.EXTERNAL_SERVER_ID);
+//		links.add(new EthernetCable(Values.ETHERNET_ID+links.size(), Values.ETHERNET_LENGHT));
+//		external.connectToDeviceWithLink(intranetRouter, links.get(links.size()-1));
+//		addNetworkElement(external);
 		
 		Server bbdd = new Server(Values.BBDD_SERVER_ID);
-		links.add(new EthernetCable(Values.ETHERNET_ID+links.size(), Values.ETHERNET_LENGHT));
-		bbdd.connectToDeviceWithLink(intranetRouter, links.get(links.size()-1));
+		links.add(new EthernetCable(Values.ETHERNET_ID+"3", Values.ETHERNET_LENGHT));
+		bbdd.connectToDeviceWithLink(webApp, links.get(links.size()-1));
 		addNetworkElement(bbdd);
 		
 		Server bbddReplica = new Server(Values.BBDD_REPLICA_ID);
-		links.add(new EthernetCable(Values.ETHERNET_ID+links.size(), Values.ETHERNET_LENGHT));
+		links.add(new EthernetCable(Values.ETHERNET_ID+"4", Values.ETHERNET_LENGHT));
 		bbddReplica.connectToDeviceWithLink(bbdd, links.get(links.size()-1));
 		addNetworkElement(bbddReplica);
 

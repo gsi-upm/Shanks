@@ -32,6 +32,8 @@ public class Values {
 	public static final String BBDD_SERVER_ID = "BBDDServer";
 	public static final String BBDD_REPLICA_ID = "BBDDReplica";
 	public static final String ETHERNET_ID = "Ethernet#";
+	public static final String WEB_APP_ID= "Web App Server";
+	public static final String WEB_PROXY_ID="WebProxy";
 	
 	// Scenario Values. 
 	public static final double ETHERNET_LENGHT = 2.5;

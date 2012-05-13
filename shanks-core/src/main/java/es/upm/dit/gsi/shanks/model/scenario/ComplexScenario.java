@@ -66,6 +66,7 @@ public abstract class ComplexScenario extends Scenario {
         this.scenarios = new HashMap<Scenario, List<Link>>();
 
         this.addScenarios();
+        this.addPossiblesFailuresComplex();
     }
 
     /**
@@ -232,5 +233,26 @@ public abstract class ComplexScenario extends Scenario {
 
         return maps;
     }
-
+    
+    public void addPossiblesFailuresComplex(){
+        Set<Scenario> scenarios = this.getScenarios();
+        for(Scenario s : scenarios){
+            for(Class<? extends Failure> c : s.getPossibleFailures().keySet()){
+                if(!this.getPossibleFailures().containsKey(c)){
+                    this.addPossibleFailure(c, s.getPossibleFailures().get(c));
+                }else{
+                    List<Set<NetworkElement>> elements = this.getPossibleFailures().get(c);
+                    elements.addAll(s.getPossibleFailures().get(c));
+                    this.addPossibleFailure(c, elements);
+                }
+            }
+        }
+    }
+    
+    //TODO Hacerlo como con los fallos
+    public void addPossiblesventsComplex(){
+        
+        
+    }
+    
 }

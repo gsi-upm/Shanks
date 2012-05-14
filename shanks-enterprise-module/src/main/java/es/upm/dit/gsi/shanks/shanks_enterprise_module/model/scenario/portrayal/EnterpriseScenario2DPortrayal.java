@@ -47,7 +47,7 @@ public class EnterpriseScenario2DPortrayal extends ComplexScenario2DPortrayal{
         this.situateScenario(cs.getScenario("Worker Room 1"), new Double2D(0,-5), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
         this.situateScenario(cs.getScenario("Worker Room 2"), new Double2D(120,-5), ShanksMath.ANGLE_0, ShanksMath.ANGLE_180, ShanksMath.ANGLE_0);
         this.situateScenario(cs.getScenario("Worker Room 3"), new Double2D(120,125), ShanksMath.ANGLE_180, ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
-        this.situateScenario(cs.getScenario("Data Center"), new Double2D(100,190), ShanksMath.ANGLE_90, ShanksMath.ANGLE_0, ShanksMath.ANGLE_180);
+        this.situateScenario(cs.getScenario("Data Center"), new Double2D(65,190), ShanksMath.ANGLE_90, ShanksMath.ANGLE_0, ShanksMath.ANGLE_180);
         
 	}
 

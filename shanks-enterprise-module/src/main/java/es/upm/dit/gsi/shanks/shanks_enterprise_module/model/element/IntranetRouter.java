@@ -11,6 +11,7 @@ public class IntranetRouter extends Device{
 	public static final String PROPERTY_POWER = "Power";
 	public static final String PROPERTY_PORTS = "Ports";
 	
+	
 	private boolean[] ports;
 	
 	public IntranetRouter(String id, String initialState, boolean isGateway)

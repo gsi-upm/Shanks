@@ -17,6 +17,7 @@ import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementSt
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
+import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.AlreadyConnectedScenarioException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.NonGatewayDeviceException;
@@ -27,7 +28,9 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.element.IntranetRouter;
 import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.scenario.portrayal.EnterpriseScenario2DPortrayal;
+import es.upm.dit.gsi.shanks.workerroom.model.element.device.Router;
 import es.upm.dit.gsi.shanks.workerroom.model.element.link.EthernetLink;
+import es.upm.dit.gsi.shanks.workerroom.model.failure.RouterCongestion;
 import es.upm.dit.gsi.shanks.workerroom.model.failure.WireBroken;
 import es.upm.dit.gsi.shanks.workerroom.model.scenario.WorkerRoomScenario;
 
@@ -94,7 +97,7 @@ public class EnterpriseScenario extends ComplexScenario{
 	public void addNetworkElements()
 			throws UnsupportedNetworkElementStatusException,
 			TooManyConnectionException, DuplicatedIDException {
-		Device router = new IntranetRouter("Intranet Router", IntranetRouter.STATUS_OK, true);
+		Device router = new Router("Intranet Router", Router.STATUS_OK, true);
 		Link ethernetLink1 = new EthernetLink("EL1", EthernetLink.STATUS_OK, 2);
 		Link ethernetLink2 = new EthernetLink("EL2", EthernetLink.STATUS_OK, 2);
 		Link ethernetLink3 = new EthernetLink("EL3", EthernetLink.STATUS_OK, 2);
@@ -130,22 +133,22 @@ public class EnterpriseScenario extends ComplexScenario{
 		this.addPossibleFailure(WireBroken.class, possibleCombinations);
 		
 		
-		
 	}
+	
+
 
 	@Override
 	public void addPossibleEvents() {
+		this.addPossibleEventsOfNE(RouterCongestion.class, this.getNetworkElement("Intranet Router"));
 			
 	}
 
 	@Override
 	public HashMap<Class<? extends Failure>, Double> getPenaltiesInStatus(
 			String status) throws UnsupportedScenarioStatusException {
-        HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
 
-		penalties.put(WireBroken.class, 1.0);
-
-        return penalties;
+		HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
+	    return penalties;
 	}
 
 }

@@ -31,13 +31,8 @@ public class IntranetRouter2DPortrayal extends Device2DPortrayal{
         HashMap<String, Boolean> status = device.getStatus();
         List<String> okStatus = new ArrayList<String>();
         
-        for(String s : status.keySet()){
-            if(s.equals(IntranetRouter.STATUS_OK)){
-            	if(status.get(s))
-            		okStatus.add(s);
-            }
-        }
-        if (okStatus.size() == 1) {
+       
+        if (status.get(IntranetRouter.STATUS_OK)) {
             graphics.setColor(Color.green);
         } else{
             graphics.setColor(Color.red); 

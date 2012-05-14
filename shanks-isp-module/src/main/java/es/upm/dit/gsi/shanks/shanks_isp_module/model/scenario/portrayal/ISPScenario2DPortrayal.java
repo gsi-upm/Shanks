@@ -73,28 +73,26 @@ public class ISPScenario2DPortrayal extends ComplexScenario2DPortrayal{
 
 	@Override
 	public void setupPortrayals() {
-		ContinuousPortrayal2D devicePortrayal = (ContinuousPortrayal2D) this.getPortrayals().get(Scenario2DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.DEVICES_PORTRAYAL);  
+		ContinuousPortrayal2D devicesPortrayal = (ContinuousPortrayal2D) this.getPortrayals().get(Scenario2DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.DEVICES_PORTRAYAL);  
 		NetworkPortrayal2D networkPortrayalLink = (NetworkPortrayal2D) this.getPortrayals().get(Scenario2DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.LINKS_PORTRAYAL);
-		NetworkPortrayal2D networkPortrayalCable = (NetworkPortrayal2D) this.getPortrayals().get(Scenario2DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.LINKS_PORTRAYAL);
-		NetworkPortrayal2D networkPortrayalWifi = (NetworkPortrayal2D) this.getPortrayals().get(Scenario2DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.LINKS_PORTRAYAL);
-
-		
 		SparseGridPortrayal2D failuresPortrayal = (SparseGridPortrayal2D) this.getPortrayals().get(FAILURE_DISPLAY_ID).get(FAILURE_PORTRAYAL_ID);
-        devicePortrayal.setPortrayalForClass(IntranetRouter.class, new IntranetRouter2DPortrayal());
-        devicePortrayal.setPortrayalForClass(Computer.class, new es.upm.dit.gsi.shanks.workerroom.model.element.portrayal.Computer2DPortrayal());
-        devicePortrayal.setPortrayalForClass(Printer.class, new Printer2DPortrayal());
-        devicePortrayal.setPortrayalForClass(Router.class, new Router2DPortrayal());
-        devicePortrayal.setPortrayalForClass(Server.class, new Server2DPortrayal());
-        devicePortrayal.setPortrayalForClass(es.upm.dit.gsi.shanks.datacenter.model.element.device.Computer.class, new Computer2DPortrayal());
-        devicePortrayal.setPortrayalForClass(es.upm.dit.gsi.shanks.datacenter.model.element.device.Router.class, new es.upm.dit.gsi.shanks.datacenter.model.element.device.portrayal.Router2DPortrayal());
-        devicePortrayal.setPortrayalForClass(ISPGateway.class, new ISPGateway2DPortrayal());
-        devicePortrayal.setPortrayalForClass(es.upm.dit.gsi.shanks.hackerhan.model.element.device.Computer.class, new es.upm.dit.gsi.shanks.hackerhan.model.element.device.portrayal.Computer2DPortrayal());
-        devicePortrayal.setPortrayalForClass(WifiRouterADSL.class, new WifiRouterADSL2DPortrayal());
-        devicePortrayal.setPortrayalForClass(WirelessDevice.class, new Smartphone2DPortrayal());
-          
-        networkPortrayalLink.setPortrayalForAll(new EthernetLink2DPortrayal());
         
-        failuresPortrayal.setPortrayalForClass(MyFailure.class, new Failure2DPortrayal());
+		devicesPortrayal.setPortrayalForClass(es.upm.dit.gsi.shanks.datacenter.model.element.device.Computer.class,
+				new Computer2DPortrayal());
+		devicesPortrayal.setPortrayalForClass(Router.class,
+				new Router2DPortrayal());
+		devicesPortrayal.setPortrayalForClass(es.upm.dit.gsi.shanks.datacenter.model.element.device.Server.class,
+				new Server2DPortrayal());
+		devicesPortrayal.setPortrayalForClass(es.upm.dit.gsi.shanks.hackerhan.model.element.device.Computer.class, new es.upm.dit.gsi.shanks.hackerhan.model.element.device.portrayal.Computer2DPortrayal());
+        devicesPortrayal.setPortrayalForClass(WifiRouterADSL.class, new WifiRouterADSL2DPortrayal());
+        devicesPortrayal.setPortrayalForClass(WirelessDevice.class, new Smartphone2DPortrayal());
+        devicesPortrayal.setPortrayalForClass(es.upm.dit.gsi.shanks.workerroom.model.element.device.Computer.class, new es.upm.dit.gsi.shanks.workerroom.model.element.portrayal.Computer2DPortrayal());
+        devicesPortrayal.setPortrayalForClass(Printer.class, new Printer2DPortrayal());
+        devicesPortrayal.setPortrayalForClass(es.upm.dit.gsi.shanks.workerroom.model.element.device.Router.class, new es.upm.dit.gsi.shanks.workerroom.model.element.portrayal.Router2DPortrayal());
+        devicesPortrayal.setPortrayalForClass(ISPGateway.class, new ISPGateway2DPortrayal());
+        
+		networkPortrayalLink.setPortrayalForAll(new EthernetLink2DPortrayal());
+        failuresPortrayal.setPortrayalForAll(new Failure2DPortrayal());
 	}
 
 	@Override

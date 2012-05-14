@@ -1,10 +1,15 @@
 package es.upm.dit.gsi.shanks.shanks_isp_module.model.scenario;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import es.upm.dit.gsi.shanks.hackerhan.model.scenario.HackerHANScenario;
+import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
@@ -24,10 +29,12 @@ import es.upm.dit.gsi.shanks.shanks_isp_module.model.Values;
 import es.upm.dit.gsi.shanks.shanks_isp_module.model.element.device.ISPGateway;
 import es.upm.dit.gsi.shanks.shanks_isp_module.model.scenario.portrayal.ISPScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.workerroom.model.element.link.EthernetLink;
+import es.upm.dit.gsi.shanks.workerroom.model.failure.WireBroken;
 import es.upm.dit.gsi.shanks.workerroom.model.scenario.WorkerRoomScenario;
 
 public class ISPScenario extends ComplexScenario{
 
+	
 	
 	public static final String STATUS_NORMAL = "Normal";
 	public static final String STATUS_UNDER_ATTACK = "UnderAttack";
@@ -57,7 +64,6 @@ public class ISPScenario extends ComplexScenario{
 	    this.addScenario(HackerHANScenario.class, "Hacker HAN 1", HackerHANScenario.STATUS_NORMAL, p, Values.WIFI_ROUTER_ID, "LINK2");
 	    this.addScenario(HackerHANScenario.class, "Hacker HAN 2", HackerHANScenario.STATUS_NORMAL, p, Values.WIFI_ROUTER_ID, "LINK3");
 	    this.addScenario(HackerHANScenario.class, "Hacker HAN 3", HackerHANScenario.STATUS_NORMAL, p, Values.WIFI_ROUTER_ID, "LINK4");
-
 	}
 
 	@Override
@@ -103,6 +109,22 @@ public class ISPScenario extends ComplexScenario{
 
 	@Override
 	public void addPossibleFailures() {
+		Set<NetworkElement> set1 = new HashSet<NetworkElement>();
+		set1.add(this.getNetworkElement("LINK1"));
+		Set<NetworkElement> set2 = new HashSet<NetworkElement>();
+		set2.add(this.getNetworkElement("LINK2"));
+		Set<NetworkElement> set3 = new HashSet<NetworkElement>();
+		set3.add(this.getNetworkElement("LINK3"));
+		Set<NetworkElement> set4 = new HashSet<NetworkElement>();
+		set4.add(this.getNetworkElement("LINK4"));
+        List<Set<NetworkElement>> possibleCombinations = new ArrayList<Set<NetworkElement>>();
+		possibleCombinations.add(set1);
+		possibleCombinations.add(set2);
+		possibleCombinations.add(set3);
+		possibleCombinations.add(set4);
+		this.addPossibleFailure(WireBroken.class, possibleCombinations);
+		
+		
 		
 	}
 
@@ -111,10 +133,13 @@ public class ISPScenario extends ComplexScenario{
 		
 	}
 
+
 	@Override
 	public HashMap<Class<? extends Failure>, Double> getPenaltiesInStatus(
 			String status) throws UnsupportedScenarioStatusException {
-		return null;
+		 
+		HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
+	    return penalties;
 	}
 
 }

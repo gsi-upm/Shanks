@@ -7,20 +7,20 @@ package es.upm.dit.gsi.shanks.datacenter.model.scenario.portrayal;
 import sim.portrayal.continuous.ContinuousPortrayal2D;
 import sim.portrayal.network.NetworkPortrayal2D;
 import es.upm.dit.gsi.shanks.datacenter.model.Values;
-import es.upm.dit.gsi.shanks.datacenter.model.element.device.Computer;
 import es.upm.dit.gsi.shanks.datacenter.model.element.device.Router;
 import es.upm.dit.gsi.shanks.datacenter.model.element.device.Server;
-import es.upm.dit.gsi.shanks.datacenter.model.element.device.portrayal.Computer2DPortrayal;
-import es.upm.dit.gsi.shanks.datacenter.model.element.device.portrayal.Router2DPortrayal;
 import es.upm.dit.gsi.shanks.datacenter.model.element.device.portrayal.Server2DPortrayal;
-import es.upm.dit.gsi.shanks.datacenter.model.element.link.EthernetCable;
-import es.upm.dit.gsi.shanks.datacenter.model.element.link.portrayal.EthernetCable2DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Computer;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.EthernetLink;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.portrayals.Computer2DPortrayal;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.portrayals.EthernetCable2DPortrayal;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.portrayals.Router2DPortrayal;
 
 /**
  * 
@@ -122,7 +122,7 @@ public class DataCenterScenario2DPortrayal extends Scenario2DPortrayal {
 				new Router2DPortrayal());
 		devicesPortrayal.setPortrayalForClass(Server.class,
 				new Server2DPortrayal());
-		linksPortrayal.setPortrayalForClass(EthernetCable.class,
+		linksPortrayal.setPortrayalForClass(EthernetLink.class,
 				new EthernetCable2DPortrayal());
 	}
 

@@ -1,9 +1,10 @@
 package es.upm.dit.gsi.shanks.shanks_enterprise_module.model.element;
 
-import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.scenario.Scenario;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.RouterDNS;
 
-public class IntranetRouter extends Device{
+public class CompanyRouter extends RouterDNS{
 
 	public static final String STATUS_OK = "Ok";
 	public static final String STATUS_OFF ="Off";
@@ -14,9 +15,9 @@ public class IntranetRouter extends Device{
 	
 	private boolean[] ports;
 	
-	public IntranetRouter(String id, String initialState, boolean isGateway)
+	public CompanyRouter(String id, Scenario parent)
 			throws UnsupportedNetworkElementStatusException {
-		super(id, initialState, isGateway);
+		super(id, parent);
 		this.initPorts();
 	}
 

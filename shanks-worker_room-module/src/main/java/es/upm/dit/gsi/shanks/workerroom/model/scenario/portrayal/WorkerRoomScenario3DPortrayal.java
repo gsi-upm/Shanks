@@ -9,13 +9,13 @@ import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
-import es.upm.dit.gsi.shanks.workerroom.model.element.device.Computer;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Computer;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.portrayals.Computer3DPortrayal;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.portrayals.Router3DPortrayal;
+import es.upm.dit.gsi.shanks.workerroom.model.element.device.LANRouter;
 import es.upm.dit.gsi.shanks.workerroom.model.element.device.Printer;
-import es.upm.dit.gsi.shanks.workerroom.model.element.device.Router;
-import es.upm.dit.gsi.shanks.workerroom.model.element.portrayal.Computer3DPortrayal;
 import es.upm.dit.gsi.shanks.workerroom.model.element.portrayal.EthernetLink3DPortrayal;
 import es.upm.dit.gsi.shanks.workerroom.model.element.portrayal.Printer3DPortrayal;
-import es.upm.dit.gsi.shanks.workerroom.model.element.portrayal.Router3DPortrayal;
 
 public class WorkerRoomScenario3DPortrayal extends Scenario3DPortrayal{
 
@@ -48,7 +48,7 @@ public class WorkerRoomScenario3DPortrayal extends Scenario3DPortrayal{
         this.situateDevice((Device)this.getScenario().getNetworkElement("PC6"), 100.0, 520.0, 100.0);
         this.situateDevice((Device)this.getScenario().getNetworkElement("PC7"), 100.0, 620.0, 100.0);
         this.situateDevice((Device)this.getScenario().getNetworkElement("PC8"), 100.0, 720.0, 100.0);
-        this.situateDevice((Device)this.getScenario().getNetworkElement("Router"), 600.0, 370.0, 100.0);
+        this.situateDevice((Device)this.getScenario().getNetworkElement("LANRouter"), 600.0, 370.0, 100.0);
         this.situateDevice((Device)this.getScenario().getNetworkElement("Printer"), 350.0, 370.0, 100.0);
         this.drawLink((Link)this.getScenario().getNetworkElement("EthernetLink"));
 		
@@ -60,10 +60,9 @@ public class WorkerRoomScenario3DPortrayal extends Scenario3DPortrayal{
 		ContinuousPortrayal3D printerPortrayal = (ContinuousPortrayal3D) this.getPortrayals().get(Scenario3DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.DEVICES_PORTRAYAL);
 		ContinuousPortrayal3D routerPortrayal = (ContinuousPortrayal3D) this.getPortrayals().get(Scenario3DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.DEVICES_PORTRAYAL);	
 		NetworkPortrayal3D networkPortrayal = (NetworkPortrayal3D) this.getPortrayals().get(Scenario3DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.LINKS_PORTRAYAL);
-        ContinuousPortrayal3D failuresPortrayal = (ContinuousPortrayal3D) this.getPortrayals().get(WorkerRoomScenario2DPortrayal.FAILURE_DISPLAY_ID).get(WorkerRoomScenario2DPortrayal.FAILURE_PORTRAYAL_ID);
         devicePortrayal.setPortrayalForClass(Computer.class, new Computer3DPortrayal());
         printerPortrayal.setPortrayalForClass(Printer.class, new Printer3DPortrayal());
-        routerPortrayal.setPortrayalForClass(Router.class, new Router3DPortrayal());
+        routerPortrayal.setPortrayalForClass(LANRouter.class, new Router3DPortrayal());
         networkPortrayal.setPortrayalForAll(new EthernetLink3DPortrayal());
         //failuresPortrayal.setPortrayalForClass(MyFailure.class, new Failure3DPortrayal());
         

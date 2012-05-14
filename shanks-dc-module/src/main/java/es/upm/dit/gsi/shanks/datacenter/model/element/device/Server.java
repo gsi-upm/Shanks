@@ -7,8 +7,10 @@ package es.upm.dit.gsi.shanks.datacenter.model.element.device;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import es.upm.dit.gsi.shanks.datacenter.model.Values;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Computer;
 
 /**
  * A server is a computer in which a user can be signed up and ask for services.

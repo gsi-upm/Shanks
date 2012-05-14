@@ -1,6 +1,7 @@
 package es.upm.dit.gsi.shanks.datacenter.model.element.device.portrayal;
 
 import es.upm.dit.gsi.shanks.datacenter.model.Values;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.portrayals.Computer2DPortrayal;
 
 public class Server2DPortrayal extends Computer2DPortrayal {
 

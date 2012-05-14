@@ -6,7 +6,6 @@ import sim.portrayal.grid.SparseGridPortrayal2D;
 import sim.portrayal.network.NetworkPortrayal2D;
 import sim.util.Double2D;
 import es.upm.dit.gsi.shanks.datacenter.model.element.device.Server;
-import es.upm.dit.gsi.shanks.datacenter.model.element.device.portrayal.Computer2DPortrayal;
 import es.upm.dit.gsi.shanks.datacenter.model.element.device.portrayal.Server2DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
@@ -19,15 +18,16 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ShanksMath;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
-import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.element.IntranetRouter;
-import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.element.portrayal.IntranetRouter2DPortrayal;
-import es.upm.dit.gsi.shanks.workerroom.model.element.device.Computer;
+import es.upm.dit.gsi.shanks.networkattacks.util.failures.WireBroken;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Computer;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.portrayals.Computer2DPortrayal;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.portrayals.Router2DPortrayal;
+import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.element.CompanyRouter;
+import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.element.portrayal.CompanyRouter2DPortrayal;
+import es.upm.dit.gsi.shanks.workerroom.model.element.device.LANRouter;
 import es.upm.dit.gsi.shanks.workerroom.model.element.device.Printer;
-import es.upm.dit.gsi.shanks.workerroom.model.element.device.Router;
 import es.upm.dit.gsi.shanks.workerroom.model.element.portrayal.EthernetLink2DPortrayal;
 import es.upm.dit.gsi.shanks.workerroom.model.element.portrayal.Printer2DPortrayal;
-import es.upm.dit.gsi.shanks.workerroom.model.element.portrayal.Router2DPortrayal;
-import es.upm.dit.gsi.shanks.workerroom.model.failure.WireBroken;
 
 public class EnterpriseScenario2DPortrayal extends ComplexScenario2DPortrayal{
 
@@ -66,7 +66,7 @@ public class EnterpriseScenario2DPortrayal extends ComplexScenario2DPortrayal{
 	@Override
 	public void placeElements() {
 		ComplexScenario cs = (ComplexScenario) this.getScenario();       
-        this.situateDevice((Device)cs.getNetworkElement("Intranet Router"), 60, 60);        
+        this.situateDevice((Device)cs.getNetworkElement("Intranet LANRouter"), 60, 60);        
         this.drawLink((Link)cs.getNetworkElement("EL1"));
         this.drawLink((Link)cs.getNetworkElement("EL2"));
         this.drawLink((Link)cs.getNetworkElement("EL3"));
@@ -75,17 +75,18 @@ public class EnterpriseScenario2DPortrayal extends ComplexScenario2DPortrayal{
 
 	@Override
 	public void setupPortrayals() {
+		//TODO revisar bien esto para que coja las cosas como deben ser. 
 		ContinuousPortrayal2D devicePortrayal = (ContinuousPortrayal2D) this.getPortrayals().get(Scenario2DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.DEVICES_PORTRAYAL);
         
 		NetworkPortrayal2D networkPortrayal = (NetworkPortrayal2D) this.getPortrayals().get(Scenario2DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.LINKS_PORTRAYAL);
         SparseGridPortrayal2D failuresPortrayal = (SparseGridPortrayal2D) this.getPortrayals().get(FAILURE_DISPLAY_ID).get(FAILURE_PORTRAYAL_ID);
-        devicePortrayal.setPortrayalForClass(IntranetRouter.class, new IntranetRouter2DPortrayal());
+        devicePortrayal.setPortrayalForClass(CompanyRouter.class, new CompanyRouter2DPortrayal());
         devicePortrayal.setPortrayalForClass(Computer.class, new es.upm.dit.gsi.shanks.workerroom.model.element.portrayal.Computer2DPortrayal());
         devicePortrayal.setPortrayalForClass(Printer.class, new Printer2DPortrayal());
-        devicePortrayal.setPortrayalForClass(Router.class, new Router2DPortrayal());
+        devicePortrayal.setPortrayalForClass(LANRouter.class, new Router2DPortrayal());
         devicePortrayal.setPortrayalForClass(Server.class, new Server2DPortrayal());
-        devicePortrayal.setPortrayalForClass(es.upm.dit.gsi.shanks.datacenter.model.element.device.Computer.class, new Computer2DPortrayal());
-        devicePortrayal.setPortrayalForClass(es.upm.dit.gsi.shanks.datacenter.model.element.device.Router.class, new es.upm.dit.gsi.shanks.datacenter.model.element.device.portrayal.Router2DPortrayal());
+        devicePortrayal.setPortrayalForClass(Computer.class, new Computer2DPortrayal());
+        devicePortrayal.setPortrayalForClass(es.upm.dit.gsi.shanks.datacenter.model.element.device.Router.class, new Router2DPortrayal());
         networkPortrayal.setPortrayalForAll(new EthernetLink2DPortrayal());
         failuresPortrayal.setPortrayalForClass(WireBroken.class, new Failure2DPortrayal());
 	}

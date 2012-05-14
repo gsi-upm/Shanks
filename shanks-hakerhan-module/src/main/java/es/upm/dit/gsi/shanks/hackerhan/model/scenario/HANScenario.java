@@ -7,10 +7,8 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
-import es.upm.dit.gsi.shanks.hackerhan.model.element.device.Computer;
 import es.upm.dit.gsi.shanks.hackerhan.model.element.device.WifiRouterADSL;
 import es.upm.dit.gsi.shanks.hackerhan.model.element.device.WirelessDevice;
-import es.upm.dit.gsi.shanks.hackerhan.model.element.link.EthernetCable;
 import es.upm.dit.gsi.shanks.hackerhan.model.element.link.WifiConnection;
 import es.upm.dit.gsi.shanks.hackerhan.model.failure.NoIPFailure;
 import es.upm.dit.gsi.shanks.hackerhan.model.scenario.portrayal.HANScenario2DPortrayal;
@@ -25,6 +23,8 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusE
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Computer;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.EthernetLink;
 
 /**
  * @author a.carrera
@@ -54,13 +54,13 @@ public class HANScenario extends Scenario {
 			TooManyConnectionException, DuplicatedIDException {
 		
 		Computer computer = new Computer("PC");
-		WifiRouterADSL router = new WifiRouterADSL("Router");
+		WifiRouterADSL router = new WifiRouterADSL("Router", this);
 //		ModemADSL modem = new ModemADSL("Modem", true);
 //		WifiAccessPoint wifiAP = new WifiAccessPoint("WifiAccessPoint");
 		WirelessDevice iPhone = new WirelessDevice("iPhone");
 		WirelessDevice android = new WirelessDevice("Android");
 		
-		EthernetCable ethernetCable = new EthernetCable("Ethernet: PC-Router", 2.5);
+		EthernetLink ethernetLink = new EthernetLink("Ethernet: PC-Router", 2.5);
 //		InternalBus ibRouterWifi = new InternalBus("InternalBus_MRW", 0.5);
 		WifiConnection wifi = new WifiConnection("Wifi", WifiConnection.STATUS_OK, 64);
 		
@@ -79,7 +79,7 @@ public class HANScenario extends Scenario {
 		this.addNetworkElement(android);
 		
 //		this.addNetworkElement(ibRouterWifi);
-		this.addNetworkElement(ethernetCable);
+		this.addNetworkElement(ethernetLink);
 		this.addNetworkElement(wifi);
 	}
 

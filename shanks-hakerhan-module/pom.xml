@@ -366,6 +366,12 @@
 			<type>jar</type>
 		</dependency>
 		<dependency>
+		 	<groupId>es.upm.dit.gsi.shanks</groupId>
+	  		<artifactId>shanks-network-attacks-simulation</artifactId>
+	      	<version>0.0.1-SNAPSHOT</version>
+	     	<type>jar</type>
+	 	</dependency>
+		<dependency>
 			<groupId>net.sourceforge.jason</groupId>
 			<artifactId>jason</artifactId>
 			<version>1.3.6</version>

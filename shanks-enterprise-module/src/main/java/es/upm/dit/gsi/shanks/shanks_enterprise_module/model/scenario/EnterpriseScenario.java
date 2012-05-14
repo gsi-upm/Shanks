@@ -17,7 +17,6 @@ import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementSt
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
-import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.AlreadyConnectedScenarioException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.NonGatewayDeviceException;
@@ -26,12 +25,10 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusE
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
-import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.element.IntranetRouter;
+import es.upm.dit.gsi.shanks.networkattacks.util.failures.WireBroken;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.EthernetLink;
 import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.scenario.portrayal.EnterpriseScenario2DPortrayal;
-import es.upm.dit.gsi.shanks.workerroom.model.element.device.Router;
-import es.upm.dit.gsi.shanks.workerroom.model.element.link.EthernetLink;
-import es.upm.dit.gsi.shanks.workerroom.model.failure.RouterCongestion;
-import es.upm.dit.gsi.shanks.workerroom.model.failure.WireBroken;
+import es.upm.dit.gsi.shanks.workerroom.model.element.device.LANRouter;
 import es.upm.dit.gsi.shanks.workerroom.model.scenario.WorkerRoomScenario;
 
 public class EnterpriseScenario extends ComplexScenario{
@@ -65,9 +62,9 @@ public class EnterpriseScenario extends ComplexScenario{
 			InvocationTargetException {
 		Properties p = this.getProperties();
 	    p.put(WorkerRoomScenario.CLOUDY_PROB, "10.0");
-		this.addScenario(WorkerRoomScenario.class, "Worker Room 1", WorkerRoomScenario.STATUS_NORMAL, p, "Router", "EL1");
-		this.addScenario(WorkerRoomScenario.class, "Worker Room 2", WorkerRoomScenario.STATUS_NORMAL, p, "Router", "EL2");
-		this.addScenario(WorkerRoomScenario.class, "Worker Room 3", WorkerRoomScenario.STATUS_NORMAL, p, "Router", "EL3");
+		this.addScenario(WorkerRoomScenario.class, "Worker Room 1", WorkerRoomScenario.STATUS_NORMAL, p, "LANRouter", "EL1");
+		this.addScenario(WorkerRoomScenario.class, "Worker Room 2", WorkerRoomScenario.STATUS_NORMAL, p, "LANRouter", "EL2");
+		this.addScenario(WorkerRoomScenario.class, "Worker Room 3", WorkerRoomScenario.STATUS_NORMAL, p, "LANRouter", "EL3");
 		this.addScenario(DataCenterScenario.class, "Data Center", DataCenterScenario.STATUS_NORMAL, p, Values.DATA_CENTER_ROUTER_ID, "EL4");
 		
 	}
@@ -97,11 +94,11 @@ public class EnterpriseScenario extends ComplexScenario{
 	public void addNetworkElements()
 			throws UnsupportedNetworkElementStatusException,
 			TooManyConnectionException, DuplicatedIDException {
-		Device router = new Router("Intranet Router", Router.STATUS_OK, true);
-		Link ethernetLink1 = new EthernetLink("EL1", EthernetLink.STATUS_OK, 2);
-		Link ethernetLink2 = new EthernetLink("EL2", EthernetLink.STATUS_OK, 2);
-		Link ethernetLink3 = new EthernetLink("EL3", EthernetLink.STATUS_OK, 2);
-		Link ethernetLink4 = new EthernetLink("EL4", EthernetLink.STATUS_OK, 2);
+		Device router = new LANRouter("Intranet LANRouter", this);
+		Link ethernetLink1 = new EthernetLink("EL1", 2.0);
+		Link ethernetLink2 = new EthernetLink("EL2", 2.0);
+		Link ethernetLink3 = new EthernetLink("EL3", 2);
+		Link ethernetLink4 = new EthernetLink("EL4", 2);
 		
 		this.addNetworkElement(ethernetLink4);
 		this.addNetworkElement(ethernetLink3);
@@ -132,6 +129,8 @@ public class EnterpriseScenario extends ComplexScenario{
 		possibleCombinations.add(set4);
 		this.addPossibleFailure(WireBroken.class, possibleCombinations);
 		
+		//TODO Add routerfauilure to the CompanyRouter
+		
 		
 	}
 	
@@ -139,7 +138,7 @@ public class EnterpriseScenario extends ComplexScenario{
 
 	@Override
 	public void addPossibleEvents() {
-		this.addPossibleEventsOfNE(RouterCongestion.class, this.getNetworkElement("Intranet Router"));
+//		this.addPossibleEventsOfNE(RouterCongestion.class, this.getNetworkElement("Intranet LANRouter"));
 			
 	}
 

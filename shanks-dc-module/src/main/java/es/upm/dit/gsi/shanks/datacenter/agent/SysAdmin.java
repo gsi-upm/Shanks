@@ -1,10 +1,7 @@
 package es.upm.dit.gsi.shanks.datacenter.agent;
 
-import jason.functions.e;
-
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Set;
 
 import unbbayes.prs.bn.ProbabilisticNetwork;
 import es.upm.dit.gsi.shanks.ShanksSimulation;

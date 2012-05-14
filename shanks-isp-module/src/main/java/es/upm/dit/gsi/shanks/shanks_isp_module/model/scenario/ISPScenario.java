@@ -60,7 +60,7 @@ public class ISPScenario extends ComplexScenario{
 			InvocationTargetException {
 		Properties p = this.getProperties();
 	    p.put(WorkerRoomScenario.CLOUDY_PROB, "10.0");
-	    this.addScenario(EnterpriseScenario.class, "Enterprise", EnterpriseScenario.STATUS_NORMAL, p, "Intranet Router", "LINK1");
+	    this.addScenario(EnterpriseScenario.class, "Enterprise", EnterpriseScenario.STATUS_NORMAL, p, "Intranet LANRouter", "LINK1");
 	    this.addScenario(HackerHANScenario.class, "Hacker HAN 1", HackerHANScenario.STATUS_NORMAL, p, Values.WIFI_ROUTER_ID, "LINK2");
 	    this.addScenario(HackerHANScenario.class, "Hacker HAN 2", HackerHANScenario.STATUS_NORMAL, p, Values.WIFI_ROUTER_ID, "LINK3");
 	    this.addScenario(HackerHANScenario.class, "Hacker HAN 3", HackerHANScenario.STATUS_NORMAL, p, Values.WIFI_ROUTER_ID, "LINK4");
@@ -88,7 +88,7 @@ public class ISPScenario extends ComplexScenario{
 	public void addNetworkElements()
 			throws UnsupportedNetworkElementStatusException,
 			TooManyConnectionException, DuplicatedIDException {
-		Device ispRouter = new ISPGateway("ISP Gateway", ISPGateway.STATUS_OK, true);
+		Device ispRouter = new ISPGateway("ISP Gateway", this);
 		Link cupperLink1 = new EthernetLink("LINK1", EthernetLink.STATUS_OK, 2);
 		Link cupperLink2 = new EthernetLink("LINK2", EthernetLink.STATUS_OK, 2);
 		Link cupperLink3 = new EthernetLink("LINK3", EthernetLink.STATUS_OK, 2);

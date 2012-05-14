@@ -8,15 +8,11 @@ import java.util.Properties;
 import java.util.Set;
 
 import es.upm.dit.gsi.shanks.hackerhan.model.Values;
-import es.upm.dit.gsi.shanks.hackerhan.model.element.device.Computer;
 import es.upm.dit.gsi.shanks.hackerhan.model.element.device.WifiRouterADSL;
 import es.upm.dit.gsi.shanks.hackerhan.model.element.device.WirelessDevice;
-import es.upm.dit.gsi.shanks.hackerhan.model.element.link.EthernetCable;
 import es.upm.dit.gsi.shanks.hackerhan.model.element.link.WifiConnection;
-import es.upm.dit.gsi.shanks.hackerhan.model.failure.ComputerFailure;
 import es.upm.dit.gsi.shanks.hackerhan.model.failure.NoIPFailure;
 import es.upm.dit.gsi.shanks.hackerhan.model.failure.NoISPConnection;
-import es.upm.dit.gsi.shanks.hackerhan.model.failure.RouterFailure;
 import es.upm.dit.gsi.shanks.hackerhan.model.failure.WirelessDeviceFailure;
 import es.upm.dit.gsi.shanks.hackerhan.model.scenario.portrayal.HackerHanScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.hackerhan.model.scenario.portrayal.HackerHanScenario3DPortrayal;
@@ -31,6 +27,10 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusE
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
+import es.upm.dit.gsi.shanks.networkattacks.util.failures.ComputerFailure;
+import es.upm.dit.gsi.shanks.networkattacks.util.failures.RouterFailure;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Computer;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.EthernetLink;
 
 /**
  * @author a.carrera
@@ -62,13 +62,13 @@ public class HackerHANScenario extends Scenario {
 			TooManyConnectionException, DuplicatedIDException {
 		
 		Computer computer = new Computer(Values.COMPUTER_ID+"@"+this.getID());
-		WifiRouterADSL router = new WifiRouterADSL(Values.WIFI_ROUTER_ID);
+		WifiRouterADSL router = new WifiRouterADSL(Values.WIFI_ROUTER_ID, this);
 		WirelessDevice android = new WirelessDevice(Values.ANDROID_ID+"@"+this.getID());
 		WirelessDevice tablet = new WirelessDevice(Values.TABLET_ID+"@"+this.getID());
 		
-		EthernetCable ethernetCable = new EthernetCable(Values.ETHERNET_ID+"@"+this.getID(), Values.ETHERNET_LENGHT);
+		EthernetLink ethernetLink = new EthernetLink(Values.ETHERNET_ID+"@"+this.getID(), Values.ETHERNET_LENGHT);
 		WifiConnection wifi = new WifiConnection(Values.WIFI_ID+"@"+this.getID(), WifiConnection.STATUS_OK, Values.WIFI_CHANNELS);
-		computer.connectToDeviceWithLink(router, ethernetCable);
+		computer.connectToDeviceWithLink(router, ethernetLink);
 		android.connectToDeviceWithLink(router, wifi);
 		tablet.connectToDeviceWithLink(router, wifi);
 		
@@ -76,7 +76,7 @@ public class HackerHANScenario extends Scenario {
 		this.addNetworkElement(router);
 		this.addNetworkElement(android);
 		this.addNetworkElement(tablet);
-		this.addNetworkElement(ethernetCable);
+		this.addNetworkElement(ethernetLink);
 		this.addNetworkElement(wifi);
 	}
 

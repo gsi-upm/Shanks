@@ -23,14 +23,14 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusE
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
-import es.upm.dit.gsi.shanks.workerroom.model.element.device.Computer;
+import es.upm.dit.gsi.shanks.networkattacks.util.failures.ComputerFailure;
+import es.upm.dit.gsi.shanks.networkattacks.util.failures.RouterFailure;
+import es.upm.dit.gsi.shanks.networkattacks.util.failures.WireBroken;
+import es.upm.dit.gsi.shanks.networkattacks.util.failures.WireDamaged;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Computer;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.EthernetLink;
+import es.upm.dit.gsi.shanks.workerroom.model.element.device.LANRouter;
 import es.upm.dit.gsi.shanks.workerroom.model.element.device.Printer;
-import es.upm.dit.gsi.shanks.workerroom.model.element.device.Router;
-import es.upm.dit.gsi.shanks.workerroom.model.element.link.EthernetLink;
-import es.upm.dit.gsi.shanks.workerroom.model.failure.ComputerPruebaFailure;
-import es.upm.dit.gsi.shanks.workerroom.model.failure.RouterCongestion;
-import es.upm.dit.gsi.shanks.workerroom.model.failure.WireBroken;
-import es.upm.dit.gsi.shanks.workerroom.model.failure.WireDamaged;
 import es.upm.dit.gsi.shanks.workerroom.model.scenario.portrayal.WorkerRoomScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.workerroom.model.scenario.portrayal.WorkerRoomScenario3DPortrayal;
 import es.upm.dit.gsi.shanks.workerroom.simulation.WorkerRoom2DSimulationGUI;
@@ -57,19 +57,19 @@ public class WorkerRoomScenario extends Scenario{
 	public void addNetworkElements()
 			throws UnsupportedNetworkElementStatusException,
 			TooManyConnectionException, DuplicatedIDException {
-		Device pc1 = new Computer("PC1", Computer.STATUS_OK, false);
-		Device pc2 = new Computer("PC2", Computer.STATUS_OK, false);
-		Device pc3 = new Computer("PC3", Computer.STATUS_OK, false);
-		Device pc4 = new Computer("PC4", Computer.STATUS_OK, false);
-		Device pc5 = new Computer("PC5", Computer.STATUS_OK, false);
+		Device pc1 = new Computer("PC1");
+		Device pc2 = new Computer("PC2");
+		Device pc3 = new Computer("PC3");
+		Device pc4 = new Computer("PC4");
+		Device pc5 = new Computer("PC5");
 		Device printer = new Printer("Printer", Printer.STATUS_OK, false);
-		Device router = new Router("Router", Router.STATUS_OK, true);
-		Link ethernetLink1 = new EthernetLink("EthernetLink1", EthernetLink.STATUS_OK, 2);
-		Link ethernetLink2 = new EthernetLink("EthernetLink2", EthernetLink.STATUS_OK, 2);
-		Link ethernetLink3 = new EthernetLink("EthernetLink3", EthernetLink.STATUS_OK, 2);
-		Link ethernetLink4 = new EthernetLink("EthernetLink4", EthernetLink.STATUS_OK, 2);
-		Link ethernetLink5 = new EthernetLink("EthernetLink5", EthernetLink.STATUS_OK, 2);
-		Link ethernetLink6 = new EthernetLink("EthernetLink6", EthernetLink.STATUS_OK, 2);
+		Device router = new LANRouter("LANRouter", this);
+		Link ethernetLink1 = new EthernetLink("EthernetLink1", 2);
+		Link ethernetLink2 = new EthernetLink("EthernetLink2", 2);
+		Link ethernetLink3 = new EthernetLink("EthernetLink3", 2);
+		Link ethernetLink4 = new EthernetLink("EthernetLink4", 2);
+		Link ethernetLink5 = new EthernetLink("EthernetLink5", 2);
+		Link ethernetLink6 = new EthernetLink("EthernetLink6", 2);
 
 		
 		ethernetLink1.connectDevices(pc1, router);
@@ -97,7 +97,7 @@ public class WorkerRoomScenario extends Scenario{
 
 	@Override
 	public void addPossibleEvents() {
-		this.addPossibleEventsOfNE(RouterCongestion.class, this.getNetworkElement("Router"));
+//		this.addPossibleEventsOfNE(RouterFailure.class, this.getNetworkElement("LANRouter"));
 	}
 
 	@Override
@@ -124,7 +124,7 @@ public class WorkerRoomScenario extends Scenario{
 		this.addPossibleFailure(WireBroken.class, possibleCombinations);
 		this.addPossibleFailure(WireDamaged.class, possibleCombinations);
 		
-//		this.addPossibleFailure(RouterCongestion.class, this.getNetworkElement("Router"));
+		this.addPossibleFailure(RouterFailure.class, this.getNetworkElement("LANRouter"));
 		
 		Set<NetworkElement> set10 = new HashSet<NetworkElement>();
 		set10.add(this.getNetworkElement("PC1"));
@@ -142,7 +142,7 @@ public class WorkerRoomScenario extends Scenario{
 		possibleCombinations1.add(set12);
 		possibleCombinations1.add(set13);
 		possibleCombinations1.add(set14);
-		this.addPossibleFailure(ComputerPruebaFailure.class, possibleCombinations1);	
+		this.addPossibleFailure(ComputerFailure.class, possibleCombinations1);	
 	}
 
 	@Override

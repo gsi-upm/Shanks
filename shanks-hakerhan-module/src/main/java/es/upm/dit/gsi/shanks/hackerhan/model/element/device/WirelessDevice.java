@@ -68,10 +68,10 @@ public class WirelessDevice extends Device{
 				this.updatePropertyTo(WirelessDevice.PROPERTY_BATTERY_CAPACITY, 1.0);
 				this.updatePropertyTo(WirelessDevice.PROPERTY_SIGNAL, 1.0);
 			}
-			if(status.get(Computer.STATUS_DISCONNECTED)){
+			if(status.get(WirelessDevice.STATUS_DISCONNECTED)){
 				this.updatePropertyTo(WirelessDevice.PROPERTY_CONNECTION, Values.DISCONNECTED);
 			} 
-			if(status.get(Computer.STATUS_OK)){
+			if(status.get(WirelessDevice.STATUS_OK)){
 				this.updatePropertyTo(WirelessDevice.PROPERTY_BATTERY_CAPACITY,
 						50 + Math.random() * 50);
 				this.updatePropertyTo(WirelessDevice.PROPERTY_SIGNAL,

@@ -2,8 +2,7 @@ package es.upm.dit.gsi.shanks.workerroom.model.failure;
 
 import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.model.event.networkelement.ProbabilisticNetworkElementEvent;
-import es.upm.dit.gsi.shanks.model.failure.Failure;
-import es.upm.dit.gsi.shanks.workerroom.model.element.device.Router;
+import es.upm.dit.gsi.shanks.workerroom.model.element.device.LANRouter;
 
 public class RouterCongestion extends ProbabilisticNetworkElementEvent{
 
@@ -20,7 +19,7 @@ public class RouterCongestion extends ProbabilisticNetworkElementEvent{
 
 	@Override
 	public void addPossibleAffected() {
-		this.addPossibleAffectedProperties(Router.class, Router.PROPERTY_CONGESTION,100.0);
+		this.addPossibleAffectedProperties(LANRouter.class, LANRouter.PROPERTY_CONGESTION, 100.0);
 	}
 
 }

@@ -1,6 +1,7 @@
 package es.upm.dit.gsi.shanks.datacenter.model.failure;
 
 import es.upm.dit.gsi.shanks.datacenter.model.Values;
+import es.upm.dit.gsi.shanks.networkattacks.util.failures.ComputerFailure;
 
 public class ServerFailure extends ComputerFailure {
 

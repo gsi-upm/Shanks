@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 
 import es.upm.dit.gsi.shanks.hackerhan.model.Values;
-import es.upm.dit.gsi.shanks.hackerhan.model.element.device.Computer;
 import es.upm.dit.gsi.shanks.hackerhan.model.element.device.WifiRouterADSL;
 import es.upm.dit.gsi.shanks.hackerhan.model.element.device.WirelessDevice;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Computer;
 
 public class NoISPConnection extends Failure {
 

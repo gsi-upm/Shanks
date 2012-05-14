@@ -7,20 +7,20 @@ package es.upm.dit.gsi.shanks.hackerhan.model.scenario.portrayal;
 import sim.portrayal.continuous.ContinuousPortrayal2D;
 import sim.portrayal.network.NetworkPortrayal2D;
 import es.upm.dit.gsi.shanks.hackerhan.model.Values;
-import es.upm.dit.gsi.shanks.hackerhan.model.element.device.Computer;
 import es.upm.dit.gsi.shanks.hackerhan.model.element.device.WifiRouterADSL;
 import es.upm.dit.gsi.shanks.hackerhan.model.element.device.WirelessDevice;
-import es.upm.dit.gsi.shanks.hackerhan.model.element.device.portrayal.Computer2DPortrayal;
 import es.upm.dit.gsi.shanks.hackerhan.model.element.device.portrayal.Smartphone2DPortrayal;
 import es.upm.dit.gsi.shanks.hackerhan.model.element.device.portrayal.WifiRouterADSL2DPortrayal;
-import es.upm.dit.gsi.shanks.hackerhan.model.element.link.EthernetCable;
-import es.upm.dit.gsi.shanks.hackerhan.model.element.link.protrayal.EthernetCable2DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Computer;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.EthernetLink;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.portrayals.Computer2DPortrayal;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.portrayals.EthernetCable2DPortrayal;
 
 /**
  * 
@@ -74,7 +74,7 @@ public class HackerHanScenario2DPortrayal extends Scenario2DPortrayal{
         devicesPortrayal.setPortrayalForClass(WifiRouterADSL.class, new WifiRouterADSL2DPortrayal());
         devicesPortrayal.setPortrayalForClass(WirelessDevice.class, new Smartphone2DPortrayal());
                 
-        linksPortrayal.setPortrayalForClass(EthernetCable.class, new EthernetCable2DPortrayal());
+        linksPortrayal.setPortrayalForClass(EthernetLink.class, new EthernetCable2DPortrayal());
 	}
 
 }

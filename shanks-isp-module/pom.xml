@@ -15,16 +15,25 @@
 	</organization>
 	<developers>
 		<developer>
+			<id>dlara</id>
+			<name>Daniel Lara Diezma</name>
+			<email>daniel.lara.diezma@gmail.com</email>
+		</developer>
+		<developer>
 			<id>darofar</id>
-			<name>Danny Rolando Fonseca Arboleda</name>
+			<name>Dannny Rolando Fonseca</name>
 			<email>darofar@gmail.com</email>
+		</developer>
+		<developer>
+			<id>a.mardomingo</id>
+			<name>Alberto Mardomingo</name>
+			<email>mardoalmar@gmail.com</email>
 		</developer>
 		<developer>
 			<id>a.carrera</id>
 			<name>Álvaro Carrera Barroso</name>
 			<email>carrerabarroso@gmail.com</email>
 		</developer>
-		
 	</developers>
 	<licenses>
 		<license>
@@ -391,6 +400,12 @@
 	      	<version>0.0.1-SNAPSHOT</version>
 	     	<type>jar</type>
 	 	 </dependency>
+		<dependency>
+		 	<groupId>es.upm.dit.gsi.shanks</groupId>
+	  		<artifactId>shanks-network-attacks-simulation</artifactId>
+	      	<version>0.0.1-SNAPSHOT</version>
+	     	<type>jar</type>
+	 	</dependency>
 		<dependency>
 			<groupId>net.sourceforge.jason</groupId>
 			<artifactId>jason</artifactId>

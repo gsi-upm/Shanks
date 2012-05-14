@@ -62,7 +62,7 @@ public class HackerHANScenario extends Scenario {
 			TooManyConnectionException, DuplicatedIDException {
 		
 		Computer computer = new Computer(Values.COMPUTER_ID+"@"+this.getID());
-		WifiRouterADSL router = new WifiRouterADSL(Values.WIFI_ROUTER_ID+"@");
+		WifiRouterADSL router = new WifiRouterADSL(Values.WIFI_ROUTER_ID);
 		WirelessDevice android = new WirelessDevice(Values.ANDROID_ID+"@"+this.getID());
 		WirelessDevice tablet = new WirelessDevice(Values.TABLET_ID+"@"+this.getID());
 		
@@ -88,7 +88,7 @@ public class HackerHANScenario extends Scenario {
 	@Override
 	public void addPossibleFailures() {
 		NetworkElement computer = this.getNetworkElement(Values.COMPUTER_ID+"@"+this.getID());
-		NetworkElement router = this.getNetworkElement(Values.WIFI_ROUTER_ID+"@"+this.getID());
+		NetworkElement router = this.getNetworkElement(Values.WIFI_ROUTER_ID);
 		NetworkElement android = this.getNetworkElement(Values.ANDROID_ID+"@"+this.getID());
 		NetworkElement tablet = this.getNetworkElement(Values.TABLET_ID+"@"+this.getID());
 //		NetworkElement ethernet = this.getNetworkElement("Ethernet");

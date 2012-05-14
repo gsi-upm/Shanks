@@ -38,8 +38,6 @@ import es.upm.dit.gsi.shanks.workerroom.simulation.WorkerRoomSimulation;
 
 public class WorkerRoomScenario extends Scenario{
 	
-	 public static final String CLOUDY = "CLOUDY";
-	 public static final String SUNNY = "SUNNY";
 
 	 public static final String CLOUDY_PROB = "CLOUDY_PROB";
 	 
@@ -162,42 +160,14 @@ public class WorkerRoomScenario extends Scenario{
 	@Override
 	public HashMap<Class<? extends Failure>, Double> getPenaltiesInStatus(
 			String status) throws UnsupportedScenarioStatusException {
-		 if (status.equals(CLOUDY)) {
-	            return this.getCloudyPenalties();
-	        } else if (status.equals(SUNNY)) {
-	            return this.getSunnyPenalties();
-	        } else {
-	            throw new UnsupportedScenarioStatusException();
-	        }
+		
+		HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
+	    return penalties;
 	}
 	
-	/**
-     * @return
-     */
-    private HashMap<Class<? extends Failure>, Double> getSunnyPenalties() {
-        HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
-
-        penalties.put(WireBroken.class, 1.0);
-
-        return penalties;
-    }
-
-    /**
-     * @return
-     */
-    private HashMap<Class<? extends Failure>, Double> getCloudyPenalties() {
-        HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
-        String probs = (String) this.getProperty(CLOUDY_PROB);
-        double prob = new Double(probs);
-        penalties.put(WireBroken.class, prob);
-
-        return penalties;
-    }
 
 	@Override
 	public void setPossibleStates() {
-		this.addPossibleStatus(SUNNY);
-		this.addPossibleStatus(CLOUDY);
 		this.addPossibleStatus(STATUS_NORMAL);
 		this.addPossibleStatus(STATUS_UNDER_ATTACK);
 		
@@ -220,7 +190,7 @@ public class WorkerRoomScenario extends Scenario{
 		configProperties.put(WorkerRoomSimulation.CONFIGURATION, "3");
 		WorkerRoomSimulation sim = new WorkerRoomSimulation(
 		        System.currentTimeMillis(), WorkerRoomScenario.class,
-		        "WorkerRoomScenario", SUNNY,
+		        "WorkerRoomScenario", STATUS_NORMAL,
 		        scenarioProperties, configProperties);
 		WorkerRoom2DSimulationGUI gui = new WorkerRoom2DSimulationGUI(sim);
 		//WorkerRoom3DSimulationGUI gui = new WorkerRoom3DSimulationGUI(sim);

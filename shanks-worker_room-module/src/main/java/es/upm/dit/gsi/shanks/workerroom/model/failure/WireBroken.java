@@ -10,7 +10,6 @@ public class WireBroken extends Failure{
 
 	public WireBroken() {
 		super(WireBroken.class.getName(), 1);
-		System.out.println("FALLO WIRE BROKEN CONSTRUIDO");
 	}
 
 	@Override

@@ -33,6 +33,8 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
 public class DataCenterScenario extends Scenario {
 
 	// TODO make that the status has influence.
+	public static final String CLOUDY = "CLOUDY";
+    public static final String SUNNY = "SUNNY";
 	public static final String STATUS_NORMAL = "Normal";
 	public static final String STATUS_UNDER_ATTACK = "UnderAttack";
 
@@ -60,6 +62,7 @@ public class DataCenterScenario extends Scenario {
 	public void setPossibleStates() {
 		this.addPossibleStatus(DataCenterScenario.STATUS_UNDER_ATTACK);
 		this.addPossibleStatus(DataCenterScenario.STATUS_NORMAL);
+
 	}
 
 	@Override
@@ -122,31 +125,31 @@ public class DataCenterScenario extends Scenario {
 	@Override
 	public void addPossibleFailures() {
 		
-		HashMap<String, NetworkElement> addedElements = this.getCurrentElements();
-		Set<NetworkElement> routerSet = new HashSet<NetworkElement>();
-		List<Set<NetworkElement>> computers = new ArrayList<Set<NetworkElement>>();
-		List<Set<NetworkElement>> servers = new ArrayList<Set<NetworkElement>>();
-		
-		for(String eName: addedElements.keySet()){
-			Set<NetworkElement> computerSet = new HashSet<NetworkElement>();
-			Set<NetworkElement> serverSet = new HashSet<NetworkElement>();
-			NetworkElement e = addedElements.get(eName);
-			if(!(e instanceof Link)){
-				routerSet.add(e);
-				if((e instanceof Computer)) {
-					if((e instanceof Server)){
-						serverSet.add(e);
-						servers.add(serverSet);
-					} else {
-						computerSet.add(e);
-						computers.add(computerSet);
-					}
-				}
-			}
-		}
-		this.addPossibleFailure(RouterFailure.class, routerSet);
-		this.addPossibleFailure(ComputerFailure.class, computers);
-		this.addPossibleFailure(ServerFailure.class, servers);
+//		HashMap<String, NetworkElement> addedElements = this.getCurrentElements();
+//		Set<NetworkElement> routerSet = new HashSet<NetworkElement>();
+//		List<Set<NetworkElement>> computers = new ArrayList<Set<NetworkElement>>();
+//		List<Set<NetworkElement>> servers = new ArrayList<Set<NetworkElement>>();
+//		
+//		for(String eName: addedElements.keySet()){
+//			Set<NetworkElement> computerSet = new HashSet<NetworkElement>();
+//			Set<NetworkElement> serverSet = new HashSet<NetworkElement>();
+//			NetworkElement e = addedElements.get(eName);
+//			if(!(e instanceof Link)){
+//				routerSet.add(e);
+//				if((e instanceof Computer)) {
+//					if((e instanceof Server)){
+//						serverSet.add(e);
+//						servers.add(serverSet);
+//					} else {
+//						computerSet.add(e);
+//						computers.add(computerSet);
+//					}
+//				}
+//			}
+//		}
+//		this.addPossibleFailure(RouterFailure.class, routerSet);
+//		this.addPossibleFailure(ComputerFailure.class, computers);
+//		this.addPossibleFailure(ServerFailure.class, servers);
 		
 	}
 
@@ -158,8 +161,9 @@ public class DataCenterScenario extends Scenario {
 	@Override
 	public HashMap<Class<? extends Failure>, Double> getPenaltiesInStatus(
 			String status) throws UnsupportedScenarioStatusException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
+	    return penalties;
 	}
 
 }

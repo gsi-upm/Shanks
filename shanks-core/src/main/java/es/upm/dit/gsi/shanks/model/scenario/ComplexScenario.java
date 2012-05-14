@@ -19,6 +19,7 @@ import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
+import es.upm.dit.gsi.shanks.model.event.Event;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.failure.exception.NoCombinationForFailureException;
 import es.upm.dit.gsi.shanks.model.failure.exception.UnsupportedElementInFailureException;
@@ -67,6 +68,7 @@ public abstract class ComplexScenario extends Scenario {
 
         this.addScenarios();
         this.addPossiblesFailuresComplex();
+        this.addPossiblesEventsComplex();
     }
 
     /**
@@ -237,21 +239,32 @@ public abstract class ComplexScenario extends Scenario {
     public void addPossiblesFailuresComplex(){
         Set<Scenario> scenarios = this.getScenarios();
         for(Scenario s : scenarios){
-            for(Class<? extends Failure> c : s.getPossibleFailures().keySet()){
-                if(!this.getPossibleFailures().containsKey(c)){
-                    this.addPossibleFailure(c, s.getPossibleFailures().get(c));
-                }else{
-                    List<Set<NetworkElement>> elements = this.getPossibleFailures().get(c);
-                    elements.addAll(s.getPossibleFailures().get(c));
-                    this.addPossibleFailure(c, elements);
-                }
+                for(Class<? extends Failure> c : s.getPossibleFailures().keySet()){
+                    if(!this.getPossibleFailures().containsKey(c)){
+                        this.addPossibleFailure(c, s.getPossibleFailures().get(c));
+                    }else{
+                        List<Set<NetworkElement>> elements = this.getPossibleFailures().get(c);
+                        elements.addAll(s.getPossibleFailures().get(c));
+                        this.addPossibleFailure(c, elements);
+                    }
             }
         }
     }
     
     //TODO Hacerlo como con los fallos
-    public void addPossiblesventsComplex(){
-        
+    public void addPossiblesEventsComplex(){
+        Set<Scenario> scenarios = this.getScenarios();
+        for(Scenario s : scenarios){
+                for(Class<? extends Event> c : s.getPossibleEventsOfNE().keySet()){
+                    if(!this.getPossibleEventsOfNE().containsKey(c)){
+                        this.addPossibleEventsOfNE(c, s.getPossibleEventsOfNE().get(c));
+                    }else{
+                        List<Set<NetworkElement>> elements = this.getPossibleEventsOfNE().get(c);
+                        elements.addAll(s.getPossibleEventsOfNE().get(c));
+                        this.addPossibleEventsOfNE(c, elements);
+                    }
+            }
+        }
         
     }
     

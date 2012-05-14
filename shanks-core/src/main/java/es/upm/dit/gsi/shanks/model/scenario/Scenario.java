@@ -616,7 +616,7 @@ public abstract class Scenario {
                             prob = failure.getOccurrenceProbability()
                                     * numberOfCombinations * penalty;
                         } else {
-                            prob = -1.0; // Impossible failure
+                            prob = 1.0; // Impossible failure
                         }
                     } else {
                         prob = failure.getOccurrenceProbability()

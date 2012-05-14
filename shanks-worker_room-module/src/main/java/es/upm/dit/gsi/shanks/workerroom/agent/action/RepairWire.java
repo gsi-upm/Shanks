@@ -14,7 +14,7 @@ public class RepairWire extends SimpleShanksAgentAction{
 
 	@Override
 	public void addPossibleAffected() {
-		this.addPossibleAffectedProperties(EthernetLink.class, EthernetLink.PROPERTY_PACKETLOSSRATIO, Values.REPAIR_WIRE_PROB);
+		this.addPossibleAffectedProperties(EthernetLink.class, EthernetLink.PROPERTY_PACKETLOSSRATIO, 0.001);
 		
 	}
 

@@ -13,6 +13,7 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
+import es.upm.dit.gsi.shanks.workerroom.agent.RepairWireAgent;
 
 public class ISPSimulation extends ShanksSimulation{
 
@@ -36,4 +37,11 @@ public class ISPSimulation extends ShanksSimulation{
 		this.configuration = configPropertiesISPSimulation;
 	}
 
+
+    @Override
+    public void registerShanksAgents() throws DuplicatedAgentIDException,
+            DuplicatedActionIDException {
+    	RepairWireAgent worker = new RepairWireAgent("Repair Wire Worker");
+    	this.registerShanksAgent(worker);
+      }
 }

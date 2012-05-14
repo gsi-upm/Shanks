@@ -84,6 +84,20 @@ public class NotificationManager implements Steppable {
         		"identifiers counter: "+ID_COUNTER);
     }
     
+    
+    /**
+     * The user can use this method to add notifications manually. 
+     *   
+     * @param n
+     *          the notification to add. 
+     */
+     public static void addNotification(Notification n) {
+        NotificationManager.notifications.add(n);
+        logger.fine("New notification added to notifications list. There is currently: " +
+                    notifications.size()+" notifications\n Notification added: "
+                    +NotificationManager.notifications.get(NotificationManager.notifications.size()-1));
+    }
+    
     /**
      * Whenever a new event triggers it will use this method to add the corresponding notification
      * to the notification lists. 
@@ -98,7 +112,7 @@ public class NotificationManager implements Steppable {
                                         NotificationManager.sim.getSchedule().getSteps(), e.getLauncher(), 
                                         interaction, (List<Object>) e.getAffected()));
         logger.fine("New notification added to notifications list. There is currently: " +
-                    notifications.get(notifications.size()-1)+" notifications\n Notification added: "
+                    notifications.size()+" notifications\n Notification added: "
                     +NotificationManager.notifications.get(NotificationManager.notifications.size()-1));
     }
     

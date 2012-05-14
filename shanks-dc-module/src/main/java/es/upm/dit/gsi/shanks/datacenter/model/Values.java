@@ -48,7 +48,22 @@ public class Values {
 	public static final String SERVICE_NOT_FOUND = "ServiceNotFound";
 	public static final Object ACTION_NOT_AVAILABLE = "NotAvailableAction";
 
-
+	// SysAdmin values
+	public static final String SYSADMIN_BAYESIAN_NETWORK_PATH = "/shanks-dc-module/src/main/java/es/upm/dit/gsi/shanks/datacenter/agent/SysAdmin.net";
 	
+	public static final String SYSADMIN_REPAIR_NODENAME = "Reparar";
+	public static final String SYSADMIN_SERVER_LOAD_NODENAME = "Server_load";
+	public static final String SYSADMIN_ROUTER_LOAD_NODENAME = "Router_load";
+	public static final String SYSADMIN_LOG_NODENAME = "log";
+	public static final String SYSADMIN_ACTION_NODENAME = "Action";
+	
+	public static final String SYSADMIN_LOG_OK = "OK";
+	public static final String SYSADMIN_LOG_WEIRD = "Weird";
+	public static final String SYSADMIN_LOG_NOK = "NOK";
+	
+	public static final String SYSADMIN_ACTION_REPAIR = "Repair";
+	public static final String SYSADMIN_ACTION_MANTEINANCE = "Manteinance";
+	public static final String SYSADMIN_ACTION_PATCH = "Patch";
+	public static final String SYSADMIN_ACTION_LOOKOUT = "Look_out"; 
 
 }

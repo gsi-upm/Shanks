@@ -15,6 +15,8 @@ import es.upm.dit.gsi.shanks.hackerhan.attack.DDoS;
 import es.upm.dit.gsi.shanks.hackerhan.attack.RootShell;
 import es.upm.dit.gsi.shanks.hackerhan.attack.SQLInjection;
 import es.upm.dit.gsi.shanks.hackerhan.model.Values;
+import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
+import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 
 /**
  * Hacker agent is a malicious agent that investigate security failures and try
@@ -255,12 +257,21 @@ public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksA
 	 */
 	private Attack createAttack(String attackType, String targetID, ShanksSimulation sim){
 		Attack result = null;
-		if (attackType.equalsIgnoreCase(Values.ATTACK_DDOS)){
-			result = new DDoS(this, targetID, sim);
-		} else if (attackType.equalsIgnoreCase(Values.ATTACK_ROOT_SHELL)){
-			result = new RootShell(this, sim);
-		} else if (attackType.equalsIgnoreCase(Values.ATTACK_SQL_INJECTION)) {
-			result = new SQLInjection(this, sim);
+		try {
+			if (attackType.equalsIgnoreCase(Values.ATTACK_DDOS)) {
+				result = new DDoS(this, targetID, sim);
+			} else if (attackType.equalsIgnoreCase(Values.ATTACK_ROOT_SHELL)) {
+				result = new RootShell(this, sim,
+						((ComplexScenario) sim.getScenario())
+								.getScenario(Values.HAN_SCENARIO_ID
+										+ this.getID().charAt(this.getID().length() - 1)));
+
+			} else if (attackType.equalsIgnoreCase(Values.ATTACK_SQL_INJECTION)) {
+				result = new SQLInjection(this, sim);
+			}
+		} catch (ScenarioNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return result;
 	}

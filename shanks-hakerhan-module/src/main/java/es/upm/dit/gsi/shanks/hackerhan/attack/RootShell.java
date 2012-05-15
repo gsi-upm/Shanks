@@ -3,6 +3,12 @@ package es.upm.dit.gsi.shanks.hackerhan.attack;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.capability.creation.CreationShanksAgentCapability;
 import es.upm.dit.gsi.shanks.hackerhan.agent.Hacker;
+import es.upm.dit.gsi.shanks.hackerhan.model.Values;
+import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
+import es.upm.dit.gsi.shanks.model.scenario.Scenario;
+import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.RouterDNS;
+import es.upm.dit.gsi.shanks.datacenter.model.element.device.Server;
 
 /**
  * Class to represent a "RootShell" attack,
@@ -15,37 +21,39 @@ public class RootShell implements Attack {
 	private Hacker hacker;
 	private ShanksSimulation sim;
 	
-	Thread attackThread;
-	int ports;
+	private Scenario han;
 	
+	boolean running;
 	boolean success;
 	
-	public RootShell(Hacker hacker, ShanksSimulation sim){
+	public RootShell(Hacker hacker, ShanksSimulation sim, Scenario han){
 		super();
 		this.hacker = hacker;
 		this.sim = sim;
-		this.ports = 1000;
+		this.han = han;
 		this.success = false;
+		this.running = false;
 	}
 	@Override
 	public void execute() {
-		/*
-		 * If the target is another han, automatic success.
-		 * 
-		 * If not, scan for open ports. If one is found, checks
-		 * his knowledge base (o uses a random variable) to see if 
-		 * a vulnerability can be exploit.
-		 * 
-		 */
-		
-		//ISPDNS dns = sim.getScenario().getNetworkElement("DNS");
-		//Gateway gateway = dns.getRouter("Gateway");
-		
-		//Gateway gateway = (Gateway) sim.getScenario().getNetworkElement("Gateway");
-//		int port = sim.random.nextInt(ports);
-//		if(gateway.isPortOpen(hacker.getID(), port)){
-//			// Try to attack it.
-//		}
+		try {
+			this.running = true;
+			Server webServer = (Server) ((ComplexScenario)((ComplexScenario)this.sim.getScenario()).getScenario(Values.ENTERPRISE_SCENARIO_ID))
+					.getScenario(Values.DATA_CENTER_SCENARIO_ID).getNetworkElement(Values.WEB_SERVER_ID);
+			int vulnerability = (int) ((Double)webServer.getProperty(Server.PROPERTY_VULNERABILITY) * 100);
+			
+			int rand = this.sim.random.nextInt(100);
+			if (rand < vulnerability){
+				this.success = true;
+				// TODO: set property "hacked"??
+			}
+			// TODO: Increase log "weirdness" 
+			
+		} catch (ScenarioNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				
 	}
 
 	@Override
@@ -72,7 +80,7 @@ public class RootShell implements Attack {
 	
 	@Override
 	public boolean isRunning() {
-		return this.attackThread.isAlive();
+		return this.running;
 	}
 
 }

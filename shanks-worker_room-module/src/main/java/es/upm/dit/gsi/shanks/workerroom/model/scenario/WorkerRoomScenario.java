@@ -29,6 +29,7 @@ import es.upm.dit.gsi.shanks.networkattacks.util.failures.WireBroken;
 import es.upm.dit.gsi.shanks.networkattacks.util.failures.WireDamaged;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Computer;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.EthernetLink;
+import es.upm.dit.gsi.shanks.workerroom.model.Values;
 import es.upm.dit.gsi.shanks.workerroom.model.element.device.LANRouter;
 import es.upm.dit.gsi.shanks.workerroom.model.element.device.Printer;
 import es.upm.dit.gsi.shanks.workerroom.model.scenario.portrayal.WorkerRoomScenario2DPortrayal;
@@ -50,49 +51,34 @@ public class WorkerRoomScenario extends Scenario{
 			TooManyConnectionException, UnsupportedScenarioStatusException,
 			DuplicatedIDException {
 		super(id, initialState, properties);
-		
 	}
 
 	@Override
 	public void addNetworkElements()
 			throws UnsupportedNetworkElementStatusException,
 			TooManyConnectionException, DuplicatedIDException {
-		Device pc1 = new Computer("PC1");
-		Device pc2 = new Computer("PC2");
-		Device pc3 = new Computer("PC3");
-		Device pc4 = new Computer("PC4");
-		Device pc5 = new Computer("PC5");
-		Device printer = new Printer("Printer", Printer.STATUS_OK, false);
-		Device router = new LANRouter("LANRouter");
-		Link ethernetLink1 = new EthernetLink("EthernetLink1", 2);
-		Link ethernetLink2 = new EthernetLink("EthernetLink2", 2);
-		Link ethernetLink3 = new EthernetLink("EthernetLink3", 2);
-		Link ethernetLink4 = new EthernetLink("EthernetLink4", 2);
-		Link ethernetLink5 = new EthernetLink("EthernetLink5", 2);
-		Link ethernetLink6 = new EthernetLink("EthernetLink6", 2);
-
 		
-		ethernetLink1.connectDevices(pc1, router);
-		ethernetLink2.connectDevices(pc2, router);
-		ethernetLink3.connectDevices(pc3, router);
-		ethernetLink4.connectDevices(pc4, router);
-		ethernetLink5.connectDevices(pc5, router);
-		ethernetLink6.connectDevices(printer, router);
-		
-		this.addNetworkElement(ethernetLink1);
-		this.addNetworkElement(ethernetLink2);
-		this.addNetworkElement(ethernetLink3);
-		this.addNetworkElement(ethernetLink4);
-		this.addNetworkElement(ethernetLink5);
-		this.addNetworkElement(ethernetLink6);
+		// Worker_room router
+		LANRouter router = new LANRouter(Values.WORKER_ROOM_ROUTER_ID);
 		this.addNetworkElement(router);
-		this.addNetworkElement(printer);
-		this.addNetworkElement(pc1);	
-		this.addNetworkElement(pc2);
-		this.addNetworkElement(pc3);
-		this.addNetworkElement(pc4);
-		this.addNetworkElement(pc5);
-				
+		
+		// Adding PCs, PC-Links and connect it with router
+		ArrayList<Computer> pcs = new ArrayList<Computer>();
+		ArrayList<Link> links = new ArrayList<Link>();
+		for(int i=0; i<Values.NUMBER_OF_WORKERROOM_PCS; i++){
+			Computer computer = new Computer(Values.WR_COMPUTER_ID+i);
+			EthernetLink link = new EthernetLink(Values.WR_ETHERNET_ID+i, 2.0);
+			pcs.add(computer);
+			links.add(link);
+			router.connectToDeviceWithLink(computer, link);
+			this.addNetworkElement(computer);
+			this.addNetworkElement(link);
+		}
+		
+		// Adding printer
+		Printer printer = new Printer(Values.WR_Printer_ID, Printer.STATUS_OK, false);
+		links.add(new EthernetLink(Values.WR_ETHERNET_ID+links.size(), 2.0));
+		router.connectToDeviceWithLink(printer, links.get(links.size()-1));
 	}
 
 	@Override
@@ -102,47 +88,24 @@ public class WorkerRoomScenario extends Scenario{
 
 	@Override
 	public void addPossibleFailures() {
-		Set<NetworkElement> set1 = new HashSet<NetworkElement>();
-		set1.add(this.getNetworkElement("EthernetLink1"));
-		Set<NetworkElement> set2 = new HashSet<NetworkElement>();
-		set2.add(this.getNetworkElement("EthernetLink2"));
-		Set<NetworkElement> set3 = new HashSet<NetworkElement>();
-		set3.add(this.getNetworkElement("EthernetLink3"));
-		Set<NetworkElement> set4 = new HashSet<NetworkElement>();
-		set4.add(this.getNetworkElement("EthernetLink4"));
-		Set<NetworkElement> set5 = new HashSet<NetworkElement>();
-		set5.add(this.getNetworkElement("EthernetLink5"));
-		Set<NetworkElement> set6 = new HashSet<NetworkElement>();
-		set6.add(this.getNetworkElement("EthernetLink6"));
-        List<Set<NetworkElement>> possibleCombinations = new ArrayList<Set<NetworkElement>>();
-		possibleCombinations.add(set1);
-		possibleCombinations.add(set2);
-		possibleCombinations.add(set3);
-		possibleCombinations.add(set4);
-		possibleCombinations.add(set5);
-		possibleCombinations.add(set6);
-		this.addPossibleFailure(WireBroken.class, possibleCombinations);
-		this.addPossibleFailure(WireDamaged.class, possibleCombinations);
-		
-		this.addPossibleFailure(RouterFailure.class, this.getNetworkElement("LANRouter"));
-		
-		Set<NetworkElement> set10 = new HashSet<NetworkElement>();
-		set10.add(this.getNetworkElement("PC1"));
-		Set<NetworkElement> set11 = new HashSet<NetworkElement>();
-		set11.add(this.getNetworkElement("PC2"));
-		Set<NetworkElement> set12 = new HashSet<NetworkElement>();
-		set12.add(this.getNetworkElement("PC3"));
-		Set<NetworkElement> set13 = new HashSet<NetworkElement>();
-		set13.add(this.getNetworkElement("PC4"));
-		Set<NetworkElement> set14 = new HashSet<NetworkElement>();
-		set14.add(this.getNetworkElement("PC5"));		
-		List<Set<NetworkElement>> possibleCombinations1 = new ArrayList<Set<NetworkElement>>();
-		possibleCombinations1.add(set10);
-		possibleCombinations1.add(set11);
-		possibleCombinations1.add(set12);
-		possibleCombinations1.add(set13);
-		possibleCombinations1.add(set14);
-		this.addPossibleFailure(ComputerFailure.class, possibleCombinations1);	
+		List<Set<NetworkElement>> linksCombinations = new ArrayList<Set<NetworkElement>>();
+		List<Set<NetworkElement>> pcsCombinations = new ArrayList<Set<NetworkElement>>();
+		for(String key: this.getCurrentElements().keySet()){
+			NetworkElement ne = this.getCurrentElements().get(key);
+			if(ne instanceof Link){
+				Set<NetworkElement> set = new HashSet<NetworkElement>();
+				set.add(ne);
+				linksCombinations.add(set);
+			} else if(ne instanceof Computer){
+				Set<NetworkElement> set = new HashSet<NetworkElement>();
+				set.add(ne);
+				pcsCombinations.add(set);
+			}
+		}
+		this.addPossibleFailure(WireBroken.class, linksCombinations);
+		this.addPossibleFailure(WireDamaged.class, linksCombinations);
+		this.addPossibleFailure(RouterFailure.class, this.getNetworkElement(Values.WORKER_ROOM_ROUTER_ID));
+		this.addPossibleFailure(ComputerFailure.class, pcsCombinations);	
 	}
 
 	@Override
@@ -160,7 +123,6 @@ public class WorkerRoomScenario extends Scenario{
 	@Override
 	public HashMap<Class<? extends Failure>, Double> getPenaltiesInStatus(
 			String status) throws UnsupportedScenarioStatusException {
-		
 		HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
 	    return penalties;
 	}
@@ -170,7 +132,6 @@ public class WorkerRoomScenario extends Scenario{
 	public void setPossibleStates() {
 		this.addPossibleStatus(STATUS_NORMAL);
 		this.addPossibleStatus(STATUS_UNDER_ATTACK);
-		
 	}
 	
 	public static void main(String[] args) throws SecurityException,

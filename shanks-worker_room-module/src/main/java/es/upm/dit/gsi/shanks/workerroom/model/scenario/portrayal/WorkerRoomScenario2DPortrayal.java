@@ -4,6 +4,7 @@ import sim.field.grid.SparseGrid2D;
 import sim.portrayal.continuous.ContinuousPortrayal2D;
 import sim.portrayal.grid.SparseGridPortrayal2D;
 import sim.portrayal.network.NetworkPortrayal2D;
+import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
@@ -44,22 +45,20 @@ public class WorkerRoomScenario2DPortrayal extends Scenario2DPortrayal{
 
 	@Override
 	public void placeElements() {
-		this.situateDevice((Device)this.getScenario().getNetworkElement("PC1"), 10, 20);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("PC2"), 10, 30);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("PC3"), 10, 40);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("PC4"), 10, 50);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("PC5"), 10, 60);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("Printer"), 50, 20);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("LANRouter"), 50, 50);
-		
-		this.drawLink((Link)this.getScenario().getNetworkElement("EthernetLink1"));
-		this.drawLink((Link)this.getScenario().getNetworkElement("EthernetLink2"));
-		this.drawLink((Link)this.getScenario().getNetworkElement("EthernetLink3"));
-		this.drawLink((Link)this.getScenario().getNetworkElement("EthernetLink4"));
-		this.drawLink((Link)this.getScenario().getNetworkElement("EthernetLink5"));
-		this.drawLink((Link)this.getScenario().getNetworkElement("EthernetLink6"));
-
-		
+		int positionY=20;
+		for(String key: this.getScenario().getCurrentElements().keySet()){
+			NetworkElement ne = this.getScenario().getCurrentElements().get(key);
+			if(ne instanceof Computer) {
+				this.situateDevice((Device) ne, 10, positionY);
+				positionY = positionY+10;
+			} else if(ne instanceof Printer) {
+				this.situateDevice((Device) ne, 50, 20);
+			} else if(ne instanceof LANRouter){
+				this.situateDevice((Device) ne, 50, 50);
+			} else if(ne instanceof Link){
+				this.drawLink((Link) ne);
+			}
+		}
 	}
 
 	@Override

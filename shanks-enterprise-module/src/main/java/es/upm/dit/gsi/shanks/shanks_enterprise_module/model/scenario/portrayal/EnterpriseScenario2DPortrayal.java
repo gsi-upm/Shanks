@@ -5,6 +5,7 @@ import sim.portrayal.continuous.ContinuousPortrayal2D;
 import sim.portrayal.grid.SparseGridPortrayal2D;
 import sim.portrayal.network.NetworkPortrayal2D;
 import sim.util.Double2D;
+import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.failure.portrayal.Failure2DPortrayal;
@@ -22,6 +23,7 @@ import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Server;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.portrayals.Computer2DPortrayal;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.portrayals.Router2DPortrayal;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.portrayals.Server2DPortrayal;
+import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.Values;
 import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.element.CompanyRouter;
 import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.element.portrayal.CompanyRouter2DPortrayal;
 import es.upm.dit.gsi.shanks.workerroom.model.element.device.LANRouter;
@@ -44,11 +46,36 @@ public class EnterpriseScenario2DPortrayal extends ComplexScenario2DPortrayal{
 	public void placeScenarios() throws DuplicatedPortrayalIDException,
 			ScenarioNotFoundException {
 		ComplexScenario cs = (ComplexScenario) this.getScenario();
-        this.situateScenario(cs.getScenario("Worker Room 1"), new Double2D(0,-5), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
-        this.situateScenario(cs.getScenario("Worker Room 2"), new Double2D(120,-5), ShanksMath.ANGLE_0, ShanksMath.ANGLE_180, ShanksMath.ANGLE_0);
-        this.situateScenario(cs.getScenario("Worker Room 3"), new Double2D(120,125), ShanksMath.ANGLE_180, ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
-        this.situateScenario(cs.getScenario("Data Center"), new Double2D(65,190), ShanksMath.ANGLE_90, ShanksMath.ANGLE_0, ShanksMath.ANGLE_180);
-        
+		int place = 0;
+		int positionX = 0;
+		int positionY = 0;
+		for (Scenario subScenario : cs.getScenarios()) {
+			if (place == 0) {
+				this.situateScenario(subScenario, new Double2D(
+						positionX, positionY), ShanksMath.ANGLE_0, 
+						ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
+				place = 1;
+				positionX = positionX+Values.deltaX;
+			} else if (place == 1) {
+				this.situateScenario(subScenario, new Double2D(
+						positionX, positionY), ShanksMath.ANGLE_180, 
+						ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
+				place = 2;
+				positionX = positionX+Values.deltaX;
+			} else if (place == 2) {
+				this.situateScenario(subScenario, new Double2D(
+						positionX, positionY), ShanksMath.ANGLE_180, 
+						ShanksMath.ANGLE_0, ShanksMath.ANGLE_180);
+				place = 3;
+				positionY = positionY+Values.deltaY;
+			} else if (place == 3) {
+				this.situateScenario(subScenario, new Double2D(
+						positionX, positionY), ShanksMath.ANGLE_0, 
+						ShanksMath.ANGLE_180, ShanksMath.ANGLE_180);
+				place = 0;
+				positionY = positionY+Values.deltaY;
+			}
+		}        
 	}
 
 	@Override
@@ -66,11 +93,13 @@ public class EnterpriseScenario2DPortrayal extends ComplexScenario2DPortrayal{
 	@Override
 	public void placeElements() {
 		ComplexScenario cs = (ComplexScenario) this.getScenario();       
-        this.situateDevice((Device)cs.getNetworkElement("Intranet LANRouter"), 60, 60);        
-        this.drawLink((Link)cs.getNetworkElement("EL1"));
-        this.drawLink((Link)cs.getNetworkElement("EL2"));
-        this.drawLink((Link)cs.getNetworkElement("EL3"));
-        this.drawLink((Link)cs.getNetworkElement("EL4"));
+        this.situateDevice((Device)cs.getNetworkElement(Values.ENTERPRISE_GATEWAY_ID), 60, 60);
+		for (String key : cs.getCurrentElements().keySet()) {
+			NetworkElement ne = cs.getCurrentElements().get(key);
+			if (ne instanceof Link) {
+				this.drawLink((Link) ne);
+			}
+		}     
 	}
 
 	@Override

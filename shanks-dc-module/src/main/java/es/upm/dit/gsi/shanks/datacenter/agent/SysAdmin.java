@@ -2,6 +2,7 @@ package es.upm.dit.gsi.shanks.datacenter.agent;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Set;
 
 import unbbayes.prs.bn.ProbabilisticNetwork;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
@@ -12,6 +13,10 @@ import es.upm.dit.gsi.shanks.datacenter.model.Values;
 import es.upm.dit.gsi.shanks.datacenter.model.element.device.Router;
 import es.upm.dit.gsi.shanks.datacenter.model.element.device.Server;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.failure.Failure;
+import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
+import es.upm.dit.gsi.shanks.model.scenario.Scenario;
+import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 import es.upm.dit.gsi.shanks.networkattacks.util.action.RepairComputer;
 
@@ -67,7 +72,7 @@ public class SysAdmin extends SimpleShanksAgent implements
 
 	@Override
 	public void executeReasoningCycle(ShanksSimulation simulation) {
-		String to_repair = "0";
+		int to_repair = getBrokenCount(simulation);
 		
 		HashMap<String, Boolean> serverStatus = simulation.getScenario().getNetworkElement(Values.SERVER_ID).getStatus();
 		String webServerLoad = null;
@@ -88,8 +93,9 @@ public class SysAdmin extends SimpleShanksAgent implements
 		try {
 			
 			// Set the evidences. 
-			ShanksAgentBayesianReasoningCapability.addEvidence(this,
-					Values.SYSADMIN_REPAIR_NODENAME, to_repair);
+			if(to_repair != Integer.MIN_VALUE)
+				ShanksAgentBayesianReasoningCapability.addEvidence(this,
+						Values.SYSADMIN_REPAIR_NODENAME, String.valueOf(to_repair));
 			
 			if(webServerLoad != null)
 				ShanksAgentBayesianReasoningCapability.addEvidence(this,
@@ -98,8 +104,10 @@ public class SysAdmin extends SimpleShanksAgent implements
 			if (routerLoad != null)
 				ShanksAgentBayesianReasoningCapability.addEvidence(this,
 						Values.SYSADMIN_ROUTER_LOAD_NODENAME, routerLoad);
-			ShanksAgentBayesianReasoningCapability.addEvidence(this,
-					Values.SYSADMIN_LOG_NODENAME, log_status);
+			
+			if (log_status != null)
+				ShanksAgentBayesianReasoningCapability.addEvidence(this,
+						Values.SYSADMIN_LOG_NODENAME, log_status);
 
 			this.bayesianNetwork.updateEvidences();
 
@@ -161,28 +169,42 @@ public class SysAdmin extends SimpleShanksAgent implements
 		Router mainRouter = null;
 		Server webServer = null;
 		Server sqlServer = null;
+		try {
+			mainRouter = (Router) ((ComplexScenario)((ComplexScenario)sim.getScenario()).getScenario("EnterpriseScenario")).getScenario("WorkerRoomScenario").getNetworkElement(Values.DATA_CENTER_ROUTER_ID);
+			webServer = (Server) ((ComplexScenario)((ComplexScenario)sim.getScenario()).getScenario("EnterpriseScenario")).getScenario("WorkerRoomScenario").getNetworkElement(Values.WEB_SERVER_ID);
+			sqlServer = (Server) ((ComplexScenario)((ComplexScenario)sim.getScenario()).getScenario("EnterpriseScenario")).getScenario("WorkerRoomScenario").getNetworkElement(Values.SQL_SERVER_ID);
+		} catch (ScenarioNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		
 		//Router load
-		HashMap<String, Object> routerProperties = new HashMap<String, Object>();
-		routerProperties
-				.put(Router.PROPERTY_CONGESTION, ((Double) mainRouter
-						.getProperty(Router.PROPERTY_CONGESTION)) *2/3);
-		mainRouter.setProperties(routerProperties);
+		if(mainRouter != null){
+			HashMap<String, Object> routerProperties = new HashMap<String, Object>();
+			routerProperties
+					.put(Router.PROPERTY_CONGESTION, ((Double) mainRouter
+							.getProperty(Router.PROPERTY_CONGESTION)) *2/3);
+			mainRouter.setProperties(routerProperties);
+		}
 
 		// Updates the server vulnerability
-		HashMap<String, Object> webServerProperties = new HashMap<String, Object>();
-		webServerProperties
-				.put(Server.PROPERTY_LOAD, ((Double) webServer
-						.getProperty(Server.PROPERTY_LOAD)) *2/3);
-		webServer.setProperties(webServerProperties);
+		if (webServer != null) {
+			HashMap<String, Object> webServerProperties = new HashMap<String, Object>();
+			webServerProperties
+					.put(Server.PROPERTY_LOAD, ((Double) webServer
+							.getProperty(Server.PROPERTY_LOAD)) *2/3);
+			webServer.setProperties(webServerProperties);
+		}
 
 		// Updates the sqlServer
-		HashMap<String, Object> sqlServerProperties = new HashMap<String, Object>();
-		sqlServerProperties
-				.put(Server.PROPERTY_LOAD, ((Double) sqlServer
-						.getProperty(Server.PROPERTY_LOAD)) *2/3);
-		sqlServer.setProperties(sqlServerProperties);
-
+		if (sqlServer !=  null) {
+			HashMap<String, Object> sqlServerProperties = new HashMap<String, Object>();
+			sqlServerProperties
+					.put(Server.PROPERTY_LOAD, ((Double) sqlServer
+							.getProperty(Server.PROPERTY_LOAD)) *2/3);
+			sqlServer.setProperties(sqlServerProperties);
+		}
 	}
 
 	/**
@@ -197,27 +219,41 @@ public class SysAdmin extends SimpleShanksAgent implements
 		Router mainRouter = null;
 		Server webServer = null;
 		Server sqlServer = null;
+		try {
+			mainRouter = (Router) ((ComplexScenario)((ComplexScenario)sim.getScenario()).getScenario("EnterpriseScenario")).getScenario("WorkerRoomScenario").getNetworkElement(Values.DATA_CENTER_ROUTER_ID);
+			webServer = (Server) ((ComplexScenario)((ComplexScenario)sim.getScenario()).getScenario("EnterpriseScenario")).getScenario("WorkerRoomScenario").getNetworkElement(Values.WEB_SERVER_ID);
+			sqlServer = (Server) ((ComplexScenario)((ComplexScenario)sim.getScenario()).getScenario("EnterpriseScenario")).getScenario("WorkerRoomScenario").getNetworkElement(Values.SQL_SERVER_ID);
+		} catch (ScenarioNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		// Updates the router vulnerability
-		HashMap<String, Object> routerProperties = new HashMap<String, Object>();
-		routerProperties
-				.put(Router.PROPERTY_VULNERABILITY, ((Double) mainRouter
-						.getProperty(Router.PROPERTY_VULNERABILITY)) / 2);
-		mainRouter.setProperties(routerProperties);
+		if (mainRouter != null) {
+			HashMap<String, Object> routerProperties = new HashMap<String, Object>();
+			routerProperties
+					.put(Router.PROPERTY_VULNERABILITY, ((Double) mainRouter
+							.getProperty(Router.PROPERTY_VULNERABILITY)) / 2);
+			mainRouter.setProperties(routerProperties);
+		}
 
 		// Updates the server vulnerability
+		if(webServer !=null) {
 		HashMap<String, Object> webServerProperties = new HashMap<String, Object>();
-		webServerProperties
+			webServerProperties
 				.put(Server.PROPERTY_VULNERABILITY, ((Double) webServer
-						.getProperty(Server.PROPERTY_VULNERABILITY)) / 2);
-		webServer.setProperties(webServerProperties);
+							.getProperty(Server.PROPERTY_VULNERABILITY)) / 2);
+			webServer.setProperties(webServerProperties);
+		}
 
 		// Updates the sqlServer
-		HashMap<String, Object> sqlServerProperties = new HashMap<String, Object>();
-		sqlServerProperties
-				.put(Server.PROPERTY_VULNERABILITY, ((Double) sqlServer
-						.getProperty(Server.PROPERTY_VULNERABILITY)) / 2);
-		sqlServer.setProperties(sqlServerProperties);
+		if(sqlServer != null) {
+			HashMap<String, Object> sqlServerProperties = new HashMap<String, Object>();
+			sqlServerProperties
+					.put(Server.PROPERTY_VULNERABILITY, ((Double) sqlServer
+							.getProperty(Server.PROPERTY_VULNERABILITY)) / 2);
+			sqlServer.setProperties(sqlServerProperties);
+		}
 	}
 
 	private void repair(ShanksSimulation sim) {
@@ -229,5 +265,23 @@ public class SysAdmin extends SimpleShanksAgent implements
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Returns the count of current failures in the worker room.
+	 * 
+	 * @param ShanksSimulation - The simulation
+	 * @return int - MIN_VALUE if something goes wrong
+	 */
+	private int getBrokenCount(ShanksSimulation sim){
+		try {
+			Scenario workerRoom = ((ComplexScenario)((ComplexScenario)sim.getScenario()).getScenario("EnterpriseScenario")).getScenario("WorkerRoomScenario");
+			Set<Failure> failures = workerRoom.getCurrentFailures();
+			return failures.size();
+		} catch (ScenarioNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return Integer.MIN_VALUE;
 	}
 }

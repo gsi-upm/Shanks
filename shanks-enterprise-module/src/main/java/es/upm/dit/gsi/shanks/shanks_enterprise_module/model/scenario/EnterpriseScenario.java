@@ -95,7 +95,7 @@ public class EnterpriseScenario extends ComplexScenario{
 			throws UnsupportedNetworkElementStatusException,
 			TooManyConnectionException, DuplicatedIDException {
 
-		// Adding the Enterprise Router.
+		// Adding the Enterprise DCRouter.
 		Device companyRouter = new CompanyRouter(Values.ENTERPRISE_GATEWAY_ID);
 		this.addNetworkElement(companyRouter);
 		

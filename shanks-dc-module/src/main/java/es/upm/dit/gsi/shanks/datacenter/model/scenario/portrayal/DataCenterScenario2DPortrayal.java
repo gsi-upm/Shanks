@@ -4,14 +4,10 @@
  */
 package es.upm.dit.gsi.shanks.datacenter.model.scenario.portrayal;
 
-import java.util.HashMap;
-
 import sim.portrayal.continuous.ContinuousPortrayal2D;
 import sim.portrayal.network.NetworkPortrayal2D;
 import es.upm.dit.gsi.shanks.datacenter.model.Values;
-import es.upm.dit.gsi.shanks.datacenter.model.element.device.Router;
-import es.upm.dit.gsi.shanks.datacenter.model.element.device.Server;
-import es.upm.dit.gsi.shanks.datacenter.model.element.device.portrayal.Server2DPortrayal;
+import es.upm.dit.gsi.shanks.datacenter.model.element.device.DCRouter;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
@@ -21,9 +17,11 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Computer;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.EthernetLink;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Server;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.portrayals.Computer2DPortrayal;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.portrayals.EthernetCable2DPortrayal;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.portrayals.Router2DPortrayal;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.portrayals.Server2DPortrayal;
 
 /**
  * 
@@ -106,7 +104,7 @@ public class DataCenterScenario2DPortrayal extends Scenario2DPortrayal {
 				.get(ScenarioPortrayal.LINKS_PORTRAYAL);
 		devicesPortrayal.setPortrayalForClass(Computer.class,
 				new Computer2DPortrayal());
-		devicesPortrayal.setPortrayalForClass(Router.class,
+		devicesPortrayal.setPortrayalForClass(DCRouter.class,
 				new Router2DPortrayal());
 		devicesPortrayal.setPortrayalForClass(Server.class,
 				new Server2DPortrayal());

@@ -10,15 +10,13 @@ import es.upm.dit.gsi.shanks.agent.SimpleShanksAgent;
 import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.BayesianReasonerShanksAgent;
 import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.ShanksAgentBayesianReasoningCapability;
 import es.upm.dit.gsi.shanks.datacenter.model.Values;
-import es.upm.dit.gsi.shanks.datacenter.model.element.device.Router;
-import es.upm.dit.gsi.shanks.datacenter.model.element.device.Server;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.datacenter.model.element.device.DCRouter;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
-import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 import es.upm.dit.gsi.shanks.networkattacks.util.action.RepairComputer;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Server;
 
 public class SysAdmin extends SimpleShanksAgent implements
 		BayesianReasonerShanksAgent {
@@ -81,7 +79,7 @@ public class SysAdmin extends SimpleShanksAgent implements
 				webServerLoad = key;
 		}
 		
-		// Router Load
+		// DCRouter Load
 		HashMap<String, Boolean> routerStatus = simulation.getScenario().getNetworkElement(Values.ENTERPRISE_GATEWAY_ID).getStatus();
 		String routerLoad = null;
 		for(String key: routerStatus.keySet()){
@@ -166,11 +164,11 @@ public class SysAdmin extends SimpleShanksAgent implements
 	private void maintenance(ShanksSimulation sim) {
 		// TODO: Implement maintenance
 		// Updates the router vulnerability
-		Router mainRouter = null;
+		DCRouter mainRouter = null;
 		Server webServer = null;
 		Server sqlServer = null;
 		try {
-			mainRouter = (Router) ((ComplexScenario)((ComplexScenario)sim.getScenario()).getScenario("EnterpriseScenario")).getScenario("WorkerRoomScenario").getNetworkElement(Values.DATA_CENTER_ROUTER_ID);
+			mainRouter = (DCRouter) ((ComplexScenario)((ComplexScenario)sim.getScenario()).getScenario("EnterpriseScenario")).getScenario("WorkerRoomScenario").getNetworkElement(Values.DATA_CENTER_ROUTER_ID);
 			webServer = (Server) ((ComplexScenario)((ComplexScenario)sim.getScenario()).getScenario("EnterpriseScenario")).getScenario("WorkerRoomScenario").getNetworkElement(Values.WEB_SERVER_ID);
 			sqlServer = (Server) ((ComplexScenario)((ComplexScenario)sim.getScenario()).getScenario("EnterpriseScenario")).getScenario("WorkerRoomScenario").getNetworkElement(Values.SQL_SERVER_ID);
 		} catch (ScenarioNotFoundException e) {
@@ -179,12 +177,12 @@ public class SysAdmin extends SimpleShanksAgent implements
 		}
 
 		
-		//Router load
+		//DCRouter load
 		if(mainRouter != null){
 			HashMap<String, Object> routerProperties = new HashMap<String, Object>();
 			routerProperties
-					.put(Router.PROPERTY_CONGESTION, ((Double) mainRouter
-							.getProperty(Router.PROPERTY_CONGESTION)) *2/3);
+					.put(DCRouter.PROPERTY_CONGESTION, ((Double) mainRouter
+							.getProperty(DCRouter.PROPERTY_CONGESTION)) *2/3);
 			mainRouter.setProperties(routerProperties);
 		}
 
@@ -216,11 +214,11 @@ public class SysAdmin extends SimpleShanksAgent implements
 	 */
 	private void patch(ShanksSimulation sim) {
 		// TODO: Implement patch
-		Router mainRouter = null;
+		DCRouter mainRouter = null;
 		Server webServer = null;
 		Server sqlServer = null;
 		try {
-			mainRouter = (Router) ((ComplexScenario)((ComplexScenario)sim.getScenario()).getScenario("EnterpriseScenario")).getScenario("WorkerRoomScenario").getNetworkElement(Values.DATA_CENTER_ROUTER_ID);
+			mainRouter = (DCRouter) ((ComplexScenario)((ComplexScenario)sim.getScenario()).getScenario("EnterpriseScenario")).getScenario("WorkerRoomScenario").getNetworkElement(Values.DATA_CENTER_ROUTER_ID);
 			webServer = (Server) ((ComplexScenario)((ComplexScenario)sim.getScenario()).getScenario("EnterpriseScenario")).getScenario("WorkerRoomScenario").getNetworkElement(Values.WEB_SERVER_ID);
 			sqlServer = (Server) ((ComplexScenario)((ComplexScenario)sim.getScenario()).getScenario("EnterpriseScenario")).getScenario("WorkerRoomScenario").getNetworkElement(Values.SQL_SERVER_ID);
 		} catch (ScenarioNotFoundException e) {
@@ -232,8 +230,8 @@ public class SysAdmin extends SimpleShanksAgent implements
 		if (mainRouter != null) {
 			HashMap<String, Object> routerProperties = new HashMap<String, Object>();
 			routerProperties
-					.put(Router.PROPERTY_VULNERABILITY, ((Double) mainRouter
-							.getProperty(Router.PROPERTY_VULNERABILITY)) / 2);
+					.put(DCRouter.PROPERTY_VULNERABILITY, ((Double) mainRouter
+							.getProperty(DCRouter.PROPERTY_VULNERABILITY)) / 2);
 			mainRouter.setProperties(routerProperties);
 		}
 

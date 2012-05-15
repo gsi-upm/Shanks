@@ -30,10 +30,6 @@ public class Values extends es.upm.dit.gsi.shanks.networkattacks.util.Values {
 	public static final int NUMBER_OF_SYSADMINS = 3;
 	
 
-	//Services values.
-	public static final String SERVICE_NOT_FOUND = "ServiceNotFound";
-	public static final Object ACTION_NOT_AVAILABLE = "NotAvailableAction";
-
 	// SysAdmin values
 	public static final String SYSADMIN_BAYESIAN_NETWORK_PATH = "/shanks-dc-module/src/main/java/es/upm/dit/gsi/shanks/datacenter/agent/SysAdmin.net";
 	

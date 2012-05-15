@@ -7,8 +7,7 @@ import es.upm.dit.gsi.shanks.hackerhan.model.Values;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
-import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.RouterDNS;
-import es.upm.dit.gsi.shanks.datacenter.model.element.device.Server;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Server;
 
 /**
  * Class to represent a "RootShell" attack,

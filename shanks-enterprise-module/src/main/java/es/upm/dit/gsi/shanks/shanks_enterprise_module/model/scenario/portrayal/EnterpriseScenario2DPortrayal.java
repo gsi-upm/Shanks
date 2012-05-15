@@ -5,8 +5,6 @@ import sim.portrayal.continuous.ContinuousPortrayal2D;
 import sim.portrayal.grid.SparseGridPortrayal2D;
 import sim.portrayal.network.NetworkPortrayal2D;
 import sim.util.Double2D;
-import es.upm.dit.gsi.shanks.datacenter.model.element.device.Server;
-import es.upm.dit.gsi.shanks.datacenter.model.element.device.portrayal.Server2DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.failure.portrayal.Failure2DPortrayal;
@@ -20,8 +18,10 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.ShanksMath;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 import es.upm.dit.gsi.shanks.networkattacks.util.failures.WireBroken;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Computer;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Server;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.portrayals.Computer2DPortrayal;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.portrayals.Router2DPortrayal;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.portrayals.Server2DPortrayal;
 import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.element.CompanyRouter;
 import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.element.portrayal.CompanyRouter2DPortrayal;
 import es.upm.dit.gsi.shanks.workerroom.model.element.device.LANRouter;
@@ -86,7 +86,7 @@ public class EnterpriseScenario2DPortrayal extends ComplexScenario2DPortrayal{
         devicePortrayal.setPortrayalForClass(LANRouter.class, new Router2DPortrayal());
         devicePortrayal.setPortrayalForClass(Server.class, new Server2DPortrayal());
         devicePortrayal.setPortrayalForClass(Computer.class, new Computer2DPortrayal());
-        devicePortrayal.setPortrayalForClass(es.upm.dit.gsi.shanks.datacenter.model.element.device.Router.class, new Router2DPortrayal());
+        devicePortrayal.setPortrayalForClass(es.upm.dit.gsi.shanks.datacenter.model.element.device.DCRouter.class, new Router2DPortrayal());
         networkPortrayal.setPortrayalForAll(new EthernetLink2DPortrayal());
         failuresPortrayal.setPortrayalForClass(WireBroken.class, new Failure2DPortrayal());
 	}

@@ -21,6 +21,10 @@ public class Values {
 		Values.sim = newSim;
 	}
 	
+	//Services values.
+	public static final String SERVICE_NOT_FOUND = "ServiceNotFound";
+	public static final Object ACTION_NOT_AVAILABLE = "NotAvailableAction";
+	
 	// HAN
 	public static final String HAN_SCENARIO_ID = "HomeAreaNetwork#";
 	

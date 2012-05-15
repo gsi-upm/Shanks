@@ -5,8 +5,7 @@ import sim.portrayal.continuous.ContinuousPortrayal2D;
 import sim.portrayal.grid.SparseGridPortrayal2D;
 import sim.portrayal.network.NetworkPortrayal2D;
 import sim.util.Double2D;
-import es.upm.dit.gsi.shanks.datacenter.model.element.device.Router;
-import es.upm.dit.gsi.shanks.datacenter.model.element.device.portrayal.Server2DPortrayal;
+import es.upm.dit.gsi.shanks.datacenter.model.element.device.DCRouter;
 import es.upm.dit.gsi.shanks.hackerhan.model.element.device.WifiRouterADSL;
 import es.upm.dit.gsi.shanks.hackerhan.model.element.device.WirelessDevice;
 import es.upm.dit.gsi.shanks.hackerhan.model.element.device.portrayal.Smartphone2DPortrayal;
@@ -25,6 +24,7 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Computer;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.portrayals.Computer2DPortrayal;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.portrayals.Router2DPortrayal;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.portrayals.Server2DPortrayal;
 import es.upm.dit.gsi.shanks.shanks_isp_module.model.element.device.ISPGateway;
 import es.upm.dit.gsi.shanks.shanks_isp_module.model.element.portrayal.ISPGateway2DPortrayal;
 import es.upm.dit.gsi.shanks.workerroom.model.element.device.Printer;
@@ -72,9 +72,9 @@ public class ISPScenario2DPortrayal extends ComplexScenario2DPortrayal{
         
 		devicesPortrayal.setPortrayalForClass(Computer.class,
 				new Computer2DPortrayal());
-		devicesPortrayal.setPortrayalForClass(Router.class,
+		devicesPortrayal.setPortrayalForClass(DCRouter.class,
 				new Router2DPortrayal());
-		devicesPortrayal.setPortrayalForClass(es.upm.dit.gsi.shanks.datacenter.model.element.device.Server.class,
+		devicesPortrayal.setPortrayalForClass(es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Server.class,
 				new Server2DPortrayal());
 		devicesPortrayal.setPortrayalForClass(Computer.class, new Computer2DPortrayal());
         devicesPortrayal.setPortrayalForClass(WifiRouterADSL.class, new WifiRouterADSL2DPortrayal());

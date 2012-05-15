@@ -2,7 +2,6 @@ package es.upm.dit.gsi.shanks.hackerhan.attack;
 
 import jason.asSemantics.Message;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import es.upm.dit.gsi.shanks.ShanksSimulation;

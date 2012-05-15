@@ -3,14 +3,13 @@
  * 08/05/2012 
  * 
  */
-package es.upm.dit.gsi.shanks.datacenter.model.element.device;
+package es.upm.dit.gsi.shanks.networkattacks.util.networkelements;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import es.upm.dit.gsi.shanks.datacenter.model.Values;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
-import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Computer;
+import es.upm.dit.gsi.shanks.networkattacks.util.Values;
 
 /**
  * A server is a computer in which a user can be signed up and ask for services.

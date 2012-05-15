@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import unbbayes.prs.bn.ProbabilisticNetwork;
-
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.SimpleShanksAgent;
 import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.BayesianReasonerShanksAgent;

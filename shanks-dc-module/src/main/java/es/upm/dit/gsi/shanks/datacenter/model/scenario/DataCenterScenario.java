@@ -8,8 +8,7 @@ import java.util.Properties;
 import java.util.Set;
 
 import es.upm.dit.gsi.shanks.datacenter.model.Values;
-import es.upm.dit.gsi.shanks.datacenter.model.element.device.Router;
-import es.upm.dit.gsi.shanks.datacenter.model.element.device.Server;
+import es.upm.dit.gsi.shanks.datacenter.model.element.device.DCRouter;
 import es.upm.dit.gsi.shanks.datacenter.model.failure.ServerFailure;
 import es.upm.dit.gsi.shanks.datacenter.model.scenario.portrayal.DataCenterScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.datacenter.model.scenario.portrayal.DataCenterScenario3DPortrayal;
@@ -29,6 +28,7 @@ import es.upm.dit.gsi.shanks.networkattacks.util.failures.ComputerFailure;
 import es.upm.dit.gsi.shanks.networkattacks.util.failures.RouterFailure;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Computer;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.EthernetLink;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Server;
 
 public class DataCenterScenario extends Scenario {
 
@@ -70,10 +70,10 @@ public class DataCenterScenario extends Scenario {
 			throws UnsupportedNetworkElementStatusException,
 			TooManyConnectionException, DuplicatedIDException {
 		
-		Router intranetRouter = new Router(Values.DATA_CENTER_ROUTER_ID);
+		DCRouter intranetRouter = new DCRouter(Values.DATA_CENTER_ROUTER_ID);
 		addNetworkElement(intranetRouter);
 		
-		Router webProxy = new Router(Values.WEB_PROXY_ID);
+		DCRouter webProxy = new DCRouter(Values.WEB_PROXY_ID);
 		addNetworkElement(webProxy);
 		
 		Link intranetWebProxyLink = new EthernetLink(Values.INTRANET_LINK, Values.ETHERNET_LENGHT);

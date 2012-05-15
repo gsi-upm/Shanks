@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
-import es.upm.dit.gsi.shanks.datacenter.model.Values;
 import es.upm.dit.gsi.shanks.datacenter.model.scenario.DataCenterScenario;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
@@ -25,10 +24,12 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusE
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
+import es.upm.dit.gsi.shanks.networkattacks.util.failures.RouterFailure;
 import es.upm.dit.gsi.shanks.networkattacks.util.failures.WireBroken;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.EthernetLink;
+import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.Values;
+import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.element.CompanyRouter;
 import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.scenario.portrayal.EnterpriseScenario2DPortrayal;
-import es.upm.dit.gsi.shanks.workerroom.model.element.device.LANRouter;
 import es.upm.dit.gsi.shanks.workerroom.model.scenario.WorkerRoomScenario;
 
 public class EnterpriseScenario extends ComplexScenario{
@@ -62,11 +63,10 @@ public class EnterpriseScenario extends ComplexScenario{
 			InvocationTargetException {
 		Properties p = this.getProperties();
 	    p.put(WorkerRoomScenario.CLOUDY_PROB, "10.0");
-		this.addScenario(WorkerRoomScenario.class, "Worker Room 1", WorkerRoomScenario.STATUS_NORMAL, p, "LANRouter", "EL1");
-		this.addScenario(WorkerRoomScenario.class, "Worker Room 2", WorkerRoomScenario.STATUS_NORMAL, p, "LANRouter", "EL2");
-		this.addScenario(WorkerRoomScenario.class, "Worker Room 3", WorkerRoomScenario.STATUS_NORMAL, p, "LANRouter", "EL3");
-		this.addScenario(DataCenterScenario.class, "Data Center", DataCenterScenario.STATUS_NORMAL, p, Values.DATA_CENTER_ROUTER_ID, "EL4");
-		
+	    this.addScenario(DataCenterScenario.class, Values.DATA_CENTER_SCENARIO_ID, DataCenterScenario.STATUS_NORMAL, p, Values.DATA_CENTER_ROUTER_ID, Values.DATA_CENTER_LINK_ID);
+		for (int i=0; i<Values.NUMBER_OF_WORKERROOMS; i++){
+			this.addScenario(WorkerRoomScenario.class, Values.WORKER_ROOM_SCENARIO_ID+i, WorkerRoomScenario.STATUS_NORMAL, p, Values.WORKER_ROOM_ROUTER_ID, Values.WORKER_ROOM_LINK_ID+i);
+		}
 	}
 
 	@Override
@@ -94,52 +94,39 @@ public class EnterpriseScenario extends ComplexScenario{
 	public void addNetworkElements()
 			throws UnsupportedNetworkElementStatusException,
 			TooManyConnectionException, DuplicatedIDException {
-		Device router = new LANRouter("Intranet LANRouter", this);
-		Link ethernetLink1 = new EthernetLink("EL1", 2.0);
-		Link ethernetLink2 = new EthernetLink("EL2", 2.0);
-		Link ethernetLink3 = new EthernetLink("EL3", 2);
-		Link ethernetLink4 = new EthernetLink("EL4", 2);
+
+		// Adding the Enterprise Router.
+		Device companyRouter = new CompanyRouter(Values.ENTERPRISE_GATEWAY_ID);
+		this.addNetworkElement(companyRouter);
 		
-		this.addNetworkElement(ethernetLink4);
-		this.addNetworkElement(ethernetLink3);
-		this.addNetworkElement(ethernetLink2);
-		this.addNetworkElement(ethernetLink1);
-		this.addNetworkElement(router);
-		
-		router.connectToLink(ethernetLink4);
-		router.connectToLink(ethernetLink3);
-		router.connectToLink(ethernetLink2);
-		router.connectToLink(ethernetLink1);
+		// Adding data center subnet external link. 
+		Link dcLink = new EthernetLink(Values.DATA_CENTER_LINK_ID, 2.0);
+		companyRouter.connectToLink(dcLink);
+		this.addNetworkElement(dcLink);
+	
+		// Adding WorkerRoom external links.
+		for(int i=0; i<Values.NUMBER_OF_WORKERROOMS; i++){
+			Link workerRoomLink = new EthernetLink(Values.WORKER_ROOM_LINK_ID+i, 2.0);
+			companyRouter.connectToLink(workerRoomLink);
+			this.addNetworkElement(workerRoomLink);
+		}
 	}
 
 	@Override
 	public void addPossibleFailures(){
-		Set<NetworkElement> set1 = new HashSet<NetworkElement>();
-		set1.add(this.getNetworkElement("EL1"));
-		Set<NetworkElement> set2 = new HashSet<NetworkElement>();
-		set2.add(this.getNetworkElement("EL2"));
-		Set<NetworkElement> set3 = new HashSet<NetworkElement>();
-		set3.add(this.getNetworkElement("EL3"));
-		Set<NetworkElement> set4 = new HashSet<NetworkElement>();
-		set4.add(this.getNetworkElement("EL4"));
-        List<Set<NetworkElement>> possibleCombinations = new ArrayList<Set<NetworkElement>>();
-		possibleCombinations.add(set1);
-		possibleCombinations.add(set2);
-		possibleCombinations.add(set3);
-		possibleCombinations.add(set4);
+		List<Set<NetworkElement>> possibleCombinations = new ArrayList<Set<NetworkElement>>();
+		for(int i=0; i<Values.NUMBER_OF_WORKERROOMS; i++){
+			Set<NetworkElement> set = new HashSet<NetworkElement>();
+			set.add(this.getNetworkElement(Values.WORKER_ROOM_LINK_ID+i));
+			possibleCombinations.add(set);
+		}
 		this.addPossibleFailure(WireBroken.class, possibleCombinations);
-		
-		//TODO Add routerfauilure to the CompanyRouter
-		
-		
+		this.addPossibleFailure(RouterFailure.class, this.getNetworkElement(Values.ENTERPRISE_GATEWAY_ID));
 	}
 	
-
-
 	@Override
 	public void addPossibleEvents() {
 //		this.addPossibleEventsOfNE(RouterCongestion.class, this.getNetworkElement("Intranet LANRouter"));
-			
 	}
 
 	@Override

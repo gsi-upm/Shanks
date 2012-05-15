@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks.shanks_enterprise_module.model;
+package es.upm.dit.gsi.shanks.shanks_enterprise_module.simulation;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;

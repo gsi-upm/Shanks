@@ -1,5 +1,6 @@
 package es.upm.dit.gsi.shanks.datacenter.agent;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
@@ -162,7 +163,36 @@ public class SysAdmin extends SimpleShanksAgent implements
 	 * @param sim
 	 */
 	private void lookOut(ShanksSimulation sim) {
-		// TODO: Implement lookOut
+		//The ID to be banned
+		String webID = "";
+		Server webServer = (Server)sim.getScenario().getNetworkElement(Values.WEB_SERVER_ID);
+		int webLog = Integer.parseInt((String) webServer.getProperty(Server.PROPERTY_LOG));
+		if (webLog > Values.SERVER_LOG_WEIRD){
+			HashMap<String, Integer> webLogs = webServer.getLogs();
+			for (String ID : webLogs.keySet()){
+				if (webID.equals("")){
+					webID = ID;
+				} else {
+					if (webLogs.get(ID) > webLogs.get(webID))
+						webID = ID;
+				}
+			}
+		}
+		String sqlID = "";
+		Server sqlServer = (Server)sim.getScenario().getNetworkElement(Values.WEB_SERVER_ID);
+		int sqlLog = Integer.parseInt((String) sqlServer.getProperty(Server.PROPERTY_LOG));
+		if (sqlLog > Values.SERVER_LOG_WEIRD){
+			HashMap<String, Integer> sqlLogs = sqlServer.getLogs();
+			for (String ID : sqlLogs.keySet()){
+				if (sqlID.equals("")){
+					sqlID = ID;
+				} else {
+					if (sqlLogs.get(ID) > sqlLogs.get(webID))
+						sqlID = ID;
+				}
+			}
+		}
+		// TODO: ban the IDs
 	}
 
 	/**

@@ -2,11 +2,13 @@ package es.upm.dit.gsi.shanks.hackerhan.attack;
 
 import jason.asSemantics.Message;
 
+import java.util.HashMap;
 import java.util.List;
 
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.SimpleShanksAgent;
 import es.upm.dit.gsi.shanks.hackerhan.model.Values;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.RouterDNS;
 
 /**
  * Class to represent the bot to be deployed in a Hacked HAN
@@ -49,6 +51,11 @@ public class Bot extends SimpleShanksAgent{
 			// Jaffa, Tal shak! 
 //			Gateway gateway = (Gateway)simulation.getScenario().getNetworkElement(target);
 			// TODO: increase load count.
+			RouterDNS router = (RouterDNS) simulation.getScenario().getNetworkElement(Values.ENTERPRISE_GATEWAY_ID);
+			int cong = (Integer)router.getProperty(RouterDNS.PROPERTY_CONGESTION);
+			HashMap<String, Object> newLoad = new HashMap<String, Object>();
+			newLoad.put(RouterDNS.PROPERTY_CONGESTION, cong + Values.LOAD_INCREASE);
+			router.setProperties(newLoad);
 		}
 	}
 

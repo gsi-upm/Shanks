@@ -1,6 +1,7 @@
 package es.upm.dit.gsi.shanks.hackerhan.attack;
 
 import es.upm.dit.gsi.shanks.ShanksSimulation;
+import es.upm.dit.gsi.shanks.agent.capability.creation.CreationShanksAgentCapability;
 import es.upm.dit.gsi.shanks.hackerhan.agent.Hacker;
 
 /**
@@ -58,9 +59,10 @@ public class RootShell implements Attack {
 			
 			// TODO: find a han to attack
 			
-//			Bot bot = new Bot(dns.getRouterID("") + hacker.getID() + hacker.getBotCount());
-//			hacker.addBot(bot.getID());
-//			CreationShanksAgentCapability.addNewAgent(sim,bot);
+			//Bot bot = new Bot(dns.getRouterID("") + hacker.getID() + hacker.getBotCount());
+			Bot bot = new Bot("Bot" + hacker.getID() + hacker.getBotCount());
+			hacker.addBot(bot.getID());
+			CreationShanksAgentCapability.addNewAgent(sim,bot);
 		} catch (Exception e) {
 			sim.logger.warning("Could not create bot:");
 			sim.logger.warning(e.getMessage());

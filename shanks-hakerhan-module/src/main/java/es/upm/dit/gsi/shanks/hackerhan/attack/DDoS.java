@@ -4,8 +4,11 @@ import jason.asSemantics.Message;
 
 import java.util.ArrayList;
 
+import es.upm.dit.gsi.shanks.ShanksSimulation;
+import es.upm.dit.gsi.shanks.datacenter.model.element.device.Router;
 import es.upm.dit.gsi.shanks.hackerhan.agent.Hacker;
 import es.upm.dit.gsi.shanks.hackerhan.model.Values;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.RouterDNS;
 
 /**
  * Class to represent a DDoS attack
@@ -24,12 +27,23 @@ public class DDoS implements Attack {
 	private String targetID;
 	
 	/**
+	 * Running
+	 */
+	private boolean running;
+	
+	/**
+	 * Simulation
+	 */
+	private ShanksSimulation sim;
+	
+	/**
 	 * Constructor
 	 * 
 	 * @param hacker - The hacker launching the attack.
 	 */
-	public DDoS(Hacker hacker, String targetID){
+	public DDoS(Hacker hacker, String targetID, ShanksSimulation sim){
 		super();
+		this.sim = sim;
 		this.hacker = hacker;
 		this.targetID = targetID;
 	}
@@ -40,6 +54,7 @@ public class DDoS implements Attack {
 	 */
 	@Override
 	public void execute() {
+		this.running = true;
 		// Order every bot to launch an attack
 		for(String bot: hacker.getBots()){
 			// TODO: send a message to the bot.
@@ -59,13 +74,17 @@ public class DDoS implements Attack {
 	@Override
 	public boolean isSuccessful() {
 		// TODO Check if the company gateway is still up.
-		return false;
+		RouterDNS router = (RouterDNS)this.sim.getScenario().getNetworkElement(targetID);
+		return router.getCurrentStatus().equalsIgnoreCase(Router.STATUS_CONGESTED)
+				|| router.getCurrentStatus().equals(Router.STATUS_DISCONNECTED);
 	}
 	
 	@Override
 	public boolean isRunning() {
+		if (isSuccessful())
+			this.running = false;
 		// Once the messages have been sent, there is nothing to be done.
-		return false;
+		return running;
 	}
 
 }

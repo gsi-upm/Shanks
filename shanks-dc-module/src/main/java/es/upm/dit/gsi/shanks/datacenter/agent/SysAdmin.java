@@ -6,13 +6,12 @@ import java.util.Iterator;
 import unbbayes.prs.bn.ProbabilisticNetwork;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.SimpleShanksAgent;
-import es.upm.dit.gsi.shanks.agent.action.SimpleShanksAgentAction;
 import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.BayesianReasonerShanksAgent;
 import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.ShanksAgentBayesianReasoningCapability;
 import es.upm.dit.gsi.shanks.datacenter.model.Values;
 import es.upm.dit.gsi.shanks.datacenter.model.element.device.Router;
 import es.upm.dit.gsi.shanks.datacenter.model.element.device.Server;
-import es.upm.dit.gsi.shanks.shanks_isp_module.agent.action.RepairComputer;
+import es.upm.dit.gsi.shanks.networkattacks.util.action.RepairComputer;
 
 public class SysAdmin extends SimpleShanksAgent implements
 		BayesianReasonerShanksAgent {

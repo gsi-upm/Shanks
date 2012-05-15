@@ -53,8 +53,8 @@ public class Values extends es.upm.dit.gsi.shanks.networkattacks.util.Values  {
 	
 	public static final String ATTACK_ORDER = "StartAttack";
 	public static final String STOP_ORDER = "StopAttack";
-	public static final int DDOS_MAX_STEPS = 10;
+	public static final int ATTACK_MAX_STEPS = 10;
 	
 	public static final int LOAD_INCREASE = 5;
-	
+	public static final int MAX_ABILITY = 10;
 }

@@ -1,7 +1,5 @@
 package es.upm.dit.gsi.shanks.hackerhan.attack;
 
-import java.util.HashMap;
-
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.capability.creation.CreationShanksAgentCapability;
 import es.upm.dit.gsi.shanks.hackerhan.agent.Hacker;
@@ -24,11 +22,14 @@ public class RootShell implements Attack {
 	
 	private Scenario han;
 	
-	private int numberOfAttacks = 0;
-	private int successfullAttacks = 0;
+	private int steps;
 	
-	boolean running;
-	boolean success;
+	private boolean running;
+	private boolean success;
+	private String accessID;
+	
+	private static int numberOfAttacks = 0;
+	private static int successfullAttacks = 0;
 	
 	public RootShell(Hacker hacker, ShanksSimulation sim, Scenario han){
 		super();
@@ -37,6 +38,8 @@ public class RootShell implements Attack {
 		this.han = han;
 		this.success = false;
 		this.running = false;
+		this.steps = sim.random.nextInt(Values.ATTACK_MAX_STEPS);
+		this.accessID = hacker.getID();
 	}
 	@Override
 	public void execute() {
@@ -44,7 +47,7 @@ public class RootShell implements Attack {
 			this.running = true;
 			Server webServer = (Server) ((ComplexScenario)((ComplexScenario)this.sim.getScenario()).getScenario(Values.ENTERPRISE_SCENARIO_ID))
 					.getScenario(Values.DATA_CENTER_SCENARIO_ID).getNetworkElement(Values.WEB_SERVER_ID);
-			int vulnerability = (int) ((Double)webServer.getProperty(Server.PROPERTY_VULNERABILITY) * 100);
+			int vulnerability = this.hacker.getAbility() * (int) ((Double)webServer.getProperty(Server.PROPERTY_VULNERABILITY) * 100);
 			
 			int rand = this.sim.random.nextInt(100);
 			if (rand < vulnerability){
@@ -61,7 +64,7 @@ public class RootShell implements Attack {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-				
+		this.steps -= 1;
 	}
 
 	@Override
@@ -91,8 +94,22 @@ public class RootShell implements Attack {
 		return this.running;
 	}
 	
-	public double ratioAttacks(){
+	@Override
+	public void stop() {
+		this.steps = 0;
+		this.running = false;
+	}
+
+	@Override
+	public int numberSteps() {
+		return this.steps;
+	}
+	
+	public static double ratioAttacks(){
 		return successfullAttacks/numberOfAttacks;
 	}
 
+	public void setAccessID(String newID){
+		this.accessID = newID;
+	}
 }

@@ -54,7 +54,7 @@ public class DDoS implements Attack {
 		this.sim = sim;
 		this.hacker = hacker;
 		this.targetID = targetID;
-		this.last = sim.random.nextInt(Values.DDOS_MAX_STEPS);
+		this.last = sim.random.nextInt(Values.ATTACK_MAX_STEPS);
 	}
 	/**
 	 * Launchs the attack.
@@ -120,7 +120,7 @@ public class DDoS implements Attack {
 		this.running = false;
 	}
 
-	public int getNumberOfSteps() {
+	public int numberSteps() {
 		return last;
 	}
 	public void decreaseSteps() {

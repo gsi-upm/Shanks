@@ -9,6 +9,7 @@ import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.SimpleShanksAgent;
 import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.BayesianReasonerShanksAgent;
 import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.ShanksAgentBayesianReasoningCapability;
+import es.upm.dit.gsi.shanks.exception.UnkownAgentException;
 import es.upm.dit.gsi.shanks.hackerhan.attack.Attack;
 import es.upm.dit.gsi.shanks.hackerhan.attack.DDoS;
 import es.upm.dit.gsi.shanks.hackerhan.attack.RootShell;
@@ -58,14 +59,19 @@ public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksA
 	 */
 	private ProbabilisticNetwork bayesianNetwork;
 	
-	private int numberOfDDoSAttacks;
-	private int numberOfRootAttacks;
-	private int numberOfSQLAttacks;
+	private static int numberOfDDoSAttacks = 0;
+	private static int numberOfRootAttacks = 0;
+	private static int numberOfSQLAttacks = 0;
 	
 	/**
 	 * The bayesian network file path
 	 */
 	private String bayesianNetworkPath;
+	
+	/**
+	 * The ability of the hacker
+	 */
+	private int ability;
 
 	private static final long serialVersionUID = -8386091575218484770L;
 
@@ -73,10 +79,7 @@ public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksA
 		super(id);
 		this.bayesianNetworkPath = bnPath;
 		this.bayesianNetwork = new ProbabilisticNetwork("HackerBN");
-		this.numberOfDDoSAttacks = 0;
-		this.numberOfRootAttacks = 0;
-		this.numberOfSQLAttacks = 0;
-		
+		this.ability = -1;
 		try{
 			this.bayesianNetwork = ShanksAgentBayesianReasoningCapability.loadNetwork(bnPath);
 		} catch (Exception e) {
@@ -94,9 +97,11 @@ public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksA
 
 	@Override
 	public void executeReasoningCycle(ShanksSimulation simulation) {
-		if (this.attack.isRunning() && this.attack instanceof DDoS){
-			((DDoS)this.attack).decreaseSteps();
-			if (((DDoS)this.attack).getNumberOfSteps() == 0)
+		if (this.ability == -1)
+			simulation.random.nextInt(Values.MAX_ABILITY);
+		if (this.attack.isRunning()){
+			this.attack.execute();
+			if (((DDoS)this.attack).numberSteps() == 0) 
 				((DDoS)this.attack).stop();
 		} else {
 
@@ -184,7 +189,7 @@ public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksA
 				}
 				if(!this.targetsID.isEmpty()){
 					String targetID = this.targetsID.get(0);
-					this.attack = createAttack(attack, targetID, simulation);
+					this.attack = createAttack(action, attack, targetID, simulation);
 				}
 				if (action.equals(Values.ACTION_GET_BOT) && this.attack instanceof RootShell) {
 					((RootShell)this.attack).installBot(simulation);
@@ -250,7 +255,7 @@ public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksA
 	 * @param sim - The simulation
 	 * @return - The attack to be executed.
 	 */
-	private Attack createAttack(String attackType, String targetID, ShanksSimulation sim){
+	private Attack createAttack(String action, String attackType, String targetID, ShanksSimulation sim){
 		Attack result = null;
 		try {
 			if (attackType.equalsIgnoreCase(Values.ATTACK_DDOS)) {
@@ -261,9 +266,23 @@ public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksA
 						((ComplexScenario) sim.getScenario())
 								.getScenario(Values.HAN_SCENARIO_ID
 										+ this.getID().charAt(this.getID().length() - 1)));
+				if (action.equals(Values.ACTION_PROXY_ATTACK)){
+					try {
+						((RootShell)result).setAccessID(sim.getAgent(this.bots.get(0)).getID());
+					} catch (UnkownAgentException e) {
+						e.printStackTrace();
+					}
+				}
 				numberOfRootAttacks++;
 			} else if (attackType.equalsIgnoreCase(Values.ATTACK_SQL_INJECTION)) {
 				result = new SQLInjection(this, sim);
+				if (action.equals(Values.ACTION_PROXY_ATTACK)){
+					try {
+						((SQLInjection)result).setAccessID(sim.getAgent(this.bots.get(0)).getID());
+					} catch (UnkownAgentException e) {
+						e.printStackTrace();
+					}
+				}
 				numberOfSQLAttacks++;
 			}
 		} catch (ScenarioNotFoundException e) {
@@ -272,17 +291,25 @@ public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksA
 		}
 		return result;
 	}
-	
-	public int getNumberOfDDoSAttacks(){
+
+	/**
+	 * Returns the ability of the hacker
+	 * 
+	 * @return
+	 */
+	public int getAbility(){
+		return this.ability;
+	}
+
+	public static int getNumberOfDDoSAttacks(){
 		return numberOfDDoSAttacks;
 	}
 	
-	public int getNumberOfRootAttacks(){
+	public static int getNumberOfRootAttacks(){
 		return numberOfRootAttacks;
 	}
 	
-	public int getNumberOfSQLAttacks(){
+	public static int getNumberOfSQLAttacks(){
 		return numberOfSQLAttacks;
 	}
-	
 }

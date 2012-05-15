@@ -13,6 +13,17 @@ public interface Attack {
 	public void execute();
 	
 	/**
+	 * Stops the attack();
+	 */
+	public void stop();
+	
+	/**
+	 * Returns the number of steps the attack should last.
+	 * @return int -the number of steps
+	 */
+	public int numberSteps();
+	
+	/**
 	 * Returns true if the attack succeeded.
 	 * 
 	 * @return true - if the attack was successful.

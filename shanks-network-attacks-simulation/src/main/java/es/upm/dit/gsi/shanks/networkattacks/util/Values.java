@@ -46,5 +46,9 @@ public class Values {
 	// Portrayals Values.
 	public static final double Computer2DSide = 25;
 	public static final double Server2DHeight = 50;
+	
+	// Enterprise net elements
+	public static final String MAIN_ROUTER_ID = "mainCompanyRouter";
+	public static final String WEB_SERVER_ID = "companyWebServer"; 
 
 }

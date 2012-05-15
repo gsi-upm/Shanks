@@ -26,6 +26,8 @@ public class RouterDNS extends Device{
 	public static final String PROPERTY_CONNECTION = "ConnectionStatus";
 	public static final String PROPERTY_CONGESTION = "Congestion"; // in %
 	
+	public static final String PROPERTY_VULNERABILITY = "Vulnerability";
+	
 //	public RouterDNSDNS(String id, String initialState, boolean isGateway)
 //			throws UnsupportedNetworkElementStatusException {
 //		super(id, initialState, isGateway);

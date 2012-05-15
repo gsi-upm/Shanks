@@ -63,6 +63,11 @@ public class Values {
 	public static final String WEB_SERVER_ID = "MegaCorpWebServer";
 	public static final String SQL_SERVER_ID = "MegaCorpSQLServer";
 	
+	// Enterprise server properties
+	public static final int SERVER_LOG_OK = 0;
+	public static final int SERVER_LOG_WEIRD = 5;
+	public static final int SERVER_LOG_NOK = 10;
+	
 	// Simulation Configuration
 	public static final int NUMBER_OF_WORKERROOMS = 3;
 	public static final int NUMBER_OF_HANS = 8;

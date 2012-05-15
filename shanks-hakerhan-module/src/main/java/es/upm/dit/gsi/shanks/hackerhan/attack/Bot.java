@@ -17,11 +17,10 @@ import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.RouterDNS;
  */
 public class Bot extends SimpleShanksAgent{
 
-
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -1410036330601812725L;
 	
 	private boolean attacking;
 	private String target;
@@ -40,6 +39,8 @@ public class Bot extends SimpleShanksAgent{
 				// Jaffa, kree!!
 				this.target = ((String)message.getPropCont()).split(":")[1];
 				this.attacking = true;
+			} else if (((String)message.getPropCont()).contains(Values.STOP_ORDER)){
+				this.attacking = false;
 			}
 		}
 		// TODO: if "StartAttack" --> launch the attack

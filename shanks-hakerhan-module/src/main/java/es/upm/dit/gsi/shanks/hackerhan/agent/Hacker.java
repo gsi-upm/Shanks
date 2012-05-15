@@ -16,6 +16,7 @@ import es.upm.dit.gsi.shanks.hackerhan.attack.SQLInjection;
 import es.upm.dit.gsi.shanks.hackerhan.model.Values;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.RouterDNS;
 
 /**
  * Hacker agent is a malicious agent that investigate security failures and try
@@ -85,10 +86,27 @@ public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksA
 
 	@Override
 	public void executeReasoningCycle(ShanksSimulation simulation) {
+		if (this.attack.isRunning() && this.attack instanceof DDoS){
+			((DDoS)this.attack).decreaseSteps();
+			if (((DDoS)this.attack).getNumberOfSteps() == 0)
+				((DDoS)this.attack).stop();
+		} else {
 
 		try {
 			ShanksAgentBayesianReasoningCapability.addEvidence(this, "Conexion", "OK");
+			RouterDNS router = (RouterDNS) ((ComplexScenario)simulation.getScenario()).getScenario(Values.HAN_SCENARIO_ID +
+					this.getID().charAt(this.getID().length()-1)).getNetworkElement(Values.WIFI_ROUTER_ID);
+			ShanksAgentBayesianReasoningCapability.addEvidence(this, "Conexion",
+					String.valueOf(router.getProperty(RouterDNS.PROPERTY_CONNECTION)));
 			// TODO: Updates the connection data
+			
+			// If 0 --> lazy
+			// Else --> lets hack!
+			if (simulation.random.nextInt(1) == 0) {
+				ShanksAgentBayesianReasoningCapability.addEvidence(this, "Estado_De_Animo", "Vaguear");
+			} else {
+				ShanksAgentBayesianReasoningCapability.addEvidence(this, "Estado_De_Animo", "Hackear");
+			}
 
 			this.bayesianNetwork.updateEvidences(); // Is this correct??
 
@@ -96,6 +114,7 @@ public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksA
 			Iterator<String> actions = accionStatus.keySet().iterator();
 			
 			// Find out which attack I am supposed to do.
+			
 			int result = simulation.random.nextInt(100);
 
 			String action = Values.ACTION_NONE;
@@ -131,22 +150,6 @@ public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksA
 				probability += accionStatus.get(action)*100;
 			}
 			
-//			if (0 <= result && result > accionStatus.get(Values.ACTION_NONE) * 100) {
-//				// No action
-//				action = Values.ACTION_NONE;
-//			} else if (accionStatus.get(Values.ACTION_NONE) * 100 <= result
-//					&& result < (accionStatus.get(Values.ACTION_NONE) + accionStatus.get(Values.ACTION_PROXY_ATTACK)) * 100) {
-//				// Proxied attack
-//				action = Values.ACTION_PROXY_ATTACK;
-//			} else if ((accionStatus.get(Values.ACTION_NONE) + accionStatus.get(Values.ACTION_PROXY_ATTACK)) * 100 <= result &&
-//					result < (accionStatus.get(Values.ACTION_NONE) + accionStatus.get(Values.ACTION_PROXY_ATTACK) + accionStatus.get(Values.ACTION_DIRECT_ATTACK)) * 100) {
-//				// Direct attack
-//				action = Values.ACTION_DIRECT_ATTACK;
-//			} else {
-//				// Get bot
-//				action = Values.ACTION_GET_BOT;
-//			}
-			
 			// I tell the bayesian network what am I doing.
 			ShanksAgentBayesianReasoningCapability.addEvidence(this, "Accion", action);
 			this.bayesianNetwork.updateEvidences();
@@ -180,26 +183,11 @@ public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksA
 				} else if (this.attack != null){
 					this.attack.execute();
 				}
-				
-//				if(0 < type && type <= types.get(Values.ATTACK_DDOS)*100){
-//					// DDoS
-//					this.attack = new DDoS(this, targetsID.get(0));
-//					this.attack.execute();
-//				} else if (types.get(Values.ATTACK_DDOS)*100 < type &&
-//						type <= (types.get(Values.ATTACK_DDOS) + types.get(Values.ATTACK_ROOT_SHELL))*100) {
-//					this.attack = new RootShell(this, simulation);
-//					this.attack.execute();
-//				} else if((types.get(Values.ATTACK_DDOS) + types.get(Values.ATTACK_ROOT_SHELL))*100 < type &&
-//						type <= (types.get(Values.ATTACK_DDOS) + types.get(Values.ATTACK_ROOT_SHELL) + types.get(Values.ATTACK_SQL_INJECTION))*100) {
-//					// SQL Injection
-//					this.attack = new SQLInjection(this, simulation);
-//					this.attack.execute();
-//				} else {
-//					// NONE
-//				}
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
+		}
 		}
 	}
 

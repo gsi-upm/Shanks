@@ -36,6 +36,11 @@ public class DDoS implements Attack {
 	private ShanksSimulation sim;
 	
 	/**
+	 * Number of steps the attack will last.
+	 */
+	private int last;
+
+	/**
 	 * Constructor
 	 * 
 	 * @param hacker - The hacker launching the attack.
@@ -45,6 +50,7 @@ public class DDoS implements Attack {
 		this.sim = sim;
 		this.hacker = hacker;
 		this.targetID = targetID;
+		this.last = sim.random.nextInt(Values.DDOS_MAX_STEPS);
 	}
 	/**
 	 * Launchs the attack.
@@ -60,7 +66,7 @@ public class DDoS implements Attack {
 			Message msg = new Message();
 			msg.setReceiver(bot);
 			msg.setMsgId("Start");
-			msg.setPropCont(Values.ATTACK_ORDER + ":" + this.targetID);
+			msg.setPropCont(Values.ATTACK_ORDER + ":" + this.targetID + ":" + String.valueOf(this.last));
 			hacker.sendMsg(msg);
 		}
 	}
@@ -91,5 +97,27 @@ public class DDoS implements Attack {
 		// Once the messages have been sent, there is nothing to be done.
 		return running;
 	}
+	
+	/**
+	 * Stops the attack
+	 */
+	public void stop(){
+		// Order every bot to stop the attack
+		for(String bot: hacker.getBots()){
+			// TODO: send a message to the bot.
+			Message msg = new Message();
+			msg.setReceiver(bot);
+			msg.setMsgId("Stop");
+			msg.setPropCont(Values.STOP_ORDER);
+			hacker.sendMsg(msg);
+		}
+		this.running = false;
+	}
 
+	public int getNumberOfSteps() {
+		return last;
+	}
+	public void decreaseSteps() {
+		this.last -= 1;
+	}
 }

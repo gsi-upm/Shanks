@@ -1,5 +1,7 @@
 package es.upm.dit.gsi.shanks.hackerhan.attack;
 
+import java.util.HashMap;
+
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.capability.creation.CreationShanksAgentCapability;
 import es.upm.dit.gsi.shanks.hackerhan.agent.Hacker;
@@ -45,8 +47,10 @@ public class RootShell implements Attack {
 			if (rand < vulnerability){
 				this.success = true;
 				// TODO: set property "hacked"??
+			} else {
+				webServer.addProperty(Server.PROPERTY_LOG, (Integer)webServer.getProperty(Server.PROPERTY_LOG) +1 );
+			// TODO: Increase log "weirdness"
 			}
-			// TODO: Increase log "weirdness" 
 			
 		} catch (ScenarioNotFoundException e) {
 			// TODO Auto-generated catch block

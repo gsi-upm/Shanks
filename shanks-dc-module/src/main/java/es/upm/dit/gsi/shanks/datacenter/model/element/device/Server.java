@@ -20,6 +20,8 @@ import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Computer;
  */
 public class Server extends Computer {
 
+	public static final String PROPERTY_VULNERABILITY = "Vulnerability";
+	public static final String PROPERTY_LOAD = "load";
 	/**
 	 * List of registered authentications.
 	 */

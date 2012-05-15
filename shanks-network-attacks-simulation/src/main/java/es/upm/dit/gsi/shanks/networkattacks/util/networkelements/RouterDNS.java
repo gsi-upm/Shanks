@@ -6,6 +6,7 @@ import java.util.HashMap;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.networkattacks.util.Values;
 import es.upm.dit.gsi.shanks.networkattacks.util.notifications.DNSConsult;
@@ -14,7 +15,9 @@ import es.upm.dit.gsi.shanks.notification.NotificationManager;
 public class RouterDNS extends Device{
 
 	private Scenario parentScenario;
-	
+	private ArrayList<Device> block;
+	private ArrayList<Device> allowed;
+	private ArrayList<String> ports;
 	
 	public static final String STATUS_OFF = "OFF";
 	public static final String STATUS_OK = "OK";
@@ -27,16 +30,6 @@ public class RouterDNS extends Device{
 	public static final String PROPERTY_CONGESTION = "Congestion"; // in %
 	
 	public static final String PROPERTY_VULNERABILITY = "Vulnerability";
-	
-//	public RouterDNSDNS(String id, String initialState, boolean isGateway)
-//			throws UnsupportedNetworkElementStatusException {
-//		super(id, initialState, isGateway);
-//	}
-//	
-//	public RouterDNSDNS(String id, boolean isGateway)
-//			throws UnsupportedNetworkElementStatusException {
-//		super(id, RouterDNS.STATUS_OK, isGateway);
-//	}
 	
 	public RouterDNS(String id, Scenario parent)
 			throws UnsupportedNetworkElementStatusException {
@@ -159,16 +152,26 @@ public class RouterDNS extends Device{
 	 * @return A reference to the gateway-device asked, or null if there is no
 	 *         one defined under the given ID.
 	 */
-	public Device getGateway(String gatewayID, Object whoIsAsking) {
-		HashMap<String, NetworkElement> elements = this.parentScenario
-				.getCurrentElements();
-		if (elements.containsKey(gatewayID)) {
-			NetworkElement e = elements.get(gatewayID);
+	public Device getAccess(String gatewayID, Object whoIsAsking) {
+		HashMap<String, Device> connectedDevices = new HashMap<String, Device>();
+
+		// get Connected devices
+		// TODO this may be can be placed after the construction of the devices in some
+		// place like fillInitialProeprties, but i dont know exactly if it will work.  
+		for (Link links: this.getLinks()){
+			for(Device linkedDevices: links.getLinkedDevices()){
+				if(!linkedDevices.equals(this)){
+					connectedDevices.put(linkedDevices.getID(), linkedDevices);
+				}
+			}
+		}
+		//look for the asked device
+		if (connectedDevices.containsKey(gatewayID)) {
+			NetworkElement e = connectedDevices.get(gatewayID);
+			ArrayList<Object> target = new ArrayList<Object>();
+			target.add(e);
+			NotificationManager.addNotification(new DNSConsult(whoIsAsking, target));
 			if (e instanceof Device) {
-				ArrayList<Object> target = new ArrayList<Object>();
-				target.add(e);
-				NotificationManager.addNotification(new DNSConsult(whoIsAsking,
-						target));
 				return (Device) e;
 			}
 		}
@@ -187,6 +190,38 @@ public class RouterDNS extends Device{
 	 */
 	public void setParentScenario(Scenario parentScenario) {
 		this.parentScenario = parentScenario;
+	}
+	
+	/**
+	 * 
+	 * @param d
+	 */
+	public void blockAccess(Device d){
+		this.block.add(d);
+	}
+
+	public boolean isBlocked(Device d){
+		return this.block.contains(d);
+	}
+	
+	public void allowAccess(Device d){
+		this.allowed.add(d);
+	}
+	
+	public boolean isAllowed(Device d){
+		return this.allowed.contains(d);
+	}
+	
+	public boolean openPort(String port){
+		if(this.ports.contains(port)){
+			this.ports.add(port);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean closePort(String port){
+		return this.ports.remove(port);
 	}
 
 }

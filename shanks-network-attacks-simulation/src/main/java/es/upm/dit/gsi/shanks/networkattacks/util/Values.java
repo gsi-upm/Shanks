@@ -48,7 +48,7 @@ public class Values {
 	public static final double Server2DHeight = 50;
 	
 	// Enterprise net elements
-	public static final String MAIN_ROUTER_ID = "mainCompanyRouter";
-	public static final String WEB_SERVER_ID = "companyWebServer"; 
+	public static final String ENTERPRISE_GATEWAY_ID = "MegaCorpGateway";
+	public static final String WEB_SERVER_ID = "MegaCorpWebServer"; 
 
 }

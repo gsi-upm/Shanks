@@ -33,6 +33,11 @@ public class Server extends Computer {
 	 * A HashMap with services referenced by a serviceName.
 	 */
 	private HashMap<String, HashMap<String, Object>> services;
+	
+	/**
+	 * A List with the "access" logs
+	 */
+	private HashMap<String, Integer> logs;
 
 	/**
 	 * 
@@ -43,6 +48,7 @@ public class Server extends Computer {
 		super(id);
 		this.passwords = new ArrayList<String>();
 		this.services = new HashMap<String, HashMap<String, Object>>();
+		this.logs = new HashMap<String, Integer>();
 	}
 
 	/**
@@ -111,6 +117,19 @@ public class Server extends Computer {
 		} else {
 			return this.services.get(serviceName).get(serviceAction);
 		}
+	}
+	
+	public void logAccess(String ID){
+		if (this.logs.containsKey(ID)) {
+			this.logs.put(ID, this.logs.get(ID) + 1);
+		} else {
+			this.logs.put(ID, 1);
+		}
+		
+	}
+	
+	public HashMap<String, Integer> getLogs(){
+		return logs;
 	}
 
 }

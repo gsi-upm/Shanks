@@ -19,6 +19,9 @@ public class SQLInjection implements Attack {
 	
 	private ShanksSimulation sim;
 	
+	private int numberOfAttacks = 0;
+	private int successfullAttacks = 0;
+	
 	private ArrayList<Integer> ports;
 	
 	private boolean running;
@@ -48,9 +51,11 @@ public class SQLInjection implements Attack {
 			int rand = this.sim.random.nextInt(100);
 			if (rand < vulnerability){
 				this.success = true;
+				successfullAttacks++;
 				// TODO: set property "hacked"??
 			}
 			// TODO: Increase log "weirdness" 
+			numberOfAttacks++;
 			
 		} catch (ScenarioNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -65,6 +70,10 @@ public class SQLInjection implements Attack {
 	@Override
 	public boolean isRunning() {
 		return this.running;
+	}
+	
+	public double ratioAttacks(){
+		return successfullAttacks/numberOfAttacks;
 	}
 
 }

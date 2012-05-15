@@ -24,6 +24,9 @@ public class RootShell implements Attack {
 	
 	private Scenario han;
 	
+	private int numberOfAttacks = 0;
+	private int successfullAttacks = 0;
+	
 	boolean running;
 	boolean success;
 	
@@ -46,11 +49,13 @@ public class RootShell implements Attack {
 			int rand = this.sim.random.nextInt(100);
 			if (rand < vulnerability){
 				this.success = true;
+				successfullAttacks++;
 				// TODO: set property "hacked"??
 			} else {
 				webServer.addProperty(Server.PROPERTY_LOG, (Integer)webServer.getProperty(Server.PROPERTY_LOG) +1 );
 			// TODO: Increase log "weirdness"
 			}
+			numberOfAttacks++;
 			
 		} catch (ScenarioNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -84,6 +89,10 @@ public class RootShell implements Attack {
 	@Override
 	public boolean isRunning() {
 		return this.running;
+	}
+	
+	public double ratioAttacks(){
+		return successfullAttacks/numberOfAttacks;
 	}
 
 }

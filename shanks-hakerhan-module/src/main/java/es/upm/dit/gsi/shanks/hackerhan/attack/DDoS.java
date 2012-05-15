@@ -39,6 +39,10 @@ public class DDoS implements Attack {
 	 * Number of steps the attack will last.
 	 */
 	private int last;
+	
+	private int numberOfAttacks = 0;
+	private int successfullAttacks = 0;
+	
 
 	/**
 	 * Constructor
@@ -69,6 +73,7 @@ public class DDoS implements Attack {
 			msg.setPropCont(Values.ATTACK_ORDER + ":" + this.targetID + ":" + String.valueOf(this.last));
 			hacker.sendMsg(msg);
 		}
+		numberOfAttacks++;
 	}
 
 	/**
@@ -84,6 +89,7 @@ public class DDoS implements Attack {
 		
 		for (String statusID : status.keySet()){
 			if (status.get(statusID) && !statusID.equalsIgnoreCase(RouterDNS.STATUS_OK))
+				successfullAttacks++;
 				return true;
 		}
 		
@@ -119,5 +125,9 @@ public class DDoS implements Attack {
 	}
 	public void decreaseSteps() {
 		this.last -= 1;
+	}
+	
+	public double ratioAttacks(){
+		return successfullAttacks/numberOfAttacks;
 	}
 }

@@ -77,7 +77,7 @@ public class SysAdmin extends SimpleShanksAgent implements
 		}
 		
 		// Router Load
-		HashMap<String, Boolean> routerStatus = simulation.getScenario().getNetworkElement(Values.MAIN_ROUTER_ID).getStatus();
+		HashMap<String, Boolean> routerStatus = simulation.getScenario().getNetworkElement(Values.ENTERPRISE_GATEWAY_ID).getStatus();
 		String routerLoad = null;
 		for(String key: routerStatus.keySet()){
 			if (routerStatus.get(key))

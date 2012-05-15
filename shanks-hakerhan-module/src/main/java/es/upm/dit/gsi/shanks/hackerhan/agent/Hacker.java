@@ -174,8 +174,11 @@ public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksA
 					String targetID = this.targetsID.get(0);
 					this.attack = createAttack(attack, targetID, simulation);
 				}
-				
-				if (this.attack != null) this.attack.execute();
+				if (action.equals(Values.ACTION_GET_BOT) && this.attack instanceof RootShell) {
+					((RootShell)this.attack).installBot(simulation);
+				} else if (this.attack != null){
+					this.attack.execute();
+				}
 				
 //				if(0 < type && type <= types.get(Values.ATTACK_DDOS)*100){
 //					// DDoS

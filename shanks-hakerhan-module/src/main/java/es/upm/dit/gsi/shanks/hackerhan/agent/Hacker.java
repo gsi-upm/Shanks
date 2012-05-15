@@ -58,6 +58,10 @@ public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksA
 	 */
 	private ProbabilisticNetwork bayesianNetwork;
 	
+	private int numberOfDDoSAttacks;
+	private int numberOfRootAttacks;
+	private int numberOfSQLAttacks;
+	
 	/**
 	 * The bayesian network file path
 	 */
@@ -69,6 +73,10 @@ public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksA
 		super(id);
 		this.bayesianNetworkPath = bnPath;
 		this.bayesianNetwork = new ProbabilisticNetwork("HackerBN");
+		this.numberOfDDoSAttacks = 0;
+		this.numberOfRootAttacks = 0;
+		this.numberOfSQLAttacks = 0;
+		
 		try{
 			this.bayesianNetwork = ShanksAgentBayesianReasoningCapability.loadNetwork(bnPath);
 		} catch (Exception e) {
@@ -247,20 +255,34 @@ public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksA
 		try {
 			if (attackType.equalsIgnoreCase(Values.ATTACK_DDOS)) {
 				result = new DDoS(this, targetID, sim);
+				numberOfDDoSAttacks++;
 			} else if (attackType.equalsIgnoreCase(Values.ATTACK_ROOT_SHELL)) {
 				result = new RootShell(this, sim,
 						((ComplexScenario) sim.getScenario())
 								.getScenario(Values.HAN_SCENARIO_ID
 										+ this.getID().charAt(this.getID().length() - 1)));
-
+				numberOfRootAttacks++;
 			} else if (attackType.equalsIgnoreCase(Values.ATTACK_SQL_INJECTION)) {
 				result = new SQLInjection(this, sim);
+				numberOfSQLAttacks++;
 			}
 		} catch (ScenarioNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	public int getNumberOfDDoSAttacks(){
+		return numberOfDDoSAttacks;
+	}
+	
+	public int getNumberOfRootAttacks(){
+		return numberOfRootAttacks;
+	}
+	
+	public int getNumberOfSQLAttacks(){
+		return numberOfSQLAttacks;
 	}
 	
 }

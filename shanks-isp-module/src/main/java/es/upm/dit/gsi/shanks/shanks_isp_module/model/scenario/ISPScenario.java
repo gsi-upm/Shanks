@@ -1,15 +1,11 @@
 package es.upm.dit.gsi.shanks.shanks_isp_module.model.scenario;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Properties;
-import java.util.Set;
 
+import es.upm.dit.gsi.shanks.hackerhan.model.scenario.HANScenario;
 import es.upm.dit.gsi.shanks.hackerhan.model.scenario.HackerHANScenario;
-import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
@@ -29,7 +25,6 @@ import es.upm.dit.gsi.shanks.shanks_isp_module.model.Values;
 import es.upm.dit.gsi.shanks.shanks_isp_module.model.element.device.ISPGateway;
 import es.upm.dit.gsi.shanks.shanks_isp_module.model.scenario.portrayal.ISPScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.workerroom.model.element.link.EthernetLink;
-import es.upm.dit.gsi.shanks.workerroom.model.failure.WireBroken;
 import es.upm.dit.gsi.shanks.workerroom.model.scenario.WorkerRoomScenario;
 
 public class ISPScenario extends ComplexScenario{
@@ -60,10 +55,14 @@ public class ISPScenario extends ComplexScenario{
 			InvocationTargetException {
 		Properties p = this.getProperties();
 	    p.put(WorkerRoomScenario.CLOUDY_PROB, "10.0");
-	    this.addScenario(EnterpriseScenario.class, "Enterprise", EnterpriseScenario.STATUS_NORMAL, p, "Intranet LANRouter", "LINK1");
-	    this.addScenario(HackerHANScenario.class, "Hacker HAN 1", HackerHANScenario.STATUS_NORMAL, p, Values.WIFI_ROUTER_ID, "LINK2");
-	    this.addScenario(HackerHANScenario.class, "Hacker HAN 2", HackerHANScenario.STATUS_NORMAL, p, Values.WIFI_ROUTER_ID, "LINK3");
-	    this.addScenario(HackerHANScenario.class, "Hacker HAN 3", HackerHANScenario.STATUS_NORMAL, p, Values.WIFI_ROUTER_ID, "LINK4");
+	    this.addScenario(EnterpriseScenario.class, Values.ENTERPRISE_SCENARIO_ID, EnterpriseScenario.STATUS_NORMAL, p, Values.ENTERPRISE_GATEWAY_ID, Values.ENTERPRISE_SUSCRIBER_LINK_ID);
+	    for (int i=0; i<Values.NUMBER_OF_HANS; i++){
+	    	if(Math.random()<Values.HACKER_PROBABILITY){
+	    		this.addScenario(HackerHANScenario.class, Values.HAN_SCENARIO_ID+i, HackerHANScenario.STATUS_NORMAL, p, Values.WIFI_ROUTER_ID, Values.HAN_SUSCRIBER_LINK+i);	    		
+	    	} else {
+	    		this.addScenario(HANScenario.class, Values.HAN_SCENARIO_ID+i, HANScenario.STATUS_NORMAL, p, Values.WIFI_ROUTER_ID, Values.HAN_SUSCRIBER_LINK+i);
+	    	}
+	    }
 	}
 
 	@Override
@@ -88,43 +87,41 @@ public class ISPScenario extends ComplexScenario{
 	public void addNetworkElements()
 			throws UnsupportedNetworkElementStatusException,
 			TooManyConnectionException, DuplicatedIDException {
-		Device ispRouter = new ISPGateway("ISP Gateway", this);
-		Link cupperLink1 = new EthernetLink("LINK1", EthernetLink.STATUS_OK, 2);
-		Link cupperLink2 = new EthernetLink("LINK2", EthernetLink.STATUS_OK, 2);
-		Link cupperLink3 = new EthernetLink("LINK3", EthernetLink.STATUS_OK, 2);
-		Link cupperLink4 = new EthernetLink("LINK4", EthernetLink.STATUS_OK, 2);
 		
-		ispRouter.connectToLink(cupperLink4);
-		ispRouter.connectToLink(cupperLink3);
-		ispRouter.connectToLink(cupperLink2);
-		ispRouter.connectToLink(cupperLink1);
-		
-		this.addNetworkElement(cupperLink4);
-		this.addNetworkElement(cupperLink3);
-		this.addNetworkElement(cupperLink2);
-		this.addNetworkElement(cupperLink1);
+		// Adding the ISP router
+		Device ispRouter = new ISPGateway(Values.ISP_GATEWAY_ID, this);
 		this.addNetworkElement(ispRouter);
-
+		
+		// Adding the enterprise subscription to the ISP
+		Link enterpriseSuscription = new EthernetLink(Values.ENTERPRISE_SUSCRIBER_LINK_ID, EthernetLink.STATUS_OK, 2);
+		ispRouter.connectToLink(enterpriseSuscription);
+		this.addNetworkElement(enterpriseSuscription);
+		
+		//Adding the HAN's subscriptions to the ISP
+		for (int i=0; i<Values.NUMBER_OF_HANS; i++){
+			Link hanSubscription = new EthernetLink(Values.HAN_SUSCRIBER_LINK+i, EthernetLink.STATUS_OK, 2);
+			ispRouter.connectToLink(hanSubscription);
+			this.addNetworkElement(hanSubscription);
+		}
 	}
 
 	@Override
 	public void addPossibleFailures() {
-		Set<NetworkElement> set1 = new HashSet<NetworkElement>();
-		set1.add(this.getNetworkElement("LINK1"));
-		Set<NetworkElement> set2 = new HashSet<NetworkElement>();
-		set2.add(this.getNetworkElement("LINK2"));
-		Set<NetworkElement> set3 = new HashSet<NetworkElement>();
-		set3.add(this.getNetworkElement("LINK3"));
-		Set<NetworkElement> set4 = new HashSet<NetworkElement>();
-		set4.add(this.getNetworkElement("LINK4"));
-        List<Set<NetworkElement>> possibleCombinations = new ArrayList<Set<NetworkElement>>();
-		possibleCombinations.add(set1);
-		possibleCombinations.add(set2);
-		possibleCombinations.add(set3);
-		possibleCombinations.add(set4);
-		this.addPossibleFailure(WireBroken.class, possibleCombinations);
-		
-		
+		//TODO ¿really necessary?
+//		Set<NetworkElement> set1 = new HashSet<NetworkElement>();
+//		set1.add(this.getNetworkElement("LINK1"));
+//		Set<NetworkElement> set2 = new HashSet<NetworkElement>();
+//		set2.add(this.getNetworkElement("LINK2"));
+//		Set<NetworkElement> set3 = new HashSet<NetworkElement>();
+//		set3.add(this.getNetworkElement("LINK3"));
+//		Set<NetworkElement> set4 = new HashSet<NetworkElement>();
+//		set4.add(this.getNetworkElement("LINK4"));
+//        List<Set<NetworkElement>> possibleCombinations = new ArrayList<Set<NetworkElement>>();
+//		possibleCombinations.add(set1);
+//		possibleCombinations.add(set2);
+//		possibleCombinations.add(set3);
+//		possibleCombinations.add(set4);
+//		this.addPossibleFailure(WireBroken.class, possibleCombinations);
 		
 	}
 
@@ -137,7 +134,6 @@ public class ISPScenario extends ComplexScenario{
 	@Override
 	public HashMap<Class<? extends Failure>, Double> getPenaltiesInStatus(
 			String status) throws UnsupportedScenarioStatusException {
-		 
 		HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
 	    return penalties;
 	}

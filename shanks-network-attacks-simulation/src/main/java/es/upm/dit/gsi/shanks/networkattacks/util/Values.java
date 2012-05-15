@@ -51,4 +51,11 @@ public class Values {
 	public static final String ENTERPRISE_GATEWAY_ID = "MegaCorpGateway";
 	public static final String WEB_SERVER_ID = "MegaCorpWebServer"; 
 
+	
+	//HAN Elements 
+	public static final String HAN_SUSCRIBER_LINK = "HanSuscription";
+	public static final String HAN_SCENARIO_ID= "HomeAreaNetwork";
+	
+	//ISP Elements
+	public static final String ISP_GATEWAY_ID = "ISPGateway";
 }

@@ -50,6 +50,7 @@ public class Values {
 	// Enterprise net elements
 	public static final String ENTERPRISE_GATEWAY_ID = "MegaCorpGateway";
 	public static final String WEB_SERVER_ID = "MegaCorpWebServer"; 
+	public static final String SQL_SERVER_ID = "MegaCorpSQLServer";
 
 	
 	//HAN Elements 

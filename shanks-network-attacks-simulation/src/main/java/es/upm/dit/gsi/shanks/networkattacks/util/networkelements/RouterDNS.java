@@ -152,7 +152,7 @@ public class RouterDNS extends Device{
 	 * @return A reference to the gateway-device asked, or null if there is no
 	 *         one defined under the given ID.
 	 */
-	public Device getAccess(String gatewayID, Object whoIsAsking) {
+	public Device getGateway(String gatewayID, Object whoIsAsking) {
 		HashMap<String, Device> connectedDevices = new HashMap<String, Device>();
 
 		// get Connected devices

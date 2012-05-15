@@ -13,9 +13,9 @@ public class ISPGateway extends RouterDNS{
 	
 	private HashMap<Scenario, Boolean> connections;
 
-	public ISPGateway(String id, Scenario parent)
+	public ISPGateway(String id)
 			throws UnsupportedNetworkElementStatusException {
-		super(id, parent);
+		super(id);
 		this.connections = new HashMap<Scenario, Boolean>();
 	}
 

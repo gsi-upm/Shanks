@@ -63,7 +63,7 @@ public class WorkerRoomScenario extends Scenario{
 		Device pc4 = new Computer("PC4");
 		Device pc5 = new Computer("PC5");
 		Device printer = new Printer("Printer", Printer.STATUS_OK, false);
-		Device router = new LANRouter("LANRouter", this);
+		Device router = new LANRouter("LANRouter");
 		Link ethernetLink1 = new EthernetLink("EthernetLink1", 2);
 		Link ethernetLink2 = new EthernetLink("EthernetLink2", 2);
 		Link ethernetLink3 = new EthernetLink("EthernetLink3", 2);

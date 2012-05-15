@@ -74,7 +74,7 @@ public class SysAdmin extends SimpleShanksAgent implements
 	public void executeReasoningCycle(ShanksSimulation simulation) {
 		int to_repair = getBrokenCount(simulation);
 		
-		HashMap<String, Boolean> serverStatus = simulation.getScenario().getNetworkElement(Values.SERVER_ID).getStatus();
+		HashMap<String, Boolean> serverStatus = simulation.getScenario().getNetworkElement(Values.EXTERNAL_SERVICES_SERVER_ID).getStatus();
 		String webServerLoad = null;
 		for(String key: serverStatus.keySet()){
 			if (serverStatus.get(key))

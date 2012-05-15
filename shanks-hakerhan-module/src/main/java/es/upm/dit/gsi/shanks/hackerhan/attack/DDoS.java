@@ -5,7 +5,6 @@ import jason.asSemantics.Message;
 import java.util.ArrayList;
 
 import es.upm.dit.gsi.shanks.ShanksSimulation;
-import es.upm.dit.gsi.shanks.datacenter.model.element.device.Router;
 import es.upm.dit.gsi.shanks.hackerhan.agent.Hacker;
 import es.upm.dit.gsi.shanks.hackerhan.model.Values;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.RouterDNS;
@@ -75,8 +74,8 @@ public class DDoS implements Attack {
 	public boolean isSuccessful() {
 		// TODO Check if the company gateway is still up.
 		RouterDNS router = (RouterDNS)this.sim.getScenario().getNetworkElement(targetID);
-		return router.getCurrentStatus().equalsIgnoreCase(Router.STATUS_CONGESTED)
-				|| router.getCurrentStatus().equals(Router.STATUS_DISCONNECTED);
+		return router.getCurrentStatus().equalsIgnoreCase(RouterDNS.STATUS_CONGESTED)
+				|| router.getCurrentStatus().equals(RouterDNS.STATUS_DISCONNECTED);
 	}
 	
 	@Override

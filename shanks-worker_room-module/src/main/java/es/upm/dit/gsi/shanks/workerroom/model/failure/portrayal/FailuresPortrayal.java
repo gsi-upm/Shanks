@@ -7,7 +7,6 @@ import sim.portrayal.DrawInfo2D;
 import sim.portrayal.Portrayal;
 import sim.portrayal.SimplePortrayal2D;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
-import es.upm.dit.gsi.shanks.model.failure.portrayal.Failure2DPortrayal;
 
 public class FailuresPortrayal extends SimplePortrayal2D implements Portrayal{
 

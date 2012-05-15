@@ -4,12 +4,15 @@
  */
 package es.upm.dit.gsi.shanks.datacenter.model.scenario.portrayal;
 
+import java.util.HashMap;
+
 import sim.portrayal.continuous.ContinuousPortrayal2D;
 import sim.portrayal.network.NetworkPortrayal2D;
 import es.upm.dit.gsi.shanks.datacenter.model.Values;
 import es.upm.dit.gsi.shanks.datacenter.model.element.device.Router;
 import es.upm.dit.gsi.shanks.datacenter.model.element.device.Server;
 import es.upm.dit.gsi.shanks.datacenter.model.element.device.portrayal.Server2DPortrayal;
+import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
@@ -72,40 +75,25 @@ public class DataCenterScenario2DPortrayal extends Scenario2DPortrayal {
 						Values.LDAP_SERVER_ID), 35, 60);
 		this.situateDevice(
 				(Device) this.getScenario().getNetworkElement(
-						Values.EXTERNAL_SERVER_ID), 65, 5);
-		for (int i = 0; i < Values.NUMBER_OF_ITCROW; i++) {
+						Values.EXTERNAL_SERVICES_SERVER_ID), 65, 5);
+		for (int i = 0; i < Values.NUMBER_OF_SYSADMINS; i++) {
 			this.situateDevice(
 					(Device) this.getScenario().getNetworkElement(
-							Values.COMPUTER_ID + i), 5 + 30 * i, 115);
+							Values.SA_COMPUTER_ID + i), 5 + 30 * i, 115);
 		}
 		this.situateDevice(
 				(Device) this.getScenario().getNetworkElement(
 						Values.DATA_CENTER_ROUTER_ID), 50, 5);
 
-		for (int i = 0; i < Values.NUMBER_OF_ITCROW; i++) {
-			this.drawLink((Link) this.getScenario().getNetworkElement(
-					Values.ETHERNET_ID + i+10));
+		for (String key: this.getScenario().getCurrentElements().keySet()) {
+			NetworkElement e = this.getScenario().getCurrentElements().get(key);
+			if(e instanceof Link){
+				this.drawLink((Link)e);
+			}
 		}
 		
-		for(int i = 0; i < 5; i++){
-			this.drawLink((Link) this.getScenario().getNetworkElement(
-					Values.ETHERNET_ID + i));
-		}
 		this.situateDevice((Device) this.getScenario().getNetworkElement(Values.WEB_PROXY_ID), 50, 60);
-		this.situateDevice((Device) this.getScenario().getNetworkElement(Values.WEB_APP_ID), 35, 5);
-		// this.drawLink((Link)this.getScenario().getNetworkElement(Values.ETHERNET_ID
-		// +"1"));
-		// this.drawLink((Link)this.getScenario().getNetworkElement(Values.ETHERNET_ID
-		// +"2"));
-		// this.drawLink((Link)this.getScenario().getNetworkElement(Values.ETHERNET_ID
-		// +"4"));
-		// this.drawLink((Link)this.getScenario().getNetworkElement(Values.ETHERNET_ID
-		// +"5"));
-		// this.drawLink((Link)this.getScenario().getNetworkElement(Values.ETHERNET_ID
-		// +"6"));
-		// this.drawLink((Link)this.getScenario().getNetworkElement(Values.ETHERNET_ID
-		// +"7"));
-
+		this.situateDevice((Device) this.getScenario().getNetworkElement(Values.EXTERNAL_SERVICES_SERVER_ID), 35, 5);
 	}
 
 	@Override

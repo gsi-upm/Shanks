@@ -14,21 +14,20 @@ public class Values extends es.upm.dit.gsi.shanks.networkattacks.util.Values {
 	public static final double SERVER_FAILURE_PROB = 0.001;
 	
 	// Network Elements names. 
-	public static final String COMPUTER_ID = "ITCrowComputer#";
-	public static final String DATA_CENTER_ROUTER_ID = "DataCenterRouter#";
-	public static final String SERVER_ID = "Server#";
+	public static final String SA_COMPUTER_ID = "SysAdminComputer#";
 	public static final String LDAP_SERVER_ID = "LDAPServer";
-	public static final String EXTERNAL_SERVER_ID = "ExternalServer";
+	public static final String EXTERNAL_SERVICES_SERVER_ID = "ExternalServer";
 	public static final String BBDD_SERVER_ID = "BBDDServer";
 	public static final String BBDD_REPLICA_ID = "BBDDReplica";
+//	public static final String WEB_APP_ID = "Web App Server";
+	public static final String WEB_PROXY_ID = "WebProxy";
+	public static final String INTRANET_LINK = "IntranetBusLink";
 	public static final String ETHERNET_ID = "Ethernet#";
-	public static final String WEB_APP_ID= "Web App Server";
-	public static final String WEB_PROXY_ID="WebProxy";
 	
 	// Scenario Values. 
 	public static final double ETHERNET_LENGHT = 2.5;
 	public static final int WIFI_CHANNELS = 64;
-	public static final int NUMBER_OF_ITCROW = 3;
+	public static final int NUMBER_OF_SYSADMINS = 3;
 	
 
 	//Services values.
@@ -51,6 +50,8 @@ public class Values extends es.upm.dit.gsi.shanks.networkattacks.util.Values {
 	public static final String SYSADMIN_ACTION_REPAIR = "Repair";
 	public static final String SYSADMIN_ACTION_MAINTENANCE = "Maintenance";
 	public static final String SYSADMIN_ACTION_PATCH = "Patch";
-	public static final String SYSADMIN_ACTION_LOOKOUT = "Look_out"; 
+	public static final String SYSADMIN_ACTION_LOOKOUT = "Look_out";
+
+
 
 }

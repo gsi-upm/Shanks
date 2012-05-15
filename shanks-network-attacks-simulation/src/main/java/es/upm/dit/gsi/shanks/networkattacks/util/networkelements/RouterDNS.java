@@ -7,14 +7,12 @@ import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
-import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.networkattacks.util.Values;
 import es.upm.dit.gsi.shanks.networkattacks.util.notifications.DNSConsult;
 import es.upm.dit.gsi.shanks.notification.NotificationManager;
 
 public class RouterDNS extends Device{
 
-	private Scenario parentScenario;
 	private ArrayList<Device> block;
 	private ArrayList<Device> allowed;
 	private ArrayList<String> ports;
@@ -31,10 +29,9 @@ public class RouterDNS extends Device{
 	
 	public static final String PROPERTY_VULNERABILITY = "Vulnerability";
 	
-	public RouterDNS(String id, Scenario parent)
+	public RouterDNS(String id)
 			throws UnsupportedNetworkElementStatusException {
 		super(id, RouterDNS.STATUS_OK, true);
-		this.parentScenario = parent;
 	}	
 
 	/*
@@ -176,20 +173,6 @@ public class RouterDNS extends Device{
 			}
 		}
 		return null;
-	}
-	
-	/**
-	 * @return the parentScenario
-	 */
-	public Scenario getParentScenario() {
-		return parentScenario;
-	}
-
-	/**
-	 * @param parentScenario the parentScenario to set
-	 */
-	public void setParentScenario(Scenario parentScenario) {
-		this.parentScenario = parentScenario;
 	}
 	
 	/**

@@ -5,7 +5,6 @@
 package es.upm.dit.gsi.shanks.hackerhan.model.element.device;
 
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
-import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.RouterDNS;
 
 /**
@@ -17,9 +16,9 @@ import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.RouterDNS;
  */
 public class WifiRouterADSL extends RouterDNS {
 
-	public WifiRouterADSL(String id, Scenario parent)
+	public WifiRouterADSL(String id)
 			throws UnsupportedNetworkElementStatusException {
-		super(id, parent);
+		super(id);
 	}
 
 	

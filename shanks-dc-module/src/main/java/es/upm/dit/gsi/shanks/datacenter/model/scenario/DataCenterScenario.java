@@ -2,15 +2,21 @@ package es.upm.dit.gsi.shanks.datacenter.model.scenario;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import es.upm.dit.gsi.shanks.datacenter.model.Values;
 import es.upm.dit.gsi.shanks.datacenter.model.element.device.Router;
 import es.upm.dit.gsi.shanks.datacenter.model.element.device.Server;
+import es.upm.dit.gsi.shanks.datacenter.model.failure.ServerFailure;
 import es.upm.dit.gsi.shanks.datacenter.model.scenario.portrayal.DataCenterScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.datacenter.model.scenario.portrayal.DataCenterScenario3DPortrayal;
+import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
@@ -19,6 +25,8 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusE
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
+import es.upm.dit.gsi.shanks.networkattacks.util.failures.ComputerFailure;
+import es.upm.dit.gsi.shanks.networkattacks.util.failures.RouterFailure;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Computer;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.EthernetLink;
 
@@ -61,49 +69,46 @@ public class DataCenterScenario extends Scenario {
 	public void addNetworkElements()
 			throws UnsupportedNetworkElementStatusException,
 			TooManyConnectionException, DuplicatedIDException {
-		ArrayList<EthernetLink> links = new ArrayList<EthernetLink>();
 		
-		Router intranetRouter = new Router(Values.DATA_CENTER_ROUTER_ID, this);
+		Router intranetRouter = new Router(Values.DATA_CENTER_ROUTER_ID);
 		addNetworkElement(intranetRouter);
 		
-		Router webProxy = new Router(Values.WEB_PROXY_ID, this);
-		links.add(new EthernetLink(Values.ETHERNET_ID+"0", Values.ETHERNET_LENGHT));
-		webProxy.connectToDeviceWithLink(intranetRouter, links.get(links.size()-1));
+		Router webProxy = new Router(Values.WEB_PROXY_ID);
 		addNetworkElement(webProxy);
-
-		// IT Crow terminals.
 		
-		for (int i = 0; i < Values.NUMBER_OF_ITCROW; i++) {
-			Computer computer = (new Computer(Values.COMPUTER_ID + i));
-			links.add(new EthernetLink(Values.ETHERNET_ID+i+10, Values.ETHERNET_LENGHT));
-			computer.connectToDeviceWithLink(webProxy, links.get(i+1));
+		Link intranetWebProxyLink = new EthernetLink(Values.INTRANET_LINK, Values.ETHERNET_LENGHT);
+		webProxy.connectToDeviceWithLink(intranetRouter, intranetWebProxyLink);
+
+		// SysAmind terminals.
+		ArrayList<EthernetLink> links = new ArrayList<EthernetLink>();
+		for (int i = 0; i < Values.NUMBER_OF_SYSADMINS; i++) {
+			Computer computer = (new Computer(Values.SA_COMPUTER_ID + i));
+			links.add(new EthernetLink(Values.ETHERNET_ID+i, Values.ETHERNET_LENGHT));
+			computer.connectToDeviceWithLink(intranetRouter, links.get(links.size()-1));
 			addNetworkElement(computer);
 		}
 
 		
 		// Servers
 		Server ldap = new Server(Values.LDAP_SERVER_ID);
-		links.add(new EthernetLink(Values.ETHERNET_ID+"1", Values.ETHERNET_LENGHT));
-		ldap.connectToDeviceWithLink(webProxy, links.get(links.size()-1));
+		links.add(new EthernetLink(Values.ETHERNET_ID+(links.size()), Values.ETHERNET_LENGHT));
+		ldap.connectToDeviceWithLink(intranetRouter, links.get(links.size()-1));
 		addNetworkElement(ldap);
 		
-		Server webApp = new Server(Values.WEB_APP_ID);
-		links.add(new EthernetLink(Values.ETHERNET_ID+"2", Values.ETHERNET_LENGHT));
-		webApp.connectToDeviceWithLink(intranetRouter, links.get(links.size()-1));
-		addNetworkElement(webApp);
-		
-//		Server external = new Server(Values.EXTERNAL_SERVER_ID);
-//		links.add(new EthernetLink(Values.ETHERNET_ID+links.size(), Values.ETHERNET_LENGHT));
-//		external.connectToDeviceWithLink(intranetRouter, links.get(links.size()-1));
-//		addNetworkElement(external);
+		Server externalServices = new Server(Values.EXTERNAL_SERVICES_SERVER_ID);
+		links.add(new EthernetLink(Values.ETHERNET_ID+links.size(), Values.ETHERNET_LENGHT));
+		externalServices.connectToDeviceWithLink(webProxy, links.get(links.size()-1));
+		links.add(new EthernetLink(Values.ETHERNET_ID+links.size(), Values.ETHERNET_LENGHT));
+		externalServices.connectToDeviceWithLink(intranetRouter, links.get(links.size()-1));
+		addNetworkElement(externalServices);
 		
 		Server bbdd = new Server(Values.BBDD_SERVER_ID);
-		links.add(new EthernetLink(Values.ETHERNET_ID+"3", Values.ETHERNET_LENGHT));
-		bbdd.connectToDeviceWithLink(webApp, links.get(links.size()-1));
+		links.add(new EthernetLink(Values.ETHERNET_ID+links.size(), Values.ETHERNET_LENGHT));
+		bbdd.connectToDeviceWithLink(intranetRouter, links.get(links.size()-1));
 		addNetworkElement(bbdd);
 		
 		Server bbddReplica = new Server(Values.BBDD_REPLICA_ID);
-		links.add(new EthernetLink(Values.ETHERNET_ID+"4", Values.ETHERNET_LENGHT));
+		links.add(new EthernetLink(Values.ETHERNET_ID+links.size(), Values.ETHERNET_LENGHT));
 		bbddReplica.connectToDeviceWithLink(bbdd, links.get(links.size()-1));
 		addNetworkElement(bbddReplica);
 
@@ -117,45 +122,42 @@ public class DataCenterScenario extends Scenario {
 	@Override
 	public void addPossibleFailures() {
 		
-//		HashMap<String, NetworkElement> addedElements = this.getCurrentElements();
-//		Set<NetworkElement> routerSet = new HashSet<NetworkElement>();
-//		List<Set<NetworkElement>> computers = new ArrayList<Set<NetworkElement>>();
-//		List<Set<NetworkElement>> servers = new ArrayList<Set<NetworkElement>>();
-//		
-//		for(String eName: addedElements.keySet()){
-//			Set<NetworkElement> computerSet = new HashSet<NetworkElement>();
-//			Set<NetworkElement> serverSet = new HashSet<NetworkElement>();
-//			NetworkElement e = addedElements.get(eName);
-//			if(!(e instanceof Link)){
-//				routerSet.add(e);
-//				if((e instanceof Computer)) {
-//					if((e instanceof Server)){
-//						serverSet.add(e);
-//						servers.add(serverSet);
-//					} else {
-//						computerSet.add(e);
-//						computers.add(computerSet);
-//					}
-//				}
-//			}
-//		}
-//		this.addPossibleFailure(RouterFailure.class, routerSet);
-//		this.addPossibleFailure(ComputerFailure.class, computers);
-//		this.addPossibleFailure(ServerFailure.class, servers);
+		HashMap<String, NetworkElement> addedElements = this.getCurrentElements();
+		Set<NetworkElement> routerSet = new HashSet<NetworkElement>();
+		List<Set<NetworkElement>> computers = new ArrayList<Set<NetworkElement>>();
+		List<Set<NetworkElement>> servers = new ArrayList<Set<NetworkElement>>();
+		
+		for(String eName: addedElements.keySet()){
+			Set<NetworkElement> computerSet = new HashSet<NetworkElement>();
+			Set<NetworkElement> serverSet = new HashSet<NetworkElement>();
+			NetworkElement e = addedElements.get(eName);
+			if(!(e instanceof Link)){
+				routerSet.add(e);
+				if((e instanceof Computer)) {
+					if((e instanceof Server)){
+						serverSet.add(e);
+						servers.add(serverSet);
+					} else {
+						computerSet.add(e);
+						computers.add(computerSet);
+					}
+				}
+			}
+		}
+		this.addPossibleFailure(RouterFailure.class, routerSet);
+		this.addPossibleFailure(ComputerFailure.class, computers);
+		this.addPossibleFailure(ServerFailure.class, servers);
 		
 	}
 
 	@Override
 	public void addPossibleEvents() {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public HashMap<Class<? extends Failure>, Double> getPenaltiesInStatus(
 			String status) throws UnsupportedScenarioStatusException {
-		
 		HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
 	    return penalties;
 	}
-
 }

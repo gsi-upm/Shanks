@@ -57,10 +57,11 @@ public class ISPScenario extends ComplexScenario{
 	    p.put(WorkerRoomScenario.CLOUDY_PROB, "10.0");
 	    this.addScenario(EnterpriseScenario.class, Values.ENTERPRISE_SCENARIO_ID, EnterpriseScenario.STATUS_NORMAL, p, Values.ENTERPRISE_GATEWAY_ID, Values.ENTERPRISE_SUSCRIBER_LINK_ID);
 	    for (int i=0; i<Values.NUMBER_OF_HANS; i++){
+	    	//TODO !!! Agents has nothing to do with scenarios, so this does nothing
 	    	if(Math.random()<Values.HACKER_PROBABILITY){
-	    		this.addScenario(HackerHANScenario.class, Values.HAN_SCENARIO_ID+i, HackerHANScenario.STATUS_NORMAL, p, Values.WIFI_ROUTER_ID, Values.HAN_SUSCRIBER_LINK+i);	    		
+	    		this.addScenario(HackerHANScenario.class, Values.HAN_SCENARIO_ID+i, HackerHANScenario.STATUS_NORMAL, p, Values.HAN_ROUTER_ID, Values.HAN_SUSCRIBER_LINK+i);	    		
 	    	} else {
-	    		this.addScenario(HANScenario.class, Values.HAN_SCENARIO_ID+i, HANScenario.STATUS_NORMAL, p, Values.WIFI_ROUTER_ID, Values.HAN_SUSCRIBER_LINK+i);
+	    		this.addScenario(HANScenario.class, Values.HAN_SCENARIO_ID+i, HANScenario.STATUS_NORMAL, p, Values.HAN_ROUTER_ID, Values.HAN_SUSCRIBER_LINK+i);
 	    	}
 	    }
 	}
@@ -89,7 +90,7 @@ public class ISPScenario extends ComplexScenario{
 			TooManyConnectionException, DuplicatedIDException {
 		
 		// Adding the ISP router
-		Device ispRouter = new ISPGateway(Values.ISP_GATEWAY_ID, this);
+		Device ispRouter = new ISPGateway(Values.ISP_GATEWAY_ID);
 		this.addNetworkElement(ispRouter);
 		
 		// Adding the enterprise subscription to the ISP
@@ -122,14 +123,11 @@ public class ISPScenario extends ComplexScenario{
 //		possibleCombinations.add(set3);
 //		possibleCombinations.add(set4);
 //		this.addPossibleFailure(WireBroken.class, possibleCombinations);
-		
 	}
 
 	@Override
 	public void addPossibleEvents() {
-		
 	}
-
 
 	@Override
 	public HashMap<Class<? extends Failure>, Double> getPenaltiesInStatus(

@@ -26,12 +26,8 @@ public class Values {
 	public static final String CONNECTED = "connected";
 	public static final String ON = "on";
 	public static final String OFF = "off";
-	
-	//whenever the value of an state or property is Not Applicable.
-	public static final String NA = "not-aplicable";
-	
-	//
 	public static final String NO_IP = "no-ip";
+	public static final String NA = "not-aplicable"; //whenever the value of an state or property is Not Applicable.
 	
 	// DNS values
 	public static final String DNSConsultID = "DNSConsult#";
@@ -47,16 +43,19 @@ public class Values {
 	public static final double Computer2DSide = 25;
 	public static final double Server2DHeight = 50;
 	
-	// Enterprise net elements
-	public static final String ENTERPRISE_GATEWAY_ID = "MegaCorpGateway";
-	public static final String WEB_SERVER_ID = "MegaCorpWebServer"; 
-	public static final String SQL_SERVER_ID = "MegaCorpSQLServer";
-
-	
-	//HAN Elements 
-	public static final String HAN_SUSCRIBER_LINK = "HanSuscription";
-	public static final String HAN_SCENARIO_ID= "HomeAreaNetwork";
-	
-	//ISP Elements
+	//Router IDs 
 	public static final String ISP_GATEWAY_ID = "ISPGateway";
+	public static final String HAN_ROUTER_ID = "WifiRouter#";
+	public static final String ENTERPRISE_GATEWAY_ID = "MegaCorpGateway";
+	public static final String DATA_CENTER_ROUTER_ID = "DataCenterRouter";
+	public static final String WORKER_ROOM_ROUTER_ID = "WorkerRoomRouter";
+	
+	// Enterprise net elements
+	public static final String WEB_SERVER_ID = "MegaCorpWebServer";
+	public static final String SQL_SERVER_ID = "MegaCorpSQLServer";
+	
+	// Simulation Configuration
+	public static final int NUMBER_OF_WORKERROOMS = 3;
+	public static final int NUMBER_OF_HANS = 8;
+	public static final double HACKER_PROBABILITY = 0.5;
 }

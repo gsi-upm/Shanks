@@ -62,7 +62,7 @@ public class HackerHANScenario extends Scenario {
 			TooManyConnectionException, DuplicatedIDException {
 		
 		Computer computer = new Computer(Values.COMPUTER_ID+"@"+this.getID());
-		WifiRouterADSL router = new WifiRouterADSL(Values.WIFI_ROUTER_ID, this);
+		WifiRouterADSL router = new WifiRouterADSL(Values.WIFI_ROUTER_ID);
 		WirelessDevice android = new WirelessDevice(Values.ANDROID_ID+"@"+this.getID());
 		WirelessDevice tablet = new WirelessDevice(Values.TABLET_ID+"@"+this.getID());
 		

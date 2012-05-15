@@ -72,4 +72,10 @@ public class Values {
 	public static final int NUMBER_OF_WORKERROOMS = 3;
 	public static final int NUMBER_OF_HANS = 8;
 	public static final double HACKER_PROBABILITY = 0.5;
+	
+	//IDs for charts
+	public static final String DDOS_NUMBER = "Number of DDoS Attacks";
+	public static final String ROOT_NUMBER =" Number of RootShell Attacks";
+	public static final String SQL_NUMBER = "Number of SQLInjection Attacks";
+	
 }

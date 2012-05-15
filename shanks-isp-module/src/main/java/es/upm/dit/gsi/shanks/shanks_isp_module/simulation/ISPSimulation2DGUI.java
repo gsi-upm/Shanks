@@ -22,6 +22,8 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedChartI
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
 import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation;
+import es.upm.dit.gsi.shanks.model.test.steppable.FailuresChartPainter;
+import es.upm.dit.gsi.shanks.networkattacks.util.Values;
 import es.upm.dit.gsi.shanks.shanks_isp_module.model.scenario.ISPScenario;
 import es.upm.dit.gsi.shanks.shanks_isp_module.model.scenario.portrayal.ISPScenario2DPortrayal;
 
@@ -51,6 +53,8 @@ public class ISPSimulation2DGUI extends ShanksSimulation2DGUI{
 	public void addCharts(Scenario2DPortrayal scenarioPortrayal)
 			throws DuplicatedChartIDException, DuplicatedPortrayalIDException,
 			ScenarioNotFoundException {
+        this.addTimeChart(Values.DDOS_NUMBER, "Time / Steps", "How many attacks of each type has a Hacker made?");
+		
 		
 	}
 
@@ -59,9 +63,13 @@ public class ISPSimulation2DGUI extends ShanksSimulation2DGUI{
 		HashMap<String, JFrame> frames = scenarioPortrayal.getFrameList();
         JFrame mainFrame = frames.get(Scenario2DPortrayal.MAIN_DISPLAY_ID);
         JFrame failureFrame = frames.get(ISPScenario2DPortrayal.FAILURE_DISPLAY_ID);
+        JFrame chartFrame = frames.get(Values.DDOS_NUMBER);
+
+        
 
         mainFrame.setLocation(100, 100);
         failureFrame.setLocation(500, 0);
+        chartFrame.setLocation(200, 200);
 	}
 	
 	public static void main(String[] args) throws SecurityException,

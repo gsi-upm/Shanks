@@ -3,6 +3,8 @@ package es.upm.dit.gsi.shanks.shanks_isp_module.simulation;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
 
+import sim.engine.Schedule;
+
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
 import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
@@ -13,6 +15,7 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
+import es.upm.dit.gsi.shanks.shanks_isp_module.model.chart.chartPainter;
 import es.upm.dit.gsi.shanks.workerroom.agent.RepairWireAgent;
 
 public class ISPSimulation extends ShanksSimulation{
@@ -44,4 +47,10 @@ public class ISPSimulation extends ShanksSimulation{
     	RepairWireAgent worker = new RepairWireAgent("Repair Wire Worker");
     	this.registerShanksAgent(worker);
       }
+    
+    public void addSteppables() {
+		schedule.scheduleRepeating(Schedule.EPOCH, 3, new chartPainter(), 50);
+	}
+    
+    
 }

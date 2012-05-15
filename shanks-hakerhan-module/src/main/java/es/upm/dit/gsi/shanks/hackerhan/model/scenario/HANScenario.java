@@ -7,11 +7,15 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
+import es.upm.dit.gsi.shanks.hackerhan.model.Values;
 import es.upm.dit.gsi.shanks.hackerhan.model.element.device.WifiRouterADSL;
 import es.upm.dit.gsi.shanks.hackerhan.model.element.device.WirelessDevice;
 import es.upm.dit.gsi.shanks.hackerhan.model.element.link.WifiConnection;
 import es.upm.dit.gsi.shanks.hackerhan.model.failure.NoIPFailure;
-import es.upm.dit.gsi.shanks.hackerhan.model.scenario.portrayal.HANScenario2DPortrayal;
+import es.upm.dit.gsi.shanks.hackerhan.model.failure.NoISPConnection;
+import es.upm.dit.gsi.shanks.hackerhan.model.failure.WirelessDeviceFailure;
+import es.upm.dit.gsi.shanks.hackerhan.model.scenario.portrayal.HackerHanScenario2DPortrayal;
+import es.upm.dit.gsi.shanks.hackerhan.model.scenario.portrayal.HackerHanScenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
@@ -23,6 +27,8 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusE
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
+import es.upm.dit.gsi.shanks.networkattacks.util.failures.ComputerFailure;
+import es.upm.dit.gsi.shanks.networkattacks.util.failures.RouterFailure;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Computer;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.EthernetLink;
 
@@ -32,9 +38,11 @@ import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.EthernetLink;
  */
 public class HANScenario extends Scenario {
 
-	public static final String STATUS_SUNNY = "Sunny";
-	public static final String STATUS_RAINY = "Rainy";
-	public static final String STATUS_SNOWY = "Snowy";
+	//TODO make that the status has influence. 
+	public static final String STATUS_NORMAL = "Normal";
+	public static final String STATUS_MONITORIZED = "Monitorized";
+	public static final String STATUS_BLOCKED = "Blocked";
+	public static final String STATUS_ATTACKING = "Attacking";
 	
 	public HANScenario(String id, String initialState, Properties properties)
 			throws UnsupportedNetworkElementStatusException,
@@ -53,32 +61,21 @@ public class HANScenario extends Scenario {
 			throws UnsupportedNetworkElementStatusException,
 			TooManyConnectionException, DuplicatedIDException {
 		
-		Computer computer = new Computer("PC");
-		WifiRouterADSL router = new WifiRouterADSL("Router", this);
-//		ModemADSL modem = new ModemADSL("Modem", true);
-//		WifiAccessPoint wifiAP = new WifiAccessPoint("WifiAccessPoint");
-		WirelessDevice iPhone = new WirelessDevice("iPhone");
-		WirelessDevice android = new WirelessDevice("Android");
+		Computer computer = new Computer(Values.COMPUTER_ID+"@"+this.getID());
+		WifiRouterADSL router = new WifiRouterADSL(Values.WIFI_ROUTER_ID);
+		WirelessDevice android = new WirelessDevice(Values.ANDROID_ID+"@"+this.getID());
+		WirelessDevice tablet = new WirelessDevice(Values.TABLET_ID+"@"+this.getID());
 		
-		EthernetLink ethernetLink = new EthernetLink("Ethernet: PC-Router", 2.5);
-//		InternalBus ibRouterWifi = new InternalBus("InternalBus_MRW", 0.5);
-		WifiConnection wifi = new WifiConnection("Wifi", WifiConnection.STATUS_OK, 64);
-		
-//		router.connectToDeviceWithLink(wifiAP, ibRouterWifi);
-//		wifiAP.connectToDeviceWithLink(modem, ibRouterWifi);
-//		modem.connectToDeviceWithLink(router, ibRouterWifi);
-//		computer.connectToDeviceWithLink(router, ethernetCable);
-//		iPhone.connectToDeviceWithLink(wifiAP, wifi);
-//		android.connectToDeviceWithLink(wifiAP, wifi);
+		EthernetLink ethernetLink = new EthernetLink(Values.ETHERNET_ID+"@"+this.getID(), Values.ETHERNET_LENGHT);
+		WifiConnection wifi = new WifiConnection(Values.WIFI_ID+"@"+this.getID(), WifiConnection.STATUS_OK, Values.WIFI_CHANNELS);
+		computer.connectToDeviceWithLink(router, ethernetLink);
+		android.connectToDeviceWithLink(router, wifi);
+		tablet.connectToDeviceWithLink(router, wifi);
 		
 		this.addNetworkElement(computer);
 		this.addNetworkElement(router);
-//		this.addNetworkElement(modem);
-//		this.addNetworkElement(wifiAP);
-		this.addNetworkElement(iPhone);
 		this.addNetworkElement(android);
-		
-//		this.addNetworkElement(ibRouterWifi);
+		this.addNetworkElement(tablet);
 		this.addNetworkElement(ethernetLink);
 		this.addNetworkElement(wifi);
 	}
@@ -90,19 +87,43 @@ public class HANScenario extends Scenario {
 	 */
 	@Override
 	public void addPossibleFailures() {
-        
-        
-        Set<NetworkElement> set = new HashSet<NetworkElement>();
-        set.add(this.getNetworkElement("PC"));
-        set.add(this.getNetworkElement("Ethernet PC"));
-        
-        List<Set<NetworkElement>> possibleCombinations = new ArrayList<Set<NetworkElement>>();
-        possibleCombinations.add(set);
-
-        NetworkElement router = this.getNetworkElement("Router");
-        this.addPossibleFailure(NoIPFailure.class, router);
-        
-        NetworkElement pc = this.getNetworkElement("PC");
+		NetworkElement computer = this.getNetworkElement(Values.COMPUTER_ID+"@"+this.getID());
+		NetworkElement router = this.getNetworkElement(Values.WIFI_ROUTER_ID);
+		NetworkElement android = this.getNetworkElement(Values.ANDROID_ID+"@"+this.getID());
+		NetworkElement tablet = this.getNetworkElement(Values.TABLET_ID+"@"+this.getID());
+//		NetworkElement ethernet = this.getNetworkElement("Ethernet");
+//		NetworkElement wifi= this.getNetworkElement("Wifi");
+		
+//		ComputerFailure.java
+		this.addPossibleFailure(ComputerFailure.class, computer);
+		
+//		NoIPFailure.java
+		Set<NetworkElement> set = new HashSet<NetworkElement>();
+		set.add(router);
+		set.add(computer);
+		set.add(android);
+		set.add(tablet);
+		this.addPossibleFailure(NoIPFailure.class, set);
+		
+//		NoISPConnection.java
+		this.addPossibleFailure(NoISPConnection.class, set);
+		
+//		RouterFailure.java
+		this.addPossibleFailure(RouterFailure.class, router);
+		
+//		WirelessDeviceFailure.java
+		List<Set<NetworkElement>> possibleCombinations = new ArrayList<Set<NetworkElement>>();
+		set = new HashSet<NetworkElement>();
+		set.add(android);
+		possibleCombinations.add(set);
+		set = new HashSet<NetworkElement>();
+		set.add(tablet);
+		possibleCombinations.add(set);
+		set = new HashSet<NetworkElement>();
+		set.add(android);
+		set.add(tablet);
+		possibleCombinations.add(set);
+		this.addPossibleFailure(WirelessDeviceFailure.class, possibleCombinations);
 	}
 
 	/*
@@ -114,8 +135,7 @@ public class HANScenario extends Scenario {
 	@Override
 	public Scenario2DPortrayal createScenario2DPortrayal()
 			throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
-		return new HANScenario2DPortrayal(this, 400, 400);
-//		return null;
+		return new HackerHanScenario2DPortrayal(this, 400, 400);
 	}
 
 	/*
@@ -127,8 +147,7 @@ public class HANScenario extends Scenario {
 	@Override
 	public Scenario3DPortrayal createScenario3DPortrayal()
 			throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
-//		return new HANScenario3DPortrayal(this, 100, 100, 100);
-		return null;
+		return new HackerHanScenario3DPortrayal(this, 100, 100, 100);
 	}
 
 	/*
@@ -141,40 +160,20 @@ public class HANScenario extends Scenario {
 	@Override
 	public HashMap<Class<? extends Failure>, Double> getPenaltiesInStatus(
 			String status) throws UnsupportedScenarioStatusException {
-		if (status.equals(HANScenario.STATUS_RAINY)) {
-            return this.getRainyPenalties();
-        } else if (status.equals(HANScenario.STATUS_SNOWY)) {
-            return this.getSnowyPenalties();
-        } else if (status.equals(HANScenario.STATUS_SUNNY)){
-        	return this.getSunnyPenalties();
-        } else {
-            throw new UnsupportedScenarioStatusException();
-        }
-	}
 
-	private HashMap<Class<? extends Failure>, Double> getSunnyPenalties() {
-        HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
-
-        penalties.put(NoIPFailure.class, 1.0);
-
-        
-        return penalties;
-	}
-
-	private HashMap<Class<? extends Failure>, Double> getSnowyPenalties() {
-        HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
-
-        penalties.put(NoIPFailure.class, 1.0);
-
-        return penalties;
-	}
-
-	private HashMap<Class<? extends Failure>, Double> getRainyPenalties() {
-        HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
-
-        penalties.put(NoIPFailure.class, 1.0);
-
-        return penalties;
+		HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
+		penalties.put(ComputerFailure.class, 1.0);
+		penalties.put(NoIPFailure.class, 1.0);
+		penalties.put(NoISPConnection.class, 1.0);
+		penalties.put(RouterFailure.class, 1.0);
+		penalties.put(WirelessDeviceFailure.class, 1.0);
+		
+//		penalties.put(ComputerFailure.class, Values.COMPUTER_FAILURE_PROB);
+//		penalties.put(NoIPFailure.class, Values.NO_IP_FAILURE_PROB);
+//		penalties.put(NoISPConnection.class, Values.NO_ISP_FAILURE_PROB);
+//		penalties.put(RouterFailure.class, Values.ROUTER_FAILURE_PROB);
+//		penalties.put(WirelessDeviceFailure.class, Values.WIRELESSD_FAILURE_PROB);
+		return penalties;
 	}
 
 	/*
@@ -184,15 +183,14 @@ public class HANScenario extends Scenario {
 	 */
 	@Override
 	public void setPossibleStates() {
-		this.addPossibleStatus(HANScenario.STATUS_SUNNY);
-		this.addPossibleStatus(HANScenario.STATUS_RAINY);
-		this.addPossibleStatus(HANScenario.STATUS_SNOWY);
+		this.addPossibleStatus(HackerHANScenario.STATUS_MONITORIZED);
+		this.addPossibleStatus(HackerHANScenario.STATUS_BLOCKED);
+		this.addPossibleStatus(HackerHANScenario.STATUS_ATTACKING);
+		this.addPossibleStatus(HackerHANScenario.STATUS_NORMAL);
 	}
 
 	@Override
 	public void addPossibleEvents() {
-		// TODO Auto-generated method stub
-		
+		// Nothing here.  
 	}
-
 }

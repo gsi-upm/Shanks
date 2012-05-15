@@ -21,6 +21,9 @@ public class Values {
 		Values.sim = newSim;
 	}
 	
+	// HAN
+	public static final String HAN_SCENARIO_ID = "HomeAreaNetwork#";
+	
 	// Values for network elements properties. 
 	public static final String DISCONNECTED = "disconnected";
 	public static final String CONNECTED = "connected";
@@ -51,6 +54,8 @@ public class Values {
 	public static final String WORKER_ROOM_ROUTER_ID = "WorkerRoomRouter";
 	
 	// Enterprise net elements
+	public static final String ENTERPRISE_SCENARIO_ID = "MegaCorp";
+	public static final String DATA_CENTER_SCENARIO_ID = "DataCenter";
 	public static final String WEB_SERVER_ID = "MegaCorpWebServer";
 	public static final String SQL_SERVER_ID = "MegaCorpSQLServer";
 	

@@ -11,6 +11,8 @@ import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.ShanksAgentBayesia
 import es.upm.dit.gsi.shanks.datacenter.model.Values;
 import es.upm.dit.gsi.shanks.datacenter.model.element.device.Router;
 import es.upm.dit.gsi.shanks.datacenter.model.element.device.Server;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 import es.upm.dit.gsi.shanks.networkattacks.util.action.RepairComputer;
 
 public class SysAdmin extends SimpleShanksAgent implements
@@ -219,7 +221,13 @@ public class SysAdmin extends SimpleShanksAgent implements
 	}
 
 	private void repair(ShanksSimulation sim) {
-		RepairComputer action = new RepairComputer(this.getID(), this);
+		RepairComputer action = new RepairComputer(this.getID() + "Repair", this);
 		// Is this the correct way??
+		try {
+			action.executeAction(sim, this, null);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

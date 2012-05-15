@@ -27,7 +27,7 @@ public class SysAdmin extends SimpleShanksAgent implements
 	/**
 	 * Previous logs
 	 */
-	private String logStatus;
+	//private String logStatus;
 	/**
 	 * 
 	 */
@@ -35,7 +35,7 @@ public class SysAdmin extends SimpleShanksAgent implements
 
 	public SysAdmin(String id) {
 		super(id);
-		this.logStatus = Values.SYSADMIN_LOG_OK;
+		//this.logStatus = Values.SYSADMIN_LOG_OK;
 		this.bayesianNetworkFilePath = Values.SYSADMIN_BAYESIAN_NETWORK_PATH;
 		try {
 			this.bayesianNetwork = ShanksAgentBayesianReasoningCapability
@@ -72,7 +72,8 @@ public class SysAdmin extends SimpleShanksAgent implements
 	public void executeReasoningCycle(ShanksSimulation simulation) {
 		int to_repair = getBrokenCount(simulation);
 		
-		HashMap<String, Boolean> serverStatus = simulation.getScenario().getNetworkElement(Values.EXTERNAL_SERVICES_SERVER_ID).getStatus();
+		Server webServer = (Server)simulation.getScenario().getNetworkElement(Values.WEB_SERVER_ID);
+		HashMap<String, Boolean> serverStatus = webServer.getStatus();
 		String webServerLoad = null;
 		for(String key: serverStatus.keySet()){
 			if (serverStatus.get(key))
@@ -86,7 +87,17 @@ public class SysAdmin extends SimpleShanksAgent implements
 			if (routerStatus.get(key))
 				routerLoad = key;
 		}
-		String log_status = this.logStatus;
+		int logWeird = (Integer)webServer.getProperty(Server.PROPERTY_LOG) +
+				(Integer)simulation.getScenario().getNetworkElement(Values.SQL_SERVER_ID).getProperty(Server.PROPERTY_LOG);
+		
+		String logStatus;
+		if (logWeird > Values.SERVER_LOG_NOK){
+			logStatus = Values.SYSADMIN_LOG_NOK;
+		} else if(logWeird > Values.SERVER_LOG_WEIRD){
+			logStatus = Values.SYSADMIN_LOG_WEIRD;
+		} else {
+			logStatus = Values.SYSADMIN_LOG_OK;
+		}
 
 		try {
 			
@@ -103,9 +114,9 @@ public class SysAdmin extends SimpleShanksAgent implements
 				ShanksAgentBayesianReasoningCapability.addEvidence(this,
 						Values.SYSADMIN_ROUTER_LOAD_NODENAME, routerLoad);
 			
-			if (log_status != null)
+			if (logStatus != null)
 				ShanksAgentBayesianReasoningCapability.addEvidence(this,
-						Values.SYSADMIN_LOG_NODENAME, log_status);
+						Values.SYSADMIN_LOG_NODENAME, logStatus);
 
 			this.bayesianNetwork.updateEvidences();
 

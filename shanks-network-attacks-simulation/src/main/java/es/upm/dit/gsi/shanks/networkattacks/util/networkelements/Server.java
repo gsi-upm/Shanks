@@ -131,5 +131,23 @@ public class Server extends Computer {
 	public HashMap<String, Integer> getLogs(){
 		return logs;
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * es.upm.dit.gsi.shanks.model.element.NetworkElement#fillIntialProperties()
+	 */
+	@Override
+	public void fillIntialProperties() {
+		this.addProperty(Server.PROPERTY_CPUFREQ, 50.0);
+		this.addProperty(Server.PROPERTY_TEMPERATURE, 30.0);
+		this.addProperty(Server.PROPERTY_POWER, Values.ON);
+		this.addProperty(Server.PROPERTY_ETHERNET_CONNECTION,
+				Values.CONNECTED);
+		this.addProperty(Server.PROPERTY_LOAD, 10);
+		this.addProperty(Server.PROPERTY_LOG, Values.SERVER_LOG_OK);
+		this.addProperty(PROPERTY_HACKED, false);
+	}
 
 }

@@ -12,6 +12,7 @@ import sim.portrayal.DrawInfo2D;
 import es.upm.dit.gsi.shanks.hackerhan.model.element.device.WirelessDevice;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device2DPortrayal;
+import es.upm.dit.gsi.shanks.networkattacks.util.Values;
 
 /**
  * Portrayal for wireless device implementing a Smartphone.
@@ -59,8 +60,10 @@ public class Smartphone2DPortrayal extends Device2DPortrayal {
         graphics.fillRect(x, y, w, h);
 
         // Draw the devices ID
-        graphics.setColor(Color.black);
-        graphics.drawString(device.getID(), x - 3, y+1);
+        if(Values.VISIBLE_ID){
+	        graphics.setColor(Color.black);
+	        graphics.drawString(device.getID(), x - 3, y+1);
+        }
 
     }
 	

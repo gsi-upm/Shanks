@@ -8,6 +8,7 @@ import sim.portrayal.DrawInfo2D;
 import es.upm.dit.gsi.shanks.hackerhan.model.element.device.WifiRouterADSL;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device2DPortrayal;
+import es.upm.dit.gsi.shanks.networkattacks.util.Values;
 
 public class WifiRouterADSL2DPortrayal extends Device2DPortrayal {
 
@@ -58,8 +59,10 @@ public class WifiRouterADSL2DPortrayal extends Device2DPortrayal {
 		graphics.fillOval(x, y, w + 5, h + 5);
 
 		// Draw the devices ID
-		graphics.setColor(Color.black);
-		graphics.drawString(device.getID(), x - 3, y + 1);
+		if(Values.VISIBLE_ID){
+			graphics.setColor(Color.black);
+			graphics.drawString(device.getID(), x - 3, y + 1);
+		}
 
 	}
 	private static final long serialVersionUID = -9152169914992904544L;

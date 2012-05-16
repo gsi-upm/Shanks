@@ -71,7 +71,8 @@ public class Values {
 	// Simulation Configuration
 	public static final int NUMBER_OF_WORKERROOMS = 3;
 	public static final int NUMBER_OF_HANS = 8;
-	public static final double HACKER_PROBABILITY = 0.5;
+	public static final int NUMBER_OF_HACKERS = 1;
+	//public static final double HACKER_PROBABILITY = 0.5;
 	
 	//Vissble IDs
 	public static boolean VISIBLE_ID = false;

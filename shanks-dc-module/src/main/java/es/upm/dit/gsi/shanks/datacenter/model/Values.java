@@ -31,7 +31,7 @@ public class Values extends es.upm.dit.gsi.shanks.networkattacks.util.Values {
 	
 
 	// SysAdmin values
-	public static final String SYSADMIN_BAYESIAN_NETWORK_PATH = "/shanks-dc-module/src/main/java/es/upm/dit/gsi/shanks/datacenter/agent/SysAdmin.net";
+	public static final String SYSADMIN_BAYESIAN_NETWORK_PATH = "../shanks-network-attacks-simulation/src/main/java/es/upm/dit/gsi/shanks/networkattacks/util/Hacker.net";
 	
 	public static final String SYSADMIN_REPAIR_NODENAME = "Reparar";
 	public static final String SYSADMIN_SERVER_LOAD_NODENAME = "Server_load";

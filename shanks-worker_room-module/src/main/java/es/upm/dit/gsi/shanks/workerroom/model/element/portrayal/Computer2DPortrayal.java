@@ -10,6 +10,7 @@ import sim.portrayal.DrawInfo2D;
 import sim.portrayal.Portrayal;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device2DPortrayal;
+import es.upm.dit.gsi.shanks.networkattacks.util.Values;
 import es.upm.dit.gsi.shanks.workerroom.model.element.device.Computer;
 
 public class Computer2DPortrayal extends Device2DPortrayal implements Portrayal {
@@ -53,8 +54,10 @@ public class Computer2DPortrayal extends Device2DPortrayal implements Portrayal 
         graphics.fillOval(x, y, w, h);
 
         // Draw the devices ID ID
-        graphics.setColor(Color.black);
-        graphics.drawString(device.getID(), x - 3, y);
+        if(!Values.VISIBLE_ID){
+	        graphics.setColor(Color.black);
+	        graphics.drawString(device.getID(), x - 3, y);
+        }
 
     }
 }

@@ -10,6 +10,7 @@ import sim.portrayal.Portrayal;
 import sim.portrayal.network.EdgeDrawInfo2D;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.portrayal.Link2DPortrayal;
+import es.upm.dit.gsi.shanks.networkattacks.util.Values;
 import es.upm.dit.gsi.shanks.workerroom.model.element.link.EthernetLink;
 
 public class EthernetLink2DPortrayal extends Link2DPortrayal implements Portrayal{
@@ -100,10 +101,13 @@ public class EthernetLink2DPortrayal extends Link2DPortrayal implements Portraya
         }
         graphics.drawLine(startX, startY, endX, endY);
 
-        graphics.setColor(Color.blue);
-        graphics.setFont(labelFont);
-        int width = graphics.getFontMetrics().stringWidth(link.getID());
-        graphics.drawString(link.getID(), midX - width / 2, midY);
+        
+        if(Values.VISIBLE_ID){
+	        graphics.setColor(Color.blue);
+	        graphics.setFont(labelFont);
+	        int width = graphics.getFontMetrics().stringWidth(link.getID());
+	        graphics.drawString(link.getID(), midX - width / 2, midY);
+        }
     }
 
 }

@@ -55,6 +55,11 @@ public class Hacker extends SimpleShanksAgent implements
 	 * The attack
 	 */
 	private Attack attack;
+	
+	/**
+	 * The han of the hacker
+	 */
+	private HackerHANScenario hackerHan;
 
 	/**
 	 * The bayesian network
@@ -82,9 +87,10 @@ public class Hacker extends SimpleShanksAgent implements
 
 	private static final long serialVersionUID = -8386091575218484770L;
 
-	public Hacker(String id, String bnPath) {
+	public Hacker(String id, String bnPath, HackerHANScenario han) {
 		super(id);
 		this.bayesianNetworkPath = bnPath;
+		this.hackerHan = han;
 		this.bayesianNetwork = new ProbabilisticNetwork("HackerBN");
 		this.hackedHans = new ArrayList<String>();
 		this.ability = -1;
@@ -331,5 +337,9 @@ public class Hacker extends SimpleShanksAgent implements
 				return han;
 		}
 		return null;
+	}
+	
+	private HackerHANScenario getHackerHAN(){
+		return this.hackerHan;
 	}
 }

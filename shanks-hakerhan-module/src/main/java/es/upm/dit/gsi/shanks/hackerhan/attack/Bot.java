@@ -8,6 +8,8 @@ import java.util.List;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.SimpleShanksAgent;
 import es.upm.dit.gsi.shanks.hackerhan.model.Values;
+import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
+import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.RouterDNS;
 
 /**
@@ -24,10 +26,12 @@ public class Bot extends SimpleShanksAgent{
 	
 	private boolean attacking;
 	private String target;
+	private Scenario han;
 
-	public Bot(String id) {
+	public Bot(String id, Scenario han) {
 		super(id);
 		attacking = false;
+		this.han = han;
 	}
 
 	@Override
@@ -52,12 +56,18 @@ public class Bot extends SimpleShanksAgent{
 			// Jaffa, Tal shak! 
 //			Gateway gateway = (Gateway)simulation.getScenario().getNetworkElement(target);
 			// TODO: increase load count.
+			RouterDNS routerISP = (RouterDNS)((RouterDNS) simulation.getScenario().getNetworkElement(Values.ISP_GATEWAY_ID))
+					.getGateway(Values.ENTERPRISE_GATEWAY_ID, this);
 			RouterDNS router = (RouterDNS) simulation.getScenario().getNetworkElement(Values.ENTERPRISE_GATEWAY_ID);
 			int cong = (Integer)router.getProperty(RouterDNS.PROPERTY_CONGESTION);
 			HashMap<String, Object> newLoad = new HashMap<String, Object>();
 			newLoad.put(RouterDNS.PROPERTY_CONGESTION, cong + Values.LOAD_INCREASE);
 			router.setProperties(newLoad);
 		}
+	}
+	
+	public Scenario getHAN(){
+		return this.han;
 	}
 
 }

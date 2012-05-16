@@ -9,14 +9,15 @@ import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.SimpleShanksAgent;
 import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.BayesianReasonerShanksAgent;
 import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.ShanksAgentBayesianReasoningCapability;
-import es.upm.dit.gsi.shanks.exception.UnkownAgentException;
 import es.upm.dit.gsi.shanks.hackerhan.attack.Attack;
+import es.upm.dit.gsi.shanks.hackerhan.attack.Bot;
 import es.upm.dit.gsi.shanks.hackerhan.attack.DDoS;
 import es.upm.dit.gsi.shanks.hackerhan.attack.RootShell;
 import es.upm.dit.gsi.shanks.hackerhan.attack.SQLInjection;
 import es.upm.dit.gsi.shanks.hackerhan.model.Values;
+import es.upm.dit.gsi.shanks.hackerhan.model.scenario.HackerHANScenario;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
-import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
+import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.RouterDNS;
 
 /**
@@ -37,8 +38,9 @@ import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.RouterDNS;
  * @author Danny
  * 
  */
-public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksAgent {
-	
+public class Hacker extends SimpleShanksAgent implements
+		BayesianReasonerShanksAgent {
+
 	/**
 	 * The gateway target
 	 */
@@ -47,27 +49,32 @@ public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksA
 	/**
 	 * The bot network available to the hacker
 	 */
-	private ArrayList<String> bots;
-	
+	private ArrayList<Bot> bots;
+
 	/**
 	 * The attack
 	 */
 	private Attack attack;
-	
+
 	/**
 	 * The bayesian network
 	 */
 	private ProbabilisticNetwork bayesianNetwork;
-	
+
 	private static int numberOfDDoSAttacks = 0;
 	private static int numberOfRootAttacks = 0;
 	private static int numberOfSQLAttacks = 0;
-	
+
 	/**
 	 * The bayesian network file path
 	 */
 	private String bayesianNetworkPath;
-	
+
+	/**
+	 * Hacked Scenarios ID
+	 */
+	private ArrayList<String> hackedHans;
+
 	/**
 	 * The ability of the hacker
 	 */
@@ -79,9 +86,12 @@ public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksA
 		super(id);
 		this.bayesianNetworkPath = bnPath;
 		this.bayesianNetwork = new ProbabilisticNetwork("HackerBN");
+		this.hackedHans = new ArrayList<String>();
 		this.ability = -1;
-		try{
-			this.bayesianNetwork = ShanksAgentBayesianReasoningCapability.loadNetwork(bnPath);
+		this.bots = new ArrayList<Bot>();
+		try {
+			this.bayesianNetwork = ShanksAgentBayesianReasoningCapability
+					.loadNetwork(bnPath);
 		} catch (Exception e) {
 			System.out.println("Could not load Probabilistic Network");
 			e.printStackTrace();
@@ -99,117 +109,126 @@ public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksA
 	public void executeReasoningCycle(ShanksSimulation simulation) {
 		if (this.ability == -1)
 			simulation.random.nextInt(Values.MAX_ABILITY);
-		if (this.attack.isRunning()){
+		if (this.attack != null && this.attack.isRunning()) {
 			this.attack.execute();
-			if (((DDoS)this.attack).numberSteps() == 0) 
-				((DDoS)this.attack).stop();
+			if (((DDoS) this.attack).numberSteps() == 0)
+				((DDoS) this.attack).stop();
 		} else {
 
-		try {
-			ShanksAgentBayesianReasoningCapability.addEvidence(this, "Conexion", "OK");
-			RouterDNS router = (RouterDNS) ((ComplexScenario)simulation.getScenario()).getScenario(Values.HAN_SCENARIO_ID +
-					this.getID().charAt(this.getID().length()-1)).getNetworkElement(Values.HAN_ROUTER_ID);
+			try {
+				RouterDNS router = (RouterDNS) ((ComplexScenario)simulation.getScenario()).getScenario(Values.HAN_SCENARIO_ID +
+						this.getID().charAt(this.getID().length()-1)).getNetworkElement(Values.HAN_ROUTER_ID);
+				ShanksAgentBayesianReasoningCapability.addEvidence(this,
+						"Conexion", String.valueOf(router
+								.getProperty(RouterDNS.PROPERTY_CONNECTION)));
+				// TODO: Updates the connection data
+			
 			ShanksAgentBayesianReasoningCapability.addEvidence(this, "Conexion",
 					String.valueOf(router.getProperty(RouterDNS.PROPERTY_CONNECTION)));
 			// TODO: Updates the connection data
-			
-			// If 0 --> lazy
-			// Else --> lets hack!
-			if (simulation.random.nextInt(1) == 0) {
-				ShanksAgentBayesianReasoningCapability.addEvidence(this, "Estado_De_Animo", "Vaguear");
-			} else {
-				ShanksAgentBayesianReasoningCapability.addEvidence(this, "Estado_De_Animo", "Hackear");
-			}
 
-			this.bayesianNetwork.updateEvidences(); // Is this correct??
+				// If 0 --> lazy
+				// Else --> lets hack!
+				if (simulation.random.nextInt(1) == 0) {
+					ShanksAgentBayesianReasoningCapability.addEvidence(this,
+							"Estado_De_Animo", "Vaguear");
+				} else {
+					ShanksAgentBayesianReasoningCapability.addEvidence(this,
+							"Estado_De_Animo", "Hackear");
+				}
 
-			HashMap<String, Float> accionStatus = ShanksAgentBayesianReasoningCapability.getNodeStatesHypotheses(this, "Accion");
-			Iterator<String> actions = accionStatus.keySet().iterator();
-			
-			// Find out which attack I am supposed to do.
-			
-			int result = simulation.random.nextInt(100);
+				this.bayesianNetwork.updateEvidences(); // Is this correct??
 
-			String action = Values.ACTION_NONE;
+				HashMap<String, Float> accionStatus = ShanksAgentBayesianReasoningCapability
+						.getNodeStatesHypotheses(this, "Accion");
+				Iterator<String> actions = accionStatus.keySet().iterator();
 
-			/*
-			 * This could be a little confusing, so let me explain: I generate a
-			 * random int between 0 an 100. I am supposed to have several
-			 * results from the bayesian network, which are like:
-			 * 
-			 * ACTION_NONE = 0.1 
-			 * ACTION_PROXY_ATTACK = 0.3 
-			 * ACTION_DIRECT_ATTACK = 0.3 
-			 * ACTION_GET_BOT = 0.3
-			 * 
-			 * So, now, I will rearrange this, by adding its values so I will
-			 * get a range for each option. Graphically it will be something
-			 * like:
-			 * 
-			 *            result 
-			 *               |
-			 *               V
-			 *  0 ---- 10 ------------ 40 ------------ 70 ------------ 100
-			 *    NONE        PROXY          DIRECT          GET_BOT
-			 * 
-			 * So I will proceed with a proxy attack
-			 * 
-			 * I am sure as hell there is a better way of doing this, but I have
-			 * not been able to find it.
-			 */
-			float probability = 0; 
-			while (probability < result){
-				action = actions.next();
-				probability += accionStatus.get(action)*100;
-			}
-			
-			// I tell the bayesian network what am I doing.
-			ShanksAgentBayesianReasoningCapability.addEvidence(this, "Accion", action);
-			this.bayesianNetwork.updateEvidences();
-			
-			if (!action.equals(Values.ACTION_NONE)) {
+				// Find out which attack I am supposed to do.
 
-				// I need to repeat the same thing than previously, to find out
-				// which attack I am launching
-				HashMap<String, Float> types = ShanksAgentBayesianReasoningCapability.getNodeStatesHypotheses(this, "Tipo_Ataque");
-				Iterator<String> attacks = types.keySet().iterator();
-				
-				int type = simulation.random.nextInt(100);
-				
+				int result = simulation.random.nextInt(100);
+
+				String action = Values.ACTION_NONE;
+
 				/*
-				 * Order:
+				 * This could be a little confusing, so let me explain: I
+				 * generate a random int between 0 an 100. I am supposed to have
+				 * several results from the bayesian network, which are like:
 				 * 
-				 * DDos, RootShell, SQLInjection, None.
+				 * ACTION_NONE = 0.1 ACTION_PROXY_ATTACK = 0.3
+				 * ACTION_DIRECT_ATTACK = 0.3 ACTION_GET_BOT = 0.3
+				 * 
+				 * So, now, I will rearrange this, by adding its values so I
+				 * will get a range for each option. Graphically it will be
+				 * something like:
+				 * 
+				 * result | V 0 ---- 10 ------------ 40 ------------ 70
+				 * ------------ 100 NONE PROXY DIRECT GET_BOT
+				 * 
+				 * So I will proceed with a proxy attack
+				 * 
+				 * I am sure as hell there is a better way of doing this, but I
+				 * have not been able to find it.
 				 */
-				float attackProbaility = 0;
-				String attack = Values.ATTACK_NONE;
-				while(attackProbaility < type){
-					attack = attacks.next();
-					attackProbaility += types.get(attack)*100;
+				float probability = 0;
+				while (probability < result) {
+					action = actions.next();
+					probability += accionStatus.get(action) * 100;
 				}
-				if(!this.targetsID.isEmpty()){
-					String targetID = this.targetsID.get(0);
-					this.attack = createAttack(action, attack, targetID, simulation);
+
+				// I tell the bayesian network what am I doing.
+				ShanksAgentBayesianReasoningCapability.addEvidence(this,
+						"Accion", action);
+				this.bayesianNetwork.updateEvidences();
+
+				if (!action.equals(Values.ACTION_NONE)) {
+
+					// I need to repeat the same thing than previously, to find
+					// out
+					// which attack I am launching
+					HashMap<String, Float> types = ShanksAgentBayesianReasoningCapability
+							.getNodeStatesHypotheses(this, "Tipo_Ataque");
+					Iterator<String> attacks = types.keySet().iterator();
+
+					int type = simulation.random.nextInt(100);
+
+					/*
+					 * Order:
+					 * 
+					 * DDos, RootShell, SQLInjection, None.
+					 */
+					float attackProbaility = 0;
+					String attack = Values.ATTACK_NONE;
+					while (attackProbaility < type) {
+						attack = attacks.next();
+						attackProbaility += types.get(attack) * 100;
+					}
+					if (!this.targetsID.isEmpty()) {
+						String targetID = this.targetsID.get(0);
+						this.attack = createAttack(action, attack, targetID,
+								simulation);
+					}
+					if (action.equals(Values.ACTION_GET_BOT)
+							&& this.attack instanceof RootShell) {
+						((RootShell) this.attack)
+								.setHAN(getHanToHack(simulation));
+						((RootShell) this.attack).installBot(simulation);
+					} else if (this.attack != null) {
+						this.attack.execute();
+					}
 				}
-				if (action.equals(Values.ACTION_GET_BOT) && this.attack instanceof RootShell) {
-					((RootShell)this.attack).installBot(simulation);
-				} else if (this.attack != null){
-					this.attack.execute();
-				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
 		}
 	}
 
 	/**
 	 * Returns the list of bots avaliable for this hacker
 	 * 
-	 * @return ArrayList<String> with the ID's of the bots.
+	 * @return ArrayList<Bot> with the bots.
 	 */
-	public ArrayList<String> getBots() {
+	public ArrayList<Bot> getBots() {
 		return this.bots;
 	}
 
@@ -228,8 +247,8 @@ public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksA
 	 * @param botID
 	 *            - The new Bot ID.
 	 */
-	public void addBot(String botID) {
-		this.bots.add(botID);
+	public void addBot(Bot bot) {
+		this.bots.add(bot);
 	}
 
 	@Override
@@ -246,48 +265,39 @@ public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksA
 	public String getBayesianNetworkFilePath() {
 		return this.bayesianNetworkPath;
 	}
-	
+
 	/**
 	 * Takes a String with the attack type and returns the Attack object
 	 * 
-	 * @param attackType - String with the attack type
-	 * @param targetID - The target
-	 * @param sim - The simulation
+	 * @param attackType
+	 *            - String with the attack type
+	 * @param targetID
+	 *            - The target
+	 * @param sim
+	 *            - The simulation
 	 * @return - The attack to be executed.
 	 */
-	private Attack createAttack(String action, String attackType, String targetID, ShanksSimulation sim){
+	private Attack createAttack(String action, String attackType,
+			String targetID, ShanksSimulation sim) {
 		Attack result = null;
-		try {
-			if (attackType.equalsIgnoreCase(Values.ATTACK_DDOS)) {
-				result = new DDoS(this, targetID, sim);
-				numberOfDDoSAttacks++;
-			} else if (attackType.equalsIgnoreCase(Values.ATTACK_ROOT_SHELL)) {
-				result = new RootShell(this, sim,
-						((ComplexScenario) sim.getScenario())
-								.getScenario(Values.HAN_SCENARIO_ID
-										+ this.getID().charAt(this.getID().length() - 1)));
-				if (action.equals(Values.ACTION_PROXY_ATTACK)){
-					try {
-						((RootShell)result).setAccessID(sim.getAgent(this.bots.get(0)).getID());
-					} catch (UnkownAgentException e) {
-						e.printStackTrace();
-					}
-				}
-				numberOfRootAttacks++;
-			} else if (attackType.equalsIgnoreCase(Values.ATTACK_SQL_INJECTION)) {
-				result = new SQLInjection(this, sim);
-				if (action.equals(Values.ACTION_PROXY_ATTACK)){
-					try {
-						((SQLInjection)result).setAccessID(sim.getAgent(this.bots.get(0)).getID());
-					} catch (UnkownAgentException e) {
-						e.printStackTrace();
-					}
-				}
-				numberOfSQLAttacks++;
+		if (attackType.equalsIgnoreCase(Values.ATTACK_DDOS)) {
+			result = new DDoS(this, targetID, sim);
+			numberOfDDoSAttacks++;
+		} else if (attackType.equalsIgnoreCase(Values.ATTACK_ROOT_SHELL)) {
+			result = new RootShell(this, sim);
+			if (action.equals(Values.ACTION_PROXY_ATTACK)) {
+				Bot BotHan = this.bots
+						.get(sim.random.nextInt(this.bots.size() - 1));
+				((RootShell) result).setHAN(BotHan.getHAN());
 			}
-		} catch (ScenarioNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			numberOfRootAttacks++;
+		} else if (attackType.equalsIgnoreCase(Values.ATTACK_SQL_INJECTION)) {
+			result = new SQLInjection(this, sim);
+			if (action.equals(Values.ACTION_PROXY_ATTACK)) {
+				((SQLInjection) result).setAccessID(this.bots.get(0).getHAN()
+						.getID());
+			}
+			numberOfSQLAttacks++;
 		}
 		return result;
 	}
@@ -297,19 +307,29 @@ public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksA
 	 * 
 	 * @return
 	 */
-	public int getAbility(){
+	public int getAbility() {
 		return this.ability;
 	}
 
-	public static int getNumberOfDDoSAttacks(){
+	public static int getNumberOfDDoSAttacks() {
 		return numberOfDDoSAttacks;
 	}
-	
-	public static int getNumberOfRootAttacks(){
+
+	public static int getNumberOfRootAttacks() {
 		return numberOfRootAttacks;
 	}
-	
-	public static int getNumberOfSQLAttacks(){
+
+	public static int getNumberOfSQLAttacks() {
 		return numberOfSQLAttacks;
+	}
+
+	private Scenario getHanToHack(ShanksSimulation sim) {
+		ComplexScenario comp = (ComplexScenario) sim.getScenario();
+		for (Scenario han : comp.getScenarios()) {
+			if (han instanceof HackerHANScenario
+					&& this.hackedHans.contains(han.getID()))
+				return han;
+		}
+		return null;
 	}
 }

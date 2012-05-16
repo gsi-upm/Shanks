@@ -82,7 +82,8 @@ public class HackerHANModelSimulation extends ShanksSimulation {
 	@Override
 	public void registerShanksAgents() throws DuplicatedAgentIDException,
 			DuplicatedActionIDException {
-		Hacker hacker = new Hacker("Hacker", "/src/main/java/es/upm/dit/gsi/shanks/hackerhan/agent/Hacker.net");
+		Hacker hacker = new Hacker("Hacker", "src/main/java/es/upm/dit/gsi/shanks/hackerhan/agent/Hacker.net");
+
 		this.registerShanksAgent(hacker);
 	}
 	private static final long serialVersionUID = -2546286073637681966L;

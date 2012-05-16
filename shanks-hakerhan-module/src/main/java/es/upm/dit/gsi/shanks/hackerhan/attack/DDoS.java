@@ -65,10 +65,10 @@ public class DDoS implements Attack {
 	public void execute() {
 		this.running = true;
 		// Order every bot to launch an attack
-		for(String bot: hacker.getBots()){
+		for(Bot bot: hacker.getBots()){
 			// TODO: send a message to the bot.
 			Message msg = new Message();
-			msg.setReceiver(bot);
+			msg.setReceiver(bot.getID());
 			msg.setMsgId("Start");
 			msg.setPropCont(Values.ATTACK_ORDER + ":" + this.targetID + ":" + String.valueOf(this.last));
 			hacker.sendMsg(msg);
@@ -109,10 +109,10 @@ public class DDoS implements Attack {
 	 */
 	public void stop(){
 		// Order every bot to stop the attack
-		for(String bot: hacker.getBots()){
+		for(Bot bot: hacker.getBots()){
 			// TODO: send a message to the bot.
 			Message msg = new Message();
-			msg.setReceiver(bot);
+			msg.setReceiver(bot.getID());
 			msg.setMsgId("Stop");
 			msg.setPropCont(Values.STOP_ORDER);
 			hacker.sendMsg(msg);

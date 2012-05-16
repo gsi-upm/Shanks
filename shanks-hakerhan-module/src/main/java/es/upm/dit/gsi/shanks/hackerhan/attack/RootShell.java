@@ -26,20 +26,17 @@ public class RootShell implements Attack {
 	
 	private boolean running;
 	private boolean success;
-	private String accessID;
 	
 	private static int numberOfAttacks = 0;
 	private static int successfullAttacks = 0;
 	
-	public RootShell(Hacker hacker, ShanksSimulation sim, Scenario han){
+	public RootShell(Hacker hacker, ShanksSimulation sim){
 		super();
 		this.hacker = hacker;
 		this.sim = sim;
-		this.han = han;
 		this.success = false;
 		this.running = false;
 		this.steps = sim.random.nextInt(Values.ATTACK_MAX_STEPS);
-		this.accessID = hacker.getID();
 	}
 	@Override
 	public void execute() {
@@ -79,8 +76,8 @@ public class RootShell implements Attack {
 			// TODO: find a han to attack
 			
 			//Bot bot = new Bot(dns.getRouterID("") + hacker.getID() + hacker.getBotCount());
-			Bot bot = new Bot("Bot" + hacker.getID() + hacker.getBotCount());
-			hacker.addBot(bot.getID());
+			Bot bot = new Bot("Bot" + hacker.getID() + hacker.getBotCount(), han);
+			hacker.addBot(bot);
 			CreationShanksAgentCapability.addNewAgent(sim,bot);
 		} catch (Exception e) {
 			sim.logger.warning("Could not create bot:");
@@ -109,7 +106,11 @@ public class RootShell implements Attack {
 		return successfullAttacks/numberOfAttacks;
 	}
 
-	public void setAccessID(String newID){
-		this.accessID = newID;
+	public void setHAN(Scenario han){
+		this.han = han;
+	}
+	
+	public Scenario getHAN(Scenario han){
+		return this.han = han;
 	}
 }

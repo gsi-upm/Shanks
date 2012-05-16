@@ -45,7 +45,6 @@ public class BlockAgent extends SimpleShanksAgent{
 				this.getInbox().remove(message);
 			}
 		}
-		
 	}
 
 	@Override
@@ -87,7 +86,6 @@ public class BlockAgent extends SimpleShanksAgent{
 				}
 			}
 		}
-		
 	}
 
 	private static final long serialVersionUID = 7915033908926580092L;

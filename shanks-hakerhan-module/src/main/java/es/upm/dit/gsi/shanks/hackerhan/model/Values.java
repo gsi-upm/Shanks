@@ -29,12 +29,11 @@ public class Values extends es.upm.dit.gsi.shanks.networkattacks.util.Values  {
 	public static final Double WIRELESSD_FAILURE_PROB = 0.1;
 	
 	// Network Elements names. 
-	public static final String COMPUTER_ID = "Computer#";
-	public static final String WIFI_ROUTER_ID = "WifiRouter#";
-	public static final String ANDROID_ID = "Android#";
-	public static final String TABLET_ID = "Tablet#";
-	public static final String ETHERNET_ID = "Ethernet#";
-	public static final String WIFI_ID = "Wifi#";
+	public static final String COMPUTER_ID = "Computer";
+	public static final String ANDROID_ID = "Android";
+	public static final String TABLET_ID = "Tablet";
+	public static final String ETHERNET_ID = "Ethernet";
+	public static final String WIFI_ID = "Wifi";
 	
 	// Scenario Values. 
 	public static final double ETHERNET_LENGHT = 2.5;

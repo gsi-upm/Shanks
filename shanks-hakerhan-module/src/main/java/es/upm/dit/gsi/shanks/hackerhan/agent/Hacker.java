@@ -108,7 +108,7 @@ public class Hacker extends SimpleShanksAgent implements BayesianReasonerShanksA
 		try {
 			ShanksAgentBayesianReasoningCapability.addEvidence(this, "Conexion", "OK");
 			RouterDNS router = (RouterDNS) ((ComplexScenario)simulation.getScenario()).getScenario(Values.HAN_SCENARIO_ID +
-					this.getID().charAt(this.getID().length()-1)).getNetworkElement(Values.WIFI_ROUTER_ID);
+					this.getID().charAt(this.getID().length()-1)).getNetworkElement(Values.HAN_ROUTER_ID);
 			ShanksAgentBayesianReasoningCapability.addEvidence(this, "Conexion",
 					String.valueOf(router.getProperty(RouterDNS.PROPERTY_CONNECTION)));
 			// TODO: Updates the connection data

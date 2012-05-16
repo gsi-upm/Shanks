@@ -56,12 +56,11 @@ public class HackerHanScenario2DPortrayal extends Scenario2DPortrayal{
 	 */
 	@Override
 	public void placeElements() {
-		this.situateDevice((Device)this.getScenario().getNetworkElement(Values.COMPUTER_ID+"@"+this.getScenario().getID()), 0, 0);
-		this.situateDevice((Device)this.getScenario().getNetworkElement(Values.WIFI_ROUTER_ID), 40, 0);
-		this.situateDevice((Device)this.getScenario().getNetworkElement(Values.ANDROID_ID+"@"+this.getScenario().getID()), 0, 40);
-		this.situateDevice((Device)this.getScenario().getNetworkElement(Values.TABLET_ID+"@"+this.getScenario().getID()), 0, 20);
-		
-		this.drawLink((Link)this.getScenario().getNetworkElement(Values.ETHERNET_ID+"@"+this.getScenario().getID()));
+		this.situateDevice((Device)this.getScenario().getNetworkElement(Values.COMPUTER_ID), 2, 2);
+		this.situateDevice((Device)this.getScenario().getNetworkElement(Values.HAN_ROUTER_ID), 12, 12);
+		this.situateDevice((Device)this.getScenario().getNetworkElement(Values.ANDROID_ID), 2, 8);
+		this.situateDevice((Device)this.getScenario().getNetworkElement(Values.TABLET_ID), 8, 2);
+		this.drawLink((Link)this.getScenario().getNetworkElement(Values.ETHERNET_ID));
 	}
 
 	@Override

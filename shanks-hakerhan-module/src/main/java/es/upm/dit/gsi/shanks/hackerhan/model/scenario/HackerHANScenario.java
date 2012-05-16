@@ -61,13 +61,13 @@ public class HackerHANScenario extends Scenario {
 			throws UnsupportedNetworkElementStatusException,
 			TooManyConnectionException, DuplicatedIDException {
 		
-		Computer computer = new Computer(Values.COMPUTER_ID+"@"+this.getID());
-		WifiRouterADSL router = new WifiRouterADSL(Values.WIFI_ROUTER_ID);
-		WirelessDevice android = new WirelessDevice(Values.ANDROID_ID+"@"+this.getID());
-		WirelessDevice tablet = new WirelessDevice(Values.TABLET_ID+"@"+this.getID());
+		Computer computer = new Computer(Values.COMPUTER_ID);
+		WifiRouterADSL router = new WifiRouterADSL(Values.HAN_ROUTER_ID);
+		WirelessDevice android = new WirelessDevice(Values.ANDROID_ID);
+		WirelessDevice tablet = new WirelessDevice(Values.TABLET_ID);
 		
-		EthernetLink ethernetLink = new EthernetLink(Values.ETHERNET_ID+"@"+this.getID(), Values.ETHERNET_LENGHT);
-		WifiConnection wifi = new WifiConnection(Values.WIFI_ID+"@"+this.getID(), WifiConnection.STATUS_OK, Values.WIFI_CHANNELS);
+		EthernetLink ethernetLink = new EthernetLink(Values.ETHERNET_ID, Values.ETHERNET_LENGHT);
+		WifiConnection wifi = new WifiConnection(Values.WIFI_ID, WifiConnection.STATUS_OK, Values.WIFI_CHANNELS);
 		computer.connectToDeviceWithLink(router, ethernetLink);
 		android.connectToDeviceWithLink(router, wifi);
 		tablet.connectToDeviceWithLink(router, wifi);
@@ -87,10 +87,10 @@ public class HackerHANScenario extends Scenario {
 	 */
 	@Override
 	public void addPossibleFailures() {
-		NetworkElement computer = this.getNetworkElement(Values.COMPUTER_ID+"@"+this.getID());
-		NetworkElement router = this.getNetworkElement(Values.WIFI_ROUTER_ID);
-		NetworkElement android = this.getNetworkElement(Values.ANDROID_ID+"@"+this.getID());
-		NetworkElement tablet = this.getNetworkElement(Values.TABLET_ID+"@"+this.getID());
+		NetworkElement computer = this.getNetworkElement(Values.COMPUTER_ID);
+		NetworkElement router = this.getNetworkElement(Values.HAN_ROUTER_ID);
+		NetworkElement android = this.getNetworkElement(Values.ANDROID_ID);
+		NetworkElement tablet = this.getNetworkElement(Values.TABLET_ID);
 //		NetworkElement ethernet = this.getNetworkElement("Ethernet");
 //		NetworkElement wifi= this.getNetworkElement("Wifi");
 		
@@ -162,11 +162,11 @@ public class HackerHANScenario extends Scenario {
 			String status) throws UnsupportedScenarioStatusException {
 
 		HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
-		penalties.put(ComputerFailure.class, 1.0);
-		penalties.put(NoIPFailure.class, 1.0);
-		penalties.put(NoISPConnection.class, 1.0);
-		penalties.put(RouterFailure.class, 1.0);
-		penalties.put(WirelessDeviceFailure.class, 1.0);
+//		penalties.put(ComputerFailure.class, 1.0);
+//		penalties.put(NoIPFailure.class, 1.0);
+//		penalties.put(NoISPConnection.class, 1.0);
+//		penalties.put(RouterFailure.class, 1.0);
+//		penalties.put(WirelessDeviceFailure.class, 1.0);
 		
 //		penalties.put(ComputerFailure.class, Values.COMPUTER_FAILURE_PROB);
 //		penalties.put(NoIPFailure.class, Values.NO_IP_FAILURE_PROB);

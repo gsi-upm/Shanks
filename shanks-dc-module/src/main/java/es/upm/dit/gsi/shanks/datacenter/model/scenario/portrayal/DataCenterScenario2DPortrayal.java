@@ -90,7 +90,7 @@ public class DataCenterScenario2DPortrayal extends Scenario2DPortrayal {
 			}
 		}
 		
-		this.situateDevice((Device) this.getScenario().getNetworkElement(Values.WEB_PROXY_ID), 50, 60);
+		this.situateDevice((Device) this.getScenario().getNetworkElement(Values.WEB_PROXY_ID), 25, 25);
 		this.situateDevice((Device) this.getScenario().getNetworkElement(Values.EXTERNAL_SERVICES_SERVER_ID), 35, 5);
 	}
 

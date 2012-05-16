@@ -223,6 +223,7 @@ public class Hacker extends SimpleShanksAgent implements
 								.setHAN(getHanToHack(simulation));
 						((RootShell) this.attack).installBot(simulation);
 					} else if (this.attack != null) {
+						System.out.println("Chaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaarge");
 						this.attack.execute();
 					}
 				}

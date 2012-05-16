@@ -5,7 +5,7 @@ import es.upm.dit.gsi.shanks.ShanksSimulation;
 public class Values extends es.upm.dit.gsi.shanks.networkattacks.util.Values {
 
 	// Worker_Room Values
-	public static final String WORKER_ROOM_SCENARIO_ID = "WorkerRoom#";
+	//public static final String WORKER_ROOM_SCENARIO_ID = "WorkerRoom#";
 	public static final String WORKER_ROOM_LINK_ID = "WorkerRoomExternalLink";
 	
 	// Datacenter values

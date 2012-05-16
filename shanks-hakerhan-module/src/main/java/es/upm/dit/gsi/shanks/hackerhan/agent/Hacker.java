@@ -124,14 +124,18 @@ public class Hacker extends SimpleShanksAgent implements
 			try {
 				RouterDNS router = (RouterDNS) ((ComplexScenario)simulation.getScenario()).getScenario(Values.HAN_SCENARIO_ID +
 						this.getID().charAt(this.getID().length()-1)).getNetworkElement(Values.HAN_ROUTER_ID);
-				ShanksAgentBayesianReasoningCapability.addEvidence(this,
-						"Conexion", String.valueOf(router
+				System.out.println(String.valueOf(router
 								.getProperty(RouterDNS.PROPERTY_CONNECTION)));
-				// TODO: Updates the connection data
-			
-			ShanksAgentBayesianReasoningCapability.addEvidence(this, "Conexion",
-					String.valueOf(router.getProperty(RouterDNS.PROPERTY_CONNECTION)));
-			// TODO: Updates the connection data
+				if(router.getProperty(RouterDNS.PROPERTY_CONNECTION).equals(Values.CONNECTED)){
+					ShanksAgentBayesianReasoningCapability.addEvidence(this,
+						"Conexion", "OK");
+				} else if(router.getProperty(RouterDNS.PROPERTY_CONNECTION).equals(Values.NO_IP)) {
+					ShanksAgentBayesianReasoningCapability.addEvidence(this,
+							"Conexion", "Aviso");
+				} else {
+					ShanksAgentBayesianReasoningCapability.addEvidence(this,
+							"Conexion", "NOK");
+				}
 
 				// If 0 --> lazy
 				// Else --> lets hack!
@@ -208,7 +212,7 @@ public class Hacker extends SimpleShanksAgent implements
 						attack = attacks.next();
 						attackProbaility += types.get(attack) * 100;
 					}
-					if (!this.targetsID.isEmpty()) {
+					if (this.targetsID != null && !this.targetsID.isEmpty()) {
 						String targetID = this.targetsID.get(0);
 						this.attack = createAttack(action, attack, targetID,
 								simulation);

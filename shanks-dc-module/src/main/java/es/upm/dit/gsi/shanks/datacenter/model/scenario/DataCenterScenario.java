@@ -8,7 +8,6 @@ import java.util.Properties;
 import java.util.Set;
 
 import es.upm.dit.gsi.shanks.datacenter.model.Values;
-import es.upm.dit.gsi.shanks.datacenter.model.element.device.DCRouter;
 import es.upm.dit.gsi.shanks.datacenter.model.failure.ServerFailure;
 import es.upm.dit.gsi.shanks.datacenter.model.scenario.portrayal.DataCenterScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.datacenter.model.scenario.portrayal.DataCenterScenario3DPortrayal;
@@ -133,7 +132,6 @@ public class DataCenterScenario extends Scenario {
 			Set<NetworkElement> serverSet = new HashSet<NetworkElement>();
 			NetworkElement e = addedElements.get(eName);
 			if(!(e instanceof Link)){
-				routerSet.add(e);
 				if((e instanceof Computer)) {
 					if((e instanceof Server)){
 						serverSet.add(e);
@@ -142,6 +140,8 @@ public class DataCenterScenario extends Scenario {
 						computerSet.add(e);
 						computers.add(computerSet);
 					}
+				} else if(e instanceof RouterDNS){
+					routerSet.add(e);
 				}
 			}
 		}

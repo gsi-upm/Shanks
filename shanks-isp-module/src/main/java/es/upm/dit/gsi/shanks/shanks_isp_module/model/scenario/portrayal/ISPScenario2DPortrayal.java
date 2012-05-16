@@ -23,6 +23,7 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ShanksMath;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Computer;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.RouterDNS;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.portrayals.Computer2DPortrayal;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.portrayals.Router2DPortrayal;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.portrayals.Server2DPortrayal;
@@ -83,6 +84,8 @@ public class ISPScenario2DPortrayal extends ComplexScenario2DPortrayal {
 
 		devicesPortrayal.setPortrayalForClass(Computer.class,
 				new Computer2DPortrayal());
+		devicesPortrayal.setPortrayalForClass(RouterDNS.class,
+				new Router2DPortrayal());
 		devicesPortrayal.setPortrayalForClass(DCRouter.class,
 				new Router2DPortrayal());
 		devicesPortrayal

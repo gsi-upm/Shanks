@@ -32,7 +32,7 @@ public class ISPSimulation2DGUI extends ShanksSimulation2DGUI{
 	}
 
 	public static String getName() {
-        return "Enterprise Scenario";
+        return Values.ENTERPRISE_SCENARIO_ID;
     }
 	
 	@Override

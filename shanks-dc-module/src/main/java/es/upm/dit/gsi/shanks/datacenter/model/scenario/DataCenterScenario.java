@@ -28,6 +28,7 @@ import es.upm.dit.gsi.shanks.networkattacks.util.failures.ComputerFailure;
 import es.upm.dit.gsi.shanks.networkattacks.util.failures.RouterFailure;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Computer;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.EthernetLink;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.RouterDNS;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Server;
 
 public class DataCenterScenario extends Scenario {
@@ -70,10 +71,10 @@ public class DataCenterScenario extends Scenario {
 			throws UnsupportedNetworkElementStatusException,
 			TooManyConnectionException, DuplicatedIDException {
 		
-		DCRouter intranetRouter = new DCRouter(Values.DATA_CENTER_ROUTER_ID);
+		RouterDNS intranetRouter = new RouterDNS(Values.DATA_CENTER_ROUTER_ID);
 		addNetworkElement(intranetRouter);
 		
-		DCRouter webProxy = new DCRouter(Values.WEB_PROXY_ID);
+		RouterDNS webProxy = new RouterDNS(Values.WEB_PROXY_ID);
 		addNetworkElement(webProxy);
 		
 		Link intranetWebProxyLink = new EthernetLink(Values.INTRANET_LINK, Values.ETHERNET_LENGHT);

@@ -43,7 +43,7 @@ public class Values {
 	public static final Double COMPUTER_FAILURE_PROB = 0.1;
 	public static final Double NO_IP_FAILURE_PROB = 0.5;
 	public static final Double NO_ISP_FAILURE_PROB = 0.1;
-	public static final Double ROUTER_FAILURE_PROB = 0.1;
+	public static final Double ROUTER_FAILURE_PROB = 0.99;
 	public static final Double WIRELESSD_FAILURE_PROB = 0.1;
 	
 	// Portrayals Values.

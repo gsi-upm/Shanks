@@ -375,6 +375,36 @@
 	     	<type>jar</type>
 	 	 </dependency>
 <!-- 		<dependency> -->
+<!-- 		 	<groupId>es.upm.dit.gsi.shanks</groupId> -->
+<!-- 	  		<artifactId>shanks-isp-module</artifactId> -->
+<!-- 	      	<version>0.0.1-SNAPSHOT</version> -->
+<!-- 	     	<type>jar</type> -->
+<!-- 	 	 </dependency> -->
+<!-- 		<dependency> -->
+<!-- 		 	<groupId>es.upm.dit.gsi.shanks</groupId> -->
+<!-- 	  		<artifactId>shanks-dc-module</artifactId> -->
+<!-- 	      	<version>0.0.1-SNAPSHOT</version> -->
+<!-- 	     	<type>jar</type> -->
+<!-- 	 	 </dependency> -->
+<!-- 		<dependency> -->
+<!-- 		 	<groupId>es.upm.dit.gsi.shanks</groupId> -->
+<!-- 	  		<artifactId>shanks-worker_room-module</artifactId> -->
+<!-- 	      	<version>0.0.1-SNAPSHOT</version> -->
+<!-- 	     	<type>jar</type> -->
+<!-- 	 	 </dependency> -->
+<!-- 	 	 <dependency> -->
+<!-- 		 	<groupId>es.upm.dit.gsi.shanks</groupId> -->
+<!-- 	  		<artifactId>shanks-hakerhan-module</artifactId> -->
+<!-- 	      	<version>0.0.1-SNAPSHOT</version> -->
+<!-- 	     	<type>jar</type> -->
+<!-- 	 	 </dependency> -->
+<!-- 	 	 <dependency> -->
+<!-- 		 	<groupId>es.upm.dit.gsi.shanks</groupId> -->
+<!-- 	  		<artifactId>shanks-enterprise-module</artifactId> -->
+<!-- 	      	<version>0.0.1-SNAPSHOT</version> -->
+<!-- 	     	<type>jar</type> -->
+<!-- 	 	 </dependency> -->
+<!-- 		<dependency> -->
 <!-- 			<groupId>net.sourceforge.jason</groupId> -->
 <!-- 			<artifactId>jason</artifactId> -->
 <!-- 			<version>1.3.6</version> -->

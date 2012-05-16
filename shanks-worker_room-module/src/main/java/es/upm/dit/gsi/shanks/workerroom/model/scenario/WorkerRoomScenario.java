@@ -28,8 +28,8 @@ import es.upm.dit.gsi.shanks.networkattacks.util.failures.WireBroken;
 import es.upm.dit.gsi.shanks.networkattacks.util.failures.WireDamaged;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Computer;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.EthernetLink;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.RouterDNS;
 import es.upm.dit.gsi.shanks.workerroom.model.Values;
-import es.upm.dit.gsi.shanks.workerroom.model.element.device.LANRouter;
 import es.upm.dit.gsi.shanks.workerroom.model.element.device.Printer;
 import es.upm.dit.gsi.shanks.workerroom.model.scenario.portrayal.WorkerRoomScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.workerroom.model.scenario.portrayal.WorkerRoomScenario3DPortrayal;
@@ -56,7 +56,7 @@ public class WorkerRoomScenario extends Scenario {
 			TooManyConnectionException, DuplicatedIDException {
 
 		// Worker_room router
-		LANRouter router = new LANRouter(Values.WORKER_ROOM_ROUTER_ID);
+		RouterDNS router = new RouterDNS(Values.WORKER_ROOM_ROUTER_ID);
 		this.addNetworkElement(router);
 
 		// Adding PCs, PC-Links and connect it with router

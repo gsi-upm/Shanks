@@ -19,9 +19,9 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusE
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.RouterDNS;
 import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.scenario.EnterpriseScenario;
 import es.upm.dit.gsi.shanks.shanks_isp_module.model.Values;
-import es.upm.dit.gsi.shanks.shanks_isp_module.model.element.device.ISPGateway;
 import es.upm.dit.gsi.shanks.shanks_isp_module.model.scenario.portrayal.ISPScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.workerroom.model.element.link.EthernetLink;
 import es.upm.dit.gsi.shanks.workerroom.model.scenario.WorkerRoomScenario;
@@ -84,7 +84,7 @@ public class ISPScenario extends ComplexScenario{
 			TooManyConnectionException, DuplicatedIDException {
 		
 		// Adding the ISP router
-		Device ispRouter = new ISPGateway(Values.ISP_GATEWAY_ID);
+		Device ispRouter = new RouterDNS(Values.ISP_GATEWAY_ID);
 		this.addNetworkElement(ispRouter);
 		
 		// Adding the enterprise subscription to the ISP

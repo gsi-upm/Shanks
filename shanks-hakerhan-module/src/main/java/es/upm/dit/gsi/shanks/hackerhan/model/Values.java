@@ -26,7 +26,7 @@ public class Values extends es.upm.dit.gsi.shanks.networkattacks.util.Values  {
 	public static final Double NO_IP_FAILURE_PROB = 0.5;
 	public static final Double NO_ISP_FAILURE_PROB = 0.1;
 	public static final Double ROUTER_FAILURE_PROB = 0.1;
-	public static final Double WIRELESSD_FAILURE_PROB = 0.1;
+	public static final Double WIRELESSD_FAILURE_PROB = 0.01;
 	
 	// Network Elements names. 
 	public static final String COMPUTER_ID = "Computer";

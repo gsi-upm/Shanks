@@ -8,11 +8,8 @@ import java.util.Properties;
 import java.util.Set;
 
 import es.upm.dit.gsi.shanks.hackerhan.model.Values;
-import es.upm.dit.gsi.shanks.hackerhan.model.element.device.WifiRouterADSL;
 import es.upm.dit.gsi.shanks.hackerhan.model.element.device.WirelessDevice;
 import es.upm.dit.gsi.shanks.hackerhan.model.element.link.WifiConnection;
-import es.upm.dit.gsi.shanks.hackerhan.model.failure.NoIPFailure;
-import es.upm.dit.gsi.shanks.hackerhan.model.failure.NoISPConnection;
 import es.upm.dit.gsi.shanks.hackerhan.model.failure.WirelessDeviceFailure;
 import es.upm.dit.gsi.shanks.hackerhan.model.scenario.portrayal.HackerHanScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.hackerhan.model.scenario.portrayal.HackerHanScenario3DPortrayal;
@@ -31,6 +28,7 @@ import es.upm.dit.gsi.shanks.networkattacks.util.failures.ComputerFailure;
 import es.upm.dit.gsi.shanks.networkattacks.util.failures.RouterFailure;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Computer;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.EthernetLink;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.RouterDNS;
 
 /**
  * @author a.carrera
@@ -62,7 +60,7 @@ public class HackerHANScenario extends Scenario {
 			TooManyConnectionException, DuplicatedIDException {
 		
 		Computer computer = new Computer(Values.COMPUTER_ID);
-		WifiRouterADSL router = new WifiRouterADSL(Values.HAN_ROUTER_ID);
+		RouterDNS router = new RouterDNS(Values.HAN_ROUTER_ID);
 		WirelessDevice android = new WirelessDevice(Values.ANDROID_ID);
 		WirelessDevice tablet = new WirelessDevice(Values.TABLET_ID);
 		
@@ -99,14 +97,14 @@ public class HackerHANScenario extends Scenario {
 		
 //		NoIPFailure.java
 		Set<NetworkElement> set = new HashSet<NetworkElement>();
-		set.add(router);
-		set.add(computer);
-		set.add(android);
-		set.add(tablet);
-		this.addPossibleFailure(NoIPFailure.class, set);
+//		set.add(router);
+//		set.add(computer);
+//		set.add(android);
+//		set.add(tablet);
+//		this.addPossibleFailure(NoIPFailure.class, set);
 		
 //		NoISPConnection.java
-		this.addPossibleFailure(NoISPConnection.class, set);
+//		this.addPossibleFailure(NoISPConnection.class, set);
 		
 //		RouterFailure.java
 		this.addPossibleFailure(RouterFailure.class, router);

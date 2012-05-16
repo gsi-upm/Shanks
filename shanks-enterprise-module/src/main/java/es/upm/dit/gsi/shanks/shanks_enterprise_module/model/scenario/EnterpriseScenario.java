@@ -27,8 +27,8 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
 import es.upm.dit.gsi.shanks.networkattacks.util.failures.RouterFailure;
 import es.upm.dit.gsi.shanks.networkattacks.util.failures.WireBroken;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.EthernetLink;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.RouterDNS;
 import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.Values;
-import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.element.CompanyRouter;
 import es.upm.dit.gsi.shanks.shanks_enterprise_module.model.scenario.portrayal.EnterpriseScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.workerroom.model.scenario.WorkerRoomScenario;
 
@@ -96,7 +96,7 @@ public class EnterpriseScenario extends ComplexScenario{
 			TooManyConnectionException, DuplicatedIDException {
 
 		// Adding the Enterprise DCRouter.
-		Device companyRouter = new CompanyRouter(Values.ENTERPRISE_GATEWAY_ID);
+		Device companyRouter = new RouterDNS(Values.ENTERPRISE_GATEWAY_ID);
 		this.addNetworkElement(companyRouter);
 		
 		// Adding data center subnet external link. 

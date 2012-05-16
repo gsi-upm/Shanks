@@ -4,6 +4,7 @@ import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.capability.creation.CreationShanksAgentCapability;
 import es.upm.dit.gsi.shanks.hackerhan.agent.Hacker;
 import es.upm.dit.gsi.shanks.hackerhan.model.Values;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
@@ -52,7 +53,12 @@ public class RootShell implements Attack {
 				successfullAttacks++;
 				// TODO: set property "hacked"??
 			} else {
-				webServer.addProperty(Server.PROPERTY_LOG, (Integer)webServer.getProperty(Server.PROPERTY_LOG) +1 );
+				try {
+					webServer.updatePropertyTo(Server.PROPERTY_LOG, (Integer)webServer.getProperty(Server.PROPERTY_LOG) +1 );
+				} catch (UnsupportedNetworkElementStatusException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			// TODO: Increase log "weirdness"
 			}
 			numberOfAttacks++;

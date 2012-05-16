@@ -8,6 +8,7 @@ import java.util.List;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.SimpleShanksAgent;
 import es.upm.dit.gsi.shanks.hackerhan.model.Values;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.RouterDNS;
@@ -60,9 +61,12 @@ public class Bot extends SimpleShanksAgent{
 					.getGateway(Values.ENTERPRISE_GATEWAY_ID, this);
 			RouterDNS router = (RouterDNS) simulation.getScenario().getNetworkElement(Values.ENTERPRISE_GATEWAY_ID);
 			int cong = (Integer)router.getProperty(RouterDNS.PROPERTY_CONGESTION);
-			HashMap<String, Object> newLoad = new HashMap<String, Object>();
-			newLoad.put(RouterDNS.PROPERTY_CONGESTION, cong + Values.LOAD_INCREASE);
-			router.setProperties(newLoad);
+			try {
+				router.updatePropertyTo(RouterDNS.PROPERTY_CONGESTION, cong + Values.LOAD_INCREASE);
+			} catch (UnsupportedNetworkElementStatusException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	

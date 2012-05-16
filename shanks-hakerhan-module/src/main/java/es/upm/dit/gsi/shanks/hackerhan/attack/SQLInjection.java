@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.hackerhan.agent.Hacker;
 import es.upm.dit.gsi.shanks.hackerhan.model.Values;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Server;
@@ -63,7 +64,12 @@ public class SQLInjection implements Attack {
 					successfullAttacks++;
 					// TODO: set property "hacked"??
 				} else {
-					sqlServer.addProperty(Server.PROPERTY_LOG, (Integer)sqlServer.getProperty(Server.PROPERTY_LOG) +1 );
+					try {
+						sqlServer.updatePropertyTo(Server.PROPERTY_LOG, (Integer)sqlServer.getProperty(Server.PROPERTY_LOG) +1 );
+					} catch (UnsupportedNetworkElementStatusException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					sqlServer.logAccess(accessID);
 				// TODO: Increase log "weirdness"
 				}

@@ -93,7 +93,7 @@ public class Computer extends Device {
 	@Override
 	public void checkStatus() throws UnsupportedNetworkElementStatusException {
 		String power = (String) this.getProperty(Computer.PROPERTY_POWER);
-		//double temp = (Double) this.getProperty(Computer.PROPERTY_TEMPERATURE);
+		double temp = (Double) this.getProperty(Computer.PROPERTY_TEMPERATURE);
 		double freq = (Double) this.getProperty(Computer.PROPERTY_CPUFREQ);
 		String connection = (String) this
 				.getProperty(Computer.PROPERTY_ETHERNET_CONNECTION);
@@ -103,9 +103,9 @@ public class Computer extends Device {
 			this.shutdown();
 		} else {
 			this.updateStatusTo(Computer.STATUS_OFF, false);
-			if (/*(temp >= 80) ||*/ (freq > 90)|| !(connection.equals(Values.CONNECTED))) {
+			if ((temp >= 80) || (freq > 90)|| !(connection.equals(Values.CONNECTED))) {
 				this.updateStatusTo(Computer.STATUS_OK, false);
-				if (/*(temp >= 80) ||*/ (freq > 90) ){
+				if ((temp >= 80) || (freq > 90) ){
 					this.updateStatusTo(Computer.STATUS_NOK, true);
 				} else {
 					this.updateStatusTo(Computer.STATUS_NOK, false);

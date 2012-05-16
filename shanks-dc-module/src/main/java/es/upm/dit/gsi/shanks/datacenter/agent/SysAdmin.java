@@ -13,6 +13,7 @@ import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.BayesianReasonerSh
 import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.ShanksAgentBayesianReasoningCapability;
 import es.upm.dit.gsi.shanks.datacenter.model.Values;
 import es.upm.dit.gsi.shanks.datacenter.model.element.device.DCRouter;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
@@ -199,9 +200,7 @@ public class SysAdmin extends SimpleShanksAgent implements
 		try {
 		//The ID to be banned
 		String webID = "";
-		Server webServer;
-		
-			webServer = (Server)((ComplexScenario)((ComplexScenario)sim.getScenario())
+		Server webServer = (Server)((ComplexScenario)((ComplexScenario)sim.getScenario())
 					.getScenario(Values.ENTERPRISE_SCENARIO_ID)).getScenario(Values.DATA_CENTER_SCENARIO_ID)
 					.getNetworkElement(Values.EXTERNAL_SERVICES_SERVER_ID);
 			int logWeird;
@@ -223,10 +222,12 @@ public class SysAdmin extends SimpleShanksAgent implements
 			}
 		}
 		String sqlID = "";
-		Server sqlServer = (Server)sim.getScenario().getNetworkElement(Values.WEB_SERVER_ID);
+		Server sqlServer = (Server)((ComplexScenario)((ComplexScenario)sim.getScenario())
+				.getScenario(Values.ENTERPRISE_SCENARIO_ID)).getScenario(Values.DATA_CENTER_SCENARIO_ID)
+				.getNetworkElement(Values.SQL_SERVER_ID);
 		int sqlLog;
 		
-		System.out.println("*********************************************** " + sqlServer ==  null);
+		System.out.println(sqlServer.getID());
 		if (sqlServer.getProperties().containsKey(Server.PROPERTY_LOG)) {
 			sqlLog = (Integer)sqlServer.getProperty(Server.PROPERTY_LOG);
 		} else {
@@ -257,8 +258,9 @@ public class SysAdmin extends SimpleShanksAgent implements
 	 * 
 	 * @param ShanksSimulation
 	 *            - The simulation
+	 * @throws UnsupportedNetworkElementStatusException 
 	 */
-	private void maintenance(ShanksSimulation sim) {
+	private void maintenance(ShanksSimulation sim){
 		// TODO: Implement maintenance
 		// Updates the router vulnerability
 		RouterDNS mainRouter = null;
@@ -282,29 +284,36 @@ public class SysAdmin extends SimpleShanksAgent implements
 		
 		//DCRouter load
 		if(mainRouter != null){
-			HashMap<String, Object> routerProperties = new HashMap<String, Object>();
-			routerProperties
-					.put(DCRouter.PROPERTY_CONGESTION, ((Double) mainRouter
-							.getProperty(DCRouter.PROPERTY_CONGESTION)) *2/3);
-			mainRouter.setProperties(routerProperties);
+			try {
+				mainRouter.updatePropertyTo(RouterDNS.PROPERTY_CONGESTION, ((Integer) mainRouter
+						.getProperty(RouterDNS.PROPERTY_CONGESTION)) *2/3);
+			} catch (UnsupportedNetworkElementStatusException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		// Updates the server vulnerability
 		if (webServer != null) {
-			HashMap<String, Object> webServerProperties = new HashMap<String, Object>();
-			webServerProperties
-					.put(Server.PROPERTY_LOAD, ((Double) webServer
-							.getProperty(Server.PROPERTY_LOAD)) *2/3);
-			webServer.setProperties(webServerProperties);
+
+			try {
+				webServer.updatePropertyTo(Server.PROPERTY_LOAD, ((Integer) webServer
+								.getProperty(Server.PROPERTY_LOAD)) *2/3);
+			} catch (UnsupportedNetworkElementStatusException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		// Updates the sqlServer
 		if (sqlServer !=  null) {
-			HashMap<String, Object> sqlServerProperties = new HashMap<String, Object>();
-			sqlServerProperties
-					.put(Server.PROPERTY_LOAD, ((Double) sqlServer
-							.getProperty(Server.PROPERTY_LOAD)) *2/3);
-			sqlServer.setProperties(sqlServerProperties);
+			try {
+				sqlServer.updatePropertyTo(Server.PROPERTY_LOAD, ((Integer) sqlServer
+						.getProperty(Server.PROPERTY_LOAD)) *2/3);
+			} catch (UnsupportedNetworkElementStatusException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -337,29 +346,35 @@ public class SysAdmin extends SimpleShanksAgent implements
 
 		// Updates the router vulnerability
 		if (mainRouter != null) {
-			HashMap<String, Object> routerProperties = new HashMap<String, Object>();
-			routerProperties
-					.put(DCRouter.PROPERTY_VULNERABILITY, ((Double) mainRouter
-							.getProperty(DCRouter.PROPERTY_VULNERABILITY)) / 2);
-			mainRouter.setProperties(routerProperties);
+			try {
+				mainRouter.updatePropertyTo(RouterDNS.PROPERTY_VULNERABILITY, ((Double) mainRouter
+								.getProperty(DCRouter.PROPERTY_VULNERABILITY)) / 2);
+			} catch (UnsupportedNetworkElementStatusException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		// Updates the server vulnerability
 		if(webServer !=null) {
-		HashMap<String, Object> webServerProperties = new HashMap<String, Object>();
-			webServerProperties
-				.put(Server.PROPERTY_VULNERABILITY, ((Double) webServer
-							.getProperty(Server.PROPERTY_VULNERABILITY)) / 2);
-			webServer.setProperties(webServerProperties);
+			try {
+				webServer.updatePropertyTo(Server.PROPERTY_VULNERABILITY, ((Double) webServer
+								.getProperty(Server.PROPERTY_VULNERABILITY)) / 2);
+			} catch (UnsupportedNetworkElementStatusException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		// Updates the sqlServer
 		if(sqlServer != null) {
-			HashMap<String, Object> sqlServerProperties = new HashMap<String, Object>();
-			sqlServerProperties
-					.put(Server.PROPERTY_VULNERABILITY, ((Double) sqlServer
-							.getProperty(Server.PROPERTY_VULNERABILITY)) / 2);
-			sqlServer.setProperties(sqlServerProperties);
+			try {
+				sqlServer.updatePropertyTo(Server.PROPERTY_VULNERABILITY, ((Double) sqlServer
+								.getProperty(Server.PROPERTY_VULNERABILITY)) / 2);
+			} catch (UnsupportedNetworkElementStatusException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 

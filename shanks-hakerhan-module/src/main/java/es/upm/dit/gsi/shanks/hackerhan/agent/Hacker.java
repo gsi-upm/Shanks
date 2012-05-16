@@ -186,8 +186,8 @@ public class Hacker extends SimpleShanksAgent implements
 				}
 
 				// I tell the bayesian network what am I doing.
-				ShanksAgentBayesianReasoningCapability.addEvidence(this,
-						"Accion", action);
+				//ShanksAgentBayesianReasoningCapability.addEvidence(this,
+				//		"Accion", action);
 				this.bayesianNetwork.updateEvidences();
 
 				if (!action.equals(Values.ACTION_NONE)) {
@@ -217,7 +217,8 @@ public class Hacker extends SimpleShanksAgent implements
 						this.attack = createAttack(action, attack, targetID,
 								simulation);
 					}
-					if (action.equals(Values.ACTION_GET_BOT)
+					simulation.logger.info("Hacker attack: " + action + ", " + attack);
+					if (action.equals(Values.ACTION_GET_BOT) 
 							&& this.attack instanceof RootShell) {
 						((RootShell) this.attack)
 								.setHAN(getHanToHack(simulation));
@@ -344,7 +345,7 @@ public class Hacker extends SimpleShanksAgent implements
 		return null;
 	}
 	
-	private HackerHANScenario getHackerHAN(){
+	public HackerHANScenario getHackerHAN(){
 		return this.hackerHan;
 	}
 }

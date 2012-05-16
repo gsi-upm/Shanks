@@ -51,8 +51,9 @@ public class ISPSimulation2DGUI extends ShanksSimulation2DGUI{
 	public void addCharts(Scenario2DPortrayal scenarioPortrayal)
 			throws DuplicatedChartIDException, DuplicatedPortrayalIDException,
 			ScenarioNotFoundException {
-        this.addTimeChart(Values.DDOS_NUMBER, "Time / Steps", "How many attacks of each type has a Hacker made?");
-		
+        this.addTimeChart(Values.DDOS_NUMBER, "Time / Steps", "How many DDoS attacks has a Hacker made?");
+		this.addTimeChart(Values.ROOT_NUMBER, "Time / Steps", "How many RootShell attacks has a Hacker made?");
+		this.addTimeChart(Values.SQL_NUMBER, "Time / Steps", "How many SQLInjection attackas has a Hacker made?");
 		
 	}
 
@@ -62,9 +63,15 @@ public class ISPSimulation2DGUI extends ShanksSimulation2DGUI{
         JFrame mainFrame = frames.get(Scenario2DPortrayal.MAIN_DISPLAY_ID);
         JFrame failureFrame = frames.get(ISPScenario2DPortrayal.FAILURE_DISPLAY_ID);
         JFrame chartFrame = frames.get(Values.DDOS_NUMBER);
+        JFrame chartFrameRoot = frames.get(Values.ROOT_NUMBER);
+        JFrame chartFrameSQL = frames.get(Values.SQL_NUMBER);
+
+        
         mainFrame.setLocation(100, 100);
         failureFrame.setLocation(500, 0);
         chartFrame.setLocation(200, 200);
+        chartFrameRoot.setLocation(200, 250);
+        chartFrameSQL.setLocation(200, 300);
 	}
 	
 	public static void main(String[] args) throws SecurityException,

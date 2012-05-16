@@ -118,10 +118,12 @@ public class SysAdmin extends SimpleShanksAgent implements
 //				if (routerStatus.get(key))
 //					routerLoad = key;
 //			}
-			int logWeird = (Integer)webServer.getProperty(Server.PROPERTY_LOG) +
-					(Integer)((ComplexScenario)((ComplexScenario)simulation.getScenario())
-							.getScenario(Values.ENTERPRISE_SCENARIO_ID)).getScenario(Values.DATA_CENTER_SCENARIO_ID)
-							.getNetworkElement(Values.SQL_SERVER_ID).getProperty(Server.PROPERTY_LOG);
+			int logWeird;
+			if (webServer.getProperties().containsKey(Server.PROPERTY_LOG)) {
+				logWeird = (Integer)webServer.getProperty(Server.PROPERTY_LOG);
+			} else {
+				logWeird = 8;
+			}
 			
 			String logStatus;
 			if (logWeird > Values.SERVER_LOG_NOK){
@@ -202,8 +204,14 @@ public class SysAdmin extends SimpleShanksAgent implements
 			webServer = (Server)((ComplexScenario)((ComplexScenario)sim.getScenario())
 					.getScenario(Values.ENTERPRISE_SCENARIO_ID)).getScenario(Values.DATA_CENTER_SCENARIO_ID)
 					.getNetworkElement(Values.EXTERNAL_SERVICES_SERVER_ID);
-		int webLog = Integer.parseInt((String) webServer.getProperty(Server.PROPERTY_LOG));
-		if (webLog > Values.SERVER_LOG_WEIRD){
+			int logWeird;
+			if (webServer.getProperties().containsKey(Server.PROPERTY_LOG)) {
+				logWeird = (Integer)webServer.getProperty(Server.PROPERTY_LOG);
+			} else {
+				logWeird = 8;
+			}
+			
+		if (logWeird > Values.SERVER_LOG_WEIRD){
 			HashMap<String, Integer> webLogs = webServer.getLogs();
 			for (String ID : webLogs.keySet()){
 				if (webID.equals("")){
@@ -216,7 +224,13 @@ public class SysAdmin extends SimpleShanksAgent implements
 		}
 		String sqlID = "";
 		Server sqlServer = (Server)sim.getScenario().getNetworkElement(Values.WEB_SERVER_ID);
-		int sqlLog = Integer.parseInt((String) sqlServer.getProperty(Server.PROPERTY_LOG));
+		int sqlLog;
+		if (sqlServer.getProperties().containsKey(Server.PROPERTY_LOG)) {
+			sqlLog = (Integer)sqlServer.getProperty(Server.PROPERTY_LOG);
+		} else {
+			sqlLog = 8;
+		}
+		
 		if (sqlLog > Values.SERVER_LOG_WEIRD){
 			HashMap<String, Integer> sqlLogs = sqlServer.getLogs();
 			for (String ID : sqlLogs.keySet()){

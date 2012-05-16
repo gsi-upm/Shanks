@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
+import unbbayes.prs.Node;
 import unbbayes.prs.bn.ProbabilisticNetwork;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.SimpleShanksAgent;
@@ -17,6 +18,7 @@ import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.networkattacks.util.action.RepairComputer;
+import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.RouterDNS;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Server;
 
 public class SysAdmin extends SimpleShanksAgent implements
@@ -72,27 +74,54 @@ public class SysAdmin extends SimpleShanksAgent implements
 	@Override
 	public void executeReasoningCycle(ShanksSimulation simulation) {
 		try {
-			int to_repair = getBrokenCount(simulation);
+			String to_repair = getBrokenCount(simulation);
 			Server webServer = (Server)((ComplexScenario)((ComplexScenario)simulation.getScenario())
 					.getScenario(Values.ENTERPRISE_SCENARIO_ID)).getScenario(Values.DATA_CENTER_SCENARIO_ID)
 					.getNetworkElement(Values.EXTERNAL_SERVICES_SERVER_ID);
-			HashMap<String, Boolean> serverStatus = webServer.getStatus();
+			//HashMap<String, Boolean> serverStatus = webServer.getStatus();
 			String webServerLoad = null;
-			for(String key: serverStatus.keySet()){
-				if (serverStatus.get(key))
-					webServerLoad = key;
+			if(webServer.getProperties().containsKey(Server.PROPERTY_LOAD)){
+				int load = (Integer)webServer.getProperties().get(Server.PROPERTY_LOAD);
+				if (load > 100) {
+					webServerLoad = Values.SYSADMIN_LOAD_DOWN;
+				} else if ( load > 80) {
+					webServerLoad = Values.SYSADMIN_LOAD_HIGH;
+				} else {
+					webServerLoad = Values.SYSADMIN_LOAD_NORMAL;
+				}
+				
 			}
+//			for(String key: serverStatus.keySet()){
+//				System.out.println(key);
+//				if (serverStatus.get(key))
+//					webServerLoad = key;
+//			}
 			
 			// DCRouter Load
-			HashMap<String, Boolean> routerStatus = ((ComplexScenario)simulation.getScenario())
-					.getScenario(Values.ENTERPRISE_SCENARIO_ID).getNetworkElement(Values.ENTERPRISE_GATEWAY_ID).getStatus();
+			RouterDNS router = (RouterDNS)((ComplexScenario)simulation.getScenario())
+					.getScenario(Values.ENTERPRISE_SCENARIO_ID).getNetworkElement(Values.ENTERPRISE_GATEWAY_ID);
+			//HashMap<String, Boolean> routerStatus = router.getStatus();
 			String routerLoad = null;
-			for(String key: routerStatus.keySet()){
-				if (routerStatus.get(key))
-					routerLoad = key;
+			if(router.getProperties().containsKey(RouterDNS.PROPERTY_CONGESTION)){
+				double load = (Double) router.getProperties().get(RouterDNS.PROPERTY_CONGESTION);
+				if (load > 100) {
+					routerLoad = Values.SYSADMIN_LOAD_DOWN;
+				} else if ( load > 80) {
+					routerLoad = Values.SYSADMIN_LOAD_HIGH;
+				} else {
+					routerLoad = Values.SYSADMIN_LOAD_NORMAL;
+				}
+				
 			}
+			
+//			for(String key: routerStatus.keySet()){
+//				if (routerStatus.get(key))
+//					routerLoad = key;
+//			}
 			int logWeird = (Integer)webServer.getProperty(Server.PROPERTY_LOG) +
-					(Integer)simulation.getScenario().getNetworkElement(Values.SQL_SERVER_ID).getProperty(Server.PROPERTY_LOG);
+					(Integer)((ComplexScenario)((ComplexScenario)simulation.getScenario())
+							.getScenario(Values.ENTERPRISE_SCENARIO_ID)).getScenario(Values.DATA_CENTER_SCENARIO_ID)
+							.getNetworkElement(Values.SQL_SERVER_ID).getProperty(Server.PROPERTY_LOG);
 			
 			String logStatus;
 			if (logWeird > Values.SERVER_LOG_NOK){
@@ -104,11 +133,10 @@ public class SysAdmin extends SimpleShanksAgent implements
 			}
 	
 
-			
 			// Set the evidences. 
-			if(to_repair != Integer.MIN_VALUE)
+			if(to_repair != String.valueOf(Integer.MIN_VALUE))
 				ShanksAgentBayesianReasoningCapability.addEvidence(this,
-						Values.SYSADMIN_REPAIR_NODENAME, String.valueOf(to_repair));
+						Values.SYSADMIN_REPAIR_NODENAME, to_repair);
 			
 			if(webServerLoad != null)
 				ShanksAgentBayesianReasoningCapability.addEvidence(this,
@@ -166,9 +194,14 @@ public class SysAdmin extends SimpleShanksAgent implements
 	 * @param sim
 	 */
 	private void lookOut(ShanksSimulation sim) {
+		try {
 		//The ID to be banned
 		String webID = "";
-		Server webServer = (Server)sim.getScenario().getNetworkElement(Values.WEB_SERVER_ID);
+		Server webServer;
+		
+			webServer = (Server)((ComplexScenario)((ComplexScenario)sim.getScenario())
+					.getScenario(Values.ENTERPRISE_SCENARIO_ID)).getScenario(Values.DATA_CENTER_SCENARIO_ID)
+					.getNetworkElement(Values.EXTERNAL_SERVICES_SERVER_ID);
 		int webLog = Integer.parseInt((String) webServer.getProperty(Server.PROPERTY_LOG));
 		if (webLog > Values.SERVER_LOG_WEIRD){
 			HashMap<String, Integer> webLogs = webServer.getLogs();
@@ -195,6 +228,10 @@ public class SysAdmin extends SimpleShanksAgent implements
 				}
 			}
 		}
+		} catch (ScenarioNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		// TODO: ban the IDs
 	}
 
@@ -208,13 +245,19 @@ public class SysAdmin extends SimpleShanksAgent implements
 	private void maintenance(ShanksSimulation sim) {
 		// TODO: Implement maintenance
 		// Updates the router vulnerability
-		DCRouter mainRouter = null;
+		RouterDNS mainRouter = null;
 		Server webServer = null;
 		Server sqlServer = null;
 		try {
-			mainRouter = (DCRouter) ((ComplexScenario)((ComplexScenario)sim.getScenario()).getScenario("EnterpriseScenario")).getScenario("WorkerRoomScenario").getNetworkElement(Values.DATA_CENTER_ROUTER_ID);
-			webServer = (Server) ((ComplexScenario)((ComplexScenario)sim.getScenario()).getScenario("EnterpriseScenario")).getScenario("WorkerRoomScenario").getNetworkElement(Values.WEB_SERVER_ID);
-			sqlServer = (Server) ((ComplexScenario)((ComplexScenario)sim.getScenario()).getScenario("EnterpriseScenario")).getScenario("WorkerRoomScenario").getNetworkElement(Values.SQL_SERVER_ID);
+			mainRouter = (RouterDNS) ((ComplexScenario)((ComplexScenario)sim.getScenario())
+					.getScenario(Values.ENTERPRISE_SCENARIO_ID)).getScenario(Values.DATA_CENTER_SCENARIO_ID)
+					.getNetworkElement(Values.ENTERPRISE_GATEWAY_ID);
+			webServer = (Server)((ComplexScenario)((ComplexScenario)sim.getScenario())
+					.getScenario(Values.ENTERPRISE_SCENARIO_ID)).getScenario(Values.DATA_CENTER_SCENARIO_ID)
+					.getNetworkElement(Values.EXTERNAL_SERVICES_SERVER_ID);
+			sqlServer = (Server) ((ComplexScenario)((ComplexScenario)sim.getScenario())
+					.getScenario(Values.ENTERPRISE_SCENARIO_ID)).getScenario(Values.DATA_CENTER_SCENARIO_ID)
+					.getNetworkElement(Values.SQL_SERVER_ID);
 		} catch (ScenarioNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -258,13 +301,19 @@ public class SysAdmin extends SimpleShanksAgent implements
 	 */
 	private void patch(ShanksSimulation sim) {
 		// TODO: Implement patch
-		DCRouter mainRouter = null;
+		RouterDNS mainRouter = null;
 		Server webServer = null;
 		Server sqlServer = null;
 		try {
-			mainRouter = (DCRouter) ((ComplexScenario)((ComplexScenario)sim.getScenario()).getScenario("EnterpriseScenario")).getScenario("WorkerRoomScenario").getNetworkElement(Values.DATA_CENTER_ROUTER_ID);
-			webServer = (Server) ((ComplexScenario)((ComplexScenario)sim.getScenario()).getScenario("EnterpriseScenario")).getScenario("WorkerRoomScenario").getNetworkElement(Values.WEB_SERVER_ID);
-			sqlServer = (Server) ((ComplexScenario)((ComplexScenario)sim.getScenario()).getScenario("EnterpriseScenario")).getScenario("WorkerRoomScenario").getNetworkElement(Values.SQL_SERVER_ID);
+			mainRouter = (RouterDNS) ((ComplexScenario)((ComplexScenario)sim.getScenario())
+					.getScenario(Values.ENTERPRISE_SCENARIO_ID)).getScenario(Values.DATA_CENTER_SCENARIO_ID)
+					.getNetworkElement(Values.ENTERPRISE_GATEWAY_ID);
+			webServer = (Server)((ComplexScenario)((ComplexScenario)sim.getScenario())
+					.getScenario(Values.ENTERPRISE_SCENARIO_ID)).getScenario(Values.DATA_CENTER_SCENARIO_ID)
+					.getNetworkElement(Values.EXTERNAL_SERVICES_SERVER_ID);
+			sqlServer = (Server) ((ComplexScenario)((ComplexScenario)sim.getScenario())
+					.getScenario(Values.ENTERPRISE_SCENARIO_ID)).getScenario(Values.DATA_CENTER_SCENARIO_ID)
+					.getNetworkElement(Values.SQL_SERVER_ID);
 		} catch (ScenarioNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -315,15 +364,26 @@ public class SysAdmin extends SimpleShanksAgent implements
 	 * @param ShanksSimulation - The simulation
 	 * @return int - MIN_VALUE if something goes wrong
 	 */
-	private int getBrokenCount(ShanksSimulation sim){
+	private String getBrokenCount(ShanksSimulation sim){
 		try {
-			Scenario workerRoom = ((ComplexScenario)((ComplexScenario)sim.getScenario()).getScenario(Values.ENTERPRISE_SCENARIO_ID)).getScenario("WorkerRoomScenario");
-			Set<Failure> failures = workerRoom.getCurrentFailures();
-			return failures.size();
+			String fail = Values.SYSADMIN_REPAIR_OK;
+			int failures = 0;
+			for (int i = 0; i < Values.NUMBER_OF_WORKERROOMS; i++){
+				Scenario workerRoom = ((ComplexScenario)((ComplexScenario)sim.getScenario()).getScenario(Values.ENTERPRISE_SCENARIO_ID)).getScenario(Values.WORKER_ROOM_SCENARIO_ID + i);
+				Set<Failure> failuresSet = workerRoom.getCurrentFailures();
+				failures += failuresSet.size();
+			}
+			if (failures > 3) {
+				fail = Values.SYSADMIN_REPAIR_MORE;
+			} else if (failures > 0) {
+				fail = Values.SYSADMIN_REPAIR_1_3;
+			}
+			
+			return fail;
 		} catch (ScenarioNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return Integer.MIN_VALUE;
+		return String.valueOf(Integer.MIN_VALUE);
 	}
 }

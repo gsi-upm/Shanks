@@ -17,7 +17,7 @@ public class Values extends es.upm.dit.gsi.shanks.networkattacks.util.Values {
 	public static final String SA_COMPUTER_ID = "SysAdminComputer#";
 	public static final String LDAP_SERVER_ID = "LDAPServer";
 	public static final String EXTERNAL_SERVICES_SERVER_ID = "ExternalServer";
-	public static final String BBDD_SERVER_ID = "BBDDServer";
+	public static final String BBDD_SERVER_ID = Values.SQL_SERVER_ID;
 	public static final String BBDD_REPLICA_ID = "BBDDReplica";
 //	public static final String WEB_APP_ID = "Web App Server";
 	public static final String WEB_PROXY_ID = "WebProxy";
@@ -31,7 +31,7 @@ public class Values extends es.upm.dit.gsi.shanks.networkattacks.util.Values {
 	
 
 	// SysAdmin values
-	public static final String SYSADMIN_BAYESIAN_NETWORK_PATH = "../shanks-network-attacks-simulation/src/main/java/es/upm/dit/gsi/shanks/networkattacks/util/Hacker.net";
+	public static final String SYSADMIN_BAYESIAN_NETWORK_PATH = "../shanks-network-attacks-simulation/src/main/java/es/upm/dit/gsi/shanks/networkattacks/util/SysAdmin.net";
 	
 	public static final String SYSADMIN_REPAIR_NODENAME = "Reparar";
 	public static final String SYSADMIN_SERVER_LOAD_NODENAME = "Server_load";
@@ -42,6 +42,14 @@ public class Values extends es.upm.dit.gsi.shanks.networkattacks.util.Values {
 	public static final String SYSADMIN_LOG_OK = "OK";
 	public static final String SYSADMIN_LOG_WEIRD = "Weird";
 	public static final String SYSADMIN_LOG_NOK = "NOK";
+	
+	public static final String SYSADMIN_REPAIR_OK = "ALL_OK";
+	public static final String SYSADMIN_REPAIR_1_3 = "1_to_3";
+	public static final String SYSADMIN_REPAIR_MORE = "more_than_3";
+	
+	public static final String SYSADMIN_LOAD_NORMAL = "Normal";
+	public static final String SYSADMIN_LOAD_HIGH = "High";
+	public static final String SYSADMIN_LOAD_DOWN = "Down";
 	
 	public static final String SYSADMIN_ACTION_REPAIR = "Repair";
 	public static final String SYSADMIN_ACTION_MAINTENANCE = "Maintenance";

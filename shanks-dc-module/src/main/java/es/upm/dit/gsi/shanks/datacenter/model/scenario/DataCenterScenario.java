@@ -102,7 +102,7 @@ public class DataCenterScenario extends Scenario {
 		externalServices.connectToDeviceWithLink(intranetRouter, links.get(links.size()-1));
 		addNetworkElement(externalServices);
 		
-		Server bbdd = new Server(Values.BBDD_SERVER_ID);
+		Server bbdd = new Server(Values.SQL_SERVER_ID);
 		links.add(new EthernetLink(Values.ETHERNET_ID+links.size(), Values.ETHERNET_LENGHT));
 		bbdd.connectToDeviceWithLink(intranetRouter, links.get(links.size()-1));
 		addNetworkElement(bbdd);

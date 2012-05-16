@@ -65,7 +65,7 @@ public class ISPSimulation extends ShanksSimulation {
 				}
 			}
 			Hacker hacker = new Hacker("Hacker" + i, 
-					"src/main/java/es/upm/dit/gsi/shanks/hackerhan/agent/Hacker.net", (HackerHANScenario)hackerHan);
+					"../shanks-network-attacks-simulation/src/main/java/es/upm/dit/gsi/shanks/networkattacks/util/Hacker.net", (HackerHANScenario)hackerHan);
 			this.registerShanksAgent(hacker);
 		}
 		

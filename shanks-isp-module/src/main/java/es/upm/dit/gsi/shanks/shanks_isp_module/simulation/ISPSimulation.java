@@ -1,14 +1,21 @@
 package es.upm.dit.gsi.shanks.shanks_isp_module.simulation;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Properties;
+import java.util.Set;
 
 import sim.engine.Schedule;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
+import es.upm.dit.gsi.shanks.datacenter.agent.SysAdmin;
 import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
+import es.upm.dit.gsi.shanks.hackerhan.agent.Hacker;
+import es.upm.dit.gsi.shanks.hackerhan.model.scenario.HackerHANScenario;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
@@ -43,6 +50,28 @@ public class ISPSimulation extends ShanksSimulation {
 			DuplicatedActionIDException {
 		RepairWireAgent worker = new RepairWireAgent("Repair Wire Worker");
 		this.registerShanksAgent(worker);
+		
+		// Add hackers
+		ArrayList<Scenario> hackerHans = new ArrayList<Scenario>();
+		Iterator<Scenario> scenarios = ((ComplexScenario)this.getScenario()).getScenarios().iterator();
+		for (int i = 0; i< Values.NUMBER_OF_HANS; i++){
+			Scenario hackerHan = null;
+			while(scenarios.hasNext()){
+				Scenario next = scenarios.next();
+				if (next instanceof HackerHANScenario && !hackerHans.contains(next)){
+					hackerHan = next;
+					hackerHans.add(next);
+					break; // Shame on me. But I do not have time to do this properly.
+				}
+			}
+			Hacker hacker = new Hacker("Hacker" + i, 
+					"src/main/java/es/upm/dit/gsi/shanks/hackerhan/agent/Hacker.net", (HackerHANScenario)hackerHan);
+			this.registerShanksAgent(hacker);
+		}
+		
+		// Add sysadmin
+		SysAdmin bofh = new SysAdmin("elAutoestopista"); // Tek ma'tek, Tek ma'te!
+		this.registerShanksAgent(bofh);
 	}
 
 	public void addSteppables() {

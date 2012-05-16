@@ -77,5 +77,9 @@ public class Values {
 	public static final String DDOS_NUMBER = "Number of DDoS Attacks";
 	public static final String ROOT_NUMBER =" Number of RootShell Attacks";
 	public static final String SQL_NUMBER = "Number of SQLInjection Attacks";
-	
+
+	//Agents
+	public static final String COMPLAINT = "UserComplaint";
+	public static final String UNBLOCK_PETITION = "UserUnblockPetition";
+
 }

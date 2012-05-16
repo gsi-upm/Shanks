@@ -225,6 +225,8 @@ public class SysAdmin extends SimpleShanksAgent implements
 		String sqlID = "";
 		Server sqlServer = (Server)sim.getScenario().getNetworkElement(Values.WEB_SERVER_ID);
 		int sqlLog;
+		
+		System.out.println("*********************************************** " + sqlServer ==  null);
 		if (sqlServer.getProperties().containsKey(Server.PROPERTY_LOG)) {
 			sqlLog = (Integer)sqlServer.getProperty(Server.PROPERTY_LOG);
 		} else {

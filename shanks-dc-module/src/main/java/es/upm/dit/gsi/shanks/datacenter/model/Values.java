@@ -52,7 +52,7 @@ public class Values extends es.upm.dit.gsi.shanks.networkattacks.util.Values {
 	public static final String SYSADMIN_LOAD_DOWN = "Down";
 	
 	public static final String SYSADMIN_ACTION_REPAIR = "Repair";
-	public static final String SYSADMIN_ACTION_MAINTENANCE = "Maintenance";
+	public static final String SYSADMIN_ACTION_MAINTENANCE = "Manteinance";
 	public static final String SYSADMIN_ACTION_PATCH = "Patch";
 	public static final String SYSADMIN_ACTION_LOOKOUT = "Look_out";
 

@@ -19,6 +19,9 @@ public class Values extends es.upm.dit.gsi.shanks.networkattacks.util.Values {
 
 	public static final String ISP_SCENARIO_ID = "ISPScenario";
 
+	public static final String ACTION_BLOCK = "Blocking";
+	public static final String ACTION_UNBLOCK = "Unblocking";
+
 
 
 }

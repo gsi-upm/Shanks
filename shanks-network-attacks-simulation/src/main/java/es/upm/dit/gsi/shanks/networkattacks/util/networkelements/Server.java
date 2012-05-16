@@ -147,7 +147,8 @@ public class Server extends Computer {
 				Values.CONNECTED);
 		this.addProperty(Server.PROPERTY_LOAD, 10);
 		this.addProperty(Server.PROPERTY_LOG, Values.SERVER_LOG_OK);
-		this.addProperty(PROPERTY_HACKED, false);
+		this.addProperty(Server.PROPERTY_HACKED, false);
+		this.addProperty(Server.PROPERTY_VULNERABILITY, 0.1);
 	}
 
 }

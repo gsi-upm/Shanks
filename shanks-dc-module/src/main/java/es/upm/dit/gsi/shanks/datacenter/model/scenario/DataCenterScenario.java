@@ -78,6 +78,7 @@ public class DataCenterScenario extends Scenario {
 		
 		Link intranetWebProxyLink = new EthernetLink(Values.INTRANET_LINK, Values.ETHERNET_LENGHT);
 		webProxy.connectToDeviceWithLink(intranetRouter, intranetWebProxyLink);
+		this.addNetworkElement(intranetWebProxyLink);
 
 		// SysAmind terminals.
 		ArrayList<EthernetLink> links = new ArrayList<EthernetLink>();

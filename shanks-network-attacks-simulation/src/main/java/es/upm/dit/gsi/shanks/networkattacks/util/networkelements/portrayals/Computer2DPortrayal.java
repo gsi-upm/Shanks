@@ -55,8 +55,10 @@ public class Computer2DPortrayal extends Device2DPortrayal {
         graphics.fillRect(x, y, w, h);
 
         // Draw the devices ID
-        graphics.setColor(Color.black);
-        graphics.drawString(device.getID(), x - 3, y+1);
+        if(Values.VISIBLE_ID){
+	        graphics.setColor(Color.black);
+	        graphics.drawString(device.getID(), x - 3, y+1);
+        }
     }
     
 	private static final long serialVersionUID = -1566002502140466217L;

@@ -11,8 +11,8 @@ public class Values extends es.upm.dit.gsi.shanks.networkattacks.util.Values {
 	// Datacenter values
 	public static final String DATA_CENTER_SCENARIO_ID = "DataCenter";
 	public static final String DATA_CENTER_LINK_ID = "DataCenterExternalLink";
-	public static int deltaX = 120;
-	public static int deltaY = 100;
+	public static int deltaX = 80;
+	public static int deltaY = 80;
 	
 
 	public Values(ShanksSimulation sim) {

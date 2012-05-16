@@ -48,30 +48,30 @@ public class EnterpriseScenario2DPortrayal extends ComplexScenario2DPortrayal{
 		ComplexScenario cs = (ComplexScenario) this.getScenario();
 		int place = 0;
 		int positionX = 0;
-		int positionY = 0;
+		int positionY = 20;
 		for (Scenario subScenario : cs.getScenarios()) {
 			if (place == 0) {
 				this.situateScenario(subScenario, new Double2D(
 						positionX, positionY), ShanksMath.ANGLE_0, 
 						ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
 				place = 1;
-				positionX = positionX+Values.deltaX;
+				positionX = positionX - Values.deltaX;
 			} else if (place == 1) {
 				this.situateScenario(subScenario, new Double2D(
-						positionX, positionY), ShanksMath.ANGLE_180, 
+						positionX, positionY), ShanksMath.ANGLE_0, 
 						ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
 				place = 2;
-				positionX = positionX+Values.deltaX;
+				positionX = positionX - Values.deltaX;
 			} else if (place == 2) {
 				this.situateScenario(subScenario, new Double2D(
-						positionX, positionY), ShanksMath.ANGLE_180, 
-						ShanksMath.ANGLE_0, ShanksMath.ANGLE_180);
+						positionX, positionY), ShanksMath.ANGLE_0, 
+						ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
 				place = 3;
 				positionY = positionY+Values.deltaY;
 			} else if (place == 3) {
 				this.situateScenario(subScenario, new Double2D(
 						positionX, positionY), ShanksMath.ANGLE_0, 
-						ShanksMath.ANGLE_180, ShanksMath.ANGLE_180);
+						ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
 				place = 0;
 				positionY = positionY+Values.deltaY;
 			}

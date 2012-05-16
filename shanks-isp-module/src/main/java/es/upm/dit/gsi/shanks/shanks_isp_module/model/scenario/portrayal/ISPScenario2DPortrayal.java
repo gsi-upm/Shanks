@@ -60,7 +60,7 @@ public class ISPScenario2DPortrayal extends ComplexScenario2DPortrayal {
 	public void placeElements() {
 		ComplexScenario cs = (ComplexScenario) this.getScenario();
 		this.situateDevice(
-				(Device) cs.getNetworkElement(Values.ISP_GATEWAY_ID), 150, 55);
+				(Device) cs.getNetworkElement(Values.ISP_GATEWAY_ID), 150, 150);
 		for (String key : cs.getCurrentElements().keySet()) {
 			NetworkElement ne = cs.getCurrentElements().get(key);
 			if (ne instanceof Link) {
@@ -128,20 +128,20 @@ public class ISPScenario2DPortrayal extends ComplexScenario2DPortrayal {
 				positionX = positionX+Values.deltaX;
 			} else if (place == 1) {
 				this.situateScenario(subScenario, new Double2D(
-						positionX, positionY), ShanksMath.ANGLE_180, 
+						positionX, positionY), ShanksMath.ANGLE_0, 
 						ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
 				place = 2;
 				positionX = positionX+Values.deltaX;
 			} else if (place == 2) {
 				this.situateScenario(subScenario, new Double2D(
-						positionX, positionY), ShanksMath.ANGLE_180, 
-						ShanksMath.ANGLE_0, ShanksMath.ANGLE_180);
+						positionX, positionY), ShanksMath.ANGLE_0, 
+						ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
 				place = 3;
 				positionY = positionY+Values.deltaY;
 			} else if (place == 3) {
 				this.situateScenario(subScenario, new Double2D(
 						positionX, positionY), ShanksMath.ANGLE_0, 
-						ShanksMath.ANGLE_180, ShanksMath.ANGLE_180);
+						ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
 				place = 0;
 				positionY = positionY+Values.deltaY;
 			}

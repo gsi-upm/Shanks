@@ -69,7 +69,7 @@ public class ISPScenario extends ComplexScenario{
 	@Override
 	public Scenario2DPortrayal createScenario2DPortrayal()
 			throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
-		return new ISPScenario2DPortrayal(this, 150, 150);
+		return new ISPScenario2DPortrayal(this, 300, 300);
 	}
 
 	@Override

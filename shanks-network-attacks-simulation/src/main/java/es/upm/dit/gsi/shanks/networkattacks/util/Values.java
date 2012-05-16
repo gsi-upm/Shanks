@@ -73,6 +73,9 @@ public class Values {
 	public static final int NUMBER_OF_HANS = 8;
 	public static final double HACKER_PROBABILITY = 0.5;
 	
+	//Vissble IDs
+	public static boolean VISIBLE_ID = true;
+	
 	//IDs for charts
 	public static final String DDOS_NUMBER = "Number of DDoS Attacks";
 	public static final String ROOT_NUMBER =" Number of RootShell Attacks";

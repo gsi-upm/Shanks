@@ -20,8 +20,4 @@ public class WifiRouterADSL extends RouterDNS {
 			throws UnsupportedNetworkElementStatusException {
 		super(id);
 	}
-
-	
-
-
 }

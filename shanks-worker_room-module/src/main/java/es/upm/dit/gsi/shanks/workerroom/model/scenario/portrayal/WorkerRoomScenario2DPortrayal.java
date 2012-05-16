@@ -32,7 +32,7 @@ public class WorkerRoomScenario2DPortrayal extends Scenario2DPortrayal{
 
 	@Override
 	public void addPortrayals() {
-		SparseGrid2D failuresGrid = new SparseGrid2D(100, 100);
+		SparseGrid2D failuresGrid = new SparseGrid2D(10, 10);
         SparseGridPortrayal2D failuresPortrayal = new SparseGridPortrayal2D();
         failuresPortrayal.setField(failuresGrid);
         try {
@@ -45,16 +45,16 @@ public class WorkerRoomScenario2DPortrayal extends Scenario2DPortrayal{
 
 	@Override
 	public void placeElements() {
-		int positionY=20;
+		int positionY=2;
 		for(String key: this.getScenario().getCurrentElements().keySet()){
 			NetworkElement ne = this.getScenario().getCurrentElements().get(key);
 			if(ne instanceof Computer) {
-				this.situateDevice((Device) ne, 10, positionY);
-				positionY = positionY+10;
+				this.situateDevice((Device) ne, 1, positionY);
+				positionY = positionY+2;
 			} else if(ne instanceof Printer) {
-				this.situateDevice((Device) ne, 50, 20);
+				this.situateDevice((Device) ne, 4, 4);
 			} else if(ne instanceof LANRouter){
-				this.situateDevice((Device) ne, 50, 50);
+				this.situateDevice((Device) ne, 4, 8);
 			} else if(ne instanceof Link){
 				this.drawLink((Link) ne);
 			}

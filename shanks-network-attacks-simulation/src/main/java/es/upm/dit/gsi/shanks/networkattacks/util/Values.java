@@ -52,7 +52,7 @@ public class Values {
 	
 	//Router IDs 
 	public static final String ISP_GATEWAY_ID = "ISPGateway";
-	public static final String HAN_ROUTER_ID = "WifiRouter#";
+	public static final String HAN_ROUTER_ID = "WifiRouter";
 	public static final String ENTERPRISE_GATEWAY_ID = "MegaCorpGateway";
 	public static final String DATA_CENTER_ROUTER_ID = "DataCenterRouter";
 	public static final String WORKER_ROOM_ROUTER_ID = "WorkerRoomRouter";
@@ -74,7 +74,7 @@ public class Values {
 	public static final double HACKER_PROBABILITY = 0.5;
 	
 	//Vissble IDs
-	public static boolean VISIBLE_ID = true;
+	public static boolean VISIBLE_ID = false;
 	
 	//IDs for charts
 	public static final String DDOS_NUMBER = "Number of DDoS Attacks";
@@ -84,5 +84,6 @@ public class Values {
 	//Agents
 	public static final String COMPLAINT = "UserComplaint";
 	public static final String UNBLOCK_PETITION = "UserUnblockPetition";
+	public static final String WORKER_ROOM_SCENARIO_ID = "WorkerRoomScenario";
 
 }

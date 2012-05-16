@@ -17,6 +17,8 @@ public class Values extends es.upm.dit.gsi.shanks.networkattacks.util.Values {
 	public static final int deltaX = 60;
 	public static final int deltaY = 60;
 
+	public static final String ISP_SCENARIO_ID = "ISPScenario";
+
 
 
 }

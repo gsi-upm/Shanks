@@ -12,7 +12,7 @@ public class Values extends es.upm.dit.gsi.shanks.networkattacks.util.Values{
 	
 	public static final String WR_COMPUTER_ID = "WorkerRoomTerminal#";
 	public static final String WR_ETHERNET_ID = "WorkerRoomLink#";
-	public static final String WR_Printer_ID = "WorkerRoomPrinter";
+	public static final String WR_PRINTER_ID = "WorkerRoomPrinter";
 	
 	// Agents Values. 
 	public static final String REPAIR_WIRE_ACTION_ID = "Repair Wire";

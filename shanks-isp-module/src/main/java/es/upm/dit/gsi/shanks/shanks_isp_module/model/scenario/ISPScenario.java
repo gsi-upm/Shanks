@@ -4,7 +4,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Properties;
 
-import es.upm.dit.gsi.shanks.hackerhan.model.scenario.HANScenario;
 import es.upm.dit.gsi.shanks.hackerhan.model.scenario.HackerHANScenario;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
@@ -57,12 +56,7 @@ public class ISPScenario extends ComplexScenario{
 	    p.put(WorkerRoomScenario.CLOUDY_PROB, "10.0");
 	    this.addScenario(EnterpriseScenario.class, Values.ENTERPRISE_SCENARIO_ID, EnterpriseScenario.STATUS_NORMAL, p, Values.ENTERPRISE_GATEWAY_ID, Values.ENTERPRISE_SUSCRIBER_LINK_ID);
 	    for (int i=0; i<Values.NUMBER_OF_HANS; i++){
-	    	//TODO !!! Agents has nothing to do with scenarios, so this does nothing
-	    	if(Math.random()<Values.HACKER_PROBABILITY){
-	    		this.addScenario(HackerHANScenario.class, Values.HAN_SCENARIO_ID+i, HackerHANScenario.STATUS_NORMAL, p, Values.HAN_ROUTER_ID, Values.HAN_SUSCRIBER_LINK+i);	    		
-	    	} else {
-	    		this.addScenario(HANScenario.class, Values.HAN_SCENARIO_ID+i, HANScenario.STATUS_NORMAL, p, Values.HAN_ROUTER_ID, Values.HAN_SUSCRIBER_LINK+i);
-	    	}
+	    	this.addScenario(HackerHANScenario.class, Values.HAN_SCENARIO_ID+i, HackerHANScenario.STATUS_NORMAL, p, Values.HAN_ROUTER_ID, Values.HAN_SUSCRIBER_LINK+i);	    		
 	    }
 	}
 

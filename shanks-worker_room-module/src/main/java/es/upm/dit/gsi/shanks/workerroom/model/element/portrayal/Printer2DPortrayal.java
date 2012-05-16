@@ -55,10 +55,10 @@ public class Printer2DPortrayal extends Device2DPortrayal implements Portrayal{
         graphics.fillOval(x, y, w, h);
         
         // Draw the devices ID ID
-        if(Values.VISIBLE_ID){
+//        if(Values.VISIBLE_ID){
 	        graphics.setColor(Color.black);
 	        graphics.drawString(device.getID(), x - 3, y);
-        }
+//        }
 
     }
 

@@ -4,7 +4,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Properties;
-import java.util.Set;
 
 import sim.engine.Schedule;
 import es.upm.dit.gsi.shanks.ShanksSimulation;

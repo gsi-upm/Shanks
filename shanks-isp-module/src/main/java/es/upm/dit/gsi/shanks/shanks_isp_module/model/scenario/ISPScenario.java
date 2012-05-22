@@ -1,17 +1,11 @@
 package es.upm.dit.gsi.shanks.shanks_isp_module.model.scenario;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Properties;
 
-import sim.portrayal.DrawInfo2D;
-import sim.portrayal.Portrayal;
-
 import es.upm.dit.gsi.shanks.hackerhan.model.scenario.HackerHANScenario;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
-import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device2DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;

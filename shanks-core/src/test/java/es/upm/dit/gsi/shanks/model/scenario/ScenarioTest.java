@@ -13,7 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.failure.exception.NoCombinationForFailureException;
 import es.upm.dit.gsi.shanks.model.failure.exception.UnsupportedElementInFailureException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
@@ -42,14 +42,14 @@ public class ScenarioTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      * @throws TooManyConnectionException
      * @throws UnsupportedScenarioStatusException
      * @throws DuplicatedIDException
      */
     @Test
     public void createScenario()
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException {
         Properties scenarioProperties = new Properties();
@@ -61,14 +61,14 @@ public class ScenarioTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      * @throws TooManyConnectionException
      * @throws UnsupportedScenarioStatusException
      * @throws DuplicatedIDException
      */
     @Test
     public void createScenarioAndChangeState()
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException {
         Properties scenarioProperties = new Properties();
@@ -80,14 +80,14 @@ public class ScenarioTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      * @throws TooManyConnectionException
      * @throws UnsupportedScenarioStatusException
      * @throws DuplicatedIDException
      */
     @Test
     public void createScenarioAndChangeWrongState()
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException {
         Properties scenarioProperties = new Properties();
@@ -104,13 +104,13 @@ public class ScenarioTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      * @throws TooManyConnectionException
      * @throws DuplicatedIDException
      */
     @Test
     public void createScenarioWithWrongState()
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException, DuplicatedIDException {
         boolean catched = false;
         try {
@@ -125,7 +125,7 @@ public class ScenarioTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      * @throws TooManyConnectionException
      * @throws UnsupportedScenarioStatusException
      * @throws DuplicatedIDException
@@ -136,7 +136,7 @@ public class ScenarioTest {
      */
     @Test
     public void createScenarioAndNoGenerateFailures()
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException, NoCombinationForFailureException, UnsupportedElementInFailureException, InstantiationException, IllegalAccessException {
 

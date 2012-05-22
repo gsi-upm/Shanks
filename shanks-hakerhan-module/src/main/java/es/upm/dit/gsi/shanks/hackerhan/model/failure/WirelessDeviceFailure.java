@@ -11,7 +11,7 @@ import java.util.List;
 import es.upm.dit.gsi.shanks.hackerhan.model.Values;
 import es.upm.dit.gsi.shanks.hackerhan.model.element.device.WirelessDevice;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 
 /**
@@ -62,7 +62,7 @@ public class WirelessDeviceFailure extends Failure{
 	}
 	
 	@Override
-	public void activateFailure() throws UnsupportedNetworkElementStatusException {
+	public void activateFailure() throws UnsupportedNetworkElementFieldException {
 		List<NetworkElement> before = new ArrayList<NetworkElement>(this.getAffectedElements());
 		super.activateFailure();
 		List<NetworkElement> after = this.getAffectedElements();

@@ -17,7 +17,7 @@ import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.event.Event;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
@@ -44,7 +44,7 @@ public abstract class ComplexScenario extends Scenario {
      * @param type
      * @param initialState
      * @param properties
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      * @throws TooManyConnectionException
      * @throws UnsupportedScenarioStatusException
      * @throws DuplicatedIDException
@@ -59,7 +59,7 @@ public abstract class ComplexScenario extends Scenario {
      */
     public ComplexScenario(String type, String initialState,
             Properties properties)
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException, NonGatewayDeviceException,
             AlreadyConnectedScenarioException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
@@ -77,7 +77,7 @@ public abstract class ComplexScenario extends Scenario {
      * @throws DuplicatedIDException
      * @throws UnsupportedScenarioStatusException
      * @throws TooManyConnectionException
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      * @throws AlreadyConnectedScenarioException
      * @throws NonGatewayDeviceException
      * @throws InvocationTargetException 
@@ -88,7 +88,7 @@ public abstract class ComplexScenario extends Scenario {
      * @throws SecurityException 
      */
     abstract public void addScenarios()
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException, NonGatewayDeviceException,
             AlreadyConnectedScenarioException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException;
@@ -173,7 +173,7 @@ public abstract class ComplexScenario extends Scenario {
     public void generateNetworkElementsEvents(ShanksSimulation sim) throws UnsupportedScenarioStatusException,
             NoCombinationForFailureException,
             UnsupportedElementInFailureException, InstantiationException,
-            IllegalAccessException, SecurityException, IllegalArgumentException, UnsupportedNetworkElementStatusException, NoSuchMethodException, InvocationTargetException {
+            IllegalAccessException, SecurityException, IllegalArgumentException, UnsupportedNetworkElementFieldException, NoSuchMethodException, InvocationTargetException {
         super.generateFailures();
         for (Scenario scenario : this.scenarios.keySet()) {
             scenario.generateNetworkElementEvents(sim);

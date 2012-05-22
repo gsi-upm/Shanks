@@ -13,7 +13,7 @@ import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.BayesianReasonerSh
 import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.ShanksAgentBayesianReasoningCapability;
 import es.upm.dit.gsi.shanks.datacenter.model.Values;
 import es.upm.dit.gsi.shanks.datacenter.model.element.device.DCRouter;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
@@ -258,7 +258,7 @@ public class SysAdmin extends SimpleShanksAgent implements
 	 * 
 	 * @param ShanksSimulation
 	 *            - The simulation
-	 * @throws UnsupportedNetworkElementStatusException 
+	 * @throws UnsupportedNetworkElementFieldException 
 	 */
 	private void maintenance(ShanksSimulation sim){
 		// TODO: Implement maintenance
@@ -287,7 +287,7 @@ public class SysAdmin extends SimpleShanksAgent implements
 			try {
 				mainRouter.updatePropertyTo(RouterDNS.PROPERTY_CONGESTION, ((Integer) mainRouter
 						.getProperty(RouterDNS.PROPERTY_CONGESTION)) *2/3);
-			} catch (UnsupportedNetworkElementStatusException e) {
+			} catch (UnsupportedNetworkElementFieldException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -299,7 +299,7 @@ public class SysAdmin extends SimpleShanksAgent implements
 			try {
 				webServer.updatePropertyTo(Server.PROPERTY_LOAD, ((Integer) webServer
 								.getProperty(Server.PROPERTY_LOAD)) *2/3);
-			} catch (UnsupportedNetworkElementStatusException e) {
+			} catch (UnsupportedNetworkElementFieldException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -310,7 +310,7 @@ public class SysAdmin extends SimpleShanksAgent implements
 			try {
 				sqlServer.updatePropertyTo(Server.PROPERTY_LOAD, ((Integer) sqlServer
 						.getProperty(Server.PROPERTY_LOAD)) *2/3);
-			} catch (UnsupportedNetworkElementStatusException e) {
+			} catch (UnsupportedNetworkElementFieldException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -349,7 +349,7 @@ public class SysAdmin extends SimpleShanksAgent implements
 			try {
 				mainRouter.updatePropertyTo(RouterDNS.PROPERTY_VULNERABILITY, ((Double) mainRouter
 								.getProperty(DCRouter.PROPERTY_VULNERABILITY)) / 2);
-			} catch (UnsupportedNetworkElementStatusException e) {
+			} catch (UnsupportedNetworkElementFieldException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -360,7 +360,7 @@ public class SysAdmin extends SimpleShanksAgent implements
 			try {
 				webServer.updatePropertyTo(Server.PROPERTY_VULNERABILITY, ((Double) webServer
 								.getProperty(Server.PROPERTY_VULNERABILITY)) / 2);
-			} catch (UnsupportedNetworkElementStatusException e) {
+			} catch (UnsupportedNetworkElementFieldException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -371,7 +371,7 @@ public class SysAdmin extends SimpleShanksAgent implements
 			try {
 				sqlServer.updatePropertyTo(Server.PROPERTY_VULNERABILITY, ((Double) sqlServer
 								.getProperty(Server.PROPERTY_VULNERABILITY)) / 2);
-			} catch (UnsupportedNetworkElementStatusException e) {
+			} catch (UnsupportedNetworkElementFieldException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

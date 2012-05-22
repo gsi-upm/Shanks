@@ -4,7 +4,7 @@ import java.util.List;
 
 import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 import es.upm.dit.gsi.shanks.notification.NotificationManager;
@@ -36,11 +36,6 @@ public abstract class Event {
     }
 
     /**
-     * Add classes using addPossibleAffectedElements method
-     */
-    public abstract void addPossibleAffected();
-
-    /**
      * @return the id
      */
     public String getID(){
@@ -67,13 +62,13 @@ public abstract class Event {
     /**
      * Used to generate the event.
      * 
-     * @throws UnsupportedNetworkElementStatusException 
+     * @throws UnsupportedNetworkElementFieldException 
      * @throws UnsupportedScenarioStatusException 
      * 
      */
-    public void launchEvent() throws UnsupportedNetworkElementStatusException, UnsupportedScenarioStatusException {
-        this.changeProperties();
+    public void launchEvent() throws UnsupportedNetworkElementFieldException, UnsupportedScenarioStatusException {
         this.changeStatus();
+        this.changeProperties();
         this.interactWithNE();
         this.generateNotification();
     }
@@ -82,13 +77,18 @@ public abstract class Event {
         NotificationManager.addNotification(this, this.getClass().getName());
     }
     
+    /**
+     * Add classes using addPossibleAffectedElements method
+     */
+    public abstract void addPossibleAffected();
+
     public abstract void addAffectedElement(NetworkElement ne);
     
     public abstract void addAffectedScenario(Scenario scen);
     
-    public abstract void changeProperties() throws UnsupportedNetworkElementStatusException;
+    public abstract void changeProperties() throws UnsupportedNetworkElementFieldException;
     
-    public abstract void changeStatus() throws UnsupportedNetworkElementStatusException, UnsupportedScenarioStatusException;
+    public abstract void changeStatus() throws UnsupportedNetworkElementFieldException, UnsupportedScenarioStatusException;
     
     public abstract void interactWithNE();
 

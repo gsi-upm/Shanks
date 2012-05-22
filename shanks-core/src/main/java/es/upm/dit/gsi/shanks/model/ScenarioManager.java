@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 import sim.engine.SimState;
 import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.failure.exception.NoCombinationForFailureException;
 import es.upm.dit.gsi.shanks.model.failure.exception.UnsupportedElementInFailureException;
@@ -95,8 +95,8 @@ public class ScenarioManager implements Steppable {
             logger.severe("InstantiationException: " + e.getMessage());
         } catch (IllegalAccessException e) {
             logger.severe("IllegalAccessException: " + e.getMessage());
-        } catch (UnsupportedNetworkElementStatusException e) {
-            logger.severe("UnsupportedNetworkElementStatusException: " + e.getMessage());
+        } catch (UnsupportedNetworkElementFieldException e) {
+            logger.severe("UnsupportedNetworkElementFieldException: " + e.getMessage());
         } catch (SecurityException e) {
             logger.severe("SecurityException: " + e.getMessage());
             e.printStackTrace();
@@ -121,10 +121,10 @@ public class ScenarioManager implements Steppable {
      * @throws IllegalAccessException 
      * @throws InstantiationException 
      * @throws UnsupportedElementInFailureException 
-     * @throws UnsupportedNetworkElementStatusException  
+     * @throws UnsupportedNetworkElementFieldException  
  
      */
-    public void stateMachine(ShanksSimulation sim) throws UnsupportedScenarioStatusException, NoCombinationForFailureException, UnsupportedElementInFailureException, InstantiationException, IllegalAccessException, UnsupportedNetworkElementStatusException, SecurityException, IllegalArgumentException, NoSuchMethodException, InvocationTargetException{
+    public void stateMachine(ShanksSimulation sim) throws UnsupportedScenarioStatusException, NoCombinationForFailureException, UnsupportedElementInFailureException, InstantiationException, IllegalAccessException, UnsupportedNetworkElementFieldException, SecurityException, IllegalArgumentException, NoSuchMethodException, InvocationTargetException{
         logger.fine("Using default state machine for ScenarioManager");
 //        switch (this.simulationStateMachineStatus) {
 //        case CHECK_FAILURES:
@@ -163,17 +163,17 @@ public class ScenarioManager implements Steppable {
      * @throws IllegalAccessException 
      * @throws InstantiationException 
      * @throws UnsupportedElementInFailureException 
-     * @throws UnsupportedNetworkElementStatusException 
+     * @throws UnsupportedNetworkElementFieldException 
      */
-    private void generateFailures(ShanksSimulation sim) throws UnsupportedScenarioStatusException, NoCombinationForFailureException, UnsupportedElementInFailureException, InstantiationException, IllegalAccessException, UnsupportedNetworkElementStatusException {
+    private void generateFailures(ShanksSimulation sim) throws UnsupportedScenarioStatusException, NoCombinationForFailureException, UnsupportedElementInFailureException, InstantiationException, IllegalAccessException, UnsupportedNetworkElementFieldException {
         this.scenario.generateFailures();
     }
     
-    private void generateScenarioEvents(ShanksSimulation sim) throws SecurityException, IllegalArgumentException, UnsupportedScenarioStatusException, InstantiationException, IllegalAccessException, UnsupportedNetworkElementStatusException, NoSuchMethodException, InvocationTargetException{
+    private void generateScenarioEvents(ShanksSimulation sim) throws SecurityException, IllegalArgumentException, UnsupportedScenarioStatusException, InstantiationException, IllegalAccessException, UnsupportedNetworkElementFieldException, NoSuchMethodException, InvocationTargetException{
         this.scenario.generateScenarioEvents(sim);
     }
     
-    private void generateNetworkElementEvents(ShanksSimulation sim) throws UnsupportedScenarioStatusException, InstantiationException, IllegalAccessException, UnsupportedNetworkElementStatusException, SecurityException, IllegalArgumentException, NoSuchMethodException, InvocationTargetException{
+    private void generateNetworkElementEvents(ShanksSimulation sim) throws UnsupportedScenarioStatusException, InstantiationException, IllegalAccessException, UnsupportedNetworkElementFieldException, SecurityException, IllegalArgumentException, NoSuchMethodException, InvocationTargetException{
         this.scenario.generateNetworkElementEvents(sim);
     }
 

@@ -6,7 +6,7 @@ import java.util.List;
 
 import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.event.ProbabilisticEvent;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
@@ -35,13 +35,13 @@ public abstract class ProbabilisticScenarioEvent extends ProbabilisticEvent{
 
 
     public void changeProperties()
-            throws UnsupportedNetworkElementStatusException {
+            throws UnsupportedNetworkElementFieldException {
 
         
     }
 
     @Override
-    public void changeStatus() throws UnsupportedNetworkElementStatusException, UnsupportedScenarioStatusException {
+    public void changeStatus() throws UnsupportedNetworkElementFieldException, UnsupportedScenarioStatusException {
         List<? extends Scenario> scenarios = this.affectedScenarios;
         for(Scenario scen : scenarios){
             for(Class<?> c : possibleAffected.keySet()){

@@ -8,7 +8,7 @@ import java.util.List;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.SimpleShanksAgent;
 import es.upm.dit.gsi.shanks.hackerhan.model.Values;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.RouterDNS;
@@ -63,7 +63,7 @@ public class Bot extends SimpleShanksAgent{
 			int cong = (Integer)router.getProperty(RouterDNS.PROPERTY_CONGESTION);
 			try {
 				router.updatePropertyTo(RouterDNS.PROPERTY_CONGESTION, cong + Values.LOAD_INCREASE);
-			} catch (UnsupportedNetworkElementStatusException e) {
+			} catch (UnsupportedNetworkElementFieldException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

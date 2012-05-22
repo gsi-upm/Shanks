@@ -5,7 +5,7 @@ package es.upm.dit.gsi.shanks.networkattacks.util.networkelements;
 
 import java.util.HashMap;
 
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 
 /**
@@ -27,10 +27,10 @@ public class EthernetLink extends Link {
 	 * 
 	 * @param id
 	 * @param length
-	 * @throws UnsupportedNetworkElementStatusException
+	 * @throws UnsupportedNetworkElementFieldException
 	 */
 	public EthernetLink(String id, double length)
-			throws UnsupportedNetworkElementStatusException {
+			throws UnsupportedNetworkElementFieldException {
 		super(id, EthernetLink.STATUS_OK, 2);
 		this.updatePropertyTo(EthernetLink.PROPERTY_LENGTH, length);
 	}
@@ -42,7 +42,7 @@ public class EthernetLink extends Link {
 	 */
 	@Override
 	public void checkProperties()
-			throws UnsupportedNetworkElementStatusException {
+			throws UnsupportedNetworkElementFieldException {
     	HashMap<String, Boolean> status = this.getStatus();
 		if (status.get(EthernetLink.STATUS_OK)) {
 			this.updatePropertyTo(EthernetLink.PROPERTY_PACKETLOSSRATIO, 0.001);
@@ -57,7 +57,7 @@ public class EthernetLink extends Link {
 	 * @see es.upm.dit.gsi.shanks.model.element.NetworkElement#checkStatus()
 	 */
 	@Override
-	public void checkStatus() throws UnsupportedNetworkElementStatusException {
+	public void checkStatus() throws UnsupportedNetworkElementFieldException {
 		double ratio = (Double) this.getProperty(EthernetLink.PROPERTY_PACKETLOSSRATIO);
 		if (ratio < 0.1) {
 			this.updateStatusTo(EthernetLink.STATUS_OK, true);

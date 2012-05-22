@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.failure.exception.UnsupportedElementInFailureException;
 
 /**
@@ -83,7 +83,7 @@ public abstract class Failure {
     
     
     
-    public void activateFailure() throws UnsupportedNetworkElementStatusException{
+    public void activateFailure() throws UnsupportedNetworkElementFieldException{
         if(!this.active){
             List<? extends NetworkElement> elements = this.affectedElements;
             for(NetworkElement e : elements){
@@ -151,7 +151,7 @@ public abstract class Failure {
 //                    String oldStatus = this.oldStatesOfAffectedElements
 //                            .get(element);
 //                    element.setCurrentStatus(oldStatus);
-//                } catch (UnsupportedNetworkElementStatusException e) {
+//                } catch (UnsupportedNetworkElementFieldException e) {
 //                    logger.severe("Exception setting status: "
 //                            + affectedElements.get(element) + " in element "
 //                            + element.getID() + ". Exception: "

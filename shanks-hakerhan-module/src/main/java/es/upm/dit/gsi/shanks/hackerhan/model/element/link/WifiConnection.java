@@ -6,7 +6,7 @@ package es.upm.dit.gsi.shanks.hackerhan.model.element.link;
 
 import java.util.HashMap;
 
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 
 /**
@@ -24,7 +24,7 @@ public class WifiConnection extends Link {
 	public static final String PROPERTY_PACKETLOSSRATIO = "Packet loss ratio"; //in %
 
 	public WifiConnection(String id, String initialState, int capacity)
-			throws UnsupportedNetworkElementStatusException {
+			throws UnsupportedNetworkElementFieldException {
 		super(id, initialState, capacity);
 	}
 	
@@ -34,7 +34,7 @@ public class WifiConnection extends Link {
 	 */
 	@Override
 	public void checkProperties()
-			throws UnsupportedNetworkElementStatusException {
+			throws UnsupportedNetworkElementFieldException {
     	HashMap<String, Boolean> status = this.getStatus();
 		if (status.get(WifiConnection.STATUS_OK)) {
 			this.updatePropertyTo(WifiConnection.PROPERTY_PACKETLOSSRATIO, 0.001);
@@ -51,7 +51,7 @@ public class WifiConnection extends Link {
 	 * @see es.upm.dit.gsi.shanks.model.element.NetworkElement#checkStatus()
 	 */
 	@Override
-	public void checkStatus() throws UnsupportedNetworkElementStatusException {
+	public void checkStatus() throws UnsupportedNetworkElementFieldException {
 		double pklratio = (Double) this.getProperty(WifiConnection.PROPERTY_PACKETLOSSRATIO);
 		double interference = (Double) this.getProperty(WifiConnection.PROPERTY_INTERFEARENCE);
 		if ((interference > 1)||(pklratio > 1)) {

@@ -3,7 +3,7 @@ package es.upm.dit.gsi.shanks.networkattacks.util.networkelements;
 import java.util.HashMap;
 
 import es.upm.dit.gsi.shanks.model.element.device.Device;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.networkattacks.util.Values;
 
 /**
@@ -38,7 +38,7 @@ public class Computer extends Device {
 	public static final String PROPERTY_POWER = "Power";
 	public static final String PROPERTY_ETHERNET_CONNECTION = "Connection";
 
-	public Computer(String id) throws UnsupportedNetworkElementStatusException {
+	public Computer(String id) throws UnsupportedNetworkElementFieldException {
 		super(id, Computer.STATUS_OK, false);
 	}
 
@@ -49,7 +49,7 @@ public class Computer extends Device {
 	 */
 	@Override
 	public void checkProperties()
-			throws UnsupportedNetworkElementStatusException {
+			throws UnsupportedNetworkElementFieldException {
 		HashMap<String, Boolean> status = this.getStatus();
 		if (status.get(Computer.STATUS_OFF)) {
 			this.shutdown();
@@ -91,7 +91,7 @@ public class Computer extends Device {
 	 * @see es.upm.dit.gsi.shanks.model.element.NetworkElement#checkStatus()
 	 */
 	@Override
-	public void checkStatus() throws UnsupportedNetworkElementStatusException {
+	public void checkStatus() throws UnsupportedNetworkElementFieldException {
 		String power = (String) this.getProperty(Computer.PROPERTY_POWER);
 		double temp = (Double) this.getProperty(Computer.PROPERTY_TEMPERATURE);
 		double freq = (Double) this.getProperty(Computer.PROPERTY_CPUFREQ);
@@ -162,9 +162,9 @@ public class Computer extends Device {
 	/**
 	 * Accessory method that configures the device on shut down state.
 	 * 
-	 * @throws UnsupportedNetworkElementStatusException
+	 * @throws UnsupportedNetworkElementFieldException
 	 */
-	private void shutdown() throws UnsupportedNetworkElementStatusException {
+	private void shutdown() throws UnsupportedNetworkElementFieldException {
 		this.updatePropertyTo(Computer.PROPERTY_CPUFREQ, 0.0);
 		this.updatePropertyTo(Computer.PROPERTY_TEMPERATURE, 0.0);
 		this.updatePropertyTo(Computer.PROPERTY_POWER, Values.OFF);

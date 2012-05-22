@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 import es.upm.dit.gsi.shanks.hackerhan.model.Values;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 
 /**
  * This is a simple implementation of a Wireless device like a Smartphone or Tablet. On this simulation
@@ -44,7 +44,7 @@ public class WirelessDevice extends Device{
 
 	
 	public WirelessDevice(String id)
-			throws UnsupportedNetworkElementStatusException {
+			throws UnsupportedNetworkElementFieldException {
 		super(id, WirelessDevice.STATUS_OK, false);
 	}
 	
@@ -54,7 +54,7 @@ public class WirelessDevice extends Device{
 	 */
 	@Override
 	public void checkProperties()
-			throws UnsupportedNetworkElementStatusException {
+			throws UnsupportedNetworkElementFieldException {
         HashMap<String, Boolean> status = this.getStatus();
 		if(status.get(WirelessDevice.STATUS_OFF)) {
 			this.shutdown();
@@ -86,7 +86,7 @@ public class WirelessDevice extends Device{
 	 * @see es.upm.dit.gsi.shanks.model.element.NetworkElement#checkStatus()
 	 */
 	@Override
-	public void checkStatus() throws UnsupportedNetworkElementStatusException {
+	public void checkStatus() throws UnsupportedNetworkElementFieldException {
 
 		double battery = (Double) this.getProperty(WirelessDevice.PROPERTY_BATTERY_CAPACITY);
 		double signal = (Double) this.getProperty(WirelessDevice.PROPERTY_SIGNAL);
@@ -157,9 +157,9 @@ public class WirelessDevice extends Device{
 	/**
 	 * Accessory method that configures the device on shut down state. 
 	 * 
-	 * @throws UnsupportedNetworkElementStatusException
+	 * @throws UnsupportedNetworkElementFieldException
 	 */
-	private void shutdown() throws UnsupportedNetworkElementStatusException {
+	private void shutdown() throws UnsupportedNetworkElementFieldException {
 		this.updatePropertyTo(WirelessDevice.PROPERTY_CONNECTION, Values.DISCONNECTED);
 		this.updatePropertyTo(WirelessDevice.PROPERTY_SIGNAL, 0.0);
 		this.updatePropertyTo(WirelessDevice.PROPERTY_POWER, Values.OFF);

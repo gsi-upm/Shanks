@@ -14,7 +14,7 @@ import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
 import es.upm.dit.gsi.shanks.model.event.test.MyProbNetElementEvent;
@@ -42,13 +42,13 @@ public class MyScenario extends Scenario {
      * @param id
      * @param initialState
      * @param properties
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      * @throws TooManyConnectionException
      * @throws UnsupportedScenarioStatusException
      * @throws DuplicatedIDException
      */
     public MyScenario(String id, String initialState, Properties properties)
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException {
         super(id, initialState, properties);
@@ -66,7 +66,7 @@ public class MyScenario extends Scenario {
      */
     @Override
     public void addNetworkElements()
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException, DuplicatedIDException {
         Device d1 = new MyDevice("D1", MyDevice.OK_STATUS, false);
         Device d2 = new MyDevice("D2", MyDevice.OK_STATUS, false);
@@ -225,7 +225,7 @@ public class MyScenario extends Scenario {
      * @throws InstantiationException
      * @throws IllegalAccessException
      * @throws InvocationTargetException
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      * @throws TooManyConnectionException
      * @throws UnsupportedScenarioStatusException
      * @throws DuplicatedIDException
@@ -238,7 +238,7 @@ public class MyScenario extends Scenario {
             IllegalArgumentException, NoSuchMethodException,
             InstantiationException, IllegalAccessException,
             InvocationTargetException,
-            UnsupportedNetworkElementStatusException,
+            UnsupportedNetworkElementFieldException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException, DuplicatedPortrayalIDException, ScenarioNotFoundException, DuplicatedAgentIDException, DuplicatedActionIDException {
 

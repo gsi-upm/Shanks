@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Properties;
 
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
@@ -19,7 +19,7 @@ public class TestScenario extends Scenario{
     public static final String TEST_STATE = "sunny";
 
     public TestScenario(String id, String initialState, Properties properties)
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException {
         super(id, initialState, properties);
@@ -44,7 +44,7 @@ public class TestScenario extends Scenario{
 
     @Override
     public void addNetworkElements()
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException, DuplicatedIDException {
     }
 
@@ -65,7 +65,7 @@ public class TestScenario extends Scenario{
             this.addPossibleEventsOfScenario(TestProbabilisticScenarioEvent.class, this);
             this.addPossibleEventsOfScenario(TestPeriodicScenarioEvent.class, this);
             
-        } catch (UnsupportedNetworkElementStatusException e1) {
+        } catch (UnsupportedNetworkElementFieldException e1) {
             e1.printStackTrace();
         }
     }

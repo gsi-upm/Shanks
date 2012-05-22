@@ -14,7 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.AlreadyConnectedScenarioException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.NonGatewayDeviceException;
@@ -36,7 +36,7 @@ public class ComplexScenarioTest {
 
     @Test
     public void createComplexScenario()
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException, NonGatewayDeviceException, AlreadyConnectedScenarioException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
         Properties scenarioProperties = new Properties();
@@ -51,7 +51,7 @@ public class ComplexScenarioTest {
 
     @Test
     public void createComplexScenarioAndGetScenarios()
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException, NonGatewayDeviceException, AlreadyConnectedScenarioException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException, ScenarioNotFoundException {
         Properties scenarioProperties = new Properties();
@@ -68,7 +68,7 @@ public class ComplexScenarioTest {
 
     @Test
     public void createSuperComplexScenario()
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException, NonGatewayDeviceException, AlreadyConnectedScenarioException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
         Properties scenarioProperties = new Properties();
@@ -83,7 +83,7 @@ public class ComplexScenarioTest {
 
     @Test
     public void createSuperComplexScenarioAndGetScenarios()
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException, NonGatewayDeviceException, AlreadyConnectedScenarioException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException, ScenarioNotFoundException {
         Properties scenarioProperties = new Properties();

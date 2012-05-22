@@ -8,7 +8,7 @@ import es.upm.dit.gsi.shanks.agent.SimpleShanksAgent;
 import es.upm.dit.gsi.shanks.agent.action.test.MyShanksAgentAction;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 
 public class MyFixAgent extends SimpleShanksAgent{
@@ -42,7 +42,7 @@ public class MyFixAgent extends SimpleShanksAgent{
         if(!simulation.getScenario().getCurrentFailures().isEmpty()){
             try {
                 act.executeAction(simulation, this, ne);
-            } catch (UnsupportedNetworkElementStatusException e) {
+            } catch (UnsupportedNetworkElementFieldException e) {
                 e.printStackTrace();
             } catch (UnsupportedScenarioStatusException e) {
                 e.printStackTrace();

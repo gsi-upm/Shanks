@@ -8,7 +8,7 @@ package es.upm.dit.gsi.shanks.networkattacks.util.networkelements;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.networkattacks.util.Values;
 
 /**
@@ -42,9 +42,9 @@ public class Server extends Computer {
 	/**
 	 * 
 	 * @param id
-	 * @throws UnsupportedNetworkElementStatusException
+	 * @throws UnsupportedNetworkElementFieldException
 	 */
-	public Server(String id) throws UnsupportedNetworkElementStatusException {
+	public Server(String id) throws UnsupportedNetworkElementFieldException {
 		super(id);
 		this.passwords = new ArrayList<String>();
 		this.services = new HashMap<String, HashMap<String, Object>>();

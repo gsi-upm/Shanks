@@ -9,7 +9,7 @@ import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
@@ -52,7 +52,7 @@ public class MyComplexScenario extends ComplexScenario {
      * @param type
      * @param initialState
      * @param properties
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      * @throws TooManyConnectionException
      * @throws UnsupportedScenarioStatusException
      * @throws DuplicatedIDException
@@ -67,7 +67,7 @@ public class MyComplexScenario extends ComplexScenario {
      */
     public MyComplexScenario(String type, String initialState,
             Properties properties)
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException, NonGatewayDeviceException,
             AlreadyConnectedScenarioException, SecurityException,
@@ -96,7 +96,7 @@ public class MyComplexScenario extends ComplexScenario {
      */
     @Override
     public void addNetworkElements()
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException, DuplicatedIDException {
         Link el1 = new MyLink("EL1", MyLink.OK_STATUS, 2);
         Link el2 = new MyLink("EL2", MyLink.OK_STATUS, 2);
@@ -183,7 +183,7 @@ public class MyComplexScenario extends ComplexScenario {
      * @see es.upm.dit.gsi.shanks.model.scenario.ComplexScenario#addScenarios()
      */
     @Override
-    public void addScenarios() throws UnsupportedNetworkElementStatusException,
+    public void addScenarios() throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException, NonGatewayDeviceException,
             AlreadyConnectedScenarioException, SecurityException,
@@ -208,7 +208,7 @@ public class MyComplexScenario extends ComplexScenario {
      * @throws InstantiationException
      * @throws IllegalAccessException
      * @throws InvocationTargetException
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      * @throws TooManyConnectionException
      * @throws UnsupportedScenarioStatusException
      * @throws DuplicatedIDException
@@ -221,7 +221,7 @@ public class MyComplexScenario extends ComplexScenario {
             IllegalArgumentException, NoSuchMethodException,
             InstantiationException, IllegalAccessException,
             InvocationTargetException,
-            UnsupportedNetworkElementStatusException,
+            UnsupportedNetworkElementFieldException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException, DuplicatedPortrayalIDException,
             ScenarioNotFoundException, DuplicatedAgentIDException, DuplicatedActionIDException {

@@ -3,7 +3,7 @@ package es.upm.dit.gsi.shanks.workerroom.model.element.device;
 import java.util.HashMap;
 
 import es.upm.dit.gsi.shanks.model.element.device.Device;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 
 /**
  * Class that represent a personal computer
@@ -36,13 +36,13 @@ public class Computer extends Device{
 		
 
 	public Computer(String id, String status, boolean isGateway)
-			throws UnsupportedNetworkElementStatusException {
+			throws UnsupportedNetworkElementFieldException {
 		super(id, status, isGateway);
 	}
 
 	@Override
 	public void checkProperties()
-			throws UnsupportedNetworkElementStatusException {
+			throws UnsupportedNetworkElementFieldException {
 		HashMap<String, Boolean> status = this.getStatus();
 		if(status.get(Computer.STATUS_OK)){
 			this.updatePropertyTo(Computer.PROPERTY_ANTIVIRUS, true);
@@ -82,7 +82,7 @@ public class Computer extends Device{
 	}
 
 	@Override
-	public void checkStatus() throws UnsupportedNetworkElementStatusException {
+	public void checkStatus() throws UnsupportedNetworkElementFieldException {
 		Boolean antivirus = (Boolean) this.getProperty(Computer.PROPERTY_ANTIVIRUS);
 		Integer cpuFrequ = (Integer) this.getProperty(Computer.PROPERTY_CPUFREQ);
 		Boolean ethernet = (Boolean) this.getProperty(Computer.PROPERTY_ETHERNET_CONNECTION);

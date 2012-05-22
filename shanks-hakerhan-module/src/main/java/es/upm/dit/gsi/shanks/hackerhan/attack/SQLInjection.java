@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.hackerhan.agent.Hacker;
 import es.upm.dit.gsi.shanks.hackerhan.model.Values;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.Server;
@@ -66,7 +66,7 @@ public class SQLInjection implements Attack {
 				} else {
 					try {
 						sqlServer.updatePropertyTo(Server.PROPERTY_LOG, (Integer)sqlServer.getProperty(Server.PROPERTY_LOG) +1 );
-					} catch (UnsupportedNetworkElementStatusException e) {
+					} catch (UnsupportedNetworkElementFieldException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}

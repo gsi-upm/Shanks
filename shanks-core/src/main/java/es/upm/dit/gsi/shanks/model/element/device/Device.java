@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 
 /**
@@ -30,10 +30,10 @@ public abstract class Device extends NetworkElement {
     /**
      * @param id
      * @param isGateway
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      */
     public Device(String id, String initialState, boolean isGateway)
-            throws UnsupportedNetworkElementStatusException {
+            throws UnsupportedNetworkElementFieldException {
         super(id, initialState);
         this.isGateway = isGateway;
         this.linksList = new ArrayList<Link>();

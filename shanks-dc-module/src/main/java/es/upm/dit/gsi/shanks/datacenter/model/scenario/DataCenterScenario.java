@@ -13,7 +13,7 @@ import es.upm.dit.gsi.shanks.datacenter.model.scenario.portrayal.DataCenterScena
 import es.upm.dit.gsi.shanks.datacenter.model.scenario.portrayal.DataCenterScenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
@@ -40,7 +40,7 @@ public class DataCenterScenario extends Scenario {
 
 	public DataCenterScenario(String id, String initialState,
 			Properties properties)
-			throws UnsupportedNetworkElementStatusException,
+			throws UnsupportedNetworkElementFieldException,
 			TooManyConnectionException, UnsupportedScenarioStatusException,
 			DuplicatedIDException {
 		super(id, initialState, properties);
@@ -67,7 +67,7 @@ public class DataCenterScenario extends Scenario {
 
 	@Override
 	public void addNetworkElements()
-			throws UnsupportedNetworkElementStatusException,
+			throws UnsupportedNetworkElementFieldException,
 			TooManyConnectionException, DuplicatedIDException {
 		
 		RouterDNS intranetRouter = new RouterDNS(Values.DATA_CENTER_ROUTER_ID);

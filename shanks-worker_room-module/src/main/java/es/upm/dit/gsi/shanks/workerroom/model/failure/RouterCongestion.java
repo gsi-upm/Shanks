@@ -1,6 +1,7 @@
 package es.upm.dit.gsi.shanks.workerroom.model.failure;
 
 import sim.engine.Steppable;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.event.networkelement.ProbabilisticNetworkElementEvent;
 import es.upm.dit.gsi.shanks.workerroom.model.element.device.LANRouter;
 
@@ -19,7 +20,14 @@ public class RouterCongestion extends ProbabilisticNetworkElementEvent{
 
 	@Override
 	public void addPossibleAffected() {
-		this.addPossibleAffectedProperties(LANRouter.class, LANRouter.PROPERTY_CONGESTION, 100.0);
+		this.addPossibleAffectedElementProperty(LANRouter.class, LANRouter.PROPERTY_CONGESTION, 100.0);
+	}
+
+	@Override
+	public void changeOtherFields()
+			throws UnsupportedNetworkElementFieldException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

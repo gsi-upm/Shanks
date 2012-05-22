@@ -16,7 +16,7 @@ import ec.util.MersenneTwisterFast;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.event.Event;
 import es.upm.dit.gsi.shanks.model.event.PeriodicEvent;
 import es.upm.dit.gsi.shanks.model.event.ProbabilisticEvent;
@@ -71,13 +71,13 @@ public abstract class Scenario {
      * @param id
      * @param initialState
      * @param properties
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      * @throws TooManyConnectionException
      * @throws UnsupportedScenarioStatusException
      * @throws DuplicatedIDException
      */
     public Scenario(String id, String initialState, Properties properties)
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException {
         this.id = id;
@@ -159,7 +159,7 @@ public abstract class Scenario {
      *            the currentStatus to set
      * @return true if the status was set correctly and false if the status is
      *         not a possible status of the network element
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      */
     public boolean setCurrentStatus(String desiredStatus)
             throws UnsupportedScenarioStatusException {
@@ -430,13 +430,13 @@ public abstract class Scenario {
     abstract public void setPossibleStates();
 
     /**
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      * @throws TooManyConnectionException
      * @throws DuplicatedIDException
      * 
      */
     abstract public void addNetworkElements()
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException, DuplicatedIDException;
 
     /**
@@ -455,7 +455,7 @@ public abstract class Scenario {
      * @throws UnsupportedElementInFailureException
      * @throws IllegalAccessException
      * @throws InstantiationException
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      * @throws NoSuchMethodException
      * @throws SecurityException
      * @throws InvocationTargetException
@@ -465,7 +465,7 @@ public abstract class Scenario {
 
     public void generateNetworkElementEvents(ShanksSimulation sim)
             throws UnsupportedScenarioStatusException, InstantiationException,
-            IllegalAccessException, UnsupportedNetworkElementStatusException,
+            IllegalAccessException, UnsupportedNetworkElementFieldException,
             SecurityException, NoSuchMethodException, IllegalArgumentException,
             InvocationTargetException {
         MersenneTwisterFast random = new MersenneTwisterFast();
@@ -523,7 +523,7 @@ public abstract class Scenario {
 
     public void generateScenarioEvents(ShanksSimulation sim)
             throws UnsupportedScenarioStatusException, InstantiationException,
-            IllegalAccessException, UnsupportedNetworkElementStatusException,
+            IllegalAccessException, UnsupportedNetworkElementFieldException,
             SecurityException, NoSuchMethodException, IllegalArgumentException,
             InvocationTargetException {
         MersenneTwisterFast random = new MersenneTwisterFast();
@@ -590,7 +590,7 @@ public abstract class Scenario {
     public void generateFailures() throws UnsupportedScenarioStatusException,
             NoCombinationForFailureException,
             UnsupportedElementInFailureException, InstantiationException,
-            IllegalAccessException, UnsupportedNetworkElementStatusException {
+            IllegalAccessException, UnsupportedNetworkElementFieldException {
         MersenneTwisterFast randomizer = new MersenneTwisterFast();
         String status = this.getCurrentStatus();
         HashMap<Class<? extends Failure>, Double> penalties = this
@@ -657,15 +657,16 @@ public abstract class Scenario {
      * @param failure
      * @param elementsSet
      * @throws UnsupportedElementInFailureException
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      */
     // TODO Retocar la manera de ver ahora los fallos (Lo hare cuando modifique
-    // escenario para adatarlo a eventos y acciones)
-    //
+    // escenario para adaptarlo a eventos y acciones)
+    // Añadir AffectedElements NO REQUIERE añadir la propiedad/estado ni el valor al cual
+    // debe cambiar. Solo el objeto ELEMENT. Lo otro ya se definió al añadir el fallo a la sim. 
     private void setupFailure(Failure failure, Set<NetworkElement> elementsSet,
             int configurationNumber)
             throws UnsupportedElementInFailureException,
-            UnsupportedNetworkElementStatusException {
+            UnsupportedNetworkElementFieldException {
         for (NetworkElement element : elementsSet) {
             for (String statusToSet : element.getStatus().keySet()) {
                 if (element.getStatus().containsKey(statusToSet)) {

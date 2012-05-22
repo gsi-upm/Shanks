@@ -12,7 +12,7 @@ import sim.portrayal.network.NetworkPortrayal2D;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device2DPortrayal;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
@@ -72,7 +72,7 @@ public class WorkerRoomScenario2DPortrayal extends Scenario2DPortrayal {
 		try {
 			ScenarioID scenarioID = new ScenarioID(this.getScenario().getID(), "", false);
 			this.situateDevice(scenarioID, 5, 5);
-		} catch (UnsupportedNetworkElementStatusException e) {
+		} catch (UnsupportedNetworkElementFieldException e) {
 			e.printStackTrace();
 		}
 	}
@@ -116,7 +116,7 @@ public class WorkerRoomScenario2DPortrayal extends Scenario2DPortrayal {
 	
 	private class ScenarioID extends Device {
 		public ScenarioID(String id, String initialState, boolean isGateway)
-				throws UnsupportedNetworkElementStatusException {
+				throws UnsupportedNetworkElementFieldException {
 			super(id, initialState, isGateway);
 		}
 		@Override
@@ -124,11 +124,11 @@ public class WorkerRoomScenario2DPortrayal extends Scenario2DPortrayal {
 		}
 		@Override
 		public void checkProperties()
-				throws UnsupportedNetworkElementStatusException {
+				throws UnsupportedNetworkElementFieldException {
 		}
 		@Override
 		public void checkStatus()
-				throws UnsupportedNetworkElementStatusException {
+				throws UnsupportedNetworkElementFieldException {
 		}
 		@Override
 		public void setPossibleStates() {

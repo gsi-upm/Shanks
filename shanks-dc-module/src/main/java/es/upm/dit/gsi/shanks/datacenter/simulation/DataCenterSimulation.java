@@ -8,7 +8,7 @@ import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
 import es.upm.dit.gsi.shanks.datacenter.model.scenario.DataCenterScenario;
 import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
@@ -23,7 +23,7 @@ public class DataCenterSimulation extends ShanksSimulation{
 			throws SecurityException, IllegalArgumentException,
 			NoSuchMethodException, InstantiationException,
 			IllegalAccessException, InvocationTargetException,
-			UnsupportedNetworkElementStatusException,
+			UnsupportedNetworkElementFieldException,
 			TooManyConnectionException, UnsupportedScenarioStatusException,
 			DuplicatedIDException, DuplicatedPortrayalIDException,
 			ScenarioNotFoundException, DuplicatedAgentIDException,

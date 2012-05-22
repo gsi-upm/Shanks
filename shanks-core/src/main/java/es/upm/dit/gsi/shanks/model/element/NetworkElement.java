@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 
 
 /**
@@ -28,9 +28,9 @@ public abstract class NetworkElement {
     
     /**
      * @param id
-     * @throws UnsupportedNetworkElementStatusException 
+     * @throws UnsupportedNetworkElementFieldException 
      */
-    public NetworkElement(String id, String initialStatus) throws UnsupportedNetworkElementStatusException {
+    public NetworkElement(String id, String initialStatus) throws UnsupportedNetworkElementFieldException {
         this.id = id;
         this.properties = new HashMap<String, Object>();
         this.states = new HashMap<String, Boolean>();
@@ -67,9 +67,9 @@ public abstract class NetworkElement {
     /**
      * @param desiredStatus
      * @return
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      */
-    public boolean setCurrentStatus(String desiredStatus, boolean state) throws UnsupportedNetworkElementStatusException {
+    public boolean setCurrentStatus(String desiredStatus, boolean state) throws UnsupportedNetworkElementFieldException {
         List<String> states = new ArrayList<String>();
         states.add(desiredStatus);
         return this.setCurrentStatus(states, state);
@@ -78,15 +78,15 @@ public abstract class NetworkElement {
     /**
      * @param desiredStatus the currentStatus to set
      * @return true if the status was set correctly and false if the status is not a possible status of the network element
-     * @throws UnsupportedNetworkElementStatusException 
+     * @throws UnsupportedNetworkElementFieldException 
      */
-    public boolean setCurrentStatus(List<String> desiredStatus, boolean state) throws UnsupportedNetworkElementStatusException {
+    public boolean setCurrentStatus(List<String> desiredStatus, boolean state) throws UnsupportedNetworkElementFieldException {
         for(String s : desiredStatus){
             if(states.containsKey(s)){
                 states.put(s,state);
                 this.checkProperties();
             } else {
-                throw new UnsupportedNetworkElementStatusException(this, s);
+                throw new UnsupportedNetworkElementFieldException(this, s);
             }
         }
         return true;
@@ -98,9 +98,9 @@ public abstract class NetworkElement {
      * @param desiredStatus
      * @param state
      * @return
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      */
-    public boolean updateStatusTo(String desiredStatus, boolean state) throws UnsupportedNetworkElementStatusException {
+    public boolean updateStatusTo(String desiredStatus, boolean state) throws UnsupportedNetworkElementFieldException {
         List<String> states = new ArrayList<String>();
         states.add(desiredStatus);
         return this.updateStatusTo(states, state);
@@ -109,9 +109,9 @@ public abstract class NetworkElement {
     /**
      * @param desiredStatus the currentStatus to set
      * @return true if the status was set correctly and false if the status is not a possible status of the network element
-     * @throws UnsupportedNetworkElementStatusException 
+     * @throws UnsupportedNetworkElementFieldException 
      */
-    public boolean updateStatusTo(List<String> desiredStatus, boolean value) throws UnsupportedNetworkElementStatusException {
+    public boolean updateStatusTo(List<String> desiredStatus, boolean value) throws UnsupportedNetworkElementFieldException {
         boolean allStatusUpdated = false;
         for(String status : desiredStatus){
             if (this.isPossibleStatus(status)) {
@@ -119,7 +119,7 @@ public abstract class NetworkElement {
                 logger.fine("Network Element Status updated -> ElementID: " + this.getID() + " Current Status: " + status);
             } else {
                 logger.warning("Impossible to update status: " + status + ". This network element " + this.getID() + "does not support this status.");
-                throw new UnsupportedNetworkElementStatusException(this, status);
+                throw new UnsupportedNetworkElementFieldException(this, status);
             }
         }
         allStatusUpdated = true;
@@ -131,9 +131,9 @@ public abstract class NetworkElement {
      * @param desiredProperty
      * @param value
      * @return
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      */
-    public boolean updatePropertyTo(String desiredProperty, Object value) throws UnsupportedNetworkElementStatusException {
+    public boolean updatePropertyTo(String desiredProperty, Object value) throws UnsupportedNetworkElementFieldException {
         List<String> properties = new ArrayList<String>();
         properties.add(desiredProperty);
         return this.updatePropertyTo(properties, value);
@@ -144,9 +144,9 @@ public abstract class NetworkElement {
      * @param desiredProperty
      * @param value
      * @return
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      */
-    public boolean updatePropertyTo(List<String> desiredProperty, Object value) throws UnsupportedNetworkElementStatusException {
+    public boolean updatePropertyTo(List<String> desiredProperty, Object value) throws UnsupportedNetworkElementFieldException {
         boolean allPropertiesUpdated = false;
         for(String property : desiredProperty){
             if (this.properties.containsKey(property)) {
@@ -154,7 +154,8 @@ public abstract class NetworkElement {
                 logger.fine("Network Element Property updated -> ElementID: " + this.getID() + " Property : " + property + " changed to : " + value);
             } else {
                 logger.warning("Impossible to change property: " + property + ". This network element " + this.getID() + "haven't got this property.");
-                throw new UnsupportedNetworkElementStatusException(this, property);
+                // TODO make Unssoported... PropertyException
+                throw new UnsupportedNetworkElementFieldException(this, property);
             }
         }
         allPropertiesUpdated = true;
@@ -169,9 +170,9 @@ public abstract class NetworkElement {
 
     /**
      * This method check properties and change them depending on the current status
-     * @throws UnsupportedNetworkElementStatusException 
+     * @throws UnsupportedNetworkElementFieldException 
      */
-    abstract public void checkProperties() throws UnsupportedNetworkElementStatusException;
+    abstract public void checkProperties() throws UnsupportedNetworkElementFieldException;
 
 
     /**
@@ -214,9 +215,9 @@ public abstract class NetworkElement {
      * 
      * @param propertyName
      * @param propertyValue
-     * @throws UnsupportedNetworkElementStatusException 
+     * @throws UnsupportedNetworkElementFieldException 
      */
-    public void changeProperty(String propertyName, Object propertyValue) throws UnsupportedNetworkElementStatusException {
+    public void changeProperty(String propertyName, Object propertyValue) throws UnsupportedNetworkElementFieldException {
         this.properties.put(propertyName, propertyValue);
         this.checkStatus();
     }
@@ -225,9 +226,9 @@ public abstract class NetworkElement {
      * This method check status and change them depending on the current properties
      * This method must use updateStatusTo(String desiredStatus) method to change element status.
      * WARNING: Do not use setCurrentStatus(String desiredStatus) to avoid an infinitive loop
-     * @throws UnsupportedNetworkElementStatusException 
+     * @throws UnsupportedNetworkElementFieldException 
      */
-    abstract public void checkStatus() throws UnsupportedNetworkElementStatusException;
+    abstract public void checkStatus() throws UnsupportedNetworkElementFieldException;
 
 
     /**

@@ -15,7 +15,7 @@ import es.upm.dit.gsi.shanks.hackerhan.model.element.device.portrayal.Smartphone
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device2DPortrayal;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.failure.portrayal.Failure2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
@@ -74,7 +74,7 @@ public class ISPScenario2DPortrayal extends ComplexScenario2DPortrayal {
 		try {
 			ScenarioID scenarioID = new ScenarioID("Network's Attack Simulation","", false);
 			this.situateDevice(scenarioID, 2, 2);
-		} catch (UnsupportedNetworkElementStatusException e) {
+		} catch (UnsupportedNetworkElementFieldException e) {
 			e.printStackTrace();
 		}
 	}
@@ -159,7 +159,7 @@ public class ISPScenario2DPortrayal extends ComplexScenario2DPortrayal {
 
 	private class ScenarioID extends Device {
 		public ScenarioID(String id, String initialState, boolean isGateway)
-				throws UnsupportedNetworkElementStatusException {
+				throws UnsupportedNetworkElementFieldException {
 			super(id, initialState, isGateway);
 		}
 
@@ -169,12 +169,12 @@ public class ISPScenario2DPortrayal extends ComplexScenario2DPortrayal {
 
 		@Override
 		public void checkProperties()
-				throws UnsupportedNetworkElementStatusException {
+				throws UnsupportedNetworkElementFieldException {
 		}
 
 		@Override
 		public void checkStatus()
-				throws UnsupportedNetworkElementStatusException {
+				throws UnsupportedNetworkElementFieldException {
 		}
 
 		@Override

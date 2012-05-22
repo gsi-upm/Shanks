@@ -2,7 +2,7 @@ package es.upm.dit.gsi.shanks.workerroom.model.element.link;
 
 import java.util.HashMap;
 
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 
 
@@ -23,14 +23,14 @@ public class EthernetLink extends Link{
 	
 
 	public EthernetLink(String id, String initialState, int capacity)
-			throws UnsupportedNetworkElementStatusException {
+			throws UnsupportedNetworkElementFieldException {
 		super(id, initialState, capacity);
 	}
 
 
 	@Override
 	public void checkProperties()
-			throws UnsupportedNetworkElementStatusException {
+			throws UnsupportedNetworkElementFieldException {
 		HashMap<String, Boolean> status = this.getStatus();
 		if(status.get(STATUS_OK)){
 			this.updatePropertyTo(EthernetLink.PROPERTY_LENGTH, 1.0);
@@ -45,7 +45,7 @@ public class EthernetLink extends Link{
 	}
 
 	@Override
-	public void checkStatus() throws UnsupportedNetworkElementStatusException {
+	public void checkStatus() throws UnsupportedNetworkElementFieldException {
 		Double packetLoss = (Double) this.getProperty(EthernetLink.PROPERTY_PACKETLOSSRATIO);
 		if(packetLoss > 0.1 && packetLoss < 0.5){
 			this.updateStatusTo(STATUS_DAMAGED, true);

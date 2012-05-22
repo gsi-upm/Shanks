@@ -2,7 +2,7 @@ package es.upm.dit.gsi.shanks.model.element.link.test;
 
 import java.util.HashMap;
 
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 
 /**
@@ -21,9 +21,9 @@ public class MyLink extends Link {
      * @param id
      * @param initialState
      * @param capacity
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      */
-    public MyLink(String id, String initialState, int capacity) throws UnsupportedNetworkElementStatusException {
+    public MyLink(String id, String initialState, int capacity) throws UnsupportedNetworkElementFieldException {
         super(id, initialState, capacity);
     }
 
@@ -40,7 +40,7 @@ public class MyLink extends Link {
      * @see es.upm.dit.gsi.shanks.model.element.NetworkElement#checkProperties()
      */
     @Override
-    public void checkProperties() throws UnsupportedNetworkElementStatusException {
+    public void checkProperties() throws UnsupportedNetworkElementFieldException {
         HashMap<String, Boolean> status = this.getStatus();
         if (status.get(MyLink.BROKEN_STATUS)) {
             this.changeProperty(MyLink.DISTANCE_PROPERTY, 0.0);
@@ -62,7 +62,7 @@ public class MyLink extends Link {
      * @see es.upm.dit.gsi.shanks.model.element.NetworkElement#checkStatus()
      */
     @Override
-    public void checkStatus() throws UnsupportedNetworkElementStatusException {
+    public void checkStatus() throws UnsupportedNetworkElementFieldException {
         Double distance = (Double) this.getProperty(MyLink.DISTANCE_PROPERTY);
         if (distance>0){
             this.updateStatusTo(MyLink.BROKEN_STATUS, false);

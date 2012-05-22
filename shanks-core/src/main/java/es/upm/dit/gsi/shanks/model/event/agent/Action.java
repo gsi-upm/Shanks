@@ -6,7 +6,7 @@ import java.util.List;
 
 import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.event.OneShotEvent;
 
 public abstract class Action extends OneShotEvent{
@@ -29,7 +29,7 @@ public abstract class Action extends OneShotEvent{
     
     public abstract void addPossibleAffected();
     
-    public void changeStatus() throws UnsupportedNetworkElementStatusException{
+    public void changeStatus() throws UnsupportedNetworkElementFieldException{
         List<? extends NetworkElement> elements = this.affectedElements;
 
         for(NetworkElement el : elements){
@@ -45,7 +45,7 @@ public abstract class Action extends OneShotEvent{
         }
     }
     
-    public void changeProperties() throws UnsupportedNetworkElementStatusException{
+    public void changeProperties() throws UnsupportedNetworkElementFieldException{
         List<? extends NetworkElement> elements = this.affectedElements;
         for(NetworkElement el : elements){
             for(Class<?> c : possibleAffected.keySet()){

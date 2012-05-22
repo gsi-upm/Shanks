@@ -25,7 +25,7 @@ import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.event.agent.Action;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
@@ -75,7 +75,7 @@ public class SimpleActionTest {
     }
     
     @Test
-    public void createActionAndNoExecuteAction() throws UnsupportedNetworkElementStatusException{
+    public void createActionAndNoExecuteAction() throws UnsupportedNetworkElementFieldException{
         @SuppressWarnings("serial")
         Steppable launcher = new Steppable() {
             @Override
@@ -97,7 +97,7 @@ public class SimpleActionTest {
     }
     
     @Test
-    public void createActionAndExecuteAction() throws UnsupportedNetworkElementStatusException, UnsupportedScenarioStatusException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException, TooManyConnectionException, DuplicatedIDException, DuplicatedPortrayalIDException, ScenarioNotFoundException, DuplicatedAgentIDException, DuplicatedActionIDException{
+    public void createActionAndExecuteAction() throws UnsupportedNetworkElementFieldException, UnsupportedScenarioStatusException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException, TooManyConnectionException, DuplicatedIDException, DuplicatedPortrayalIDException, ScenarioNotFoundException, DuplicatedAgentIDException, DuplicatedActionIDException{
         @SuppressWarnings("serial")
         Steppable launcher = new Steppable() {
             @Override

@@ -12,7 +12,7 @@ import es.upm.dit.gsi.shanks.datacenter.model.scenario.DataCenterScenario;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
@@ -43,7 +43,7 @@ public class EnterpriseScenario extends ComplexScenario{
 
 	public EnterpriseScenario(String type, String initialState,
 			Properties properties)
-			throws UnsupportedNetworkElementStatusException,
+			throws UnsupportedNetworkElementFieldException,
 			TooManyConnectionException, UnsupportedScenarioStatusException,
 			DuplicatedIDException, NonGatewayDeviceException,
 			AlreadyConnectedScenarioException, SecurityException,
@@ -54,7 +54,7 @@ public class EnterpriseScenario extends ComplexScenario{
 	}
 
 	@Override
-	public void addScenarios() throws UnsupportedNetworkElementStatusException,
+	public void addScenarios() throws UnsupportedNetworkElementFieldException,
 			TooManyConnectionException, UnsupportedScenarioStatusException,
 			DuplicatedIDException, NonGatewayDeviceException,
 			AlreadyConnectedScenarioException, SecurityException,
@@ -92,7 +92,7 @@ public class EnterpriseScenario extends ComplexScenario{
 
 	@Override
 	public void addNetworkElements()
-			throws UnsupportedNetworkElementStatusException,
+			throws UnsupportedNetworkElementFieldException,
 			TooManyConnectionException, DuplicatedIDException {
 
 		// Adding the Enterprise DCRouter.

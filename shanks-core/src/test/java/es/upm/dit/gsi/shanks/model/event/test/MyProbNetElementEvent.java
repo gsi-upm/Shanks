@@ -2,6 +2,7 @@ package es.upm.dit.gsi.shanks.model.event.test;
 
 import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.event.networkelement.ProbabilisticNetworkElementEvent;
 
 public class MyProbNetElementEvent extends ProbabilisticNetworkElementEvent{
@@ -13,12 +14,19 @@ public class MyProbNetElementEvent extends ProbabilisticNetworkElementEvent{
 
     @Override
     public void addPossibleAffected() {
-        this.addPossibleAffectedProperties(MyDevice.class, MyDevice.TEMPERATURE_PROPERTY, 80);
+        this.addPossibleAffectedElementProperty(MyDevice.class, MyDevice.TEMPERATURE_PROPERTY, 80);
         
     }
 
     @Override
     public void interactWithNE() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void changeOtherFields()
+            throws UnsupportedNetworkElementFieldException {
         // TODO Auto-generated method stub
         
     }

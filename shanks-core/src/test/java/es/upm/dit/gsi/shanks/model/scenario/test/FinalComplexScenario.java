@@ -12,7 +12,7 @@ import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
@@ -40,7 +40,7 @@ public class FinalComplexScenario extends ComplexScenario {
 
     public FinalComplexScenario(String type, String initialState,
             Properties properties)
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException, NonGatewayDeviceException,
             AlreadyConnectedScenarioException, SecurityException,
@@ -54,7 +54,7 @@ public class FinalComplexScenario extends ComplexScenario {
      * @see es.upm.dit.gsi.shanks.model.scenario.ComplexScenario#addScenarios()
      */
     @Override
-    public void addScenarios() throws UnsupportedNetworkElementStatusException,
+    public void addScenarios() throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException, NonGatewayDeviceException,
             AlreadyConnectedScenarioException, SecurityException,
@@ -104,7 +104,7 @@ public class FinalComplexScenario extends ComplexScenario {
      */
     @Override
     public void addNetworkElements()
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException, DuplicatedIDException {
         Link fel1 = new MyLink("FEL1", MyLink.OK_STATUS, 2);
         Link fel2 = new MyLink("FEL2", MyLink.OK_STATUS, 2);
@@ -210,7 +210,7 @@ public class FinalComplexScenario extends ComplexScenario {
      * @throws InstantiationException
      * @throws IllegalAccessException
      * @throws InvocationTargetException
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      * @throws TooManyConnectionException
      * @throws UnsupportedScenarioStatusException
      * @throws DuplicatedIDException
@@ -223,7 +223,7 @@ public class FinalComplexScenario extends ComplexScenario {
             IllegalArgumentException, NoSuchMethodException,
             InstantiationException, IllegalAccessException,
             InvocationTargetException,
-            UnsupportedNetworkElementStatusException,
+            UnsupportedNetworkElementFieldException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException, DuplicatedPortrayalIDException, ScenarioNotFoundException, DuplicatedAgentIDException, DuplicatedActionIDException {
 

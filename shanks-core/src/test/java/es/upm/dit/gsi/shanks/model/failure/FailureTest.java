@@ -13,7 +13,7 @@ import org.junit.Test;
 
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
 import es.upm.dit.gsi.shanks.model.failure.exception.UnsupportedElementInFailureException;
@@ -54,11 +54,11 @@ public class FailureTest {
     
     
     /**
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      * @throws UnsupportedElementInFailureException 
      */
     @Test
-    public void createFailureAndChangeStatus() throws UnsupportedNetworkElementStatusException,
+    public void createFailureAndChangeStatus() throws UnsupportedNetworkElementFieldException,
             UnsupportedElementInFailureException{
           Failure f = new MyFailure();
           
@@ -72,10 +72,10 @@ public class FailureTest {
     }
     
     /**
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      */
     @Test
-    public void createFailureAndNoActiveIt() throws UnsupportedNetworkElementStatusException {
+    public void createFailureAndNoActiveIt() throws UnsupportedNetworkElementFieldException {
         Failure f = new MyFailure();
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         f.addPossibleAffectedElements();
@@ -86,11 +86,11 @@ public class FailureTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      * @throws UnsupportedElementInFailureException 
      */
     @Test
-    public void createFailureAndActiveIt() throws UnsupportedNetworkElementStatusException, UnsupportedElementInFailureException {
+    public void createFailureAndActiveIt() throws UnsupportedNetworkElementFieldException, UnsupportedElementInFailureException {
         Failure f = new MyFailure();
         
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
@@ -106,10 +106,10 @@ public class FailureTest {
     }
 
 //    /**
-//     * @throws UnsupportedNetworkElementStatusException
+//     * @throws UnsupportedNetworkElementFieldException
 //     */
 //    @Test
-//    public void createFailureAndDeactiveIt() throws UnsupportedNetworkElementStatusException {
+//    public void createFailureAndDeactiveIt() throws UnsupportedNetworkElementFieldException {
 //        Failure f = new MyFailure();
 //        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
 //        try {
@@ -127,10 +127,10 @@ public class FailureTest {
 //    }
 //
     /**
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      */
     @Test
-    public void createFailureAndAddNonPossibleElement() throws UnsupportedNetworkElementStatusException {
+    public void createFailureAndAddNonPossibleElement() throws UnsupportedNetworkElementFieldException {
         Failure f = new MyFailure();
         Link l = new MyLink("L1", MyLink.OK_STATUS, 3);
         f.removePossibleAffectedElements(MyLink.class);
@@ -145,10 +145,10 @@ public class FailureTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      */
     @Test
-    public void createFailureAndResolveIt() throws UnsupportedNetworkElementStatusException {
+    public void createFailureAndResolveIt() throws UnsupportedNetworkElementFieldException {
         Failure f = new MyFailure();
         Link l = new MyLink("L1", MyLink.OK_STATUS, 3);
         try {
@@ -161,14 +161,14 @@ public class FailureTest {
         } catch (UnsupportedElementInFailureException e) {
             e.printStackTrace();
             Assert.fail();
-        } catch (UnsupportedNetworkElementStatusException e) {
+        } catch (UnsupportedNetworkElementFieldException e) {
             e.printStackTrace();
             Assert.fail();
         }
     }
     
     @Test
-    public void createFailureandChangeProperties() throws UnsupportedNetworkElementStatusException, UnsupportedElementInFailureException{
+    public void createFailureandChangeProperties() throws UnsupportedNetworkElementFieldException, UnsupportedElementInFailureException{
         Failure f = new MyFailure();
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         try{

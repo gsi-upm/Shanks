@@ -12,7 +12,7 @@ import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
 import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
@@ -44,7 +44,7 @@ public class WorkerRoomScenario extends Scenario {
 
 	public WorkerRoomScenario(String id, String initialState,
 			Properties properties)
-			throws UnsupportedNetworkElementStatusException,
+			throws UnsupportedNetworkElementFieldException,
 			TooManyConnectionException, UnsupportedScenarioStatusException,
 			DuplicatedIDException {
 		super(id, initialState, properties);
@@ -52,7 +52,7 @@ public class WorkerRoomScenario extends Scenario {
 
 	@Override
 	public void addNetworkElements()
-			throws UnsupportedNetworkElementStatusException,
+			throws UnsupportedNetworkElementFieldException,
 			TooManyConnectionException, DuplicatedIDException {
 
 		// Worker_room router
@@ -137,7 +137,7 @@ public class WorkerRoomScenario extends Scenario {
 			IllegalArgumentException, NoSuchMethodException,
 			InstantiationException, IllegalAccessException,
 			InvocationTargetException,
-			UnsupportedNetworkElementStatusException,
+			UnsupportedNetworkElementFieldException,
 			TooManyConnectionException, UnsupportedScenarioStatusException,
 			DuplicatedIDException, DuplicatedPortrayalIDException,
 			ScenarioNotFoundException, DuplicatedAgentIDException,

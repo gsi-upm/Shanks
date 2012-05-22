@@ -1,6 +1,6 @@
 package es.upm.dit.gsi.shanks.workerroom.model.element.device;
 
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.RouterDNS;
 
 
@@ -14,7 +14,7 @@ import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.RouterDNS;
 public class LANRouter extends RouterDNS {
 
 	public LANRouter(String id)
-			throws UnsupportedNetworkElementStatusException {
+			throws UnsupportedNetworkElementFieldException {
 		super(id);
 	}
 }

@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 
 /**
  * Link class
@@ -30,9 +30,9 @@ public abstract class Link extends NetworkElement {
     /**
      * @param id
      * @param capacity
-     * @throws UnsupportedNetworkElementStatusException 
+     * @throws UnsupportedNetworkElementFieldException 
      */
-    public Link(String id, String initialState, int capacity) throws UnsupportedNetworkElementStatusException {
+    public Link(String id, String initialState, int capacity) throws UnsupportedNetworkElementFieldException {
         super(id, initialState);
         this.deviceCapacity = capacity;
         this.linkedDevices = new ArrayList<Device>();

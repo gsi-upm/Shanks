@@ -17,7 +17,7 @@ import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
 import es.upm.dit.gsi.shanks.exception.UnkownAgentException;
 import es.upm.dit.gsi.shanks.model.ScenarioManager;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
@@ -64,7 +64,7 @@ public class ShanksSimulation extends SimState {
      * @throws InstantiationException
      * @throws IllegalAccessException
      * @throws InvocationTargetException
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      * @throws TooManyConnectionException
      * @throws UnsupportedScenarioStatusException
      * @throws DuplicatedIDException
@@ -78,7 +78,7 @@ public class ShanksSimulation extends SimState {
             throws SecurityException, IllegalArgumentException,
             NoSuchMethodException, InstantiationException,
             IllegalAccessException, InvocationTargetException,
-            UnsupportedNetworkElementStatusException,
+            UnsupportedNetworkElementFieldException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException, DuplicatedPortrayalIDException,
             ScenarioNotFoundException, DuplicatedAgentIDException,
@@ -110,7 +110,7 @@ public class ShanksSimulation extends SimState {
      * @throws DuplicatedIDException
      * @throws UnsupportedScenarioStatusException
      * @throws TooManyConnectionException
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      * @throws NoSuchMethodException
      * @throws SecurityException
      * @throws InvocationTargetException
@@ -123,7 +123,7 @@ public class ShanksSimulation extends SimState {
     private ScenarioManager createScenarioManager(
             Class<? extends Scenario> scenarioClass, String scenarioID,
             String initialState, Properties properties)
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException, SecurityException, NoSuchMethodException,
             IllegalArgumentException, InstantiationException,

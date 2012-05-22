@@ -15,7 +15,7 @@ import es.upm.dit.gsi.shanks.hackerhan.model.scenario.portrayal.HackerHanScenari
 import es.upm.dit.gsi.shanks.hackerhan.model.scenario.portrayal.HackerHanScenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
@@ -43,7 +43,7 @@ public class HackerHANScenario extends Scenario {
 	public static final String STATUS_ATTACKING = "Attacking";
 	
 	public HackerHANScenario(String id, String initialState, Properties properties)
-			throws UnsupportedNetworkElementStatusException,
+			throws UnsupportedNetworkElementFieldException,
 			TooManyConnectionException, UnsupportedScenarioStatusException,
 			DuplicatedIDException {
 		super(id, initialState, properties);
@@ -56,7 +56,7 @@ public class HackerHANScenario extends Scenario {
 	 */
 	@Override
 	public void addNetworkElements()
-			throws UnsupportedNetworkElementStatusException,
+			throws UnsupportedNetworkElementFieldException,
 			TooManyConnectionException, DuplicatedIDException {
 		
 		Computer computer = new Computer(Values.COMPUTER_ID);

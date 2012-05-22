@@ -1,6 +1,6 @@
 package es.upm.dit.gsi.shanks.shanks_isp_module.model.element.link;
 
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 
 public class CupperLink extends Link{
@@ -12,7 +12,7 @@ public class CupperLink extends Link{
 	public static final String PROPERTY_PACKETLOSTRATIO = "Packet Lost Ratio";
 	
 	public CupperLink(String id, String initialState, int capacity)
-			throws UnsupportedNetworkElementStatusException {
+			throws UnsupportedNetworkElementFieldException {
 		super(id, initialState, capacity);
 		
 	}
@@ -25,13 +25,13 @@ public class CupperLink extends Link{
 
 	@Override
 	public void checkProperties()
-			throws UnsupportedNetworkElementStatusException {
+			throws UnsupportedNetworkElementFieldException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void checkStatus() throws UnsupportedNetworkElementStatusException {
+	public void checkStatus() throws UnsupportedNetworkElementFieldException {
 		// TODO Auto-generated method stub
 		
 	}

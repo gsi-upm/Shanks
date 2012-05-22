@@ -6,7 +6,7 @@ import java.util.List;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.SimpleShanksAgent;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 import es.upm.dit.gsi.shanks.workerroom.agent.action.RepairWire;
 import es.upm.dit.gsi.shanks.workerroom.model.Values;
@@ -44,7 +44,7 @@ public class RepairWireAgent extends SimpleShanksAgent{
         			if(linksDamaged.size() > 3){
         			try {
 						repair.executeAction(simulation, this, linksDamaged);
-					} catch (UnsupportedNetworkElementStatusException e1) {
+					} catch (UnsupportedNetworkElementFieldException e1) {
 						e1.printStackTrace();
 					} catch (UnsupportedScenarioStatusException e1) {
 						e1.printStackTrace();
@@ -54,7 +54,7 @@ public class RepairWireAgent extends SimpleShanksAgent{
         		}
         		try {
     				e.checkStatus();
-                	} catch (UnsupportedNetworkElementStatusException e1) {
+                	} catch (UnsupportedNetworkElementFieldException e1) {
     				e1.printStackTrace();
     				}
         		}

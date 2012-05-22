@@ -3,7 +3,7 @@ package es.upm.dit.gsi.shanks.workerroom.model.element.device;
 import java.util.HashMap;
 
 import es.upm.dit.gsi.shanks.model.element.device.Device;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 
 /**
  * Class that represent a printer
@@ -30,14 +30,14 @@ public class Printer extends Device{
 	
 	
 	public Printer(String id, String initialState, boolean isGateway)
-			throws UnsupportedNetworkElementStatusException {
+			throws UnsupportedNetworkElementFieldException {
 		super(id, initialState, isGateway);
 	}
 	
 	
 	@Override
 	public void checkProperties()
-			throws UnsupportedNetworkElementStatusException {
+			throws UnsupportedNetworkElementFieldException {
 		Integer paper = (Integer) this.getProperty(Printer.PROPERTY_PAPER);
 		Double ink = (Double) this.getProperty(Printer.PROPERTY_INK);
 		Boolean ethernet = (Boolean) this.getProperty(Printer.PROPERTY_ETHERNET_CONNECTION);
@@ -80,7 +80,7 @@ public class Printer extends Device{
 	}
 
 	@Override
-	public void checkStatus() throws UnsupportedNetworkElementStatusException {	
+	public void checkStatus() throws UnsupportedNetworkElementFieldException {	
 		HashMap<String, Boolean> status = this.getStatus();
 		if(status.get(Printer.STATUS_OK)){
 			this.updatePropertyTo(Printer.PROPERTY_ETHERNET_CONNECTION, true);
@@ -135,11 +135,11 @@ public class Printer extends Device{
 		return (Double) this.getProperty(PROPERTY_INK);
 	}
 	
-	public void setInkLevel(double ink) throws UnsupportedNetworkElementStatusException{
+	public void setInkLevel(double ink) throws UnsupportedNetworkElementFieldException{
 		this.updatePropertyTo(PROPERTY_INK, ink);
 	}
 	
-	public void decreaseInk(double percentaje) throws UnsupportedNetworkElementStatusException{
+	public void decreaseInk(double percentaje) throws UnsupportedNetworkElementFieldException{
 		double newInk = this.getInkLevel() - percentaje;
 		this.setInkLevel(newInk);
 	}
@@ -148,11 +148,11 @@ public class Printer extends Device{
 		return (Integer) this.getProperty(PROPERTY_PAPER);
 	}
 	
-	public void setPaperLevel(double paper) throws UnsupportedNetworkElementStatusException{
+	public void setPaperLevel(double paper) throws UnsupportedNetworkElementFieldException{
 		this.updatePropertyTo(PROPERTY_PAPER, paper);
 	}
 	
-	public void decreasePaper(double paper) throws UnsupportedNetworkElementStatusException{
+	public void decreasePaper(double paper) throws UnsupportedNetworkElementFieldException{
 		double newPaper = this.getPaperLevel() - paper;
 		this.setPaperLevel(newPaper);
 	}

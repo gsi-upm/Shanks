@@ -3,7 +3,7 @@ package es.upm.dit.gsi.shanks.shanks_isp_module.model.element.device;
 import java.util.HashMap;
 import java.util.Set;
 
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.networkattacks.util.networkelements.RouterDNS;
@@ -14,7 +14,7 @@ public class ISPGateway extends RouterDNS{
 	private HashMap<Scenario, Boolean> connections;
 
 	public ISPGateway(String id)
-			throws UnsupportedNetworkElementStatusException {
+			throws UnsupportedNetworkElementFieldException {
 		super(id);
 		this.connections = new HashMap<Scenario, Boolean>();
 	}

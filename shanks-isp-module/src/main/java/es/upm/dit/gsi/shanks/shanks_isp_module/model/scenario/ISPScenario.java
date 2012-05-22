@@ -13,7 +13,7 @@ import es.upm.dit.gsi.shanks.hackerhan.model.scenario.HackerHANScenario;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device2DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.failure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
@@ -38,7 +38,7 @@ public class ISPScenario extends ComplexScenario {
 	public static final String STATUS_UNDER_ATTACK = "UnderAttack";
 
 	public ISPScenario(String type, String initialState, Properties properties)
-			throws UnsupportedNetworkElementStatusException,
+			throws UnsupportedNetworkElementFieldException,
 			TooManyConnectionException, UnsupportedScenarioStatusException,
 			DuplicatedIDException, NonGatewayDeviceException,
 			AlreadyConnectedScenarioException, SecurityException,
@@ -49,7 +49,7 @@ public class ISPScenario extends ComplexScenario {
 	}
 
 	@Override
-	public void addScenarios() throws UnsupportedNetworkElementStatusException,
+	public void addScenarios() throws UnsupportedNetworkElementFieldException,
 			TooManyConnectionException, UnsupportedScenarioStatusException,
 			DuplicatedIDException, NonGatewayDeviceException,
 			AlreadyConnectedScenarioException, SecurityException,
@@ -90,7 +90,7 @@ public class ISPScenario extends ComplexScenario {
 
 	@Override
 	public void addNetworkElements()
-			throws UnsupportedNetworkElementStatusException,
+			throws UnsupportedNetworkElementFieldException,
 			TooManyConnectionException, DuplicatedIDException {
 
 		// Adding the ISP router

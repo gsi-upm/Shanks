@@ -6,13 +6,13 @@ import java.util.List;
 
 import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.event.PeriodicEvent;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 
 public abstract class PeriodicNetworkElementEvent extends PeriodicEvent{
     
-    private List<NetworkElement> affectedElements;
+    protected List<NetworkElement> affectedElements;
     private HashMap<Class<? extends NetworkElement>, HashMap<String, Object>> possibleAffected;
     private HashMap<String, Object> properties;
     private HashMap<String, Object> status;
@@ -37,7 +37,7 @@ public abstract class PeriodicNetworkElementEvent extends PeriodicEvent{
         
 
     @Override
-    public void changeProperties() throws UnsupportedNetworkElementStatusException {
+    public void changeProperties() throws UnsupportedNetworkElementFieldException {
         List<? extends NetworkElement> elements = this.affectedElements;
         for(NetworkElement el : elements){
             for(Class<?> c : possibleAffected.keySet()){
@@ -53,7 +53,7 @@ public abstract class PeriodicNetworkElementEvent extends PeriodicEvent{
         
     }
 
-    public void changeStatus() throws UnsupportedNetworkElementStatusException {
+    public void changeStatus() throws UnsupportedNetworkElementFieldException {
         List<? extends NetworkElement> elements = this.affectedElements;
         for(NetworkElement el : elements){
             for(Class<?> c : possibleAffected.keySet()){

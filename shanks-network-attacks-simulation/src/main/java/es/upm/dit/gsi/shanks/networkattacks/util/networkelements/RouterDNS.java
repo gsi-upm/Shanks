@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.networkattacks.util.Values;
 import es.upm.dit.gsi.shanks.networkattacks.util.notifications.DNSConsult;
@@ -30,7 +30,7 @@ public class RouterDNS extends Device{
 	public static final String PROPERTY_VULNERABILITY = "Vulnerability";
 	
 	public RouterDNS(String id)
-			throws UnsupportedNetworkElementStatusException {
+			throws UnsupportedNetworkElementFieldException {
 		super(id, RouterDNS.STATUS_OK, true);
 	}	
 
@@ -51,7 +51,7 @@ public class RouterDNS extends Device{
 	 */
 	@Override
 	public void checkProperties()
-			throws UnsupportedNetworkElementStatusException {
+			throws UnsupportedNetworkElementFieldException {
         HashMap<String, Boolean> status = this.getStatus();
 		if (status.get(RouterDNS.STATUS_OFF)) {
 			this.shutdown();
@@ -76,7 +76,7 @@ public class RouterDNS extends Device{
 	 * @see es.upm.dit.gsi.shanks.model.element.NetworkElement#checkStatus()
 	 */
 	@Override
-	public void checkStatus() throws UnsupportedNetworkElementStatusException {
+	public void checkStatus() throws UnsupportedNetworkElementFieldException {
 		String power = (String) this.getProperty(RouterDNS.PROPERTY_POWER);
 		String cStatus = (String) this.getProperty(RouterDNS.PROPERTY_CONNECTION);
 		double congestion = (Double) this.getProperty(RouterDNS.PROPERTY_CONGESTION);
@@ -128,9 +128,9 @@ public class RouterDNS extends Device{
 	/**
 	 * Accessory method that configures the device on shut down state. 
 	 * 
-	 * @throws UnsupportedNetworkElementStatusException
+	 * @throws UnsupportedNetworkElementFieldException
 	 */
-	private void shutdown() throws UnsupportedNetworkElementStatusException {
+	private void shutdown() throws UnsupportedNetworkElementFieldException {
 		this.updatePropertyTo(RouterDNS.PROPERTY_POWER, Values.OFF);
 		this.updatePropertyTo(RouterDNS.PROPERTY_CONNECTION, Values.DISCONNECTED);
 		this.updatePropertyTo(RouterDNS.PROPERTY_CONGESTION, 0);

@@ -16,7 +16,7 @@ import org.junit.Test;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementStatusException;
+import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
 
@@ -52,10 +52,10 @@ public class NetworkElementTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      */
     @Test
-    public void createDevice() throws UnsupportedNetworkElementStatusException {
+    public void createDevice() throws UnsupportedNetworkElementFieldException {
 
         
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
@@ -69,11 +69,11 @@ public class NetworkElementTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      */
     @Test
     public void createDeviceAndCheckInitialStatus()
-            throws UnsupportedNetworkElementStatusException {
+            throws UnsupportedNetworkElementFieldException {
         
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         Assert.assertEquals("MyDevice", d.getID());
@@ -88,11 +88,11 @@ public class NetworkElementTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      */
     @Test
     public void createDeviceAndCheckChangedStatus()
-            throws UnsupportedNetworkElementStatusException {
+            throws UnsupportedNetworkElementFieldException {
         
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         Assert.assertEquals("MyDevice", d.getID());
@@ -116,11 +116,11 @@ public class NetworkElementTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      */
     @Test
     public void createDeviceAndCheckChangedStatusAndChangedProperty()
-            throws UnsupportedNetworkElementStatusException {
+            throws UnsupportedNetworkElementFieldException {
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         Assert.assertEquals("MyDevice", d.getID());
         Assert.assertTrue(d.getStatus().keySet().contains(MyDevice.OK_STATUS));
@@ -148,11 +148,11 @@ public class NetworkElementTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      */
     @Test
     public void createGatewayDevice()
-            throws UnsupportedNetworkElementStatusException {
+            throws UnsupportedNetworkElementFieldException {
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, true);
         Assert.assertEquals("MyDevice", d.getID());
         Assert.assertTrue(d.getStatus().keySet().contains(MyDevice.OK_STATUS));
@@ -162,16 +162,16 @@ public class NetworkElementTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      */
     @Test
     public void createDeviceChangeStatus()
-            throws UnsupportedNetworkElementStatusException {
+            throws UnsupportedNetworkElementFieldException {
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         try {
             d.setCurrentStatus(MyDevice.NOK_STATUS, false);
             d.setCurrentStatus(MyDevice.OK_STATUS, true);
-        } catch (UnsupportedNetworkElementStatusException e) {
+        } catch (UnsupportedNetworkElementFieldException e) {
             e.printStackTrace();
             Assert.fail();
         }
@@ -180,27 +180,27 @@ public class NetworkElementTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      */
     @Test
     public void createDeviceChangeToImpossibleStatus()
-            throws UnsupportedNetworkElementStatusException {
+            throws UnsupportedNetworkElementFieldException {
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         boolean catched = false;
         try {
             d.updateStatusTo("WrongStatus", true);
-        } catch (UnsupportedNetworkElementStatusException e) {
+        } catch (UnsupportedNetworkElementFieldException e) {
             catched = true;
         }
         Assert.assertTrue(catched);
     }
 
     /**
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      */
     @Test
     public void PorpertiesNetworkElement()
-            throws UnsupportedNetworkElementStatusException {
+            throws UnsupportedNetworkElementFieldException {
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         d.addProperty("friendDevice", d2);
@@ -208,11 +208,11 @@ public class NetworkElementTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      */
     @Test
     public void FullPorpertiesNetworkElement()
-            throws UnsupportedNetworkElementStatusException {
+            throws UnsupportedNetworkElementFieldException {
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         HashMap<String, Object> properties = new HashMap<String, Object>();
@@ -225,7 +225,7 @@ public class NetworkElementTest {
 
     @Test
     public void updateProperties() 
-            throws UnsupportedNetworkElementStatusException{
+            throws UnsupportedNetworkElementFieldException{
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         Assert.assertEquals(15.5, d.getProperty(MyDevice.TEMPERATURE_PROPERTY));
         d.updatePropertyTo(MyDevice.TEMPERATURE_PROPERTY, 70);
@@ -241,12 +241,12 @@ public class NetworkElementTest {
     }
     
     /**
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      * @throws TooManyConnectionException
      */
     @Test
     public void connect2DevicesToLink()
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException {
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
@@ -269,12 +269,12 @@ public class NetworkElementTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      * @throws TooManyConnectionException
      */
     @Test
     public void connect2DevicesToLinkInOneMethod()
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException {
         Device d1 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
@@ -297,12 +297,12 @@ public class NetworkElementTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      * @throws TooManyConnectionException
      */
     @Test
     public void connect2DevicesToLinkInOneMethodInFullLink()
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException {
         Device d1 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
@@ -319,12 +319,12 @@ public class NetworkElementTest {
     }
     
     /**
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      * @throws TooManyConnectionException
      */
     @Test
     public void disconnectDeviceFromLink()
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException {
         Device d1 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
@@ -349,12 +349,12 @@ public class NetworkElementTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      * @throws TooManyConnectionException
      */
     @Test
     public void disconnectLinkFromDevice()
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException {
         Device d1 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
@@ -379,12 +379,12 @@ public class NetworkElementTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      * @throws TooManyConnectionException
      */
     @Test
     public void disconnectLinkFromDeviceAndViceversa()
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException {
         Device d1 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
@@ -410,12 +410,12 @@ public class NetworkElementTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementStatusException
+     * @throws UnsupportedNetworkElementFieldException
      * @throws TooManyConnectionException
      */
     @Test
     public void connectDeviceToFullLink()
-            throws UnsupportedNetworkElementStatusException,
+            throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException {
         Device d1 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);

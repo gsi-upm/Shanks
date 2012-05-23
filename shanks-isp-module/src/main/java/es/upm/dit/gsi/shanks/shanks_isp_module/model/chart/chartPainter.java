@@ -26,9 +26,9 @@ public class chartPainter implements Steppable{
 			for(ShanksAgent agent : agents){
 				if(agent instanceof Hacker){
 					Hacker hacker = (Hacker) agent;
-					scenarioPortrayal.addDataToDataSerieInTimeChart(Values.DDOS_NUMBER, hacker.getID(), simulation.schedule.getSteps(), hacker.getNumberOfDDoSAttacks());
-					scenarioPortrayal.addDataToDataSerieInTimeChart(Values.ROOT_NUMBER, hacker.getID(), simulation.schedule.getSteps(), hacker.getNumberOfRootAttacks());
-					scenarioPortrayal.addDataToDataSerieInTimeChart(Values.SQL_NUMBER, hacker.getID(), simulation.schedule.getSteps(), hacker.getNumberOfSQLAttacks());
+					scenarioPortrayal.addDataToDataSerieInTimeChart(Values.DDOS_NUMBER, hacker.getID(), simulation.schedule.getSteps(), Hacker.getNumberOfDDoSAttacks());
+					scenarioPortrayal.addDataToDataSerieInTimeChart(Values.ROOT_NUMBER, hacker.getID(), simulation.schedule.getSteps(), Hacker.getNumberOfRootAttacks());
+					scenarioPortrayal.addDataToDataSerieInTimeChart(Values.SQL_NUMBER, hacker.getID(), simulation.schedule.getSteps(), Hacker.getNumberOfSQLAttacks());
 				
 				}
 			}

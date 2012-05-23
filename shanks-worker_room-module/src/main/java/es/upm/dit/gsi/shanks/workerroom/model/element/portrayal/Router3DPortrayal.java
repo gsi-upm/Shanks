@@ -28,5 +28,5 @@ public class Router3DPortrayal extends Device3DPortrayal{
         	return Color.red;
         }
 	}
-
+	private static final long serialVersionUID = -1936722614331257506L;
 }

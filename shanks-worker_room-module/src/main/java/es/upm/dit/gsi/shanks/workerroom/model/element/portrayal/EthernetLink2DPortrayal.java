@@ -15,11 +15,6 @@ import es.upm.dit.gsi.shanks.workerroom.model.element.link.EthernetLink;
 
 public class EthernetLink2DPortrayal extends Link2DPortrayal implements Portrayal{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3756523350135713540L;
-	
 	/* (non-Javadoc)
      * @see es.upm.dit.gsi.shanks.model.element.link.portrayal.Link2DPortrayal#draw(java.lang.Object, java.awt.Graphics2D, sim.portrayal.DrawInfo2D)
      */
@@ -38,7 +33,8 @@ public class EthernetLink2DPortrayal extends Link2DPortrayal implements Portraya
      * @param graphics
      * @param info
      */
-    private void drawComplexLink(Link link, Object object, Graphics2D graphics,
+    @SuppressWarnings("unused")
+	private void drawComplexLink(Link link, Object object, Graphics2D graphics,
             DrawInfo2D info) {
 
         EdgeDrawInfo2D ei = (EdgeDrawInfo2D) info;
@@ -91,7 +87,7 @@ public class EthernetLink2DPortrayal extends Link2DPortrayal implements Portraya
 
         graphics.setColor(Color.black);
         HashMap<String, Boolean> status = link.getStatus();
-        HashMap<String, Object> properties = link.getProperties();
+//        HashMap<String, Object> properties = link.getProperties();
         if (status.get(EthernetLink.STATUS_OK)) {
             graphics.setColor(Color.green);
         } else if (status.get(EthernetLink.STATUS_DAMAGED)) {
@@ -110,4 +106,5 @@ public class EthernetLink2DPortrayal extends Link2DPortrayal implements Portraya
         }
     }
 
+	private static final long serialVersionUID = -3756523350135713540L;
 }

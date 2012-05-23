@@ -29,4 +29,5 @@ public class Computer3DPortrayal extends Device3DPortrayal{
 	        }
 	}
 
+	private static final long serialVersionUID = 7847729008744423528L;
 }

@@ -18,7 +18,6 @@ import es.upm.dit.gsi.shanks.workerroom.agent.RepairWireAgent;
 public class EnterpriseSimulation extends ShanksSimulation{
 
 	private static final long serialVersionUID = 1778288778609950190L;
-    private Properties configuration;
 
     public static final String CONFIGURATION = "Configuration";
 	
@@ -35,7 +34,6 @@ public class EnterpriseSimulation extends ShanksSimulation{
 			ScenarioNotFoundException, DuplicatedAgentIDException,
 			DuplicatedActionIDException {
 		super(seed, scenarioClass, scenarioID, initialState, properties);
-		this.configuration = configPropertiesEnterpriseSimulation;
 	}
 	
 	public void registerShanksAgents() throws DuplicatedAgentIDException,

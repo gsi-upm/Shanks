@@ -29,7 +29,6 @@ public class Router2DPortrayal extends Device2DPortrayal implements Portrayal{
 
         HashMap<String, Boolean> status = device.getStatus();
         List<String> okStatus = new ArrayList<String>();
-        List<String> nokStatus = new ArrayList<String>();
         
         for(String s : status.keySet()){
             if(s.equals(Computer.STATUS_OK)){
@@ -61,4 +60,5 @@ public class Router2DPortrayal extends Device2DPortrayal implements Portrayal{
 
     }
 
+	private static final long serialVersionUID = 2537105053675002771L;
 }

@@ -33,7 +33,6 @@ public class Printer2DPortrayal extends Device2DPortrayal implements Portrayal{
 
         HashMap<String, Boolean> status = device.getStatus();
         List<String> okStatus = new ArrayList<String>();
-        List<String> nokStatus = new ArrayList<String>();
         
         for(String s : status.keySet()){
             if(s.equals(Computer.STATUS_OK)){

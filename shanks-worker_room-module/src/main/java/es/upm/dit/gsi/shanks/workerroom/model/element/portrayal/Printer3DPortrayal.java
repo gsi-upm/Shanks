@@ -29,4 +29,5 @@ public class Printer3DPortrayal extends Device3DPortrayal{
         }
 	}
 
+	private static final long serialVersionUID = 7192217228143784392L;
 }

@@ -9,9 +9,10 @@ import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.portrayal.Link3DPortrayal;
 import es.upm.dit.gsi.shanks.workerroom.model.element.link.EthernetLink;
 
+@SuppressWarnings("restriction")
 public class EthernetLink3DPortrayal extends Link3DPortrayal{
 
-	 /* (non-Javadoc)
+	/* (non-Javadoc)
      * @see es.upm.dit.gsi.shanks.model.element.link.portrayal.Link3DPortrayal#getModel(java.lang.Object, javax.media.j3d.TransformGroup)
      */
     @Override
@@ -40,5 +41,5 @@ public class EthernetLink3DPortrayal extends Link3DPortrayal{
         }
 	}
 
-	
+	private static final long serialVersionUID = 5912536626075582807L;	
 }

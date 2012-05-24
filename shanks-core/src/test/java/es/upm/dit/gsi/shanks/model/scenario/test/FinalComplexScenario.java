@@ -15,8 +15,8 @@ import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
-import es.upm.dit.gsi.shanks.model.failure.Failure;
-import es.upm.dit.gsi.shanks.model.failure.test.MyFailure;
+import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
+import es.upm.dit.gsi.shanks.model.failure.util.test.FailureTest;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.AlreadyConnectedScenarioException;
@@ -148,7 +148,7 @@ public class FinalComplexScenario extends ComplexScenario {
      */
     @Override
     public void addPossibleFailures() {
-        this.addPossibleFailure(MyFailure.class, this.getNetworkElement("FEL1"));
+        this.addPossibleFailure(FailureTest.class, this.getNetworkElement("FEL1"));
     }
 
     /* (non-Javadoc)
@@ -175,7 +175,7 @@ public class FinalComplexScenario extends ComplexScenario {
     private HashMap<Class<? extends Failure>, Double> getSunnyPenalties() {
         HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
 
-        penalties.put(MyFailure.class, 1.0);
+        penalties.put(FailureTest.class, 1.0);
 
         return penalties;
     }
@@ -186,7 +186,7 @@ public class FinalComplexScenario extends ComplexScenario {
     private HashMap<Class<? extends Failure>, Double> getEarthquakePenalties() {
         HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
 
-        penalties.put(MyFailure.class, 10.0);
+        penalties.put(FailureTest.class, 10.0);
 
         return penalties;
     }
@@ -197,7 +197,7 @@ public class FinalComplexScenario extends ComplexScenario {
     private HashMap<Class<? extends Failure>, Double> getStormPenalties() {
         HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
 
-        penalties.put(MyFailure.class, 3.0);
+        penalties.put(FailureTest.class, 3.0);
 
         return penalties;
     }

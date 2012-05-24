@@ -17,9 +17,9 @@ import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
+import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
 import es.upm.dit.gsi.shanks.model.event.test.MyProbNetElementEvent;
-import es.upm.dit.gsi.shanks.model.failure.Failure;
-import es.upm.dit.gsi.shanks.model.failure.test.MyFailure;
+import es.upm.dit.gsi.shanks.model.failure.util.test.FailureTest;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
@@ -106,7 +106,7 @@ public class MyScenario extends Scenario {
         Set<NetworkElement> seta = new HashSet<NetworkElement>();
         seta.add(this.getNetworkElement("D1"));
         seta.add(this.getNetworkElement("L1"));
-        this.addPossibleFailure(MyFailure.class, seta);
+        this.addPossibleFailure(FailureTest.class, seta);
         Set<NetworkElement> set = new HashSet<NetworkElement>();
         set.add(this.getNetworkElement("D1"));
         set.add(this.getNetworkElement("L1"));
@@ -120,7 +120,7 @@ public class MyScenario extends Scenario {
         possibleCombinations.add(set);
         possibleCombinations.add(set2);
         possibleCombinations.add(set3);
-        this.addPossibleFailure(MyFailure.class, possibleCombinations);
+        this.addPossibleFailure(FailureTest.class, possibleCombinations);
     }
     
     @Override
@@ -184,7 +184,7 @@ public class MyScenario extends Scenario {
     private HashMap<Class<? extends Failure>, Double> getSunnyPenalties() {
         HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
 
-        penalties.put(MyFailure.class, 1.0);
+        penalties.put(FailureTest.class, 1.0);
 
         return penalties;
     }
@@ -196,7 +196,7 @@ public class MyScenario extends Scenario {
         HashMap<Class<? extends Failure>, Double> penalties = new HashMap<Class<? extends Failure>, Double>();
         String probs = (String) this.getProperty(MyScenario.CLOUDY_PROB);
         double prob = new Double(probs);
-        penalties.put(MyFailure.class, prob);
+        penalties.put(FailureTest.class, prob);
 
         return penalties;
     }

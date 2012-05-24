@@ -14,7 +14,7 @@ import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.JasonShanksAgent;
 import es.upm.dit.gsi.shanks.agent.action.test.MyJasonShanksAgentAction;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
-import es.upm.dit.gsi.shanks.model.failure.Failure;
+import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
 
 public class MyJasonShanksAgent extends JasonShanksAgent {
 

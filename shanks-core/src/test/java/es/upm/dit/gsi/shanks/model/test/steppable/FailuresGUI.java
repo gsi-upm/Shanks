@@ -13,7 +13,7 @@ import sim.portrayal.grid.SparseGridPortrayal2D;
 import sim.portrayal3d.continuous.ContinuousPortrayal3D;
 import sim.util.Double3D;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
-import es.upm.dit.gsi.shanks.model.failure.Failure;
+import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
@@ -24,11 +24,6 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyHyperComplexScenari
  *
  */
 public class FailuresGUI implements Steppable {
-
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -929835696282793943L;
 
     @Override
     public void step(SimState sim) {
@@ -83,4 +78,6 @@ public class FailuresGUI implements Steppable {
             }
         }
     }
+    
+    private static final long serialVersionUID = -929835696282793943L;
 }

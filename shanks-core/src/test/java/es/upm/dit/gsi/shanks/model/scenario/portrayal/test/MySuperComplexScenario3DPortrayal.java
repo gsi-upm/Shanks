@@ -9,8 +9,8 @@ import es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice3DPortr
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.portrayal.test.MyLink3DPortrayal;
-import es.upm.dit.gsi.shanks.model.failure.portrayal.Failure3DPortrayal;
-import es.upm.dit.gsi.shanks.model.failure.test.MyFailure;
+import es.upm.dit.gsi.shanks.model.event.failiure.portrayal.Failure3DPortrayal;
+import es.upm.dit.gsi.shanks.model.failure.util.test.FailureTest;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
@@ -73,7 +73,7 @@ public class MySuperComplexScenario3DPortrayal extends
         ContinuousPortrayal3D failuresPortrayal = (ContinuousPortrayal3D) this.getPortrayals().get(MyHyperComplexScenario2DPortrayal.FAILURE_DISPLAY_ID).get(MyHyperComplexScenario2DPortrayal.FAILURE_PORTRAYAL_ID);
         devicePortrayal.setPortrayalForClass(MyDevice.class, new MyDevice3DPortrayal());
         networkPortrayal.setPortrayalForAll(new MyLink3DPortrayal());
-        failuresPortrayal.setPortrayalForClass(MyFailure.class, new Failure3DPortrayal());
+        failuresPortrayal.setPortrayalForClass(FailureTest.class, new Failure3DPortrayal());
         
         this.scaleDisplay(Scenario3DPortrayal.MAIN_DISPLAY_ID, 1.5);
         this.getDisplay(MAIN_DISPLAY_ID).setShowsAxes(false);

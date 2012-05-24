@@ -17,6 +17,8 @@ import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
+import es.upm.dit.gsi.shanks.model.event.exception.DuplicateAffectedElementOnEventException;
+import es.upm.dit.gsi.shanks.model.event.exception.UnsupportedElementByEventException;
 import es.upm.dit.gsi.shanks.model.event.networkelement.PeriodicNetworkElementEvent;
 import es.upm.dit.gsi.shanks.model.event.networkelement.ProbabilisticNetworkElementEvent;
 import es.upm.dit.gsi.shanks.model.event.scenario.PeriodicScenarioEvent;
@@ -129,7 +131,7 @@ public class EventTest {
     }
     
     @Test
-    public void createProbNEAndLaunchIt() throws UnsupportedNetworkElementFieldException{
+    public void createProbNEAndLaunchIt() throws UnsupportedNetworkElementFieldException, DuplicateAffectedElementOnEventException, UnsupportedElementByEventException{
         Steppable generator = new Steppable() {
             
             private static final long serialVersionUID = 1L;

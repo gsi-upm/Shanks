@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.shanks.notification.util.test;
+package es.upm.dit.gsi.shanks.model.failure.util.test;
 
 import java.util.HashMap;
 import java.util.Properties;
@@ -14,11 +14,14 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 
-public class TestScenario extends Scenario{
+public class FailureTestScenario extends Scenario{
 
-    public static final String TEST_STATE = "sunny";
+    public static final String TEST_STATE = "testState";
+    public static final String OK_STATE = "OKState";
+    public static final String NOK_STATE = "NokState";
+    public static final String USER_FIELD = "userField";
 
-    public TestScenario(String id, String initialState, Properties properties)
+    public FailureTestScenario(String id, String initialState, Properties properties)
             throws UnsupportedNetworkElementFieldException,
             TooManyConnectionException, UnsupportedScenarioStatusException,
             DuplicatedIDException {
@@ -39,7 +42,9 @@ public class TestScenario extends Scenario{
 
     @Override
     public void setPossibleStates() {
-        this.addPossibleStatus(TestScenario.TEST_STATE);
+        this.addPossibleStatus(FailureTestScenario.TEST_STATE);
+        this.addPossibleStatus(FailureTestScenario.OK_STATE);
+        this.addPossibleStatus(FailureTestScenario.NOK_STATE);
     }
 
     @Override
@@ -54,20 +59,20 @@ public class TestScenario extends Scenario{
 
     @Override
     public void addPossibleEvents() {
-        try {
+//        try {
             
-            TestDevice neperd = new TestDevice(TestDefinitions.DEVICE_ID+"NEPerE", null, false);
-            this.addPossibleEventsOfNE(TestPeriodicNetworkElementEvent.class, neperd);
+//            TestDevice neperd = new TestDevice(TestDefinitions.DEVICE_ID+"NEPerE", null, false);
+//            this.addPossibleEventsOfNE(TestPeriodicNetworkElementEvent.class, neperd);
+//            
+//            TestDevice neprod = new TestDevice(TestDefinitions.DEVICE_ID+"NEProE", null, false);
+//            this.addPossibleEventsOfNE(TestProbabilisticNetworkElementEvent.class, neprod);
+//            
+//            this.addPossibleEventsOfScenario(TestProbabilisticScenarioEvent.class, this);
+//            this.addPossibleEventsOfScenario(TestPeriodicScenarioEvent.class, this);
             
-            TestDevice neprod = new TestDevice(TestDefinitions.DEVICE_ID+"NEProE", null, false);
-            this.addPossibleEventsOfNE(TestProbabilisticNetworkElementEvent.class, neprod);
-            
-            this.addPossibleEventsOfScenario(TestProbabilisticScenarioEvent.class, this);
-            this.addPossibleEventsOfScenario(TestPeriodicScenarioEvent.class, this);
-            
-        } catch (UnsupportedNetworkElementFieldException e1) {
-            e1.printStackTrace();
-        }
+//        } catch (UnsupportedNetworkElementFieldException e1) {
+//            e1.printStackTrace();
+//        }
     }
 
     @Override

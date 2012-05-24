@@ -14,7 +14,7 @@ import es.upm.dit.gsi.shanks.agent.test.MyJasonShanksAgent;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
-import es.upm.dit.gsi.shanks.model.failure.Failure;
+import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 
 public class MyJasonShanksAgentAction extends JasonShanksAgentAction {
@@ -38,7 +38,7 @@ public class MyJasonShanksAgentAction extends JasonShanksAgentAction {
         }
         int random = simulation.random.nextInt(number);
         Failure f = (Failure) failures.toArray()[random];
-        List<NetworkElement> elements = f.getAffectedElements();
+        List<NetworkElement> elements = f.getCurrentAffectedElements();
         for (NetworkElement element : elements){
             Class<? extends NetworkElement> c = element.getClass();
             if (c.equals(MyDevice.class)) {

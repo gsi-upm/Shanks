@@ -5,6 +5,8 @@ import java.util.List;
 import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
+import es.upm.dit.gsi.shanks.model.event.exception.DuplicateAffectedElementOnEventException;
+import es.upm.dit.gsi.shanks.model.event.exception.UnsupportedElementByEventException;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 import es.upm.dit.gsi.shanks.notification.NotificationManager;
@@ -82,7 +84,8 @@ public abstract class Event {
      */
     public abstract void addPossibleAffected();
 
-    public abstract void addAffectedElement(NetworkElement ne);
+    //TODO we can make a ShanksEventException that mask all individual exceptions. 
+    public abstract void addAffectedElement(NetworkElement ne) throws DuplicateAffectedElementOnEventException, UnsupportedElementByEventException ;
     
     public abstract void addAffectedScenario(Scenario scen);
     

@@ -20,9 +20,7 @@ import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.event.Event;
-import es.upm.dit.gsi.shanks.model.failure.Failure;
-import es.upm.dit.gsi.shanks.model.failure.exception.NoCombinationForFailureException;
-import es.upm.dit.gsi.shanks.model.failure.exception.UnsupportedElementInFailureException;
+import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.exception.AlreadyConnectedScenarioException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.NonGatewayDeviceException;
@@ -170,11 +168,8 @@ public abstract class ComplexScenario extends Scenario {
      * 
      * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#generateFailures()
      */
-    public void generateNetworkElementsEvents(ShanksSimulation sim) throws UnsupportedScenarioStatusException,
-            NoCombinationForFailureException,
-            UnsupportedElementInFailureException, InstantiationException,
-            IllegalAccessException, SecurityException, IllegalArgumentException, UnsupportedNetworkElementFieldException, NoSuchMethodException, InvocationTargetException {
-        super.generateFailures();
+    public void generateNetworkElementsEvents(ShanksSimulation sim) throws Exception {
+        super.generateNetworkElementEvents(sim);
         for (Scenario scenario : this.scenarios.keySet()) {
             scenario.generateNetworkElementEvents(sim);
         }

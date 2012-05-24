@@ -9,6 +9,8 @@ import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.event.ProbabilisticEvent;
+import es.upm.dit.gsi.shanks.model.event.exception.DuplicateAffectedElementOnEventException;
+import es.upm.dit.gsi.shanks.model.event.exception.UnsupportedElementByEventException;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 
@@ -25,6 +27,7 @@ public abstract class ProbabilisticNetworkElementEvent extends ProbabilisticEven
         super(name, generator, prob);
         
         this.affectedElements = new ArrayList<NetworkElement>();
+        this.affectedScenarios= new ArrayList<Scenario>();
         this.possibleAffectedElements = new HashMap<Class<? extends NetworkElement>, HashMap<String, Object>>();
         this.possibleAffectedScenarios = new HashMap<Class<? extends Scenario>, HashMap<String, Object>>();
         
@@ -32,7 +35,11 @@ public abstract class ProbabilisticNetworkElementEvent extends ProbabilisticEven
     }
     
     public void addPossibleAffectedScenario(Class <? extends Scenario> scenarioClass, HashMap<String, Object> affectedFields) {
-        this.possibleAffectedScenarios.put(scenarioClass, affectedFields);
+        // Make it on the hard way to get check each element.
+        //this.possibleAffectedScenarios.put(scenarioClass, affectedFields);
+        for(String fieldKey: affectedFields.keySet()){
+            this.addPossibleAffectedScenarioField(scenarioClass, fieldKey, affectedFields.get(fieldKey));
+        }
     }
     
     public void addPossibleAffectedScenarioState(Class<? extends Scenario> scenarioClass, String state, Object value){
@@ -62,18 +69,23 @@ public abstract class ProbabilisticNetworkElementEvent extends ProbabilisticEven
     }   
     
     public void addPossibleAffectedElement(Class <? extends NetworkElement> elementClass, HashMap<String, Object> affectedFields) {
-        this.possibleAffectedElements.put(elementClass, affectedFields);
+        // Make it on the hard way to get check each element.
+        //this.possibleAffectedElements.put(elementClass, affectedFields);
+        for(String fieldKey: affectedFields.keySet()){
+            this.addPossibleAffectedElementField(elementClass, fieldKey, affectedFields.get(fieldKey));
+        }
+        
     }
     
     public void addPossibleAffectedElementProperty(Class<? extends NetworkElement> elementClass, String property, Object value) {
         //NOTE: if in the future we will distinguish between change properties or change states, then the three methods make sense.
-        //meanwhile we keep this three methods, although only one of them makes sense, for the user to better target the names of the methods.
+        //meanwhile we keep this three methods, although only one of them makes sense, for the user better understanding.
         this.addPossibleAffectedElementField(elementClass, property, value);
     }
     
     public void addPossibleAffectedElementState(Class<? extends NetworkElement> elementClass, String state, Object value){
         //NOTE: if in the future we will distinguish between change properties or change states, then the three methods make sense.
-        //meanwhile we keep this three methods, although only one of them makes sense, for the user to better target the names of the methods.
+        //meanwhile we keep this three methods, although only one of them makes sense, for the user better understanding.
         this.addPossibleAffectedElementField(elementClass, state, value);
     }
     
@@ -83,7 +95,7 @@ public abstract class ProbabilisticNetworkElementEvent extends ProbabilisticEven
             if(!affectedFields.containsKey(field)){
                 affectedFields.put(field, value);
             } else {
-                this.logger.warning("Trying to add a new affected field that already has beeen defined. May be you has define " +
+                this.logger.warning("Trying to add a new possible affected field that already has beeen defined. May be you has define " +
                 		            "two values or maybe there is two fields with the same name. \nHowever the second value " +
                 		            "was ignored.\nElementClass: "+elementClass.getName()+"\nField: "+field+"\nValue: "+value);
             }
@@ -95,15 +107,29 @@ public abstract class ProbabilisticNetworkElementEvent extends ProbabilisticEven
     }
 
     @Override
-    public void addAffectedElement(NetworkElement el){
-        if(!this.affectedElements.contains(el))
-            affectedElements.add(el);
-        else 
-            this.logger.warning("Has been tried to add a duplicate affected element. The element has not been added." +
-            		"\nElement: "+el);
+    public void addAffectedElement(NetworkElement el) throws DuplicateAffectedElementOnEventException, UnsupportedElementByEventException {
+        if(this.possibleAffectedElements.containsKey(el.getClass())){
+            
+            if((!this.affectedElements.contains(el)) ) 
+                affectedElements.add(el);
+            else {
+                this.logger.warning("Has been tried to add a duplicate affected element. The element has not been added." +
+                        "\nProbabilisticEvent: "+ this.getClass().getName() +
+                        "\nElement: "+el);
+                throw new DuplicateAffectedElementOnEventException(el);
+            }
+                
+        } else {
+            this.logger.fine("Has been tried to add an affected element that doesn't match with possible affected types. " +
+            		"The element has not been added." +
+                    "\nProbabilisticEvent: "+ this.getClass().getName() +
+                    "\nElement: "+el);
+            throw new UnsupportedElementByEventException(el);
+        }
+        
     }
     
-    public void addAffectedElements(List<NetworkElement> ln){
+    public void addAffectedElements(List<NetworkElement> ln) throws DuplicateAffectedElementOnEventException, UnsupportedElementByEventException{
         for(NetworkElement ne: ln)
             this.addAffectedElement(ne);
     }
@@ -202,7 +228,7 @@ public abstract class ProbabilisticNetworkElementEvent extends ProbabilisticEven
             for(Scenario sc : scenarios){
                 if(c.equals(sc.getClass())){                        
                     for(String s : possibleAffectedScenarios.get(c).keySet()){
-                        sc.setCurrentStatus(this.possibleAffectedScenarios.get(c).get(s).toString());    
+                        sc.setCurrentStatus(s);    
 //                        if(sc.getStatus().containsKey(s)){
 //                            sc.updateStatusTo(s, (Boolean) possibleAffectedElements.get(c).get(s));
 //                        }
@@ -233,9 +259,28 @@ public abstract class ProbabilisticNetworkElementEvent extends ProbabilisticEven
         return possibleAffectedElements;
     }
 
+    /**
+     * @return the possibleAffectedElements
+     */
+    public HashMap<Class<? extends Scenario>, HashMap<String, Object>> getPossibleAffectedScenarios() {
+        return possibleAffectedScenarios;
+    }
+    
     @Override
     public List<?> getAffected() {
         return this.getCurrentAffectedElements();
+    }
+    
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.model.event.Event#launchEvent()
+     */
+    @Override
+    public void launchEvent() throws UnsupportedNetworkElementFieldException,
+            UnsupportedScenarioStatusException {
+        super.launchEvent();
+        
+        //This may be moved to EVENT.
+        this.changeOtherFields();
     }
     
 //    public static void main(String args[]) {

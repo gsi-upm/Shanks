@@ -2,6 +2,10 @@ package es.upm.dit.gsi.shanks.model.element.device.portrayal;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.ImageObserver;
+
+import javax.swing.ImageIcon;
 
 import sim.portrayal.DrawInfo2D;
 import sim.portrayal.SimplePortrayal2D;
@@ -33,5 +37,20 @@ public abstract class Device2DPortrayal extends SimplePortrayal2D {
         graphics.setColor(Color.black);
         graphics.drawString(device.getID(), x - 3, y);
 
+    }
+    
+    public void putImage(String path, int x, int y, int w, int h, Graphics2D graphics){
+        ImageIcon i = new ImageIcon(path);
+        Image image = i.getImage();
+        ImageObserver io = new ImageObserver() {
+            
+            @Override
+            public boolean imageUpdate(Image img, int infoflags, int x, int y,
+                    int width, int height) {
+                return false;
+            }
+        };
+        
+        graphics.drawImage(image, x, y, w*3, h*3, io);
     }
 }

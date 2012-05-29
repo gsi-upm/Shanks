@@ -30,6 +30,7 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyScenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation;
+import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation2DGUI;
 import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI;
 
 /**
@@ -244,8 +245,8 @@ public class MyScenario extends Scenario {
 
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "5");
-//        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_2D);
-        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_3D);
+        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_2D);
+//        scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_3D);
         //scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
         Properties configProperties = new Properties();
         configProperties.put(MyShanksSimulation.CONFIGURATION, "3");
@@ -253,8 +254,8 @@ public class MyScenario extends Scenario {
                 System.currentTimeMillis(), MyScenario.class,
                 "MyScenario", MyScenario.SUNNY,
                 scenarioProperties, configProperties);
-       // MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
-        MyShanksSimulation3DGUI gui = new MyShanksSimulation3DGUI(sim);
+        MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
+//        MyShanksSimulation3DGUI gui = new MyShanksSimulation3DGUI(sim);
         gui.start();
 //        sim.start();
 //        do

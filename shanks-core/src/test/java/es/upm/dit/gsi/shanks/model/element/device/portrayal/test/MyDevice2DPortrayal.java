@@ -58,7 +58,10 @@ public class MyDevice2DPortrayal extends Device2DPortrayal implements Portrayal 
         final int w = (int) (width);
         final int h = (int) (height);
         graphics.fillOval(x, y, w, h);
-
+        
+        //If you want put and image use this method
+        //this.putImage(path, x, y, w, h, graphics);
+        
         // Draw the devices ID ID
         graphics.setColor(Color.black);
         graphics.drawString(device.getID(), x - 3, y);

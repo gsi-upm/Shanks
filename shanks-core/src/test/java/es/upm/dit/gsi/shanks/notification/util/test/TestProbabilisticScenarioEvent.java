@@ -12,7 +12,7 @@ public class TestProbabilisticScenarioEvent extends ProbabilisticScenarioEvent{
 
     @Override
     public void addPossibleAffected() {
-        // Not necessary to run the test. 
+        this.addPossibleAffectedStatus(TestScenario.class, TestScenario.TEST_STATE);
     }
 
     @Override

@@ -12,7 +12,7 @@ public class TestPeriodicScenarioEvent extends PeriodicScenarioEvent{
 
     @Override
     public void addPossibleAffected() {
-        // Not necessary to run the test
+        this.addPossibleAffectedStatus(TestScenario.class, TestScenario.TEST_STATE);
         
     }
 

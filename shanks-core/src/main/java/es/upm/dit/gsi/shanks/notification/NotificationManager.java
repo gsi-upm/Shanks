@@ -61,7 +61,7 @@ public class NotificationManager implements Steppable {
         NotificationManager.notifables = lNotifables;
         NotificationManager.sim = simulation;
         NotificationManager.ID_COUNTER = NotificationManager.notifications.size();
-        logger.info("NotificationManager set with custom initial fields..." +
+        logger.fine("NotificationManager set with custom initial fields..." +
         		"\nNotifications List: "+lNotifications+"\nNotifable elements"+lNotifables +
         		"\nCurrent simulation: "+simulation+"\nNotification idetifiers counter: "+ID_COUNTER);
     }
@@ -80,7 +80,7 @@ public class NotificationManager implements Steppable {
         NotificationManager.notifables = new ArrayList<Notifable>();
         NotificationManager.sim = simulation;
         NotificationManager.ID_COUNTER = 0;
-        logger.info("NotificationManager set with default initial fields.\nNotification " +
+        logger.fine("NotificationManager set with default initial fields.\nNotification " +
         		"identifiers counter: "+ID_COUNTER);
     }
     

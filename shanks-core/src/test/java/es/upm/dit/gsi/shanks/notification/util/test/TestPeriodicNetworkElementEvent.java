@@ -13,7 +13,7 @@ public class TestPeriodicNetworkElementEvent extends PeriodicNetworkElementEvent
 
     @Override
     public void addPossibleAffected() {
-        // Not necessary to run the test
+        this.addPossibleAffectedStatus(TestDevice.class, null, false);
     }
 
     @Override

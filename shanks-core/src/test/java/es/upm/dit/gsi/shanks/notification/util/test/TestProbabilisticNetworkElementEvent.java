@@ -14,7 +14,7 @@ public class TestProbabilisticNetworkElementEvent extends ProbabilisticNetworkEl
 
     @Override
     public void addPossibleAffected() {
-        // TODO Auto-generated method stub
+        this.addPossibleAffectedElementState(TestDevice.class, null, false);
         
     }
 

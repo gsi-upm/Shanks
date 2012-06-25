@@ -13,8 +13,9 @@ import sim.engine.SimState;
 import sim.engine.Stoppable;
 import es.upm.dit.gsi.shanks.agent.ShanksAgent;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
-import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
-import es.upm.dit.gsi.shanks.exception.UnkownAgentException;
+import es.upm.dit.gsi.shanks.agent.exception.DuplicatedAgentIDException;
+import es.upm.dit.gsi.shanks.agent.exception.UnkownAgentException;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.ScenarioManager;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
@@ -74,15 +75,15 @@ public class ShanksSimulation extends SimState {
      * @throws DuplicatedAgentIDException
      */
     public ShanksSimulation(long seed, Class<? extends Scenario> scenarioClass,
-            String scenarioID, String initialState, Properties properties)
-            throws SecurityException, IllegalArgumentException,
-            NoSuchMethodException, InstantiationException,
-            IllegalAccessException, InvocationTargetException,
-            UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, DuplicatedPortrayalIDException,
-            ScenarioNotFoundException, DuplicatedAgentIDException,
-            DuplicatedActionIDException {
+            String scenarioID, String initialState, Properties properties) throws ShanksException {
+//            throws SecurityException, IllegalArgumentException,
+//            NoSuchMethodException, InstantiationException,
+//            IllegalAccessException, InvocationTargetException,
+//            UnsupportedNetworkElementFieldException,
+//            TooManyConnectionException, UnsupportedScenarioStatusException,
+//            DuplicatedIDException, DuplicatedPortrayalIDException,
+//            ScenarioNotFoundException, DuplicatedAgentIDException,
+//            DuplicatedActionIDException {
         super(seed);
         this.scenarioManager = this.createScenarioManager(scenarioClass,
                 scenarioID, initialState, properties);
@@ -98,8 +99,7 @@ public class ShanksSimulation extends SimState {
      * @throws DuplicatedActionIDException
      * @throws DuplicatedAgentIDException
      */
-    public void registerShanksAgents() throws DuplicatedAgentIDException,
-            DuplicatedActionIDException {
+    public void registerShanksAgents() throws ShanksException {
         logger.info("No agents to add...");
     }
 
@@ -122,19 +122,34 @@ public class ShanksSimulation extends SimState {
      */
     private ScenarioManager createScenarioManager(
             Class<? extends Scenario> scenarioClass, String scenarioID,
-            String initialState, Properties properties)
-            throws UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, SecurityException, NoSuchMethodException,
-            IllegalArgumentException, InstantiationException,
-            IllegalAccessException, InvocationTargetException,
-            DuplicatedPortrayalIDException, ScenarioNotFoundException {
+            String initialState, Properties properties) throws ShanksException {
+//            throws UnsupportedNetworkElementFieldException,
+//            TooManyConnectionException, UnsupportedScenarioStatusException,
+//            DuplicatedIDException, SecurityException, NoSuchMethodException,
+//            IllegalArgumentException, InstantiationException,
+//            IllegalAccessException, InvocationTargetException,
+//            DuplicatedPortrayalIDException, ScenarioNotFoundException {
 
-        Constructor<? extends Scenario> c = scenarioClass
-                .getConstructor(new Class[] { String.class, String.class,
-                        Properties.class });
-
-        Scenario s = c.newInstance(scenarioID, initialState, properties);
+        Constructor<? extends Scenario> c;
+        Scenario s = null;
+        try {
+            c = scenarioClass
+                    .getConstructor(new Class[] { String.class, String.class,
+                            Properties.class });
+            s = c.newInstance(scenarioID, initialState, properties);
+        } catch (SecurityException e) {
+            throw new ShanksException(e);
+        } catch (NoSuchMethodException e) {
+            throw new ShanksException(e);
+        } catch (IllegalArgumentException e) {
+            throw new ShanksException(e);
+        } catch (InstantiationException e) {
+            throw new ShanksException(e);
+        } catch (IllegalAccessException e) {
+            throw new ShanksException(e);
+        } catch (InvocationTargetException e) {
+            throw new ShanksException(e);
+        }
         logger.fine("Scenario created");
         ScenarioPortrayal sp = s.createScenarioPortrayal();
         if (sp == null) {
@@ -172,7 +187,7 @@ public class ShanksSimulation extends SimState {
      * @throws ScenarioNotFoundException
      */
     public ScenarioPortrayal getScenarioPortrayal()
-            throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
+            throws ShanksException {
         ScenarioPortrayal sp = this.scenarioManager.getPortrayal();
         if (sp == null) {
             sp = this.scenarioManager.getScenario().createScenarioPortrayal();
@@ -206,15 +221,10 @@ public class ShanksSimulation extends SimState {
         super.start();
         logger.finer("-> start method");
         try {
-            try {
-                startSimulation();
-            } catch (DuplicatedActionIDException e) {
-                logger.severe("DuplicatedActionIDException: " + e.getMessage());
-                e.printStackTrace();
-            }
-        } catch (DuplicatedAgentIDException e) {
-            logger.warning("DuplicatedAgentIDException: " + e.getMessage()
-                    + ". Older agent has survived, new agent was not started.");
+            startSimulation();
+        } catch (ShanksException e) {
+            logger.severe("ShanksException: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -224,8 +234,7 @@ public class ShanksSimulation extends SimState {
      * @throws DuplicatedAgentIDException
      * @throws DuplicatedActionIDException
      */
-    public void startSimulation() throws DuplicatedAgentIDException,
-            DuplicatedActionIDException {
+    public void startSimulation() throws ShanksException {
         schedule.scheduleRepeating(Schedule.EPOCH, 0, this.scenarioManager, 2);
         schedule.scheduleRepeating(Schedule.EPOCH, 1, this.notificationManager, 1);
         this.addAgents();
@@ -237,8 +246,7 @@ public class ShanksSimulation extends SimState {
      * 
      * @throws DuplicatedActionIDException
      */
-    private void addAgents() throws DuplicatedAgentIDException,
-            DuplicatedActionIDException {
+    private void addAgents() throws ShanksException {
         for (Entry<String, ShanksAgent> agentEntry : this.agents.entrySet()) {
             stoppables.put(agentEntry.getKey(), schedule.scheduleRepeating(Schedule.EPOCH, 2, agentEntry.getValue(), 1));
         }
@@ -256,7 +264,7 @@ public class ShanksSimulation extends SimState {
      * @throws DuplicatedAgentIDException
      */
     public void registerShanksAgent(ShanksAgent agent)
-            throws DuplicatedAgentIDException {
+            throws ShanksException {
         if (!this.agents.containsKey(agent.getID())) {
             this.agents.put(agent.getID(), agent);
         } else {
@@ -288,7 +296,7 @@ public class ShanksSimulation extends SimState {
      * @return ShanksAgent with ID equals to agentID
      * @throws UnkownAgentException
      */
-    public ShanksAgent getAgent(String agentID) throws UnkownAgentException {
+    public ShanksAgent getAgent(String agentID) throws ShanksException {
         if (this.agents.containsKey(agentID)) {
             return this.agents.get(agentID);
         } else {

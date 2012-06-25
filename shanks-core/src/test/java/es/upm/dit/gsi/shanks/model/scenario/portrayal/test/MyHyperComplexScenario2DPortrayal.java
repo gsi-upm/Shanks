@@ -8,6 +8,7 @@ import sim.portrayal.continuous.ContinuousPortrayal2D;
 import sim.portrayal.grid.SparseGridPortrayal2D;
 import sim.portrayal.network.NetworkPortrayal2D;
 import sim.util.Double2D;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice2DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
@@ -17,7 +18,6 @@ import es.upm.dit.gsi.shanks.model.event.failiure.portrayal.Failure2DPortrayal;
 import es.upm.dit.gsi.shanks.model.failure.util.test.FailureTest;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
-import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ComplexScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
@@ -35,14 +35,12 @@ public class MyHyperComplexScenario2DPortrayal extends
     public static final String FAILURE_PORTRAYAL_ID = "Failures";
 
     public MyHyperComplexScenario2DPortrayal(Scenario scenario, int width,
-            int height) throws DuplicatedPortrayalIDException,
-            ScenarioNotFoundException {
+            int height) throws ShanksException {
         super(scenario, width, height);
     }
 
     @Override
-    public void placeScenarios() throws DuplicatedPortrayalIDException,
-            ScenarioNotFoundException {
+    public void placeScenarios() throws ShanksException {
         ComplexScenario cs = (ComplexScenario) this.getScenario();
         this.situateScenario(cs.getScenario("MegaComplexScenario1"), new Double2D(0,0), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
         this.situateScenario(cs.getScenario("MegaComplexScenario2"), new Double2D(0,400), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0, ShanksMath.ANGLE_180);
@@ -73,6 +71,8 @@ public class MyHyperComplexScenario2DPortrayal extends
         try {
             this.addPortrayal(MyHyperComplexScenario2DPortrayal.FAILURE_DISPLAY_ID, MyHyperComplexScenario2DPortrayal.FAILURE_PORTRAYAL_ID, failuresPortrayal);
         } catch (DuplicatedPortrayalIDException e) {            
+            e.printStackTrace();
+        } catch (ShanksException e) {
             e.printStackTrace();
         }
     }

@@ -12,6 +12,7 @@ import sim.util.Double2D;
 import sim.util.Double3D;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.capability.movement.Location;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
@@ -51,6 +52,9 @@ public class ShanksAgentPerceptionCapability {
                 e.printStackTrace();
             } catch (ScenarioNotFoundException e) {
                 e.printStackTrace();
+            } catch (ShanksException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
         } else if (agentLocation.is2DLocation()) {
             try {
@@ -67,6 +71,8 @@ public class ShanksAgentPerceptionCapability {
             } catch (DuplicatedPortrayalIDException e) {
                 e.printStackTrace();
             } catch (ScenarioNotFoundException e) {
+                e.printStackTrace();
+            } catch (ShanksException e) {
                 e.printStackTrace();
             }
         }
@@ -101,6 +107,8 @@ public class ShanksAgentPerceptionCapability {
                 e.printStackTrace();
             } catch (ScenarioNotFoundException e) {
                 e.printStackTrace();
+            } catch (ShanksException e) {
+                e.printStackTrace();
             }
         }
         if (agentLocation.is2DLocation()) {
@@ -116,6 +124,8 @@ public class ShanksAgentPerceptionCapability {
             } catch (DuplicatedPortrayalIDException e) {
                 e.printStackTrace();
             } catch (ScenarioNotFoundException e) {
+                e.printStackTrace();
+            } catch (ShanksException e) {
                 e.printStackTrace();
             }
         }
@@ -206,6 +216,8 @@ public class ShanksAgentPerceptionCapability {
             e.printStackTrace();
         } catch (ScenarioNotFoundException e) {
             e.printStackTrace();
+        } catch (ShanksException e) {
+            e.printStackTrace();
         }
         return null;
 
@@ -294,6 +306,8 @@ public class ShanksAgentPerceptionCapability {
                 e.printStackTrace();
             } catch (ScenarioNotFoundException e) {
                 e.printStackTrace();
+            } catch (ShanksException e) {
+                e.printStackTrace();
             }
         } else if (agentLocation.is2DLocation()) {
             try {
@@ -308,6 +322,8 @@ public class ShanksAgentPerceptionCapability {
             } catch (DuplicatedPortrayalIDException e) {
                 e.printStackTrace();
             } catch (ScenarioNotFoundException e) {
+                e.printStackTrace();
+            } catch (ShanksException e) {
                 e.printStackTrace();
             }
         }

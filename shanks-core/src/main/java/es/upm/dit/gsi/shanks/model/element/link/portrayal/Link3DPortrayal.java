@@ -34,11 +34,6 @@ import es.upm.dit.gsi.shanks.model.element.link.Link;
 @SuppressWarnings("restriction")
 public abstract class Link3DPortrayal extends SimpleEdgePortrayal3D {
 
-    /**
-	 * 
-	 */
-    private static final long serialVersionUID = 3575152597887827354L;
-
     @Override
     public TransformGroup getModel(Object object, TransformGroup model) {
 
@@ -150,4 +145,6 @@ public abstract class Link3DPortrayal extends SimpleEdgePortrayal3D {
     abstract public Color getLabelColor(Link link);
 
     abstract public Color getLinkColor(Link link);
+    
+    private static final long serialVersionUID = 3575152597887827354L;
 }

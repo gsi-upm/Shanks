@@ -8,6 +8,7 @@ import sim.engine.SimState;
 import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.agent.ShanksAgent;
 import es.upm.dit.gsi.shanks.agent.capability.movement.Location;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 
@@ -92,10 +93,10 @@ public class TestAgent extends TestAction implements ShanksAgent {
         try {
             this.launchEvent();
         } catch (UnsupportedNetworkElementFieldException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (UnsupportedScenarioStatusException e) {
-            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (ShanksException e) {
             e.printStackTrace();
         }
     }

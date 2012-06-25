@@ -8,6 +8,7 @@ import sim.portrayal3d.continuous.ContinuousPortrayal3D;
 import sim.util.Bag;
 import sim.util.Double2D;
 import sim.util.Double3D;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
@@ -19,8 +20,7 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
 public abstract class ComplexScenario3DPortrayal extends Scenario3DPortrayal {
 
     public ComplexScenario3DPortrayal(Scenario scenario, long width,
-            long height, long length) throws DuplicatedPortrayalIDException,
-            ScenarioNotFoundException {
+            long height, long length) throws ShanksException {
         super(scenario, width, height, length);
         this.placeScenarios();
     }
@@ -31,8 +31,7 @@ public abstract class ComplexScenario3DPortrayal extends Scenario3DPortrayal {
      * @throws DuplicatedPortrayalIDException
      * @throws ScenarioNotFoundException
      */
-    abstract public void placeScenarios() throws DuplicatedPortrayalIDException,
-            ScenarioNotFoundException;
+    abstract public void placeScenarios() throws ShanksException;
 
     /**
      * Situate the scenario in the complex scenario main display
@@ -47,7 +46,7 @@ public abstract class ComplexScenario3DPortrayal extends Scenario3DPortrayal {
      */
     public void situateScenario(Scenario scenario, Double3D position,
             Double2D alpha, Double2D beta, Double2D gamma)
-            throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
+            throws ShanksException {
         Scenario3DPortrayal portrayal;
         try {
             portrayal = (Scenario3DPortrayal) scenario

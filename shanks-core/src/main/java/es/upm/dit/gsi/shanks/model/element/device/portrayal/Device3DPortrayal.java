@@ -21,16 +21,10 @@ import com.sun.j3d.utils.geometry.Sphere;
 
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 
-
 @SuppressWarnings("restriction")
 public abstract class Device3DPortrayal extends SimplePortrayal3D {
 
-
     private int diameter = 50;
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 6319038986129405512L;
     public Logger log = Logger.getLogger(Device3DPortrayal.class.getName());
 
     public String getLabel(Device device) {
@@ -44,15 +38,15 @@ public abstract class Device3DPortrayal extends SimplePortrayal3D {
 
         Color3f colour;
         Sphere s = new Sphere(diameter);
-//        Cone s = new Cone(diameter, diameter);
-//        ColorCube s = new ColorCube(diameter);
-        
+        // Cone s = new Cone(diameter, diameter);
+        // ColorCube s = new ColorCube(diameter);
+
         colour = new Color3f(this.getDeviceColor(device));
 
         int FONT_SIZE = 48;
         Font labelFont = new Font("SansSerif", Font.BOLD, FONT_SIZE);
         double labelScale = 1.0;
-        double SCALING_MODIFIER = 1.0 / 5.0; 
+        double SCALING_MODIFIER = 1.0 / 5.0;
 
         model.removeAllChildren();
         Appearance appearance = new Appearance();
@@ -70,18 +64,17 @@ public abstract class Device3DPortrayal extends SimplePortrayal3D {
         model.setName(device.getID());
         clearPickableFlags(model);
         model.setPickable(true);
-        
-        
-
 
         // draw the device labels if the user wants
         Transform3D offset = new Transform3D();
-        offset.setTranslation(new Vector3d(5+diameter/2,5+diameter/2,5+diameter/2));
+        offset.setTranslation(new Vector3d(5 + diameter / 2, 5 + diameter / 2,
+                5 + diameter / 2));
         Transform3D trans = offset;
         String str = device.getID();
         com.sun.j3d.utils.geometry.Text2D text = new com.sun.j3d.utils.geometry.Text2D(
-                str, new Color3f(this.getLabelColor(device)), labelFont.getFamily(),
-                labelFont.getSize(), labelFont.getStyle());
+                str, new Color3f(this.getLabelColor(device)),
+                labelFont.getFamily(), labelFont.getSize(),
+                labelFont.getStyle());
         text.setRectangleScaleFactor((float) (labelScale * SCALING_MODIFIER));
 
         // text = new Shape3D(new Text3D(labelFont3D, ""));
@@ -120,4 +113,5 @@ public abstract class Device3DPortrayal extends SimplePortrayal3D {
 
     abstract public Color getLabelColor(Device device);
 
+    private static final long serialVersionUID = 6319038986129405512L;
 }

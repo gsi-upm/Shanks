@@ -1,14 +1,12 @@
 package es.upm.dit.gsi.shanks.agent.action.exception;
 
-public class UnknownShanksAgentActionException extends Exception {
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -1884223740174508179L;
+public class UnknownShanksAgentActionException extends ShanksException {
 
     public UnknownShanksAgentActionException(String actionID, String agentID) {
         super("Unknown action " + actionID + "for agent " + agentID);
     }
 
+    private static final long serialVersionUID = -1884223740174508179L;
 }

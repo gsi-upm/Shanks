@@ -3,8 +3,9 @@ package es.upm.dit.gsi.shanks.agent.capability.creation;
 import sim.engine.Schedule;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.ShanksAgent;
-import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
-import es.upm.dit.gsi.shanks.exception.UnkownAgentException;
+import es.upm.dit.gsi.shanks.agent.exception.DuplicatedAgentIDException;
+import es.upm.dit.gsi.shanks.agent.exception.UnkownAgentException;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 
 /**
  * Class to provide the capability of create a new shanks agent
@@ -24,7 +25,7 @@ public class CreationShanksAgentCapability {
      * @param Agent - The new agent
      * @throws DuplicatedAgentIDException 
      */
-    public static void addNewAgent(ShanksSimulation sim, ShanksAgent agent) throws DuplicatedAgentIDException{
+    public static void addNewAgent(ShanksSimulation sim, ShanksAgent agent) throws ShanksException {
         sim.registerShanksAgent(agent);
         if (sim.schedule.getTime() < 0) {
             sim.schedule.scheduleRepeating(Schedule.EPOCH, 2, agent, 1);
@@ -43,7 +44,7 @@ public class CreationShanksAgentCapability {
      * @param agentID - The name of the agent to remove
      * @throws UnkownAgentException 
      */
-    public static void removeAgent(ShanksSimulation sim, String agentID) throws UnkownAgentException {
+    public static void removeAgent(ShanksSimulation sim, String agentID) throws ShanksException {
         sim.logger.info("Stoppable not fount. Attempting direct stop...");
         sim.unregisterShanksAgent(agentID);        
         sim.logger.info("Agent " + agentID + " stopped.");// by " + remover.getID());

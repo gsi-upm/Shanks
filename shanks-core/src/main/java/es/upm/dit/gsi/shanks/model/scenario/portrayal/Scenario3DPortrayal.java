@@ -13,7 +13,8 @@ import sim.portrayal3d.continuous.ContinuousPortrayal3D;
 import sim.portrayal3d.network.NetworkPortrayal3D;
 import sim.portrayal3d.network.SpatialNetwork3D;
 import sim.util.Double3D;
-import es.upm.dit.gsi.shanks.exception.DuplictaedDisplayIDException;
+import es.upm.dit.gsi.shanks.agent.exception.DuplictaedDisplayIDException;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
@@ -45,7 +46,7 @@ public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
      * @param height
      * @throws DuplicatedPortrayalIDException 
      */
-    public Scenario3DPortrayal(Scenario scenario, long width, long height, long length) throws DuplicatedPortrayalIDException {
+    public Scenario3DPortrayal(Scenario scenario, long width, long height, long length) throws ShanksException {
         super(scenario);
         this.scaled = new HashMap<String,Boolean>();
         this.devices = new Continuous3D(5, width, height, length);
@@ -90,7 +91,7 @@ public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
      * @param display
      * @throws DuplictaedDisplayIDException 
      */
-    public void addDisplay(String displayID, Display3D display) throws DuplictaedDisplayIDException {
+    public void addDisplay(String displayID, Display3D display) throws ShanksException {
         if (this.displayList.containsKey(displayID)) {
             throw new DuplictaedDisplayIDException(displayID);
         }
@@ -132,7 +133,7 @@ public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
      * @param frame
      * @throws DuplictedFrameIDException 
      */
-    public void addFrame(String frameID, JFrame frame) throws DuplictedFrameIDException {
+    public void addFrame(String frameID, JFrame frame) throws ShanksException {
         if (this.frameList.containsKey(frameID)) {
             throw new DuplictedFrameIDException(frameID);
         } else {

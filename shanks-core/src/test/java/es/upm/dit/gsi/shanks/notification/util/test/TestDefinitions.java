@@ -1,21 +1,13 @@
 package es.upm.dit.gsi.shanks.notification.util.test;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
 import es.upm.dit.gsi.shanks.ShanksSimulation;
-import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
-import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
-import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.event.Event;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
-import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
-import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
-import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 
 public class TestDefinitions {
 
@@ -51,15 +43,7 @@ public class TestDefinitions {
      * @return
      *          a test simulation. 
      */
-    public static ShanksSimulation getSimulation(int conf) throws SecurityException,
-            IllegalArgumentException, NoSuchMethodException,
-            InstantiationException, IllegalAccessException,
-            InvocationTargetException,
-            UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, DuplicatedPortrayalIDException,
-            ScenarioNotFoundException, DuplicatedAgentIDException,
-            DuplicatedActionIDException {
+    public static ShanksSimulation getSimulation(int conf) throws ShanksException {
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
         Properties configProperties = new Properties();

@@ -8,6 +8,7 @@ import sim.portrayal.continuous.ContinuousPortrayal2D;
 import sim.portrayal.grid.SparseGridPortrayal2D;
 import sim.portrayal.network.NetworkPortrayal2D;
 import sim.util.Double2D;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice2DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
@@ -38,7 +39,7 @@ public class FinalComplexScenario2DPortrayal extends ComplexScenario2DPortrayal 
      * @throws ScenarioNotFoundException
      */
     public FinalComplexScenario2DPortrayal(Scenario scenario, int width,
-            int height) throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
+            int height) throws ShanksException {
         super(scenario, width, height);
     }
 
@@ -53,6 +54,8 @@ public class FinalComplexScenario2DPortrayal extends ComplexScenario2DPortrayal 
         try {
             this.addPortrayal(MyHyperComplexScenario2DPortrayal.FAILURE_DISPLAY_ID, MyHyperComplexScenario2DPortrayal.FAILURE_PORTRAYAL_ID, failuresPortrayal);
         } catch (DuplicatedPortrayalIDException e) {            
+            e.printStackTrace();
+        } catch (ShanksException e) {
             e.printStackTrace();
         }
     }
@@ -88,8 +91,7 @@ public class FinalComplexScenario2DPortrayal extends ComplexScenario2DPortrayal 
     }
 
     @Override
-    public void placeScenarios() throws DuplicatedPortrayalIDException,
-            ScenarioNotFoundException {
+    public void placeScenarios() throws ShanksException {
         ComplexScenario cs = (ComplexScenario) this.getScenario();
         this.situateScenario(cs.getScenario("HyperComplexScenario1"), new Double2D(0,0), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);
         this.situateScenario(cs.getScenario("HyperComplexScenario2"), new Double2D(350,0), ShanksMath.ANGLE_0, ShanksMath.ANGLE_0, ShanksMath.ANGLE_0);

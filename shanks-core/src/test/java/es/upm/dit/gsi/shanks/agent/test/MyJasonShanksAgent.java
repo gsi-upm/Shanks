@@ -14,6 +14,7 @@ import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.JasonShanksAgent;
 import es.upm.dit.gsi.shanks.agent.action.test.MyJasonShanksAgentAction;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
 
 public class MyJasonShanksAgent extends JasonShanksAgent {
@@ -27,7 +28,7 @@ public class MyJasonShanksAgent extends JasonShanksAgent {
      * @throws DuplicatedActionIDException
      */
     public MyJasonShanksAgent(String id, String aslFilePath)
-            throws DuplicatedActionIDException {
+            throws ShanksException {
         super(id, aslFilePath);
         this.numberOfResolvedFailures = 0;
     }

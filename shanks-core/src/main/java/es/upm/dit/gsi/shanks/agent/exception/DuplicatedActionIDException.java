@@ -1,6 +1,8 @@
 package es.upm.dit.gsi.shanks.agent.exception;
 
-public class DuplicatedActionIDException extends Exception {
+import es.upm.dit.gsi.shanks.exception.ShanksException;
+
+public class DuplicatedActionIDException extends ShanksException {
 
     /**
      * 

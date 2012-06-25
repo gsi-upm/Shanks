@@ -8,7 +8,8 @@ import java.util.Properties;
 import sim.engine.Schedule;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
-import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
+import es.upm.dit.gsi.shanks.agent.exception.DuplicatedAgentIDException;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
@@ -51,14 +52,7 @@ public class TestSimulation extends ShanksSimulation {
             Class<? extends Scenario> scenarioClass, String scenarioID,
             String initialState, Properties properties,
             Properties configPropertiesTestSimulation)
-            throws SecurityException, IllegalArgumentException,
-            NoSuchMethodException, InstantiationException,
-            IllegalAccessException, InvocationTargetException,
-            UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, DuplicatedPortrayalIDException,
-            ScenarioNotFoundException, DuplicatedAgentIDException,
-            DuplicatedActionIDException {
+            throws ShanksException {
         super(seed, scenarioClass, scenarioID, initialState, properties);
         this.configuration = configPropertiesTestSimulation;
     }
@@ -88,8 +82,7 @@ public class TestSimulation extends ShanksSimulation {
     }
 
     @Override
-    public void registerShanksAgents() throws DuplicatedAgentIDException,
-            DuplicatedActionIDException {
+    public void registerShanksAgents() throws ShanksException {
         TestAgent agent = new TestAgent(TestDefinitions.AGENT_ID, 0, this.getScenarioManager());
         this.registerShanksAgent(agent);
     }

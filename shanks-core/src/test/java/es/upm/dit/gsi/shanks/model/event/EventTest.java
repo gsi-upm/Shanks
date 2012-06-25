@@ -13,12 +13,10 @@ import org.junit.Test;
 
 import sim.engine.SimState;
 import sim.engine.Steppable;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
-import es.upm.dit.gsi.shanks.model.event.exception.DuplicateAffectedElementOnEventException;
-import es.upm.dit.gsi.shanks.model.event.exception.UnsupportedElementByEventException;
 import es.upm.dit.gsi.shanks.model.event.networkelement.PeriodicNetworkElementEvent;
 import es.upm.dit.gsi.shanks.model.event.networkelement.ProbabilisticNetworkElementEvent;
 import es.upm.dit.gsi.shanks.model.event.scenario.PeriodicScenarioEvent;
@@ -79,7 +77,7 @@ public class EventTest {
     }
     
     @Test
-    public void createPeriodicNEAndLaunchIt() throws UnsupportedNetworkElementFieldException{
+    public void createPeriodicNEAndLaunchIt() throws ShanksException{
         Steppable generator = new Steppable() {
             
             private static final long serialVersionUID = 1L;
@@ -131,7 +129,7 @@ public class EventTest {
     }
     
     @Test
-    public void createProbNEAndLaunchIt() throws UnsupportedNetworkElementFieldException, DuplicateAffectedElementOnEventException, UnsupportedElementByEventException{
+    public void createProbNEAndLaunchIt() throws ShanksException {
         Steppable generator = new Steppable() {
             
             private static final long serialVersionUID = 1L;
@@ -181,7 +179,7 @@ public class EventTest {
     }
     
     @Test
-    public void createProbScenarioEventAndLaunchaIt() throws UnsupportedNetworkElementFieldException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException{
+    public void createProbScenarioEventAndLaunchaIt() throws ShanksException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException{
         Steppable generator = new Steppable() {
             
             private static final long serialVersionUID = 1L;
@@ -229,7 +227,7 @@ public class EventTest {
     }
     
     @Test
-    public void createPeriodicScenarioEventAndLaunchaIt() throws UnsupportedNetworkElementFieldException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException{
+    public void createPeriodicScenarioEventAndLaunchaIt() throws ShanksException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException{
         Steppable generator = new Steppable() {
             
             private static final long serialVersionUID = 1L;

@@ -12,6 +12,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.event.exception.UnsupportedElementByEventException;
@@ -49,9 +50,7 @@ public class ScenarioTest {
      */
     @Test
     public void createScenario()
-            throws UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException {
+            throws ShanksException {
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
@@ -68,9 +67,7 @@ public class ScenarioTest {
      */
     @Test
     public void createScenarioAndChangeState()
-            throws UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException {
+            throws ShanksException {
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
@@ -87,9 +84,7 @@ public class ScenarioTest {
      */
     @Test
     public void createScenarioAndChangeWrongState()
-            throws UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException {
+            throws ShanksException {
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
@@ -110,8 +105,7 @@ public class ScenarioTest {
      */
     @Test
     public void createScenarioWithWrongState()
-            throws UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, DuplicatedIDException {
+            throws ShanksException {
         boolean catched = false;
         try {
             Properties scenarioProperties = new Properties();
@@ -136,10 +130,7 @@ public class ScenarioTest {
      */
     @Test
     public void createScenarioAndNoGenerateFailures()
-            throws UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, NoCombinationForFailureException, InstantiationException, IllegalAccessException {
-
+            throws ShanksException {
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);

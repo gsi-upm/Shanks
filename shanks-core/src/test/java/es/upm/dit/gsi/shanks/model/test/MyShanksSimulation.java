@@ -9,10 +9,11 @@ import sim.engine.Schedule;
 import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
+import es.upm.dit.gsi.shanks.agent.exception.DuplicatedAgentIDException;
 import es.upm.dit.gsi.shanks.agent.test.MyFixAgent;
 import es.upm.dit.gsi.shanks.agent.test.MyJasonShanksAgent;
 import es.upm.dit.gsi.shanks.agent.test.MySimpleShanksAgent;
-import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
@@ -64,14 +65,7 @@ public class MyShanksSimulation extends ShanksSimulation {
             Class<? extends Scenario> scenarioClass, String scenarioID,
             String initialState, Properties properties,
             Properties configPropertiesMyShanksSimulation)
-            throws SecurityException, IllegalArgumentException,
-            NoSuchMethodException, InstantiationException,
-            IllegalAccessException, InvocationTargetException,
-            UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, DuplicatedPortrayalIDException,
-            ScenarioNotFoundException, DuplicatedAgentIDException,
-            DuplicatedActionIDException {
+            throws ShanksException {
         super(seed, scenarioClass, scenarioID, initialState, properties);
         this.configuration = configPropertiesMyShanksSimulation;
         this.counter++;
@@ -112,8 +106,7 @@ public class MyShanksSimulation extends ShanksSimulation {
     }
 
     @Override
-    public void registerShanksAgents() throws DuplicatedAgentIDException,
-            DuplicatedActionIDException {
+    public void registerShanksAgents() throws ShanksException {
         MyJasonShanksAgent agent = new MyJasonShanksAgent("resolverAgent1",
                 "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent1.asl");
         this.registerShanksAgent(agent);

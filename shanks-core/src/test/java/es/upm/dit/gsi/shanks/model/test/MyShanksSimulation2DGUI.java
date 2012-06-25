@@ -7,10 +7,8 @@ import javax.swing.JFrame;
 import sim.display.Display2D;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.ShanksSimulation2DGUI;
-import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedChartIDException;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyHyperComplexScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.test.steppable.FailuresChartPainter;
 
@@ -20,8 +18,6 @@ import es.upm.dit.gsi.shanks.model.test.steppable.FailuresChartPainter;
  */
 public class MyShanksSimulation2DGUI extends ShanksSimulation2DGUI {
 
-     
-    
     /**
      * @param sim
      */
@@ -62,8 +58,11 @@ public class MyShanksSimulation2DGUI extends ShanksSimulation2DGUI {
      * shanks.model.scenario.portrayal.Scenario2DPortrayal)
      */
     @Override
-    public void addCharts(Scenario2DPortrayal scenarioPortrayal) throws DuplicatedChartIDException, DuplicatedPortrayalIDException, ScenarioNotFoundException {
-            this.addTimeChart(FailuresChartPainter.RESOLVED_FAILURES_PER_AGENT_CHART_ID, "Time / Steps", "Resolved failures");
+    public void addCharts(Scenario2DPortrayal scenarioPortrayal)
+            throws ShanksException {
+        this.addTimeChart(
+                FailuresChartPainter.RESOLVED_FAILURES_PER_AGENT_CHART_ID,
+                "Time / Steps", "Resolved failures");
     }
 
     /*
@@ -77,9 +76,11 @@ public class MyShanksSimulation2DGUI extends ShanksSimulation2DGUI {
     public void locateFrames(Scenario2DPortrayal scenarioPortrayal) {
         HashMap<String, JFrame> frames = scenarioPortrayal.getFrameList();
         JFrame mainFrame = frames.get(Scenario2DPortrayal.MAIN_DISPLAY_ID);
-        JFrame failureFrame = frames.get(MyHyperComplexScenario2DPortrayal.FAILURE_DISPLAY_ID);
-        JFrame chartFrame = frames.get(FailuresChartPainter.RESOLVED_FAILURES_PER_AGENT_CHART_ID);
-        
+        JFrame failureFrame = frames
+                .get(MyHyperComplexScenario2DPortrayal.FAILURE_DISPLAY_ID);
+        JFrame chartFrame = frames
+                .get(FailuresChartPainter.RESOLVED_FAILURES_PER_AGENT_CHART_ID);
+
         mainFrame.setLocation(100, 100);
         failureFrame.setLocation(500, 0);
         chartFrame.setLocation(600, 200);

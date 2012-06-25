@@ -9,11 +9,6 @@ import es.upm.dit.gsi.shanks.agent.ShanksAgent;
 
 public abstract class ShanksAgent2DPortrayal extends SimplePortrayal2D {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -5132594800897540031L;
-
     @Override
     public void draw(Object object, Graphics2D graphics, DrawInfo2D info) {
 
@@ -34,4 +29,6 @@ public abstract class ShanksAgent2DPortrayal extends SimplePortrayal2D {
         graphics.drawString(agent.getID(), x - 3, y);
 
     }
+    
+    private static final long serialVersionUID = -5132594800897540031L;
 }

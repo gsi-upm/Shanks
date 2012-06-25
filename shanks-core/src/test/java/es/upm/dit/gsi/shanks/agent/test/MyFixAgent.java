@@ -6,6 +6,7 @@ import java.util.List;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.SimpleShanksAgent;
 import es.upm.dit.gsi.shanks.agent.action.test.MyShanksAgentAction;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
@@ -45,6 +46,8 @@ public class MyFixAgent extends SimpleShanksAgent{
             } catch (UnsupportedNetworkElementFieldException e) {
                 e.printStackTrace();
             } catch (UnsupportedScenarioStatusException e) {
+                e.printStackTrace();
+            } catch (ShanksException e) {
                 e.printStackTrace();
             }
         }

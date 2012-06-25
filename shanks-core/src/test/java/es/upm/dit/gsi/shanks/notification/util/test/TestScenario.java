@@ -3,6 +3,7 @@ package es.upm.dit.gsi.shanks.notification.util.test;
 import java.util.HashMap;
 import java.util.Properties;
 
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
@@ -19,9 +20,7 @@ public class TestScenario extends Scenario{
     public static final String TEST_STATE = "sunny";
 
     public TestScenario(String id, String initialState, Properties properties)
-            throws UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException {
+            throws ShanksException {
         super(id, initialState, properties);
     }
 
@@ -67,6 +66,8 @@ public class TestScenario extends Scenario{
             
         } catch (UnsupportedNetworkElementFieldException e1) {
             e1.printStackTrace();
+        } catch (ShanksException e) {
+            e.printStackTrace();
         }
     }
 

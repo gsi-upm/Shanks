@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import sim.engine.SimState;
 import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
 import es.upm.dit.gsi.shanks.model.event.failiure.exception.NoCombinationForFailureException;
@@ -86,28 +87,33 @@ public class ScenarioManager implements Steppable {
             this.stateMachine(sim);
         } catch (UnsupportedScenarioStatusException e) {
             logger.severe("UnsupportedScenarioStatusException: " + e.getMessage());
+            e.printStackTrace();
         } catch (NoCombinationForFailureException e) {
             logger.severe("NoCombinationForFailureException: " + e.getMessage());
+            e.printStackTrace();
         } catch (InstantiationException e) {
             logger.severe("InstantiationException: " + e.getMessage());
+            e.printStackTrace();
         } catch (IllegalAccessException e) {
             logger.severe("IllegalAccessException: " + e.getMessage());
+            e.printStackTrace();
         } catch (UnsupportedNetworkElementFieldException e) {
             logger.severe("UnsupportedNetworkElementFieldException: " + e.getMessage());
+            e.printStackTrace();
         } catch (SecurityException e) {
             logger.severe("SecurityException: " + e.getMessage());
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
-            // TODO Auto-generated catch block
+            logger.severe("IllegalArgumentException: "+ e.getMessage());
             e.printStackTrace();
         } catch (NoSuchMethodException e) {
-            // TODO Auto-generated catch block
+            logger.severe("NoSuchMethodException: "+ e.getMessage());
             e.printStackTrace();
         } catch (InvocationTargetException e) {
-            // TODO Auto-generated catch block
+            logger.severe("InvocationtargetException: "+ e.getMessage());
             e.printStackTrace();
         } catch (Exception e) {
-            // TODO Auto-generated catch block
+            logger.severe("UnknownException: "+ e.getMessage());
             e.printStackTrace();
         }
     }
@@ -164,11 +170,11 @@ public class ScenarioManager implements Steppable {
 //        this.scenario.generateFailures();
 //    }
     
-    private void generateScenarioEvents(ShanksSimulation sim) throws SecurityException, IllegalArgumentException, UnsupportedScenarioStatusException, InstantiationException, IllegalAccessException, UnsupportedNetworkElementFieldException, NoSuchMethodException, InvocationTargetException{
+    private void generateScenarioEvents(ShanksSimulation sim) throws ShanksException{
         this.scenario.generateScenarioEvents(sim);
     }
     
-    private void generateNetworkElementEvents(ShanksSimulation sim) throws Exception{
+    private void generateNetworkElementEvents(ShanksSimulation sim) throws ShanksException{
         this.scenario.generateNetworkElementEvents(sim);
     }
 

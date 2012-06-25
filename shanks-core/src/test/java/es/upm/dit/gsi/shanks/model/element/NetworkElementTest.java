@@ -2,6 +2,8 @@ package es.upm.dit.gsi.shanks.model.element;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.LogManager;
@@ -13,10 +15,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
 
@@ -30,10 +32,18 @@ public class NetworkElementTest {
      * @throws Exception
      */
     @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
+    public static void setUpBeforeClass() throws ShanksException {
         LogManager lm = LogManager.getLogManager();
         File configFile = new File("src/test/resources/logging.properties");
-        lm.readConfiguration(new FileInputStream(configFile));
+        try {
+            lm.readConfiguration(new FileInputStream(configFile));
+        } catch (SecurityException e) {
+            throw new ShanksException(e); 
+        } catch (FileNotFoundException e) {
+            throw new ShanksException(e);
+        } catch (IOException e) {
+            throw new ShanksException(e);
+        }
 
     }
 
@@ -52,12 +62,10 @@ public class NetworkElementTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementFieldException
+     * @throws ShanksException
      */
     @Test
-    public void createDevice() throws UnsupportedNetworkElementFieldException {
-
-        
+    public void createDevice() throws ShanksException {
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         Assert.assertEquals("MyDevice", d.getID());
         Assert.assertEquals(false, d.isGateway());
@@ -65,15 +73,14 @@ public class NetworkElementTest {
         Assert.assertTrue(d.getStatus().keySet().contains(MyDevice.NOK_STATUS));
         Assert.assertTrue(d.getStatus().keySet().contains(MyDevice.UNKOWN_STATUS));
         Assert.assertTrue(d.getStatus().keySet().contains(MyDevice.HIGH_TEMP_STATUS));
-    
     }
 
     /**
-     * @throws UnsupportedNetworkElementFieldException
+     * @throws ShanksException
      */
     @Test
     public void createDeviceAndCheckInitialStatus()
-            throws UnsupportedNetworkElementFieldException {
+            throws ShanksException {
         
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         Assert.assertEquals("MyDevice", d.getID());
@@ -88,11 +95,11 @@ public class NetworkElementTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementFieldException
+     * @throws ShanksException
      */
     @Test
     public void createDeviceAndCheckChangedStatus()
-            throws UnsupportedNetworkElementFieldException {
+            throws ShanksException {
         
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         Assert.assertEquals("MyDevice", d.getID());
@@ -116,11 +123,11 @@ public class NetworkElementTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementFieldException
+     * @throws ShanksException
      */
     @Test
     public void createDeviceAndCheckChangedStatusAndChangedProperty()
-            throws UnsupportedNetworkElementFieldException {
+            throws ShanksException {
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         Assert.assertEquals("MyDevice", d.getID());
         Assert.assertTrue(d.getStatus().keySet().contains(MyDevice.OK_STATUS));
@@ -148,11 +155,11 @@ public class NetworkElementTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementFieldException
+     * @throws ShanksException
      */
     @Test
     public void createGatewayDevice()
-            throws UnsupportedNetworkElementFieldException {
+            throws ShanksException {
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, true);
         Assert.assertEquals("MyDevice", d.getID());
         Assert.assertTrue(d.getStatus().keySet().contains(MyDevice.OK_STATUS));
@@ -162,16 +169,16 @@ public class NetworkElementTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementFieldException
+     * @throws ShanksException
      */
     @Test
     public void createDeviceChangeStatus()
-            throws UnsupportedNetworkElementFieldException {
+            throws ShanksException {
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         try {
             d.setCurrentStatus(MyDevice.NOK_STATUS, false);
             d.setCurrentStatus(MyDevice.OK_STATUS, true);
-        } catch (UnsupportedNetworkElementFieldException e) {
+        } catch (ShanksException e) {
             e.printStackTrace();
             Assert.fail();
         }
@@ -180,27 +187,27 @@ public class NetworkElementTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementFieldException
+     * @throws ShanksException
      */
     @Test
     public void createDeviceChangeToImpossibleStatus()
-            throws UnsupportedNetworkElementFieldException {
+            throws ShanksException {
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         boolean catched = false;
         try {
             d.updateStatusTo("WrongStatus", true);
-        } catch (UnsupportedNetworkElementFieldException e) {
+        } catch (ShanksException e) {
             catched = true;
         }
         Assert.assertTrue(catched);
     }
 
     /**
-     * @throws UnsupportedNetworkElementFieldException
+     * @throws ShanksException
      */
     @Test
     public void PorpertiesNetworkElement()
-            throws UnsupportedNetworkElementFieldException {
+            throws ShanksException {
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         d.addProperty("friendDevice", d2);
@@ -208,11 +215,11 @@ public class NetworkElementTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementFieldException
+     * @throws ShanksException
      */
     @Test
     public void FullPorpertiesNetworkElement()
-            throws UnsupportedNetworkElementFieldException {
+            throws ShanksException {
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         HashMap<String, Object> properties = new HashMap<String, Object>();
@@ -225,7 +232,7 @@ public class NetworkElementTest {
 
     @Test
     public void updateProperties() 
-            throws UnsupportedNetworkElementFieldException{
+            throws ShanksException{
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         Assert.assertEquals(15.5, d.getProperty(MyDevice.TEMPERATURE_PROPERTY));
         d.updatePropertyTo(MyDevice.TEMPERATURE_PROPERTY, 70);
@@ -241,12 +248,12 @@ public class NetworkElementTest {
     }
     
     /**
-     * @throws UnsupportedNetworkElementFieldException
+     * @throws ShanksException
      * @throws TooManyConnectionException
      */
     @Test
     public void connect2DevicesToLink()
-            throws UnsupportedNetworkElementFieldException,
+            throws ShanksException,
             TooManyConnectionException {
         Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
@@ -269,12 +276,12 @@ public class NetworkElementTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementFieldException
+     * @throws ShanksException
      * @throws TooManyConnectionException
      */
     @Test
     public void connect2DevicesToLinkInOneMethod()
-            throws UnsupportedNetworkElementFieldException,
+            throws ShanksException,
             TooManyConnectionException {
         Device d1 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
@@ -297,12 +304,12 @@ public class NetworkElementTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementFieldException
+     * @throws ShanksException
      * @throws TooManyConnectionException
      */
     @Test
     public void connect2DevicesToLinkInOneMethodInFullLink()
-            throws UnsupportedNetworkElementFieldException,
+            throws ShanksException,
             TooManyConnectionException {
         Device d1 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
@@ -319,12 +326,12 @@ public class NetworkElementTest {
     }
     
     /**
-     * @throws UnsupportedNetworkElementFieldException
+     * @throws ShanksException
      * @throws TooManyConnectionException
      */
     @Test
     public void disconnectDeviceFromLink()
-            throws UnsupportedNetworkElementFieldException,
+            throws ShanksException,
             TooManyConnectionException {
         Device d1 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
@@ -349,12 +356,12 @@ public class NetworkElementTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementFieldException
+     * @throws ShanksException
      * @throws TooManyConnectionException
      */
     @Test
     public void disconnectLinkFromDevice()
-            throws UnsupportedNetworkElementFieldException,
+            throws ShanksException,
             TooManyConnectionException {
         Device d1 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
@@ -379,12 +386,12 @@ public class NetworkElementTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementFieldException
+     * @throws ShanksException
      * @throws TooManyConnectionException
      */
     @Test
     public void disconnectLinkFromDeviceAndViceversa()
-            throws UnsupportedNetworkElementFieldException,
+            throws ShanksException,
             TooManyConnectionException {
         Device d1 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
@@ -410,12 +417,12 @@ public class NetworkElementTest {
     }
 
     /**
-     * @throws UnsupportedNetworkElementFieldException
+     * @throws ShanksException
      * @throws TooManyConnectionException
      */
     @Test
     public void connectDeviceToFullLink()
-            throws UnsupportedNetworkElementFieldException,
+            throws ShanksException,
             TooManyConnectionException {
         Device d1 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
         Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);

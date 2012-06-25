@@ -1,6 +1,8 @@
 package es.upm.dit.gsi.shanks.model.event.exception;
 
-public class ShanksEventException extends Exception {
+import es.upm.dit.gsi.shanks.exception.ShanksException;
+
+public class ShanksEventException extends ShanksException {
 
     
     public ShanksEventException(String msg) {

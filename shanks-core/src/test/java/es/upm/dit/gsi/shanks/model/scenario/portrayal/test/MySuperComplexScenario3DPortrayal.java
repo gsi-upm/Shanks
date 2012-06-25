@@ -4,6 +4,7 @@ import sim.field.continuous.Continuous3D;
 import sim.portrayal3d.continuous.ContinuousPortrayal3D;
 import sim.portrayal3d.network.NetworkPortrayal3D;
 import sim.util.Double3D;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice3DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
@@ -13,7 +14,6 @@ import es.upm.dit.gsi.shanks.model.event.failiure.portrayal.Failure3DPortrayal;
 import es.upm.dit.gsi.shanks.model.failure.util.test.FailureTest;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
-import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ComplexScenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
@@ -33,11 +33,11 @@ public class MySuperComplexScenario3DPortrayal extends
      * @param height
      * @param length
      * @throws DuplicatedPortrayalIDException
-     * @throws ScenarioNotFoundException
+     * @throws ShanksException
      */
     public MySuperComplexScenario3DPortrayal(Scenario scenario, long width,
             long height, long length)
-            throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
+            throws ShanksException {
         super(scenario, width, height, length);
     }
 
@@ -45,7 +45,7 @@ public class MySuperComplexScenario3DPortrayal extends
      * @see es.upm.dit.gsi.shanks.model.scenario.portrayal.ComplexScenario3DPortrayal#placeScenarios()
      */
     @Override
-    public void placeScenarios() throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
+    public void placeScenarios() throws DuplicatedPortrayalIDException, ShanksException {
         ComplexScenario cs = (ComplexScenario) this.getScenario();
         this.situateScenario(cs.getScenario("ComplexScenario1"), new Double3D(250,0,0), ShanksMath.ANGLE_0, ShanksMath.ANGLE_315, ShanksMath.ANGLE_0);
         this.situateScenario(cs.getScenario("ComplexScenario2"), new Double3D(0,0,250), ShanksMath.ANGLE_0, ShanksMath.ANGLE_45, ShanksMath.ANGLE_0);
@@ -87,6 +87,8 @@ public class MySuperComplexScenario3DPortrayal extends
         try {
             this.addPortrayal(MyHyperComplexScenario2DPortrayal.FAILURE_DISPLAY_ID, MyHyperComplexScenario2DPortrayal.FAILURE_PORTRAYAL_ID, failuresPortrayal);
         } catch (DuplicatedPortrayalIDException e) {            
+            e.printStackTrace();
+        } catch (ShanksException e) {
             e.printStackTrace();
         }
     }

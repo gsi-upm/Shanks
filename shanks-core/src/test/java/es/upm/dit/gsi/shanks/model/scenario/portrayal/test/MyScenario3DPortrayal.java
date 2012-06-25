@@ -3,6 +3,7 @@ package es.upm.dit.gsi.shanks.model.scenario.portrayal.test;
 import sim.field.continuous.Continuous3D;
 import sim.portrayal3d.continuous.ContinuousPortrayal3D;
 import sim.portrayal3d.network.NetworkPortrayal3D;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice3DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
@@ -28,7 +29,7 @@ public class MyScenario3DPortrayal extends Scenario3DPortrayal {
      * @param length
      * @throws DuplicatedPortrayalIDException
      */
-    public MyScenario3DPortrayal(Scenario scenario, int width, int height, int length) throws DuplicatedPortrayalIDException {
+    public MyScenario3DPortrayal(Scenario scenario, int width, int height, int length) throws ShanksException {
         super(scenario, width, height, length);
     }
 
@@ -77,6 +78,8 @@ public class MyScenario3DPortrayal extends Scenario3DPortrayal {
         try {
             this.addPortrayal(MyHyperComplexScenario2DPortrayal.FAILURE_DISPLAY_ID, MyHyperComplexScenario2DPortrayal.FAILURE_PORTRAYAL_ID, failuresPortrayal);
         } catch (DuplicatedPortrayalIDException e) {            
+            e.printStackTrace();
+        } catch (ShanksException e) {
             e.printStackTrace();
         }
     }

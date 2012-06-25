@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.Properties;
 
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
-import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
+import es.upm.dit.gsi.shanks.agent.exception.DuplicatedAgentIDException;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
@@ -67,13 +68,7 @@ public class MyMegaComplexScenario extends ComplexScenario {
      */
     public MyMegaComplexScenario(String type, String initialState,
             Properties properties)
-            throws UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, NonGatewayDeviceException,
-            AlreadyConnectedScenarioException, SecurityException,
-            IllegalArgumentException, NoSuchMethodException,
-            InstantiationException, IllegalAccessException,
-            InvocationTargetException {
+            throws ShanksException {
         super(type, initialState, properties);
     }
 
@@ -81,13 +76,7 @@ public class MyMegaComplexScenario extends ComplexScenario {
      * @see es.upm.dit.gsi.shanks.model.scenario.ComplexScenario#addScenarios()
      */
     @Override
-    public void addScenarios() throws UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, NonGatewayDeviceException,
-            AlreadyConnectedScenarioException, SecurityException,
-            IllegalArgumentException, NoSuchMethodException,
-            InstantiationException, IllegalAccessException,
-            InvocationTargetException {
+    public void addScenarios() throws ShanksException {
 
         this.addScenario(MySuperComplexScenario.class, "SuperComplexScenario1", MySuperComplexScenario.SUNNY, this.getProperties(), "SED1", "MEL1");
         this.addScenario(MySuperComplexScenario.class, "SuperComplexScenario2", MySuperComplexScenario.SUNNY, this.getProperties(), "SED1", "MEL1");
@@ -98,7 +87,7 @@ public class MyMegaComplexScenario extends ComplexScenario {
      */
     @Override
     public Scenario2DPortrayal createScenario2DPortrayal()
-            throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
+            throws ShanksException {
         return new MyMegaComplexScenario2DPortrayal(this, 400, 400);
     }
 
@@ -107,7 +96,7 @@ public class MyMegaComplexScenario extends ComplexScenario {
      */
     @Override
     public Scenario3DPortrayal createScenario3DPortrayal()
-            throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
+            throws ShanksException {
         return new MyMegaComplexScenario3DPortrayal(this, 100, 100, 100);
     }
 
@@ -126,8 +115,7 @@ public class MyMegaComplexScenario extends ComplexScenario {
      */
     @Override
     public void addNetworkElements()
-            throws UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, DuplicatedIDException {
+            throws ShanksException {
         Link mel1 = new MyLink("MEL1", MyLink.OK_STATUS, 3);
         Device med1 = new MyDevice("MED1", MyDevice.OK_STATUS, true);
 
@@ -150,7 +138,7 @@ public class MyMegaComplexScenario extends ComplexScenario {
      */
     @Override
     public HashMap<Class<? extends Failure>, Double> getPenaltiesInStatus(
-            String status) throws UnsupportedScenarioStatusException {
+            String status) throws ShanksException {
 
         if (status.equals(MyMegaComplexScenario.STORM)) {
             return this.getStormPenalties();
@@ -214,13 +202,7 @@ public class MyMegaComplexScenario extends ComplexScenario {
      * @throws DuplicatedActionIDException 
      * @throws DuplicatedAgentIDException 
      */
-    public static void main(String[] args) throws SecurityException,
-            IllegalArgumentException, NoSuchMethodException,
-            InstantiationException, IllegalAccessException,
-            InvocationTargetException,
-            UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, DuplicatedPortrayalIDException, ScenarioNotFoundException, DuplicatedAgentIDException, DuplicatedActionIDException {
+    public static void main(String[] args) throws ShanksException {
 
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "5");

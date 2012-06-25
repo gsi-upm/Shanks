@@ -1,6 +1,8 @@
 package es.upm.dit.gsi.shanks.model.scenario.exception;
 
-public class UnsupportedScenarioStatusException extends Exception {
+import es.upm.dit.gsi.shanks.exception.ShanksException;
+
+public class UnsupportedScenarioStatusException extends ShanksException {
 
     /**
      * 

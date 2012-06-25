@@ -7,6 +7,7 @@ import sim.field.continuous.Continuous2D;
 import sim.portrayal.continuous.ContinuousPortrayal2D;
 import sim.util.Bag;
 import sim.util.Double2D;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
@@ -18,7 +19,7 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
 public abstract class ComplexScenario2DPortrayal extends Scenario2DPortrayal {
 
     public ComplexScenario2DPortrayal(Scenario scenario, int width, int height)
-            throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
+            throws ShanksException {
         super(scenario, width, height);
         this.placeScenarios();
     }
@@ -29,8 +30,7 @@ public abstract class ComplexScenario2DPortrayal extends Scenario2DPortrayal {
      * @throws DuplicatedPortrayalIDException
      * @throws ScenarioNotFoundException
      */
-    abstract public void placeScenarios() throws DuplicatedPortrayalIDException,
-            ScenarioNotFoundException;
+    abstract public void placeScenarios() throws ShanksException;
 
     /**
      * Situate the scenario in the complex scenario main display
@@ -44,8 +44,7 @@ public abstract class ComplexScenario2DPortrayal extends Scenario2DPortrayal {
      * @throws ScenarioNotFoundException
      */
     public void situateScenario(Scenario scenario, Double2D position,
-            Double2D alpha, Double2D beta, Double2D gamma) throws DuplicatedPortrayalIDException,
-            ScenarioNotFoundException {
+            Double2D alpha, Double2D beta, Double2D gamma) throws ShanksException {
         Scenario2DPortrayal portrayal;
         try {
             portrayal = (Scenario2DPortrayal) scenario

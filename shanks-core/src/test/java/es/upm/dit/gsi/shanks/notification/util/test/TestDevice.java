@@ -1,12 +1,13 @@
 package es.upm.dit.gsi.shanks.notification.util.test;
 
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 
 public class TestDevice extends Device {
 
     public TestDevice(String id, String initialState, boolean isGateway)
-            throws UnsupportedNetworkElementFieldException {
+            throws ShanksException {
         super(id, initialState, isGateway);
         // TODO Auto-generated constructor stub
     }

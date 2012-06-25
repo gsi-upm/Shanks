@@ -27,10 +27,6 @@ public abstract class ShanksAgent3DPortrayal extends SimplePortrayal3D {
 
 
     private int diameter = 50;
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 6319038986129405512L;
     public Logger log = Logger.getLogger(ShanksAgent3DPortrayal.class.getName());
 
     public String getLabel(ShanksAgent agent) {
@@ -120,4 +116,5 @@ public abstract class ShanksAgent3DPortrayal extends SimplePortrayal3D {
 
     abstract public Color getLabelColor(ShanksAgent agent);
 
+    private static final long serialVersionUID = 6319038986129405512L;
 }

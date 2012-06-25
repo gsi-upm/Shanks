@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import sim.engine.Steppable;
 import ec.util.MersenneTwisterFast;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
@@ -77,9 +78,10 @@ public abstract class Scenario {
      * @throws DuplicatedIDException
      */
     public Scenario(String id, String initialState, Properties properties)
-            throws UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException {
+                    throws ShanksException {
+//            throws UnsupportedNetworkElementFieldException,
+//            TooManyConnectionException, UnsupportedScenarioStatusException,
+//            DuplicatedIDException {
         this.id = id;
         this.setProperties(properties);
         this.possibleStates = new ArrayList<String>();
@@ -108,7 +110,7 @@ public abstract class Scenario {
      * @throws ScenarioNotFoundException
      */
     public ScenarioPortrayal createScenarioPortrayal()
-            throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
+            throws ShanksException {
         logger.fine("Creating Scenario Portrayal...");
         String dimensions = (String) this.getProperty(Scenario.SIMULATION_GUI);
         if (dimensions.equals(Scenario.SIMULATION_2D)) {
@@ -130,7 +132,7 @@ public abstract class Scenario {
      * @throws ScenarioNotFoundException
      */
     abstract public Scenario2DPortrayal createScenario2DPortrayal()
-            throws DuplicatedPortrayalIDException, ScenarioNotFoundException;
+            throws ShanksException;
 
     /**
      * @return a Scenario2DPortrayal
@@ -138,7 +140,7 @@ public abstract class Scenario {
      * @throws ScenarioNotFoundException
      */
     abstract public Scenario3DPortrayal createScenario3DPortrayal()
-            throws DuplicatedPortrayalIDException, ScenarioNotFoundException;
+            throws ShanksException;
 
     /**
      * @return the id
@@ -162,7 +164,7 @@ public abstract class Scenario {
      * @throws UnsupportedNetworkElementFieldException
      */
     public boolean setCurrentStatus(String desiredStatus)
-            throws UnsupportedScenarioStatusException {
+            throws ShanksException {
         if (this.isPossibleStatus(desiredStatus)) {
             this.currentStatus = desiredStatus;
             return true;
@@ -224,7 +226,7 @@ public abstract class Scenario {
      * @throws DuplicatedIDException
      */
     public void addNetworkElement(NetworkElement element)
-            throws DuplicatedIDException {
+            throws ShanksException {
         if (!this.currentElements.containsKey(element.getID())) {
             this.currentElements.put(element.getID(), element);
         } else {
@@ -436,8 +438,7 @@ public abstract class Scenario {
      * 
      */
     abstract public void addNetworkElements()
-            throws UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, DuplicatedIDException;
+            throws ShanksException;
 
     /**
      * 
@@ -458,7 +459,7 @@ public abstract class Scenario {
      */
 
     public void generateNetworkElementEvents(ShanksSimulation sim)
-            throws Exception {
+            throws ShanksException {
         MersenneTwisterFast random = new MersenneTwisterFast();
         Iterator<Class<? extends Event>> it = this.getPossibleEventsOfNE()
                 .keySet().iterator();
@@ -467,8 +468,23 @@ public abstract class Scenario {
             double prob = 0;
             Constructor<? extends Event> c = null;
             if (ProbabilisticEvent.class.isAssignableFrom(type)) {
-                c = type.getConstructor(new Class[] { Steppable.class });
-                Event event = c.newInstance(sim.getScenarioManager());
+                Event event = null;
+                try {
+                    c = type.getConstructor(new Class[] { Steppable.class });
+                    event = c.newInstance(sim.getScenarioManager());
+                } catch (SecurityException e1) {
+                    throw new ShanksException(e1);
+                } catch (NoSuchMethodException e1) {
+                    throw new ShanksException(e1);
+                } catch (IllegalArgumentException e) {
+                    throw new ShanksException(e);
+                } catch (InstantiationException e) {
+                    throw new ShanksException(e);
+                } catch (IllegalAccessException e) {
+                    throw new ShanksException(e);
+                } catch (InvocationTargetException e) {
+                    throw new ShanksException(e);
+                }
                 List<Set<NetworkElement>> list = this.getPossibleEventsOfNE()
                         .get(type);
                 int numberOfCombinations = list.size();
@@ -478,16 +494,35 @@ public abstract class Scenario {
                 if (aux < prob) {
                     Set<NetworkElement> elementsSet;
                     elementsSet = list.get(combinationNumber);
-                    this.setupNetworkElementEvent(event, elementsSet,
-                            combinationNumber);
+                    try {
+                        this.setupNetworkElementEvent(event, elementsSet,
+                                combinationNumber);
+                    } catch (Exception e1) {
+                        throw new ShanksException(e1);
+                    }
                     event.launchEvent();
                     for (NetworkElement e : elementsSet) {
                         e.checkStatus();
                     }
                 }
             } else if (PeriodicEvent.class.isAssignableFrom(type)) {
-                c = type.getConstructor(new Class[] { Steppable.class });
-                Event event = c.newInstance(sim.getScenarioManager());
+                Event event = null;
+                try {
+                    c = type.getConstructor(new Class[] { Steppable.class });
+                    event = c.newInstance(sim.getScenarioManager());
+                } catch (SecurityException e1) {
+                    throw new ShanksException(e1);
+                } catch (NoSuchMethodException e1) {
+                    throw new ShanksException(e1);
+                } catch (IllegalArgumentException e) {
+                    throw new ShanksException(e);
+                } catch (InstantiationException e) {
+                    throw new ShanksException(e);
+                } catch (IllegalAccessException e) {
+                    throw new ShanksException(e);
+                } catch (InvocationTargetException e) {
+                    throw new ShanksException(e);
+                }
                 if ((sim.getSchedule().getSteps() != 0)
                         && (((PeriodicEvent) event).getPeriod()
                                 % sim.getSchedule().getSteps() == 0)) {
@@ -498,8 +533,12 @@ public abstract class Scenario {
                             .nextInt(numberOfCombinations);
                     Set<NetworkElement> elementSet;
                     elementSet = list.get(combinationNumber);
-                    this.setupNetworkElementEvent(event, elementSet,
-                            combinationNumber);
+                    try {
+                        this.setupNetworkElementEvent(event, elementSet,
+                                combinationNumber);
+                    } catch (Exception e1) {
+                        throw new ShanksException(e1);
+                    }
                     event.launchEvent();
                     for (NetworkElement e : elementSet) {
                         e.checkStatus();
@@ -514,10 +553,11 @@ public abstract class Scenario {
     }
 
     public void generateScenarioEvents(ShanksSimulation sim)
-            throws UnsupportedScenarioStatusException, InstantiationException,
-            IllegalAccessException, UnsupportedNetworkElementFieldException,
-            SecurityException, NoSuchMethodException, IllegalArgumentException,
-            InvocationTargetException {
+            throws ShanksException {
+//            throws UnsupportedScenarioStatusException, InstantiationException,
+//            IllegalAccessException, UnsupportedNetworkElementFieldException,
+//            SecurityException, NoSuchMethodException, IllegalArgumentException,
+//            InvocationTargetException {
         MersenneTwisterFast random = new MersenneTwisterFast();
         Iterator<Class<? extends Event>> it = this
                 .getPossibleEventsOfScenario().keySet().iterator();
@@ -526,8 +566,23 @@ public abstract class Scenario {
             double prob = 0;
             Constructor<? extends Event> c = null;
             if (ProbabilisticEvent.class.isAssignableFrom(type)) {
-                c = type.getConstructor(new Class[] { Steppable.class });
-                Event event = c.newInstance(sim.getScenarioManager());
+                Event event = null;
+                try {
+                    c = type.getConstructor(new Class[] { Steppable.class });
+                    event = c.newInstance(sim.getScenarioManager());
+                } catch (SecurityException e1) {
+                    throw new ShanksException(e1);
+                } catch (NoSuchMethodException e1) {
+                    throw new ShanksException(e1);
+                } catch (IllegalArgumentException e) {
+                    throw new ShanksException(e);
+                } catch (InstantiationException e) {
+                    throw new ShanksException(e);
+                } catch (IllegalAccessException e) {
+                    throw new ShanksException(e);
+                } catch (InvocationTargetException e) {
+                    throw new ShanksException(e);
+                }
                 List<Set<Scenario>> list = this.getPossibleEventsOfScenario()
                         .get(type);
                 int numberOfCombinations = list.size();
@@ -542,8 +597,23 @@ public abstract class Scenario {
                     event.launchEvent();
                 }
             } else if (PeriodicEvent.class.isAssignableFrom(type)) {
-                c = type.getConstructor(new Class[] { Steppable.class });
-                Event event = c.newInstance(sim.getScenarioManager());
+                Event event = null;
+                try {
+                    c = type.getConstructor(new Class[] { Steppable.class });
+                    event = c.newInstance(sim.getScenarioManager());
+                } catch (SecurityException e1) {
+                    throw new ShanksException(e1);
+                } catch (NoSuchMethodException e1) {
+                    throw new ShanksException(e1);
+                } catch (IllegalArgumentException e) {
+                    throw new ShanksException(e);
+                } catch (InstantiationException e) {
+                    throw new ShanksException(e);
+                } catch (IllegalAccessException e) {
+                    throw new ShanksException(e);
+                } catch (InvocationTargetException e) {
+                    throw new ShanksException(e);
+                }
                 if ((sim.getSchedule().getSteps() != 0)
                         && (((PeriodicEvent) event).getPeriod()
                                 % sim.getSchedule().getSteps() == 0)) {
@@ -571,7 +641,7 @@ public abstract class Scenario {
 
     public void setupNetworkElementEvent(Event event,
             Set<NetworkElement> elementsSet, int configurationNumber)
-            throws Exception {
+            throws ShanksException {
         for (NetworkElement ne : elementsSet) {
             event.addAffectedElement(ne);
         }
@@ -708,7 +778,7 @@ public abstract class Scenario {
      * @throws UnsupportedScenarioStatusException
      */
     abstract public HashMap<Class<? extends Failure>, Double> getPenaltiesInStatus(
-            String status) throws UnsupportedScenarioStatusException;
+            String status) throws ShanksException;
 
     /**
      * @return resolved failures

@@ -13,11 +13,6 @@ import es.upm.dit.gsi.shanks.model.element.device.Device;
 
 public abstract class Device2DPortrayal extends SimplePortrayal2D {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -5132594800897540031L;
-
     @Override
     public void draw(Object object, Graphics2D graphics, DrawInfo2D info) {
 
@@ -29,7 +24,7 @@ public abstract class Device2DPortrayal extends SimplePortrayal2D {
         final int x = (int) (info.draw.x - width / 2.0);
         final int y = (int) (info.draw.y - height / 2.0);
         final int w = (int) (width);
-        final int h = (int) (height);        
+        final int h = (int) (height);
         graphics.setColor(Color.gray);
         graphics.fillOval(x, y, w, h);
 
@@ -38,19 +33,22 @@ public abstract class Device2DPortrayal extends SimplePortrayal2D {
         graphics.drawString(device.getID(), x - 3, y);
 
     }
-    
-    public void putImage(String path, int x, int y, int w, int h, Graphics2D graphics){
+
+    public void putImage(String path, int x, int y, int w, int h,
+            Graphics2D graphics) {
         ImageIcon i = new ImageIcon(path);
         Image image = i.getImage();
         ImageObserver io = new ImageObserver() {
-            
+
             @Override
             public boolean imageUpdate(Image img, int infoflags, int x, int y,
                     int width, int height) {
                 return false;
             }
         };
-        
-        graphics.drawImage(image, x, y, w*3, h*3, io);
+
+        graphics.drawImage(image, x, y, w * 3, h * 3, io);
     }
+
+    private static final long serialVersionUID = -5132594800897540031L;
 }

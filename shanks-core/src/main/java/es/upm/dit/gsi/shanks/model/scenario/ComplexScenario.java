@@ -14,6 +14,7 @@ import java.util.Properties;
 import java.util.Set;
 
 import es.upm.dit.gsi.shanks.ShanksSimulation;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
@@ -56,11 +57,12 @@ public abstract class ComplexScenario extends Scenario {
      * @throws SecurityException 
      */
     public ComplexScenario(String type, String initialState,
-            Properties properties)
-            throws UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, NonGatewayDeviceException,
-            AlreadyConnectedScenarioException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+            Properties properties) throws ShanksException {
+
+//            throws UnsupportedNetworkElementFieldException,
+//            TooManyConnectionException, UnsupportedScenarioStatusException,
+//            DuplicatedIDException, NonGatewayDeviceException,
+//            AlreadyConnectedScenarioException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
         super(type, initialState, properties);
         this.scenarios = new HashMap<Scenario, List<Link>>();
 
@@ -85,11 +87,12 @@ public abstract class ComplexScenario extends Scenario {
      * @throws IllegalArgumentException 
      * @throws SecurityException 
      */
-    abstract public void addScenarios()
-            throws UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, NonGatewayDeviceException,
-            AlreadyConnectedScenarioException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException;
+    abstract public void addScenarios() throws ShanksException;
+            
+//            throws UnsupportedNetworkElementFieldException,
+//            TooManyConnectionException, UnsupportedScenarioStatusException,
+//            DuplicatedIDException, NonGatewayDeviceException,
+//            AlreadyConnectedScenarioException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException;
 
     /**
      * Add the scenario to the complex scenario.
@@ -111,12 +114,28 @@ public abstract class ComplexScenario extends Scenario {
      * @throws IllegalAccessException
      * @throws InvocationTargetException
      */
-    public void addScenario(Class<? extends Scenario> scenarioClass, String scenarioID, String initialState, Properties properties, String gatewayDeviceID, String externalLinkID)
-            throws NonGatewayDeviceException, TooManyConnectionException,
-            DuplicatedIDException, AlreadyConnectedScenarioException, SecurityException, NoSuchMethodException, IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
-        Constructor<? extends Scenario> c  = scenarioClass.getConstructor(new Class[]{String.class,String.class,Properties.class});
-        
-        Scenario scenario = c.newInstance(scenarioID,initialState,properties);
+    public void addScenario(Class<? extends Scenario> scenarioClass, String scenarioID, String initialState, 
+            Properties properties, String gatewayDeviceID, String externalLinkID) throws ShanksException {
+        // throws NonGatewayDeviceException, TooManyConnectionException,
+        // DuplicatedIDException, AlreadyConnectedScenarioException, SecurityException, NoSuchMethodException, IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
+        Constructor<? extends Scenario> c;
+        Scenario scenario;
+        try {
+            c = scenarioClass.getConstructor(new Class[]{String.class,String.class,Properties.class});
+            scenario = c.newInstance(scenarioID,initialState,properties);
+        } catch (SecurityException e) {
+            throw new ShanksException(e);
+        } catch (NoSuchMethodException e) {
+            throw new ShanksException(e);
+        } catch (IllegalArgumentException e) {
+            throw new ShanksException(e);
+        } catch (InstantiationException e) {
+            throw new ShanksException(e);
+        } catch (IllegalAccessException e) {
+            throw new ShanksException(e);
+        } catch (InvocationTargetException e) {
+            throw new ShanksException(e);
+        }
 
         Device gateway = (Device) scenario.getNetworkElement(gatewayDeviceID);
         Link externalLink = (Link) this.getNetworkElement(externalLinkID);
@@ -154,7 +173,7 @@ public abstract class ComplexScenario extends Scenario {
      *         scenarioID
      * @throws ScenarioNotFoundException 
      */
-    public Scenario getScenario(String scenarioID) throws ScenarioNotFoundException {
+    public Scenario getScenario(String scenarioID) throws ShanksException {
         for (Scenario s : this.scenarios.keySet()) {
             if (s.getID().equals(scenarioID)) {
                 return s;
@@ -168,7 +187,7 @@ public abstract class ComplexScenario extends Scenario {
      * 
      * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#generateFailures()
      */
-    public void generateNetworkElementsEvents(ShanksSimulation sim) throws Exception {
+    public void generateNetworkElementsEvents(ShanksSimulation sim) throws ShanksException {
         super.generateNetworkElementEvents(sim);
         for (Scenario scenario : this.scenarios.keySet()) {
             scenario.generateNetworkElementEvents(sim);

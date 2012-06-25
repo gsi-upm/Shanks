@@ -4,7 +4,6 @@
  */
 package es.upm.dit.gsi.shanks.model.scenario;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
 
 import junit.framework.Assert;
@@ -13,13 +12,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
-import es.upm.dit.gsi.shanks.model.scenario.exception.AlreadyConnectedScenarioException;
-import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
-import es.upm.dit.gsi.shanks.model.scenario.exception.NonGatewayDeviceException;
-import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
-import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.scenario.test.MyComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
 import es.upm.dit.gsi.shanks.model.scenario.test.MySuperComplexScenario;
@@ -36,9 +29,7 @@ public class ComplexScenarioTest {
 
     @Test
     public void createComplexScenario()
-            throws UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, NonGatewayDeviceException, AlreadyConnectedScenarioException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+            throws ShanksException {
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
@@ -51,9 +42,7 @@ public class ComplexScenarioTest {
 
     @Test
     public void createComplexScenarioAndGetScenarios()
-            throws UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, NonGatewayDeviceException, AlreadyConnectedScenarioException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException, ScenarioNotFoundException {
+            throws ShanksException {
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
@@ -68,9 +57,7 @@ public class ComplexScenarioTest {
 
     @Test
     public void createSuperComplexScenario()
-            throws UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, NonGatewayDeviceException, AlreadyConnectedScenarioException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+            throws ShanksException {
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
@@ -83,9 +70,7 @@ public class ComplexScenarioTest {
 
     @Test
     public void createSuperComplexScenarioAndGetScenarios()
-            throws UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, NonGatewayDeviceException, AlreadyConnectedScenarioException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException, ScenarioNotFoundException {
+            throws ShanksException {
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
@@ -97,5 +82,4 @@ public class ComplexScenarioTest {
         Assert.assertEquals("ComplexScenario1", s1.getID());
         Assert.assertEquals("ComplexScenario2", s2.getID());
     }
-
 }

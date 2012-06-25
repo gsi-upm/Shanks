@@ -9,37 +9,39 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
-
 
 /**
  * @author a.carrera
- *
+ * 
  */
 public abstract class NetworkElement {
 
     Logger logger = Logger.getLogger(NetworkElement.class.getName());
-    
+
     private String id;
-    private HashMap<String,Boolean> states;
+    private HashMap<String, Boolean> states;
     private HashMap<String, Object> properties;
-    public HashMap<String, Object> universal; //TODO rename this variable to global. Universal seems like whole simulation state.
+    public HashMap<String, Object> universal; // TODO rename this variable to
+                                              // global. Universal seems like
+                                              // whole simulation state.
     public List<String> possiblesStates;
-    
+
     /**
      * @param id
-     * @throws UnsupportedNetworkElementFieldException 
+     * @throws UnsupportedNetworkElementFieldException
      */
-    public NetworkElement(String id, String initialStatus) throws UnsupportedNetworkElementFieldException {
+    public NetworkElement(String id, String initialStatus)
+            throws ShanksException {
         this.id = id;
         this.properties = new HashMap<String, Object>();
         this.states = new HashMap<String, Boolean>();
-        
+
         this.setPossibleStates();
         this.states.put(initialStatus, true);
         this.fillIntialProperties();
     }
-
 
     /**
      * @return the id
@@ -48,14 +50,12 @@ public abstract class NetworkElement {
         return id;
     }
 
-
     /**
      * @param id
      */
     public void setID(String id) {
         this.id = id;
     }
-    
 
     /**
      * @return the currentStatus
@@ -63,27 +63,31 @@ public abstract class NetworkElement {
     public HashMap<String, Boolean> getStatus() {
         return states;
     }
-    
+
     /**
      * @param desiredStatus
      * @return
      * @throws UnsupportedNetworkElementFieldException
      */
-    public boolean setCurrentStatus(String desiredStatus, boolean state) throws UnsupportedNetworkElementFieldException {
+    public boolean setCurrentStatus(String desiredStatus, boolean state)
+            throws ShanksException {
         List<String> states = new ArrayList<String>();
         states.add(desiredStatus);
         return this.setCurrentStatus(states, state);
     }
-    
+
     /**
-     * @param desiredStatus the currentStatus to set
-     * @return true if the status was set correctly and false if the status is not a possible status of the network element
-     * @throws UnsupportedNetworkElementFieldException 
+     * @param desiredStatus
+     *            the currentStatus to set
+     * @return true if the status was set correctly and false if the status is
+     *         not a possible status of the network element
+     * @throws UnsupportedNetworkElementFieldException
      */
-    public boolean setCurrentStatus(List<String> desiredStatus, boolean state) throws UnsupportedNetworkElementFieldException {
-        for(String s : desiredStatus){
-            if(states.containsKey(s)){
-                states.put(s,state);
+    public boolean setCurrentStatus(List<String> desiredStatus, boolean state)
+            throws ShanksException {
+        for (String s : desiredStatus) {
+            if (states.containsKey(s)) {
+                states.put(s, state);
                 this.checkProperties();
             } else {
                 throw new UnsupportedNetworkElementFieldException(this, s);
@@ -91,89 +95,99 @@ public abstract class NetworkElement {
         }
         return true;
     }
-    
-    
-    
+
     /**
      * @param desiredStatus
      * @param state
      * @return
      * @throws UnsupportedNetworkElementFieldException
      */
-    public boolean updateStatusTo(String desiredStatus, boolean state) throws UnsupportedNetworkElementFieldException {
+    public boolean updateStatusTo(String desiredStatus, boolean state)
+            throws ShanksException {
         List<String> states = new ArrayList<String>();
         states.add(desiredStatus);
         return this.updateStatusTo(states, state);
     }
-    
+
     /**
-     * @param desiredStatus the currentStatus to set
-     * @return true if the status was set correctly and false if the status is not a possible status of the network element
-     * @throws UnsupportedNetworkElementFieldException 
+     * @param desiredStatus
+     *            the currentStatus to set
+     * @return true if the status was set correctly and false if the status is
+     *         not a possible status of the network element
+     * @throws UnsupportedNetworkElementFieldException
      */
-    public boolean updateStatusTo(List<String> desiredStatus, boolean value) throws UnsupportedNetworkElementFieldException {
+    public boolean updateStatusTo(List<String> desiredStatus, boolean value)
+            throws ShanksException {
         boolean allStatusUpdated = false;
-        for(String status : desiredStatus){
+        for (String status : desiredStatus) {
             if (this.isPossibleStatus(status)) {
                 states.put(status, value);
-                logger.fine("Network Element Status updated -> ElementID: " + this.getID() + " Current Status: " + status);
+                logger.fine("Network Element Status updated -> ElementID: "
+                        + this.getID() + " Current Status: " + status);
             } else {
-                logger.warning("Impossible to update status: " + status + ". This network element " + this.getID() + "does not support this status.");
+                logger.warning("Impossible to update status: " + status
+                        + ". This network element " + this.getID()
+                        + "does not support this status.");
                 throw new UnsupportedNetworkElementFieldException(this, status);
             }
         }
         allStatusUpdated = true;
         return allStatusUpdated;
     }
-  
-    
+
     /**
      * @param desiredProperty
      * @param value
      * @return
      * @throws UnsupportedNetworkElementFieldException
      */
-    public boolean updatePropertyTo(String desiredProperty, Object value) throws UnsupportedNetworkElementFieldException {
+    public boolean updatePropertyTo(String desiredProperty, Object value)
+            throws ShanksException {
         List<String> properties = new ArrayList<String>();
         properties.add(desiredProperty);
         return this.updatePropertyTo(properties, value);
     }
-    
-    
+
     /**
      * @param desiredProperty
      * @param value
      * @return
      * @throws UnsupportedNetworkElementFieldException
      */
-    public boolean updatePropertyTo(List<String> desiredProperty, Object value) throws UnsupportedNetworkElementFieldException {
+    public boolean updatePropertyTo(List<String> desiredProperty, Object value)
+            throws ShanksException {
         boolean allPropertiesUpdated = false;
-        for(String property : desiredProperty){
+        for (String property : desiredProperty) {
             if (this.properties.containsKey(property)) {
                 properties.put(property, value);
-                logger.fine("Network Element Property updated -> ElementID: " + this.getID() + " Property : " + property + " changed to : " + value);
+                logger.fine("Network Element Property updated -> ElementID: "
+                        + this.getID() + " Property : " + property
+                        + " changed to : " + value);
             } else {
-                logger.warning("Impossible to change property: " + property + ". This network element " + this.getID() + "haven't got this property.");
+                logger.warning("Impossible to change property: " + property
+                        + ". This network element " + this.getID()
+                        + "haven't got this property.");
                 // TODO make Unssoported... PropertyException
-                throw new UnsupportedNetworkElementFieldException(this, property);
+                throw new UnsupportedNetworkElementFieldException(this,
+                        property);
             }
         }
         allPropertiesUpdated = true;
         return allPropertiesUpdated;
     }
-    
-    
+
     /**
      * Set the initial properties of the network element
      */
     abstract public void fillIntialProperties();
 
     /**
-     * This method check properties and change them depending on the current status
-     * @throws UnsupportedNetworkElementFieldException 
+     * This method check properties and change them depending on the current
+     * status
+     * 
+     * @throws UnsupportedNetworkElementFieldException
      */
-    abstract public void checkProperties() throws UnsupportedNetworkElementFieldException;
-
+    abstract public void checkProperties() throws ShanksException;
 
     /**
      * @param possibleStatus
@@ -183,10 +197,9 @@ public abstract class NetworkElement {
         if (this.states.containsKey(possibleStatus)) {
             return true;
         } else {
-            return false;            
+            return false;
         }
     }
-
 
     /**
      * @return the properties
@@ -196,12 +209,13 @@ public abstract class NetworkElement {
     }
 
     /**
-     * @param properties the properties to set
+     * @param properties
+     *            the properties to set
      */
     public void setProperties(HashMap<String, Object> properties) {
         this.properties = properties;
     }
-    
+
     /**
      * @param propertyName
      * @param propertyValue
@@ -209,27 +223,30 @@ public abstract class NetworkElement {
     public void addProperty(String propertyName, Object propertyValue) {
         this.properties.put(propertyName, propertyValue);
     }
-    
+
     /**
-     * If the property exists, this method changes it. If not, this method creates it.
+     * If the property exists, this method changes it. If not, this method
+     * creates it.
      * 
      * @param propertyName
      * @param propertyValue
-     * @throws UnsupportedNetworkElementFieldException 
+     * @throws UnsupportedNetworkElementFieldException
      */
-    public void changeProperty(String propertyName, Object propertyValue) throws UnsupportedNetworkElementFieldException {
+    public void changeProperty(String propertyName, Object propertyValue)
+            throws ShanksException {
         this.properties.put(propertyName, propertyValue);
         this.checkStatus();
     }
-    
-    /**
-     * This method check status and change them depending on the current properties
-     * This method must use updateStatusTo(String desiredStatus) method to change element status.
-     * WARNING: Do not use setCurrentStatus(String desiredStatus) to avoid an infinitive loop
-     * @throws UnsupportedNetworkElementFieldException 
-     */
-    abstract public void checkStatus() throws UnsupportedNetworkElementFieldException;
 
+    /**
+     * This method check status and change them depending on the current
+     * properties This method must use updateStatusTo(String desiredStatus)
+     * method to change element status. WARNING: Do not use
+     * setCurrentStatus(String desiredStatus) to avoid an infinitive loop
+     * 
+     * @throws UnsupportedNetworkElementFieldException
+     */
+    abstract public void checkStatus() throws ShanksException;
 
     /**
      * @param propertyName
@@ -239,10 +256,10 @@ public abstract class NetworkElement {
         return this.properties.get(propertyName);
     }
 
-
     /**
-     * This method only returns a copy of the list, if you modify the copy, the internal list of PossibleStates will be not modified.
-     * To interact with the real list, use "addPossibleStatus" and "removePossibleStatus" methods
+     * This method only returns a copy of the list, if you modify the copy, the
+     * internal list of PossibleStates will be not modified. To interact with
+     * the real list, use "addPossibleStatus" and "removePossibleStatus" methods
      * 
      * @return a copy of possibleStates list
      */
@@ -254,12 +271,11 @@ public abstract class NetworkElement {
         return copy;
     }
 
-
     /**
      *
      */
     abstract public void setPossibleStates();
-    
+
     /**
      * Add the possibles states of the device
      * 
@@ -268,18 +284,15 @@ public abstract class NetworkElement {
     public void addPossibleStatus(String possibleStatus) {
         this.states.put(possibleStatus, false);
     }
-    
+
     /**
      * @param possibleStatus
      */
     public void removePossibleStatus(String possibleStatus) {
         this.states.remove(possibleStatus);
     }
-    
 
-    
-    
-    public void setUniversalSituation(){
+    public void setUniversalSituation() {
         universal.put("PROPERTIES", properties);
         universal.put("STATUS", states);
     }

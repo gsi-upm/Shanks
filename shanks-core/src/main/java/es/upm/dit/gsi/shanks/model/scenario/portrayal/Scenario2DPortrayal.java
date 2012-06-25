@@ -13,7 +13,8 @@ import sim.portrayal.continuous.ContinuousPortrayal2D;
 import sim.portrayal.network.NetworkPortrayal2D;
 import sim.portrayal.network.SpatialNetwork2D;
 import sim.util.Double2D;
-import es.upm.dit.gsi.shanks.exception.DuplictaedDisplayIDException;
+import es.upm.dit.gsi.shanks.agent.exception.DuplictaedDisplayIDException;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
@@ -44,7 +45,7 @@ public abstract class Scenario2DPortrayal extends ScenarioPortrayal {
      * @throws DuplicatedPortrayalIDException
      */
     public Scenario2DPortrayal(Scenario scenario, int width, int height)
-            throws DuplicatedPortrayalIDException {
+            throws ShanksException {
         super(scenario);
         this.devices = new Continuous2D(5, width, height);
         this.links = new Network();
@@ -92,7 +93,7 @@ public abstract class Scenario2DPortrayal extends ScenarioPortrayal {
      * @throws DuplictaedDisplayIDException
      */
     public void addDisplay(String displayID, Display2D display)
-            throws DuplictaedDisplayIDException {
+            throws ShanksException {
         if (this.displayList.containsKey(displayID)) {
             throw new DuplictaedDisplayIDException(displayID);
         }
@@ -133,7 +134,7 @@ public abstract class Scenario2DPortrayal extends ScenarioPortrayal {
      * @param frame
      * @throws DuplictedFrameIDException 
      */
-    public void addFrame(String frameID, JFrame frame) throws DuplictedFrameIDException {
+    public void addFrame(String frameID, JFrame frame) throws ShanksException {
         if (this.frameList.containsKey(frameID)) {
             throw new DuplictedFrameIDException(frameID);
         } else {

@@ -13,6 +13,7 @@ import sim.portrayal.grid.SparseGridPortrayal2D;
 import sim.portrayal3d.continuous.ContinuousPortrayal3D;
 import sim.util.Double3D;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
@@ -52,6 +53,8 @@ public class FailuresGUI implements Steppable {
                 e.printStackTrace();
             } catch (ScenarioNotFoundException e) {
                 e.printStackTrace();
+            } catch (ShanksException e) {
+                e.printStackTrace();
             }
         } else if (simulation.getScenario()
                 .getProperty(Scenario.SIMULATION_GUI)
@@ -74,6 +77,8 @@ public class FailuresGUI implements Steppable {
             } catch (DuplicatedPortrayalIDException e) {
                 e.printStackTrace();
             } catch (ScenarioNotFoundException e) {
+                e.printStackTrace();
+            } catch (ShanksException e) {
                 e.printStackTrace();
             }
         }

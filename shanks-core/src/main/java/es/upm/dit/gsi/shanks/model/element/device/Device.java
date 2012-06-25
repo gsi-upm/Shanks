@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
@@ -33,7 +34,7 @@ public abstract class Device extends NetworkElement {
      * @throws UnsupportedNetworkElementFieldException
      */
     public Device(String id, String initialState, boolean isGateway)
-            throws UnsupportedNetworkElementFieldException {
+            throws ShanksException {
         super(id, initialState);
         this.isGateway = isGateway;
         this.linksList = new ArrayList<Link>();
@@ -54,11 +55,11 @@ public abstract class Device extends NetworkElement {
      * @param link
      * @throws TooManyConnectionException
      */
-    public void connectToLink(Link link) throws TooManyConnectionException {
+    public void connectToLink(Link link) throws ShanksException {
         if (!this.linksList.contains(link)) {
             this.linksList.add(link);
-            logger.finer("Device " + this.getID() + " is now connected to Link "
-                    + link.getID());
+            logger.finer("Device " + this.getID()
+                    + " is now connected to Link " + link.getID());
             link.connectDevice(this);
         }
     }
@@ -89,11 +90,11 @@ public abstract class Device extends NetworkElement {
      * @throws TooManyConnectionException
      */
     public void connectToDeviceWithLink(Device device, Link link)
-            throws TooManyConnectionException {
+            throws ShanksException {
         this.connectToLink(link);
         try {
             device.connectToLink(link);
-        } catch (TooManyConnectionException e) {
+        } catch (ShanksException e) {
             this.disconnectFromLink(link);
             throw e;
         }

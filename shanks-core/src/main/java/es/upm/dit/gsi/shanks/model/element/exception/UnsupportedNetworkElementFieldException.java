@@ -1,8 +1,9 @@
 package es.upm.dit.gsi.shanks.model.element.exception;
 
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 
-public class UnsupportedNetworkElementFieldException extends Exception {
+public class UnsupportedNetworkElementFieldException extends ShanksException {
     
     public static final String STATUS = "status";
     public static final String PROPERTY = "property";

@@ -2,7 +2,6 @@ package es.upm.dit.gsi.shanks.agent.action.test;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -18,20 +17,13 @@ import org.junit.Test;
 import sim.engine.SimState;
 import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.agent.action.SimpleShanksAgentAction;
-import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
 import es.upm.dit.gsi.shanks.agent.test.MySimpleShanksAgent;
-import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
-import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.event.agent.Action;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
-import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
-import es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException;
-import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
-import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
 import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation;
 
@@ -75,7 +67,7 @@ public class SimpleActionTest {
     }
     
     @Test
-    public void createActionAndNoExecuteAction() throws UnsupportedNetworkElementFieldException{
+    public void createActionAndNoExecuteAction() throws ShanksException{
         @SuppressWarnings("serial")
         Steppable launcher = new Steppable() {
             @Override
@@ -97,7 +89,7 @@ public class SimpleActionTest {
     }
     
     @Test
-    public void createActionAndExecuteAction() throws UnsupportedNetworkElementFieldException, UnsupportedScenarioStatusException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException, TooManyConnectionException, DuplicatedIDException, DuplicatedPortrayalIDException, ScenarioNotFoundException, DuplicatedAgentIDException, DuplicatedActionIDException{
+    public void createActionAndExecuteAction() throws ShanksException{
         @SuppressWarnings("serial")
         Steppable launcher = new Steppable() {
             @Override

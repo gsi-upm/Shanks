@@ -2,8 +2,8 @@ package es.upm.dit.gsi.shanks.model.element.device.test;
 
 import java.util.HashMap;
 
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 
 /**
  * @author a.carrera
@@ -15,9 +15,9 @@ public class MyDevice extends Device {
      * @param id
      * @param initialState
      * @param isGateway
-     * @throws UnsupportedNetworkElementFieldException
+     * @throws ShanksException 
      */
-    public MyDevice(String id, String initialState, boolean isGateway) throws UnsupportedNetworkElementFieldException {
+    public MyDevice(String id, String initialState, boolean isGateway) throws ShanksException {
         super(id, initialState, isGateway);
     }
 
@@ -55,7 +55,7 @@ public class MyDevice extends Device {
      * @see es.upm.dit.gsi.shanks.model.element.NetworkElement#checkProperties()
      */
     @Override
-    public void checkProperties() throws UnsupportedNetworkElementFieldException {
+    public void checkProperties() throws ShanksException {
         HashMap<String, Boolean> status = this.getStatus();
             if (status.get(MyDevice.OK_STATUS)) {
                 this.changeProperty(MyDevice.TEMPERATURE_PROPERTY, 30);
@@ -73,7 +73,7 @@ public class MyDevice extends Device {
      * @see es.upm.dit.gsi.shanks.model.element.NetworkElement#checkStatus()
      */
     @Override
-    public void checkStatus() throws UnsupportedNetworkElementFieldException {
+    public void checkStatus() throws ShanksException {
         Integer temp = (Integer) this.getProperty(MyDevice.TEMPERATURE_PROPERTY);
         if (temp <= 70 && temp >=50) {
             this.updateStatusTo(MyDevice.OK_STATUS, true);

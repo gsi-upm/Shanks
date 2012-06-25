@@ -11,6 +11,7 @@ import sim.util.media.chart.ChartGenerator;
 import sim.util.media.chart.HistogramGenerator;
 import sim.util.media.chart.ScatterPlotGenerator;
 import sim.util.media.chart.TimeSeriesChartGenerator;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedChartIDException;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedDataSerieIDException;
@@ -86,7 +87,7 @@ public abstract class ScenarioPortrayal {
      * @param portrayal
      * @throws DuplicatedPortrayalIDException 
      */
-    public void addPortrayal(String displayID, String portrayalID, Portrayal portrayal) throws DuplicatedPortrayalIDException {
+    public void addPortrayal(String displayID, String portrayalID, Portrayal portrayal) throws ShanksException {
         if (!this.portrayals.containsKey(displayID)) {
             this.portrayals.put(displayID, new HashMap<String,Portrayal>());
         }
@@ -115,7 +116,7 @@ public abstract class ScenarioPortrayal {
      * @param chart
      * @throws DuplicatedChartIDException 
      */
-    public void addTimeChart(String chartID, String xAxisLabel, String yAxisLabel) throws DuplicatedChartIDException {
+    public void addTimeChart(String chartID, String xAxisLabel, String yAxisLabel) throws ShanksException {
         if (!this.timeCharts.containsKey(chartID)) {
             TimeSeriesChartGenerator chart = new TimeSeriesChartGenerator();
             chart.setTitle(chartID);
@@ -163,7 +164,7 @@ public abstract class ScenarioPortrayal {
      * @param dataSerie
      * @throws DuplicatedDataSerieIDException
      */
-    public void addDataSerieToTimeChart(String chartID, String dataSerieID) throws DuplicatedDataSerieIDException {
+    public void addDataSerieToTimeChart(String chartID, String dataSerieID) throws ShanksException {
         if (!this.timeChartData.containsKey(chartID)) {
             this.timeChartData.put(chartID, new HashMap<String, XYSeries>());
         }
@@ -218,8 +219,9 @@ public abstract class ScenarioPortrayal {
      * @param dataSerieID
      * @param x
      * @param y
+     * @throws ShanksException 
      */
-    public void addDataToDataSerieInTimeChart(String chartID, String dataSerieID, double x, double y) {
+    public void addDataToDataSerieInTimeChart(String chartID, String dataSerieID, double x, double y) throws ShanksException {
         if (this.containsDataSerieInTimeChart(chartID, dataSerieID)) {
             this.timeChartData.get(chartID).get(dataSerieID).add(x, y, true);
         } else {
@@ -240,7 +242,7 @@ public abstract class ScenarioPortrayal {
      * @param String yAxisLabel - The name of the y axis 
      * @throws DuplicatedChartIDException 
      */
-    public void addScatterPlot(String scatterID, String xAxisLabel, String yAxisLabel) throws DuplicatedChartIDException {
+    public void addScatterPlot(String scatterID, String xAxisLabel, String yAxisLabel) throws ShanksException {
         if (!this.timeCharts.containsKey(scatterID)) {
             ScatterPlotGenerator scatter = new ScatterPlotGenerator();
             scatter.setTitle(scatterID);
@@ -325,7 +327,7 @@ public abstract class ScenarioPortrayal {
      * @param String yAxisLabel
      * @throws DuplicatedChartIDException 
      */
-    public void addHistogram(String histogramID, String xAxisLabel, String yAxisLabel) throws DuplicatedChartIDException {
+    public void addHistogram(String histogramID, String xAxisLabel, String yAxisLabel) throws ShanksException {
         if (!this.histograms.containsKey(histogramID)) {
             HistogramGenerator histogram = new HistogramGenerator();
             histogram.setTitle(histogramID);

@@ -6,10 +6,9 @@ import java.util.List;
 import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.ShanksAgent;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.event.agent.Action;
-import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 
 public abstract class SimpleShanksAgentAction extends Action{
 
@@ -20,7 +19,7 @@ public abstract class SimpleShanksAgentAction extends Action{
         this.affected = new ArrayList<NetworkElement>();
     }
     
-    public void executeAction(ShanksSimulation simulation, ShanksAgent agent, List<NetworkElement> arguments) throws UnsupportedNetworkElementFieldException, UnsupportedScenarioStatusException {
+    public void executeAction(ShanksSimulation simulation, ShanksAgent agent, List<NetworkElement> arguments) throws ShanksException {
         for(NetworkElement ne : arguments){
             this.addAffectedElement(ne);
         }

@@ -11,11 +11,6 @@ import es.upm.dit.gsi.shanks.model.element.link.Link;
 
 public abstract class Link2DPortrayal extends SimpleEdgePortrayal2D {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 8224336342428392184L;
-
     @Override
     public void draw(Object object, Graphics2D graphics, DrawInfo2D info) {
         EdgeDrawInfo2D ei = (EdgeDrawInfo2D) info;
@@ -38,4 +33,6 @@ public abstract class Link2DPortrayal extends SimpleEdgePortrayal2D {
         graphics.drawString( link.getID(), midX - width / 2, midY );
 
     }
+    
+    private static final long serialVersionUID = 8224336342428392184L;
 }

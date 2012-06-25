@@ -4,6 +4,7 @@ import sim.field.grid.SparseGrid2D;
 import sim.portrayal.continuous.ContinuousPortrayal2D;
 import sim.portrayal.grid.SparseGridPortrayal2D;
 import sim.portrayal.network.NetworkPortrayal2D;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice2DPortrayal;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
@@ -28,7 +29,7 @@ public class MyScenario2DPortrayal extends Scenario2DPortrayal {
      * @param height
      * @throws DuplicatedPortrayalIDException
      */
-    public MyScenario2DPortrayal(Scenario scenario, int width, int height) throws DuplicatedPortrayalIDException {
+    public MyScenario2DPortrayal(Scenario scenario, int width, int height) throws ShanksException {
         super(scenario, width, height);
     }
 
@@ -72,6 +73,8 @@ public class MyScenario2DPortrayal extends Scenario2DPortrayal {
         try {
             this.addPortrayal(MyHyperComplexScenario2DPortrayal.FAILURE_DISPLAY_ID, MyHyperComplexScenario2DPortrayal.FAILURE_PORTRAYAL_ID, failuresPortrayal);
         } catch (DuplicatedPortrayalIDException e) {            
+            e.printStackTrace();
+        } catch (ShanksException e) {
             e.printStackTrace();
         }
     }

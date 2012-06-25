@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.Properties;
 
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
-import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
+import es.upm.dit.gsi.shanks.agent.exception.DuplicatedAgentIDException;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
@@ -67,13 +68,7 @@ public class MyComplexScenario extends ComplexScenario {
      */
     public MyComplexScenario(String type, String initialState,
             Properties properties)
-            throws UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, NonGatewayDeviceException,
-            AlreadyConnectedScenarioException, SecurityException,
-            IllegalArgumentException, NoSuchMethodException,
-            InstantiationException, IllegalAccessException,
-            InvocationTargetException {
+            throws ShanksException {
         super(type, initialState, properties);
     }
 
@@ -96,8 +91,7 @@ public class MyComplexScenario extends ComplexScenario {
      */
     @Override
     public void addNetworkElements()
-            throws UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, DuplicatedIDException {
+            throws ShanksException {
         Link el1 = new MyLink("EL1", MyLink.OK_STATUS, 2);
         Link el2 = new MyLink("EL2", MyLink.OK_STATUS, 2);
         Device ed1 = new MyDevice("ED1", MyDevice.OK_STATUS, true);
@@ -130,7 +124,7 @@ public class MyComplexScenario extends ComplexScenario {
      */
     @Override
     public HashMap<Class<? extends Failure>, Double> getPenaltiesInStatus(
-            String status) throws UnsupportedScenarioStatusException {
+            String status) throws ShanksException {
 
         if (status.equals(MyComplexScenario.STORM)) {
             return this.getStormPenalties();
@@ -183,13 +177,7 @@ public class MyComplexScenario extends ComplexScenario {
      * @see es.upm.dit.gsi.shanks.model.scenario.ComplexScenario#addScenarios()
      */
     @Override
-    public void addScenarios() throws UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, NonGatewayDeviceException,
-            AlreadyConnectedScenarioException, SecurityException,
-            IllegalArgumentException, NoSuchMethodException,
-            InstantiationException, IllegalAccessException,
-            InvocationTargetException {
+    public void addScenarios() throws ShanksException {
 
         Properties p = this.getProperties();
         p.put(MyScenario.CLOUDY_PROB, "10.0");
@@ -217,14 +205,7 @@ public class MyComplexScenario extends ComplexScenario {
      * @throws DuplicatedActionIDException 
      * @throws DuplicatedAgentIDException 
      */
-    public static void main(String[] args) throws SecurityException,
-            IllegalArgumentException, NoSuchMethodException,
-            InstantiationException, IllegalAccessException,
-            InvocationTargetException,
-            UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, DuplicatedPortrayalIDException,
-            ScenarioNotFoundException, DuplicatedAgentIDException, DuplicatedActionIDException {
+    public static void main(String[] args) throws ShanksException {
 
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "5");
@@ -251,7 +232,7 @@ public class MyComplexScenario extends ComplexScenario {
      */
     @Override
     public Scenario2DPortrayal createScenario2DPortrayal()
-            throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
+            throws ShanksException {
         return new MyComplexScenario2DPortrayal(this, 200, 200);
     }
 
@@ -263,7 +244,7 @@ public class MyComplexScenario extends ComplexScenario {
      */
     @Override
     public Scenario3DPortrayal createScenario3DPortrayal()
-            throws DuplicatedPortrayalIDException, ScenarioNotFoundException {
+            throws ShanksException {
         return new MyComplexScenario3DPortrayal(this, 100, 100, 100);
     }
 

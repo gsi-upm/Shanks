@@ -9,7 +9,8 @@ import java.util.Properties;
 import java.util.Set;
 
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
-import es.upm.dit.gsi.shanks.exception.DuplicatedAgentIDException;
+import es.upm.dit.gsi.shanks.agent.exception.DuplicatedAgentIDException;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
@@ -31,7 +32,6 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyScenario2DPortrayal
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyScenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation;
 import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation2DGUI;
-import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI;
 
 /**
  * @author a.carrera
@@ -49,8 +49,7 @@ public class MyScenario extends Scenario {
      * @throws DuplicatedIDException
      */
     public MyScenario(String id, String initialState, Properties properties)
-            throws UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
+            throws ShanksException,
             DuplicatedIDException {
         super(id, initialState, properties);
     }
@@ -67,8 +66,7 @@ public class MyScenario extends Scenario {
      */
     @Override
     public void addNetworkElements()
-            throws UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, DuplicatedIDException {
+            throws ShanksException {
         Device d1 = new MyDevice("D1", MyDevice.OK_STATUS, false);
         Device d2 = new MyDevice("D2", MyDevice.OK_STATUS, false);
         Device d3 = new MyDevice("D3", MyDevice.OK_STATUS, false);
@@ -206,7 +204,7 @@ public class MyScenario extends Scenario {
      * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#createScenario2DPortrayal()
      */
     @Override
-    public Scenario2DPortrayal createScenario2DPortrayal() throws DuplicatedPortrayalIDException {
+    public Scenario2DPortrayal createScenario2DPortrayal() throws ShanksException {
         return new MyScenario2DPortrayal(this, 100, 100);
     }
 
@@ -214,7 +212,7 @@ public class MyScenario extends Scenario {
      * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#createScenario3DPortrayal()
      */
     @Override
-    public Scenario3DPortrayal createScenario3DPortrayal() throws DuplicatedPortrayalIDException {
+    public Scenario3DPortrayal createScenario3DPortrayal() throws ShanksException {
         return new MyScenario3DPortrayal(this, 100, 100, 100);
     }
     
@@ -235,13 +233,7 @@ public class MyScenario extends Scenario {
      * @throws DuplicatedActionIDException 
      * @throws DuplicatedAgentIDException 
      */
-    public static void main(String[] args) throws SecurityException,
-            IllegalArgumentException, NoSuchMethodException,
-            InstantiationException, IllegalAccessException,
-            InvocationTargetException,
-            UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException, DuplicatedPortrayalIDException, ScenarioNotFoundException, DuplicatedAgentIDException, DuplicatedActionIDException {
+    public static void main(String[] args) throws ShanksException {
 
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "5");

@@ -3,10 +3,9 @@ package es.upm.dit.gsi.shanks.model.event.failiure;
 import java.util.logging.Logger;
 
 import sim.engine.Steppable;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.event.networkelement.ProbabilisticNetworkElementEvent;
-import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 
 /**
  * 
@@ -32,8 +31,7 @@ public abstract class Failure extends ProbabilisticNetworkElementEvent {
      * @see es.upm.dit.gsi.shanks.model.event.Event#launchEvent()
      */
     @Override
-    public void launchEvent() throws UnsupportedNetworkElementFieldException,
-            UnsupportedScenarioStatusException {
+    public void launchEvent() throws ShanksException {
         super.launchEvent();
         this.resolved = false;
         this.active = true;

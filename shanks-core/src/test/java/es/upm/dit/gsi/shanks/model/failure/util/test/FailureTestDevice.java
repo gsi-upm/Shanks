@@ -2,8 +2,8 @@ package es.upm.dit.gsi.shanks.model.failure.util.test;
 
 import java.util.HashMap;
 
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 
 /**
  * @author a.carrera
@@ -17,9 +17,9 @@ public class FailureTestDevice extends Device {
      * @param id
      * @param initialState
      * @param isGateway
-     * @throws UnsupportedNetworkElementFieldException
+     * @throws ShanksException
      */
-    public FailureTestDevice(String id, String initialState, boolean isGateway) throws UnsupportedNetworkElementFieldException {
+    public FailureTestDevice(String id, String initialState, boolean isGateway) throws ShanksException {
         super(id, initialState, isGateway);
         this.userField = null;
     }
@@ -62,7 +62,7 @@ public class FailureTestDevice extends Device {
      * @see es.upm.dit.gsi.shanks.model.element.NetworkElement#checkProperties()
      */
     @Override
-    public void checkProperties() throws UnsupportedNetworkElementFieldException {
+    public void checkProperties() throws ShanksException {
         HashMap<String, Boolean> status = this.getStatus();
         if (status.get(FailureTestDevice.OFF_STATUS)) {
             this.updatePropertyTo(FailureTestDevice.POWER_PROPERTY, "OFF");
@@ -87,7 +87,7 @@ public class FailureTestDevice extends Device {
      * @see es.upm.dit.gsi.shanks.model.element.NetworkElement#checkStatus()
      */
     @Override
-    public void checkStatus() throws UnsupportedNetworkElementFieldException {
+    public void checkStatus() throws ShanksException {
         String power = (String) this.getProperty(FailureTestDevice.POWER_PROPERTY);
         String fundations = (String) this.getProperty(FUNDATIONS_PROPERTY);
         Double other = (Double) this.getProperty(FailureTestDevice.OTHER_PROPERTY);

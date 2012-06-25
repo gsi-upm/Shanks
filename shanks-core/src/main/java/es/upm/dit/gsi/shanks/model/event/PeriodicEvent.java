@@ -1,10 +1,9 @@
 package es.upm.dit.gsi.shanks.model.event;
 
 import sim.engine.Steppable;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
-import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 
 public abstract class PeriodicEvent extends Event{
 
@@ -28,9 +27,9 @@ public abstract class PeriodicEvent extends Event{
     
     public abstract void addAffectedScenario(Scenario scen);
 
-    public abstract void changeProperties() throws UnsupportedNetworkElementFieldException;
+    public abstract void changeProperties() throws ShanksException;
  
-    public abstract void changeStatus() throws UnsupportedNetworkElementFieldException, UnsupportedScenarioStatusException;
+    public abstract void changeStatus() throws ShanksException;
 
     public abstract void interactWithNE();
 

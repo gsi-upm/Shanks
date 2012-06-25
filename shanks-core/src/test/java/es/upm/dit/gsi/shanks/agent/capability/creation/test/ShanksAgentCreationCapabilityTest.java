@@ -8,9 +8,9 @@ import org.junit.Test;
 
 import es.upm.dit.gsi.shanks.agent.ShanksAgent;
 import es.upm.dit.gsi.shanks.agent.capability.creation.CreationShanksAgentCapability;
+import es.upm.dit.gsi.shanks.agent.exception.UnkownAgentException;
 import es.upm.dit.gsi.shanks.agent.test.CounterShanksAgent;
 import es.upm.dit.gsi.shanks.agent.test.MySimpleShanksAgent;
-import es.upm.dit.gsi.shanks.exception.UnkownAgentException;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
 import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation;

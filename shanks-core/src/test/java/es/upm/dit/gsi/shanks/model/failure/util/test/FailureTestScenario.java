@@ -3,6 +3,7 @@ package es.upm.dit.gsi.shanks.model.failure.util.test;
 import java.util.HashMap;
 import java.util.Properties;
 
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
@@ -22,9 +23,7 @@ public class FailureTestScenario extends Scenario{
     public static final String USER_FIELD = "userField";
 
     public FailureTestScenario(String id, String initialState, Properties properties)
-            throws UnsupportedNetworkElementFieldException,
-            TooManyConnectionException, UnsupportedScenarioStatusException,
-            DuplicatedIDException {
+            throws ShanksException {
         super(id, initialState, properties);
     }
 

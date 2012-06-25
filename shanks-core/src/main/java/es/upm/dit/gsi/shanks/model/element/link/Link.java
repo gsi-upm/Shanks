@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
@@ -32,7 +33,7 @@ public abstract class Link extends NetworkElement {
      * @param capacity
      * @throws UnsupportedNetworkElementFieldException 
      */
-    public Link(String id, String initialState, int capacity) throws UnsupportedNetworkElementFieldException {
+    public Link(String id, String initialState, int capacity) throws ShanksException {
         super(id, initialState);
         this.deviceCapacity = capacity;
         this.linkedDevices = new ArrayList<Device>();
@@ -58,7 +59,7 @@ public abstract class Link extends NetworkElement {
      * @param device
      * @throws TooManyConnectionException 
      */
-    public void connectDevice(Device device) throws TooManyConnectionException {
+    public void connectDevice(Device device) throws ShanksException {
         if (this.linkedDevices.size()<deviceCapacity) {
             if (!this.linkedDevices.contains(device)) {
                 this.linkedDevices.add(device);
@@ -92,11 +93,11 @@ public abstract class Link extends NetworkElement {
      * @param device2
      * @throws TooManyConnectionException 
      */
-    public void connectDevices(Device device1, Device device2) throws TooManyConnectionException {
+    public void connectDevices(Device device1, Device device2) throws ShanksException {
         this.connectDevice(device1);
         try {
             this.connectDevice(device2);
-        } catch (TooManyConnectionException e) {
+        } catch (ShanksException e) {
             this.disconnectDevice(device1);
             throw e;
         }

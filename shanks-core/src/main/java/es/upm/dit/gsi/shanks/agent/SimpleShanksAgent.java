@@ -11,7 +11,8 @@ import java.util.logging.Logger;
 
 import sim.engine.SimState;
 import es.upm.dit.gsi.shanks.ShanksSimulation;
-import es.upm.dit.gsi.shanks.exception.UnkownAgentException;
+import es.upm.dit.gsi.shanks.agent.exception.UnkownAgentException;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 
 /**
  * 
@@ -21,11 +22,6 @@ import es.upm.dit.gsi.shanks.exception.UnkownAgentException;
  * 
  */
 public abstract class SimpleShanksAgent implements ShanksAgent {
-
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -1895658991339856799L;
 
     private Logger logger = Logger.getLogger(SimpleShanksAgent.class.getName());
     
@@ -85,6 +81,8 @@ public abstract class SimpleShanksAgent implements ShanksAgent {
         } catch (UnkownAgentException e) {
             logger.severe("UnkownAgentException: " + e.getMessage());
             e.printStackTrace();
+        } catch (ShanksException e) {
+            e.printStackTrace();
         }
     }
 
@@ -99,6 +97,7 @@ public abstract class SimpleShanksAgent implements ShanksAgent {
      * @see sim.engine.Stoppable#stop()
      */
     public void stop() {
-        
     }
+    
+    private static final long serialVersionUID = -1895658991339856799L;
 }

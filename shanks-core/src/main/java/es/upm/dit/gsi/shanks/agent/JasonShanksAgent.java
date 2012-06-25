@@ -27,18 +27,14 @@ import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.action.JasonShanksAgentAction;
 import es.upm.dit.gsi.shanks.agent.action.exception.UnknownShanksAgentActionException;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
-import es.upm.dit.gsi.shanks.exception.UnkownAgentException;
+import es.upm.dit.gsi.shanks.agent.exception.UnkownAgentException;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 
 /**
  * @author a.carrera
  * 
  */
 public abstract class JasonShanksAgent extends AgArch implements ShanksAgent {
-
-    /**
-	 * 
-	 */
-    private static final long serialVersionUID = 4744430503147830611L;
 
     public static final String MYSELF = "myself";
 
@@ -59,7 +55,7 @@ public abstract class JasonShanksAgent extends AgArch implements ShanksAgent {
      * @throws DuplicatedActionIDException
      */
     public JasonShanksAgent(String id, String aslFilePath)
-            throws DuplicatedActionIDException {
+            throws ShanksException {
         this.id = id;
         this.reasoning = false;
         this.inbox = new ArrayList<Message>();
@@ -104,7 +100,7 @@ public abstract class JasonShanksAgent extends AgArch implements ShanksAgent {
      * 
      * @throws DuplicatedActionIDException
      */
-    abstract public void configActions() throws DuplicatedActionIDException;
+    abstract public void configActions() throws ShanksException;
 
     public void addAction(String actionID,
             Class<? extends JasonShanksAgentAction> action)
@@ -276,6 +272,8 @@ public abstract class JasonShanksAgent extends AgArch implements ShanksAgent {
         } catch (UnkownAgentException e) {
             logger.severe("UnkownAgentException: " + e.getMessage());
             e.printStackTrace();
+        } catch (ShanksException e) {
+            e.printStackTrace();
         }
     }
 
@@ -313,4 +311,5 @@ public abstract class JasonShanksAgent extends AgArch implements ShanksAgent {
         return this.id;
     }
 
+    private static final long serialVersionUID = 4744430503147830611L;
 }

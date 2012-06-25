@@ -2,6 +2,7 @@ package es.upm.dit.gsi.shanks.model.element.link.test;
 
 import java.util.HashMap;
 
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 
@@ -23,7 +24,7 @@ public class MyLink extends Link {
      * @param capacity
      * @throws UnsupportedNetworkElementFieldException
      */
-    public MyLink(String id, String initialState, int capacity) throws UnsupportedNetworkElementFieldException {
+    public MyLink(String id, String initialState, int capacity) throws ShanksException {
         super(id, initialState, capacity);
     }
 
@@ -40,7 +41,7 @@ public class MyLink extends Link {
      * @see es.upm.dit.gsi.shanks.model.element.NetworkElement#checkProperties()
      */
     @Override
-    public void checkProperties() throws UnsupportedNetworkElementFieldException {
+    public void checkProperties() throws ShanksException {
         HashMap<String, Boolean> status = this.getStatus();
         if (status.get(MyLink.BROKEN_STATUS)) {
             this.changeProperty(MyLink.DISTANCE_PROPERTY, 0.0);
@@ -62,7 +63,7 @@ public class MyLink extends Link {
      * @see es.upm.dit.gsi.shanks.model.element.NetworkElement#checkStatus()
      */
     @Override
-    public void checkStatus() throws UnsupportedNetworkElementFieldException {
+    public void checkStatus() throws ShanksException {
         Double distance = (Double) this.getProperty(MyLink.DISTANCE_PROPERTY);
         if (distance>0){
             this.updateStatusTo(MyLink.BROKEN_STATUS, false);

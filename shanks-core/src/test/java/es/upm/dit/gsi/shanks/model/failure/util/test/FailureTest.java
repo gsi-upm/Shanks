@@ -16,7 +16,15 @@ import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
  */
 public class FailureTest extends Failure {
 
+    public FailureTest(Steppable launcher) {
+        this(FailureTest.class.getName(), launcher, 0.0);
+    }
+    
     public FailureTest(Steppable launcher, double prob) {
+        this(FailureTest.class.getName(), launcher, prob);
+    }
+    
+    public FailureTest(String id, Steppable launcher, double prob) {
         super(FailureTest.class.getName(), launcher, prob);
     }
 

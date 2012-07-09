@@ -1,3 +1,7 @@
+/**
+ * es.upm.dit.gsi.shanks
+ * 02/04/2012
+ */
 package es.upm.dit.gsi.shanks.model.element.device.portrayal;
 
 import java.awt.Color;
@@ -11,8 +15,20 @@ import sim.portrayal.DrawInfo2D;
 import sim.portrayal.SimplePortrayal2D;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 
+/**
+ * The interface with the default 2D portrayal for devices.
+ * 
+ * @author darofar
+ * 
+ */
 public abstract class Device2DPortrayal extends SimplePortrayal2D {
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see sim.portrayal.SimplePortrayal2D#draw(java.lang.Object,
+     * java.awt.Graphics2D, sim.portrayal.DrawInfo2D)
+     */
     @Override
     public void draw(Object object, Graphics2D graphics, DrawInfo2D info) {
 
@@ -34,6 +50,24 @@ public abstract class Device2DPortrayal extends SimplePortrayal2D {
 
     }
 
+    /**
+     * The portrayal of the current device can draw a geometric figure or print
+     * a predefine image. This method is called when the device has been linked
+     * to be draw as an image.
+     * 
+     * @param path
+     *            path to the file that contains the image.
+     * @param x
+     *            the X position coordinate.
+     * @param y
+     *            the Y position coordinate.
+     * @param w
+     *            the wide of the portrayal.
+     * @param h
+     *            the height of the portrayal.
+     * @param graphics
+     *            the graphics object to draw the image on.
+     */
     public void putImage(String path, int x, int y, int w, int h,
             Graphics2D graphics) {
         ImageIcon i = new ImageIcon(path);

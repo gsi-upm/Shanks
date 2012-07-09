@@ -1,3 +1,7 @@
+/**
+ * es.upm.dit.gsi.shanks
+ * 02/04/2012
+ */
 package es.upm.dit.gsi.shanks.model.element.device.portrayal;
 
 import java.awt.Color;
@@ -21,6 +25,12 @@ import com.sun.j3d.utils.geometry.Sphere;
 
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 
+/**
+ * The interface with the default 3D portrayal for devices.
+ * 
+ * @author darofar
+ *
+ */
 @SuppressWarnings("restriction")
 public abstract class Device3DPortrayal extends SimplePortrayal3D {
 
@@ -30,7 +40,12 @@ public abstract class Device3DPortrayal extends SimplePortrayal3D {
     public String getLabel(Device device) {
         return device.getID();
     }
-
+    
+    /*
+     * (non-Javadoc)
+     * @see sim.portrayal3d.SimplePortrayal3D#getModel(java.lang.Object, javax.media.j3d.TransformGroup)
+     */
+    @Override
     public TransformGroup getModel(Object object, TransformGroup model) {
 
         Device device = (Device) object;

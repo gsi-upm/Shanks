@@ -1,3 +1,7 @@
+/**
+ * es.upm.dit.gsi.shanks
+ * 02/04/2012
+ */
 package es.upm.dit.gsi.shanks.model.element.device;
 
 import java.util.ArrayList;
@@ -7,7 +11,6 @@ import java.util.logging.Logger;
 import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
-import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 
 /**
@@ -29,12 +32,20 @@ public abstract class Device extends NetworkElement {
     private boolean isGateway;
 
     /**
+     * 
      * @param id
+     *            the identifier of the device as network element of the
+     *            simulation.
+     * 
      * @param isGateway
-     * @throws UnsupportedNetworkElementFieldException
+     *            defines if the current devices is a gateway or not. A gateway
+     *            device (an only gateway devices) can be connected with
+     *            multiple scenarios.
+     * 
+     * @param initialState
+     *            the state in which the device has to be initialized.
      */
-    public Device(String id, String initialState, boolean isGateway)
-            throws ShanksException {
+    public Device(String id, String initialState, boolean isGateway) {
         super(id, initialState);
         this.isGateway = isGateway;
         this.linksList = new ArrayList<Link>();

@@ -1,5 +1,6 @@
 /**
- * 
+ * es.upm.dit.gsi.shanks
+ * 02/04/2012
  */
 package es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes;
 
@@ -20,6 +21,9 @@ import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.exception.UnknownN
 import es.upm.dit.gsi.shanks.exception.ShanksException;
 
 /**
+ * This class defines the behavior of an agent that inherits Bayesian Reasoning
+ * Capability.
+ * 
  * @author a.carrera
  * 
  */
@@ -252,7 +256,8 @@ public class ShanksAgentBayesianReasoningCapability {
      * @param bn
      * @throws Exception
      */
-    public static void clearEvidences(ProbabilisticNetwork bn) throws ShanksException {
+    public static void clearEvidences(ProbabilisticNetwork bn)
+            throws ShanksException {
         try {
             bn.initialize();
         } catch (Exception e) {

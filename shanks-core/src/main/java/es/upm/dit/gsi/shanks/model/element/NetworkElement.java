@@ -32,8 +32,7 @@ public abstract class NetworkElement {
      * @param id
      * @throws UnsupportedNetworkElementFieldException
      */
-    public NetworkElement(String id, String initialStatus)
-            throws ShanksException {
+    public NetworkElement(String id, String initialStatus){
         this.id = id;
         this.properties = new HashMap<String, Object>();
         this.states = new HashMap<String, Boolean>();

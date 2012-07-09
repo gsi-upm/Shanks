@@ -1,3 +1,7 @@
+/**
+ * es.upm.dit.gsi.shanks
+ * 02/04/2012
+ */
 package es.upm.dit.gsi.shanks.agent.portrayal;
 
 import java.awt.Color;
@@ -21,7 +25,12 @@ import com.sun.j3d.utils.geometry.Sphere;
 
 import es.upm.dit.gsi.shanks.agent.ShanksAgent;
 
-
+/**
+ * Default 3D protrayal interface for a Shanks Agent. 
+ * 
+ * @author darofar
+ *
+ */
 @SuppressWarnings("restriction")
 public abstract class ShanksAgent3DPortrayal extends SimplePortrayal3D {
 
@@ -32,7 +41,12 @@ public abstract class ShanksAgent3DPortrayal extends SimplePortrayal3D {
     public String getLabel(ShanksAgent agent) {
         return agent.getID();
     }
-
+    
+    /*
+     * (non-Javadoc)
+     * @see sim.portrayal3d.SimplePortrayal3D#getModel(java.lang.Object, javax.media.j3d.TransformGroup)
+     */
+    @Override
     public TransformGroup getModel(Object object, TransformGroup model) {
 
         ShanksAgent agent = (ShanksAgent) object;

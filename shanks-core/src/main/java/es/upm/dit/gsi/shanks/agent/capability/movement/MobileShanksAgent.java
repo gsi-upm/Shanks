@@ -1,5 +1,6 @@
 /**
- * 
+ * es.upm.dit.gsi.shanks
+ * 02/04/2012
  */
 package es.upm.dit.gsi.shanks.agent.capability.movement;
 

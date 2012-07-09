@@ -1,3 +1,7 @@
+/**
+ * es.upm.dit.gsi.shanks
+ * 02/04/2012
+ */
 package es.upm.dit.gsi.shanks.agent.portrayal;
 
 import java.awt.Color;
@@ -7,8 +11,18 @@ import sim.portrayal.DrawInfo2D;
 import sim.portrayal.SimplePortrayal2D;
 import es.upm.dit.gsi.shanks.agent.ShanksAgent;
 
+/**
+ * Default 2D portrayal interface for a Shanks Agent.  
+ * 
+ * @author 
+ *
+ */
 public abstract class ShanksAgent2DPortrayal extends SimplePortrayal2D {
-
+    
+    /*
+     * (non-Javadoc)
+     * @see sim.portrayal.SimplePortrayal2D#draw(java.lang.Object, java.awt.Graphics2D, sim.portrayal.DrawInfo2D)
+     */
     @Override
     public void draw(Object object, Graphics2D graphics, DrawInfo2D info) {
 

@@ -1,5 +1,6 @@
 /**
- * 
+ * es.upm.dit.gsi.shanks
+ * 02/04/2012
  */
 package es.upm.dit.gsi.shanks.agent.capability.perception;
 
@@ -20,13 +21,16 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 
 /**
+ * This class defines the behaviour of an agent that inherits the Perception
+ * Capability.
+ * 
  * @author a.carrera
  * 
  */
 public class ShanksAgentPerceptionCapability {
 
     /**
-     * To obtain the percepts of the agent, it is required that the agent would
+     * To obtain the precepts of the agent, it is required that the agent would
      * implement PercipientShanksAgent interface
      * 
      * @param simulation
@@ -229,8 +233,9 @@ public class ShanksAgentPerceptionCapability {
      * @param simulation
      * @param agent
      * @return A random object location within the perception range of the
-     *         agent. This location never will be the location of the agent.
-     *         If the location is the unique object in the perception range, return null.
+     *         agent. This location never will be the location of the agent. If
+     *         the location is the unique object in the perception range, return
+     *         null.
      */
     public static Location getRandomObjectLocationInPerceptionRange(
             ShanksSimulation simulation, PercipientShanksAgent agent) {
@@ -246,7 +251,7 @@ public class ShanksAgentPerceptionCapability {
                 Bag objects = devicesField.getObjectsWithinDistance(
                         agentLocation.getLocation3D(),
                         agent.getPerceptionRange(), false);
-                if (objects.size()==1 && objects.get(0).equals(agent)) {
+                if (objects.size() == 1 && objects.get(0).equals(agent)) {
                     return null;
                 }
                 Object o;

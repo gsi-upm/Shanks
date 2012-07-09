@@ -1,5 +1,6 @@
 /**
- * 
+ * es.upm.dit.gsi.shanks
+ * 02/04/2012
  */
 package es.upm.dit.gsi.shanks.agent.capability.movement;
 
@@ -14,6 +15,9 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 
 /**
+ * This class defines the behavior of an agent that inherits the Movement
+ * Capability.
+ * 
  * @author a.carrera
  * 
  */
@@ -29,12 +33,14 @@ public class ShanksAgentMovementCapability {
     public static void updateLocation(ShanksSimulation simulation,
             MobileShanksAgent agent, Location location) {
         if (location.is2DLocation()) {
-            ShanksAgentMovementCapability.updateLocation(simulation, agent, location.getLocation2D());
+            ShanksAgentMovementCapability.updateLocation(simulation, agent,
+                    location.getLocation2D());
         } else if (location.is3DLocation()) {
-            ShanksAgentMovementCapability.updateLocation(simulation, agent, location.getLocation3D());
+            ShanksAgentMovementCapability.updateLocation(simulation, agent,
+                    location.getLocation3D());
         }
     }
-    
+
     /**
      * Update the location of the agent in the simulation
      * 
@@ -83,10 +89,11 @@ public class ShanksAgentMovementCapability {
         }
 
     }
-    
+
     /**
-     * Move the agent to the target location with the specific speed. Call this method always you want to move.
-     * This method only moves the agent a fragment equals to the velocity.
+     * Move the agent to the target location with the specific speed. Call this
+     * method always you want to move. This method only moves the agent a
+     * fragment equals to the velocity.
      * 
      * @param simulation
      * @param agent
@@ -94,17 +101,25 @@ public class ShanksAgentMovementCapability {
      * @param tarLocation
      * @param speed
      */
-    public static void goTo(ShanksSimulation simulation, MobileShanksAgent agent, Location currentLocation, Location targetLocation, double speed) {
+    public static void goTo(ShanksSimulation simulation,
+            MobileShanksAgent agent, Location currentLocation,
+            Location targetLocation, double speed) {
         if (currentLocation.is2DLocation() && targetLocation.is2DLocation()) {
-            ShanksAgentMovementCapability.goTo(simulation, agent, currentLocation.getLocation2D(), targetLocation.getLocation2D(), speed);
-        } else if (currentLocation.is3DLocation() && targetLocation.is3DLocation()) {
-            ShanksAgentMovementCapability.goTo(simulation, agent, currentLocation.getLocation3D(), targetLocation.getLocation3D(), speed);
+            ShanksAgentMovementCapability.goTo(simulation, agent,
+                    currentLocation.getLocation2D(),
+                    targetLocation.getLocation2D(), speed);
+        } else if (currentLocation.is3DLocation()
+                && targetLocation.is3DLocation()) {
+            ShanksAgentMovementCapability.goTo(simulation, agent,
+                    currentLocation.getLocation3D(),
+                    targetLocation.getLocation3D(), speed);
         }
     }
 
     /**
-     * Move the agent to the target location with the specific speed. Call this method always you want to move.
-     * This method only moves the agent a fragment equals to the velocity.
+     * Move the agent to the target location with the specific speed. Call this
+     * method always you want to move. This method only moves the agent a
+     * fragment equals to the velocity.
      * 
      * @param simulation
      * @param agent
@@ -125,8 +140,9 @@ public class ShanksAgentMovementCapability {
     }
 
     /**
-     * Move the agent to the target location with the specific speed. Call this method always you want to move.
-     * This method only moves the agent a fragment equals to the velocity.
+     * Move the agent to the target location with the specific speed. Call this
+     * method always you want to move. This method only moves the agent a
+     * fragment equals to the velocity.
      * 
      * @param simulation
      * @param agent

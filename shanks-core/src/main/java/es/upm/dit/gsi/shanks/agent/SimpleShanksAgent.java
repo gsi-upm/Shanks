@@ -1,5 +1,6 @@
 /**
- * 
+ * es.upm.dit.gsi.shanks
+ * 02/04/2012
  */
 package es.upm.dit.gsi.shanks.agent;
 
@@ -16,7 +17,7 @@ import es.upm.dit.gsi.shanks.exception.ShanksException;
 
 /**
  * 
- * Agent without any rule, behaviour or code in the reasoning cycle
+ * Agent without any rule, behavior or code in the reasoning cycle
  * 
  * @author a.carrera
  * 

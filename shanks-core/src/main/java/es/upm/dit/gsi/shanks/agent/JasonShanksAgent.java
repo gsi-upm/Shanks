@@ -1,3 +1,7 @@
+/**
+ * es.upm.dit.gsi.shanks
+ * 02/04/2012
+ */
 package es.upm.dit.gsi.shanks.agent;
 
 import jason.JasonException;
@@ -31,6 +35,9 @@ import es.upm.dit.gsi.shanks.agent.exception.UnkownAgentException;
 import es.upm.dit.gsi.shanks.exception.ShanksException;
 
 /**
+ * Interface for all jason-agents executed on the simuluation. This class
+ * integrates jason-agents on Shanks.
+ * 
  * @author a.carrera
  * 
  */
@@ -201,14 +208,16 @@ public abstract class JasonShanksAgent extends AgArch implements ShanksAgent {
 
         try {
             if (this.actions.containsKey(actionID)) {
-                
-                Constructor<? extends JasonShanksAgentAction> c = this.actions.get(actionID)
-                        .getConstructor(new Class[] { String.class, Steppable.class });
 
-                JasonShanksAgentAction shanksAction = c.newInstance(this.getID(), this);
-                
-                result = shanksAction.executeAction(this.getSimulation(),
-                        this, actionStructure.getTerms());
+                Constructor<? extends JasonShanksAgentAction> c = this.actions
+                        .get(actionID).getConstructor(
+                                new Class[] { String.class, Steppable.class });
+
+                JasonShanksAgentAction shanksAction = c.newInstance(
+                        this.getID(), this);
+
+                result = shanksAction.executeAction(this.getSimulation(), this,
+                        actionStructure.getTerms());
             } else {
                 throw new UnknownShanksAgentActionException(actionID,
                         this.getID());
@@ -294,8 +303,10 @@ public abstract class JasonShanksAgent extends AgArch implements ShanksAgent {
     public void sleep() {
         this.reasoning = false;
     }
-    
-    /* (non-Javadoc)
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see jason.architecture.AgArch#wake()
      */
     public void wake() {

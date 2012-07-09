@@ -20,6 +20,16 @@ public abstract class Failure extends ProbabilisticNetworkElementEvent {
     private boolean active;
     private boolean resolved;
 
+    /**
+     * ¡¡¡This constructor must be override!!!
+     */
+    public Failure(Steppable generator) {
+        super("_"+System.currentTimeMillis(), generator, null);
+        this.active = false;
+        this.resolved = true;
+        logger.finer("New Failure: "+this);
+    }
+    
     public Failure(String id, Steppable generator, double prob) {
         super(id+"_"+System.currentTimeMillis(), generator, prob);
         this.active = false;

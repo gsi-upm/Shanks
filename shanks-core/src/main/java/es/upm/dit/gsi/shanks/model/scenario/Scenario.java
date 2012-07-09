@@ -62,7 +62,6 @@ public abstract class Scenario {
     private HashMap<String, NetworkElement> currentElements;
     private HashMap<Failure, Integer> currentFailures;
     private HashMap<Class<? extends Failure>, List<Set<NetworkElement>>> possibleFailures;
-    // TODO
     private HashMap<Class<? extends Event>, List<Set<NetworkElement>>> possiblesEventsOnNE;
     private HashMap<Class<? extends Event>, List<Set<Scenario>>> possiblesEventsOnScenario;
     private HashMap<Class<? extends Failure>, List<Integer>> generatedFailureConfigurations;
@@ -477,11 +476,13 @@ public abstract class Scenario {
             double prob = 0;
             Constructor<? extends Event> c = null;
             if (Failure.class.isAssignableFrom(type)) {
+                Failure failure;
                 String status = this.getCurrentStatus();
                 HashMap<Class<? extends Failure>, Double> penalties = this.getPenaltiesInStatus(status);
                 double penalty = 0;
                 try {
-                    Failure failure = (Failure) type.newInstance();
+                    c = type.getConstructor(new Class[] { Steppable.class });
+                    failure = (Failure) c.newInstance(sim.getScenarioManager());
                     List<Set<NetworkElement>> list = this.getPossibleEventsOfNE().get(type);
                     int numberOfCombinations = list.size();
                     int combinationNumber = random.nextInt(numberOfCombinations);
@@ -515,6 +516,14 @@ public abstract class Scenario {
                 } catch (InstantiationException e) {
                     throw new ShanksException(e);
                 } catch (IllegalAccessException e) {
+                    throw new ShanksException(e);
+                } catch (IllegalArgumentException e) {
+                    throw new ShanksException(e);
+                } catch (InvocationTargetException e) {
+                    throw new ShanksException(e);
+                } catch (SecurityException e) {
+                    throw new ShanksException(e);
+                } catch (NoSuchMethodException e) {
                     throw new ShanksException(e);
                 }
             } else if (ProbabilisticEvent.class.isAssignableFrom(type)) {

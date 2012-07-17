@@ -16,8 +16,8 @@ import es.upm.dit.gsi.shanks.tutorial.model.element.devices.Computer;
 public class NewClientEvent extends ProbabilisticNetworkElementEvent{
 
 	public NewClientEvent(Steppable generator) {
-		super(NewClientEvent.class.getName(), generator, 0.05);
-		
+		super(NewClientEvent.class.getName(), generator, 0.02);
+	
 	}
 
 	@Override

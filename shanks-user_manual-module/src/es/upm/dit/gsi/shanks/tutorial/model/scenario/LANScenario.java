@@ -1,7 +1,9 @@
 package es.upm.dit.gsi.shanks.tutorial.model.scenario;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
@@ -10,6 +12,7 @@ import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
+import es.upm.dit.gsi.shanks.model.failure.util.test.FailureTest;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
@@ -92,29 +95,51 @@ public class LANScenario extends Scenario{
 
 	@Override
 	public void addPossibleFailures() {
-		this.addPossibleFailure(ComputerDisconnectedFailure.class, this.getNetworkElement("Computer 1"));
+		Set<NetworkElement> comp1 = new HashSet<NetworkElement>();
+		comp1.add(this.getNetworkElement("Computer 1"));	
+		Set<NetworkElement> comp2 = new HashSet<NetworkElement>();
+		comp2.add(this.getNetworkElement("Computer 2"));	
+		Set<NetworkElement> comp3 = new HashSet<NetworkElement>();
+		comp3.add(this.getNetworkElement("Computer 3"));	
+		Set<NetworkElement> comp4 = new HashSet<NetworkElement>();
+		comp4.add(this.getNetworkElement("Computer 4"));
+		Set<NetworkElement> comp5 = new HashSet<NetworkElement>();
+		comp5.add(this.getNetworkElement("Computer 5"));		
+		List<Set<NetworkElement>> possibleCombinations = new ArrayList<Set<NetworkElement>>();
+		possibleCombinations.add(comp1);
+		possibleCombinations.add(comp2);
+		possibleCombinations.add(comp3);
+		possibleCombinations.add(comp4);
+		possibleCombinations.add(comp5);
+		
+//        this.addPossibleFailure(ComputerDisconnectedFailure.class, possibleCombinations);
 		
 	}
 
 	@Override
 	public void addPossibleEvents() {
-//		Set<NetworkElement> comps = new HashSet<NetworkElement>();
-//		comps.add(this.getNetworkElement("Computer 1"));
-//		comps.add(this.getNetworkElement("Computer 2"));
-//		comps.add(this.getNetworkElement("Computer 3"));
-//		comps.add(this.getNetworkElement("Computer 4"));
-//		comps.add(this.getNetworkElement("Computer 5"));
-		this.addPossibleEventsOfNE(NewClientEvent.class, this.getNetworkElement("Computer 1"));
-		this.addPossibleEventsOfNE(NewClientEvent.class, this.getNetworkElement("Computer 2"));
-		this.addPossibleEventsOfNE(NewClientEvent.class, this.getNetworkElement("Computer 3"));
-		this.addPossibleEventsOfNE(NewClientEvent.class, this.getNetworkElement("Computer 4"));
-		this.addPossibleEventsOfNE(NewClientEvent.class, this.getNetworkElement("Computer 5"));
-		
-		this.addPossibleEventsOfNE(ClientGoOutEvent.class, this.getNetworkElement("Computer 1"));
-		this.addPossibleEventsOfNE(ClientGoOutEvent.class, this.getNetworkElement("Computer 2"));
-		this.addPossibleEventsOfNE(ClientGoOutEvent.class, this.getNetworkElement("Computer 3"));
-		this.addPossibleEventsOfNE(ClientGoOutEvent.class, this.getNetworkElement("Computer 4"));
-		this.addPossibleEventsOfNE(ClientGoOutEvent.class, this.getNetworkElement("Computer 5"));
+		Set<NetworkElement> comp1 = new HashSet<NetworkElement>();
+		comp1.add(this.getNetworkElement("Computer 1"));	
+		Set<NetworkElement> comp2 = new HashSet<NetworkElement>();
+		comp2.add(this.getNetworkElement("Computer 2"));	
+		Set<NetworkElement> comp3 = new HashSet<NetworkElement>();
+		comp3.add(this.getNetworkElement("Computer 3"));	
+		Set<NetworkElement> comp4 = new HashSet<NetworkElement>();
+		comp4.add(this.getNetworkElement("Computer 4"));
+		Set<NetworkElement> comp5 = new HashSet<NetworkElement>();
+		comp5.add(this.getNetworkElement("Computer 5"));		
+		List<Set<NetworkElement>> possibleCombinations = new ArrayList<Set<NetworkElement>>();
+		possibleCombinations.add(comp1);
+		possibleCombinations.add(comp2);
+		possibleCombinations.add(comp3);
+		possibleCombinations.add(comp4);
+		possibleCombinations.add(comp5);
+
+//		this.addPossibleEventsOfNE(NewClientEvent.class, possibleCombinations);
+//		this.addPossibleEventsOfNE(ClientGoOutEvent.class, possibleCombinations);
+        this.addPossibleEventsOfNE(ComputerDisconnectedFailure.class, possibleCombinations);
+
+
 
 	}
 

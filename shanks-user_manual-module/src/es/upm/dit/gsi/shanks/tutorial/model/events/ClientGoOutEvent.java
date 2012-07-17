@@ -9,14 +9,14 @@ import es.upm.dit.gsi.shanks.tutorial.model.element.devices.Computer;
  * 
  * @author Daniel Lara
  * 
- * This class represent an event that ocurr when a client go out from de LAN
+ * This class represent an event that happen when a client go out from de LAN
  *
  */
 
 public class ClientGoOutEvent extends ProbabilisticNetworkElementEvent{
 
 	public ClientGoOutEvent(Steppable generator) {
-		super(ClientGoOutEvent.class.getName(), generator, 0.01);
+		super(ClientGoOutEvent.class.getName(), generator, 0.02);
 		
 	}
 
@@ -30,7 +30,6 @@ public class ClientGoOutEvent extends ProbabilisticNetworkElementEvent{
 	@Override
 	public void addPossibleAffected() {
         this.addPossibleAffectedElementProperty(Computer.class, Computer.PROPERTY_POWER, false);
-
 		
 	}
 

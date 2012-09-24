@@ -32,17 +32,24 @@ public class Computer2DPortrayal extends Device2DPortrayal{
         final double width = 20;
         final double height = 20;
         
-        System.out.println("DEVICE: " + device.getID() + " ETHERNET CONNECTADO? " + device.getProperty(Computer.PROPERTY_ETHERNET_CONNECTION));
-
+//        System.out.println("DEVICE: " + device.getID() + " ETHERNET CONNECTADO? " + device.getProperty(Computer.PROPERTY_ETHERNET_CONNECTION));
         HashMap<String, Boolean> status = device.getStatus();
+        
+//        System.out.println("DEVICE" + device.getID() + "STADO DESCONECTADO? " + status.get(Computer.STATUS_DISCONNECTED));
+        System.out.println("DEVICE" + device.getID() + "STADO OFF? " + status.get(Computer.STATUS_OFF));
+//        System.out.println("DEVICE" + device.getID() + "STADO OK? " + status.get(Computer.STATUS_OK));
+
         //if the device is OK green, off is blue and if the computer have problems red
         if (status.get(Computer.STATUS_OK) && !status.get(Computer.STATUS_DISCONNECTED) 
         		&& !status.get(Computer.STATUS_HIGHTEMP) && !status.get(Computer.STATUS_OFF)) {
             graphics.setColor(Color.green);
-        } else if ((status.get(Computer.STATUS_HIGHTEMP) || status.get(Computer.STATUS_DISCONNECTED)) && !status.get(Computer.STATUS_OFF) ){
+        } else if (status.get(Computer.STATUS_DISCONNECTED)){
             graphics.setColor(Color.red);
         } else if(status.get(Computer.STATUS_OFF)){
             graphics.setColor(Color.blue);
+        } else{
+            graphics.setColor(Color.black);
+
         }
 
         // Draw the devices

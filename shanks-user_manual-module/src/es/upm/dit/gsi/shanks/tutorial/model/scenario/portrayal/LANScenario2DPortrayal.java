@@ -1,6 +1,8 @@
 package es.upm.dit.gsi.shanks.tutorial.model.scenario.portrayal;
 
+import sim.field.grid.SparseGrid2D;
 import sim.portrayal.continuous.ContinuousPortrayal2D;
+import sim.portrayal.grid.SparseGridPortrayal2D;
 import sim.portrayal.network.NetworkPortrayal2D;
 import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
@@ -8,11 +10,14 @@ import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
+import es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MyHyperComplexScenario2DPortrayal;
 import es.upm.dit.gsi.shanks.tutorial.model.element.devices.Computer;
 import es.upm.dit.gsi.shanks.tutorial.model.element.devices.Router;
 import es.upm.dit.gsi.shanks.tutorial.model.element.devices.portrayal.Computer2DPortrayal;
 import es.upm.dit.gsi.shanks.tutorial.model.element.devices.portrayal.Router2DPortrayal;
 import es.upm.dit.gsi.shanks.tutorial.model.element.links.portrayal.EthernetLink2DPortrayal;
+import es.upm.dit.gsi.shanks.tutorial.simulation.LANSimulation;
+import es.upm.dit.gsi.shanks.tutorial.simulation.LANSimulation2DGUI;
 
 /**
  * 
@@ -32,7 +37,15 @@ public class LANScenario2DPortrayal extends Scenario2DPortrayal{
 
 	@Override
 	public void addPortrayals() {
-		// TODO Auto-generated method stub
+		SparseGrid2D failuresGrid = new SparseGrid2D(100, 100);
+        SparseGridPortrayal2D failuresPortrayal = new SparseGridPortrayal2D();
+        failuresPortrayal.setField(failuresGrid);
+        try {
+			this.addPortrayal(LANSimulation2DGUI.FAILURE_DISPLAY_ID, LANSimulation2DGUI.FAILURE_PORTRAYAL_ID, failuresPortrayal);
+		} catch (ShanksException e) {
+			
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -62,6 +75,9 @@ public class LANScenario2DPortrayal extends Scenario2DPortrayal{
         devicePortrayal.setPortrayalForClass(Computer.class, new Computer2DPortrayal());
         devicePortrayal.setPortrayalForClass(Router.class, new Router2DPortrayal());
         networkPortrayal.setPortrayalForAll(new EthernetLink2DPortrayal());
+        
+        
+
 	}
 
 }

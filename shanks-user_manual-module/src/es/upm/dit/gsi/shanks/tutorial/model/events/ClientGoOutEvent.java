@@ -17,6 +17,7 @@ public class ClientGoOutEvent extends ProbabilisticNetworkElementEvent{
 
 	public ClientGoOutEvent(Steppable generator) {
 		super(ClientGoOutEvent.class.getName(), generator, 0.02);
+		System.out.println("------> " + this.getID());
 		
 	}
 

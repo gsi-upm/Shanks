@@ -112,7 +112,7 @@ public class LANScenario extends Scenario{
 		possibleCombinations.add(comp4);
 		possibleCombinations.add(comp5);
 		
-//        this.addPossibleFailure(ComputerDisconnectedFailure.class, possibleCombinations);
+       // this.addPossibleFailure(ComputerDisconnectedFailure.class, possibleCombinations);
 		
 	}
 
@@ -135,9 +135,9 @@ public class LANScenario extends Scenario{
 		possibleCombinations.add(comp4);
 		possibleCombinations.add(comp5);
 
-//		this.addPossibleEventsOfNE(NewClientEvent.class, possibleCombinations);
-//		this.addPossibleEventsOfNE(ClientGoOutEvent.class, possibleCombinations);
-        this.addPossibleEventsOfNE(ComputerDisconnectedFailure.class, possibleCombinations);
+		this.addPossibleEventsOfNE(NewClientEvent.class, possibleCombinations);
+		this.addPossibleEventsOfNE(ClientGoOutEvent.class, possibleCombinations);
+//        this.addPossibleEventsOfNE(ComputerDisconnectedFailure.class, possibleCombinations);
 
 
 

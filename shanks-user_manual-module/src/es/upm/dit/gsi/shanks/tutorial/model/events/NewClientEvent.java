@@ -17,6 +17,7 @@ public class NewClientEvent extends ProbabilisticNetworkElementEvent{
 
 	public NewClientEvent(Steppable generator) {
 		super(NewClientEvent.class.getName(), generator, 0.02);
+		System.out.println("------->" + this.getID());
 	
 	}
 

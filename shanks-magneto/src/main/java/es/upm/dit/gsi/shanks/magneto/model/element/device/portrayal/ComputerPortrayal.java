@@ -16,28 +16,26 @@ public class ComputerPortrayal extends Device2DPortrayal{
 	 * 
 	 */
 	private static final long serialVersionUID = 7215891600767658072L;
+	private static final String COMPUTER_PATH = "C:/Users/William Wallace/Universidad/Beca/MAGNETO-SHANKS/shanks-magneto/imagenes/Computer.png";
 	
 	public void draw(Object object, Graphics2D graphics, DrawInfo2D info) {
 
         Device device = (Device) object;
         final double width = 20;
         final double height = 20;
-       
-        HashMap<String, Boolean> status = device.getStatus();
-       
-        if(status.get(Computer.STATUS_ON)){
-        	graphics.setColor(Color.green);
-        }
-
-        // Draw the devices
+        
         final int x = (int) (info.draw.x - width / 2.0);
         final int y = (int) (info.draw.y - height / 2.0);
         final int w = (int) (width);
         final int h = (int) (height);
-        graphics.fillOval(x, y, w, h);
        
-        //If you want put and image use this method, and comment the previous five lines
-        //this.putImage(path, x, y, w, h, graphics);
+        HashMap<String, Boolean> status = device.getStatus();
+       
+        if(status.get(Computer.STATUS_ON)){
+        	this.putImage(COMPUTER_PATH, x, y, 2*w, 2*h, graphics);
+        }
+
+      
        
         // Draw the devices ID ID
         graphics.setColor(Color.black);

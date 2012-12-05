@@ -15,6 +15,7 @@ public class ServerPortrayal extends Device2DPortrayal{
 	 * 
 	 */
 	private static final long serialVersionUID = 4989129984386602558L;
+	private static final String SERVER_PATH = "C:/Users/William Wallace/Universidad/Beca/MAGNETO-SHANKS/shanks-magneto/imagenes/server.png";
 
 	
 	public void draw(Object object, Graphics2D graphics, DrawInfo2D info) {
@@ -24,22 +25,19 @@ public class ServerPortrayal extends Device2DPortrayal{
         final double height = 20;
        
         HashMap<String, Boolean> status = device.getStatus();
-       
-        if(status.get(Server.STATUS_OK)){
-        	graphics.setColor(Color.green);
-        }else{
-        	graphics.setColor(Color.red);
-        }
-
-        // Draw the devices
+        
         final int x = (int) (info.draw.x - width / 2.0);
         final int y = (int) (info.draw.y - height / 2.0);
         final int w = (int) (width);
         final int h = (int) (height);
-        graphics.fillOval(x, y, w, h);
+        
+        if(status.get(Server.STATUS_OK)){
+        	this.putImage(SERVER_PATH, x, y, 2*w, 2*h, graphics);
+        }
+
        
         //If you want put and image use this method, and comment the previous five lines
-        //this.putImage(path, x, y, w, h, graphics);
+        
        
         // Draw the devices ID ID
         graphics.setColor(Color.black);

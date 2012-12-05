@@ -33,11 +33,11 @@ public class MagnetoScenarioPortrayal extends Scenario2DPortrayal{
 
 	@Override
 	public void placeElements() {
-		this.situateDevice((Device)this.getScenario().getNetworkElement("User Computer"), 15, 30);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("User Gateway"), 30, 30);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("ISP Gateway"), 75, 30);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("Server Gateway"), 120, 30);
-		this.situateDevice((Device)this.getScenario().getNetworkElement("Server"), 135, 30);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("User Computer"), 15, 140);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("User Gateway"), 15, 120);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("ISP Gateway"), 50, 50);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("Server Gateway"), 140, 40);
+		this.situateDevice((Device)this.getScenario().getNetworkElement("Server"), 140, 60);
 	
 		this.drawLink((Link)this.getScenario().getNetworkElement("L1"));
 		this.drawLink((Link)this.getScenario().getNetworkElement("L2"));

@@ -1,6 +1,5 @@
 package es.upm.dit.gsi.shanks.magneto.model.element.device.portrayal;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.HashMap;
 
@@ -9,15 +8,15 @@ import es.upm.dit.gsi.shanks.magneto.model.element.device.ISPGateway;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device2DPortrayal;
 
-public class GatewayPortrayal extends Device2DPortrayal{
+public class UserGatewayPortrayal extends Device2DPortrayal{
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2875023906624774863L;
-	
-	private static final String ISP_GATEWAY_IMAGE_PATH = "C:/Users/William Wallace/Universidad/Beca/MAGNETO-SHANKS/shanks-magneto/imagenes/ISPCloud.jpg";
-	private static final String ERROR_ISP_GATEWAY_IMAGE_PATH = "C:/Users/William Wallace/Universidad/Beca/MAGNETO-SHANKS/shanks-magneto/imagenes/ISPCloudError.jpg";
+	private static final long serialVersionUID = -2362259939385311112L;
+
+	private static final String GATEWAY_IMAGE_PATH = "C:/Users/William Wallace/Universidad/Beca/MAGNETO-SHANKS/shanks-magneto/imagenes/router.png";
+	private static final String ERROR_GATEWAY_IMAGE_PATH = "C:/Users/William Wallace/Universidad/Beca/MAGNETO-SHANKS/shanks-magneto/imagenes/routerError.png";
 	
 	
 	public void draw(Object object, Graphics2D graphics, DrawInfo2D info) {
@@ -34,11 +33,9 @@ public class GatewayPortrayal extends Device2DPortrayal{
         final int h = (int) (height);
        
         if(status.get(ISPGateway.STATUS_OK)){
-        	this.putImage(ISP_GATEWAY_IMAGE_PATH, x, y - 50, 3*w, 3*h, graphics);
+        	this.putImage(GATEWAY_IMAGE_PATH, x - 15, y - 25, w, h, graphics);
         }else{
-        	this.putImage(ERROR_ISP_GATEWAY_IMAGE_PATH, x , y - 50, 3*w, 3*h, graphics);
+        	this.putImage(ERROR_GATEWAY_IMAGE_PATH, x - 15, y - 25, w, h, graphics);
         }
-
-    }
-
+	}
 }

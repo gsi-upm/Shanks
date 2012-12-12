@@ -28,6 +28,7 @@ public class ComputerPortrayal extends Device2DPortrayal{
         final int y = (int) (info.draw.y - height / 2.0);
         final int w = (int) (width);
         final int h = (int) (height);
+        
        
         HashMap<String, Boolean> status = device.getStatus();
        

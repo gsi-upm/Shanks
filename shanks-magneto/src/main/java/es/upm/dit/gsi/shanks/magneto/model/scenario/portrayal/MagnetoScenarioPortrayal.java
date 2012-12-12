@@ -11,6 +11,7 @@ import es.upm.dit.gsi.shanks.magneto.model.element.device.UserGateway;
 import es.upm.dit.gsi.shanks.magneto.model.element.device.portrayal.ComputerPortrayal;
 import es.upm.dit.gsi.shanks.magneto.model.element.device.portrayal.GatewayPortrayal;
 import es.upm.dit.gsi.shanks.magneto.model.element.device.portrayal.ServerPortrayal;
+import es.upm.dit.gsi.shanks.magneto.model.element.device.portrayal.UserGatewayPortrayal;
 import es.upm.dit.gsi.shanks.magneto.model.element.link.portrayal.MagnetoLinkPortrayal;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
@@ -51,9 +52,9 @@ public class MagnetoScenarioPortrayal extends Scenario2DPortrayal{
 		NetworkPortrayal2D networkPortrayal = (NetworkPortrayal2D) this.getPortrayals().get(Scenario2DPortrayal.MAIN_DISPLAY_ID).get(ScenarioPortrayal.LINKS_PORTRAYAL);
 
 		devicePortrayal.setPortrayalForClass(Computer.class, new ComputerPortrayal());
-		devicePortrayal.setPortrayalForClass(UserGateway.class, new GatewayPortrayal());
+		devicePortrayal.setPortrayalForClass(UserGateway.class, new UserGatewayPortrayal());
 		devicePortrayal.setPortrayalForClass(ISPGateway.class, new GatewayPortrayal());
-		devicePortrayal.setPortrayalForClass(ServerGateway.class, new GatewayPortrayal());
+		devicePortrayal.setPortrayalForClass(ServerGateway.class, new UserGatewayPortrayal());
 		devicePortrayal.setPortrayalForClass(Server.class, new ServerPortrayal());
 		
 		networkPortrayal.setPortrayalForAll(new MagnetoLinkPortrayal());

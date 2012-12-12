@@ -23,7 +23,7 @@ public class UserGateway extends Device{
 	public void fillIntialProperties() {
 		this.addProperty(PROPERTY_CONNECTION_TO_ISP, 0);
 		this.addProperty(PROPERTY_CONNECTION_TO_PROVIDER, 0);
-		this.addProperty(PROPERTY_CONNECTION_TO_ISP, true);
+		this.addProperty(PROPERTY_CONFIGURATION, true);
 		this.addProperty(PROPERTY_USERHAN, 0);
 		
 	}
@@ -46,7 +46,6 @@ public class UserGateway extends Device{
 		Integer isp = (Integer) this.getProperty(PROPERTY_CONNECTION_TO_ISP);
 		Boolean conf = (Boolean) this.getProperty(PROPERTY_CONFIGURATION);
 		Integer userHan = (Integer) this.getProperty(PROPERTY_USERHAN);
-		
 		if(provider == 0 && isp == 0 && userHan == 0 && conf){
 			this.updateStatusTo(STATUS_OK, true);		
 		}else{

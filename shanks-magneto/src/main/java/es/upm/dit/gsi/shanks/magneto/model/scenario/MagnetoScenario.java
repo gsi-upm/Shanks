@@ -1,7 +1,11 @@
 package es.upm.dit.gsi.shanks.magneto.model.scenario;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.magneto.model.element.device.Computer;
@@ -10,7 +14,20 @@ import es.upm.dit.gsi.shanks.magneto.model.element.device.Server;
 import es.upm.dit.gsi.shanks.magneto.model.element.device.ServerGateway;
 import es.upm.dit.gsi.shanks.magneto.model.element.device.UserGateway;
 import es.upm.dit.gsi.shanks.magneto.model.element.link.MagnetoLink;
+import es.upm.dit.gsi.shanks.magneto.model.event.failures.HGProviderDownOrDisconnected;
+import es.upm.dit.gsi.shanks.magneto.model.event.failures.HGUserDisconnected;
+import es.upm.dit.gsi.shanks.magneto.model.event.failures.HGUserExternalConnectivityFailure;
+import es.upm.dit.gsi.shanks.magneto.model.event.failures.ISPCongestion;
+import es.upm.dit.gsi.shanks.magneto.model.event.failures.ISPRoutingProblem;
+import es.upm.dit.gsi.shanks.magneto.model.event.failures.InternalProviderConnectivityFailure;
+import es.upm.dit.gsi.shanks.magneto.model.event.failures.LocalUserConnectivityFailure;
+import es.upm.dit.gsi.shanks.magneto.model.event.failures.OVNManagementBadlyConfigured;
+import es.upm.dit.gsi.shanks.magneto.model.event.failures.ProviderHANCongestion;
+import es.upm.dit.gsi.shanks.magneto.model.event.failures.ServiceMalFunction;
+import es.upm.dit.gsi.shanks.magneto.model.event.failures.ServiceProvideDeviceDownOrDisconnected;
+import es.upm.dit.gsi.shanks.magneto.model.event.failures.UserHANCongestion;
 import es.upm.dit.gsi.shanks.magneto.model.scenario.portrayal.MagnetoScenarioPortrayal;
+import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
@@ -79,16 +96,45 @@ public class MagnetoScenario extends Scenario{
 	
 	}
 
+
 	@Override
 	public void addPossibleFailures() {
-		// TODO Auto-generated method stub
 		
+		this.addPossibleFailure(UserHANCongestion.class, this.getNetworkElement("User Gateway"));
+		
+		this.addPossibleFailure(LocalUserConnectivityFailure.class, this.getNetworkElement("User Gateway"));
+		
+		List<Set<NetworkElement>> list = new ArrayList<Set<NetworkElement>>();
+		Set<NetworkElement> set = new HashSet<NetworkElement>();
+		set.add(this.getNetworkElement("User Gateway"));
+		set.add(this.getNetworkElement("ISP Gateway"));
+		list.add(set);
+		this.addPossibleFailure(HGUserDisconnected.class, list);
+		
+		this.addPossibleFailure(HGUserExternalConnectivityFailure.class, this.getNetworkElement("User Gateway"));
+		
+		this.addPossibleFailure(HGProviderDownOrDisconnected.class, list);
+		
+		this.addPossibleFailure(InternalProviderConnectivityFailure.class, this.getNetworkElement("Server Gateway"));
+		
+		this.addPossibleFailure(ISPCongestion.class, list);
+		
+		this.addPossibleFailure(ISPRoutingProblem.class, list);
+		
+		this.addPossibleFailure(OVNManagementBadlyConfigured.class, this.getNetworkElement("Server"));
+	
+		this.addPossibleFailure(ProviderHANCongestion.class, this.getNetworkElement("Server Gateway"));
+
+		this.addPossibleFailure(ServiceMalFunction.class, this.getNetworkElement("Server"));
+
+		this.addPossibleFailure(ServiceProvideDeviceDownOrDisconnected.class, this.getNetworkElement("Server Gateway"));
+
+	
+	
 	}
 
 	@Override
 	public void addPossibleEvents() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

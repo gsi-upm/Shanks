@@ -147,7 +147,7 @@ public class ScenarioManager implements Steppable {
 //        }
 
         this.checkFailures(sim);
-//        this.generateFailures(sim);
+        this.generateFailures(sim);
         this.generateScenarioEvents(sim);
         this.generateNetworkElementEvents(sim);
         long step = sim.getSchedule().getSteps();
@@ -176,6 +176,10 @@ public class ScenarioManager implements Steppable {
     
     private void generateNetworkElementEvents(ShanksSimulation sim) throws ShanksException{
         this.scenario.generateNetworkElementEvents(sim);
+    }
+    
+    private void generateFailures(ShanksSimulation sim) throws InstantiationException, IllegalAccessException, ShanksException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
+        this.scenario.generateFailures(sim);
     }
 
     /**

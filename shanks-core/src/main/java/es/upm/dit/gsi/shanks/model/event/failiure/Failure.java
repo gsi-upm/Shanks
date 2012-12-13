@@ -67,28 +67,28 @@ public abstract class Failure extends ProbabilisticNetworkElementEvent {
      * 
      * @return true if the failure is resolved, false if not
      */
-    public boolean isResolved() {
+    public abstract boolean isResolved();
         
-        if(!this.resolved){
-            for(NetworkElement ne: this.affectedElements){
-                for(String field: this.possibleAffectedElements.get(ne).keySet()){
-                    if(ne.getProperties().containsKey(field)){
-                        if(ne.getProperty(field).equals(this.possibleAffectedElements.get(ne).get(field)))
-                            return false;
-                    } else if(ne.getStatus().containsKey(field)){
-                        if(ne.getStatus().get(field).equals(this.possibleAffectedElements.get(ne).get(field)))
-                            return false;
-                    }
-                }            
-            }
-//        for(Scenario sc: this.affectedScenarios){
-//            for(String field: this.possibleAffectedScenarios.get(sc).keySet()){
-//                if(sc.getCurrentStatus().equals(field)){
-//                    return false;
-//                }
-//            }            
+//        if(!this.resolved){
+//            for(NetworkElement ne: this.affectedElements){
+//                for(String field: this.possibleAffectedElements.get(ne).keySet()){
+//                    if(ne.getProperties().containsKey(field)){
+//                        if(ne.getProperty(field).equals(this.possibleAffectedElements.get(ne).get(field)))
+//                            return false;
+//                    } else if(ne.getStatus().containsKey(field)){
+//                        if(ne.getStatus().get(field).equals(this.possibleAffectedElements.get(ne).get(field)))
+//                            return false;
+//                    }
+//                }            
+//            }
+////        for(Scenario sc: this.affectedScenarios){
+////            for(String field: this.possibleAffectedScenarios.get(sc).keySet()){
+////                if(sc.getCurrentStatus().equals(field)){
+////                    return false;
+////                }
+////            }            
+////        }
 //        }
-        }
-        return true;
-    }
+//        return true;
+//    }
 }

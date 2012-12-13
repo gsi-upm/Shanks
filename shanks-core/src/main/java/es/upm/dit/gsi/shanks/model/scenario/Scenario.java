@@ -294,7 +294,7 @@ public abstract class Scenario {
      *            Configuration of the failure
      */
     public void addFailure(Failure failure, int configuration) {
-        if (this.possiblesEventsOnNE.containsKey(failure.getClass())) {
+        if (this.possibleFailures.containsKey(failure.getClass())) {
             this.currentFailures.put(failure, configuration);
         } else {
             logger.warning("Failure was not added, because this scenario does not support this type of Failure. Failure type: "

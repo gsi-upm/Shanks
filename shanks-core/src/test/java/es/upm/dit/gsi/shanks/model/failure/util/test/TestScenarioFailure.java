@@ -44,4 +44,10 @@ public class TestScenarioFailure extends Failure {
 
     }
 
+    @Override
+    public boolean isResolved() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
 }

@@ -79,6 +79,12 @@ public class FailureTest {
                 public void changeOtherFields()
                         throws UnsupportedNetworkElementFieldException {
                 }
+
+                @Override
+                public boolean isResolved() {
+                    // TODO Auto-generated method stub
+                    return false;
+                }
             };
             Assert.assertTrue(f.getID().contains(
                     FailureTestDefinitions.FAILURE_ID));
@@ -113,6 +119,12 @@ public class FailureTest {
                 @Override
                 public void changeOtherFields()
                         throws UnsupportedNetworkElementFieldException {
+                }
+
+                @Override
+                public boolean isResolved() {
+                    // TODO Auto-generated method stub
+                    return false;
                 }
             };
 
@@ -159,6 +171,12 @@ public class FailureTest {
                 @Override
                 public void changeOtherFields()
                         throws UnsupportedNetworkElementFieldException {
+                }
+
+                @Override
+                public boolean isResolved() {
+                    // TODO Auto-generated method stub
+                    return false;
                 }
             };
 
@@ -214,6 +232,12 @@ public class FailureTest {
                 public void changeOtherFields()
                         throws UnsupportedNetworkElementFieldException {
                 }
+
+                @Override
+                public boolean isResolved() {
+                    // TODO Auto-generated method stub
+                    return false;
+                }
             };
 
             // Adding affected scenarios
@@ -256,6 +280,12 @@ public class FailureTest {
                 @Override
                 public void changeOtherFields()
                         throws UnsupportedNetworkElementFieldException {
+                }
+
+                @Override
+                public boolean isResolved() {
+                    // TODO Auto-generated method stub
+                    return false;
                 }
             };
 

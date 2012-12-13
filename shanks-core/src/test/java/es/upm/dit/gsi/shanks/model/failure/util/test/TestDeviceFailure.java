@@ -49,4 +49,10 @@ public class TestDeviceFailure extends Failure {
         // TODO Auto-generated method stub
     }
 
+    @Override
+    public boolean isResolved() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
 }

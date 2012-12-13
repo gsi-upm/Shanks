@@ -45,7 +45,6 @@ public class Magneto2DGUISimulation extends ShanksSimulation2DGUI{
 	public static void main (String[] args) throws ShanksException {
 
         Properties scenarioProperties = new Properties();
-//      scenarioProperties.put(MyScenario.CLOUDY_PROB, "5");
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.SIMULATION_2D);
         Properties configProperties = new Properties();
         configProperties.put(MagnetoSimulation.CONFIGURATION, "3");

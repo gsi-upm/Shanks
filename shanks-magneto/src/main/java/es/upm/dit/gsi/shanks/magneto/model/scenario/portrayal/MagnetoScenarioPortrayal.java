@@ -3,6 +3,8 @@ package es.upm.dit.gsi.shanks.magneto.model.scenario.portrayal;
 import sim.portrayal.continuous.ContinuousPortrayal2D;
 import sim.portrayal.network.NetworkPortrayal2D;
 import es.upm.dit.gsi.shanks.exception.ShanksException;
+import es.upm.dit.gsi.shanks.magneto.agent.FixAgent;
+import es.upm.dit.gsi.shanks.magneto.agent.portrayal.FixAgent2DPortrayal;
 import es.upm.dit.gsi.shanks.magneto.model.element.device.Computer;
 import es.upm.dit.gsi.shanks.magneto.model.element.device.ISPGateway;
 import es.upm.dit.gsi.shanks.magneto.model.element.device.Server;
@@ -56,6 +58,8 @@ public class MagnetoScenarioPortrayal extends Scenario2DPortrayal{
 		devicePortrayal.setPortrayalForClass(ISPGateway.class, new GatewayPortrayal());
 		devicePortrayal.setPortrayalForClass(ServerGateway.class, new UserGatewayPortrayal());
 		devicePortrayal.setPortrayalForClass(Server.class, new ServerPortrayal());
+		devicePortrayal.setPortrayalForClass(FixAgent.class, new FixAgent2DPortrayal());
+		
 		
 		networkPortrayal.setPortrayalForAll(new MagnetoLinkPortrayal());
 		

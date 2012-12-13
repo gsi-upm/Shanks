@@ -4,6 +4,7 @@ import java.util.Properties;
 
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.exception.ShanksException;
+import es.upm.dit.gsi.shanks.magneto.agent.FixAgent;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 
 public class MagnetoSimulation extends ShanksSimulation{
@@ -24,6 +25,11 @@ public class MagnetoSimulation extends ShanksSimulation{
 		super(seed, scenarioClass, scenarioID, initialState, properties);
 		this.configuration = configPropertiesLANSimulation;
 
+	}
+	
+	public void registerShanksAgents() throws ShanksException {
+		FixAgent agent = new FixAgent("FixAgent");
+		this.registerShanksAgent(agent);
 	}
 
 }

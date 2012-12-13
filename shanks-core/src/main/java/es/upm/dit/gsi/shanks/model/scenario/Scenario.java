@@ -725,7 +725,6 @@ public abstract class Scenario {
         while (it.hasNext()) {
             Class<? extends Failure> type = it.next();
             Failure failure;
-            System.out.println(type);
             double prob = 0;
             try {
                 c = type.getConstructor(new Class[] { Steppable.class });
@@ -747,7 +746,6 @@ public abstract class Scenario {
                 double aux = Math.random(); // THIS WORKS BETTER, MORE RANDOMLY
                 if (aux < prob) {
                     // Generate failure
-                    System.out.println("ECO_TANGO");
                     Set<NetworkElement> elementsSet;
                     if (numberOfCombinations >= 1) {
                         elementsSet = list.get(combinationNumber);
@@ -786,7 +784,6 @@ public abstract class Scenario {
             numList.add(configurationNumber);
             this.generatedFailureConfigurations
                     .put(failure.getClass(), numList);
-            System.out.println("MISIL LANZADO");
             failure.launchEvent();
             this.addFailure(failure, configurationNumber);
             logger.fine("Generated Failure " + failure.getID()

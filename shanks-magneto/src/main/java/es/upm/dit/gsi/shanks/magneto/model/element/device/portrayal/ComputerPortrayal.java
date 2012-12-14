@@ -2,6 +2,7 @@ package es.upm.dit.gsi.shanks.magneto.model.element.device.portrayal;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.io.File;
 import java.util.HashMap;
 
 import sim.portrayal.DrawInfo2D;
@@ -16,7 +17,9 @@ public class ComputerPortrayal extends Device2DPortrayal{
 	 * 
 	 */
 	private static final long serialVersionUID = 7215891600767658072L;
-	private static final String COMPUTER_PATH = "C:/Users/William Wallace/Universidad/Beca/MAGNETO-SHANKS/shanks-magneto/imagenes/Computer.png";
+	private static final String COMPUTER_PATH = "/home/dlara/workspace/Shanks-Magneto/shanks-magneto/imagenes/computer.png";
+	
+//	private static final String COMPUTER_PATH = "."+File.separator+"shanks-magneto"+File.separator+"imagenes"+File.separator+"computer.png";
 	
 	public void draw(Object object, Graphics2D graphics, DrawInfo2D info) {
 

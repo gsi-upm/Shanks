@@ -11,13 +11,16 @@ import es.upm.dit.gsi.shanks.agent.action.test.MyShanksAgentAction;
 import es.upm.dit.gsi.shanks.agent.capability.movement.Location;
 import es.upm.dit.gsi.shanks.agent.capability.movement.MobileShanksAgent;
 import es.upm.dit.gsi.shanks.agent.capability.movement.ShanksAgentMovementCapability;
+import es.upm.dit.gsi.shanks.agent.capability.perception.PercipientShanksAgent;
+import es.upm.dit.gsi.shanks.agent.capability.perception.ShanksAgentPerceptionCapability;
 import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.magneto.agent.action.UniversalFixAction;
+import es.upm.dit.gsi.shanks.magneto.model.element.device.UserGateway;
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 
-public class FixAgent extends SimpleShanksAgent implements MobileShanksAgent {
+public class FixAgent extends SimpleShanksAgent implements MobileShanksAgent, PercipientShanksAgent{
 
 	/**
 	 * 
@@ -32,8 +35,9 @@ public class FixAgent extends SimpleShanksAgent implements MobileShanksAgent {
 
 	public FixAgent(String id) {
 		super(id);
-		this.location = new Location(new Double2D(80, 80));
+		this.location = new Location(new Double2D(0, 0));
 		this.setCurrentLocation(location);
+		this.speed = 10.0;
 	}
 
 	public void checkMail() {
@@ -44,7 +48,7 @@ public class FixAgent extends SimpleShanksAgent implements MobileShanksAgent {
 	public void executeReasoningCycle(ShanksSimulation simulation) {
 			ShanksAgentMovementCapability.updateLocation(simulation,
 					this, location);
-			double random = Math.random();
+			
 			UniversalFixAction act = new UniversalFixAction("Fix", this);
 			List <NetworkElement> ne = new ArrayList<NetworkElement>();
 			for(String s : simulation.getScenario().getCurrentElements().keySet()){
@@ -53,11 +57,20 @@ public class FixAgent extends SimpleShanksAgent implements MobileShanksAgent {
       
 			if(!simulation.getScenario().getCurrentFailures().isEmpty()){
 				try {
-					double newprob = random * simulation.getScenario().getCurrentFailures().size();
-					if(newprob > prob_fix){
-						act.executeAction(simulation, this, ne);
-		    
+					for(NetworkElement n : ne){
+						if(!n.getStatus().get(UserGateway.STATUS_OK)){
+							Location newLoc = ShanksAgentPerceptionCapability.getObjectLocation(simulation, this, n);
+							ShanksAgentMovementCapability.goTo(simulation, this, location, newLoc, speed);
+								double random = Math.random();
+								double newprob = random * simulation.getScenario().getCurrentFailures().size();
+							if(newprob > prob_fix){
+								act.executeAction(simulation, this, ne);
+				    
+							}
+							
+						}
 					}
+					
 				} catch (UnsupportedNetworkElementFieldException e) {
 					e.printStackTrace();
 				} catch (UnsupportedScenarioStatusException e) {
@@ -95,8 +108,7 @@ public class FixAgent extends SimpleShanksAgent implements MobileShanksAgent {
 	}
 
 	public Location getTargetLocation() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.targetLocation;
 	}
 
 	public void setCurrentLocation(Location location) {
@@ -105,6 +117,10 @@ public class FixAgent extends SimpleShanksAgent implements MobileShanksAgent {
 
 	public void setTargetLocation(Location location) {
 		this.targetLocation= location;		
+	}
+
+	public double getPerceptionRange() {
+		return this.perceptionRange;
 	}
 
 }

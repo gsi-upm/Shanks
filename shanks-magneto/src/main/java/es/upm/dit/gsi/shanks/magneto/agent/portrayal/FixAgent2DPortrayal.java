@@ -15,7 +15,7 @@ public class FixAgent2DPortrayal extends ShanksAgent2DPortrayal{
 	 */
 	private static final long serialVersionUID = -5002663845504302383L;
 
-	private static final String AGENT_IMAGE_PATH = "C:/Users/William Wallace/Universidad/Beca/MAGNETO-SHANKS/shanks-magneto/imagenes/worker.jpg";
+	private static final String AGENT_IMAGE_PATH = "/home/dlara/workspace/Shanks-Magneto/shanks-magneto/imagenes/worker.jpg";
 	
 	public void draw(Object object, Graphics2D graphics, DrawInfo2D info) {
 

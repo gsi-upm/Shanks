@@ -13,7 +13,7 @@ public class Computer extends Device{
 		super(id, initialState, isGateway);
 	}
 
-	public static final String STATUS_ON = "On";
+	public static final String STATUS_ON = "Ok";
 	public static final String STATUS_DISCONNECTED = "Disconnected";
 	
 	public static final String PROPERTY_POWER = "Power";

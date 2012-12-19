@@ -12,7 +12,7 @@ import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
 public class ISPCongestion extends Failure{
 
 	public ISPCongestion(Steppable generator) {
-		super(ISPCongestion.class.getName(), generator, 0.01);
+		super(ISPCongestion.class.getName(), generator, 0.001);
 	}
 
 	@Override

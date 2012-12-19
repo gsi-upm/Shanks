@@ -16,8 +16,8 @@ public class GatewayPortrayal extends Device2DPortrayal{
 	 */
 	private static final long serialVersionUID = 2875023906624774863L;
 	
-	private static final String ISP_GATEWAY_IMAGE_PATH = "/home/dlara/workspace/Shanks-Magneto/shanks-magneto/imagenes/ISP.jpg";
-	private static final String ERROR_ISP_GATEWAY_IMAGE_PATH = "/home/dlara/workspace/Shanks-Magneto/shanks-magneto/imagenes/ISPError.jpg";
+	private static final String ISP_GATEWAY_IMAGE_PATH = "C:/Users/William Wallace/Universidad/Beca/MAGNETO-SHANKS/shanks-magneto/imagenes/ISPCloud.jpg";
+	private static final String ERROR_ISP_GATEWAY_IMAGE_PATH = "C:/Users/William Wallace/Universidad/Beca/MAGNETO-SHANKS/shanks-magneto/imagenes/ISPCloudError.jpg";
 	
 	
 	public void draw(Object object, Graphics2D graphics, DrawInfo2D info) {

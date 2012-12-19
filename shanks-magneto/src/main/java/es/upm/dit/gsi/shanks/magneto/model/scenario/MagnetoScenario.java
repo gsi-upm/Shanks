@@ -71,27 +71,38 @@ public class MagnetoScenario extends Scenario{
 		Device ispGateway = new ISPGateway("ISP Gateway", ISPGateway.STATUS_OK, true);
 		Device serverGateway = new ServerGateway("Server Gateway", ServerGateway.STATUS_OK, false);
 		Device server = new Server("Server", Server.STATUS_OK, false);
+		Device oss = new Server("OSS", Server.STATUS_OK, false);
+		Device ossGateway = new ServerGateway("OSS Gateway", ServerGateway.STATUS_OK, false);
+		
 		
 		Link compToUserGway = new MagnetoLink("L1", MagnetoLink.STATUS_OK, 2);
 		Link userGwayToISPGway = new MagnetoLink("L2", MagnetoLink.STATUS_OK, 2);
 		Link ispGwayToServerGway = new MagnetoLink("L3", MagnetoLink.STATUS_OK, 2);
 		Link serverGwayToServer = new MagnetoLink("L4", MagnetoLink.STATUS_OK, 2);
+		Link ispToOssGateway = new MagnetoLink("L5", MagnetoLink.STATUS_OK, 2);
+		Link ossGatewayToOss = new MagnetoLink("L6", MagnetoLink.STATUS_OK, 2);
 	
 		compToUserGway.connectDevices(userComputer, userGateway);
 		userGwayToISPGway.connectDevices(userGateway, ispGateway);
 		ispGwayToServerGway.connectDevices(ispGateway, serverGateway);
 		serverGwayToServer.connectDevices(serverGateway, server);
+		ispToOssGateway.connectDevices(ispGateway, ossGateway);
+		ossGatewayToOss.connectDevices(ossGateway, oss);
 		
 		this.addNetworkElement(userComputer);
 		this.addNetworkElement(userGateway);
 		this.addNetworkElement(ispGateway);
 		this.addNetworkElement(serverGateway);
 		this.addNetworkElement(server);
+		this.addNetworkElement(ossGateway);
+		this.addNetworkElement(oss);
 		
 		this.addNetworkElement(compToUserGway);
 		this.addNetworkElement(userGwayToISPGway);
 		this.addNetworkElement(ispGwayToServerGway);
 		this.addNetworkElement(serverGwayToServer);
+		this.addNetworkElement(ossGatewayToOss);
+		this.addNetworkElement(ispToOssGateway);
 		
 	
 	}

@@ -12,7 +12,7 @@ import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
 public class InternalProviderConnectivityFailure extends Failure{
 
 	public InternalProviderConnectivityFailure(Steppable generator) {
-		super(InternalProviderConnectivityFailure.class.getName(), generator, 0.01);
+		super(InternalProviderConnectivityFailure.class.getName(), generator, 0.001);
 	}
 
 	@Override

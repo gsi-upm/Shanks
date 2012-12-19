@@ -12,7 +12,7 @@ import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
 public class ISPRoutingProblem extends Failure{
 
 	public ISPRoutingProblem(Steppable generator) {
-		super(ISPRoutingProblem.class.getName(), generator, 0.01);
+		super(ISPRoutingProblem.class.getName(), generator, 0.001);
 	}
 
 	@Override

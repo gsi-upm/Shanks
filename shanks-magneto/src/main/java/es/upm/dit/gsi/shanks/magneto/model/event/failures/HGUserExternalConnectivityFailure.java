@@ -11,7 +11,7 @@ import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
 public class HGUserExternalConnectivityFailure extends Failure{
 
 	public HGUserExternalConnectivityFailure(Steppable generator) {
-		super(HGUserExternalConnectivityFailure.class.getName(), generator, 0.01);
+		super(HGUserExternalConnectivityFailure.class.getName(), generator, 0.001);
 		
 	}
 

@@ -12,7 +12,7 @@ import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
 public class ServiceProvideDeviceDownOrDisconnected extends Failure{
 
 	public ServiceProvideDeviceDownOrDisconnected(Steppable generator) {
-		super(ServiceProvideDeviceDownOrDisconnected.class.getName(), generator, 0.01);
+		super(ServiceProvideDeviceDownOrDisconnected.class.getName(), generator, 0.001);
 	}
 
 	@Override

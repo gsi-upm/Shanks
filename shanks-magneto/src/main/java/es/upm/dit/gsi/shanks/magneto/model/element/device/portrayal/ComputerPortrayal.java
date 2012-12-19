@@ -17,7 +17,7 @@ public class ComputerPortrayal extends Device2DPortrayal{
 	 * 
 	 */
 	private static final long serialVersionUID = 7215891600767658072L;
-	private static final String COMPUTER_PATH = "/home/dlara/workspace/Shanks-Magneto/shanks-magneto/imagenes/computer.png";
+	private static final String COMPUTER_PATH = "C:/Users/William Wallace/Universidad/Beca/MAGNETO-SHANKS/shanks-magneto/imagenes/computer.png";
 	
 //	private static final String COMPUTER_PATH = "."+File.separator+"shanks-magneto"+File.separator+"imagenes"+File.separator+"computer.png";
 	

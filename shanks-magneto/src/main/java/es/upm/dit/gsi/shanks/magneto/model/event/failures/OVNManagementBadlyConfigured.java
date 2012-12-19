@@ -12,7 +12,7 @@ import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
 public class OVNManagementBadlyConfigured extends Failure{
 
 	public OVNManagementBadlyConfigured(Steppable generator) {
-		super(OVNManagementBadlyConfigured.class.getName(), generator, 0.01);
+		super(OVNManagementBadlyConfigured.class.getName(), generator, 0.001);
 	}
 
 	@Override

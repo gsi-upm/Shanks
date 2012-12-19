@@ -11,7 +11,7 @@ import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
 public class LocalUserConnectivityFailure extends Failure{
 
 	public LocalUserConnectivityFailure(Steppable generator) {
-		super(LocalUserConnectivityFailure.class.getName(), generator, 0.01);
+		super(LocalUserConnectivityFailure.class.getName(), generator, 0.001);
 	}
 
 	@Override

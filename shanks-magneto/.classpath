@@ -9,5 +9,9 @@
 	<classpathentry kind="lib" path="C:/Users/William Wallace/Universidad/Beca/MAGNETO-SHANKS/shanks-core/lib/jpf-1.5.jar"/>
 	<classpathentry kind="lib" path="C:/Users/William Wallace/Universidad/Beca/MAGNETO-SHANKS/shanks-core/lib/mason.16.jar"/>
 	<classpathentry kind="lib" path="C:/Users/William Wallace/Universidad/Beca/MAGNETO-SHANKS/shanks-core/lib/unbbayes-4.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/William Wallace/Universidad/Beca/MAGNETO-SHANKS/shanks-core/lib/jfreechart-1.0.14-demo.jar"/>
+	<classpathentry kind="lib" path="C:/Users/William Wallace/Universidad/Beca/MAGNETO-SHANKS/shanks-core/lib/iText-2.1.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/William Wallace/Universidad/Beca/MAGNETO-SHANKS/shanks-core/lib/jcommon-1.0.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/William Wallace/Universidad/Beca/MAGNETO-SHANKS/shanks-core/lib/jfreechart-1.0.14.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -6,11 +6,16 @@ import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 
 public class ISPGateway extends Device{
+	
+	public int counter;
+	public boolean flag;
 
 	public ISPGateway(String id, String initialState, boolean isGateway) {
 		super(id, initialState, isGateway);
-		
+		this.counter = 0;
+		this.flag = false;
 	}
+	
 
 	public static final String STATUS_OK = "Ok";
 
@@ -42,7 +47,9 @@ public class ISPGateway extends Device{
 		if(provider == 0 && user == 0){
 			this.updateStatusTo(STATUS_OK, true);
 		}else{
+			counter++;
 			this.updateStatusTo(STATUS_OK, false);
+			System.out.println("ISP GATEWAY " + counter);
 		}
 		
 	}
@@ -51,6 +58,14 @@ public class ISPGateway extends Device{
 	public void setPossibleStates() {
 		this.addPossibleStatus(STATUS_OK);
 		
+	}
+	
+	public int getCounter(){
+		return counter;
+	}
+	
+	public void resetCounter(){
+		counter = 0;
 	}
 
 }

@@ -10,9 +10,10 @@ import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFi
 import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
 
 public class HGProviderDownOrDisconnected extends Failure{
+	
 
 	public HGProviderDownOrDisconnected(Steppable generator) {
-		super(HGProviderDownOrDisconnected.class.getName(), generator, 0.01);
+		super(HGProviderDownOrDisconnected.class.getName(), generator, 0.001);
 	}
 
 	@Override

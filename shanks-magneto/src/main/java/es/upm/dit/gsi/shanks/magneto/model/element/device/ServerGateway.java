@@ -6,16 +6,19 @@ import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 
 public class ServerGateway extends Device{
-
-	public ServerGateway(String id, String initialState, boolean isGateway) {
-		super(id, initialState, isGateway);
-		
-	}
 	
 	public static final String STATUS_OK = "Ok";
 	
 	public static final String PROPERTY_PROVIDERHAN = "Provider HAN";
 	public static final String PROPERTY_LOCALACCESS = "Local Acces";
+	
+	public int counter;
+
+	public ServerGateway(String id, String initialState, boolean isGateway) {
+		super(id, initialState, isGateway);
+		this.counter = 0;
+	}
+
 
 	@Override
 	public void fillIntialProperties() {
@@ -41,7 +44,9 @@ public class ServerGateway extends Device{
 		if(han == 0 && local == 2){
 			this.updateStatusTo(STATUS_OK, true);
 		}else{
+			counter++;
 			this.updateStatusTo(STATUS_OK, false);
+			System.out.println("GATEWAY SERVER " + counter);
 		}
 		
 	}
@@ -50,6 +55,14 @@ public class ServerGateway extends Device{
 	public void setPossibleStates() {
 		this.addPossibleStatus(STATUS_OK);
 		
+	}
+	
+	public int getCounter(){
+		return counter;
+	}
+	
+	public void resetCounter(){
+		counter = 0;
 	}
 
 }

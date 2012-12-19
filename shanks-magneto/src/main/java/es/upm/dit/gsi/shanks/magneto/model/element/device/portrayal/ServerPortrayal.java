@@ -15,8 +15,8 @@ public class ServerPortrayal extends Device2DPortrayal{
 	 * 
 	 */
 	private static final long serialVersionUID = 4989129984386602558L;
-	private static final String SERVER_PATH = "/home/dlara/workspace/Shanks-Magneto/shanks-magneto/imagenes/server.png";
-	private static final String SERVER_ERROR_PATH = "/home/dlara/workspace/Shanks-Magneto/shanks-magneto/imagenes/serverError.png";
+	private static final String SERVER_PATH = "C:/Users/William Wallace/Universidad/Beca/MAGNETO-SHANKS/shanks-magneto/imagenes/server.png";
+	private static final String SERVER_ERROR_PATH = "C:/Users/William Wallace/Universidad/Beca/MAGNETO-SHANKS/shanks-magneto/imagenes/serverError.png";
 	
 	public void draw(Object object, Graphics2D graphics, DrawInfo2D info) {
 
@@ -32,9 +32,9 @@ public class ServerPortrayal extends Device2DPortrayal{
         final int h = (int) (height);
         
         if(status.get(Server.STATUS_OK)){
-        	this.putImage(SERVER_PATH, x, y, 2*w, 2*h, graphics);
+        	this.putImage(SERVER_PATH, x, y - 10, 2*w, 2*h, graphics);
         }else{
-        	this.putImage(SERVER_ERROR_PATH, x, y, 2*w, 2*h, graphics);
+        	this.putImage(SERVER_ERROR_PATH, x, y - 10, 2*w, 2*h, graphics);
         }
 
        

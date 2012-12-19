@@ -6,16 +6,21 @@ import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 
 public class Server extends Device{
-
-	public Server(String id, String initialState, boolean isGateway) {
-		super(id, initialState, isGateway);
-
-	}
-
+	
 	public static final String STATUS_OK = "Ok";
 	
 	public static final String PROPERTY_SERVER_CPU_LOAD = "CPU Load";
 	public static final String PROPERTY_SERVICE_LOOK_UP = "Service Look Up";
+	
+	public int counter;
+
+	public Server(String id, String initialState, boolean isGateway) {
+		super(id, initialState, isGateway);
+		this.counter = 0;
+
+	}
+
+
 	
 	@Override
 	public void fillIntialProperties() {
@@ -43,7 +48,9 @@ public class Server extends Device{
 		if(look == 0 && load == 1){
 			this.updateStatusTo(STATUS_OK, true);
 		}else{
+			counter++;
 			this.updateStatusTo(STATUS_OK, false);
+			System.out.println("SERVER " +  counter);
 		}
 		
 	}
@@ -54,4 +61,12 @@ public class Server extends Device{
 		
 	}
 
+	public int getCounter(){
+		return counter;
+	}
+	
+	public void resetCounter(){
+		counter = 0;
+	}
+	
 }

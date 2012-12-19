@@ -12,7 +12,7 @@ import es.upm.dit.gsi.shanks.model.event.networkelement.ProbabilisticNetworkElem
 public class UserHANCongestion extends Failure{
 
 	public UserHANCongestion(Steppable generator) {
-		super(UserHANCongestion.class.getName(), generator, 0.01);	
+		super(UserHANCongestion.class.getName(), generator, 0.001);	
 		
 	}
 

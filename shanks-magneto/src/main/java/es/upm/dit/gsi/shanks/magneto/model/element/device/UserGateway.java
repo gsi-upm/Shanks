@@ -6,11 +6,7 @@ import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
 
 public class UserGateway extends Device{
-
-	public UserGateway(String id, String initialState, boolean isGateway) {
-		super(id, initialState, isGateway);
-		
-	}
+	
 
 	public static final String STATUS_OK = "Ok";
 	
@@ -19,6 +15,13 @@ public class UserGateway extends Device{
 	public static final String PROPERTY_CONFIGURATION = "Configuration";
 	public static final String PROPERTY_USERHAN = "User HAN";
 	
+	public int counter = 0;
+
+	public UserGateway(String id, String initialState, boolean isGateway) {
+		super(id, initialState, isGateway);
+		this.counter = 0;
+	}
+
 	@Override
 	public void fillIntialProperties() {
 		this.addProperty(PROPERTY_CONNECTION_TO_ISP, 0);
@@ -49,7 +52,9 @@ public class UserGateway extends Device{
 		if(provider == 0 && isp == 0 && userHan == 0 && conf){
 			this.updateStatusTo(STATUS_OK, true);		
 		}else{
+			counter++;
 			this.updateStatusTo(STATUS_OK, false);
+			System.out.println("USER GATEWAY " + counter);
 		}
 		
 	}
@@ -59,5 +64,13 @@ public class UserGateway extends Device{
 		this.addPossibleStatus(STATUS_OK);
 		
 	}
+	
+	public int getCounter(){
+		return counter;
+	}
 
+	public void resetCounter(){
+		counter = 0;
+	}
+	
 }

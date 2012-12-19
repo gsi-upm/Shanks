@@ -12,7 +12,7 @@ import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
 public class ServiceMalFunction extends Failure{
 
 	public ServiceMalFunction(Steppable generator) {
-		super(ServiceMalFunction.class.getName(), generator, 0.01);
+		super(ServiceMalFunction.class.getName(), generator, 0.001);
 	}
 
 	@Override

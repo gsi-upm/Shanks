@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sim.util.Double2D;
-
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.SimpleShanksAgent;
-import es.upm.dit.gsi.shanks.agent.action.test.MyShanksAgentAction;
 import es.upm.dit.gsi.shanks.agent.capability.movement.Location;
 import es.upm.dit.gsi.shanks.agent.capability.movement.MobileShanksAgent;
 import es.upm.dit.gsi.shanks.agent.capability.movement.ShanksAgentMovementCapability;
@@ -20,13 +18,13 @@ import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 
-public class FixAgent extends SimpleShanksAgent implements MobileShanksAgent, PercipientShanksAgent{
+public class FixAgentBecario extends SimpleShanksAgent implements MobileShanksAgent, PercipientShanksAgent{
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8882475458980283987L;
-	private double prob_fix = 1;
+	private static final long serialVersionUID = 5436071011898203101L;
+	private double prob_fix = 1.25;
 	private Location currentLocation;
 	private Location targetLocation;
 	private Double speed;
@@ -34,7 +32,7 @@ public class FixAgent extends SimpleShanksAgent implements MobileShanksAgent, Pe
 	public Location location;
 	public int resolvedFailures;
 
-	public FixAgent(String id) {
+	public FixAgentBecario(String id) {
 		super(id);
 		this.location = new Location(new Double2D(0, 0));
 		this.setCurrentLocation(location);
@@ -63,7 +61,7 @@ public class FixAgent extends SimpleShanksAgent implements MobileShanksAgent, Pe
 							Location newLoc = ShanksAgentPerceptionCapability.getObjectLocation(simulation, this, n);
 							ShanksAgentMovementCapability.goTo(simulation, this, location, newLoc, speed);
 								double random = Math.random();
-								double newprob = random * simulation.getScenario().getCurrentFailures().size();
+								double newprob = (random * simulation.getScenario().getCurrentFailures().size())/0.95;
 							if(newprob > prob_fix){
 								act.executeAction(simulation, this, ne);
 								this.incrementFailuresResolved();

@@ -9,8 +9,11 @@ import es.upm.dit.gsi.shanks.model.element.device.Device;
 
 public class Computer extends Device{
 	
+
+	
 	public Computer(String id, String initialState, boolean isGateway){
 		super(id, initialState, isGateway);
+
 	}
 
 	public static final String STATUS_ON = "Ok";
@@ -66,4 +69,5 @@ public class Computer extends Device{
 		this.addPossibleStatus(STATUS_DISCONNECTED);
 		
 	}
+	
 }

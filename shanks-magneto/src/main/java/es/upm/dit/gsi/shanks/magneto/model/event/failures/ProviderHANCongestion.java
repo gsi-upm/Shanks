@@ -12,7 +12,7 @@ import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
 public class ProviderHANCongestion extends Failure{
 
 	public ProviderHANCongestion(Steppable generator) {
-		super(ProviderHANCongestion.class.getName(), generator, 0.01);
+		super(ProviderHANCongestion.class.getName(), generator, 0.001);
 	}
 
 	@Override

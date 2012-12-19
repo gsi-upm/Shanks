@@ -12,7 +12,7 @@ import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
 public class HGUserDisconnected extends Failure{
 
 	public HGUserDisconnected(Steppable generator) {
-		super(HGUserDisconnected.class.getName(), generator, 0.01);
+		super(HGUserDisconnected.class.getName(), generator, 0.001);
 		
 	}
 

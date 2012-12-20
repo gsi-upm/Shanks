@@ -55,7 +55,6 @@ public class ErrorsInDevicesPainter implements Steppable{
 			
 			
 			if(failuresInISP > 1){
-				System.out.println("------------->" + failuresInISP);
 				errors[posicion] = 1;
 				isp.resetCounter();
 				posicion++;

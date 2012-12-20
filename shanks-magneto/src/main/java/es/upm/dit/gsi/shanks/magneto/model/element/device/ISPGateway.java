@@ -49,7 +49,6 @@ public class ISPGateway extends Device{
 		}else{
 			counter++;
 			this.updateStatusTo(STATUS_OK, false);
-			System.out.println("ISP GATEWAY " + counter);
 		}
 		
 	}

@@ -10,6 +10,7 @@ import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.magneto.agent.FixAgent;
 import es.upm.dit.gsi.shanks.magneto.agent.FixAgentBecario;
 import es.upm.dit.gsi.shanks.magneto.model.steppables.ErrorsInDevicesPainter;
+import es.upm.dit.gsi.shanks.magneto.model.steppables.FailuresPerDevicePainter;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation;
 import es.upm.dit.gsi.shanks.model.test.steppable.FailureLog;
@@ -64,6 +65,9 @@ public class MagnetoSimulation extends ShanksSimulation{
             schedule.scheduleRepeating(Schedule.EPOCH, 3, chart, 50);
             Steppable histogram = new ErrorsInDevicesPainter();
             schedule.scheduleRepeating(Schedule.EPOCH, 3, histogram, 50);
+            Steppable plot = new FailuresPerDevicePainter();
+            schedule.scheduleRepeating(Schedule.EPOCH, 3, plot, 50);
+
 
             break;
         default:

@@ -50,7 +50,6 @@ public class Server extends Device{
 		}else{
 			counter++;
 			this.updateStatusTo(STATUS_OK, false);
-			System.out.println("SERVER " +  counter);
 		}
 		
 	}

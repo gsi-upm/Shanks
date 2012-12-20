@@ -54,7 +54,6 @@ public class UserGateway extends Device{
 		}else{
 			counter++;
 			this.updateStatusTo(STATUS_OK, false);
-			System.out.println("USER GATEWAY " + counter);
 		}
 		
 	}

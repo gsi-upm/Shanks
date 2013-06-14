@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="../../element/NetworkElement.html" title="es.upm.dit.gsi.shanks.model.element.NetworkElement" alt="" coords="297,395,586,464"/>
+<area shape="rect" id="node7_1" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/String.html" title="java.lang.String" alt="" coords="374,523,695,797"/>
+<area shape="rect" id="node9_2" href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/HashMap.html" title="java.util.HashMap" alt="" coords="16,603,216,717"/>
+<area shape="rect" id="node13_3" href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/List.html" title="java.util.List" alt="" coords="741,641,821,679"/>
+<area shape="rect" id="node2_4" href="../PeriodicEvent.html" title="es.upm.dit.gsi.shanks.model.event.PeriodicEvent" alt="" coords="483,11,829,80"/>
+<area shape="rect" id="node3_5" href="./PeriodicScenarioEvent.html" title="es.upm.dit.gsi.shanks.model.event.scenario.PeriodicScenarioEvent" alt="" coords="704,139,1125,208"/>
+<area shape="rect" id="node4_6" href="../../scenario/Scenario.html" title="es.upm.dit.gsi.shanks.model.scenario.Scenario" alt="" coords="485,267,854,336"/>
+<area shape="rect" id="node42_7" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Class.html" title="java.lang.Class" alt="" coords="878,417,951,441"/>
+</map>

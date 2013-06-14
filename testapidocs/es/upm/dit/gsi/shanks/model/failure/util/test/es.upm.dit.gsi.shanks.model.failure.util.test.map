@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./TestScenarioFailure.html" title="es.upm.dit.gsi.shanks.model.failure.util.test.TestScenarioFailure" alt="" coords="15,18,515,102"/>
+<area shape="rect" id="node2_1" href="./TestDeviceFailure.html" title="es.upm.dit.gsi.shanks.model.failure.util.test.TestDeviceFailure" alt="" coords="561,18,1049,102"/>
+<area shape="rect" id="node3_2" href="./FailureTestSimulation.html" title="es.upm.dit.gsi.shanks.model.failure.util.test.FailureTestSimulation" alt="" coords="1095,25,2049,95"/>
+<area shape="rect" id="node4_3" href="./FailureTestScenario.html" title="es.upm.dit.gsi.shanks.model.failure.util.test.FailureTestScenario" alt="" coords="2094,25,2525,95"/>
+<area shape="rect" id="node5_4" href="./FailureTestDevice.html" title="es.upm.dit.gsi.shanks.model.failure.util.test.FailureTestDevice" alt="" coords="2571,25,2979,95"/>
+<area shape="rect" id="node6_5" href="./FailureTestDefinitions.html" title="es.upm.dit.gsi.shanks.model.failure.util.test.FailureTestDefinitions" alt="" coords="3024,25,3181,95"/>
+<area shape="rect" id="node7_6" href="./FailureTest.html" title="es.upm.dit.gsi.shanks.model.failure.util.test.FailureTest" alt="" coords="3227,11,3573,109"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./FailuresGUI.html" title="es.upm.dit.gsi.shanks.model.test.steppable.FailuresGUI" alt="" coords="130,109,233,179"/>
+<area shape="rect" id="node5_1" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/engine/SimState.html" title="sim.engine.SimState" alt="" coords="15,238,347,351"/>
+<area shape="rect" id="node2_2" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/engine/Steppable.html" title="sim.engine.Steppable" alt="" coords="141,11,221,50"/>
+</map>

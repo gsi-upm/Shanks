@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="../../../exception/ShanksException.html" title="es.upm.dit.gsi.shanks.exception.ShanksException" alt="" coords="16,11,349,125"/>
+<area shape="rect" id="node2_1" href="./DuplicatedIDException.html" title="es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException" alt="" coords="30,184,335,253"/>
+</map>

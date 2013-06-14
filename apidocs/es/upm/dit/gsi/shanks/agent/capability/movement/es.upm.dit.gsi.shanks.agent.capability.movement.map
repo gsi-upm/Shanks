@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./ShanksAgentMovementCapability.html" title="es.upm.dit.gsi.shanks.agent.capability.movement.ShanksAgentMovementCapability" alt="" coords="15,25,235,95"/>
+<area shape="rect" id="node2_1" href="./MobileShanksAgent.html" title="es.upm.dit.gsi.shanks.agent.capability.movement.MobileShanksAgent" alt="" coords="281,41,409,79"/>
+<area shape="rect" id="node3_2" href="./Location.html" title="es.upm.dit.gsi.shanks.agent.capability.movement.Location" alt="" coords="455,11,647,109"/>
+</map>

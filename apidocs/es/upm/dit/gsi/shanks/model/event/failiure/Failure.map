@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./Failure.html" title="es.upm.dit.gsi.shanks.model.event.failiure.Failure" alt="" coords="16,267,344,351"/>
+<area shape="rect" id="node6_1" href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/logging/Logger.html" title="java.util.logging.Logger" alt="" coords="285,411,499,480"/>
+<area shape="rect" id="node2_2" href="../networkelement/ProbabilisticNetworkElementEvent.html" title="es.upm.dit.gsi.shanks.model.event.networkelement.ProbabilisticNetworkElementEvent" alt="" coords="50,11,553,80"/>
+<area shape="rect" id="node3_3" href="../../scenario/Scenario.html" title="es.upm.dit.gsi.shanks.model.scenario.Scenario" alt="" coords="117,139,486,208"/>
+</map>

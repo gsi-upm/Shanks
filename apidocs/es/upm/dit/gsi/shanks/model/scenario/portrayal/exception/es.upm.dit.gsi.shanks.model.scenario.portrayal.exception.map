@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./DuplictedFrameIDException.html" title="es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplictedFrameIDException" alt="" coords="16,11,291,80"/>
+<area shape="rect" id="node2_1" href="./DuplicatedPortrayalIDException.html" title="es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException" alt="" coords="336,11,765,80"/>
+<area shape="rect" id="node3_2" href="./DuplicatedDataSerieIDException.html" title="es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedDataSerieIDException" alt="" coords="811,11,1219,80"/>
+<area shape="rect" id="node4_3" href="./DuplicatedChartIDException.html" title="es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedChartIDException" alt="" coords="1265,11,1535,80"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./MyShanksAgentAction.html" title="es.upm.dit.gsi.shanks.agent.action.test.MyShanksAgentAction" alt="" coords="25,139,351,208"/>
+<area shape="rect" id="node5_1" href="http://java.sun.com/j2se/1.4.2/docs/api/es/upm/dit/gsi/shanks/model/scenario/Scenario.html" title="es.upm.dit.gsi.shanks.model.scenario.Scenario" alt="" coords="27,267,349,336"/>
+<area shape="rect" id="node2_2" href="http://java.sun.com/j2se/1.4.2/docs/api/es/upm/dit/gsi/shanks/agent/action/SimpleShanksAgentAction.html" title="es.upm.dit.gsi.shanks.agent.action.SimpleShanksAgentAction" alt="" coords="16,11,360,80"/>
+</map>

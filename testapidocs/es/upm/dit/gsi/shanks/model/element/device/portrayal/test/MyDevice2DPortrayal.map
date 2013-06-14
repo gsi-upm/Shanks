@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./MyDevice2DPortrayal.html" title="es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice2DPortrayal" alt="" coords="637,139,789,208"/>
+<area shape="rect" id="node7_1" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/portrayal/DrawInfo2D.html" title="sim.portrayal.DrawInfo2D" alt="" coords="15,267,617,365"/>
+<area shape="rect" id="node9_2" href="http://java.sun.com/j2se/1.4.2/docs/api/java/awt/Graphics2D.html" title="java.awt.Graphics2D" alt="" coords="662,281,765,351"/>
+<area shape="rect" id="node11_3" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Object.html" title="java.lang.Object" alt="" coords="811,281,883,351"/>
+<area shape="rect" id="node2_4" href="http://java.sun.com/j2se/1.4.2/docs/api/es/upm/dit/gsi/shanks/model/element/device/portrayal/Device2DPortrayal.html" title="es.upm.dit.gsi.shanks.model.element.device.portrayal.Device2DPortrayal" alt="" coords="567,11,705,80"/>
+<area shape="rect" id="node4_5" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/portrayal/Portrayal.html" title="sim.portrayal.Portrayal" alt="" coords="751,26,831,65"/>
+</map>

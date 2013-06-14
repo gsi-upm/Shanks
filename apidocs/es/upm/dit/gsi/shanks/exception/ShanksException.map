@@ -1,0 +1,23 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="../agent/action/exception/UnknownShanksAgentActionException.html" title="es.upm.dit.gsi.shanks.agent.action.exception.UnknownShanksAgentActionException" alt="" coords="16,357,440,427"/>
+<area shape="rect" id="node2_1" href="../agent/capability/reasoning/bayes/exception/UnknownNodeException.html" title="es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.exception.UnknownNodeException" alt="" coords="486,357,903,427"/>
+<area shape="rect" id="node3_2" href="../agent/capability/reasoning/bayes/exception/UnknowkNodeStateException.html" title="es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.exception.UnknowkNodeStateException" alt="" coords="949,357,1451,427"/>
+<area shape="rect" id="node4_3" href="../agent/exception/UnkownAgentException.html" title="es.upm.dit.gsi.shanks.agent.exception.UnkownAgentException" alt="" coords="1497,357,1746,427"/>
+<area shape="rect" id="node5_4" href="../agent/exception/DuplictaedDisplayIDException.html" title="es.upm.dit.gsi.shanks.agent.exception.DuplictaedDisplayIDException" alt="" coords="1792,357,2085,427"/>
+<area shape="rect" id="node6_5" href="../agent/exception/DuplicatedAgentIDException.html" title="es.upm.dit.gsi.shanks.agent.exception.DuplicatedAgentIDException" alt="" coords="2131,357,2407,427"/>
+<area shape="rect" id="node7_6" href="../agent/exception/DuplicatedActionIDException.html" title="es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException" alt="" coords="2453,357,2822,427"/>
+<area shape="rect" id="node8_7" href="./ShanksException.html" title="es.upm.dit.gsi.shanks.exception.ShanksException" alt="" coords="3639,185,3972,298"/>
+<area shape="rect" id="node9_8" href="../model/element/exception/UnsupportedNetworkElementFieldException.html" title="es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException" alt="" coords="2867,357,3362,427"/>
+<area shape="rect" id="node10_9" href="../model/element/exception/TooManyConnectionException.html" title="es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException" alt="" coords="3408,357,3645,427"/>
+<area shape="rect" id="node11_10" href="../model/event/exception/ShanksEventException.html" title="es.upm.dit.gsi.shanks.model.event.exception.ShanksEventException" alt="" coords="3691,357,3919,427"/>
+<area shape="rect" id="node12_11" href="../model/scenario/exception/UnsupportedScenarioStatusException.html" title="es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException" alt="" coords="3965,357,4211,427"/>
+<area shape="rect" id="node13_12" href="../model/scenario/exception/ScenarioNotFoundException.html" title="es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException" alt="" coords="4256,357,4704,427"/>
+<area shape="rect" id="node14_13" href="../model/scenario/exception/NonGatewayDeviceException.html" title="es.upm.dit.gsi.shanks.model.scenario.exception.NonGatewayDeviceException" alt="" coords="4749,357,5253,427"/>
+<area shape="rect" id="node15_14" href="../model/scenario/exception/DuplicatedIDException.html" title="es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException" alt="" coords="5299,357,5605,427"/>
+<area shape="rect" id="node16_15" href="../model/scenario/exception/AlreadyConnectedScenarioException.html" title="es.upm.dit.gsi.shanks.model.scenario.exception.AlreadyConnectedScenarioException" alt="" coords="5650,357,6195,427"/>
+<area shape="rect" id="node17_16" href="../model/scenario/portrayal/exception/DuplictedFrameIDException.html" title="es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplictedFrameIDException" alt="" coords="6241,357,6516,427"/>
+<area shape="rect" id="node18_17" href="../model/scenario/portrayal/exception/DuplicatedPortrayalIDException.html" title="es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException" alt="" coords="6561,357,6991,427"/>
+<area shape="rect" id="node19_18" href="../model/scenario/portrayal/exception/DuplicatedDataSerieIDException.html" title="es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedDataSerieIDException" alt="" coords="7036,357,7444,427"/>
+<area shape="rect" id="node20_19" href="../model/scenario/portrayal/exception/DuplicatedChartIDException.html" title="es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedChartIDException" alt="" coords="7490,357,7761,427"/>
+<area shape="rect" id="node28_20" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Exception.html" title="java.lang.Exception" alt="" coords="3679,11,3932,125"/>
+</map>

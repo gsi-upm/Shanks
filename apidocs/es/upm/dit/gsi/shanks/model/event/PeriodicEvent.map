@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="../element/NetworkElement.html" title="es.upm.dit.gsi.shanks.model.element.NetworkElement" alt="" coords="139,555,429,624"/>
+<area shape="rect" id="node2_1" href="./PeriodicEvent.html" title="es.upm.dit.gsi.shanks.model.event.PeriodicEvent" alt="" coords="155,155,501,224"/>
+<area shape="rect" id="node4_2" href="./networkelement/PeriodicNetworkElementEvent.html" title="es.upm.dit.gsi.shanks.model.event.networkelement.PeriodicNetworkElementEvent" alt="" coords="641,283,1129,367"/>
+<area shape="rect" id="node5_3" href="./scenario/PeriodicScenarioEvent.html" title="es.upm.dit.gsi.shanks.model.event.scenario.PeriodicScenarioEvent" alt="" coords="73,291,495,360"/>
+<area shape="rect" id="node6_4" href="../scenario/Scenario.html" title="es.upm.dit.gsi.shanks.model.scenario.Scenario" alt="" coords="358,427,727,496"/>
+<area shape="rect" id="node3_5" href="./Event.html" title="es.upm.dit.gsi.shanks.model.event.Event" alt="" coords="209,11,447,95"/>
+</map>

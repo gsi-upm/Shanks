@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="../device/Device.html" title="es.upm.dit.gsi.shanks.model.element.device.Device" alt="" coords="654,139,999,208"/>
+<area shape="rect" id="node2_1" href="./Link.html" title="es.upm.dit.gsi.shanks.model.element.link.Link" alt="" coords="462,267,749,336"/>
+<area shape="rect" id="node10_2" href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/logging/Logger.html" title="java.util.logging.Logger" alt="" coords="499,395,712,464"/>
+<area shape="rect" id="node12_3" href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/List.html" title="java.util.List" alt="" coords="1056,410,1136,449"/>
+<area shape="rect" id="node3_4" href="./portrayal/Link3DPortrayal.html" title="es.upm.dit.gsi.shanks.model.element.link.portrayal.Link3DPortrayal" alt="" coords="433,139,557,208"/>
+<area shape="rect" id="node4_5" href="../NetworkElement.html" title="es.upm.dit.gsi.shanks.model.element.NetworkElement" alt="" coords="951,11,1241,80"/>
+<area shape="rect" id="node5_6" href="../../scenario/portrayal/Scenario3DPortrayal.html" title="es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal" alt="" coords="16,11,485,80"/>
+<area shape="rect" id="node6_7" href="../../scenario/portrayal/Scenario2DPortrayal.html" title="es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal" alt="" coords="531,11,906,80"/>
+</map>

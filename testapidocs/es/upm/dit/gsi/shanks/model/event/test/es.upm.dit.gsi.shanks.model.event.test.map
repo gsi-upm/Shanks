@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./MyProbScenarioEvent.html" title="es.upm.dit.gsi.shanks.model.event.test.MyProbScenarioEvent" alt="" coords="15,11,289,80"/>
+<area shape="rect" id="node2_1" href="./MyProbNetElementEvent.html" title="es.upm.dit.gsi.shanks.model.event.test.MyProbNetElementEvent" alt="" coords="334,11,623,80"/>
+<area shape="rect" id="node3_2" href="./MyPeriodicScenarioEvent.html" title="es.upm.dit.gsi.shanks.model.event.test.MyPeriodicScenarioEvent" alt="" coords="669,11,963,80"/>
+<area shape="rect" id="node4_3" href="./MyPeriodicNetElementEvent.html" title="es.upm.dit.gsi.shanks.model.event.test.MyPeriodicNetElementEvent" alt="" coords="1008,11,1317,80"/>
+</map>

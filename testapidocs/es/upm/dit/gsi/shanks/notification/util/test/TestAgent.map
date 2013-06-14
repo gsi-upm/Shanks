@@ -1,0 +1,13 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./TestAgent.html" title="es.upm.dit.gsi.shanks.notification.util.test.TestAgent" alt="" coords="583,139,932,208"/>
+<area shape="rect" id="node3_1" href="./NotifiedString.html" title="es.upm.dit.gsi.shanks.notification.util.test.NotifiedString" alt="" coords="15,289,265,359"/>
+<area shape="rect" id="node4_2" href="./NotifiedDouble.html" title="es.upm.dit.gsi.shanks.notification.util.test.NotifiedDouble" alt="" coords="890,289,1147,359"/>
+<area shape="rect" id="node5_3" href="./NotifiedBoolean.html" title="es.upm.dit.gsi.shanks.notification.util.test.NotifiedBoolean" alt="" coords="361,289,625,359"/>
+<area shape="rect" id="node10_4" href="http://java.sun.com/j2se/1.4.2/docs/api/es/upm/dit/gsi/shanks/agent/capability/movement/Location.html" title="es.upm.dit.gsi.shanks.agent.capability.movement.Location" alt="" coords="671,275,844,373"/>
+<area shape="rect" id="node15_5" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/String.html" title="java.lang.String" alt="" coords="242,440,563,715"/>
+<area shape="rect" id="node19_6" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Double.html" title="java.lang.Double" alt="" coords="944,535,1093,619"/>
+<area shape="rect" id="node22_7" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/engine/SimState.html" title="sim.engine.SimState" alt="" coords="1245,267,1577,381"/>
+<area shape="rect" id="node24_8" href="http://java.sun.com/j2se/1.4.2/docs/api/jason/asSemantics/Message.html" title="jason.asSemantics.Message" alt="" coords="1623,267,2068,381"/>
+<area shape="rect" id="node2_9" href="./TestAction.html" title="es.upm.dit.gsi.shanks.notification.util.test.TestAction" alt="" coords="513,11,777,80"/>
+<area shape="rect" id="node7_10" href="http://java.sun.com/j2se/1.4.2/docs/api/es/upm/dit/gsi/shanks/agent/ShanksAgent.html" title="es.upm.dit.gsi.shanks.agent.ShanksAgent" alt="" coords="823,26,915,65"/>
+</map>

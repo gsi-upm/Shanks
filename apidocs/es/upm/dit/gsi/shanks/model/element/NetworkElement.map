@@ -1,0 +1,18 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./device/Device.html" title="es.upm.dit.gsi.shanks.model.element.device.Device" alt="" coords="1213,785,1558,855"/>
+<area shape="rect" id="node2_1" href="./link/Link.html" title="es.upm.dit.gsi.shanks.model.element.link.Link" alt="" coords="1197,1016,1483,1085"/>
+<area shape="rect" id="node18_2" href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/logging/Logger.html" title="java.util.logging.Logger" alt="" coords="176,1144,389,1213"/>
+<area shape="rect" id="node20_3" href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/List.html" title="java.util.List" alt="" coords="1615,1159,1695,1198"/>
+<area shape="rect" id="node3_4" href="./NetworkElement.html" title="es.upm.dit.gsi.shanks.model.element.NetworkElement" alt="" coords="1510,555,1799,624"/>
+<area shape="rect" id="node25_5" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/String.html" title="java.lang.String" alt="" coords="1850,683,2171,957"/>
+<area shape="rect" id="node27_6" href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/HashMap.html" title="java.util.HashMap" alt="" coords="733,763,933,877"/>
+<area shape="rect" id="node63_7" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Object.html" title="java.lang.Object" alt="" coords="616,785,688,855"/>
+<area shape="rect" id="node4_8" href="../event/agent/Action.html" title="es.upm.dit.gsi.shanks.model.event.agent.Action" alt="" coords="1108,427,1348,496"/>
+<area shape="rect" id="node5_9" href="../event/PeriodicEvent.html" title="es.upm.dit.gsi.shanks.model.event.PeriodicEvent" alt="" coords="1738,155,2083,224"/>
+<area shape="rect" id="node8_10" href="../event/networkelement/PeriodicNetworkElementEvent.html" title="es.upm.dit.gsi.shanks.model.event.networkelement.PeriodicNetworkElementEvent" alt="" coords="1667,283,2155,367"/>
+<area shape="rect" id="node10_11" href="../event/scenario/PeriodicScenarioEvent.html" title="es.upm.dit.gsi.shanks.model.event.scenario.PeriodicScenarioEvent" alt="" coords="2200,291,2621,360"/>
+<area shape="rect" id="node11_12" href="../scenario/Scenario.html" title="es.upm.dit.gsi.shanks.model.scenario.Scenario" alt="" coords="618,427,987,496"/>
+<area shape="rect" id="node6_13" href="../event/Event.html" title="es.upm.dit.gsi.shanks.model.event.Event" alt="" coords="2177,11,2415,95"/>
+<area shape="rect" id="node7_14" href="../event/networkelement/ProbabilisticNetworkElementEvent.html" title="es.upm.dit.gsi.shanks.model.event.networkelement.ProbabilisticNetworkElementEvent" alt="" coords="258,291,761,360"/>
+<area shape="rect" id="node9_15" href="../event/scenario/ProbabilisticScenarioEvent.html" title="es.upm.dit.gsi.shanks.model.event.scenario.ProbabilisticScenarioEvent" alt="" coords="1163,291,1621,360"/>
+</map>

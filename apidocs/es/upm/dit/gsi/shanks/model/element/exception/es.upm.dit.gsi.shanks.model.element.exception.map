@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./UnsupportedNetworkElementFieldException.html" title="es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException" alt="" coords="15,11,510,80"/>
+<area shape="rect" id="node2_1" href="./TooManyConnectionException.html" title="es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException" alt="" coords="556,11,793,80"/>
+</map>

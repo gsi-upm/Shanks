@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./UnkownAgentException.html" title="es.upm.dit.gsi.shanks.agent.exception.UnkownAgentException" alt="" coords="15,11,265,80"/>
+<area shape="rect" id="node2_1" href="./DuplictaedDisplayIDException.html" title="es.upm.dit.gsi.shanks.agent.exception.DuplictaedDisplayIDException" alt="" coords="311,11,604,80"/>
+<area shape="rect" id="node3_2" href="./DuplicatedAgentIDException.html" title="es.upm.dit.gsi.shanks.agent.exception.DuplicatedAgentIDException" alt="" coords="650,11,926,80"/>
+<area shape="rect" id="node4_3" href="./DuplicatedActionIDException.html" title="es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException" alt="" coords="971,11,1341,80"/>
+</map>

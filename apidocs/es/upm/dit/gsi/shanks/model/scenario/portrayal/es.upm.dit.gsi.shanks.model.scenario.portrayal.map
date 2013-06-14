@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./ShanksMath.html" title="es.upm.dit.gsi.shanks.model.scenario.portrayal.ShanksMath" alt="" coords="261,11,366,80"/>
+<area shape="rect" id="node2_1" href="./ScenarioPortrayal.html" title="es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal" alt="" coords="412,11,652,80"/>
+<area shape="rect" id="node3_2" href="./Scenario3DPortrayal.html" title="es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal" alt="" coords="52,139,521,208"/>
+<area shape="rect" id="node4_3" href="./Scenario2DPortrayal.html" title="es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal" alt="" coords="591,139,966,208"/>
+<area shape="rect" id="node5_4" href="./ComplexScenario3DPortrayal.html" title="es.upm.dit.gsi.shanks.model.scenario.portrayal.ComplexScenario3DPortrayal" alt="" coords="15,267,534,336"/>
+<area shape="rect" id="node6_5" href="./ComplexScenario2DPortrayal.html" title="es.upm.dit.gsi.shanks.model.scenario.portrayal.ComplexScenario2DPortrayal" alt="" coords="580,267,1004,336"/>
+</map>

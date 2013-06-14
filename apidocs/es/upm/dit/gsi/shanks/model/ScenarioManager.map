@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./scenario/Scenario.html" title="es.upm.dit.gsi.shanks.model.scenario.Scenario" alt="" coords="743,11,1112,80"/>
+<area shape="rect" id="node4_1" href="../ShanksSimulation.html" title="es.upm.dit.gsi.shanks.ShanksSimulation" alt="" coords="54,139,742,208"/>
+<area shape="rect" id="node10_2" href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/logging/Logger.html" title="java.util.logging.Logger" alt="" coords="113,433,326,503"/>
+<area shape="rect" id="node2_3" href="./scenario/portrayal/ScenarioPortrayal.html" title="es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal" alt="" coords="750,433,990,503"/>
+<area shape="rect" id="node3_4" href="./ScenarioManager.html" title="es.upm.dit.gsi.shanks.model.ScenarioManager" alt="" coords="543,267,941,351"/>
+<area shape="rect" id="node7_5" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/engine/SimState.html" title="sim.engine.SimState" alt="" coords="372,411,704,525"/>
+<area shape="rect" id="node5_6" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/engine/Steppable.html" title="sim.engine.Steppable" alt="" coords="787,154,867,193"/>
+</map>

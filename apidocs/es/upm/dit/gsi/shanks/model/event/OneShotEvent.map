@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./agent/Action.html" title="es.upm.dit.gsi.shanks.model.event.agent.Action" alt="" coords="39,283,279,352"/>
+<area shape="rect" id="node2_1" href="./OneShotEvent.html" title="es.upm.dit.gsi.shanks.model.event.OneShotEvent" alt="" coords="16,155,301,224"/>
+<area shape="rect" id="node3_2" href="./Event.html" title="es.upm.dit.gsi.shanks.model.event.Event" alt="" coords="40,11,277,95"/>
+</map>

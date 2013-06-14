@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./UnsupportedScenarioStatusException.html" title="es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException" alt="" coords="16,11,261,80"/>
+<area shape="rect" id="node2_1" href="./ScenarioNotFoundException.html" title="es.upm.dit.gsi.shanks.model.scenario.exception.ScenarioNotFoundException" alt="" coords="307,11,755,80"/>
+<area shape="rect" id="node3_2" href="./NonGatewayDeviceException.html" title="es.upm.dit.gsi.shanks.model.scenario.exception.NonGatewayDeviceException" alt="" coords="800,11,1304,80"/>
+<area shape="rect" id="node4_3" href="./DuplicatedIDException.html" title="es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException" alt="" coords="1350,11,1655,80"/>
+<area shape="rect" id="node5_4" href="./AlreadyConnectedScenarioException.html" title="es.upm.dit.gsi.shanks.model.scenario.exception.AlreadyConnectedScenarioException" alt="" coords="1701,11,2246,80"/>
+</map>

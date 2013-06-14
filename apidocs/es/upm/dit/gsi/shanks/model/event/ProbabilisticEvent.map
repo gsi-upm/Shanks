@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./ProbabilisticEvent.html" title="es.upm.dit.gsi.shanks.model.event.ProbabilisticEvent" alt="" coords="325,155,734,224"/>
+<area shape="rect" id="node3_1" href="./networkelement/ProbabilisticNetworkElementEvent.html" title="es.upm.dit.gsi.shanks.model.event.networkelement.ProbabilisticNetworkElementEvent" alt="" coords="15,283,518,352"/>
+<area shape="rect" id="node4_2" href="./scenario/ProbabilisticScenarioEvent.html" title="es.upm.dit.gsi.shanks.model.event.scenario.ProbabilisticScenarioEvent" alt="" coords="564,283,1023,352"/>
+<area shape="rect" id="node2_3" href="./Event.html" title="es.upm.dit.gsi.shanks.model.event.Event" alt="" coords="411,11,648,95"/>
+</map>

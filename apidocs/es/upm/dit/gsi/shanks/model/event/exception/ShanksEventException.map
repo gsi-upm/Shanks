@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="../../../exception/ShanksException.html" title="es.upm.dit.gsi.shanks.exception.ShanksException" alt="" coords="501,11,835,125"/>
+<area shape="rect" id="node3_1" href="./ShanksEventException.html" title="es.upm.dit.gsi.shanks.model.event.exception.ShanksEventException" alt="" coords="554,184,782,253"/>
+<area shape="rect" id="node2_2" href="./UnsupportedElementByEventException.html" title="es.upm.dit.gsi.shanks.model.event.exception.UnsupportedElementByEventException" alt="" coords="15,312,411,381"/>
+<area shape="rect" id="node4_3" href="./DuplicateAffectedElementOnEventException.html" title="es.upm.dit.gsi.shanks.model.event.exception.DuplicateAffectedElementOnEventException" alt="" coords="457,312,879,381"/>
+<area shape="rect" id="node5_4" href="../failiure/exception/NoCombinationForFailureException.html" title="es.upm.dit.gsi.shanks.model.event.failiure.exception.NoCombinationForFailureException" alt="" coords="925,312,1238,381"/>
+</map>

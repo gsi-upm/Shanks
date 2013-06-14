@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./ShanksAgentBayesianReasoningCapabilityTest.html" title="es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.test.ShanksAgentBayesianReasoningCapabilityTest" alt="" coords="99,11,399,80"/>
+<area shape="rect" id="node3_1" href="http://java.sun.com/j2se/1.4.2/docs/api/unbbayes/prs/bn/ProbabilisticNetwork.html" title="unbbayes.prs.bn.ProbabilisticNetwork" alt="" coords="16,139,232,208"/>
+<area shape="rect" id="node5_2" href="http://java.sun.com/j2se/1.4.2/docs/api/es/upm/dit/gsi/shanks/agent/capability/reasoning/bayes/BayesianReasonerShanksAgent.html" title="es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.BayesianReasonerShanksAgent" alt="" coords="277,154,475,193"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./ValueNotification.html" title="es.upm.dit.gsi.shanks.notification.ValueNotification" alt="" coords="16,155,536,224"/>
+<area shape="rect" id="node2_1" href="./NotificationManager.html" title="es.upm.dit.gsi.shanks.notification.NotificationManager" alt="" coords="771,11,1423,95"/>
+<area shape="rect" id="node3_2" href="./Notification.html" title="es.upm.dit.gsi.shanks.notification.Notification" alt="" coords="421,19,726,88"/>
+<area shape="rect" id="node5_3" href="./InteractionNotification.html" title="es.upm.dit.gsi.shanks.notification.InteractionNotification" alt="" coords="581,155,1163,224"/>
+<area shape="rect" id="node4_4" href="./Notifable.html" title="es.upm.dit.gsi.shanks.notification.Notifable" alt="" coords="1469,34,1549,73"/>
+</map>

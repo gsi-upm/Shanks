@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="../../../exception/ShanksException.html" title="es.upm.dit.gsi.shanks.exception.ShanksException" alt="" coords="16,11,349,125"/>
+<area shape="rect" id="node2_1" href="./TooManyConnectionException.html" title="es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException" alt="" coords="64,184,301,253"/>
+</map>

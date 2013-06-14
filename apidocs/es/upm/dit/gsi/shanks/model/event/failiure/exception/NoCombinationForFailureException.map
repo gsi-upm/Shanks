@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="../../exception/ShanksEventException.html" title="es.upm.dit.gsi.shanks.model.event.exception.ShanksEventException" alt="" coords="58,11,286,80"/>
+<area shape="rect" id="node2_1" href="./NoCombinationForFailureException.html" title="es.upm.dit.gsi.shanks.model.event.failiure.exception.NoCombinationForFailureException" alt="" coords="15,139,329,208"/>
+</map>

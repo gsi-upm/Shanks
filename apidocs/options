@@ -1,0 +1,38 @@
+-classpath
+'D:/Projects/git/Shanks/shanks-core/target/checkout/shanks-core/target/classes;C:/Users/Álvaro/.m2/repository/org/apache/directory/studio/org.apache.commons.logging/1.1.1/org.apache.commons.logging-1.1.1.jar;C:/Users/Álvaro/.m2/repository/com/lowagie/itext/1.2.3/itext-1.2.3.jar;C:/Users/Álvaro/.m2/repository/javax/media/jmf/2.1.1e/jmf-2.1.1e.jar;D:/Projects/git/Shanks/shanks-core/target/checkout/shanks-core/lib/jpf-1.5.jar;D:/Projects/git/Shanks/shanks-core/target/checkout/shanks-core/lib/mason.16.jar;C:/Users/Álvaro/.m2/repository/jfree/jcommon/1.0.16/jcommon-1.0.16.jar;C:/Users/Álvaro/.m2/repository/jfree/jfreechart/1.0.13/jfreechart-1.0.13.jar;C:/Users/Álvaro/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar;D:/Projects/git/Shanks/shanks-core/target/checkout/shanks-core/lib/unbbayes-4.0.0.jar;D:/Projects/git/Shanks/shanks-core/target/checkout/shanks-core/lib/jason.jar'
+-doclet
+'org.umlgraph.doclet.UmlGraphDoc'
+-docletpath
+'C:/Users/Álvaro/.m2/repository/org/umlgraph/doclet/5.1/doclet-5.1.jar'
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'D:/Projects/git/Shanks/shanks-core/target/checkout/shanks-core/src/main/java'
+-inferrel
+						-inferdep
+						-quiet
+						-constructors
+						-visibility
+						-types
+						-postfixpackage
+						-nodefontsize 9
+						-nodefontpackagesize 7
+						-views
+-author
+-bottom
+'Copyright &#169; 2011-2013 <a href="http://www.gsi.dit.upm.es">Grupo de Sistemas Inteligentes - Universidad Politécnica de Madrid</a>. All Rights Reserved.'
+-charset
+'UTF-8'
+-d
+'D:/Projects/git/Shanks/shanks-core/target/checkout/shanks-core/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'SHANKS core with MASON 0.3.1 API'
+-linkoffline
+'http://download.oracle.com/javase/6/docs/api' 'D:/Projects/git/Shanks/shanks-core/target/checkout/shanks-core/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'SHANKS core with MASON 0.3.1 API'

@@ -113,109 +113,109 @@
   <td class="src"><pre class="src">&nbsp;    <span class="keyword">public</span> TransformGroup getModel(Object object, TransformGroup model) {</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;50</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;51</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        Device device = (Device) object;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;52</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        model = <span class="keyword">new</span> TransformGroup();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;51</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        Device device = (Device) object;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;52</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        model = <span class="keyword">new</span> TransformGroup();</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;53</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;54</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        Color3f colour;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;55</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        Sphere s = <span class="keyword">new</span> Sphere(diameter);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;55</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        Sphere s = <span class="keyword">new</span> Sphere(diameter);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;56</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        <span class="comment">// Cone s = new Cone(diameter, diameter);</span></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;57</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        <span class="comment">// ColorCube s = new ColorCube(diameter);</span></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;58</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;59</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        colour = <span class="keyword">new</span> Color3f(<span class="keyword">this</span>.getDeviceColor(device));</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;59</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        colour = <span class="keyword">new</span> Color3f(<span class="keyword">this</span>.getDeviceColor(device));</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;60</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;61</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">int</span> FONT_SIZE = 48;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;62</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        Font labelFont = <span class="keyword">new</span> Font(<span class="string">"SansSerif"</span>, Font.BOLD, FONT_SIZE);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;63</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">double</span> labelScale = 1.0;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;64</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">double</span> SCALING_MODIFIER = 1.0 / 5.0;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;61</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">int</span> FONT_SIZE = 48;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;62</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        Font labelFont = <span class="keyword">new</span> Font(<span class="string">"SansSerif"</span>, Font.BOLD, FONT_SIZE);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;63</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">double</span> labelScale = 1.0;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;64</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">double</span> SCALING_MODIFIER = 1.0 / 5.0;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;65</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;66</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        model.removeAllChildren();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;67</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        Appearance appearance = <span class="keyword">new</span> Appearance();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;68</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        appearance.setColoringAttributes(<span class="keyword">new</span> ColoringAttributes(colour,</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;66</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        model.removeAllChildren();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;67</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        Appearance appearance = <span class="keyword">new</span> Appearance();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;68</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        appearance.setColoringAttributes(<span class="keyword">new</span> ColoringAttributes(colour,</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;69</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                ColoringAttributes.SHADE_GOURAUD));</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;70</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        Material m = <span class="keyword">new</span> Material();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;71</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        m.setAmbientColor(colour);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;72</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        m.setEmissiveColor(0f, 0f, 0f);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;73</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        m.setDiffuseColor(colour);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;74</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        m.setSpecularColor(1f, 1f, 1f);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;75</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        m.setShininess(128f);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;76</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        appearance.setMaterial(m);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;77</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        s.setAppearance(appearance);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;78</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        model.addChild(s);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;79</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        model.setName(device.getID());</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;80</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        clearPickableFlags(model);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;81</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        model.setPickable(<span class="keyword">true</span>);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;70</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        Material m = <span class="keyword">new</span> Material();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;71</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        m.setAmbientColor(colour);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;72</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        m.setEmissiveColor(0f, 0f, 0f);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;73</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        m.setDiffuseColor(colour);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;74</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        m.setSpecularColor(1f, 1f, 1f);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;75</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        m.setShininess(128f);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;76</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        appearance.setMaterial(m);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;77</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        s.setAppearance(appearance);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;78</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        model.addChild(s);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;79</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        model.setName(device.getID());</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;80</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        clearPickableFlags(model);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;81</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        model.setPickable(<span class="keyword">true</span>);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;82</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;83</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        <span class="comment">// draw the device labels if the user wants</span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;84</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        Transform3D offset = <span class="keyword">new</span> Transform3D();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;85</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        offset.setTranslation(<span class="keyword">new</span> Vector3d(5 + diameter / 2, 5 + diameter / 2,</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;84</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        Transform3D offset = <span class="keyword">new</span> Transform3D();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;85</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        offset.setTranslation(<span class="keyword">new</span> Vector3d(5 + diameter / 2, 5 + diameter / 2,</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;86</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                5 + diameter / 2));</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;87</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        Transform3D trans = offset;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;88</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        String str = device.getID();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;89</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        com.sun.j3d.utils.geometry.Text2D text = <span class="keyword">new</span> com.sun.j3d.utils.geometry.Text2D(</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;87</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        Transform3D trans = offset;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;88</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        String str = device.getID();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;89</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        com.sun.j3d.utils.geometry.Text2D text = <span class="keyword">new</span> com.sun.j3d.utils.geometry.Text2D(</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;90</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                str, <span class="keyword">new</span> Color3f(<span class="keyword">this</span>.getLabelColor(device)),</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;91</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                labelFont.getFamily(), labelFont.getSize(),</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;92</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                labelFont.getStyle());</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;93</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        text.setRectangleScaleFactor((<span class="keyword">float</span>) (labelScale * SCALING_MODIFIER));</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;93</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        text.setRectangleScaleFactor((<span class="keyword">float</span>) (labelScale * SCALING_MODIFIER));</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;94</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;95</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        <span class="comment">// text = new Shape3D(new Text3D(labelFont3D, ""));</span></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;96</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;97</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        OrientedShape3D o3d = <span class="keyword">new</span> OrientedShape3D(text.getGeometry(),</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;97</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        OrientedShape3D o3d = <span class="keyword">new</span> OrientedShape3D(text.getGeometry(),</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;98</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                text.getAppearance(), OrientedShape3D.ROTATE_ABOUT_POINT,</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;99</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                <span class="keyword">new</span> Point3f(0, 0, 0));</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;100</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        o3d.setCapability(Shape3D.ALLOW_APPEARANCE_WRITE); <span class="comment">// may need to change</span></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;100</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        o3d.setCapability(Shape3D.ALLOW_APPEARANCE_WRITE); <span class="comment">// may need to change</span></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;101</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                                                           <span class="comment">// the appearance</span></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;102</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                                                           <span class="comment">// (see below)</span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;103</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        o3d.setCapability(Shape3D.ALLOW_GEOMETRY_WRITE); <span class="comment">// may need to change</span></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;103</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        o3d.setCapability(Shape3D.ALLOW_GEOMETRY_WRITE); <span class="comment">// may need to change</span></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;104</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                                                         <span class="comment">// the geometry (see</span></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;105</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                                                         <span class="comment">// below)</span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;106</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        o3d.clearCapabilityIsFrequent(Shape3D.ALLOW_APPEARANCE_WRITE);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;107</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        o3d.clearCapabilityIsFrequent(Shape3D.ALLOW_GEOMETRY_WRITE);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;106</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        o3d.clearCapabilityIsFrequent(Shape3D.ALLOW_APPEARANCE_WRITE);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;107</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        o3d.clearCapabilityIsFrequent(Shape3D.ALLOW_GEOMETRY_WRITE);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;108</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;109</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        <span class="comment">// make the offset TransformGroup</span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;110</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        TransformGroup o = <span class="keyword">new</span> TransformGroup();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;111</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        o.setCapability(TransformGroup.ALLOW_CHILDREN_READ);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;112</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        o.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;113</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        o.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;114</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        o.clearCapabilityIsFrequent(TransformGroup.ALLOW_CHILDREN_READ);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;115</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        o.setTransform(trans);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;116</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        o.setUserData(str);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;110</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        TransformGroup o = <span class="keyword">new</span> TransformGroup();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;111</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        o.setCapability(TransformGroup.ALLOW_CHILDREN_READ);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;112</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        o.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;113</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        o.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;114</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        o.clearCapabilityIsFrequent(TransformGroup.ALLOW_CHILDREN_READ);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;115</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        o.setTransform(trans);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;116</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        o.setUserData(str);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;117</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;118</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        <span class="comment">// the label shouldn't be pickable -- we'll turn this off in the</span></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;119</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        <span class="comment">// TransformGroup</span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;120</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        clearPickableFlags(o);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;121</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        o.addChild(o3d); <span class="comment">// Add label to the offset TransformGroup</span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;122</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        model.addChild(o);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;120</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        clearPickableFlags(o);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;121</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        o.addChild(o3d); <span class="comment">// Add label to the offset TransformGroup</span></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;122</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        model.addChild(o);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;123</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;124</td>  <td class="nbHitsCovered">&nbsp;1231</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">return</span> model;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;124</td>  <td class="nbHitsCovered">&nbsp;1449</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">return</span> model;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;125</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;    }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;126</td>  <td class="nbHits">&nbsp;</td>
@@ -234,6 +234,6 @@
   <td class="src"><pre class="src">&nbsp;}</pre></td></tr>
 </table>
 
-<div class="footer">Report generated by <a href="http://cobertura.sourceforge.net/" target="_top">Cobertura</a> 1.9.4.1 on 14/06/13 15:02.</div>
+<div class="footer">Report generated by <a href="http://cobertura.sourceforge.net/" target="_top">Cobertura</a> 1.9.4.1 on 14/06/13 18:21.</div>
 </body>
 </html>

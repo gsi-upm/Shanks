@@ -37,10 +37,10 @@ digraph G {
 	c2516:p -> c2594:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// es.upm.dit.gsi.shanks.agent.test.MySimpleShanksAgent DEPEND es.upm.dit.gsi.shanks.ShanksSimulation
 	c2516:p -> c2595:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// es.upm.dit.gsi.shanks.agent.test.MySimpleShanksAgent DEPEND java.lang.Double
-	c2516:p -> c2593:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.agent.test.MySimpleShanksAgent DEPEND es.upm.dit.gsi.shanks.agent.capability.movement.Location
 	c2516:p -> c2590:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// es.upm.dit.gsi.shanks.agent.test.MySimpleShanksAgent DEPEND java.lang.Double
+	c2516:p -> c2593:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// java.lang.Double
 	c2593 [label=<<table title="java.lang.Double" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Double.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">

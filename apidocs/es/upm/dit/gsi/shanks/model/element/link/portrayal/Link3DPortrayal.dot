@@ -35,14 +35,14 @@ digraph G {
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	//es.upm.dit.gsi.shanks.model.element.link.portrayal.Link3DPortrayal extends sim.portrayal3d.network.SimpleEdgePortrayal3D
 	c4929:p -> c4884:p [dir=back,arrowtail=empty];
-	// es.upm.dit.gsi.shanks.model.element.link.portrayal.Link3DPortrayal DEPEND java.lang.Object
-	c4884:p -> c4930:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// es.upm.dit.gsi.shanks.model.element.link.portrayal.Link3DPortrayal DEPEND es.upm.dit.gsi.shanks.model.element.link.Link
-	c4884:p -> c4883:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.model.element.link.portrayal.Link3DPortrayal DEPEND javax.media.j3d.TransformGroup
+	c4884:p -> c4930:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// es.upm.dit.gsi.shanks.model.element.link.portrayal.Link3DPortrayal DEPEND java.lang.Object
 	c4884:p -> c4931:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.model.element.link.portrayal.Link3DPortrayal DEPEND java.awt.Color
 	c4884:p -> c4932:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// es.upm.dit.gsi.shanks.model.element.link.portrayal.Link3DPortrayal DEPEND es.upm.dit.gsi.shanks.model.element.link.Link
+	c4884:p -> c4883:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// sim.portrayal3d.network.SimpleEdgePortrayal3D
 	c4929 [label=<<table title="sim.portrayal3d.network.SimpleEdgePortrayal3D" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/portrayal3d/network/SimpleEdgePortrayal3D.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
@@ -60,7 +60,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	// java.lang.Object
-	c4930 [label=<<table title="java.lang.Object" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Object.html">
+	c4931 [label=<<table title="java.lang.Object" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Object.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Object </td></tr>
 		</table></td></tr>
@@ -72,7 +72,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	// javax.media.j3d.TransformGroup
-	c4931 [label=<<table title="javax.media.j3d.TransformGroup" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/javax/media/j3d/TransformGroup.html">
+	c4930 [label=<<table title="javax.media.j3d.TransformGroup" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/javax/media/j3d/TransformGroup.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> TransformGroup </td></tr>
 		</table></td></tr>

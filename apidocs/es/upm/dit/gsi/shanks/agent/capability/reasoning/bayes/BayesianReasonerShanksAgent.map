@@ -1,5 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node1_0" href="./BayesianReasonerShanksAgent.html" title="es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.BayesianReasonerShanksAgent" alt="" coords="235,11,432,50"/>
-<area shape="rect" id="node3_1" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/String.html" title="java.lang.String" alt="" coords="15,109,337,384"/>
-<area shape="rect" id="node5_2" href="http://java.sun.com/j2se/1.4.2/docs/api/unbbayes/prs/bn/ProbabilisticNetwork.html" title="unbbayes.prs.bn.ProbabilisticNetwork" alt="" coords="383,212,599,281"/>
+<area shape="rect" id="node1_0" href="./BayesianReasonerShanksAgent.html" title="es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.BayesianReasonerShanksAgent" alt="" coords="183,11,380,50"/>
+<area shape="rect" id="node3_1" href="http://java.sun.com/j2se/1.4.2/docs/api/unbbayes/prs/bn/ProbabilisticNetwork.html" title="unbbayes.prs.bn.ProbabilisticNetwork" alt="" coords="16,212,232,281"/>
+<area shape="rect" id="node5_2" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/String.html" title="java.lang.String" alt="" coords="278,109,599,384"/>
 </map>

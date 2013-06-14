@@ -313,7 +313,7 @@
   <td class="src"><pre class="src">&nbsp;<span class="comment">     */</span></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;166</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;    <span class="keyword">public</span> Set&lt;Scenario&gt; getScenarios() {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;167</td>  <td class="nbHitsCovered">&nbsp;654155</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">return</span> <span class="keyword">this</span>.scenarios.keySet();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;167</td>  <td class="nbHitsCovered">&nbsp;684194</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">return</span> <span class="keyword">this</span>.scenarios.keySet();</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;168</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;    }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;169</td>  <td class="nbHits">&nbsp;</td>
@@ -333,7 +333,7 @@
 <tr>  <td class="numLine">&nbsp;176</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;    <span class="keyword">public</span> Scenario getScenario(String scenarioID) <span class="keyword">throws</span> ShanksException {</pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;177</td>  <td class="nbHitsUncovered"><a title="Line 177: Conditional coverage 50% (1/2).">&nbsp;618</a></td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;<a title="Line 177: Conditional coverage 50% (1/2).">        <span class="keyword">for</span> (Scenario s : <span class="keyword">this</span>.scenarios.keySet()) {</a></span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;178</td>  <td class="nbHitsCovered"><a title="Line 178: Conditional coverage 100% (2/2).">&nbsp;974</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 178: Conditional coverage 100% (2/2).">            <span class="keyword">if</span> (s.getID().equals(scenarioID)) {</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;178</td>  <td class="nbHitsCovered"><a title="Line 178: Conditional coverage 100% (2/2).">&nbsp;972</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 178: Conditional coverage 100% (2/2).">            <span class="keyword">if</span> (s.getID().equals(scenarioID)) {</a></pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;179</td>  <td class="nbHitsCovered">&nbsp;618</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> s;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;180</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;            }</pre></td></tr>
@@ -378,19 +378,19 @@
   <td class="src"><pre class="src">&nbsp;<span class="comment">     */</span></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;203</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;    <span class="keyword">public</span> List&lt;Failure&gt; checkResolvedFailures() {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;204</td>  <td class="nbHitsCovered">&nbsp;66154</td>  <td class="src"><pre class="src">&nbsp;        List&lt;Failure&gt; fullList = <span class="keyword">new</span> ArrayList&lt;Failure&gt;();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;204</td>  <td class="nbHitsCovered">&nbsp;69157</td>  <td class="src"><pre class="src">&nbsp;        List&lt;Failure&gt; fullList = <span class="keyword">new</span> ArrayList&lt;Failure&gt;();</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;205</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;206</td>  <td class="nbHitsCovered">&nbsp;66154</td>  <td class="src"><pre class="src">&nbsp;        fullList.addAll(<span class="keyword">super</span>.checkResolvedFailures());</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;206</td>  <td class="nbHitsCovered">&nbsp;69157</td>  <td class="src"><pre class="src">&nbsp;        fullList.addAll(<span class="keyword">super</span>.checkResolvedFailures());</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;207</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;208</td>  <td class="nbHitsCovered"><a title="Line 208: Conditional coverage 100% (2/2).">&nbsp;66154</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 208: Conditional coverage 100% (2/2).">        <span class="keyword">for</span> (Scenario scenario : <span class="keyword">this</span>.scenarios.keySet()) {</a></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;209</td>  <td class="nbHitsCovered">&nbsp;132908</td>  <td class="src"><pre class="src">&nbsp;            fullList.addAll(scenario.checkResolvedFailures());</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;208</td>  <td class="nbHitsCovered"><a title="Line 208: Conditional coverage 100% (2/2).">&nbsp;69157</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 208: Conditional coverage 100% (2/2).">        <span class="keyword">for</span> (Scenario scenario : <span class="keyword">this</span>.scenarios.keySet()) {</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;209</td>  <td class="nbHitsCovered">&nbsp;138914</td>  <td class="src"><pre class="src">&nbsp;            fullList.addAll(scenario.checkResolvedFailures());</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;210</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;211</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;212</td>  <td class="nbHitsCovered">&nbsp;66154</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">return</span> fullList;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;212</td>  <td class="nbHitsCovered">&nbsp;69157</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">return</span> fullList;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;213</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;    }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;214</td>  <td class="nbHits">&nbsp;</td>
@@ -424,13 +424,13 @@
   <td class="src"><pre class="src">&nbsp;<span class="comment">     */</span></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;231</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;    <span class="keyword">public</span> Set&lt;Failure&gt; getCurrentFailures() {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;232</td>  <td class="nbHitsCovered">&nbsp;652665</td>  <td class="src"><pre class="src">&nbsp;        Set&lt;Failure&gt; failures = <span class="keyword">new</span> HashSet&lt;Failure&gt;();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;233</td>  <td class="nbHitsCovered">&nbsp;652665</td>  <td class="src"><pre class="src">&nbsp;        failures.addAll(<span class="keyword">this</span>.getFullCurrentFailures().keySet());</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;234</td>  <td class="nbHitsCovered"><a title="Line 234: Conditional coverage 100% (2/2).">&nbsp;652665</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 234: Conditional coverage 100% (2/2).">        <span class="keyword">for</span>(Scenario s : <span class="keyword">this</span>.getScenarios()) {</a></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;235</td>  <td class="nbHitsCovered">&nbsp;1311378</td>  <td class="src"><pre class="src">&nbsp;            failures.addAll(s.getCurrentFailures());</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;232</td>  <td class="nbHitsCovered">&nbsp;682704</td>  <td class="src"><pre class="src">&nbsp;        Set&lt;Failure&gt; failures = <span class="keyword">new</span> HashSet&lt;Failure&gt;();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;233</td>  <td class="nbHitsCovered">&nbsp;682704</td>  <td class="src"><pre class="src">&nbsp;        failures.addAll(<span class="keyword">this</span>.getFullCurrentFailures().keySet());</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;234</td>  <td class="nbHitsCovered"><a title="Line 234: Conditional coverage 100% (2/2).">&nbsp;682704</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 234: Conditional coverage 100% (2/2).">        <span class="keyword">for</span>(Scenario s : <span class="keyword">this</span>.getScenarios()) {</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;235</td>  <td class="nbHitsCovered">&nbsp;1371456</td>  <td class="src"><pre class="src">&nbsp;            failures.addAll(s.getCurrentFailures());</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;236</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;237</td>  <td class="nbHitsCovered">&nbsp;652665</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">return</span> failures;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;237</td>  <td class="nbHitsCovered">&nbsp;682704</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">return</span> failures;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;238</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;    }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;239</td>  <td class="nbHits">&nbsp;</td>
@@ -504,6 +504,6 @@
   <td class="src"><pre class="src">&nbsp;}</pre></td></tr>
 </table>
 
-<div class="footer">Report generated by <a href="http://cobertura.sourceforge.net/" target="_top">Cobertura</a> 1.9.4.1 on 14/06/13 15:02.</div>
+<div class="footer">Report generated by <a href="http://cobertura.sourceforge.net/" target="_top">Cobertura</a> 1.9.4.1 on 14/06/13 18:21.</div>
 </body>
 </html>

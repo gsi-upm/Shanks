@@ -11,7 +11,6 @@
 	
 	To achieve this goal, a multi-agent system (MAS) is used to handle possible situations in the scenario. These agents are able to analyse environment data, perform inference and self-healing actions, etc.
 	</description>
-	<url>http://www.gsi.dit.upm.es/index.php/es/software/150-shanks-simulation-for-heterogeneous-and-autonomous-networks.html</url>
 
 	<developers>
 
@@ -43,7 +42,7 @@
 
 	<issueManagement>
 		<system>Google Code</system>
-		<url>http://code.google.com/p/shanks-with-mason/issues/list</url>
+		<url>https://github.com/gsi-upm/Shanks/issues</url>
 	</issueManagement>
 
 	<licenses>
@@ -466,4 +465,5 @@
 			<version>1.1.1</version>
 		</dependency>
 	</dependencies>
+	<url>https://www.gsi.dit.upm.es/index.php/es/tecnologia/software/details/1/1/software-shanks.html</url>
 </project>

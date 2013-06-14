@@ -5,7 +5,7 @@
 	<version>0.3.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>SHANKS core with MASON</name>
-	<description>Simulation for Heterogeneous and Autonomic Networks with MASON.
+	<description>Simulation for Heterogeneous and Autonomic NetworkS (SHANKS).
 	
 	"Shanks with MASON" is a framework to simulate different network scenarios in order to add autonomic capabilities using MASON simulation framework.
 	

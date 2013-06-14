@@ -4,7 +4,6 @@ import java.util.logging.Logger;
 
 import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.exception.ShanksException;
-import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.event.networkelement.ProbabilisticNetworkElementEvent;
 
 /**

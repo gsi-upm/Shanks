@@ -716,8 +716,8 @@ public class ShanksSimulationTest {
         } catch (Exception e) {
             catched = true;
             e.printStackTrace();
-            Assert.fail();
         }
+        Assert.assertFalse(catched);
     }
 
     /**

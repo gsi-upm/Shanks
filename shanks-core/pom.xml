@@ -41,7 +41,7 @@
 	</developers>
 
 	<issueManagement>
-		<system>Github Issues</system>
+		<system>Google Code</system>
 		<url>https://github.com/gsi-upm/Shanks/issues</url>
 	</issueManagement>
 
@@ -53,16 +53,15 @@
 	</licenses>
 	<inceptionYear>2011</inceptionYear>
 
-	
 	<organization>
-		<name>Grupo de Sistemas Inteligentes - Universidad Politécnica de Madrid</name>
-		<url>http://www.gsi.dit.upm.es</url>
+		<name>Universidad Politécnica de Madrid</name>
+		<url>http://www.etsit.upm.es</url>
 	</organization>
 
 	<scm>
-		<connection>scm:git:https://github.com/gsi-upm/Shanks.git</connection>
-		<developerConnection>scm:git:https://github.com/gsi-upm/Shanks.git</developerConnection>
-		<url>http://github.com/gsi-upm/Shanks</url>
+		<connection>scm:svn:http://shanks-with-mason.googlecode.com/svn/trunk/shanks-core</connection>
+		<developerConnection>scm:svn:https://shanks-with-mason.googlecode.com/svn/trunk/shanks-core</developerConnection>
+		<url>http://shanks-with-mason.googlecode.com/svn/trunk/shanks-core</url>
 	</scm>
 
 	<properties>
@@ -85,8 +84,8 @@
 			<layout>default</layout>
 		</snapshotRepository>
 		<site>
-			<id>site-github-web</id>
-			<url>scm:git:https://github.com/gsi-upm/Shanks.git</url>
+			<id>shanks-site-gsi-web</id>
+			<url>scp://minsky.gsi.dit.upm.es/home/a.carrera/public_html/shanks/shanks-core/site</url>
 		</site>
 	</distributionManagement>
 
@@ -129,31 +128,20 @@
 	<build>
 		<plugins>
 			<plugin>
-					<artifactId>maven-site-plugin</artifactId>
-					<version>3.1</version>
-					<dependencies>
-						<dependency>
-							<groupId>org.apache.maven.wagon</groupId>
-							<artifactId>wagon-scm</artifactId>
-							<version>2.2</version>
-						</dependency>
-						<dependency>
-							<groupId>org.apache.maven.scm</groupId>
-							<artifactId>maven-scm-manager-plexus</artifactId>
-							<version>1.8</version>
-						</dependency>
-						<dependency>
-							<groupId>org.apache.maven.scm</groupId>
-							<artifactId>maven-scm-provider-gitexe</artifactId>
-							<version>1.8</version>
-						</dependency>
-						<dependency>
-							<groupId>org.apache.maven.scm</groupId>
-							<artifactId>maven-scm-api</artifactId>
-							<version>1.8</version>
-						</dependency>
-					</dependencies>
-				</plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<locales>en</locales>
+				</configuration>
+				<dependencies>
+					<dependency><!-- add support for ssh/scp -->
+						<groupId>org.apache.maven.wagon</groupId>
+						<artifactId>wagon-ssh</artifactId>
+						<version>1.0</version>
+					</dependency>
+				</dependencies>
+			</plugin>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>2.2.2</version>

@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// es.upm.dit.gsi.shanks.notification.util.test.TestPeriodicNetworkElementEvent
-	c7241 [label=<<table title="es.upm.dit.gsi.shanks.notification.util.test.TestPeriodicNetworkElementEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./TestPeriodicNetworkElementEvent.html">
+	c7244 [label=<<table title="es.upm.dit.gsi.shanks.notification.util.test.TestPeriodicNetworkElementEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./TestPeriodicNetworkElementEvent.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> TestPeriodicNetworkElementEvent </td></tr>
 		</table></td></tr>
@@ -22,9 +22,9 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	//es.upm.dit.gsi.shanks.notification.util.test.TestPeriodicNetworkElementEvent extends es.upm.dit.gsi.shanks.model.event.networkelement.PeriodicNetworkElementEvent
-	c7251:p -> c7241:p [dir=back,arrowtail=empty];
+	c7254:p -> c7244:p [dir=back,arrowtail=empty];
 	// es.upm.dit.gsi.shanks.model.event.networkelement.PeriodicNetworkElementEvent
-	c7251 [label=<<table title="es.upm.dit.gsi.shanks.model.event.networkelement.PeriodicNetworkElementEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/es/upm/dit/gsi/shanks/model/event/networkelement/PeriodicNetworkElementEvent.html">
+	c7254 [label=<<table title="es.upm.dit.gsi.shanks.model.event.networkelement.PeriodicNetworkElementEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/es/upm/dit/gsi/shanks/model/event/networkelement/PeriodicNetworkElementEvent.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="ariali"> PeriodicNetworkElementEvent </font></td></tr>
 		</table></td></tr>

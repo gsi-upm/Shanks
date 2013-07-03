@@ -86,10 +86,10 @@ digraph G {
 	c7695:p -> c7705:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.model.ScenarioManager DEPEND es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal
 	c7695:p -> c7686:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// es.upm.dit.gsi.shanks.ShanksSimulation DEPEND es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal
-	c7703:p -> c7686:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.ShanksSimulation DEPEND es.upm.dit.gsi.shanks.model.ScenarioManager
 	c7703:p -> c7695:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// es.upm.dit.gsi.shanks.ShanksSimulation DEPEND es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal
+	c7703:p -> c7686:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// sim.engine.SimState
 	c7705 [label=<<table title="sim.engine.SimState" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/engine/SimState.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">

@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// es.upm.dit.gsi.shanks.model.failure.util.test.TestScenarioFailure
-	c3899 [label=<<table title="es.upm.dit.gsi.shanks.model.failure.util.test.TestScenarioFailure" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./TestScenarioFailure.html">
+	c3921 [label=<<table title="es.upm.dit.gsi.shanks.model.failure.util.test.TestScenarioFailure" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./TestScenarioFailure.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> TestScenarioFailure </td></tr>
 		</table></td></tr>
@@ -23,9 +23,9 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	//es.upm.dit.gsi.shanks.model.failure.util.test.TestScenarioFailure extends es.upm.dit.gsi.shanks.model.event.failiure.Failure
-	c3951:p -> c3899:p [dir=back,arrowtail=empty];
+	c3973:p -> c3921:p [dir=back,arrowtail=empty];
 	// es.upm.dit.gsi.shanks.model.event.failiure.Failure
-	c3951 [label=<<table title="es.upm.dit.gsi.shanks.model.event.failiure.Failure" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/es/upm/dit/gsi/shanks/model/event/failiure/Failure.html">
+	c3973 [label=<<table title="es.upm.dit.gsi.shanks.model.event.failiure.Failure" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/es/upm/dit/gsi/shanks/model/event/failiure/Failure.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="ariali"> Failure </font></td></tr>
 		</table></td></tr>

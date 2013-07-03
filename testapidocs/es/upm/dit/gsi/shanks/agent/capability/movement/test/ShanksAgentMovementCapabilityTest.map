@@ -1,3 +1,7 @@
 <map id="G" name="G">
-<area shape="rect" id="node1_0" href="./ShanksAgentMovementCapabilityTest.html" title="es.upm.dit.gsi.shanks.agent.capability.movement.test.ShanksAgentMovementCapabilityTest" alt="" coords="15,11,259,80"/>
+<area shape="rect" id="node1_0" href="./ShanksAgentMovementCapabilityTest.html" title="es.upm.dit.gsi.shanks.agent.capability.movement.test.ShanksAgentMovementCapabilityTest" alt="" coords="766,11,1010,80"/>
+<area shape="rect" id="node2_1" href="../../../../model/test/MyShanksSimulation3DGUI.html" title="es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI" alt="" coords="16,139,336,208"/>
+<area shape="rect" id="node3_2" href="../../../../model/test/MyShanksSimulation2DGUI.html" title="es.upm.dit.gsi.shanks.model.test.MyShanksSimulation2DGUI" alt="" coords="381,139,701,208"/>
+<area shape="rect" id="node4_3" href="../../../../model/test/MyShanksSimulation.html" title="es.upm.dit.gsi.shanks.model.test.MyShanksSimulation" alt="" coords="747,139,1725,208"/>
+<area shape="rect" id="node6_4" href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/logging/Logger.html" title="java.util.logging.Logger" alt="" coords="1771,139,1984,208"/>
 </map>

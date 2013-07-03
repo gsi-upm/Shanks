@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// es.upm.dit.gsi.shanks.model.test.steppable.FailuresGUI
-	c6450 [label=<<table title="es.upm.dit.gsi.shanks.model.test.steppable.FailuresGUI" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./FailuresGUI.html">
+	c6453 [label=<<table title="es.upm.dit.gsi.shanks.model.test.steppable.FailuresGUI" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./FailuresGUI.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> FailuresGUI </td></tr>
 		</table></td></tr>
@@ -22,11 +22,11 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	//es.upm.dit.gsi.shanks.model.test.steppable.FailuresGUI implements sim.engine.Steppable
-	c6470:p -> c6450:p [dir=back,arrowtail=empty,style=dashed];
+	c6473:p -> c6453:p [dir=back,arrowtail=empty,style=dashed];
 	// es.upm.dit.gsi.shanks.model.test.steppable.FailuresGUI DEPEND sim.engine.SimState
-	c6450:p -> c6474:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c6453:p -> c6477:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// sim.engine.SimState
-	c6474 [label=<<table title="sim.engine.SimState" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/engine/SimState.html">
+	c6477 [label=<<table title="sim.engine.SimState" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/engine/SimState.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SimState </td></tr>
 		</table></td></tr>
@@ -41,7 +41,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	// sim.engine.Steppable
-	c6470 [label=<<table title="sim.engine.Steppable" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/engine/Steppable.html">
+	c6473 [label=<<table title="sim.engine.Steppable" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/engine/Steppable.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Steppable </td></tr>

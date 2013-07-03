@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// es.upm.dit.gsi.shanks.agent.capability.movement.test.ShanksAgentMovementCapabilityTest
-	c2281 [label=<<table title="es.upm.dit.gsi.shanks.agent.capability.movement.test.ShanksAgentMovementCapabilityTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ShanksAgentMovementCapabilityTest.html">
+	c2305 [label=<<table title="es.upm.dit.gsi.shanks.agent.capability.movement.test.ShanksAgentMovementCapabilityTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ShanksAgentMovementCapabilityTest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ShanksAgentMovementCapabilityTest </td></tr>
 		</table></td></tr>
@@ -19,6 +19,62 @@ digraph G {
 		</table></td></tr>
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="left" balign="left"> + ShanksAgentMovementCapabilityTest() </td></tr>
+		</table></td></tr>
+		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
+	// es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI
+	c2354 [label=<<table title="es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../model/test/MyShanksSimulation3DGUI.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> MyShanksSimulation3DGUI </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + MyShanksSimulation3DGUI(sim : ShanksSimulation) </td></tr>
+		</table></td></tr>
+		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
+	// es.upm.dit.gsi.shanks.model.test.MyShanksSimulation2DGUI
+	c2355 [label=<<table title="es.upm.dit.gsi.shanks.model.test.MyShanksSimulation2DGUI" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../model/test/MyShanksSimulation2DGUI.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> MyShanksSimulation2DGUI </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + MyShanksSimulation2DGUI(sim : ShanksSimulation) </td></tr>
+		</table></td></tr>
+		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
+	// es.upm.dit.gsi.shanks.model.test.MyShanksSimulation
+	c2356 [label=<<table title="es.upm.dit.gsi.shanks.model.test.MyShanksSimulation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../model/test/MyShanksSimulation.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> MyShanksSimulation </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + MyShanksSimulation(seed : long, scenarioClass : Class&lt;?&gt;, scenarioID : String, initialState : String, properties : Properties, configPropertiesMyShanksSimulation : Properties) </td></tr>
+		</table></td></tr>
+		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
+	// es.upm.dit.gsi.shanks.agent.capability.movement.test.ShanksAgentMovementCapabilityTest NAVASSOC java.util.logging.Logger
+	c2305:p -> c2377:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	// es.upm.dit.gsi.shanks.agent.capability.movement.test.ShanksAgentMovementCapabilityTest NAVASSOC es.upm.dit.gsi.shanks.model.test.MyShanksSimulation
+	c2305:p -> c2356:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	// es.upm.dit.gsi.shanks.agent.capability.movement.test.ShanksAgentMovementCapabilityTest NAVASSOC es.upm.dit.gsi.shanks.model.test.MyShanksSimulation2DGUI
+	c2305:p -> c2355:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	// es.upm.dit.gsi.shanks.agent.capability.movement.test.ShanksAgentMovementCapabilityTest NAVASSOC es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI
+	c2305:p -> c2354:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	// java.util.logging.Logger
+	c2377 [label=<<table title="java.util.logging.Logger" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/logging/Logger.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> Logger </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> # Logger(arg0 : String, arg1 : String) </td></tr>
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 }

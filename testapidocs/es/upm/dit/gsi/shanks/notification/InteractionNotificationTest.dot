@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// es.upm.dit.gsi.shanks.notification.InteractionNotificationTest
-	c6769 [label=<<table title="es.upm.dit.gsi.shanks.notification.InteractionNotificationTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./InteractionNotificationTest.html">
+	c6772 [label=<<table title="es.upm.dit.gsi.shanks.notification.InteractionNotificationTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./InteractionNotificationTest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> InteractionNotificationTest </td></tr>
 		</table></td></tr>

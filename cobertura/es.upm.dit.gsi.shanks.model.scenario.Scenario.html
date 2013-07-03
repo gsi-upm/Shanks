@@ -282,7 +282,7 @@
   <td class="src"><pre class="src">&nbsp;<span class="comment">     */</span></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;147</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;    <span class="keyword">public</span> String getID() {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;148</td>  <td class="nbHitsCovered">&nbsp;3366</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">return</span> id;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;148</td>  <td class="nbHitsCovered">&nbsp;3370</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">return</span> id;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;149</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;    }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;150</td>  <td class="nbHits">&nbsp;</td>
@@ -318,9 +318,9 @@
   <td class="src"><pre class="src">&nbsp;    <span class="keyword">public</span> <span class="keyword">boolean</span> setCurrentStatus(String desiredStatus)</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;166</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;            <span class="keyword">throws</span> ShanksException {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;167</td>  <td class="nbHitsCovered"><a title="Line 167: Conditional coverage 100% (2/2).">&nbsp;767</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 167: Conditional coverage 100% (2/2).">        <span class="keyword">if</span> (<span class="keyword">this</span>.isPossibleStatus(desiredStatus)) {</a></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;168</td>  <td class="nbHitsCovered">&nbsp;765</td>  <td class="src"><pre class="src">&nbsp;            <span class="keyword">this</span>.currentStatus = desiredStatus;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;169</td>  <td class="nbHitsCovered">&nbsp;765</td>  <td class="src"><pre class="src">&nbsp;            <span class="keyword">return</span> <span class="keyword">true</span>;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;167</td>  <td class="nbHitsCovered"><a title="Line 167: Conditional coverage 100% (2/2).">&nbsp;777</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 167: Conditional coverage 100% (2/2).">        <span class="keyword">if</span> (<span class="keyword">this</span>.isPossibleStatus(desiredStatus)) {</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;168</td>  <td class="nbHitsCovered">&nbsp;775</td>  <td class="src"><pre class="src">&nbsp;            <span class="keyword">this</span>.currentStatus = desiredStatus;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;169</td>  <td class="nbHitsCovered">&nbsp;775</td>  <td class="src"><pre class="src">&nbsp;            <span class="keyword">return</span> <span class="keyword">true</span>;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;170</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        } <span class="keyword">else</span> {</pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;171</td>  <td class="nbHitsCovered">&nbsp;2</td>  <td class="src"><pre class="src">&nbsp;            logger.warning(<span class="string">"Impossible to set status: "</span> + desiredStatus</pre></td></tr>
@@ -345,8 +345,8 @@
   <td class="src"><pre class="src">&nbsp;<span class="comment">     */</span></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;182</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;    <span class="keyword">private</span> <span class="keyword">boolean</span> isPossibleStatus(String possibleStatus) {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;183</td>  <td class="nbHitsCovered"><a title="Line 183: Conditional coverage 100% (2/2).">&nbsp;767</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 183: Conditional coverage 100% (2/2).">        <span class="keyword">if</span> (<span class="keyword">this</span>.possibleStates.contains(possibleStatus)) {</a></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;184</td>  <td class="nbHitsCovered">&nbsp;765</td>  <td class="src"><pre class="src">&nbsp;            <span class="keyword">return</span> <span class="keyword">true</span>;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;183</td>  <td class="nbHitsCovered"><a title="Line 183: Conditional coverage 100% (2/2).">&nbsp;777</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 183: Conditional coverage 100% (2/2).">        <span class="keyword">if</span> (<span class="keyword">this</span>.possibleStates.contains(possibleStatus)) {</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;184</td>  <td class="nbHitsCovered">&nbsp;775</td>  <td class="src"><pre class="src">&nbsp;            <span class="keyword">return</span> <span class="keyword">true</span>;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;185</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        } <span class="keyword">else</span> {</pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;186</td>  <td class="nbHitsCovered">&nbsp;2</td>  <td class="src"><pre class="src">&nbsp;            <span class="keyword">return</span> <span class="keyword">false</span>;</pre></td></tr>
@@ -943,18 +943,18 @@
 <tr>  <td class="numLineCover">&nbsp;553</td>  <td class="nbHitsCovered"><a title="Line 553: Conditional coverage 100% (2/2).">&nbsp;25814</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 553: Conditional coverage 100% (2/2).">                <span class="keyword">if</span> (aux &lt; prob) {</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;554</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                    Set&lt;NetworkElement&gt; elementsSet;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;555</td>  <td class="nbHitsCovered">&nbsp;12869</td>  <td class="src"><pre class="src">&nbsp;                    elementsSet = list.get(combinationNumber);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;555</td>  <td class="nbHitsCovered">&nbsp;12981</td>  <td class="src"><pre class="src">&nbsp;                    elementsSet = list.get(combinationNumber);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;556</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                    <span class="keyword">try</span> {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;557</td>  <td class="nbHitsCovered">&nbsp;12869</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">this</span>.setupNetworkElementEvent(event, elementsSet,</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;557</td>  <td class="nbHitsCovered">&nbsp;12981</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">this</span>.setupNetworkElementEvent(event, elementsSet,</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;558</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                                combinationNumber);</pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;559</td>  <td class="nbHitsUncovered">&nbsp;0</td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;                    } <span class="keyword">catch</span> (Exception e1) {</span></pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;560</td>  <td class="nbHitsUncovered">&nbsp;0</td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;                        <span class="keyword">throw</span> <span class="keyword">new</span> ShanksException(e1);</span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;561</td>  <td class="nbHitsCovered">&nbsp;12869</td>  <td class="src"><pre class="src">&nbsp;                    }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;562</td>  <td class="nbHitsCovered">&nbsp;12869</td>  <td class="src"><pre class="src">&nbsp;                    event.launchEvent();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;563</td>  <td class="nbHitsCovered"><a title="Line 563: Conditional coverage 100% (2/2).">&nbsp;12869</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 563: Conditional coverage 100% (2/2).">                    <span class="keyword">for</span> (NetworkElement e : elementsSet) {</a></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;564</td>  <td class="nbHitsCovered">&nbsp;12869</td>  <td class="src"><pre class="src">&nbsp;                        e.checkStatus();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;561</td>  <td class="nbHitsCovered">&nbsp;12981</td>  <td class="src"><pre class="src">&nbsp;                    }</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;562</td>  <td class="nbHitsCovered">&nbsp;12981</td>  <td class="src"><pre class="src">&nbsp;                    event.launchEvent();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;563</td>  <td class="nbHitsCovered"><a title="Line 563: Conditional coverage 100% (2/2).">&nbsp;12981</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 563: Conditional coverage 100% (2/2).">                    <span class="keyword">for</span> (NetworkElement e : elementsSet) {</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;564</td>  <td class="nbHitsCovered">&nbsp;12981</td>  <td class="src"><pre class="src">&nbsp;                        e.checkStatus();</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;565</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                    }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;566</td>  <td class="nbHits">&nbsp;</td>
@@ -1068,11 +1068,11 @@
 <tr>  <td class="numLineCover">&nbsp;651</td>  <td class="nbHitsCovered"><a title="Line 651: Conditional coverage 100% (2/2).">&nbsp;125</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 651: Conditional coverage 100% (2/2).">                <span class="keyword">if</span> (aux &lt; prob) {</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;652</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                    Set&lt;Scenario&gt; scenarioSet;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;653</td>  <td class="nbHitsCovered">&nbsp;57</td>  <td class="src"><pre class="src">&nbsp;                    scenarioSet = list.get(combinationNumber);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;654</td>  <td class="nbHitsCovered">&nbsp;57</td>  <td class="src"><pre class="src">&nbsp;                    <span class="keyword">this</span>.setupScenarioEvent(event, scenarioSet,</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;653</td>  <td class="nbHitsCovered">&nbsp;67</td>  <td class="src"><pre class="src">&nbsp;                    scenarioSet = list.get(combinationNumber);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;654</td>  <td class="nbHitsCovered">&nbsp;67</td>  <td class="src"><pre class="src">&nbsp;                    <span class="keyword">this</span>.setupScenarioEvent(event, scenarioSet,</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;655</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                            combinationNumber);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;656</td>  <td class="nbHitsCovered">&nbsp;57</td>  <td class="src"><pre class="src">&nbsp;                    event.launchEvent();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;656</td>  <td class="nbHitsCovered">&nbsp;67</td>  <td class="src"><pre class="src">&nbsp;                    event.launchEvent();</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;657</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;658</td>  <td class="nbHitsUncovered"><a title="Line 658: Conditional coverage 50% (1/2).">&nbsp;125</a></td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;<a title="Line 658: Conditional coverage 50% (1/2).">            } <span class="keyword">else</span> <span class="keyword">if</span> (PeriodicEvent.<span class="keyword">class</span>.isAssignableFrom(type)) {</a></span></pre></td></tr>
@@ -1138,22 +1138,22 @@
   <td class="src"><pre class="src">&nbsp;            Set&lt;NetworkElement&gt; elementsSet, <span class="keyword">int</span> configurationNumber)</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;703</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;            <span class="keyword">throws</span> ShanksException {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;704</td>  <td class="nbHitsCovered"><a title="Line 704: Conditional coverage 100% (2/2).">&nbsp;12873</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 704: Conditional coverage 100% (2/2).">        <span class="keyword">for</span> (NetworkElement ne : elementsSet) {</a></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;705</td>  <td class="nbHitsCovered">&nbsp;12873</td>  <td class="src"><pre class="src">&nbsp;            event.addAffectedElement(ne);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;704</td>  <td class="nbHitsCovered"><a title="Line 704: Conditional coverage 100% (2/2).">&nbsp;12985</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 704: Conditional coverage 100% (2/2).">        <span class="keyword">for</span> (NetworkElement ne : elementsSet) {</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;705</td>  <td class="nbHitsCovered">&nbsp;12985</td>  <td class="src"><pre class="src">&nbsp;            event.addAffectedElement(ne);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;706</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;707</td>  <td class="nbHitsCovered">&nbsp;12873</td>  <td class="src"><pre class="src">&nbsp;    }</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;707</td>  <td class="nbHitsCovered">&nbsp;12985</td>  <td class="src"><pre class="src">&nbsp;    }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;708</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;709</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;    <span class="keyword">public</span> <span class="keyword">void</span> setupScenarioEvent(Event event, Set&lt;Scenario&gt; scenarioSet,</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;710</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;            <span class="keyword">int</span> configurationNumber) {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;711</td>  <td class="nbHitsCovered"><a title="Line 711: Conditional coverage 100% (2/2).">&nbsp;61</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 711: Conditional coverage 100% (2/2).">        <span class="keyword">for</span> (Scenario ne : scenarioSet) {</a></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;712</td>  <td class="nbHitsCovered">&nbsp;61</td>  <td class="src"><pre class="src">&nbsp;            event.addAffectedScenario(ne);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;711</td>  <td class="nbHitsCovered"><a title="Line 711: Conditional coverage 100% (2/2).">&nbsp;71</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 711: Conditional coverage 100% (2/2).">        <span class="keyword">for</span> (Scenario ne : scenarioSet) {</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;712</td>  <td class="nbHitsCovered">&nbsp;71</td>  <td class="src"><pre class="src">&nbsp;            event.addAffectedScenario(ne);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;713</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;714</td>  <td class="nbHitsCovered">&nbsp;61</td>  <td class="src"><pre class="src">&nbsp;    }</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;714</td>  <td class="nbHitsCovered">&nbsp;71</td>  <td class="src"><pre class="src">&nbsp;    }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;715</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;716</td>  <td class="nbHits">&nbsp;</td>
@@ -1356,6 +1356,6 @@
   <td class="src"><pre class="src">&nbsp;}</pre></td></tr>
 </table>
 
-<div class="footer">Report generated by <a href="http://cobertura.sourceforge.net/" target="_top">Cobertura</a> 1.9.4.1 on 14/06/13 18:21.</div>
+<div class="footer">Report generated by <a href="http://cobertura.sourceforge.net/" target="_top">Cobertura</a> 1.9.4.1 on 3/07/13 12:31.</div>
 </body>
 </html>

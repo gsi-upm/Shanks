@@ -9,8 +9,56 @@ digraph G {
 	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
+	// es.upm.dit.gsi.shanks.agent.capability.creation.test.ShanksAgentCreationCapabilityTest
+	c6164 [label=<<table title="es.upm.dit.gsi.shanks.agent.capability.creation.test.ShanksAgentCreationCapabilityTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../agent/capability/creation/test/ShanksAgentCreationCapabilityTest.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ShanksAgentCreationCapabilityTest </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + ShanksAgentCreationCapabilityTest() </td></tr>
+		</table></td></tr>
+		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
+	// es.upm.dit.gsi.shanks.agent.capability.movement.test.ShanksAgentMovementCapabilityTest
+	c6165 [label=<<table title="es.upm.dit.gsi.shanks.agent.capability.movement.test.ShanksAgentMovementCapabilityTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../agent/capability/movement/test/ShanksAgentMovementCapabilityTest.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ShanksAgentMovementCapabilityTest </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + ShanksAgentMovementCapabilityTest() </td></tr>
+		</table></td></tr>
+		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
+	// es.upm.dit.gsi.shanks.agent.capability.perception.test.ShanksAgentPerceptionCapabilityTest
+	c6166 [label=<<table title="es.upm.dit.gsi.shanks.agent.capability.perception.test.ShanksAgentPerceptionCapabilityTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../agent/capability/perception/test/ShanksAgentPerceptionCapabilityTest.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ShanksAgentPerceptionCapabilityTest </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + ShanksAgentPerceptionCapabilityTest() </td></tr>
+		</table></td></tr>
+		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
+	// es.upm.dit.gsi.shanks.model.ShanksSimulationTest
+	c6213 [label=<<table title="es.upm.dit.gsi.shanks.model.ShanksSimulationTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ShanksSimulationTest.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ShanksSimulationTest </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + ShanksSimulationTest() </td></tr>
+		</table></td></tr>
+		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	// es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI
-	c6209 [label=<<table title="es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MyShanksSimulation3DGUI.html">
+	c6214 [label=<<table title="es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MyShanksSimulation3DGUI.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> MyShanksSimulation3DGUI </td></tr>
 		</table></td></tr>
@@ -22,13 +70,21 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	//es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI extends es.upm.dit.gsi.shanks.ShanksSimulation3DGUI
-	c6234:p -> c6209:p [dir=back,arrowtail=empty];
-	// es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI DEPEND es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal
-	c6209:p -> c6235:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c6237:p -> c6214:p [dir=back,arrowtail=empty];
+	// es.upm.dit.gsi.shanks.agent.capability.creation.test.ShanksAgentCreationCapabilityTest NAVASSOC es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI
+	c6164:p -> c6214:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	// es.upm.dit.gsi.shanks.agent.capability.movement.test.ShanksAgentMovementCapabilityTest NAVASSOC es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI
+	c6165:p -> c6214:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	// es.upm.dit.gsi.shanks.agent.capability.perception.test.ShanksAgentPerceptionCapabilityTest NAVASSOC es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI
+	c6166:p -> c6214:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	// es.upm.dit.gsi.shanks.model.ShanksSimulationTest NAVASSOC es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI
+	c6213:p -> c6214:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI DEPEND java.lang.String
-	c6209:p -> c6236:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c6214:p -> c6238:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI DEPEND es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal
+	c6214:p -> c6239:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.ShanksSimulation3DGUI
-	c6234 [label=<<table title="es.upm.dit.gsi.shanks.ShanksSimulation3DGUI" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/es/upm/dit/gsi/shanks/ShanksSimulation3DGUI.html">
+	c6237 [label=<<table title="es.upm.dit.gsi.shanks.ShanksSimulation3DGUI" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/es/upm/dit/gsi/shanks/ShanksSimulation3DGUI.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="ariali"> ShanksSimulation3DGUI </font></td></tr>
 		</table></td></tr>
@@ -40,7 +96,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	// es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal
-	c6235 [label=<<table title="es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/es/upm/dit/gsi/shanks/model/scenario/portrayal/Scenario3DPortrayal.html">
+	c6239 [label=<<table title="es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/es/upm/dit/gsi/shanks/model/scenario/portrayal/Scenario3DPortrayal.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="ariali"> Scenario3DPortrayal </font></td></tr>
 		</table></td></tr>
@@ -52,7 +108,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	// java.lang.String
-	c6236 [label=<<table title="java.lang.String" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/String.html">
+	c6238 [label=<<table title="java.lang.String" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/String.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> String </td></tr>
 		</table></td></tr>

@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// es.upm.dit.gsi.shanks.model.test.steppable.FailureLog
-	c6612 [label=<<table title="es.upm.dit.gsi.shanks.model.test.steppable.FailureLog" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./FailureLog.html">
+	c6615 [label=<<table title="es.upm.dit.gsi.shanks.model.test.steppable.FailureLog" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./FailureLog.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> FailureLog </td></tr>
 		</table></td></tr>
@@ -22,13 +22,13 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	//es.upm.dit.gsi.shanks.model.test.steppable.FailureLog implements sim.engine.Steppable
-	c6630:p -> c6612:p [dir=back,arrowtail=empty,style=dashed];
+	c6633:p -> c6615:p [dir=back,arrowtail=empty,style=dashed];
 	// es.upm.dit.gsi.shanks.model.test.steppable.FailureLog NAVASSOC java.util.logging.Logger
-	c6612:p -> c6631:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c6615:p -> c6634:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// es.upm.dit.gsi.shanks.model.test.steppable.FailureLog DEPEND sim.engine.SimState
-	c6612:p -> c6632:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c6615:p -> c6635:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// sim.engine.SimState
-	c6632 [label=<<table title="sim.engine.SimState" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/engine/SimState.html">
+	c6635 [label=<<table title="sim.engine.SimState" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/engine/SimState.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SimState </td></tr>
 		</table></td></tr>
@@ -43,14 +43,14 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	// sim.engine.Steppable
-	c6630 [label=<<table title="sim.engine.Steppable" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/engine/Steppable.html">
+	c6633 [label=<<table title="sim.engine.Steppable" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/engine/Steppable.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Steppable </td></tr>
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	// java.util.logging.Logger
-	c6631 [label=<<table title="java.util.logging.Logger" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/logging/Logger.html">
+	c6634 [label=<<table title="java.util.logging.Logger" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/logging/Logger.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Logger </td></tr>
 		</table></td></tr>

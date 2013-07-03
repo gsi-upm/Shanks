@@ -184,24 +184,24 @@
   <td class="src"><pre class="src">&nbsp;    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> getDistanceTo(ShanksSimulation simulation,</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;97</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;            PercipientShanksAgent agent, Object o) {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;98</td>  <td class="nbHitsCovered">&nbsp;82190</td>  <td class="src"><pre class="src">&nbsp;        Location agentLocation = agent.getCurrentLocation();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;99</td>  <td class="nbHitsCovered"><a title="Line 99: Conditional coverage 100% (2/2).">&nbsp;82190</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 99: Conditional coverage 100% (2/2).">        <span class="keyword">if</span> (agentLocation.is3DLocation()) {</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;98</td>  <td class="nbHitsCovered">&nbsp;86372</td>  <td class="src"><pre class="src">&nbsp;        Location agentLocation = agent.getCurrentLocation();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;99</td>  <td class="nbHitsCovered"><a title="Line 99: Conditional coverage 100% (2/2).">&nbsp;86372</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 99: Conditional coverage 100% (2/2).">        <span class="keyword">if</span> (agentLocation.is3DLocation()) {</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;100</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;            <span class="keyword">try</span> {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;101</td>  <td class="nbHitsCovered">&nbsp;30258</td>  <td class="src"><pre class="src">&nbsp;                ContinuousPortrayal3D devicesPortrayal = (ContinuousPortrayal3D) simulation</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;101</td>  <td class="nbHitsCovered">&nbsp;31423</td>  <td class="src"><pre class="src">&nbsp;                ContinuousPortrayal3D devicesPortrayal = (ContinuousPortrayal3D) simulation</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;102</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        .getScenarioPortrayal().getPortrayals()</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;103</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        .get(Scenario3DPortrayal.MAIN_DISPLAY_ID)</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;104</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        .get(ScenarioPortrayal.DEVICES_PORTRAYAL);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;105</td>  <td class="nbHitsCovered">&nbsp;30258</td>  <td class="src"><pre class="src">&nbsp;                Continuous3D devicesField = (Continuous3D) devicesPortrayal</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;105</td>  <td class="nbHitsCovered">&nbsp;31423</td>  <td class="src"><pre class="src">&nbsp;                Continuous3D devicesField = (Continuous3D) devicesPortrayal</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;106</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        .getField();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;107</td>  <td class="nbHitsCovered">&nbsp;30258</td>  <td class="src"><pre class="src">&nbsp;                Double3D objectLocation = devicesField</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;107</td>  <td class="nbHitsCovered">&nbsp;31423</td>  <td class="src"><pre class="src">&nbsp;                Double3D objectLocation = devicesField</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;108</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        .getObjectLocationAsDouble3D(o);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;109</td>  <td class="nbHitsCovered">&nbsp;30258</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> agentLocation.getLocation3D().distance(objectLocation);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;109</td>  <td class="nbHitsCovered">&nbsp;31423</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> agentLocation.getLocation3D().distance(objectLocation);</pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;110</td>  <td class="nbHitsUncovered">&nbsp;0</td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;            } <span class="keyword">catch</span> (DuplicatedPortrayalIDException e) {</span></pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;111</td>  <td class="nbHitsUncovered">&nbsp;0</td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;                e.printStackTrace();</span></pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;112</td>  <td class="nbHitsUncovered">&nbsp;0</td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;            } <span class="keyword">catch</span> (ScenarioNotFoundException e) {</span></pre></td></tr>
@@ -211,21 +211,21 @@
 <tr>  <td class="numLineCover">&nbsp;116</td>  <td class="nbHitsUncovered">&nbsp;0</td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;            }</span></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;117</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;118</td>  <td class="nbHitsUncovered"><a title="Line 118: Conditional coverage 50% (1/2).">&nbsp;51932</a></td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;<a title="Line 118: Conditional coverage 50% (1/2).">        <span class="keyword">if</span> (agentLocation.is2DLocation()) {</a></span></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;118</td>  <td class="nbHitsUncovered"><a title="Line 118: Conditional coverage 50% (1/2).">&nbsp;54949</a></td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;<a title="Line 118: Conditional coverage 50% (1/2).">        <span class="keyword">if</span> (agentLocation.is2DLocation()) {</a></span></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;119</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;            <span class="keyword">try</span> {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;120</td>  <td class="nbHitsCovered">&nbsp;51932</td>  <td class="src"><pre class="src">&nbsp;                ContinuousPortrayal2D devicesPortrayal = (ContinuousPortrayal2D) simulation</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;120</td>  <td class="nbHitsCovered">&nbsp;54949</td>  <td class="src"><pre class="src">&nbsp;                ContinuousPortrayal2D devicesPortrayal = (ContinuousPortrayal2D) simulation</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;121</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        .getScenarioPortrayal().getPortrayals()</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;122</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        .get(Scenario2DPortrayal.MAIN_DISPLAY_ID)</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;123</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        .get(ScenarioPortrayal.DEVICES_PORTRAYAL);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;124</td>  <td class="nbHitsCovered">&nbsp;51932</td>  <td class="src"><pre class="src">&nbsp;                Continuous2D devicesField = (Continuous2D) devicesPortrayal</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;124</td>  <td class="nbHitsCovered">&nbsp;54949</td>  <td class="src"><pre class="src">&nbsp;                Continuous2D devicesField = (Continuous2D) devicesPortrayal</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;125</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        .getField();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;126</td>  <td class="nbHitsCovered">&nbsp;51932</td>  <td class="src"><pre class="src">&nbsp;                Double2D objectLocation = devicesField.getObjectLocation(o);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;127</td>  <td class="nbHitsCovered">&nbsp;51932</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> agentLocation.getLocation2D().distance(objectLocation);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;126</td>  <td class="nbHitsCovered">&nbsp;54949</td>  <td class="src"><pre class="src">&nbsp;                Double2D objectLocation = devicesField.getObjectLocation(o);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;127</td>  <td class="nbHitsCovered">&nbsp;54949</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> agentLocation.getLocation2D().distance(objectLocation);</pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;128</td>  <td class="nbHitsUncovered">&nbsp;0</td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;            } <span class="keyword">catch</span> (DuplicatedPortrayalIDException e) {</span></pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;129</td>  <td class="nbHitsUncovered">&nbsp;0</td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;                e.printStackTrace();</span></pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;130</td>  <td class="nbHitsUncovered">&nbsp;0</td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;            } <span class="keyword">catch</span> (ScenarioNotFoundException e) {</span></pre></td></tr>
@@ -280,10 +280,10 @@
 <tr>  <td class="numLineCover">&nbsp;160</td>  <td class="nbHitsCovered">&nbsp;62</td>  <td class="src"><pre class="src">&nbsp;                Double3D newTarget = <span class="keyword">null</span>;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;161</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                <span class="keyword">do</span> {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;162</td>  <td class="nbHitsCovered">&nbsp;67</td>  <td class="src"><pre class="src">&nbsp;                    <span class="keyword">int</span> size = objects.size();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;163</td>  <td class="nbHitsCovered">&nbsp;67</td>  <td class="src"><pre class="src">&nbsp;                    o = objects.get(simulation.random.nextInt(size));</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;164</td>  <td class="nbHitsCovered">&nbsp;67</td>  <td class="src"><pre class="src">&nbsp;                    newTarget = devicesField.getObjectLocation(o);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;165</td>  <td class="nbHitsCovered"><a title="Line 165: Conditional coverage 100% (2/2).">&nbsp;67</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 165: Conditional coverage 100% (2/2).">                } <span class="keyword">while</span> (o.equals(agent));</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;162</td>  <td class="nbHitsCovered">&nbsp;65</td>  <td class="src"><pre class="src">&nbsp;                    <span class="keyword">int</span> size = objects.size();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;163</td>  <td class="nbHitsCovered">&nbsp;65</td>  <td class="src"><pre class="src">&nbsp;                    o = objects.get(simulation.random.nextInt(size));</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;164</td>  <td class="nbHitsCovered">&nbsp;65</td>  <td class="src"><pre class="src">&nbsp;                    newTarget = devicesField.getObjectLocation(o);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;165</td>  <td class="nbHitsCovered"><a title="Line 165: Conditional coverage 100% (2/2).">&nbsp;65</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 165: Conditional coverage 100% (2/2).">                } <span class="keyword">while</span> (o.equals(agent));</a></pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;166</td>  <td class="nbHitsCovered">&nbsp;62</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> <span class="keyword">new</span> Location(newTarget);</pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;167</td>  <td class="nbHitsUncovered"><a title="Line 167: Conditional coverage 50% (1/2).">&nbsp;74</a></td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;<a title="Line 167: Conditional coverage 50% (1/2).">            } <span class="keyword">else</span> <span class="keyword">if</span> (agentLocation.is2DLocation()) {</a></span></pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;168</td>  <td class="nbHitsCovered">&nbsp;74</td>  <td class="src"><pre class="src">&nbsp;                ContinuousPortrayal2D devicesPortrayal = (ContinuousPortrayal2D) simulation</pre></td></tr>
@@ -302,10 +302,10 @@
 <tr>  <td class="numLineCover">&nbsp;176</td>  <td class="nbHitsCovered">&nbsp;74</td>  <td class="src"><pre class="src">&nbsp;                Double2D newTarget = <span class="keyword">null</span>;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;177</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                <span class="keyword">do</span> {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;178</td>  <td class="nbHitsCovered">&nbsp;79</td>  <td class="src"><pre class="src">&nbsp;                    <span class="keyword">int</span> size = objects.size();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;179</td>  <td class="nbHitsCovered">&nbsp;79</td>  <td class="src"><pre class="src">&nbsp;                    o = objects.get(simulation.random.nextInt(size));</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;180</td>  <td class="nbHitsCovered">&nbsp;79</td>  <td class="src"><pre class="src">&nbsp;                    newTarget = devicesField.getObjectLocation(o);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;181</td>  <td class="nbHitsCovered"><a title="Line 181: Conditional coverage 100% (2/2).">&nbsp;79</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 181: Conditional coverage 100% (2/2).">                } <span class="keyword">while</span> (o.equals(agent));</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;178</td>  <td class="nbHitsCovered">&nbsp;83</td>  <td class="src"><pre class="src">&nbsp;                    <span class="keyword">int</span> size = objects.size();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;179</td>  <td class="nbHitsCovered">&nbsp;83</td>  <td class="src"><pre class="src">&nbsp;                    o = objects.get(simulation.random.nextInt(size));</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;180</td>  <td class="nbHitsCovered">&nbsp;83</td>  <td class="src"><pre class="src">&nbsp;                    newTarget = devicesField.getObjectLocation(o);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;181</td>  <td class="nbHitsCovered"><a title="Line 181: Conditional coverage 100% (2/2).">&nbsp;83</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 181: Conditional coverage 100% (2/2).">                } <span class="keyword">while</span> (o.equals(agent));</a></pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;182</td>  <td class="nbHitsCovered">&nbsp;74</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> <span class="keyword">new</span> Location(newTarget);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;183</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;            }</pre></td></tr>
@@ -335,34 +335,34 @@
   <td class="src"><pre class="src">&nbsp;            PercipientShanksAgent agent, Object object) {</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;198</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">try</span> {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;199</td>  <td class="nbHitsCovered"><a title="Line 199: Conditional coverage 100% (2/2).">&nbsp;82190</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 199: Conditional coverage 100% (2/2).">            <span class="keyword">if</span> (agent.getCurrentLocation().is3DLocation()) {</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;199</td>  <td class="nbHitsCovered"><a title="Line 199: Conditional coverage 100% (2/2).">&nbsp;86372</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 199: Conditional coverage 100% (2/2).">            <span class="keyword">if</span> (agent.getCurrentLocation().is3DLocation()) {</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;200</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                ContinuousPortrayal3D devicesPortrayal;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;201</td>  <td class="nbHitsCovered">&nbsp;30258</td>  <td class="src"><pre class="src">&nbsp;                devicesPortrayal = (ContinuousPortrayal3D) simulation</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;201</td>  <td class="nbHitsCovered">&nbsp;31423</td>  <td class="src"><pre class="src">&nbsp;                devicesPortrayal = (ContinuousPortrayal3D) simulation</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;202</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        .getScenarioPortrayal().getPortrayals()</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;203</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        .get(Scenario3DPortrayal.MAIN_DISPLAY_ID)</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;204</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        .get(ScenarioPortrayal.DEVICES_PORTRAYAL);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;205</td>  <td class="nbHitsCovered">&nbsp;30258</td>  <td class="src"><pre class="src">&nbsp;                Continuous3D devicesField = (Continuous3D) devicesPortrayal</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;205</td>  <td class="nbHitsCovered">&nbsp;31423</td>  <td class="src"><pre class="src">&nbsp;                Continuous3D devicesField = (Continuous3D) devicesPortrayal</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;206</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        .getField();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;207</td>  <td class="nbHitsCovered">&nbsp;30258</td>  <td class="src"><pre class="src">&nbsp;                Double3D loc = devicesField.getObjectLocation(object);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;208</td>  <td class="nbHitsCovered">&nbsp;30258</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> <span class="keyword">new</span> Location(loc);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;209</td>  <td class="nbHitsUncovered"><a title="Line 209: Conditional coverage 50% (1/2).">&nbsp;51932</a></td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;<a title="Line 209: Conditional coverage 50% (1/2).">            } <span class="keyword">else</span> <span class="keyword">if</span> (agent.getCurrentLocation().is2DLocation()) {</a></span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;210</td>  <td class="nbHitsCovered">&nbsp;51932</td>  <td class="src"><pre class="src">&nbsp;                ContinuousPortrayal2D devicesPortrayal = (ContinuousPortrayal2D) simulation</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;207</td>  <td class="nbHitsCovered">&nbsp;31423</td>  <td class="src"><pre class="src">&nbsp;                Double3D loc = devicesField.getObjectLocation(object);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;208</td>  <td class="nbHitsCovered">&nbsp;31423</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> <span class="keyword">new</span> Location(loc);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;209</td>  <td class="nbHitsUncovered"><a title="Line 209: Conditional coverage 50% (1/2).">&nbsp;54949</a></td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;<a title="Line 209: Conditional coverage 50% (1/2).">            } <span class="keyword">else</span> <span class="keyword">if</span> (agent.getCurrentLocation().is2DLocation()) {</a></span></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;210</td>  <td class="nbHitsCovered">&nbsp;54949</td>  <td class="src"><pre class="src">&nbsp;                ContinuousPortrayal2D devicesPortrayal = (ContinuousPortrayal2D) simulation</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;211</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        .getScenarioPortrayal().getPortrayals()</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;212</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        .get(Scenario2DPortrayal.MAIN_DISPLAY_ID)</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;213</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        .get(ScenarioPortrayal.DEVICES_PORTRAYAL);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;214</td>  <td class="nbHitsCovered">&nbsp;51932</td>  <td class="src"><pre class="src">&nbsp;                Continuous2D devicesField = (Continuous2D) devicesPortrayal</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;214</td>  <td class="nbHitsCovered">&nbsp;54949</td>  <td class="src"><pre class="src">&nbsp;                Continuous2D devicesField = (Continuous2D) devicesPortrayal</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;215</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        .getField();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;216</td>  <td class="nbHitsCovered">&nbsp;51932</td>  <td class="src"><pre class="src">&nbsp;                Double2D loc = devicesField.getObjectLocation(object);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;217</td>  <td class="nbHitsCovered">&nbsp;51932</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> <span class="keyword">new</span> Location(loc);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;216</td>  <td class="nbHitsCovered">&nbsp;54949</td>  <td class="src"><pre class="src">&nbsp;                Double2D loc = devicesField.getObjectLocation(object);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;217</td>  <td class="nbHitsCovered">&nbsp;54949</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> <span class="keyword">new</span> Location(loc);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;218</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;            }</pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;219</td>  <td class="nbHitsUncovered">&nbsp;0</td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;        } <span class="keyword">catch</span> (DuplicatedPortrayalIDException e) {</span></pre></td></tr>
@@ -423,19 +423,19 @@
 <tr>  <td class="numLine">&nbsp;253</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        agent.getPerceptionRange(), <span class="keyword">false</span>);</pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;254</td>  <td class="nbHitsUncovered"><a title="Line 254: Conditional coverage 75% (3/4) [each condition: 100%, 50%].">&nbsp;142</a></td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;<a title="Line 254: Conditional coverage 75% (3/4) [each condition: 100%, 50%].">                <span class="keyword">if</span> (objects.size() == 1 &amp;&amp; objects.get(0).equals(agent)) {</a></span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;255</td>  <td class="nbHitsCovered">&nbsp;25</td>  <td class="src"><pre class="src">&nbsp;                    <span class="keyword">return</span> <span class="keyword">null</span>;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;255</td>  <td class="nbHitsCovered">&nbsp;23</td>  <td class="src"><pre class="src">&nbsp;                    <span class="keyword">return</span> <span class="keyword">null</span>;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;256</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;257</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                Object o;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;258</td>  <td class="nbHitsCovered">&nbsp;117</td>  <td class="src"><pre class="src">&nbsp;                Double3D newTarget = <span class="keyword">null</span>;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;258</td>  <td class="nbHitsCovered">&nbsp;119</td>  <td class="src"><pre class="src">&nbsp;                Double3D newTarget = <span class="keyword">null</span>;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;259</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                <span class="keyword">do</span> {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;260</td>  <td class="nbHitsCovered">&nbsp;196</td>  <td class="src"><pre class="src">&nbsp;                    <span class="keyword">int</span> size = objects.size();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;261</td>  <td class="nbHitsCovered">&nbsp;196</td>  <td class="src"><pre class="src">&nbsp;                    o = objects.get(simulation.random.nextInt(size));</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;262</td>  <td class="nbHitsCovered">&nbsp;196</td>  <td class="src"><pre class="src">&nbsp;                    newTarget = devicesField.getObjectLocation(o);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;263</td>  <td class="nbHitsCovered"><a title="Line 263: Conditional coverage 100% (2/2).">&nbsp;196</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 263: Conditional coverage 100% (2/2).">                } <span class="keyword">while</span> (o.equals(agent));</a></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;264</td>  <td class="nbHitsCovered">&nbsp;117</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> <span class="keyword">new</span> Location(newTarget);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;260</td>  <td class="nbHitsCovered">&nbsp;229</td>  <td class="src"><pre class="src">&nbsp;                    <span class="keyword">int</span> size = objects.size();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;261</td>  <td class="nbHitsCovered">&nbsp;229</td>  <td class="src"><pre class="src">&nbsp;                    o = objects.get(simulation.random.nextInt(size));</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;262</td>  <td class="nbHitsCovered">&nbsp;229</td>  <td class="src"><pre class="src">&nbsp;                    newTarget = devicesField.getObjectLocation(o);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;263</td>  <td class="nbHitsCovered"><a title="Line 263: Conditional coverage 100% (2/2).">&nbsp;229</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 263: Conditional coverage 100% (2/2).">                } <span class="keyword">while</span> (o.equals(agent));</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;264</td>  <td class="nbHitsCovered">&nbsp;119</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> <span class="keyword">new</span> Location(newTarget);</pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;265</td>  <td class="nbHitsUncovered"><a title="Line 265: Conditional coverage 50% (1/2).">&nbsp;154</a></td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;<a title="Line 265: Conditional coverage 50% (1/2).">            } <span class="keyword">else</span> <span class="keyword">if</span> (agentLocation.is2DLocation()) {</a></span></pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;266</td>  <td class="nbHitsCovered">&nbsp;154</td>  <td class="src"><pre class="src">&nbsp;                ContinuousPortrayal2D devicesPortrayal = (ContinuousPortrayal2D) simulation</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;267</td>  <td class="nbHits">&nbsp;</td>
@@ -457,10 +457,10 @@
 <tr>  <td class="numLineCover">&nbsp;276</td>  <td class="nbHitsCovered">&nbsp;154</td>  <td class="src"><pre class="src">&nbsp;                Double2D newTarget = <span class="keyword">null</span>;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;277</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                <span class="keyword">do</span> {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;278</td>  <td class="nbHitsCovered">&nbsp;261</td>  <td class="src"><pre class="src">&nbsp;                    <span class="keyword">int</span> size = objects.size();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;279</td>  <td class="nbHitsCovered">&nbsp;261</td>  <td class="src"><pre class="src">&nbsp;                    o = objects.get(simulation.random.nextInt(size));</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;280</td>  <td class="nbHitsCovered">&nbsp;261</td>  <td class="src"><pre class="src">&nbsp;                    newTarget = devicesField.getObjectLocation(o);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;281</td>  <td class="nbHitsCovered"><a title="Line 281: Conditional coverage 100% (2/2).">&nbsp;261</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 281: Conditional coverage 100% (2/2).">                } <span class="keyword">while</span> (o.equals(agent));</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;278</td>  <td class="nbHitsCovered">&nbsp;238</td>  <td class="src"><pre class="src">&nbsp;                    <span class="keyword">int</span> size = objects.size();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;279</td>  <td class="nbHitsCovered">&nbsp;238</td>  <td class="src"><pre class="src">&nbsp;                    o = objects.get(simulation.random.nextInt(size));</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;280</td>  <td class="nbHitsCovered">&nbsp;238</td>  <td class="src"><pre class="src">&nbsp;                    newTarget = devicesField.getObjectLocation(o);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;281</td>  <td class="nbHitsCovered"><a title="Line 281: Conditional coverage 100% (2/2).">&nbsp;238</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 281: Conditional coverage 100% (2/2).">                } <span class="keyword">while</span> (o.equals(agent));</a></pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;282</td>  <td class="nbHitsCovered">&nbsp;154</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> <span class="keyword">new</span> Location(newTarget);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;283</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;            }</pre></td></tr>
@@ -552,6 +552,6 @@
   <td class="src"><pre class="src">&nbsp;}</pre></td></tr>
 </table>
 
-<div class="footer">Report generated by <a href="http://cobertura.sourceforge.net/" target="_top">Cobertura</a> 1.9.4.1 on 14/06/13 18:21.</div>
+<div class="footer">Report generated by <a href="http://cobertura.sourceforge.net/" target="_top">Cobertura</a> 1.9.4.1 on 3/07/13 12:31.</div>
 </body>
 </html>

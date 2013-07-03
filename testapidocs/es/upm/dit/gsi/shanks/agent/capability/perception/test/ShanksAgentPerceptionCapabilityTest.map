@@ -1,3 +1,6 @@
 <map id="G" name="G">
-<area shape="rect" id="node1_0" href="./ShanksAgentPerceptionCapabilityTest.html" title="es.upm.dit.gsi.shanks.agent.capability.perception.test.ShanksAgentPerceptionCapabilityTest" alt="" coords="15,11,262,80"/>
+<area shape="rect" id="node1_0" href="./ShanksAgentPerceptionCapabilityTest.html" title="es.upm.dit.gsi.shanks.agent.capability.perception.test.ShanksAgentPerceptionCapabilityTest" alt="" coords="418,11,665,80"/>
+<area shape="rect" id="node2_1" href="../../../../model/test/MyShanksSimulation3DGUI.html" title="es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI" alt="" coords="16,139,336,208"/>
+<area shape="rect" id="node3_2" href="../../../../model/test/MyShanksSimulation2DGUI.html" title="es.upm.dit.gsi.shanks.model.test.MyShanksSimulation2DGUI" alt="" coords="381,139,701,208"/>
+<area shape="rect" id="node4_3" href="../../../../model/test/MyShanksSimulation.html" title="es.upm.dit.gsi.shanks.model.test.MyShanksSimulation" alt="" coords="747,139,1725,208"/>
 </map>

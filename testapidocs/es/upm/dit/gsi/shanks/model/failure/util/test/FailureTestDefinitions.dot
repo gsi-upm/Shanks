@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// es.upm.dit.gsi.shanks.model.failure.util.test.FailureTestDefinitions
-	c4318 [label=<<table title="es.upm.dit.gsi.shanks.model.failure.util.test.FailureTestDefinitions" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./FailureTestDefinitions.html">
+	c4322 [label=<<table title="es.upm.dit.gsi.shanks.model.failure.util.test.FailureTestDefinitions" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./FailureTestDefinitions.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> FailureTestDefinitions </td></tr>
 		</table></td></tr>

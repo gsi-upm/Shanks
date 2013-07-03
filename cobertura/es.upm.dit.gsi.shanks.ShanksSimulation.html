@@ -361,13 +361,13 @@
   <td class="src"><pre class="src">&nbsp;    <span class="keyword">public</span> ScenarioPortrayal getScenarioPortrayal()</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;190</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;            <span class="keyword">throws</span> ShanksException {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;191</td>  <td class="nbHitsCovered">&nbsp;636287</td>  <td class="src"><pre class="src">&nbsp;        ScenarioPortrayal sp = <span class="keyword">this</span>.scenarioManager.getPortrayal();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;192</td>  <td class="nbHitsCovered"><a title="Line 192: Conditional coverage 100% (2/2).">&nbsp;636287</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 192: Conditional coverage 100% (2/2).">        <span class="keyword">if</span> (sp == <span class="keyword">null</span>) {</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;191</td>  <td class="nbHitsCovered">&nbsp;643502</td>  <td class="src"><pre class="src">&nbsp;        ScenarioPortrayal sp = <span class="keyword">this</span>.scenarioManager.getPortrayal();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;192</td>  <td class="nbHitsCovered"><a title="Line 192: Conditional coverage 100% (2/2).">&nbsp;643502</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 192: Conditional coverage 100% (2/2).">        <span class="keyword">if</span> (sp == <span class="keyword">null</span>) {</a></pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;193</td>  <td class="nbHitsCovered">&nbsp;66024</td>  <td class="src"><pre class="src">&nbsp;            sp = <span class="keyword">this</span>.scenarioManager.getScenario().createScenarioPortrayal();</pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;194</td>  <td class="nbHitsCovered">&nbsp;66024</td>  <td class="src"><pre class="src">&nbsp;            <span class="keyword">this</span>.scenarioManager.setPortrayal(sp);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;195</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;196</td>  <td class="nbHitsCovered">&nbsp;636287</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">return</span> sp;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;196</td>  <td class="nbHitsCovered">&nbsp;643502</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">return</span> sp;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;197</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;    }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;198</td>  <td class="nbHits">&nbsp;</td>
@@ -544,8 +544,8 @@
   <td class="src"><pre class="src">&nbsp;<span class="comment">     */</span></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;299</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;    <span class="keyword">public</span> ShanksAgent getAgent(String agentID) <span class="keyword">throws</span> ShanksException {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;300</td>  <td class="nbHitsCovered"><a title="Line 300: Conditional coverage 100% (2/2).">&nbsp;6</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 300: Conditional coverage 100% (2/2).">        <span class="keyword">if</span> (<span class="keyword">this</span>.agents.containsKey(agentID)) {</a></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;301</td>  <td class="nbHitsCovered">&nbsp;4</td>  <td class="src"><pre class="src">&nbsp;            <span class="keyword">return</span> <span class="keyword">this</span>.agents.get(agentID);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;300</td>  <td class="nbHitsCovered"><a title="Line 300: Conditional coverage 100% (2/2).">&nbsp;7</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 300: Conditional coverage 100% (2/2).">        <span class="keyword">if</span> (<span class="keyword">this</span>.agents.containsKey(agentID)) {</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;301</td>  <td class="nbHitsCovered">&nbsp;5</td>  <td class="src"><pre class="src">&nbsp;            <span class="keyword">return</span> <span class="keyword">this</span>.agents.get(agentID);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;302</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        } <span class="keyword">else</span> {</pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;303</td>  <td class="nbHitsCovered">&nbsp;2</td>  <td class="src"><pre class="src">&nbsp;            <span class="keyword">throw</span> <span class="keyword">new</span> UnkownAgentException(agentID);</pre></td></tr>
@@ -580,7 +580,7 @@
   <td class="src"><pre class="src">&nbsp;<span class="comment">     */</span></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;319</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;    <span class="keyword">public</span> Schedule getSchedule() {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;320</td>  <td class="nbHitsCovered">&nbsp;40189</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">return</span> schedule;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;320</td>  <td class="nbHitsCovered">&nbsp;40311</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">return</span> schedule;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;321</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;    }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;322</td>  <td class="nbHits">&nbsp;</td>
@@ -635,6 +635,6 @@
   <td class="src"><pre class="src">&nbsp;}</pre></td></tr>
 </table>
 
-<div class="footer">Report generated by <a href="http://cobertura.sourceforge.net/" target="_top">Cobertura</a> 1.9.4.1 on 14/06/13 18:21.</div>
+<div class="footer">Report generated by <a href="http://cobertura.sourceforge.net/" target="_top">Cobertura</a> 1.9.4.1 on 3/07/13 12:31.</div>
 </body>
 </html>

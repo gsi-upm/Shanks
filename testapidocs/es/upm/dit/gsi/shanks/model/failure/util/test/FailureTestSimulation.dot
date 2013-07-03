@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// es.upm.dit.gsi.shanks.model.failure.util.test.FailureTestSimulation
-	c4055 [label=<<table title="es.upm.dit.gsi.shanks.model.failure.util.test.FailureTestSimulation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./FailureTestSimulation.html">
+	c4077 [label=<<table title="es.upm.dit.gsi.shanks.model.failure.util.test.FailureTestSimulation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./FailureTestSimulation.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> FailureTestSimulation </td></tr>
 		</table></td></tr>
@@ -22,11 +22,11 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	//es.upm.dit.gsi.shanks.model.failure.util.test.FailureTestSimulation extends es.upm.dit.gsi.shanks.ShanksSimulation
-	c4105:p -> c4055:p [dir=back,arrowtail=empty];
+	c4127:p -> c4077:p [dir=back,arrowtail=empty];
 	// es.upm.dit.gsi.shanks.model.failure.util.test.FailureTestSimulation NAVASSOC java.util.Properties
-	c4055:p -> c4114:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c4077:p -> c4128:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// java.util.Properties
-	c4114 [label=<<table title="java.util.Properties" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/Properties.html">
+	c4128 [label=<<table title="java.util.Properties" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/Properties.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Properties </td></tr>
 		</table></td></tr>
@@ -39,7 +39,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	// es.upm.dit.gsi.shanks.ShanksSimulation
-	c4105 [label=<<table title="es.upm.dit.gsi.shanks.ShanksSimulation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/es/upm/dit/gsi/shanks/ShanksSimulation.html">
+	c4127 [label=<<table title="es.upm.dit.gsi.shanks.ShanksSimulation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/es/upm/dit/gsi/shanks/ShanksSimulation.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ShanksSimulation </td></tr>
 		</table></td></tr>

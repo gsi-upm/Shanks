@@ -1,10 +1,10 @@
 <map id="G" name="G">
 <area shape="rect" id="node1_0" href="../Device.html" title="es.upm.dit.gsi.shanks.model.element.device.Device" alt="" coords="15,369,361,439"/>
 <area shape="rect" id="node6_1" href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/logging/Logger.html" title="java.util.logging.Logger" alt="" coords="192,600,405,669"/>
-<area shape="rect" id="node2_2" href="./Device3DPortrayal.html" title="es.upm.dit.gsi.shanks.model.element.device.portrayal.Device3DPortrayal" alt="" coords="605,139,742,208"/>
-<area shape="rect" id="node9_3" href="http://java.sun.com/j2se/1.4.2/docs/api/javax/media/j3d/TransformGroup.html" title="javax.media.j3d.TransformGroup" alt="" coords="457,362,692,446"/>
-<area shape="rect" id="node12_4" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Object.html" title="java.lang.Object" alt="" coords="737,369,809,439"/>
-<area shape="rect" id="node14_5" href="http://java.sun.com/j2se/1.4.2/docs/api/java/awt/Color.html" title="java.awt.Color" alt="" coords="855,325,1169,483"/>
-<area shape="rect" id="node16_6" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/String.html" title="java.lang.String" alt="" coords="1214,267,1535,541"/>
-<area shape="rect" id="node3_7" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/portrayal3d/SimplePortrayal3D.html" title="sim.portrayal3d.SimplePortrayal3D" alt="" coords="603,11,743,80"/>
+<area shape="rect" id="node2_2" href="./Device3DPortrayal.html" title="es.upm.dit.gsi.shanks.model.element.device.portrayal.Device3DPortrayal" alt="" coords="731,139,869,208"/>
+<area shape="rect" id="node10_3" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/String.html" title="java.lang.String" alt="" coords="458,267,779,541"/>
+<area shape="rect" id="node12_4" href="http://java.sun.com/j2se/1.4.2/docs/api/java/awt/Color.html" title="java.awt.Color" alt="" coords="825,325,1138,483"/>
+<area shape="rect" id="node14_5" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Object.html" title="java.lang.Object" alt="" coords="1184,369,1256,439"/>
+<area shape="rect" id="node16_6" href="http://java.sun.com/j2se/1.4.2/docs/api/javax/media/j3d/TransformGroup.html" title="javax.media.j3d.TransformGroup" alt="" coords="1301,362,1536,446"/>
+<area shape="rect" id="node3_7" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/portrayal3d/SimplePortrayal3D.html" title="sim.portrayal3d.SimplePortrayal3D" alt="" coords="730,11,870,80"/>
 </map>

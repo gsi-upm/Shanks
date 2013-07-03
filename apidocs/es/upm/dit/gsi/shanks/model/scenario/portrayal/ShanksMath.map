@@ -1,6 +1,6 @@
 <map id="G" name="G">
-<area shape="rect" id="node1_0" href="./ShanksMath.html" title="es.upm.dit.gsi.shanks.model.scenario.portrayal.ShanksMath" alt="" coords="326,11,431,80"/>
-<area shape="rect" id="node3_1" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/util/Double2D.html" title="sim.util.Double2D" alt="" coords="16,176,259,363"/>
-<area shape="rect" id="node5_2" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Double.html" title="java.lang.Double" alt="" coords="304,227,453,311"/>
-<area shape="rect" id="node7_3" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/util/Double3D.html" title="sim.util.Double3D" alt="" coords="499,139,821,399"/>
+<area shape="rect" id="node1_0" href="./ShanksMath.html" title="es.upm.dit.gsi.shanks.model.scenario.portrayal.ShanksMath" alt="" coords="405,11,510,80"/>
+<area shape="rect" id="node3_1" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/util/Double3D.html" title="sim.util.Double3D" alt="" coords="15,139,337,399"/>
+<area shape="rect" id="node5_2" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Double.html" title="java.lang.Double" alt="" coords="383,227,532,311"/>
+<area shape="rect" id="node7_3" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/util/Double2D.html" title="sim.util.Double2D" alt="" coords="577,176,820,363"/>
 </map>

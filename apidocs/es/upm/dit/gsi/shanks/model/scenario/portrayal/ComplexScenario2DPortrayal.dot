@@ -63,12 +63,12 @@ digraph G {
 	c7317:p -> c7319:p [dir=back,arrowtail=empty];
 	// es.upm.dit.gsi.shanks.model.scenario.Scenario DEPEND es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal
 	c7307:p -> c7317:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// es.upm.dit.gsi.shanks.model.scenario.portrayal.ComplexScenario2DPortrayal DEPEND sim.util.Double2D
-	c7319:p -> c7333:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// es.upm.dit.gsi.shanks.model.scenario.portrayal.ComplexScenario2DPortrayal DEPEND es.upm.dit.gsi.shanks.model.scenario.ComplexScenario
-	c7319:p -> c7308:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.model.scenario.portrayal.ComplexScenario2DPortrayal DEPEND es.upm.dit.gsi.shanks.model.scenario.Scenario
 	c7319:p -> c7307:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// es.upm.dit.gsi.shanks.model.scenario.portrayal.ComplexScenario2DPortrayal DEPEND es.upm.dit.gsi.shanks.model.scenario.ComplexScenario
+	c7319:p -> c7308:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// es.upm.dit.gsi.shanks.model.scenario.portrayal.ComplexScenario2DPortrayal DEPEND sim.util.Double2D
+	c7319:p -> c7333:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// sim.util.Double2D
 	c7333 [label=<<table title="sim.util.Double2D" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/util/Double2D.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">

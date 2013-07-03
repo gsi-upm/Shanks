@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MySuperComplexScenario3DPortrayal
-	c4704 [label=<<table title="es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MySuperComplexScenario3DPortrayal" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MySuperComplexScenario3DPortrayal.html">
+	c4708 [label=<<table title="es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MySuperComplexScenario3DPortrayal" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MySuperComplexScenario3DPortrayal.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> MySuperComplexScenario3DPortrayal </td></tr>
 		</table></td></tr>
@@ -22,9 +22,9 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	//es.upm.dit.gsi.shanks.model.scenario.portrayal.test.MySuperComplexScenario3DPortrayal extends es.upm.dit.gsi.shanks.model.scenario.portrayal.ComplexScenario3DPortrayal
-	c4746:p -> c4704:p [dir=back,arrowtail=empty];
+	c4750:p -> c4708:p [dir=back,arrowtail=empty];
 	// es.upm.dit.gsi.shanks.model.scenario.portrayal.ComplexScenario3DPortrayal
-	c4746 [label=<<table title="es.upm.dit.gsi.shanks.model.scenario.portrayal.ComplexScenario3DPortrayal" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/es/upm/dit/gsi/shanks/model/scenario/portrayal/ComplexScenario3DPortrayal.html">
+	c4750 [label=<<table title="es.upm.dit.gsi.shanks.model.scenario.portrayal.ComplexScenario3DPortrayal" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/es/upm/dit/gsi/shanks/model/scenario/portrayal/ComplexScenario3DPortrayal.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="ariali"> ComplexScenario3DPortrayal </font></td></tr>
 		</table></td></tr>

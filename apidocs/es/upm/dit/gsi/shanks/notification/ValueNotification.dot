@@ -45,14 +45,14 @@ digraph G {
 	c7775:p -> c7782:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// es.upm.dit.gsi.shanks.notification.Notification NAVASSOC java.lang.Object
 	c7775:p -> c7782:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
-	// es.upm.dit.gsi.shanks.notification.ValueNotification DEPEND java.lang.Object
-	c7773:p -> c7782:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.notification.ValueNotification DEPEND java.lang.String
 	c7773:p -> c7781:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// es.upm.dit.gsi.shanks.notification.Notification DEPEND java.lang.Object
-	c7775:p -> c7782:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// es.upm.dit.gsi.shanks.notification.ValueNotification DEPEND java.lang.Object
+	c7773:p -> c7782:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.notification.Notification DEPEND java.lang.String
 	c7775:p -> c7781:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// es.upm.dit.gsi.shanks.notification.Notification DEPEND java.lang.Object
+	c7775:p -> c7782:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// java.lang.Object
 	c7782 [label=<<table title="java.lang.Object" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Object.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">

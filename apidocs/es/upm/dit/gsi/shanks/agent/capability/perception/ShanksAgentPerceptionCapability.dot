@@ -47,16 +47,16 @@ digraph G {
 <tr><td align="left" balign="left"> + ShanksSimulation(seed : long, scenarioClass : Class&lt;?&gt;, scenarioID : String, initialState : String, properties : Properties) </td></tr>
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
-	// es.upm.dit.gsi.shanks.agent.capability.perception.ShanksAgentPerceptionCapability DEPEND java.lang.Object
-	c3076:p -> c3143:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// es.upm.dit.gsi.shanks.agent.capability.perception.ShanksAgentPerceptionCapability DEPEND es.upm.dit.gsi.shanks.agent.capability.movement.Location
-	c3076:p -> c3075:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.agent.capability.perception.ShanksAgentPerceptionCapability DEPEND es.upm.dit.gsi.shanks.ShanksSimulation
 	c3076:p -> c3142:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.agent.capability.perception.ShanksAgentPerceptionCapability DEPEND sim.util.Bag
+	c3076:p -> c3143:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// es.upm.dit.gsi.shanks.agent.capability.perception.ShanksAgentPerceptionCapability DEPEND es.upm.dit.gsi.shanks.agent.capability.movement.Location
+	c3076:p -> c3075:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// es.upm.dit.gsi.shanks.agent.capability.perception.ShanksAgentPerceptionCapability DEPEND java.lang.Object
 	c3076:p -> c3144:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// java.lang.Object
-	c3143 [label=<<table title="java.lang.Object" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Object.html">
+	c3144 [label=<<table title="java.lang.Object" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Object.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Object </td></tr>
 		</table></td></tr>
@@ -68,7 +68,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	// sim.util.Bag
-	c3144 [label=<<table title="sim.util.Bag" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/util/Bag.html">
+	c3143 [label=<<table title="sim.util.Bag" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/util/Bag.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Bag </td></tr>
 		</table></td></tr>

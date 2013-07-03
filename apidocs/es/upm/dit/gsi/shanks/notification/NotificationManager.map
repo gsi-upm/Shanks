@@ -1,12 +1,12 @@
 <map id="G" name="G">
-<area shape="rect" id="node1_0" href="../model/event/Event.html" title="es.upm.dit.gsi.shanks.model.event.Event" alt="" coords="1042,11,1279,95"/>
-<area shape="rect" id="node4_1" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/engine/Steppable.html" title="sim.engine.Steppable" alt="" coords="1007,155,1087,194"/>
-<area shape="rect" id="node9_2" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/String.html" title="java.lang.String" alt="" coords="764,699,1085,973"/>
-<area shape="rect" id="node14_3" href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/List.html" title="java.util.List" alt="" coords="922,435,1002,474"/>
-<area shape="rect" id="node2_4" href="./NotificationManager.html" title="es.upm.dit.gsi.shanks.notification.NotificationManager" alt="" coords="485,254,1137,338"/>
-<area shape="rect" id="node6_5" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/engine/SimState.html" title="sim.engine.SimState" alt="" coords="419,398,751,511"/>
-<area shape="rect" id="node18_6" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Class.html" title="java.lang.Class" alt="" coords="237,824,311,848"/>
-<area shape="rect" id="node20_7" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Object.html" title="java.lang.Object" alt="" coords="62,420,134,489"/>
-<area shape="rect" id="node27_8" href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/ArrayList.html" title="java.util.ArrayList" alt="" coords="180,405,373,504"/>
-<area shape="rect" id="node3_9" href="../ShanksSimulation.html" title="es.upm.dit.gsi.shanks.ShanksSimulation" alt="" coords="189,571,877,640"/>
+<area shape="rect" id="node1_0" href="../model/event/Event.html" title="es.upm.dit.gsi.shanks.model.event.Event" alt="" coords="1087,11,1324,95"/>
+<area shape="rect" id="node4_1" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/engine/Steppable.html" title="sim.engine.Steppable" alt="" coords="1052,155,1132,194"/>
+<area shape="rect" id="node9_2" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/String.html" title="java.lang.String" alt="" coords="999,699,1321,973"/>
+<area shape="rect" id="node13_3" href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/List.html" title="java.util.List" alt="" coords="1136,435,1216,474"/>
+<area shape="rect" id="node2_4" href="./NotificationManager.html" title="es.upm.dit.gsi.shanks.notification.NotificationManager" alt="" coords="530,254,1182,338"/>
+<area shape="rect" id="node6_5" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/engine/SimState.html" title="sim.engine.SimState" alt="" coords="707,398,1039,511"/>
+<area shape="rect" id="node20_6" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Object.html" title="java.lang.Object" alt="" coords="16,420,88,489"/>
+<area shape="rect" id="node24_7" href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/ArrayList.html" title="java.util.ArrayList" alt="" coords="134,405,327,504"/>
+<area shape="rect" id="node28_8" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Class.html" title="java.lang.Class" alt="" coords="535,824,609,848"/>
+<area shape="rect" id="node3_9" href="../ShanksSimulation.html" title="es.upm.dit.gsi.shanks.ShanksSimulation" alt="" coords="424,571,1112,640"/>
 </map>

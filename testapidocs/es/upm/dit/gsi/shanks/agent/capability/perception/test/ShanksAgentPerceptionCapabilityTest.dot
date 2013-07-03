@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// es.upm.dit.gsi.shanks.agent.capability.perception.test.ShanksAgentPerceptionCapabilityTest
-	c2358 [label=<<table title="es.upm.dit.gsi.shanks.agent.capability.perception.test.ShanksAgentPerceptionCapabilityTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ShanksAgentPerceptionCapabilityTest.html">
+	c2383 [label=<<table title="es.upm.dit.gsi.shanks.agent.capability.perception.test.ShanksAgentPerceptionCapabilityTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ShanksAgentPerceptionCapabilityTest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ShanksAgentPerceptionCapabilityTest </td></tr>
 		</table></td></tr>
@@ -21,5 +21,47 @@ digraph G {
 <tr><td align="left" balign="left"> + ShanksAgentPerceptionCapabilityTest() </td></tr>
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
+	// es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI
+	c2431 [label=<<table title="es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../model/test/MyShanksSimulation3DGUI.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> MyShanksSimulation3DGUI </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + MyShanksSimulation3DGUI(sim : ShanksSimulation) </td></tr>
+		</table></td></tr>
+		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
+	// es.upm.dit.gsi.shanks.model.test.MyShanksSimulation2DGUI
+	c2432 [label=<<table title="es.upm.dit.gsi.shanks.model.test.MyShanksSimulation2DGUI" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../model/test/MyShanksSimulation2DGUI.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> MyShanksSimulation2DGUI </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + MyShanksSimulation2DGUI(sim : ShanksSimulation) </td></tr>
+		</table></td></tr>
+		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
+	// es.upm.dit.gsi.shanks.model.test.MyShanksSimulation
+	c2433 [label=<<table title="es.upm.dit.gsi.shanks.model.test.MyShanksSimulation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../model/test/MyShanksSimulation.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> MyShanksSimulation </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + MyShanksSimulation(seed : long, scenarioClass : Class&lt;?&gt;, scenarioID : String, initialState : String, properties : Properties, configPropertiesMyShanksSimulation : Properties) </td></tr>
+		</table></td></tr>
+		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
+	// es.upm.dit.gsi.shanks.agent.capability.perception.test.ShanksAgentPerceptionCapabilityTest NAVASSOC es.upm.dit.gsi.shanks.model.test.MyShanksSimulation
+	c2383:p -> c2433:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	// es.upm.dit.gsi.shanks.agent.capability.perception.test.ShanksAgentPerceptionCapabilityTest NAVASSOC es.upm.dit.gsi.shanks.model.test.MyShanksSimulation2DGUI
+	c2383:p -> c2432:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	// es.upm.dit.gsi.shanks.agent.capability.perception.test.ShanksAgentPerceptionCapabilityTest NAVASSOC es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI
+	c2383:p -> c2431:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 }
 

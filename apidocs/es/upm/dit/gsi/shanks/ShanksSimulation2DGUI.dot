@@ -41,18 +41,18 @@ digraph G {
 	c8231:p -> c8249:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal DEPEND java.lang.String
 	c8231:p -> c8250:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// es.upm.dit.gsi.shanks.ShanksSimulation2DGUI DEPEND sim.display.Display2D
-	c8245:p -> c8249:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// es.upm.dit.gsi.shanks.ShanksSimulation2DGUI DEPEND java.lang.Object
-	c8245:p -> c8251:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// es.upm.dit.gsi.shanks.ShanksSimulation2DGUI DEPEND java.lang.String
-	c8245:p -> c8250:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// es.upm.dit.gsi.shanks.ShanksSimulation2DGUI DEPEND java.awt.Image
-	c8245:p -> c8252:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// es.upm.dit.gsi.shanks.ShanksSimulation2DGUI DEPEND sim.display.Controller
-	c8245:p -> c8253:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.ShanksSimulation2DGUI DEPEND es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal
 	c8245:p -> c8231:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// es.upm.dit.gsi.shanks.ShanksSimulation2DGUI DEPEND sim.display.Controller
+	c8245:p -> c8251:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// es.upm.dit.gsi.shanks.ShanksSimulation2DGUI DEPEND sim.display.Display2D
+	c8245:p -> c8249:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// es.upm.dit.gsi.shanks.ShanksSimulation2DGUI DEPEND java.lang.String
+	c8245:p -> c8250:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// es.upm.dit.gsi.shanks.ShanksSimulation2DGUI DEPEND java.lang.Object
+	c8245:p -> c8252:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// es.upm.dit.gsi.shanks.ShanksSimulation2DGUI DEPEND java.awt.Image
+	c8245:p -> c8253:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// sim.display.Display2D
 	c8249 [label=<<table title="sim.display.Display2D" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/display/Display2D.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
@@ -67,7 +67,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	// java.lang.Object
-	c8251 [label=<<table title="java.lang.Object" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Object.html">
+	c8252 [label=<<table title="java.lang.Object" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Object.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Object </td></tr>
 		</table></td></tr>
@@ -79,7 +79,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	// java.awt.Image
-	c8252 [label=<<table title="java.awt.Image" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/java/awt/Image.html">
+	c8253 [label=<<table title="java.awt.Image" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/java/awt/Image.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="ariali"> Image </font></td></tr>
 		</table></td></tr>
@@ -91,7 +91,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	// sim.display.Controller
-	c8253 [label=<<table title="sim.display.Controller" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/display/Controller.html">
+	c8251 [label=<<table title="sim.display.Controller" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/display/Controller.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Controller </td></tr>

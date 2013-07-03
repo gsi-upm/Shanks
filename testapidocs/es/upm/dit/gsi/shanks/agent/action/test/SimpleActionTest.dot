@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// es.upm.dit.gsi.shanks.agent.action.test.SimpleActionTest
-	c1825 [label=<<table title="es.upm.dit.gsi.shanks.agent.action.test.SimpleActionTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./SimpleActionTest.html">
+	c1826 [label=<<table title="es.upm.dit.gsi.shanks.agent.action.test.SimpleActionTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./SimpleActionTest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SimpleActionTest </td></tr>
 		</table></td></tr>
@@ -21,5 +21,19 @@ digraph G {
 <tr><td align="left" balign="left"> + SimpleActionTest() </td></tr>
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
+	// es.upm.dit.gsi.shanks.model.test.MyShanksSimulation
+	c1977 [label=<<table title="es.upm.dit.gsi.shanks.model.test.MyShanksSimulation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../model/test/MyShanksSimulation.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> MyShanksSimulation </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + MyShanksSimulation(seed : long, scenarioClass : Class&lt;?&gt;, scenarioID : String, initialState : String, properties : Properties, configPropertiesMyShanksSimulation : Properties) </td></tr>
+		</table></td></tr>
+		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
+	// es.upm.dit.gsi.shanks.agent.action.test.SimpleActionTest NAVASSOC es.upm.dit.gsi.shanks.model.test.MyShanksSimulation
+	c1826:p -> c1977:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 }
 

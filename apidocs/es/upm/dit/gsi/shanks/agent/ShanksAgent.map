@@ -6,9 +6,9 @@
 <area shape="rect" id="node3_4" href="./capability/creation/CreationShanksAgentCapability.html" title="es.upm.dit.gsi.shanks.agent.capability.creation.CreationShanksAgentCapability" alt="" coords="214,11,425,80"/>
 <area shape="rect" id="node17_5" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/String.html" title="java.lang.String" alt="" coords="758,539,1079,813"/>
 <area shape="rect" id="node4_6" href="./SimpleShanksAgent.html" title="es.upm.dit.gsi.shanks.agent.SimpleShanksAgent" alt="" coords="396,237,596,307"/>
-<area shape="rect" id="node30_7" href="http://java.sun.com/j2se/1.4.2/docs/api/jason/asSemantics/Message.html" title="jason.asSemantics.Message" alt="" coords="84,366,529,479"/>
+<area shape="rect" id="node28_7" href="http://java.sun.com/j2se/1.4.2/docs/api/jason/asSemantics/Message.html" title="jason.asSemantics.Message" alt="" coords="84,366,529,479"/>
 <area shape="rect" id="node6_8" href="./JasonShanksAgent.html" title="es.upm.dit.gsi.shanks.agent.JasonShanksAgent" alt="" coords="834,237,1138,307"/>
-<area shape="rect" id="node7_9" href="./portrayal/ShanksAgent3DPortrayal.html" title="es.upm.dit.gsi.shanks.agent.portrayal.ShanksAgent3DPortrayal" alt="" coords="1510,11,1684,80"/>
+<area shape="rect" id="node7_9" href="./portrayal/ShanksAgent3DPortrayal.html" title="es.upm.dit.gsi.shanks.agent.portrayal.ShanksAgent3DPortrayal" alt="" coords="1511,11,1688,80"/>
 <area shape="rect" id="node10_10" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/engine/Steppable.html" title="sim.engine.Steppable" alt="" coords="993,26,1073,65"/>
 <area shape="rect" id="node12_11" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/engine/Stoppable.html" title="sim.engine.Stoppable" alt="" coords="868,26,948,65"/>
 </map>

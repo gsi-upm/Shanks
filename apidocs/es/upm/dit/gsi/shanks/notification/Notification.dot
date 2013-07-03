@@ -61,14 +61,14 @@ digraph G {
 	c7932:p -> c7939:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// es.upm.dit.gsi.shanks.notification.InteractionNotification NAVASSOC java.lang.String
 	c7934:p -> c7938:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
-	// es.upm.dit.gsi.shanks.notification.ValueNotification DEPEND java.lang.Object
-	c7930:p -> c7939:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.notification.ValueNotification DEPEND java.lang.String
 	c7930:p -> c7938:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// es.upm.dit.gsi.shanks.notification.Notification DEPEND java.lang.Object
-	c7932:p -> c7939:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// es.upm.dit.gsi.shanks.notification.ValueNotification DEPEND java.lang.Object
+	c7930:p -> c7939:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.notification.Notification DEPEND java.lang.String
 	c7932:p -> c7938:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// es.upm.dit.gsi.shanks.notification.Notification DEPEND java.lang.Object
+	c7932:p -> c7939:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.notification.InteractionNotification DEPEND java.lang.String
 	c7934:p -> c7938:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// java.lang.Object

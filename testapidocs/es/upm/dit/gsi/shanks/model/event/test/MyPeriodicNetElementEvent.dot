@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// es.upm.dit.gsi.shanks.model.event.test.MyPeriodicNetElementEvent
-	c3744 [label=<<table title="es.upm.dit.gsi.shanks.model.event.test.MyPeriodicNetElementEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MyPeriodicNetElementEvent.html">
+	c3766 [label=<<table title="es.upm.dit.gsi.shanks.model.event.test.MyPeriodicNetElementEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MyPeriodicNetElementEvent.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> MyPeriodicNetElementEvent </td></tr>
 		</table></td></tr>
@@ -22,9 +22,9 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	//es.upm.dit.gsi.shanks.model.event.test.MyPeriodicNetElementEvent extends es.upm.dit.gsi.shanks.model.event.networkelement.PeriodicNetworkElementEvent
-	c3798:p -> c3744:p [dir=back,arrowtail=empty];
+	c3820:p -> c3766:p [dir=back,arrowtail=empty];
 	// es.upm.dit.gsi.shanks.model.event.networkelement.PeriodicNetworkElementEvent
-	c3798 [label=<<table title="es.upm.dit.gsi.shanks.model.event.networkelement.PeriodicNetworkElementEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/es/upm/dit/gsi/shanks/model/event/networkelement/PeriodicNetworkElementEvent.html">
+	c3820 [label=<<table title="es.upm.dit.gsi.shanks.model.event.networkelement.PeriodicNetworkElementEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/es/upm/dit/gsi/shanks/model/event/networkelement/PeriodicNetworkElementEvent.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="ariali"> PeriodicNetworkElementEvent </font></td></tr>
 		</table></td></tr>

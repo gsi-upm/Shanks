@@ -276,6 +276,8 @@ public abstract class ShanksSimulation3DGUI extends GUIState {
             logger.severe(e.getMessage());
             e.printStackTrace();
         }
+        Console console = (Console) this.controller;
+        console.dispose();
     }
 
     /**

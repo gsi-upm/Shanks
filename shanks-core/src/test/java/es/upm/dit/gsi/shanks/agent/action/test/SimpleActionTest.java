@@ -28,6 +28,9 @@ import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
 import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation;
 
 public class SimpleActionTest {
+    
+    
+    private MyShanksSimulation sim = null;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
@@ -49,6 +52,10 @@ public class SimpleActionTest {
      */
     @After
     public void tearDown() throws Exception {
+        if (sim!=null) {
+            sim.finish();
+            sim=null;
+        }
     }
     
     @Test
@@ -116,7 +123,7 @@ public class SimpleActionTest {
 
         Properties configProperties = new Properties();
         configProperties.put(MyShanksSimulation.CONFIGURATION, "0");
-        MyShanksSimulation sim = new MyShanksSimulation(
+        sim = new MyShanksSimulation(
                 System.currentTimeMillis(), MyScenario.class, "MyScenario",
                 MyScenario.SUNNY, scenarioProperties, configProperties);
         

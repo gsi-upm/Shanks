@@ -8,11 +8,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.Properties;
 import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 import junit.framework.Assert;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -31,17 +31,18 @@ import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation;
 import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation2DGUI;
 import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI;
 
-
 /**
  * @author a.carrera
- *
+ * 
  */
 public class ShanksSimulationTest {
 
+    private Logger logger = Logger.getLogger(this.getClass().getName());
+    
+    private MyShanksSimulation sim = null;
+    private MyShanksSimulation2DGUI gui2D = null;
+    private MyShanksSimulation3DGUI gui3D = null;
 
-    /**
-     * @throws Exception
-     */
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
         LogManager lm = LogManager.getLogManager();
@@ -53,22 +54,35 @@ public class ShanksSimulationTest {
     /**
      * @throws Exception
      */
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
+    @Before
+    public void setUp() throws Exception {
     }
 
     /**
      * @throws Exception
      */
-    @Before
-    public void setUp() throws Exception {
-    }
-    
-    /**
-     * @throws Exception
-     */
     @After
     public void tearDown() throws Exception {
+        try {
+
+            if (gui2D != null) {
+                gui2D.quit();
+                gui2D.finish();
+                gui2D = null;
+            }
+            if (gui3D != null) {
+                gui3D.quit();
+                gui3D.finish();
+                gui3D = null;
+            }
+            if (sim != null) {
+                sim.finish();
+                sim = null;
+            }
+        } catch (Exception e) {
+            logger.warning("Exception trying clean the test. Message: "
+                    + e.getMessage());
+        }
     }
 
     /**
@@ -80,14 +94,13 @@ public class ShanksSimulationTest {
         try {
             Properties scenarioProperties = new Properties();
             scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
-            scenarioProperties.put(Scenario.SIMULATION_GUI,
-                    Scenario.NO_GUI);
+            scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
 
             Properties configProperties = new Properties();
             configProperties.put(MyShanksSimulation.CONFIGURATION, "0");
-            MyShanksSimulation sim = new MyShanksSimulation(
-                    System.currentTimeMillis(), MyScenario.class, "MyScenario",
-                    MyScenario.SUNNY, scenarioProperties, configProperties);
+            sim = new MyShanksSimulation(System.currentTimeMillis(),
+                    MyScenario.class, "MyScenario", MyScenario.SUNNY,
+                    scenarioProperties, configProperties);
             sim.start();
             do
                 if (!sim.schedule.step(sim))
@@ -111,20 +124,19 @@ public class ShanksSimulationTest {
         try {
             Properties scenarioProperties = new Properties();
             scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
-            scenarioProperties.put(Scenario.SIMULATION_GUI,
-                    Scenario.NO_GUI);
+            scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
 
             Properties configProperties = new Properties();
             configProperties.put(MyShanksSimulation.CONFIGURATION, "1");
-            MyShanksSimulation sim = new MyShanksSimulation(
-                    System.currentTimeMillis(), MyScenario.class, "MyScenario",
-                    MyScenario.SUNNY, scenarioProperties, configProperties);
+            sim = new MyShanksSimulation(System.currentTimeMillis(),
+                    MyScenario.class, "MyScenario", MyScenario.SUNNY,
+                    scenarioProperties, configProperties);
             sim.start();
             do
                 if (!sim.schedule.step(sim))
                     break;
             while (sim.schedule.getSteps() < 2001);
-            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
+            Assert.assertTrue(sim.getNumOfResolvedFailures() > 0);
             sim.finish();
         } catch (Exception e) {
             catched = true;
@@ -132,7 +144,6 @@ public class ShanksSimulationTest {
         }
         Assert.assertFalse(catched);
     }
-
 
     /**
      * 
@@ -143,20 +154,19 @@ public class ShanksSimulationTest {
         try {
             Properties scenarioProperties = new Properties();
             scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
-            scenarioProperties.put(Scenario.SIMULATION_GUI,
-                    Scenario.NO_GUI);
+            scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
 
             Properties configProperties = new Properties();
             configProperties.put(MyShanksSimulation.CONFIGURATION, "1");
-            MyShanksSimulation sim = new MyShanksSimulation(
-                    System.currentTimeMillis(), MyScenario.class, "MyScenario",
-                    MyScenario.SUNNY, scenarioProperties, configProperties);
+            sim = new MyShanksSimulation(System.currentTimeMillis(),
+                    MyScenario.class, "MyScenario", MyScenario.SUNNY,
+                    scenarioProperties, configProperties);
             sim.start();
             do
                 if (!sim.schedule.step(sim))
                     break;
             while (sim.schedule.getSteps() < 5001);
-            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
+            Assert.assertTrue(sim.getNumOfResolvedFailures() > 0);
             sim.finish();
         } catch (Exception e) {
             catched = true;
@@ -179,16 +189,16 @@ public class ShanksSimulationTest {
 
             Properties configProperties = new Properties();
             configProperties.put(MyShanksSimulation.CONFIGURATION, "0");
-            MyShanksSimulation sim = new MyShanksSimulation(
-                    System.currentTimeMillis(), MyScenario.class, "MyScenario",
-                    MyScenario.SUNNY, scenarioProperties, configProperties);
-            MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
-            gui.start();
+            sim = new MyShanksSimulation(System.currentTimeMillis(),
+                    MyScenario.class, "MyScenario", MyScenario.SUNNY,
+                    scenarioProperties, configProperties);
+            gui2D = new MyShanksSimulation2DGUI(sim);
+            gui2D.start();
             do
-                if (!gui.getSimulation().schedule.step(sim))
+                if (!gui2D.getSimulation().schedule.step(sim))
                     break;
-            while (gui.getSimulation().schedule.getSteps() < 2001);
-            gui.finish();
+            while (gui2D.getSimulation().schedule.getSteps() < 2001);
+            gui2D.finish();
         } catch (Exception e) {
             catched = true;
             e.printStackTrace();
@@ -211,17 +221,17 @@ public class ShanksSimulationTest {
 
             Properties configProperties = new Properties();
             configProperties.put(MyShanksSimulation.CONFIGURATION, "1");
-            MyShanksSimulation sim = new MyShanksSimulation(
-                    System.currentTimeMillis(), MyScenario.class, "MyScenario",
-                    MyScenario.SUNNY, scenarioProperties, configProperties);
-            MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
-            gui.start();
+            sim = new MyShanksSimulation(System.currentTimeMillis(),
+                    MyScenario.class, "MyScenario", MyScenario.SUNNY,
+                    scenarioProperties, configProperties);
+            gui2D = new MyShanksSimulation2DGUI(sim);
+            gui2D.start();
             do
-                if (!gui.getSimulation().schedule.step(sim))
+                if (!gui2D.getSimulation().schedule.step(sim))
                     break;
-            while (gui.getSimulation().schedule.getSteps() < 2001);
-            gui.finish();
-            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
+            while (gui2D.getSimulation().schedule.getSteps() < 2001);
+            gui2D.finish();
+            Assert.assertTrue(sim.getNumOfResolvedFailures() > 0);
         } catch (Exception e) {
             catched = true;
             e.printStackTrace();
@@ -244,16 +254,16 @@ public class ShanksSimulationTest {
 
             Properties configProperties = new Properties();
             configProperties.put(MyShanksSimulation.CONFIGURATION, "0");
-            MyShanksSimulation sim = new MyShanksSimulation(
-                    System.currentTimeMillis(), MyScenario.class, "MyScenario",
-                    MyScenario.SUNNY, scenarioProperties, configProperties);
-            MyShanksSimulation3DGUI gui = new MyShanksSimulation3DGUI(sim);
-            gui.start();
+            sim = new MyShanksSimulation(System.currentTimeMillis(),
+                    MyScenario.class, "MyScenario", MyScenario.SUNNY,
+                    scenarioProperties, configProperties);
+            gui3D = new MyShanksSimulation3DGUI(sim);
+            gui3D.start();
             do
-                if (!gui.getSimulation().schedule.step(sim))
+                if (!gui3D.getSimulation().schedule.step(sim))
                     break;
-            while (gui.getSimulation().schedule.getSteps() < 2001);
-            gui.finish();
+            while (gui3D.getSimulation().schedule.getSteps() < 2001);
+            gui3D.finish();
         } catch (Exception e) {
             catched = true;
             e.printStackTrace();
@@ -276,17 +286,17 @@ public class ShanksSimulationTest {
 
             Properties configProperties = new Properties();
             configProperties.put(MyShanksSimulation.CONFIGURATION, "1");
-            MyShanksSimulation sim = new MyShanksSimulation(
-                    System.currentTimeMillis(), MyScenario.class, "MyScenario",
-                    MyScenario.SUNNY, scenarioProperties, configProperties);
-            MyShanksSimulation3DGUI gui = new MyShanksSimulation3DGUI(sim);
-            gui.start();
+            sim = new MyShanksSimulation(System.currentTimeMillis(),
+                    MyScenario.class, "MyScenario", MyScenario.SUNNY,
+                    scenarioProperties, configProperties);
+            gui3D = new MyShanksSimulation3DGUI(sim);
+            gui3D.start();
             do
-                if (!gui.getSimulation().schedule.step(sim))
+                if (!gui3D.getSimulation().schedule.step(sim))
                     break;
-            while (gui.getSimulation().schedule.getSteps() < 2001);
-            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
-            gui.finish();
+            while (gui3D.getSimulation().schedule.getSteps() < 2001);
+            Assert.assertTrue(sim.getNumOfResolvedFailures() > 0);
+            gui3D.finish();
         } catch (Exception e) {
             catched = true;
             e.printStackTrace();
@@ -309,18 +319,18 @@ public class ShanksSimulationTest {
 
             Properties configProperties = new Properties();
             configProperties.put(MyShanksSimulation.CONFIGURATION, "1");
-            MyShanksSimulation sim = new MyShanksSimulation(
-                    System.currentTimeMillis(), MyComplexScenario.class,
-                    "MyComplexScenario", MyComplexScenario.SUNNY,
-                    scenarioProperties, configProperties);
-            MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
-            gui.start();
+            sim = new MyShanksSimulation(System.currentTimeMillis(),
+                    MyComplexScenario.class, "MyComplexScenario",
+                    MyComplexScenario.SUNNY, scenarioProperties,
+                    configProperties);
+            gui2D = new MyShanksSimulation2DGUI(sim);
+            gui2D.start();
             do
-                if (!gui.getSimulation().schedule.step(sim))
+                if (!gui2D.getSimulation().schedule.step(sim))
                     break;
-            while (gui.getSimulation().schedule.getSteps() < 2001);
-            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
-            gui.finish();
+            while (gui2D.getSimulation().schedule.getSteps() < 2001);
+            Assert.assertTrue(sim.getNumOfResolvedFailures() > 0);
+            gui2D.finish();
         } catch (Exception e) {
             catched = true;
             e.printStackTrace();
@@ -343,18 +353,18 @@ public class ShanksSimulationTest {
 
             Properties configProperties = new Properties();
             configProperties.put(MyShanksSimulation.CONFIGURATION, "2");
-            MyShanksSimulation sim = new MyShanksSimulation(
-                    System.currentTimeMillis(), MyComplexScenario.class,
-                    "MyComplexScenario", MyComplexScenario.SUNNY,
-                    scenarioProperties, configProperties);
-            MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
-            gui.start();
+            sim = new MyShanksSimulation(System.currentTimeMillis(),
+                    MyComplexScenario.class, "MyComplexScenario",
+                    MyComplexScenario.SUNNY, scenarioProperties,
+                    configProperties);
+            gui2D = new MyShanksSimulation2DGUI(sim);
+            gui2D.start();
             do
-                if (!gui.getSimulation().schedule.step(sim))
+                if (!gui2D.getSimulation().schedule.step(sim))
                     break;
-            while (gui.getSimulation().schedule.getSteps() < 2001);
-            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
-            gui.finish();
+            while (gui2D.getSimulation().schedule.getSteps() < 2001);
+            Assert.assertTrue(sim.getNumOfResolvedFailures() > 0);
+            gui2D.finish();
         } catch (Exception e) {
             catched = true;
             e.printStackTrace();
@@ -372,15 +382,14 @@ public class ShanksSimulationTest {
         try {
             Properties scenarioProperties = new Properties();
             scenarioProperties.put(MyScenario.CLOUDY_PROB, "50.0");
-            scenarioProperties.put(Scenario.SIMULATION_GUI,
-                    Scenario.NO_GUI);
+            scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
 
             Properties configProperties = new Properties();
             configProperties.put(MyShanksSimulation.CONFIGURATION, "1");
-            MyShanksSimulation sim = new MyShanksSimulation(
-                    System.currentTimeMillis(), MyComplexScenario.class,
-                    "MyComplexScenario", MyComplexScenario.SUNNY,
-                    scenarioProperties, configProperties);
+            sim = new MyShanksSimulation(System.currentTimeMillis(),
+                    MyComplexScenario.class, "MyComplexScenario",
+                    MyComplexScenario.SUNNY, scenarioProperties,
+                    configProperties);
             ComplexScenario cs = (ComplexScenario) sim.getScenario();
             Scenario s1 = cs.getScenario("Scenario1");
             Assert.assertNotNull(s1);
@@ -404,7 +413,7 @@ public class ShanksSimulationTest {
                 if (!sim.schedule.step(sim))
                     break;
             while (sim.schedule.getSteps() < 2001);
-            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
+            Assert.assertTrue(sim.getNumOfResolvedFailures() > 0);
             sim.finish();
         } catch (Exception e) {
             catched = true;
@@ -413,6 +422,7 @@ public class ShanksSimulationTest {
         Assert.assertFalse(catched);
 
     }
+
     /**
      * 
      */
@@ -427,11 +437,11 @@ public class ShanksSimulationTest {
 
             Properties configProperties = new Properties();
             configProperties.put(MyShanksSimulation.CONFIGURATION, "1");
-            MyShanksSimulation sim = new MyShanksSimulation(
-                    System.currentTimeMillis(), MyComplexScenario.class,
-                    "MyComplexScenario", MyComplexScenario.SUNNY,
-                    scenarioProperties, configProperties);
-            MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
+            sim = new MyShanksSimulation(System.currentTimeMillis(),
+                    MyComplexScenario.class, "MyComplexScenario",
+                    MyComplexScenario.SUNNY, scenarioProperties,
+                    configProperties);
+            gui2D = new MyShanksSimulation2DGUI(sim);
             ComplexScenario cs = (ComplexScenario) sim.getScenario();
             Scenario s1 = cs.getScenario("Scenario1");
             Assert.assertNotNull(s1);
@@ -450,13 +460,13 @@ public class ShanksSimulationTest {
                     .getClass());
             Assert.assertEquals(MyLink.class, s2.getNetworkElement("L3")
                     .getClass());
-            gui.start();
+            gui2D.start();
             do
-                if (!gui.getSimulation().schedule.step(sim))
+                if (!gui2D.getSimulation().schedule.step(sim))
                     break;
-            while (gui.getSimulation().schedule.getSteps() < 2001);
-            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
-            gui.finish();
+            while (gui2D.getSimulation().schedule.getSteps() < 2001);
+            Assert.assertTrue(sim.getNumOfResolvedFailures() > 0);
+            gui2D.finish();
         } catch (Exception e) {
             catched = true;
             e.printStackTrace();
@@ -479,11 +489,11 @@ public class ShanksSimulationTest {
 
             Properties configProperties = new Properties();
             configProperties.put(MyShanksSimulation.CONFIGURATION, "1");
-            MyShanksSimulation sim = new MyShanksSimulation(
-                    System.currentTimeMillis(), MyComplexScenario.class,
-                    "MyComplexScenario", MyComplexScenario.SUNNY,
-                    scenarioProperties, configProperties);
-            MyShanksSimulation3DGUI gui = new MyShanksSimulation3DGUI(sim);
+            sim = new MyShanksSimulation(System.currentTimeMillis(),
+                    MyComplexScenario.class, "MyComplexScenario",
+                    MyComplexScenario.SUNNY, scenarioProperties,
+                    configProperties);
+            gui3D = new MyShanksSimulation3DGUI(sim);
             ComplexScenario cs = (ComplexScenario) sim.getScenario();
             Scenario s1 = cs.getScenario("Scenario1");
             Assert.assertNotNull(s1);
@@ -502,13 +512,13 @@ public class ShanksSimulationTest {
                     .getClass());
             Assert.assertEquals(MyLink.class, s2.getNetworkElement("L3")
                     .getClass());
-            gui.start();
+            gui3D.start();
             do
-                if (!gui.getSimulation().schedule.step(sim))
+                if (!gui3D.getSimulation().schedule.step(sim))
                     break;
-            while (gui.getSimulation().schedule.getSteps() < 2001);
-            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
-            gui.finish();
+            while (gui3D.getSimulation().schedule.getSteps() < 2001);
+            Assert.assertTrue(sim.getNumOfResolvedFailures() > 0);
+            gui3D.finish();
         } catch (Exception e) {
             catched = true;
             e.printStackTrace();
@@ -531,18 +541,18 @@ public class ShanksSimulationTest {
 
             Properties configProperties = new Properties();
             configProperties.put(MyShanksSimulation.CONFIGURATION, "1");
-            MyShanksSimulation sim = new MyShanksSimulation(
-                    System.currentTimeMillis(), MyComplexScenario.class,
-                    "MyComplexScenario", MyComplexScenario.SUNNY,
-                    scenarioProperties, configProperties);
-            MyShanksSimulation3DGUI gui = new MyShanksSimulation3DGUI(sim);
-            gui.start();
+            sim = new MyShanksSimulation(System.currentTimeMillis(),
+                    MyComplexScenario.class, "MyComplexScenario",
+                    MyComplexScenario.SUNNY, scenarioProperties,
+                    configProperties);
+            gui3D = new MyShanksSimulation3DGUI(sim);
+            gui3D.start();
             do
-                if (!gui.getSimulation().schedule.step(sim))
+                if (!gui3D.getSimulation().schedule.step(sim))
                     break;
-            while (gui.getSimulation().schedule.getSteps() < 2001);
-            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
-            gui.finish();
+            while (gui3D.getSimulation().schedule.getSteps() < 2001);
+            Assert.assertTrue(sim.getNumOfResolvedFailures() > 0);
+            gui3D.finish();
         } catch (Exception e) {
             catched = true;
             e.printStackTrace();
@@ -565,18 +575,18 @@ public class ShanksSimulationTest {
 
             Properties configProperties = new Properties();
             configProperties.put(MyShanksSimulation.CONFIGURATION, "2");
-            MyShanksSimulation sim = new MyShanksSimulation(
-                    System.currentTimeMillis(), MyComplexScenario.class,
-                    "MyComplexScenario", MyComplexScenario.SUNNY,
-                    scenarioProperties, configProperties);
-            MyShanksSimulation3DGUI gui = new MyShanksSimulation3DGUI(sim);
-            gui.start();
+            sim = new MyShanksSimulation(System.currentTimeMillis(),
+                    MyComplexScenario.class, "MyComplexScenario",
+                    MyComplexScenario.SUNNY, scenarioProperties,
+                    configProperties);
+            gui3D = new MyShanksSimulation3DGUI(sim);
+            gui3D.start();
             do
-                if (!gui.getSimulation().schedule.step(sim))
+                if (!gui3D.getSimulation().schedule.step(sim))
                     break;
-            while (gui.getSimulation().schedule.getSteps() < 2001);
-            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
-            gui.finish();
+            while (gui3D.getSimulation().schedule.getSteps() < 2001);
+            Assert.assertTrue(sim.getNumOfResolvedFailures() > 0);
+            gui3D.finish();
         } catch (Exception e) {
             catched = true;
             e.printStackTrace();
@@ -599,18 +609,18 @@ public class ShanksSimulationTest {
 
             Properties configProperties = new Properties();
             configProperties.put(MyShanksSimulation.CONFIGURATION, "2");
-            MyShanksSimulation sim = new MyShanksSimulation(
-                    System.currentTimeMillis(), MySuperComplexScenario.class,
-                    "MySuperComplexScenario", MySuperComplexScenario.SUNNY,
-                    scenarioProperties, configProperties);
-            MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
-            gui.start();
+            sim = new MyShanksSimulation(System.currentTimeMillis(),
+                    MySuperComplexScenario.class, "MySuperComplexScenario",
+                    MySuperComplexScenario.SUNNY, scenarioProperties,
+                    configProperties);
+            gui2D = new MyShanksSimulation2DGUI(sim);
+            gui2D.start();
             do
-                if (!gui.getSimulation().schedule.step(sim))
+                if (!gui2D.getSimulation().schedule.step(sim))
                     break;
-            while (gui.getSimulation().schedule.getSteps() < 2001);
-            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
-            gui.finish();
+            while (gui2D.getSimulation().schedule.getSteps() < 2001);
+            Assert.assertTrue(sim.getNumOfResolvedFailures() > 0);
+            gui2D.finish();
         } catch (Exception e) {
             catched = true;
             e.printStackTrace();
@@ -633,18 +643,18 @@ public class ShanksSimulationTest {
 
             Properties configProperties = new Properties();
             configProperties.put(MyShanksSimulation.CONFIGURATION, "2");
-            MyShanksSimulation sim = new MyShanksSimulation(
-                    System.currentTimeMillis(), MySuperComplexScenario.class,
-                    "MySuperComplexScenario", MySuperComplexScenario.SUNNY,
-                    scenarioProperties, configProperties);
-            MyShanksSimulation3DGUI gui = new MyShanksSimulation3DGUI(sim);
-            gui.start();
+            sim = new MyShanksSimulation(System.currentTimeMillis(),
+                    MySuperComplexScenario.class, "MySuperComplexScenario",
+                    MySuperComplexScenario.SUNNY, scenarioProperties,
+                    configProperties);
+            gui3D = new MyShanksSimulation3DGUI(sim);
+            gui3D.start();
             do
-                if (!gui.getSimulation().schedule.step(sim))
+                if (!gui3D.getSimulation().schedule.step(sim))
                     break;
-            while (gui.getSimulation().schedule.getSteps() < 2001);
-            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
-            gui.finish();
+            while (gui3D.getSimulation().schedule.getSteps() < 2001);
+            Assert.assertTrue(sim.getNumOfResolvedFailures() > 0);
+            gui3D.finish();
         } catch (Exception e) {
             catched = true;
             e.printStackTrace();
@@ -667,18 +677,18 @@ public class ShanksSimulationTest {
 
             Properties configProperties = new Properties();
             configProperties.put(MyShanksSimulation.CONFIGURATION, "2");
-            MyShanksSimulation sim = new MyShanksSimulation(
-                    System.currentTimeMillis(), MyMegaComplexScenario.class,
-                    "MyMegaComplexScenario", MyMegaComplexScenario.SUNNY,
-                    scenarioProperties, configProperties);
-            MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
-            gui.start();
+            sim = new MyShanksSimulation(System.currentTimeMillis(),
+                    MyMegaComplexScenario.class, "MyMegaComplexScenario",
+                    MyMegaComplexScenario.SUNNY, scenarioProperties,
+                    configProperties);
+            gui2D = new MyShanksSimulation2DGUI(sim);
+            gui2D.start();
             do
-                if (!gui.getSimulation().schedule.step(sim))
+                if (!gui2D.getSimulation().schedule.step(sim))
                     break;
-            while (gui.getSimulation().schedule.getSteps() < 2001);
-            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
-            gui.finish();
+            while (gui2D.getSimulation().schedule.getSteps() < 2001);
+            Assert.assertTrue(sim.getNumOfResolvedFailures() > 0);
+            gui2D.finish();
         } catch (Exception e) {
             catched = true;
             e.printStackTrace();
@@ -701,18 +711,18 @@ public class ShanksSimulationTest {
 
             Properties configProperties = new Properties();
             configProperties.put(MyShanksSimulation.CONFIGURATION, "2");
-            MyShanksSimulation sim = new MyShanksSimulation(
-                    System.currentTimeMillis(), MyMegaComplexScenario.class,
-                    "MyMegaComplexScenario", MyMegaComplexScenario.SUNNY,
-                    scenarioProperties, configProperties);
-            MyShanksSimulation3DGUI gui = new MyShanksSimulation3DGUI(sim);
-            gui.start();
+            sim = new MyShanksSimulation(System.currentTimeMillis(),
+                    MyMegaComplexScenario.class, "MyMegaComplexScenario",
+                    MyMegaComplexScenario.SUNNY, scenarioProperties,
+                    configProperties);
+            gui3D = new MyShanksSimulation3DGUI(sim);
+            gui3D.start();
             do
-                if (!gui.getSimulation().schedule.step(sim))
+                if (!gui3D.getSimulation().schedule.step(sim))
                     break;
-            while (gui.getSimulation().schedule.getSteps() < 2001);
-            gui.finish();
-            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
+            while (gui3D.getSimulation().schedule.getSteps() < 2001);
+            gui3D.finish();
+            Assert.assertTrue(sim.getNumOfResolvedFailures() > 0);
         } catch (Exception e) {
             catched = true;
             e.printStackTrace();
@@ -734,18 +744,18 @@ public class ShanksSimulationTest {
 
             Properties configProperties = new Properties();
             configProperties.put(MyShanksSimulation.CONFIGURATION, "2");
-            MyShanksSimulation sim = new MyShanksSimulation(
-                    System.currentTimeMillis(), MyHyperComplexScenario.class,
-                    "MyHyperComplexScenario", MyHyperComplexScenario.SUNNY,
-                    scenarioProperties, configProperties);
-            MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
-            gui.start();
+            sim = new MyShanksSimulation(System.currentTimeMillis(),
+                    MyHyperComplexScenario.class, "MyHyperComplexScenario",
+                    MyHyperComplexScenario.SUNNY, scenarioProperties,
+                    configProperties);
+            gui2D = new MyShanksSimulation2DGUI(sim);
+            gui2D.start();
             do
-                if (!gui.getSimulation().schedule.step(sim))
+                if (!gui2D.getSimulation().schedule.step(sim))
                     break;
-            while (gui.getSimulation().schedule.getSteps() < 2001);
-            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
-            gui.finish();
+            while (gui2D.getSimulation().schedule.getSteps() < 2001);
+            Assert.assertTrue(sim.getNumOfResolvedFailures() > 0);
+            gui2D.finish();
         } catch (Exception e) {
             catched = true;
             e.printStackTrace();
@@ -768,18 +778,18 @@ public class ShanksSimulationTest {
 
             Properties configProperties = new Properties();
             configProperties.put(MyShanksSimulation.CONFIGURATION, "2");
-            MyShanksSimulation sim = new MyShanksSimulation(
-                    System.currentTimeMillis(), MyHyperComplexScenario.class,
-                    "MyHyperComplexScenario", MyHyperComplexScenario.SUNNY,
-                    scenarioProperties, configProperties);
-            MyShanksSimulation3DGUI gui = new MyShanksSimulation3DGUI(sim);
-            gui.start();
+            sim = new MyShanksSimulation(System.currentTimeMillis(),
+                    MyHyperComplexScenario.class, "MyHyperComplexScenario",
+                    MyHyperComplexScenario.SUNNY, scenarioProperties,
+                    configProperties);
+            gui3D = new MyShanksSimulation3DGUI(sim);
+            gui3D.start();
             do
-                if (!gui.getSimulation().schedule.step(sim))
+                if (!gui3D.getSimulation().schedule.step(sim))
                     break;
-            while (gui.getSimulation().schedule.getSteps() < 2001);
-            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
-            gui.finish();
+            while (gui3D.getSimulation().schedule.getSteps() < 2001);
+            Assert.assertTrue(sim.getNumOfResolvedFailures() > 0);
+            gui3D.finish();
         } catch (Exception e) {
             catched = true;
             e.printStackTrace();
@@ -802,18 +812,18 @@ public class ShanksSimulationTest {
 
             Properties configProperties = new Properties();
             configProperties.put(MyShanksSimulation.CONFIGURATION, "2");
-            MyShanksSimulation sim = new MyShanksSimulation(
-                    System.currentTimeMillis(), FinalComplexScenario.class,
-                    "FinalComplexScenario", MyHyperComplexScenario.SUNNY,
-                    scenarioProperties, configProperties);
-            MyShanksSimulation2DGUI gui = new MyShanksSimulation2DGUI(sim);
-            gui.start();
+            sim = new MyShanksSimulation(System.currentTimeMillis(),
+                    FinalComplexScenario.class, "FinalComplexScenario",
+                    MyHyperComplexScenario.SUNNY, scenarioProperties,
+                    configProperties);
+            gui2D = new MyShanksSimulation2DGUI(sim);
+            gui2D.start();
             do
-                if (!gui.getSimulation().schedule.step(sim))
+                if (!gui2D.getSimulation().schedule.step(sim))
                     break;
-            while (gui.getSimulation().schedule.getSteps() < 100);
-            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
-            gui.finish();
+            while (gui2D.getSimulation().schedule.getSteps() < 100);
+            Assert.assertTrue(sim.getNumOfResolvedFailures() > 0);
+            gui2D.finish();
         } catch (Exception e) {
             catched = true;
             e.printStackTrace();
@@ -836,18 +846,18 @@ public class ShanksSimulationTest {
 
             Properties configProperties = new Properties();
             configProperties.put(MyShanksSimulation.CONFIGURATION, "2");
-            MyShanksSimulation sim = new MyShanksSimulation(
-                    System.currentTimeMillis(), FinalComplexScenario.class,
-                    "FinalComplexScenario", MyHyperComplexScenario.SUNNY,
-                    scenarioProperties, configProperties);
-            MyShanksSimulation3DGUI gui = new MyShanksSimulation3DGUI(sim);
-            gui.start();
+            sim = new MyShanksSimulation(System.currentTimeMillis(),
+                    FinalComplexScenario.class, "FinalComplexScenario",
+                    MyHyperComplexScenario.SUNNY, scenarioProperties,
+                    configProperties);
+            gui3D = new MyShanksSimulation3DGUI(sim);
+            gui3D.start();
             do
-                if (!gui.getSimulation().schedule.step(sim))
+                if (!gui3D.getSimulation().schedule.step(sim))
                     break;
-            while (gui.getSimulation().schedule.getSteps() < 100);
-            Assert.assertTrue(sim.getNumOfResolvedFailures()>0);
-            gui.finish();
+            while (gui3D.getSimulation().schedule.getSteps() < 100);
+            Assert.assertTrue(sim.getNumOfResolvedFailures() > 0);
+            gui3D.finish();
         } catch (Exception e) {
             catched = true;
             e.printStackTrace();

@@ -34,16 +34,16 @@ digraph G {
 	c4117:p -> c4172:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// es.upm.dit.gsi.shanks.agent.ShanksAgent DEPEND java.lang.String
 	c4115:p -> c4173:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// es.upm.dit.gsi.shanks.agent.portrayal.ShanksAgent3DPortrayal DEPEND es.upm.dit.gsi.shanks.agent.ShanksAgent
+	c4117:p -> c4115:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.agent.portrayal.ShanksAgent3DPortrayal DEPEND java.lang.String
 	c4117:p -> c4173:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.agent.portrayal.ShanksAgent3DPortrayal DEPEND java.awt.Color
 	c4117:p -> c4174:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// es.upm.dit.gsi.shanks.agent.portrayal.ShanksAgent3DPortrayal DEPEND java.lang.Object
-	c4117:p -> c4175:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.agent.portrayal.ShanksAgent3DPortrayal DEPEND javax.media.j3d.TransformGroup
+	c4117:p -> c4175:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// es.upm.dit.gsi.shanks.agent.portrayal.ShanksAgent3DPortrayal DEPEND java.lang.Object
 	c4117:p -> c4176:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// es.upm.dit.gsi.shanks.agent.portrayal.ShanksAgent3DPortrayal DEPEND es.upm.dit.gsi.shanks.agent.ShanksAgent
-	c4117:p -> c4115:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// sim.portrayal3d.SimplePortrayal3D
 	c4171 [label=<<table title="sim.portrayal3d.SimplePortrayal3D" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/portrayal3d/SimplePortrayal3D.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
@@ -57,7 +57,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	// java.lang.Object
-	c4175 [label=<<table title="java.lang.Object" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Object.html">
+	c4176 [label=<<table title="java.lang.Object" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Object.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Object </td></tr>
 		</table></td></tr>
@@ -69,7 +69,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	// javax.media.j3d.TransformGroup
-	c4176 [label=<<table title="javax.media.j3d.TransformGroup" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/javax/media/j3d/TransformGroup.html">
+	c4175 [label=<<table title="javax.media.j3d.TransformGroup" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/javax/media/j3d/TransformGroup.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> TransformGroup </td></tr>
 		</table></td></tr>

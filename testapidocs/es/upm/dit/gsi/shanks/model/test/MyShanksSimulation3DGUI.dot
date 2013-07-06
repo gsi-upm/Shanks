@@ -79,9 +79,9 @@ digraph G {
 	c6166:p -> c6214:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// es.upm.dit.gsi.shanks.model.ShanksSimulationTest NAVASSOC es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI
 	c6213:p -> c6214:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
-	// es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI DEPEND java.lang.String
-	c6214:p -> c6238:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI DEPEND es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal
+	c6214:p -> c6238:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI DEPEND java.lang.String
 	c6214:p -> c6239:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.ShanksSimulation3DGUI
 	c6237 [label=<<table title="es.upm.dit.gsi.shanks.ShanksSimulation3DGUI" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/es/upm/dit/gsi/shanks/ShanksSimulation3DGUI.html">
@@ -96,7 +96,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	// es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal
-	c6239 [label=<<table title="es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/es/upm/dit/gsi/shanks/model/scenario/portrayal/Scenario3DPortrayal.html">
+	c6238 [label=<<table title="es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/es/upm/dit/gsi/shanks/model/scenario/portrayal/Scenario3DPortrayal.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="ariali"> Scenario3DPortrayal </font></td></tr>
 		</table></td></tr>
@@ -108,7 +108,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	// java.lang.String
-	c6238 [label=<<table title="java.lang.String" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/String.html">
+	c6239 [label=<<table title="java.lang.String" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/String.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> String </td></tr>
 		</table></td></tr>

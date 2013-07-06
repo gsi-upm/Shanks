@@ -56,12 +56,12 @@ digraph G {
 	c2717:p -> c2687:p [dir=back,arrowtail=empty];
 	// es.upm.dit.gsi.shanks.model.event.agent.Action NAVASSOC java.util.List<E>
 	c2717:p -> c2759:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	// es.upm.dit.gsi.shanks.agent.action.JasonShanksAgentAction DEPEND es.upm.dit.gsi.shanks.agent.ShanksAgent
+	c2687:p -> c2703:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.agent.action.JasonShanksAgentAction DEPEND java.util.List<E>
 	c2687:p -> c2759:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.agent.action.JasonShanksAgentAction DEPEND es.upm.dit.gsi.shanks.ShanksSimulation
 	c2687:p -> c2758:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// es.upm.dit.gsi.shanks.agent.action.JasonShanksAgentAction DEPEND es.upm.dit.gsi.shanks.agent.ShanksAgent
-	c2687:p -> c2703:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.model.event.agent.Action DEPEND java.util.List<E>
 	c2717:p -> c2759:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.model.event.agent.Action DEPEND java.util.List<E>

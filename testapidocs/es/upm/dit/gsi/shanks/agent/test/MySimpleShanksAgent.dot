@@ -35,10 +35,10 @@ digraph G {
 	c2540:p -> c2616:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// es.upm.dit.gsi.shanks.agent.test.MySimpleShanksAgent NAVASSOC java.util.logging.Logger
 	c2540:p -> c2617:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
-	// es.upm.dit.gsi.shanks.agent.test.MySimpleShanksAgent DEPEND es.upm.dit.gsi.shanks.ShanksSimulation
-	c2540:p -> c2618:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.agent.test.MySimpleShanksAgent DEPEND es.upm.dit.gsi.shanks.agent.capability.movement.Location
 	c2540:p -> c2614:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// es.upm.dit.gsi.shanks.agent.test.MySimpleShanksAgent DEPEND es.upm.dit.gsi.shanks.ShanksSimulation
+	c2540:p -> c2618:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.agent.test.MySimpleShanksAgent DEPEND java.lang.Double
 	c2540:p -> c2616:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// java.lang.Double

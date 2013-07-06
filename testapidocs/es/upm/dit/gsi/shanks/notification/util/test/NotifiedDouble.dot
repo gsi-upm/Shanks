@@ -47,10 +47,10 @@ digraph G {
 	c7879:p -> c7886:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.notification.util.test.TestAgent DEPEND java.lang.Double
 	c7879:p -> c7887:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// es.upm.dit.gsi.shanks.notification.util.test.NotifiedDouble DEPEND java.lang.Object
-	c7883:p -> c7888:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.notification.util.test.NotifiedDouble DEPEND java.lang.String
 	c7883:p -> c7886:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// es.upm.dit.gsi.shanks.notification.util.test.NotifiedDouble DEPEND java.lang.Object
+	c7883:p -> c7888:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.notification.util.test.NotifiedDouble DEPEND java.lang.Double
 	c7883:p -> c7887:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// java.lang.Double

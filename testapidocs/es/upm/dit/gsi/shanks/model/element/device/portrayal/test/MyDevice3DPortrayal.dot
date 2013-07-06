@@ -23,13 +23,13 @@ digraph G {
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	//es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice3DPortrayal extends es.upm.dit.gsi.shanks.model.element.device.portrayal.Device3DPortrayal
 	c2935:p -> c2869:p [dir=back,arrowtail=empty];
-	// es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice3DPortrayal DEPEND es.upm.dit.gsi.shanks.model.element.device.Device
-	c2869:p -> c2936:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice3DPortrayal DEPEND java.lang.Object
+	// es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice3DPortrayal DEPEND javax.media.j3d.TransformGroup
 	c2869:p -> c2937:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice3DPortrayal DEPEND java.awt.Color
 	c2869:p -> c2944:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice3DPortrayal DEPEND javax.media.j3d.TransformGroup
+	// es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice3DPortrayal DEPEND es.upm.dit.gsi.shanks.model.element.device.Device
+	c2869:p -> c2945:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice3DPortrayal DEPEND java.lang.Object
 	c2869:p -> c2946:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.model.element.device.portrayal.Device3DPortrayal
 	c2935 [label=<<table title="es.upm.dit.gsi.shanks.model.element.device.portrayal.Device3DPortrayal" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/es/upm/dit/gsi/shanks/model/element/device/portrayal/Device3DPortrayal.html">
@@ -44,7 +44,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	// java.lang.Object
-	c2937 [label=<<table title="java.lang.Object" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Object.html">
+	c2946 [label=<<table title="java.lang.Object" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Object.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Object </td></tr>
 		</table></td></tr>
@@ -56,7 +56,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	// javax.media.j3d.TransformGroup
-	c2946 [label=<<table title="javax.media.j3d.TransformGroup" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/javax/media/j3d/TransformGroup.html">
+	c2937 [label=<<table title="javax.media.j3d.TransformGroup" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/javax/media/j3d/TransformGroup.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> TransformGroup </td></tr>
 		</table></td></tr>
@@ -87,7 +87,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
 	// es.upm.dit.gsi.shanks.model.element.device.Device
-	c2936 [label=<<table title="es.upm.dit.gsi.shanks.model.element.device.Device" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/es/upm/dit/gsi/shanks/model/element/device/Device.html">
+	c2945 [label=<<table title="es.upm.dit.gsi.shanks.model.element.device.Device" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/es/upm/dit/gsi/shanks/model/element/device/Device.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="ariali"> Device </font></td></tr>
 		</table></td></tr>

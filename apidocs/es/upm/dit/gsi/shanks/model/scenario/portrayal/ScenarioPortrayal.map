@@ -5,12 +5,12 @@
 <area shape="rect" id="node6_3" href="../../../ShanksSimulation.html" title="es.upm.dit.gsi.shanks.ShanksSimulation" alt="" coords="1716,139,2404,208"/>
 <area shape="rect" id="node10_4" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/String.html" title="java.lang.String" alt="" coords="15,683,337,957"/>
 <area shape="rect" id="node13_5" href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/HashMap.html" title="java.util.HashMap" alt="" coords="2091,763,2291,877"/>
-<area shape="rect" id="node48_6" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Object.html" title="java.lang.Object" alt="" coords="2359,547,2431,616"/>
+<area shape="rect" id="node45_6" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Object.html" title="java.lang.Object" alt="" coords="2359,547,2431,616"/>
 <area shape="rect" id="node2_7" href="./ScenarioPortrayal.html" title="es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal" alt="" coords="2071,411,2311,480"/>
 <area shape="rect" id="node27_8" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/field/network/Network.html" title="sim.field.network.Network" alt="" coords="1105,771,1266,869"/>
-<area shape="rect" id="node52_9" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/util/media/chart/HistogramGenerator.html" title="sim.util.media.chart.HistogramGenerator" alt="" coords="1748,547,1897,616"/>
-<area shape="rect" id="node55_10" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/portrayal/Portrayal.html" title="sim.portrayal.Portrayal" alt="" coords="1943,562,2023,601"/>
-<area shape="rect" id="node58_11" href="http://java.sun.com/j2se/1.4.2/docs/api/org/jfree/data/general/Series.html" title="org.jfree.data.general.Series" alt="" coords="708,539,969,623"/>
-<area shape="rect" id="node67_12" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/util/media/chart/ChartGenerator.html" title="sim.util.media.chart.ChartGenerator" alt="" coords="1015,547,1137,616"/>
+<area shape="rect" id="node53_9" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/util/media/chart/HistogramGenerator.html" title="sim.util.media.chart.HistogramGenerator" alt="" coords="1748,547,1897,616"/>
+<area shape="rect" id="node58_10" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/portrayal/Portrayal.html" title="sim.portrayal.Portrayal" alt="" coords="1943,562,2023,601"/>
+<area shape="rect" id="node60_11" href="http://java.sun.com/j2se/1.4.2/docs/api/org/jfree/data/general/Series.html" title="org.jfree.data.general.Series" alt="" coords="708,539,969,623"/>
+<area shape="rect" id="node66_12" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/util/media/chart/ChartGenerator.html" title="sim.util.media.chart.ChartGenerator" alt="" coords="1015,547,1137,616"/>
 <area shape="rect" id="node5_13" href="../../ScenarioManager.html" title="es.upm.dit.gsi.shanks.model.ScenarioManager" alt="" coords="1789,267,2187,351"/>
 </map>

@@ -47,10 +47,10 @@ digraph G {
 <tr><td align="left" balign="left"> + ShanksSimulation(seed : long, scenarioClass : Class&lt;?&gt;, scenarioID : String, initialState : String, properties : Properties) </td></tr>
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=9.0];
-	// es.upm.dit.gsi.shanks.agent.capability.perception.ShanksAgentPerceptionCapability DEPEND es.upm.dit.gsi.shanks.ShanksSimulation
-	c3076:p -> c3142:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.agent.capability.perception.ShanksAgentPerceptionCapability DEPEND sim.util.Bag
 	c3076:p -> c3143:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// es.upm.dit.gsi.shanks.agent.capability.perception.ShanksAgentPerceptionCapability DEPEND es.upm.dit.gsi.shanks.ShanksSimulation
+	c3076:p -> c3142:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.agent.capability.perception.ShanksAgentPerceptionCapability DEPEND es.upm.dit.gsi.shanks.agent.capability.movement.Location
 	c3076:p -> c3075:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.agent.capability.perception.ShanksAgentPerceptionCapability DEPEND java.lang.Object

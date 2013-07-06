@@ -93,10 +93,10 @@ digraph G {
 	c7564:p -> c7568:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// es.upm.dit.gsi.shanks.notification.util.test.TestAgent DEPEND es.upm.dit.gsi.shanks.agent.capability.movement.Location
 	c7559:p -> c7567:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// es.upm.dit.gsi.shanks.notification.util.test.TestAgent DEPEND java.lang.String
-	c7559:p -> c7568:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.notification.util.test.TestAgent DEPEND sim.engine.SimState
 	c7559:p -> c7570:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// es.upm.dit.gsi.shanks.notification.util.test.TestAgent DEPEND java.lang.String
+	c7559:p -> c7568:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.notification.util.test.TestAgent DEPEND jason.asSemantics.Message
 	c7559:p -> c7571:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.notification.util.test.TestAgent DEPEND java.lang.Double

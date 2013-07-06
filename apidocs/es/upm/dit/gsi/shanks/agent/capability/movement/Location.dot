@@ -46,10 +46,10 @@ digraph G {
 	c2995:p -> c3063:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// es.upm.dit.gsi.shanks.agent.capability.movement.Location NAVASSOC sim.util.Double3D
 	c2995:p -> c3064:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
-	// es.upm.dit.gsi.shanks.agent.capability.movement.Location DEPEND sim.util.Double3D
-	c2995:p -> c3064:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.agent.capability.movement.Location DEPEND sim.util.Double2D
 	c2995:p -> c3063:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// es.upm.dit.gsi.shanks.agent.capability.movement.Location DEPEND sim.util.Double3D
+	c2995:p -> c3064:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.agent.capability.perception.ShanksAgentPerceptionCapability DEPEND es.upm.dit.gsi.shanks.agent.capability.movement.Location
 	c2996:p -> c2995:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// es.upm.dit.gsi.shanks.agent.capability.perception.PercipientShanksAgent DEPEND es.upm.dit.gsi.shanks.agent.capability.movement.Location

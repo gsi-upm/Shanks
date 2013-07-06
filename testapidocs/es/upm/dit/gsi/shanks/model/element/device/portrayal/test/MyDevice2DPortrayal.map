@@ -1,8 +1,8 @@
 <map id="G" name="G">
-<area shape="rect" id="node1_0" href="./MyDevice2DPortrayal.html" title="es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice2DPortrayal" alt="" coords="124,139,276,208"/>
-<area shape="rect" id="node7_1" href="http://java.sun.com/j2se/1.4.2/docs/api/java/awt/Graphics2D.html" title="java.awt.Graphics2D" alt="" coords="15,281,118,351"/>
-<area shape="rect" id="node9_2" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Object.html" title="java.lang.Object" alt="" coords="164,281,236,351"/>
-<area shape="rect" id="node11_3" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/portrayal/DrawInfo2D.html" title="sim.portrayal.DrawInfo2D" alt="" coords="282,267,883,365"/>
-<area shape="rect" id="node2_4" href="http://java.sun.com/j2se/1.4.2/docs/api/es/upm/dit/gsi/shanks/model/element/device/portrayal/Device2DPortrayal.html" title="es.upm.dit.gsi.shanks.model.element.device.portrayal.Device2DPortrayal" alt="" coords="54,11,191,80"/>
-<area shape="rect" id="node4_5" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/portrayal/Portrayal.html" title="sim.portrayal.Portrayal" alt="" coords="237,26,317,65"/>
+<area shape="rect" id="node1_0" href="./MyDevice2DPortrayal.html" title="es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice2DPortrayal" alt="" coords="623,139,775,208"/>
+<area shape="rect" id="node7_1" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/portrayal/DrawInfo2D.html" title="sim.portrayal.DrawInfo2D" alt="" coords="15,267,617,365"/>
+<area shape="rect" id="node9_2" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Object.html" title="java.lang.Object" alt="" coords="663,281,735,351"/>
+<area shape="rect" id="node11_3" href="http://java.sun.com/j2se/1.4.2/docs/api/java/awt/Graphics2D.html" title="java.awt.Graphics2D" alt="" coords="781,281,883,351"/>
+<area shape="rect" id="node2_4" href="http://java.sun.com/j2se/1.4.2/docs/api/es/upm/dit/gsi/shanks/model/element/device/portrayal/Device2DPortrayal.html" title="es.upm.dit.gsi.shanks.model.element.device.portrayal.Device2DPortrayal" alt="" coords="553,11,690,80"/>
+<area shape="rect" id="node4_5" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/portrayal/Portrayal.html" title="sim.portrayal.Portrayal" alt="" coords="736,26,816,65"/>
 </map>

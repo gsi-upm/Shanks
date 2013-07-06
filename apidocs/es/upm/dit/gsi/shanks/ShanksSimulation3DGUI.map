@@ -1,11 +1,11 @@
 <map id="G" name="G">
-<area shape="rect" id="node1_0" href="./model/scenario/portrayal/Scenario3DPortrayal.html" title="es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal" alt="" coords="312,267,781,336"/>
-<area shape="rect" id="node8_1" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/display3d/Display3D.html" title="sim.display3d.Display3D" alt="" coords="16,490,413,574"/>
-<area shape="rect" id="node10_2" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/String.html" title="java.lang.String" alt="" coords="527,395,849,669"/>
-<area shape="rect" id="node2_3" href="./ShanksSimulation3DGUI.html" title="es.upm.dit.gsi.shanks.ShanksSimulation3DGUI" alt="" coords="677,139,982,208"/>
-<area shape="rect" id="node6_4" href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/logging/Logger.html" title="java.util.logging.Logger" alt="" coords="53,267,267,336"/>
-<area shape="rect" id="node13_5" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/display/Controller.html" title="sim.display.Controller" alt="" coords="877,282,957,321"/>
-<area shape="rect" id="node17_6" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Object.html" title="java.lang.Object" alt="" coords="1003,267,1075,336"/>
-<area shape="rect" id="node19_7" href="http://java.sun.com/j2se/1.4.2/docs/api/java/awt/Image.html" title="java.awt.Image" alt="" coords="1120,267,1192,336"/>
-<area shape="rect" id="node3_8" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/display/GUIState.html" title="sim.display.GUIState" alt="" coords="745,11,914,80"/>
+<area shape="rect" id="node1_0" href="./model/scenario/portrayal/Scenario3DPortrayal.html" title="es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal" alt="" coords="308,267,777,336"/>
+<area shape="rect" id="node8_1" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/String.html" title="java.lang.String" alt="" coords="50,395,371,669"/>
+<area shape="rect" id="node10_2" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/display3d/Display3D.html" title="sim.display3d.Display3D" alt="" coords="485,490,882,574"/>
+<area shape="rect" id="node2_3" href="./ShanksSimulation3DGUI.html" title="es.upm.dit.gsi.shanks.ShanksSimulation3DGUI" alt="" coords="672,139,978,208"/>
+<area shape="rect" id="node6_4" href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/logging/Logger.html" title="java.util.logging.Logger" alt="" coords="49,267,262,336"/>
+<area shape="rect" id="node12_5" href="http://java.sun.com/j2se/1.4.2/docs/api/java/awt/Image.html" title="java.awt.Image" alt="" coords="873,267,945,336"/>
+<area shape="rect" id="node15_6" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/display/Controller.html" title="sim.display.Controller" alt="" coords="990,282,1070,321"/>
+<area shape="rect" id="node19_7" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Object.html" title="java.lang.Object" alt="" coords="1116,267,1188,336"/>
+<area shape="rect" id="node3_8" href="http://java.sun.com/j2se/1.4.2/docs/api/sim/display/GUIState.html" title="sim.display.GUIState" alt="" coords="740,11,910,80"/>
 </map>

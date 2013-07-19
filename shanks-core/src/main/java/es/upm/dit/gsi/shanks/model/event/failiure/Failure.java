@@ -17,7 +17,7 @@ public abstract class Failure extends ProbabilisticNetworkElementEvent {
 
     private Logger logger = Logger.getLogger(Failure.class.getName());
     private boolean active;
-    private boolean resolved;
+//    private boolean resolved;
 
     /**
      * ¡¡¡This constructor must be override!!!
@@ -25,14 +25,14 @@ public abstract class Failure extends ProbabilisticNetworkElementEvent {
     public Failure(Steppable generator) {
         super("_"+System.currentTimeMillis(), generator, null);
         this.active = false;
-        this.resolved = true;
+//        this.resolved = true;
         logger.finer("New Failure: "+this);
     }
     
     public Failure(String id, Steppable generator, double prob) {
         super(id+"_"+System.currentTimeMillis(), generator, prob);
         this.active = false;
-        this.resolved = true;
+//        this.resolved = true;
         logger.finer("New Failure: "+this);
     }
 
@@ -42,7 +42,7 @@ public abstract class Failure extends ProbabilisticNetworkElementEvent {
     @Override
     public void launchEvent() throws ShanksException {
         super.launchEvent();
-        this.resolved = false;
+//        this.resolved = false;
         this.active = true;
     }
 
@@ -57,7 +57,7 @@ public abstract class Failure extends ProbabilisticNetworkElementEvent {
      * 
      */
     public void setAsResolved(){
-        this.resolved = true;
+//        this.resolved = true;
         this.active = false;
     }
 

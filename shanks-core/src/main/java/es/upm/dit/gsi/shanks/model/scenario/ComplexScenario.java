@@ -250,6 +250,7 @@ public abstract class ComplexScenario extends Scenario {
         return maps;
     }
     
+    //Idem que con los eventos y los dupes
     public void addPossiblesFailuresComplex(){
         Set<Scenario> scenarios = this.getScenarios();
         for(Scenario s : scenarios){
@@ -258,7 +259,11 @@ public abstract class ComplexScenario extends Scenario {
                         this.addPossibleFailure(c, s.getPossibleFailures().get(c));
                     }else{
                         List<Set<NetworkElement>> elements = this.getPossibleFailures().get(c);
-                        elements.addAll(s.getPossibleFailures().get(c));
+                        //elements.addAll(s.getPossibleFailures().get(c));
+                        for(Set<NetworkElement> sne : s.getPossibleFailures().get(c)){
+                            if(!elements.contains(sne))
+                                elements.add(sne);
+                        }
                         this.addPossibleFailure(c, elements);
                     }
             }
@@ -266,6 +271,7 @@ public abstract class ComplexScenario extends Scenario {
     }
     
     //TODO Hacerlo como con los fallos
+    //J Anadido eventos de escenario, y evitado la adiccion de duplicados
     public void addPossiblesEventsComplex(){
         Set<Scenario> scenarios = this.getScenarios();
         for(Scenario s : scenarios){
@@ -274,8 +280,25 @@ public abstract class ComplexScenario extends Scenario {
                         this.addPossibleEventsOfNE(c, s.getPossibleEventsOfNE().get(c));
                     }else{
                         List<Set<NetworkElement>> elements = this.getPossibleEventsOfNE().get(c);
-                        elements.addAll(s.getPossibleEventsOfNE().get(c));
+                        //elements.addAll(s.getPossibleEventsOfNE().get(c));
+                        for(Set<NetworkElement> sne : s.getPossibleEventsOfNE().get(c)){
+                            if(!elements.contains(sne))
+                                elements.add(sne);
+                        }
                         this.addPossibleEventsOfNE(c, elements);
+                    }
+            }
+                for(Class<? extends Event> c : s.getPossibleEventsOfScenario().keySet()){
+                    if(!this.getPossibleEventsOfScenario().containsKey(c)){
+                        this.addPossibleEventsOfScenario(c, s.getPossibleEventsOfScenario().get(c));
+                    }else{
+                        List<Set<Scenario>> elements = this.getPossibleEventsOfScenario().get(c);
+                        //elements.addAll(s.getPossibleEventsOfScenario().get(c));
+                        for(Set<Scenario> sne : s.getPossibleEventsOfScenario().get(c)){
+                            if(!elements.contains(sne))
+                                elements.add(sne);
+                        }
+                        this.addPossibleEventsOfScenario(c, elements);
                     }
             }
         }

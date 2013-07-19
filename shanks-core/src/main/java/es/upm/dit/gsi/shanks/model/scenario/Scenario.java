@@ -583,8 +583,7 @@ public abstract class Scenario {
                     throw new ShanksException(e);
                 }
                 if ((sim.getSchedule().getSteps() != 0)
-                        && (((PeriodicEvent) event).getPeriod()
-                                % sim.getSchedule().getSteps() == 0)) {
+                        && (sim.getSchedule().getSteps() % ((PeriodicEvent) event).getPeriod() == 0)) {
                     List<Set<NetworkElement>> list = this
                             .getPossibleEventsOfNE().get(type);
                     int numberOfCombinations = list.size();
@@ -717,8 +716,8 @@ public abstract class Scenario {
             IllegalAccessException, ShanksException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
         MersenneTwisterFast randomizer = new MersenneTwisterFast();
         String status = this.getCurrentStatus();
-        HashMap<Class<? extends Failure>, Double> penalties = this
-                .getPenaltiesInStatus(status);
+//        HashMap<Class<? extends Failure>, Double> penalties = this
+//                .getPenaltiesInStatus(status);
         Iterator<Class<? extends Failure>> it = this.getPossibleFailures()
                 .keySet().iterator();
         Constructor<? extends Event> c = null;

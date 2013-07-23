@@ -18,7 +18,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import unbbayes.prs.bn.PotentialTable;
 import unbbayes.prs.bn.ProbabilisticNetwork;
+import unbbayes.prs.bn.ProbabilisticNode;
 import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.BayesianReasonerShanksAgent;
 import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.ShanksAgentBayesianReasoningCapability;
 import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.exception.UnknowkNodeStateException;
@@ -845,4 +847,325 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
         }
     }
 
+    /**
+     * 
+     */
+    @Test
+    public void CheckNodeCPT() {
+        try {
+            String auxNodeName = "History";
+
+            ProbabilisticNode node = ShanksAgentBayesianReasoningCapability
+                    .getNode(this.bn, auxNodeName);
+            PotentialTable cpt = node.getProbabilityFunction();
+            Assert.assertEquals(4, cpt.tableSize());
+            Assert.assertEquals(0.9F, cpt.getValue(0));
+            Assert.assertEquals(0.1F, cpt.getValue(1));
+            Assert.assertEquals(0.01F, cpt.getValue(2));
+            Assert.assertEquals(0.99F, cpt.getValue(3));
+        } catch (UnknowkNodeStateException e) {
+            e.printStackTrace();
+            Assert.fail();
+        } catch (UnknownNodeException e) {
+            e.printStackTrace();
+            Assert.fail();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail();
+        }
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void AddSoftEvidence() {
+        try {
+            String targetNodeName = "History";
+            HashMap<String, Double> softEvidence = new HashMap<String, Double>();
+            softEvidence.put("True", 0.70);
+            softEvidence.put("False", 0.30);
+
+            ShanksAgentBayesianReasoningCapability.addSoftEvidence(bn,
+                    targetNodeName, softEvidence);
+
+            double trueConf = ShanksAgentBayesianReasoningCapability
+                    .getHypothesis(bn, targetNodeName, "True");
+            double falseConf = ShanksAgentBayesianReasoningCapability
+                    .getHypothesis(bn, targetNodeName, "False");
+
+            Assert.assertEquals(0.7, trueConf, 0.01);
+            Assert.assertEquals(0.3, falseConf, 0.01);
+
+        } catch (UnknowkNodeStateException e) {
+            e.printStackTrace();
+            Assert.fail();
+        } catch (UnknownNodeException e) {
+            e.printStackTrace();
+            Assert.fail();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail();
+        }
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void AddSoftEvidenceTwoTimes() {
+        try {
+            String targetNodeName = "History";
+            HashMap<String, Double> softEvidence = new HashMap<String, Double>();
+            softEvidence.put("True", 0.70);
+            softEvidence.put("False", 0.30);
+
+            ShanksAgentBayesianReasoningCapability.addSoftEvidence(bn,
+                    targetNodeName, softEvidence);
+
+            double trueConf = ShanksAgentBayesianReasoningCapability
+                    .getHypothesis(bn, targetNodeName, "True");
+            double falseConf = ShanksAgentBayesianReasoningCapability
+                    .getHypothesis(bn, targetNodeName, "False");
+
+            Assert.assertEquals(0.7, trueConf, 0.01);
+            Assert.assertEquals(0.3, falseConf, 0.01);
+
+            // 2nd time to check the "clear evidence" method
+            softEvidence = new HashMap<String, Double>();
+            softEvidence.put("True", 0.5);
+            softEvidence.put("False", 0.5);
+
+            ShanksAgentBayesianReasoningCapability.addSoftEvidence(bn,
+                    targetNodeName, softEvidence);
+
+            trueConf = ShanksAgentBayesianReasoningCapability.getHypothesis(bn,
+                    targetNodeName, "True");
+            falseConf = ShanksAgentBayesianReasoningCapability.getHypothesis(
+                    bn, targetNodeName, "False");
+
+            Assert.assertEquals(0.5, trueConf, 0.01);
+            Assert.assertEquals(0.5, falseConf, 0.01);
+
+        } catch (UnknowkNodeStateException e) {
+            e.printStackTrace();
+            Assert.fail();
+        } catch (UnknownNodeException e) {
+            e.printStackTrace();
+            Assert.fail();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail();
+        }
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void AddSoftEvidenceInTwoNodes() {
+        try {
+            HashMap<String, HashMap<String, Double>> softEvidences = new HashMap<String, HashMap<String, Double>>();
+
+            String targetNodeName1 = "History";
+            HashMap<String, Double> softEvidence = new HashMap<String, Double>();
+            softEvidence.put("True", 0.70);
+            softEvidence.put("False", 0.30);
+            softEvidences.put(targetNodeName1, softEvidence);
+
+            String targetNodeName2 = "StrokeVolume";
+            softEvidence = new HashMap<String, Double>();
+            softEvidence.put("Low", 0.60);
+            softEvidence.put("Normal", 0.30);
+            softEvidence.put("High", 0.10);
+            softEvidences.put(targetNodeName2, softEvidence);
+
+            ShanksAgentBayesianReasoningCapability.addSoftEvidences(bn,
+                    softEvidences);
+
+            double trueConf = ShanksAgentBayesianReasoningCapability
+                    .getHypothesis(bn, targetNodeName1, "True");
+            double falseConf = ShanksAgentBayesianReasoningCapability
+                    .getHypothesis(bn, targetNodeName1, "False");
+            double lowConf = ShanksAgentBayesianReasoningCapability
+                    .getHypothesis(bn, targetNodeName2, "Low");
+            double normalConf = ShanksAgentBayesianReasoningCapability
+                    .getHypothesis(bn, targetNodeName2, "Normal");
+            double highConf = ShanksAgentBayesianReasoningCapability
+                    .getHypothesis(bn, targetNodeName2, "High");
+
+            Assert.assertEquals(0.7, trueConf, 0.05);
+            Assert.assertEquals(0.3, falseConf, 0.05);
+            Assert.assertEquals(0.6, lowConf, 0.05);
+            Assert.assertEquals(0.3, normalConf, 0.05);
+            Assert.assertEquals(0.1, highConf, 0.05);
+
+        } catch (UnknowkNodeStateException e) {
+            e.printStackTrace();
+            Assert.fail();
+        } catch (UnknownNodeException e) {
+            e.printStackTrace();
+            Assert.fail();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail();
+        }
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void AddSoftEvidenceInComplexNode() {
+        try {
+            HashMap<String, HashMap<String, Double>> softEvidences = new HashMap<String, HashMap<String, Double>>();
+
+            String targetNodeName1 = "VentAlv";
+            HashMap<String, Double> softEvidence = new HashMap<String, Double>();
+            softEvidence.put("Zero", 0.15);
+            softEvidence.put("Low", 0.1);
+            softEvidence.put("Normal", 0.21);
+            softEvidence.put("High", 0.55);
+            softEvidences.put(targetNodeName1, softEvidence);
+
+            ShanksAgentBayesianReasoningCapability.addSoftEvidences(bn,
+                    softEvidences);
+
+            double zeroConf = ShanksAgentBayesianReasoningCapability
+                    .getHypothesis(bn, targetNodeName1, "Zero");
+            double lowConf = ShanksAgentBayesianReasoningCapability
+                    .getHypothesis(bn, targetNodeName1, "Low");
+            double normalConf = ShanksAgentBayesianReasoningCapability
+                    .getHypothesis(bn, targetNodeName1, "Normal");
+            double highConf = ShanksAgentBayesianReasoningCapability
+                    .getHypothesis(bn, targetNodeName1, "High");
+
+            Assert.assertEquals(0.15, zeroConf, 0.01);
+            Assert.assertEquals(0.10, lowConf, 0.01);
+            Assert.assertEquals(0.21, normalConf, 0.01);
+            Assert.assertEquals(0.550, highConf, 0.01);
+
+        } catch (UnknowkNodeStateException e) {
+            e.printStackTrace();
+            Assert.fail();
+        } catch (UnknownNodeException e) {
+            e.printStackTrace();
+            Assert.fail();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail();
+        }
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void AddBeliefInferAndQueryAndResetOneEvidenceBayesCapabilityTest() {
+        try {
+            String nodeName = "MinVol";
+            String status = "High";
+            ShanksAgentBayesianReasoningCapability.addEvidence(this.bn,
+                    nodeName, status);
+            nodeName = "KinkedTube";
+            status = "True";
+            ShanksAgentBayesianReasoningCapability.addEvidence(this.bn,
+                    nodeName, status);
+
+            String queryNodeName = "TPR";
+            String queryStatus = "Normal";
+            float value = ShanksAgentBayesianReasoningCapability.getHypothesis(
+                    this.bn, queryNodeName, queryStatus);
+            Assert.assertEquals(0.3961F, value, 0.001F);
+            queryNodeName = "ArtCO2";
+            queryStatus = "Normal";
+            value = ShanksAgentBayesianReasoningCapability.getHypothesis(
+                    this.bn, queryNodeName, queryStatus);
+            Assert.assertEquals(0.06F, value, 0.01F);
+
+            ShanksAgentBayesianReasoningCapability.clearEvidence(this.bn,
+                    "MinVol");
+            queryNodeName = "ArtCO2";
+            queryStatus = "Normal";
+            value = ShanksAgentBayesianReasoningCapability.getHypothesis(
+                    this.bn, queryNodeName, queryStatus);
+            Assert.assertEquals(0.03F, value, 0.01F);
+            queryNodeName = "MinVol";
+            queryStatus = "High";
+            value = ShanksAgentBayesianReasoningCapability.getHypothesis(
+                    this.bn, queryNodeName, queryStatus);
+            Assert.assertEquals(0.02F, value, 0.01F);
+            queryNodeName = "TPR";
+            queryStatus = "Normal";
+            value = ShanksAgentBayesianReasoningCapability.getHypothesis(
+                    this.bn, queryNodeName, queryStatus);
+            Assert.assertEquals(0.3961F, value, 0.001F);
+
+        } catch (UnknowkNodeStateException e) {
+            e.printStackTrace();
+            Assert.fail();
+        } catch (UnknownNodeException e) {
+            e.printStackTrace();
+            Assert.fail();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail();
+        }
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void ModifyEvidenceInAGivenEvidenceNode() {
+        try {
+            String nodeName = "MinVol";
+            String status = "High";
+            ShanksAgentBayesianReasoningCapability.addEvidence(this.bn,
+                    nodeName, status);
+
+            String queryNodeName = "TPR";
+            String queryStatus = "Normal";
+            float value = ShanksAgentBayesianReasoningCapability.getHypothesis(
+                    this.bn, queryNodeName, queryStatus);
+            Assert.assertEquals(0.3961F, value, 0.001F);
+            queryNodeName = "ArtCO2";
+            queryStatus = "Normal";
+            value = ShanksAgentBayesianReasoningCapability.getHypothesis(
+                    this.bn, queryNodeName, queryStatus);
+            Assert.assertEquals(0.23, value, 0.01F);
+
+            status = "Normal";
+            ShanksAgentBayesianReasoningCapability.addEvidence(this.bn,
+                    nodeName, status);
+
+            queryNodeName = "TPR";
+            queryStatus = "Normal";
+            value = ShanksAgentBayesianReasoningCapability.getHypothesis(
+                    this.bn, queryNodeName, queryStatus);
+            Assert.assertEquals(0.3961F, value, 0.001F);
+            queryNodeName = "ArtCO2";
+            queryStatus = "Normal";
+            value = ShanksAgentBayesianReasoningCapability.getHypothesis(
+                    this.bn, queryNodeName, queryStatus);
+            Assert.assertEquals(0.85, value, 0.01F);
+            
+            ShanksAgentBayesianReasoningCapability.clearEvidence(bn, nodeName);
+            queryNodeName = "ArtCO2";
+            queryStatus = "Normal";
+            value = ShanksAgentBayesianReasoningCapability.getHypothesis(
+                    this.bn, queryNodeName, queryStatus);
+            Assert.assertEquals(0.68F, value, 0.01F);
+
+        } catch (UnknowkNodeStateException e) {
+            e.printStackTrace();
+            Assert.fail();
+        } catch (UnknownNodeException e) {
+            e.printStackTrace();
+            Assert.fail();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail();
+        }
+    }
 }

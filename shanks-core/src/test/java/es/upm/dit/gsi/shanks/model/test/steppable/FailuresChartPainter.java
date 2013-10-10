@@ -27,7 +27,7 @@ public class FailuresChartPainter implements Steppable {
     public static final String RESOLVED_FAILURES_PER_AGENT_CHART_ID = "Resolved failures per agent";
 
 
-    public Logger logger = Logger.getLogger(FailuresChartPainter.class.getName());
+    public Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     
     /**
      * 

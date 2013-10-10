@@ -26,7 +26,7 @@ import es.upm.dit.gsi.shanks.model.element.link.Link;
 
 public abstract class Device extends NetworkElement {
 
-    Logger logger = Logger.getLogger(Device.class.getName());
+    Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     private List<Link> linksList;
     private boolean isGateway;

@@ -39,8 +39,7 @@ public class MySimpleShanksAgent extends SimpleShanksAgent implements
      */
     private static final long serialVersionUID = 263836274462865563L;
 
-    private Logger logger = Logger.getLogger(MySimpleShanksAgent.class
-            .getName());
+    private Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public MySimpleShanksAgent(String id, double speed, double perceptionRange) {
         super(id);

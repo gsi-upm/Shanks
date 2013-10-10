@@ -25,7 +25,7 @@ import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
 public class Failure3DPortrayal extends SimplePortrayal3D {
     //TODO i think this class is non-useful. Need to be eliminated. 
     
-    public Logger log = Logger.getLogger(Device3DPortrayal.class.getName());
+    public Logger log = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public TransformGroup getModel(Object object, TransformGroup model) {
 

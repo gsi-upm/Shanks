@@ -26,7 +26,7 @@ import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI;
 
 public class ShanksAgentCreationCapabilityTest {
 
-    private Logger logger = Logger.getLogger(this.getClass().getName());
+    private Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private MyShanksSimulation sim = null;
     private MyShanksSimulation2DGUI gui2D = null;
     private MyShanksSimulation3DGUI gui3D = null;

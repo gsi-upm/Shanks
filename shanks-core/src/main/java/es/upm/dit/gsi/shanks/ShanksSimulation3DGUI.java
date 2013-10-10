@@ -37,8 +37,7 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
  */
 public abstract class ShanksSimulation3DGUI extends GUIState {
 
-    private Logger logger = Logger.getLogger(ShanksSimulation3DGUI.class
-            .getName());
+    private Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     /**
      * @param sim

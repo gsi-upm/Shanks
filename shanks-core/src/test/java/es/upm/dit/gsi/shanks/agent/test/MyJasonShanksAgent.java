@@ -20,7 +20,7 @@ import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
 public class MyJasonShanksAgent extends JasonShanksAgent {
 
     private int numberOfResolvedFailures;
-    private Logger logger = Logger.getLogger(MyJasonShanksAgent.class.getName());
+    private Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     /**
      * @param id

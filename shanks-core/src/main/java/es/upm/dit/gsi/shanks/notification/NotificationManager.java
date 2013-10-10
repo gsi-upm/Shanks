@@ -42,7 +42,7 @@ public class NotificationManager implements Steppable {
      */
     private static int ID_COUNTER;
     
-    private static Logger logger = Logger.getLogger(NotificationManager.class.getName());
+    private static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     /**
      * Constructor with predefined  notification list. 

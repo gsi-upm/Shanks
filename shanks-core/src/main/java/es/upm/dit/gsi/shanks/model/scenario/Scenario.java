@@ -48,7 +48,7 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
  */
 public abstract class Scenario {
 
-    private Logger logger = Logger.getLogger(Scenario.class.getName());
+    private Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public static final String SIMULATION_GUI = "SIMULATION GUI";
     public static final String SIMULATION_2D = "2D";

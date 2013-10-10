@@ -28,7 +28,7 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.ScenarioPortrayal;
 
 public class ScenarioManager implements Steppable {
 
-    public Logger logger = Logger.getLogger(ScenarioManager.class.getName());
+    public Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     private static final long serialVersionUID = -7448202235281457216L;
 

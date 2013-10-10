@@ -45,7 +45,7 @@ public abstract class JasonShanksAgent extends AgArch implements ShanksAgent {
 
     public static final String MYSELF = "myself";
 
-    private Logger logger = Logger.getLogger(JasonShanksAgent.class.getName());
+    private Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     private ShanksSimulation simulation;
     private String id;

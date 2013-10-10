@@ -26,7 +26,7 @@ public class MyJasonShanksAgentAction extends JasonShanksAgentAction {
 
     public static final String FIX = "fix";
     private Logger logger = Logger
-            .getLogger(MyJasonShanksAgent.class.getName());
+            .getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public boolean executeAction(ShanksSimulation simulation,
             ShanksAgent agent, List<Term> arguments) {

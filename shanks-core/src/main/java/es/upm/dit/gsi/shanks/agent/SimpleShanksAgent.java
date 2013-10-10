@@ -24,7 +24,7 @@ import es.upm.dit.gsi.shanks.exception.ShanksException;
  */
 public abstract class SimpleShanksAgent implements ShanksAgent {
 
-    private Logger logger = Logger.getLogger(SimpleShanksAgent.class.getName());
+    private Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     
     private ShanksSimulation simulation;
     private String id;

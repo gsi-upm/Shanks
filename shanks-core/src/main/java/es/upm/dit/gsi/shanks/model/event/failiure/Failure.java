@@ -15,7 +15,7 @@ import es.upm.dit.gsi.shanks.model.event.networkelement.ProbabilisticNetworkElem
 
 public abstract class Failure extends ProbabilisticNetworkElementEvent {
 
-    private Logger logger = Logger.getLogger(Failure.class.getName());
+    private Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private boolean active;
 //    private boolean resolved;
 

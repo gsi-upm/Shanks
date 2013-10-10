@@ -35,7 +35,7 @@ import es.upm.dit.gsi.shanks.model.element.device.Device;
 public abstract class Device3DPortrayal extends SimplePortrayal3D {
 
     private int diameter = 50;
-    public Logger log = Logger.getLogger(Device3DPortrayal.class.getName());
+    public Logger log = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public String getLabel(Device device) {
         return device.getID();

@@ -19,7 +19,7 @@ import es.upm.dit.gsi.shanks.agent.test.MyJasonShanksAgent;
 public class FailureLog implements Steppable {
 
 
-    public Logger logger = Logger.getLogger(FailureLog.class.getName());
+    public Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     
     /**
      * 

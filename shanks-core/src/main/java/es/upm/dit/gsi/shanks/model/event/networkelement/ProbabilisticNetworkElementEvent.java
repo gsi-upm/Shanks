@@ -18,7 +18,7 @@ public abstract class ProbabilisticNetworkElementEvent extends
         ProbabilisticEvent {
 
     private Logger logger = Logger
-            .getLogger(ProbabilisticNetworkElementEvent.class.getName());
+            .getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     protected List<NetworkElement> affectedElements;
     protected List<Scenario> affectedScenarios;

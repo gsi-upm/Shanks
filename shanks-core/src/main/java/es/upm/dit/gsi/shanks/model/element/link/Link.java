@@ -23,7 +23,7 @@ import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFi
 
 public abstract class Link extends NetworkElement {
     
-    private Logger logger = Logger.getLogger(Link.class.getName());
+    private Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     
     private List<Device> linkedDevices;
     private int deviceCapacity;

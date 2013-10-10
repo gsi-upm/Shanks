@@ -41,7 +41,7 @@ public class ShanksSimulation extends SimState {
 
     private static final long serialVersionUID = -2238530527253654867L;
 
-    public Logger logger = Logger.getLogger(ShanksSimulation.class.getName());
+    public Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     private ScenarioManager scenarioManager;
     

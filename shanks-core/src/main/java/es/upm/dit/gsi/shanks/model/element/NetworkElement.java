@@ -18,7 +18,7 @@ import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFi
  */
 public abstract class NetworkElement {
 
-    Logger logger = Logger.getLogger(NetworkElement.class.getName());
+    Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     private String id;
     private HashMap<String, Boolean> states;

@@ -18,6 +18,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import unbbayes.prs.Node;
 import unbbayes.prs.bn.PotentialTable;
 import unbbayes.prs.bn.ProbabilisticNetwork;
 import unbbayes.prs.bn.ProbabilisticNode;
@@ -1163,6 +1164,27 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
         } catch (UnknownNodeException e) {
             e.printStackTrace();
             Assert.fail();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail();
+        }
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void SearchingInGraphTest() {
+        try {
+            List<Node> nodes = bn.getNodes();
+            for (Node node : nodes) {
+                ProbabilisticNode pn = (ProbabilisticNode) node;
+                List<Node> adjs = pn.getAdjacents();
+                for (Node adj : adjs) {
+                    ProbabilisticNode padj = (ProbabilisticNode) adj;
+//                    padj.
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail();

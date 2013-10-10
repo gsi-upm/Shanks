@@ -152,8 +152,9 @@ public class ScenarioManager implements Steppable {
         this.generateNetworkElementEvents(sim);
         long step = sim.getSchedule().getSteps();
         if (step%500==0) {
-            logger.info("In step " + step + ", there are " + sim.getScenario().getCurrentFailures().size() + " current failures.");
-            logger.info("In step " + step + ", there are " + sim.getNumOfResolvedFailures() + " resolved failures.");
+            logger.info("Step: " + step);
+            logger.finest("In step " + step + ", there are " + sim.getScenario().getCurrentFailures().size() + " current failures.");
+            logger.finest("In step " + step + ", there are " + sim.getNumOfResolvedFailures() + " resolved failures.");
         }
     }
 

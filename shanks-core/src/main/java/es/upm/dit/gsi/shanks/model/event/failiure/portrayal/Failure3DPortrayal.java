@@ -14,7 +14,6 @@ import javax.vecmath.Color3f;
 import javax.vecmath.Point3f;
 
 import sim.portrayal3d.SimplePortrayal3D;
-import es.upm.dit.gsi.shanks.model.element.device.portrayal.Device3DPortrayal;
 import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
 
 /**

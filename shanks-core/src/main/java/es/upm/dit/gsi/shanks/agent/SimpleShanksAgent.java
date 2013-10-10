@@ -77,8 +77,8 @@ public abstract class SimpleShanksAgent implements ShanksAgent {
             ShanksAgent receiver = this.simulation.getAgent(message
                     .getReceiver());
             receiver.putMessegaInInbox(message);
-            logger.fine("Sent message from Agent: " + this.getID()
-                    + "to Agent: " + message.getReceiver());
+            logger.finer("Sent message from Agent: " + this.getID()
+                    + " to Agent: " + message.getReceiver());
         } catch (UnkownAgentException e) {
             logger.severe("UnkownAgentException: " + e.getMessage());
             e.printStackTrace();

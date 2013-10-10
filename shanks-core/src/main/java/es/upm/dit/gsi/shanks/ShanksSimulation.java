@@ -346,4 +346,14 @@ public class ShanksSimulation extends SimState {
     public NotificationManager getNotificationManager() {
         return notificationManager;
     }
+    
+    /**
+     * Return the global logger.
+     * Equals to say Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+     * 
+     * @return
+     */
+    public Logger getLogger() {
+        return this.logger;
+    }
 }

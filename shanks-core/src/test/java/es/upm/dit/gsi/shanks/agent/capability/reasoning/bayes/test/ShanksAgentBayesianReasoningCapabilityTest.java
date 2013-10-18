@@ -914,6 +914,119 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
      * 
      */
     @Test
+    public void AddSoftEvidence2Times() {
+        try {
+            String targetNodeName = "History";
+            HashMap<String, Double> softEvidence = new HashMap<String, Double>();
+            softEvidence.put("True", 0.70);
+            softEvidence.put("False", 0.30);
+
+            ShanksAgentBayesianReasoningCapability.addSoftEvidence(bn,
+                    targetNodeName, softEvidence);
+
+            double trueConf = ShanksAgentBayesianReasoningCapability
+                    .getHypothesis(bn, targetNodeName, "True");
+            double falseConf = ShanksAgentBayesianReasoningCapability
+                    .getHypothesis(bn, targetNodeName, "False");
+
+            Assert.assertEquals(0.7, trueConf, 0.01);
+            Assert.assertEquals(0.3, falseConf, 0.01);
+            
+            softEvidence = new HashMap<String, Double>();
+            softEvidence.put("True", 0.40);
+            softEvidence.put("False", 0.60);
+
+            ShanksAgentBayesianReasoningCapability.addSoftEvidence(bn,
+                    targetNodeName, softEvidence);
+
+            trueConf = ShanksAgentBayesianReasoningCapability
+                    .getHypothesis(bn, targetNodeName, "True");
+            falseConf = ShanksAgentBayesianReasoningCapability
+                    .getHypothesis(bn, targetNodeName, "False");
+
+            Assert.assertEquals(0.4, trueConf, 0.01);
+            Assert.assertEquals(0.6, falseConf, 0.01);
+
+        } catch (UnknowkNodeStateException e) {
+            e.printStackTrace();
+            Assert.fail();
+        } catch (UnknownNodeException e) {
+            e.printStackTrace();
+            Assert.fail();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail();
+        }
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void AddSoftEvidence3Times() {
+        try {
+            String targetNodeName = "History";
+            HashMap<String, Double> softEvidence = new HashMap<String, Double>();
+            softEvidence.put("True", 0.70);
+            softEvidence.put("False", 0.30);
+
+            ShanksAgentBayesianReasoningCapability.addSoftEvidence(bn,
+                    targetNodeName, softEvidence);
+
+            double trueConf = ShanksAgentBayesianReasoningCapability
+                    .getHypothesis(bn, targetNodeName, "True");
+            double falseConf = ShanksAgentBayesianReasoningCapability
+                    .getHypothesis(bn, targetNodeName, "False");
+
+            Assert.assertEquals(0.7, trueConf, 0.01);
+            Assert.assertEquals(0.3, falseConf, 0.01);
+            
+            softEvidence = new HashMap<String, Double>();
+            softEvidence.put("True", 0.40);
+            softEvidence.put("False", 0.60);
+
+            ShanksAgentBayesianReasoningCapability.addSoftEvidence(bn,
+                    targetNodeName, softEvidence);
+
+            trueConf = ShanksAgentBayesianReasoningCapability
+                    .getHypothesis(bn, targetNodeName, "True");
+            falseConf = ShanksAgentBayesianReasoningCapability
+                    .getHypothesis(bn, targetNodeName, "False");
+
+            Assert.assertEquals(0.4, trueConf, 0.01);
+            Assert.assertEquals(0.6, falseConf, 0.01);
+            
+            softEvidence = new HashMap<String, Double>();
+            softEvidence.put("True", 0.10);
+            softEvidence.put("False", 0.90);
+
+            ShanksAgentBayesianReasoningCapability.addSoftEvidence(bn,
+                    targetNodeName, softEvidence);
+
+            trueConf = ShanksAgentBayesianReasoningCapability
+                    .getHypothesis(bn, targetNodeName, "True");
+            falseConf = ShanksAgentBayesianReasoningCapability
+                    .getHypothesis(bn, targetNodeName, "False");
+
+            Assert.assertEquals(0.1, trueConf, 0.01);
+            Assert.assertEquals(0.9, falseConf, 0.01);
+
+        } catch (UnknowkNodeStateException e) {
+            e.printStackTrace();
+            Assert.fail();
+        } catch (UnknownNodeException e) {
+            e.printStackTrace();
+            Assert.fail();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail();
+        }
+    }
+
+    /**
+     * 
+     */
+    @Test
     public void AddSoftEvidenceTwoTimes() {
         try {
             String targetNodeName = "History";

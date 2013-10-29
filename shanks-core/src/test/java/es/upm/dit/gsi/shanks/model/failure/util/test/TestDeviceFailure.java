@@ -1,5 +1,7 @@
 package es.upm.dit.gsi.shanks.model.failure.util.test;
 
+import java.util.logging.Logger;
+
 import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
@@ -16,14 +18,14 @@ public class TestDeviceFailure extends Failure {
     private int configuration;
     public static final int DEFAULT_CONF = 0;
 
-    public TestDeviceFailure(String id, Steppable generator, double prob) {
-        super(id, generator, prob);
+    public TestDeviceFailure(String id, Steppable generator, double prob, Logger logger) {
+        super(id, generator, prob, logger);
         this.configuration = 0;
     }
 
     public TestDeviceFailure(String id, Steppable generator, double prob,
-            int configuration) {
-        super(id, generator, prob);
+            int configuration, Logger logger) {
+        super(id, generator, prob, logger);
         this.configuration = configuration;
     }
 

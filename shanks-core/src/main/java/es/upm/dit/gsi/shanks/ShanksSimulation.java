@@ -41,7 +41,7 @@ public class ShanksSimulation extends SimState {
 
     private static final long serialVersionUID = -2238530527253654867L;
 
-    public Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    public Logger logger;
 
     private ScenarioManager scenarioManager;
     
@@ -85,6 +85,7 @@ public class ShanksSimulation extends SimState {
 //            ScenarioNotFoundException, DuplicatedAgentIDException,
 //            DuplicatedActionIDException {
         super(seed);
+        this.logger = Logger.getLogger(scenarioID);
         this.scenarioManager = this.createScenarioManager(scenarioClass,
                 scenarioID, initialState, properties);
         this.notificationManager = this.createNotificationManager();
@@ -135,8 +136,8 @@ public class ShanksSimulation extends SimState {
         try {
             c = scenarioClass
                     .getConstructor(new Class[] { String.class, String.class,
-                            Properties.class });
-            s = c.newInstance(scenarioID, initialState, properties);
+                            Properties.class, Logger.class });
+            s = c.newInstance(scenarioID, initialState, properties, this.getLogger());
         } catch (SecurityException e) {
             throw new ShanksException(e);
         } catch (NoSuchMethodException e) {
@@ -155,7 +156,7 @@ public class ShanksSimulation extends SimState {
         if (sp == null) {
             logger.warning("ScenarioPortrayals is null");
         }
-        ScenarioManager sm = new ScenarioManager(s, sp);
+        ScenarioManager sm = new ScenarioManager(s, sp, logger);
         return sm;
     }
     
@@ -348,8 +349,7 @@ public class ShanksSimulation extends SimState {
     }
     
     /**
-     * Return the global logger.
-     * Equals to say Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+     * Return the simulation logger.
      * 
      * @return
      */

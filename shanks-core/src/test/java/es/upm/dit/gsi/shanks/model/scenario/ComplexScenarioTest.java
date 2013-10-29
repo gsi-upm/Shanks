@@ -5,6 +5,7 @@
 package es.upm.dit.gsi.shanks.model.scenario;
 
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import junit.framework.Assert;
 
@@ -19,6 +20,8 @@ import es.upm.dit.gsi.shanks.model.scenario.test.MySuperComplexScenario;
 
 public class ComplexScenarioTest {
 
+    static Logger logger = Logger.getLogger(ComplexScenarioTest.class.getName());
+    
     @Before
     public void setUp() throws Exception {
     }
@@ -33,7 +36,7 @@ public class ComplexScenarioTest {
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
-        Scenario s = new MyComplexScenario("MyComplexScenario", MyComplexScenario.SUNNY, scenarioProperties);
+        Scenario s = new MyComplexScenario("MyComplexScenario", MyComplexScenario.SUNNY, scenarioProperties, logger);
         Assert.assertEquals("MyComplexScenario", s.getID());
         Assert.assertEquals(MyComplexScenario.SUNNY, s.getCurrentStatus());
     }
@@ -46,7 +49,7 @@ public class ComplexScenarioTest {
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
-        ComplexScenario s = new MyComplexScenario("MyComplexScenario", MyComplexScenario.SUNNY, scenarioProperties);
+        ComplexScenario s = new MyComplexScenario("MyComplexScenario", MyComplexScenario.SUNNY, scenarioProperties, logger);
         Assert.assertEquals("MyComplexScenario", s.getID());
         Assert.assertEquals(MyComplexScenario.SUNNY, s.getCurrentStatus());
         Scenario s1 = s.getScenario("Scenario1");
@@ -61,7 +64,7 @@ public class ComplexScenarioTest {
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
-        Scenario s = new MySuperComplexScenario("MySuperComplexScenario", MySuperComplexScenario.SUNNY, scenarioProperties);
+        Scenario s = new MySuperComplexScenario("MySuperComplexScenario", MySuperComplexScenario.SUNNY, scenarioProperties, logger);
         Assert.assertEquals("MySuperComplexScenario", s.getID());
         Assert.assertEquals(MySuperComplexScenario.SUNNY, s.getCurrentStatus());
     }
@@ -74,7 +77,7 @@ public class ComplexScenarioTest {
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
-        ComplexScenario s = new MySuperComplexScenario("MySuperComplexScenario", MySuperComplexScenario.SUNNY, scenarioProperties);
+        ComplexScenario s = new MySuperComplexScenario("MySuperComplexScenario", MySuperComplexScenario.SUNNY, scenarioProperties, logger);
         Assert.assertEquals("MySuperComplexScenario", s.getID());
         Assert.assertEquals(MySuperComplexScenario.SUNNY, s.getCurrentStatus());
         Scenario s1 = s.getScenario("ComplexScenario1");

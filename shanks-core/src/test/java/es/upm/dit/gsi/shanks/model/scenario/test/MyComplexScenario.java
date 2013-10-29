@@ -3,6 +3,7 @@ package es.upm.dit.gsi.shanks.model.scenario.test;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedAgentIDException;
@@ -67,9 +68,9 @@ public class MyComplexScenario extends ComplexScenario {
      * @throws InvocationTargetException
      */
     public MyComplexScenario(String type, String initialState,
-            Properties properties)
+            Properties properties, Logger logger)
             throws ShanksException {
-        super(type, initialState, properties);
+        super(type, initialState, properties, logger);
     }
 
     /*
@@ -92,9 +93,9 @@ public class MyComplexScenario extends ComplexScenario {
     @Override
     public void addNetworkElements()
             throws ShanksException {
-        Link el1 = new MyLink("EL1", MyLink.OK_STATUS, 2);
-        Link el2 = new MyLink("EL2", MyLink.OK_STATUS, 2);
-        Device ed1 = new MyDevice("ED1", MyDevice.OK_STATUS, true);
+        Link el1 = new MyLink("EL1", MyLink.OK_STATUS, 2, this.getLogger());
+        Link el2 = new MyLink("EL2", MyLink.OK_STATUS, 2, this.getLogger());
+        Device ed1 = new MyDevice("ED1", MyDevice.OK_STATUS, true, this.getLogger());
 
         this.addNetworkElement(ed1);
         ed1.connectToLink(el1);

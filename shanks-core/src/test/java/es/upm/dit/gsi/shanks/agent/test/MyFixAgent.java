@@ -2,6 +2,7 @@ package es.upm.dit.gsi.shanks.agent.test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.SimpleShanksAgent;
@@ -15,8 +16,8 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusE
 public class MyFixAgent extends SimpleShanksAgent{
 
     private int resolved = 0;
-    public MyFixAgent(String id) {
-        super(id);
+    public MyFixAgent(String id, Logger logger) {
+        super(id, logger);
         
     }
 

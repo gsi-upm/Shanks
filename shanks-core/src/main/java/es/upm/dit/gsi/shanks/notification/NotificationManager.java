@@ -56,7 +56,8 @@ public class NotificationManager implements Steppable {
      *                  for each notification.
      */
     public NotificationManager(List<Notification> lNotifications, List<Notifable> lNotifables,
-            ShanksSimulation simulation) {
+            ShanksSimulation simulation, Logger logger) {
+        NotificationManager.logger = logger;
         NotificationManager.notifications = lNotifications;
         NotificationManager.notifables = lNotifables;
         NotificationManager.sim = simulation;
@@ -76,6 +77,7 @@ public class NotificationManager implements Steppable {
      *                  for each notification.
      */
     public NotificationManager(ShanksSimulation simulation) {
+        NotificationManager.logger = simulation.getLogger();
         NotificationManager.notifications = new ArrayList<Notification>();
         NotificationManager.notifables = new ArrayList<Notifable>();
         NotificationManager.sim = simulation;

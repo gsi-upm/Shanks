@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedAgentIDException;
@@ -48,10 +49,10 @@ public class MyScenario extends Scenario {
      * @throws UnsupportedScenarioStatusException
      * @throws DuplicatedIDException
      */
-    public MyScenario(String id, String initialState, Properties properties)
+    public MyScenario(String id, String initialState, Properties properties, Logger logger)
             throws ShanksException,
             DuplicatedIDException {
-        super(id, initialState, properties);
+        super(id, initialState, properties, logger);
     }
 
     public static final String CLOUDY = "CLOUDY";
@@ -67,14 +68,14 @@ public class MyScenario extends Scenario {
     @Override
     public void addNetworkElements()
             throws ShanksException {
-        Device d1 = new MyDevice("D1", MyDevice.OK_STATUS, false);
-        Device d2 = new MyDevice("D2", MyDevice.OK_STATUS, false);
-        Device d3 = new MyDevice("D3", MyDevice.OK_STATUS, false);
-        Device d4 = new MyDevice("D4", MyDevice.OK_STATUS, false);
-        Device d5 = new MyDevice("D5", MyDevice.OK_STATUS, true);
-        Link l1 = new MyLink("L1", MyLink.OK_STATUS, 3);
-        Link l2 = new MyLink("L2", MyLink.OK_STATUS, 2);
-        Link l3 = new MyLink("L3", MyLink.OK_STATUS, 2);
+        Device d1 = new MyDevice("D1", MyDevice.OK_STATUS, false, this.getLogger());
+        Device d2 = new MyDevice("D2", MyDevice.OK_STATUS, false, this.getLogger());
+        Device d3 = new MyDevice("D3", MyDevice.OK_STATUS, false, this.getLogger());
+        Device d4 = new MyDevice("D4", MyDevice.OK_STATUS, false, this.getLogger());
+        Device d5 = new MyDevice("D5", MyDevice.OK_STATUS, true, this.getLogger());
+        Link l1 = new MyLink("L1", MyLink.OK_STATUS, 3, this.getLogger());
+        Link l2 = new MyLink("L2", MyLink.OK_STATUS, 2, this.getLogger());
+        Link l3 = new MyLink("L3", MyLink.OK_STATUS, 2, this.getLogger());
 
         d1.connectToLink(l1);
         d2.connectToLink(l1);

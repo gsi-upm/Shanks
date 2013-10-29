@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 import junit.framework.Assert;
 
@@ -22,6 +23,8 @@ import es.upm.dit.gsi.shanks.notification.util.test.TestScenario;
 import es.upm.dit.gsi.shanks.notification.util.test.TestSimulation;
 
 public class ValueNotificationTest {
+    
+    static Logger logger = Logger.getLogger(ValueNotificationTest.class.getName());
 
     /**
      * @throws Exception
@@ -83,7 +86,7 @@ public class ValueNotificationTest {
                     TestDefinitions.VN_ELEMENT_ID, TestDefinitions.VN_VALUE));
         }
         try {
-            NotificationManager nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
+            NotificationManager nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0), logger);
             Assert.assertEquals(ln, (nm.getByType(ValueNotification.class)));
             ln.add(new ValueNotification(null, 0, nm, null, null));
             Assert.assertNotSame(ln, (nm.getByType(ValueNotification.class)));
@@ -111,7 +114,7 @@ public class ValueNotificationTest {
         ArrayList<Notification> obtained_ln = new ArrayList<Notification>();
         NotificationManager nm = null;
         try {
-            nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
+            nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0), logger);
             obtained_ln = nm.getByType(ValueNotification.class);
             Assert.assertEquals(ln, obtained_ln);
             for (Notification expected: ln){
@@ -147,7 +150,7 @@ public class ValueNotificationTest {
         
         NotificationManager nm = null;
         try {
-            nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
+            nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0), logger);
             Assert.assertEquals(ln, nm.getByType(ValueNotification.class));
             
             for(String step:stepCount.keySet()){
@@ -214,7 +217,7 @@ public class ValueNotificationTest {
             }
             NotificationManager nm = null;
         
-            nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
+            nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0), logger);
             Assert.assertEquals(ln, nm.getByType(ValueNotification.class));
             
             for(Object source:sourceCount.keySet()){
@@ -245,7 +248,7 @@ public class ValueNotificationTest {
         }
         NotificationManager nm = null;
         try {
-            nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
+            nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0), logger);
             Assert.assertEquals(ln, nm.getByType(ValueNotification.class));
             @SuppressWarnings("unused")
             List<Notification> obtained = nm.getByInteraction(TestDefinitions.IN_INTERACTION);
@@ -268,7 +271,7 @@ public class ValueNotificationTest {
         }
         NotificationManager nm = null;
         try {
-            nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
+            nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0), logger);
             Assert.assertEquals(ln, nm.getByType(ValueNotification.class));
             @SuppressWarnings("unused")
             List<Notification> obtained = nm.getByTarget(TestDefinitions.IN_INTERACTION);
@@ -304,7 +307,7 @@ public class ValueNotificationTest {
                     elementID, TestDefinitions.VN_VALUE));
         }
         try {
-            NotificationManager nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
+            NotificationManager nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0), logger);
             Assert.assertEquals(ln, (nm.getByType(ValueNotification.class)));
             for(String elementID:elementIDCount.keySet()){
                 List<ValueNotification> obtained = nm.getByElementID(elementID);

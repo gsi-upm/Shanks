@@ -92,7 +92,7 @@ public class ShanksAgentCreationCapabilityTest {
             sim.start();
 
             MySimpleShanksAgent creado = new MySimpleShanksAgent(
-                    "agenteCreado", 1, 1);
+                    "agenteCreado", 1, 1, sim.getLogger());
 
             CreationShanksAgentCapability.addNewAgent(sim, creado);
 
@@ -137,7 +137,7 @@ public class ShanksAgentCreationCapabilityTest {
             while (gui2D.getSimulation().schedule.getSteps() < 20);
 
             String agentID = "AgenteCreado";
-            CounterShanksAgent creado = new CounterShanksAgent(agentID);
+            CounterShanksAgent creado = new CounterShanksAgent(agentID, sim.getLogger());
 
             CreationShanksAgentCapability.addNewAgent(sim, creado);
 
@@ -180,7 +180,7 @@ public class ShanksAgentCreationCapabilityTest {
             sim.start();
 
             MySimpleShanksAgent creado = new MySimpleShanksAgent(
-                    "agenteCreado", 1, 1);
+                    "agenteCreado", 1, 1, sim.getLogger());
 
             CreationShanksAgentCapability.addNewAgent(sim, creado);
 
@@ -228,7 +228,7 @@ public class ShanksAgentCreationCapabilityTest {
 
             String createdAgentID = "CreatedAgent";
             CounterShanksAgent createdAgent = new CounterShanksAgent(
-                    createdAgentID);
+                    createdAgentID, sim.getLogger());
 
             testSim.registerShanksAgent(createdAgent);
 
@@ -300,7 +300,7 @@ public class ShanksAgentCreationCapabilityTest {
 
             String createdAgentID = "CreatedAgent";
             CounterShanksAgent createdAgent = new CounterShanksAgent(
-                    createdAgentID);
+                    createdAgentID, sim.getLogger());
 
             gui2D = new MyShanksSimulation2DGUI(testSim);
             gui2D.start();

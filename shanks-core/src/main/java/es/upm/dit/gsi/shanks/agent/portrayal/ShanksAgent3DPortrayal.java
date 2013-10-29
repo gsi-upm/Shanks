@@ -6,7 +6,6 @@ package es.upm.dit.gsi.shanks.agent.portrayal;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.util.logging.Logger;
 
 import javax.media.j3d.Appearance;
 import javax.media.j3d.ColoringAttributes;
@@ -36,7 +35,6 @@ public abstract class ShanksAgent3DPortrayal extends SimplePortrayal3D {
 
 
     private int diameter = 50;
-    public Logger log = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public String getLabel(ShanksAgent agent) {
         return agent.getID();

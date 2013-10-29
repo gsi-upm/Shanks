@@ -41,8 +41,8 @@ public class MySimpleShanksAgent extends SimpleShanksAgent implements
 
     private Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-    public MySimpleShanksAgent(String id, double speed, double perceptionRange) {
-        super(id);
+    public MySimpleShanksAgent(String id, double speed, double perceptionRange, Logger logger) {
+        super(id, logger);
         this.currentLocation = new Location();
         this.targetLocation = new Location();
         this.speed = speed;

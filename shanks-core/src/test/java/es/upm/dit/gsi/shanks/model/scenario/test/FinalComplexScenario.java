@@ -6,6 +6,7 @@ package es.upm.dit.gsi.shanks.model.scenario.test;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedAgentIDException;
@@ -38,9 +39,9 @@ import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation3DGUI;
 public class FinalComplexScenario extends ComplexScenario {
 
     public FinalComplexScenario(String type, String initialState,
-            Properties properties)
+            Properties properties, Logger logger)
             throws ShanksException {
-        super(type, initialState, properties);
+        super(type, initialState, properties, logger);
     }
 
     /* (non-Javadoc)
@@ -92,15 +93,15 @@ public class FinalComplexScenario extends ComplexScenario {
     @Override
     public void addNetworkElements()
             throws ShanksException {
-        Link fel1 = new MyLink("FEL1", MyLink.OK_STATUS, 2);
-        Link fel2 = new MyLink("FEL2", MyLink.OK_STATUS, 2);
-        Link fel3 = new MyLink("FEL3", MyLink.OK_STATUS, 2);
-        Link fel4 = new MyLink("FEL4", MyLink.OK_STATUS, 2);
-        Link fel5 = new MyLink("FEL5", MyLink.OK_STATUS, 2);
-        Link fel6 = new MyLink("FEL6", MyLink.OK_STATUS, 2);
-        Link fel7 = new MyLink("FEL7", MyLink.OK_STATUS, 2);
-        Link fel8 = new MyLink("FEL8", MyLink.OK_STATUS, 2);
-        Device fed1 = new MyDevice("FED1", MyDevice.OK_STATUS, true);
+        Link fel1 = new MyLink("FEL1", MyLink.OK_STATUS, 2, this.getLogger());
+        Link fel2 = new MyLink("FEL2", MyLink.OK_STATUS, 2, this.getLogger());
+        Link fel3 = new MyLink("FEL3", MyLink.OK_STATUS, 2, this.getLogger());
+        Link fel4 = new MyLink("FEL4", MyLink.OK_STATUS, 2, this.getLogger());
+        Link fel5 = new MyLink("FEL5", MyLink.OK_STATUS, 2, this.getLogger());
+        Link fel6 = new MyLink("FEL6", MyLink.OK_STATUS, 2, this.getLogger());
+        Link fel7 = new MyLink("FEL7", MyLink.OK_STATUS, 2, this.getLogger());
+        Link fel8 = new MyLink("FEL8", MyLink.OK_STATUS, 2, this.getLogger());
+        Device fed1 = new MyDevice("FED1", MyDevice.OK_STATUS, true, this.getLogger());
 
         this.addNetworkElement(fed1);
         

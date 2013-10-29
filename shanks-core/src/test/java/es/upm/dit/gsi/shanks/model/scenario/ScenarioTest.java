@@ -5,6 +5,7 @@
 package es.upm.dit.gsi.shanks.model.scenario;
 
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import junit.framework.Assert;
 
@@ -28,6 +29,7 @@ import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
 
 public class ScenarioTest {
 
+    static Logger logger = Logger.getLogger(ScenarioTest.class.getName());
     /**
      * @throws Exception
      */
@@ -54,7 +56,7 @@ public class ScenarioTest {
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
-        Scenario s = new MyScenario("MyScenario", MyScenario.SUNNY, scenarioProperties);
+        Scenario s = new MyScenario("MyScenario", MyScenario.SUNNY, scenarioProperties, logger);
         Assert.assertEquals("MyScenario", s.getID());
         Assert.assertEquals(MyScenario.SUNNY, s.getCurrentStatus());
     }
@@ -71,7 +73,7 @@ public class ScenarioTest {
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
-        Scenario s = new MyScenario("MyScenario", MyScenario.SUNNY, scenarioProperties);
+        Scenario s = new MyScenario("MyScenario", MyScenario.SUNNY, scenarioProperties, logger);
         s.setCurrentStatus(MyScenario.CLOUDY);
         Assert.assertEquals(MyScenario.CLOUDY, s.getCurrentStatus());
     }
@@ -88,7 +90,7 @@ public class ScenarioTest {
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
-        Scenario s = new MyScenario("MyScenario", MyScenario.SUNNY, scenarioProperties);
+        Scenario s = new MyScenario("MyScenario", MyScenario.SUNNY, scenarioProperties, logger);
         boolean catched = false;
         try {
             s.setCurrentStatus("WrongStatus");
@@ -111,7 +113,7 @@ public class ScenarioTest {
             Properties scenarioProperties = new Properties();
             scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
             scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
-            new MyScenario("MyScenario", "WrongStatus", scenarioProperties);
+            new MyScenario("MyScenario", "WrongStatus", scenarioProperties, logger);
         } catch (UnsupportedScenarioStatusException e) {
             catched = true;
         }
@@ -134,7 +136,7 @@ public class ScenarioTest {
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
         scenarioProperties.put(Scenario.SIMULATION_GUI, Scenario.NO_GUI);
-        Scenario s = new MyScenario("MyScenario", MyScenario.CLOUDY, scenarioProperties);
+        Scenario s = new MyScenario("MyScenario", MyScenario.CLOUDY, scenarioProperties, logger);
         Assert.assertTrue(s.getCurrentFailures().size() == 0);
     }
  

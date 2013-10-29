@@ -1,6 +1,7 @@
 package es.upm.dit.gsi.shanks.model.failure.util.test;
 
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
@@ -19,8 +20,8 @@ public class FailureTestDevice extends Device {
      * @param isGateway
      * @throws ShanksException
      */
-    public FailureTestDevice(String id, String initialState, boolean isGateway) throws ShanksException {
-        super(id, initialState, isGateway);
+    public FailureTestDevice(String id, String initialState, boolean isGateway, Logger logger) throws ShanksException {
+        super(id, initialState, isGateway, logger);
         this.userField = null;
     }
 

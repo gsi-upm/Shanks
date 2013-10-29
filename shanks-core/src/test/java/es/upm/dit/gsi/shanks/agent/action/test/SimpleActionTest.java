@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 import junit.framework.Assert;
 
@@ -29,6 +30,7 @@ import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation;
 
 public class SimpleActionTest {
     
+    static Logger logger = Logger.getLogger(SimpleActionTest.class.getName());
     
     private MyShanksSimulation sim = null;
 
@@ -86,7 +88,7 @@ public class SimpleActionTest {
         Assert.assertEquals("Action", act.getID());
         Assert.assertEquals(launcher, act.getLauncher());
         
-        Device d = new MyDevice("Dev", MyDevice.NOK_STATUS, false);
+        Device d = new MyDevice("Dev", MyDevice.NOK_STATUS, false, logger);
         Assert.assertEquals("Dev", d.getID());
         Assert.assertTrue(d.getStatus().get(MyDevice.NOK_STATUS));
         Assert.assertFalse(d.isGateway());
@@ -108,14 +110,14 @@ public class SimpleActionTest {
         Assert.assertEquals("Action", act.getID());
         Assert.assertEquals(launcher, act.getLauncher());
         
-        Device d = new MyDevice("Dev", MyDevice.NOK_STATUS, false);
+        Device d = new MyDevice("Dev", MyDevice.NOK_STATUS, false, logger);
 
         Assert.assertEquals("Dev", d.getID());
         Assert.assertTrue(d.getStatus().get(MyDevice.NOK_STATUS));
         Assert.assertFalse(d.isGateway()); 
         List<NetworkElement> arguments = new ArrayList<NetworkElement>();
         arguments.add(d);
-        MySimpleShanksAgent agent = new MySimpleShanksAgent("Agent", 50, 10);
+        MySimpleShanksAgent agent = new MySimpleShanksAgent("Agent", 50, 10, sim.getLogger());
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
         scenarioProperties.put(Scenario.SIMULATION_GUI,

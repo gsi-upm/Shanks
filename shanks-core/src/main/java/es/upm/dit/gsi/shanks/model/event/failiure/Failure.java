@@ -15,22 +15,21 @@ import es.upm.dit.gsi.shanks.model.event.networkelement.ProbabilisticNetworkElem
 
 public abstract class Failure extends ProbabilisticNetworkElementEvent {
 
-    private Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private boolean active;
 //    private boolean resolved;
 
     /**
      * ¡¡¡This constructor must be override!!!
      */
-    public Failure(Steppable generator) {
-        super("_"+System.currentTimeMillis(), generator, null);
+    public Failure(Steppable generator, Logger logger) {
+        super("_"+System.currentTimeMillis(), generator, null, logger);
         this.active = false;
 //        this.resolved = true;
         logger.finer("New Failure: "+this);
     }
     
-    public Failure(String id, Steppable generator, double prob) {
-        super(id+"_"+System.currentTimeMillis(), generator, prob);
+    public Failure(String id, Steppable generator, double prob, Logger logger) {
+        super(id+"_"+System.currentTimeMillis(), generator, prob, logger);
         this.active = false;
 //        this.resolved = true;
         logger.finer("New Failure: "+this);

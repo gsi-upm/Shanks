@@ -24,14 +24,15 @@ import es.upm.dit.gsi.shanks.exception.ShanksException;
  */
 public abstract class SimpleShanksAgent implements ShanksAgent {
 
-    private Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private Logger logger;
     
     private ShanksSimulation simulation;
     private String id;
     private List<Message> inbox;
 
-    public SimpleShanksAgent(String id) {
+    public SimpleShanksAgent(String id, Logger logger) {
         this.id = id;
+        this.logger = logger;
         this.inbox = new ArrayList<Message>();
     }
 
@@ -98,6 +99,13 @@ public abstract class SimpleShanksAgent implements ShanksAgent {
      * @see sim.engine.Stoppable#stop()
      */
     public void stop() {
+    }
+    
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.agent.ShanksAgent#getLogger()
+     */
+    public Logger getLogger() {
+        return this.logger;
     }
     
     private static final long serialVersionUID = -1895658991339856799L;

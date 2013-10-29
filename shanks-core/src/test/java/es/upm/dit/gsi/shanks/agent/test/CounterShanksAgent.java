@@ -1,5 +1,7 @@
 package es.upm.dit.gsi.shanks.agent.test;
 
+import java.util.logging.Logger;
+
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.agent.SimpleShanksAgent;
 import es.upm.dit.gsi.shanks.model.test.MyShanksSimulation;
@@ -17,8 +19,8 @@ public class CounterShanksAgent extends SimpleShanksAgent{
      */
     private static final long serialVersionUID = -7824028426007073312L;
 
-    public CounterShanksAgent(String id) {
-        super(id);
+    public CounterShanksAgent(String id, Logger logger) {
+        super(id, logger);
     }
 
     @Override

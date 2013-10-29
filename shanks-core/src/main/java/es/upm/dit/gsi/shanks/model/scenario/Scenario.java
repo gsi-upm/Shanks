@@ -48,7 +48,7 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortra
  */
 public abstract class Scenario {
 
-    private Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private Logger logger;
 
     public static final String SIMULATION_GUI = "SIMULATION GUI";
     public static final String SIMULATION_2D = "2D";
@@ -77,12 +77,13 @@ public abstract class Scenario {
      * @throws UnsupportedScenarioStatusException
      * @throws DuplicatedIDException
      */
-    public Scenario(String id, String initialState, Properties properties)
+    public Scenario(String id, String initialState, Properties properties, Logger logger)
             throws ShanksException {
         // throws UnsupportedNetworkElementFieldException,
         // TooManyConnectionException, UnsupportedScenarioStatusException,
         // DuplicatedIDException {
         this.id = id;
+        this.logger = logger;
         this.setProperties(properties);
         this.possibleStates = new ArrayList<String>();
         this.currentElements = new HashMap<String, NetworkElement>();
@@ -481,8 +482,8 @@ public abstract class Scenario {
                 HashMap<Class<? extends Failure>, Double> penalties = this.getPenaltiesInStatus(status);
                 double penalty = 0;
                 try {
-                    c = type.getConstructor(new Class[] { Steppable.class });
-                    failure = (Failure) c.newInstance(sim.getScenarioManager());
+                    c = type.getConstructor(new Class[] { Steppable.class, Logger.class });
+                    failure = (Failure) c.newInstance(sim.getScenarioManager(), this.getLogger());
                     List<Set<NetworkElement>> list = this.getPossibleEventsOfNE().get(type);
                     int numberOfCombinations = list.size();
                     int combinationNumber = random.nextInt(numberOfCombinations);
@@ -604,7 +605,7 @@ public abstract class Scenario {
                 }
             } else {
                 // TODO ¿generate an exception?
-                logger.warning("No NE.Events where generated.");
+                logger.warning("No NE.Events were generated.");
                 return;
             }
         }
@@ -726,8 +727,8 @@ public abstract class Scenario {
             Failure failure;
             double prob = 0;
             try {
-                c = type.getConstructor(new Class[] { Steppable.class });
-                failure = (Failure) c.newInstance(sim.getScenarioManager());
+                c = type.getConstructor(new Class[] { Steppable.class, Logger.class });
+                failure = (Failure) c.newInstance(sim.getScenarioManager(), this.getLogger());
                 List<Set<NetworkElement>> list = this.getPossibleFailures()
                         .get(type);
                 int numberOfCombinations = list.size();
@@ -836,6 +837,13 @@ public abstract class Scenario {
      */
     public NetworkElement getNetworkElement(String id) {
         return this.currentElements.get(id);
+    }
+    
+    /**
+     * @return
+     */
+    public Logger getLogger() {
+        return this.logger;
     }
 
 }

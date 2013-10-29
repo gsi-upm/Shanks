@@ -108,19 +108,19 @@ public class MyShanksSimulation extends ShanksSimulation {
     @Override
     public void registerShanksAgents() throws ShanksException {
         MyJasonShanksAgent agent = new MyJasonShanksAgent("resolverAgent1",
-                "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent1.asl");
+                "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent1.asl", this.getLogger());
         this.registerShanksAgent(agent);
         MyJasonShanksAgent agent2 = new MyJasonShanksAgent("resolverAgent2",
-                "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent2.asl");
+                "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent2.asl", this.getLogger());
         this.registerShanksAgent(agent2);
         MyJasonShanksAgent agent3 = new MyJasonShanksAgent("resolverAgent3",
-                "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent3.asl");
+                "src/test/java/es/upm/dit/gsi/shanks/agent/test/MyShanksAgent3.asl", this.getLogger());
         this.registerShanksAgent(agent3);
-        MySimpleShanksAgent agent4 = new MySimpleShanksAgent("simpleAgent1", 5, 10);
+        MySimpleShanksAgent agent4 = new MySimpleShanksAgent("simpleAgent1", 5, 10, this.getLogger());
         this.registerShanksAgent(agent4);
-        MySimpleShanksAgent agent5 = new MySimpleShanksAgent("toBeRemovedAgent", 5, 10);
+        MySimpleShanksAgent agent5 = new MySimpleShanksAgent("toBeRemovedAgent", 5, 10, this.getLogger());
         this.registerShanksAgent(agent5);
-        MyFixAgent agent6 = new MyFixAgent("FixAgent");
+        MyFixAgent agent6 = new MyFixAgent("FixAgent", this.getLogger());
         this.registerShanksAgent(agent6);
     }
 

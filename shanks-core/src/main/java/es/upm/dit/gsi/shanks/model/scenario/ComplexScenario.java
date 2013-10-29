@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import es.upm.dit.gsi.shanks.ShanksSimulation;
 import es.upm.dit.gsi.shanks.exception.ShanksException;
@@ -49,21 +50,24 @@ public abstract class ComplexScenario extends Scenario {
      * @throws DuplicatedIDException
      * @throws NonGatewayDeviceException
      * @throws AlreadyConnectedScenarioException
-     * @throws InvocationTargetException 
-     * @throws IllegalAccessException 
-     * @throws InstantiationException 
-     * @throws NoSuchMethodException 
-     * @throws IllegalArgumentException 
-     * @throws SecurityException 
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     * @throws NoSuchMethodException
+     * @throws IllegalArgumentException
+     * @throws SecurityException
      */
     public ComplexScenario(String type, String initialState,
-            Properties properties) throws ShanksException {
+            Properties properties, Logger logger) throws ShanksException {
 
-//            throws UnsupportedNetworkElementFieldException,
-//            TooManyConnectionException, UnsupportedScenarioStatusException,
-//            DuplicatedIDException, NonGatewayDeviceException,
-//            AlreadyConnectedScenarioException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
-        super(type, initialState, properties);
+        // throws UnsupportedNetworkElementFieldException,
+        // TooManyConnectionException, UnsupportedScenarioStatusException,
+        // DuplicatedIDException, NonGatewayDeviceException,
+        // AlreadyConnectedScenarioException, SecurityException,
+        // IllegalArgumentException, NoSuchMethodException,
+        // InstantiationException, IllegalAccessException,
+        // InvocationTargetException {
+        super(type, initialState, properties, logger);
         this.scenarios = new HashMap<Scenario, List<Link>>();
 
         this.addScenarios();
@@ -80,19 +84,21 @@ public abstract class ComplexScenario extends Scenario {
      * @throws UnsupportedNetworkElementFieldException
      * @throws AlreadyConnectedScenarioException
      * @throws NonGatewayDeviceException
-     * @throws InvocationTargetException 
-     * @throws IllegalAccessException 
-     * @throws InstantiationException 
-     * @throws NoSuchMethodException 
-     * @throws IllegalArgumentException 
-     * @throws SecurityException 
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     * @throws NoSuchMethodException
+     * @throws IllegalArgumentException
+     * @throws SecurityException
      */
     abstract public void addScenarios() throws ShanksException;
-            
-//            throws UnsupportedNetworkElementFieldException,
-//            TooManyConnectionException, UnsupportedScenarioStatusException,
-//            DuplicatedIDException, NonGatewayDeviceException,
-//            AlreadyConnectedScenarioException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException;
+
+    // throws UnsupportedNetworkElementFieldException,
+    // TooManyConnectionException, UnsupportedScenarioStatusException,
+    // DuplicatedIDException, NonGatewayDeviceException,
+    // AlreadyConnectedScenarioException, SecurityException,
+    // IllegalArgumentException, NoSuchMethodException, InstantiationException,
+    // IllegalAccessException, InvocationTargetException;
 
     /**
      * Add the scenario to the complex scenario.
@@ -114,15 +120,21 @@ public abstract class ComplexScenario extends Scenario {
      * @throws IllegalAccessException
      * @throws InvocationTargetException
      */
-    public void addScenario(Class<? extends Scenario> scenarioClass, String scenarioID, String initialState, 
-            Properties properties, String gatewayDeviceID, String externalLinkID) throws ShanksException {
+    public void addScenario(Class<? extends Scenario> scenarioClass,
+            String scenarioID, String initialState, Properties properties,
+            String gatewayDeviceID, String externalLinkID)
+            throws ShanksException {
         // throws NonGatewayDeviceException, TooManyConnectionException,
-        // DuplicatedIDException, AlreadyConnectedScenarioException, SecurityException, NoSuchMethodException, IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
+        // DuplicatedIDException, AlreadyConnectedScenarioException,
+        // SecurityException, NoSuchMethodException, IllegalArgumentException,
+        // InstantiationException, IllegalAccessException,
+        // InvocationTargetException {
         Constructor<? extends Scenario> c;
         Scenario scenario;
         try {
-            c = scenarioClass.getConstructor(new Class[]{String.class,String.class,Properties.class});
-            scenario = c.newInstance(scenarioID,initialState,properties);
+            c = scenarioClass.getConstructor(new Class[] { String.class,
+                    String.class, Properties.class, Logger.class });
+            scenario = c.newInstance(scenarioID, initialState, properties, this.getLogger());
         } catch (SecurityException e) {
             throw new ShanksException(e);
         } catch (NoSuchMethodException e) {
@@ -171,7 +183,7 @@ public abstract class ComplexScenario extends Scenario {
      * @param scenarioID
      * @return null if the ComplexScenario does not contains the searched
      *         scenarioID
-     * @throws ScenarioNotFoundException 
+     * @throws ScenarioNotFoundException
      */
     public Scenario getScenario(String scenarioID) throws ShanksException {
         for (Scenario s : this.scenarios.keySet()) {
@@ -179,7 +191,7 @@ public abstract class ComplexScenario extends Scenario {
                 return s;
             }
         }
-        throw new ScenarioNotFoundException(scenarioID,this.getID());
+        throw new ScenarioNotFoundException(scenarioID, this.getID());
     }
 
     /*
@@ -187,7 +199,8 @@ public abstract class ComplexScenario extends Scenario {
      * 
      * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#generateFailures()
      */
-    public void generateNetworkElementsEvents(ShanksSimulation sim) throws ShanksException {
+    public void generateNetworkElementsEvents(ShanksSimulation sim)
+            throws ShanksException {
         super.generateNetworkElementEvents(sim);
         for (Scenario scenario : this.scenarios.keySet()) {
             scenario.generateNetworkElementEvents(sim);
@@ -224,14 +237,16 @@ public abstract class ComplexScenario extends Scenario {
 
         return maps;
     }
-    
-    /* (non-Javadoc)
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see es.upm.dit.gsi.shanks.model.scenario.Scenario#getCurrentFailures()
      */
     public Set<Failure> getCurrentFailures() {
         Set<Failure> failures = new HashSet<Failure>();
         failures.addAll(this.getFullCurrentFailures().keySet());
-        for(Scenario s : this.getScenarios()) {
+        for (Scenario s : this.getScenarios()) {
             failures.addAll(s.getCurrentFailures());
         }
         return failures;
@@ -249,60 +264,69 @@ public abstract class ComplexScenario extends Scenario {
 
         return maps;
     }
-    
-    //Idem que con los eventos y los dupes
-    public void addPossiblesFailuresComplex(){
+
+    // Idem que con los eventos y los dupes
+    public void addPossiblesFailuresComplex() {
         Set<Scenario> scenarios = this.getScenarios();
-        for(Scenario s : scenarios){
-                for(Class<? extends Failure> c : s.getPossibleFailures().keySet()){
-                    if(!this.getPossibleFailures().containsKey(c)){
-                        this.addPossibleFailure(c, s.getPossibleFailures().get(c));
-                    }else{
-                        List<Set<NetworkElement>> elements = this.getPossibleFailures().get(c);
-                        //elements.addAll(s.getPossibleFailures().get(c));
-                        for(Set<NetworkElement> sne : s.getPossibleFailures().get(c)){
-                            if(!elements.contains(sne))
-                                elements.add(sne);
-                        }
-                        this.addPossibleFailure(c, elements);
+        for (Scenario s : scenarios) {
+            for (Class<? extends Failure> c : s.getPossibleFailures().keySet()) {
+                if (!this.getPossibleFailures().containsKey(c)) {
+                    this.addPossibleFailure(c, s.getPossibleFailures().get(c));
+                } else {
+                    List<Set<NetworkElement>> elements = this
+                            .getPossibleFailures().get(c);
+                    // elements.addAll(s.getPossibleFailures().get(c));
+                    for (Set<NetworkElement> sne : s.getPossibleFailures().get(
+                            c)) {
+                        if (!elements.contains(sne))
+                            elements.add(sne);
                     }
+                    this.addPossibleFailure(c, elements);
+                }
             }
         }
     }
-    
-    //TODO Hacerlo como con los fallos
-    //J Anadido eventos de escenario, y evitado la adiccion de duplicados
-    public void addPossiblesEventsComplex(){
+
+    // TODO Hacerlo como con los fallos
+    // J Anadido eventos de escenario, y evitado la adiccion de duplicados
+    public void addPossiblesEventsComplex() {
         Set<Scenario> scenarios = this.getScenarios();
-        for(Scenario s : scenarios){
-                for(Class<? extends Event> c : s.getPossibleEventsOfNE().keySet()){
-                    if(!this.getPossibleEventsOfNE().containsKey(c)){
-                        this.addPossibleEventsOfNE(c, s.getPossibleEventsOfNE().get(c));
-                    }else{
-                        List<Set<NetworkElement>> elements = this.getPossibleEventsOfNE().get(c);
-                        //elements.addAll(s.getPossibleEventsOfNE().get(c));
-                        for(Set<NetworkElement> sne : s.getPossibleEventsOfNE().get(c)){
-                            if(!elements.contains(sne))
-                                elements.add(sne);
-                        }
-                        this.addPossibleEventsOfNE(c, elements);
+        for (Scenario s : scenarios) {
+            for (Class<? extends Event> c : s.getPossibleEventsOfNE().keySet()) {
+                if (!this.getPossibleEventsOfNE().containsKey(c)) {
+                    this.addPossibleEventsOfNE(c, s.getPossibleEventsOfNE()
+                            .get(c));
+                } else {
+                    List<Set<NetworkElement>> elements = this
+                            .getPossibleEventsOfNE().get(c);
+                    // elements.addAll(s.getPossibleEventsOfNE().get(c));
+                    for (Set<NetworkElement> sne : s.getPossibleEventsOfNE()
+                            .get(c)) {
+                        if (!elements.contains(sne))
+                            elements.add(sne);
                     }
+                    this.addPossibleEventsOfNE(c, elements);
+                }
             }
-                for(Class<? extends Event> c : s.getPossibleEventsOfScenario().keySet()){
-                    if(!this.getPossibleEventsOfScenario().containsKey(c)){
-                        this.addPossibleEventsOfScenario(c, s.getPossibleEventsOfScenario().get(c));
-                    }else{
-                        List<Set<Scenario>> elements = this.getPossibleEventsOfScenario().get(c);
-                        //elements.addAll(s.getPossibleEventsOfScenario().get(c));
-                        for(Set<Scenario> sne : s.getPossibleEventsOfScenario().get(c)){
-                            if(!elements.contains(sne))
-                                elements.add(sne);
-                        }
-                        this.addPossibleEventsOfScenario(c, elements);
+            for (Class<? extends Event> c : s.getPossibleEventsOfScenario()
+                    .keySet()) {
+                if (!this.getPossibleEventsOfScenario().containsKey(c)) {
+                    this.addPossibleEventsOfScenario(c, s
+                            .getPossibleEventsOfScenario().get(c));
+                } else {
+                    List<Set<Scenario>> elements = this
+                            .getPossibleEventsOfScenario().get(c);
+                    // elements.addAll(s.getPossibleEventsOfScenario().get(c));
+                    for (Set<Scenario> sne : s.getPossibleEventsOfScenario()
+                            .get(c)) {
+                        if (!elements.contains(sne))
+                            elements.add(sne);
                     }
+                    this.addPossibleEventsOfScenario(c, elements);
+                }
             }
         }
-        
+
     }
-    
+
 }

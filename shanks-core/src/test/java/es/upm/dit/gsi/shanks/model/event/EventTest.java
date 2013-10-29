@@ -3,6 +3,7 @@ package es.upm.dit.gsi.shanks.model.event;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 import junit.framework.Assert;
 
@@ -31,6 +32,8 @@ import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusE
 import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
 
 public class EventTest {
+    Logger logger = Logger.getLogger(EventTest.class.getName());
+
     /**
      * @throws Exception
      */
@@ -55,204 +58,196 @@ public class EventTest {
     @After
     public void tearDown() throws Exception {
     }
-    
-    
+
     @Test
-    public void createPeriodicNE(){
+    public void createPeriodicNE() {
         Steppable generator = new Steppable() {
-         
+
             private static final long serialVersionUID = 1L;
 
             public void step(SimState arg0) {
-           
-                
+
             }
         };
-        PeriodicNetworkElementEvent pe = new MyPeriodicNetElementEvent(generator);
-        
-   
+        PeriodicNetworkElementEvent pe = new MyPeriodicNetElementEvent(
+                generator);
+
         Assert.assertEquals(generator, pe.getLauncher());
         Assert.assertEquals(500, pe.getPeriod());
- 
+
     }
-    
+
     @Test
-    public void createPeriodicNEAndLaunchIt() throws ShanksException{
+    public void createPeriodicNEAndLaunchIt() throws ShanksException {
         Steppable generator = new Steppable() {
-            
+
             private static final long serialVersionUID = 1L;
 
             public void step(SimState arg0) {
-           
-                
+
             }
         };
-        PeriodicNetworkElementEvent pe = new MyPeriodicNetElementEvent(generator);
-        
+        PeriodicNetworkElementEvent pe = new MyPeriodicNetElementEvent(
+                generator);
 
         Assert.assertEquals(generator, pe.getLauncher());
         Assert.assertEquals(500, pe.getPeriod());
-        
-        Device dev = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
-        
+
+        Device dev = new MyDevice("MyDevice", MyDevice.OK_STATUS, false, logger);
+
         Assert.assertEquals("MyDevice", dev.getID());
         Assert.assertTrue(dev.getStatus().get(MyDevice.OK_STATUS));
         Assert.assertFalse(dev.isGateway());
-        
+
         pe.addAffectedElement(dev);
         pe.changeProperties();
         dev.checkStatus();
-        
+
         Assert.assertEquals("MyDevice", dev.getID());
         Assert.assertTrue(dev.getStatus().get(MyDevice.NOK_STATUS));
         Assert.assertFalse(dev.getStatus().get(MyDevice.OK_STATUS));
 
     }
-    
+
     @Test
-    public void createProbNE(){
+    public void createProbNE() {
         Steppable generator = new Steppable() {
-         
+
             private static final long serialVersionUID = 1L;
 
             public void step(SimState arg0) {
-           
-                
+
             }
         };
-        ProbabilisticNetworkElementEvent pe = new MyProbNetElementEvent(generator);
-        
+        ProbabilisticNetworkElementEvent pe = new MyProbNetElementEvent(
+                generator);
 
         Assert.assertEquals(generator, pe.getLauncher());
         Assert.assertEquals(0.50, pe.getProb());
- 
+
     }
-    
+
     @Test
     public void createProbNEAndLaunchIt() throws ShanksException {
         Steppable generator = new Steppable() {
-            
+
             private static final long serialVersionUID = 1L;
 
             public void step(SimState arg0) {
-           
-                
+
             }
         };
-        ProbabilisticNetworkElementEvent pe = new MyProbNetElementEvent(generator);
-        
+        ProbabilisticNetworkElementEvent pe = new MyProbNetElementEvent(
+                generator);
 
         Assert.assertEquals(generator, pe.getLauncher());
         Assert.assertEquals(0.50, pe.getProb());
- 
-        Device dev = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
+
+        Device dev = new MyDevice("MyDevice", MyDevice.OK_STATUS, false, logger);
         Assert.assertEquals("MyDevice", dev.getID());
         Assert.assertTrue(dev.getStatus().get(MyDevice.OK_STATUS));
         Assert.assertFalse(dev.isGateway());
-        
+
         pe.addAffectedElement(dev);
         pe.changeProperties();
         dev.checkStatus();
-        
+
         Assert.assertEquals("MyDevice", dev.getID());
         Assert.assertTrue(dev.getStatus().get(MyDevice.HIGH_TEMP_STATUS));
         Assert.assertFalse(dev.getStatus().get(MyDevice.OK_STATUS));
     }
-    
+
     @Test
-    public void createProbScenarioEvent(){
+    public void createProbScenarioEvent() {
         Steppable generator = new Steppable() {
-            
+
             private static final long serialVersionUID = 1L;
 
             public void step(SimState arg0) {
-           
-                
+
             }
         };
-        
+
         ProbabilisticScenarioEvent pe = new MyProbScenarioEvent(generator);
         Assert.assertEquals(generator, pe.getLauncher());
         Assert.assertEquals(0.50, pe.getProb());
-        
-        
+
     }
-    
+
     @Test
-    public void createProbScenarioEventAndLaunchaIt() throws ShanksException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException{
+    public void createProbScenarioEventAndLaunchaIt() throws ShanksException,
+            TooManyConnectionException, UnsupportedScenarioStatusException,
+            DuplicatedIDException {
         Steppable generator = new Steppable() {
-            
+
             private static final long serialVersionUID = 1L;
 
             public void step(SimState arg0) {
-           
-                
+
             }
         };
-        
+
         ProbabilisticScenarioEvent pe = new MyProbScenarioEvent(generator);
 
         Assert.assertEquals(generator, pe.getLauncher());
         Assert.assertEquals(0.50, pe.getProb());
-        
-        Scenario scen = new MyScenario("MyScenario", MyScenario.SUNNY, null);
+
+        Scenario scen = new MyScenario("MyScenario", MyScenario.SUNNY, null,logger);
         Assert.assertEquals("MyScenario", scen.getID());
         Assert.assertEquals(MyScenario.SUNNY, scen.getCurrentStatus());
         Assert.assertNull(scen.getProperties());
-        
+
         pe.addAffectedScenario(scen);
         pe.changeStatus();
         Assert.assertEquals(MyScenario.CLOUDY, scen.getCurrentStatus());
-        
+
     }
-    
+
     @Test
-    public void createPeriodicScenarioEvent(){
+    public void createPeriodicScenarioEvent() {
         Steppable generator = new Steppable() {
-            
+
             private static final long serialVersionUID = 1L;
 
             public void step(SimState arg0) {
-           
-                
+
             }
         };
-        
+
         PeriodicScenarioEvent pe = new MyPeriodicScenarioEvent(generator);
 
         Assert.assertEquals(generator, pe.getLauncher());
         Assert.assertEquals(500, pe.getPeriod());
-        
-        
+
     }
-    
+
     @Test
-    public void createPeriodicScenarioEventAndLaunchaIt() throws ShanksException, TooManyConnectionException, UnsupportedScenarioStatusException, DuplicatedIDException{
+    public void createPeriodicScenarioEventAndLaunchaIt()
+            throws ShanksException, TooManyConnectionException,
+            UnsupportedScenarioStatusException, DuplicatedIDException {
         Steppable generator = new Steppable() {
-            
+
             private static final long serialVersionUID = 1L;
 
             public void step(SimState arg0) {
-           
-                
+
             }
         };
-        
+
         PeriodicScenarioEvent pe = new MyPeriodicScenarioEvent(generator);
 
         Assert.assertEquals(generator, pe.getLauncher());
         Assert.assertEquals(500, pe.getPeriod());
-        
-        Scenario scen = new MyScenario("MyScenario", MyScenario.SUNNY, null);
+
+        Scenario scen = new MyScenario("MyScenario", MyScenario.SUNNY, null, logger);
         Assert.assertEquals("MyScenario", scen.getID());
         Assert.assertEquals(MyScenario.SUNNY, scen.getCurrentStatus());
         Assert.assertNull(scen.getProperties());
-        
+
         pe.addAffectedScenario(scen);
         pe.changeStatus();
         Assert.assertEquals(MyScenario.CLOUDY, scen.getCurrentStatus());
-        
+
     }
-    
-   
+
 }

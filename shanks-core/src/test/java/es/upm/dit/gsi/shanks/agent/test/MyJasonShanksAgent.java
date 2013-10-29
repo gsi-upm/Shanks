@@ -27,9 +27,9 @@ public class MyJasonShanksAgent extends JasonShanksAgent {
      * @param aslFilePath
      * @throws DuplicatedActionIDException
      */
-    public MyJasonShanksAgent(String id, String aslFilePath)
+    public MyJasonShanksAgent(String id, String aslFilePath, Logger logger)
             throws ShanksException {
-        super(id, aslFilePath);
+        super(id, aslFilePath, logger);
         this.numberOfResolvedFailures = 0;
     }
 

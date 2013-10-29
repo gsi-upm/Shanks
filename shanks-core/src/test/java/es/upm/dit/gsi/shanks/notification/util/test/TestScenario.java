@@ -2,6 +2,7 @@ package es.upm.dit.gsi.shanks.notification.util.test;
 
 import java.util.HashMap;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
@@ -19,9 +20,9 @@ public class TestScenario extends Scenario{
 
     public static final String TEST_STATE = "sunny";
 
-    public TestScenario(String id, String initialState, Properties properties)
+    public TestScenario(String id, String initialState, Properties properties, Logger logger)
             throws ShanksException {
-        super(id, initialState, properties);
+        super(id, initialState, properties, logger);
     }
 
     @Override
@@ -55,10 +56,10 @@ public class TestScenario extends Scenario{
     public void addPossibleEvents() {
         try {
             
-            TestDevice neperd = new TestDevice(TestDefinitions.DEVICE_ID+"NEPerE", null, false);
+            TestDevice neperd = new TestDevice(TestDefinitions.DEVICE_ID+"NEPerE", null, false, this.getLogger());
             this.addPossibleEventsOfNE(TestPeriodicNetworkElementEvent.class, neperd);
             
-            TestDevice neprod = new TestDevice(TestDefinitions.DEVICE_ID+"NEProE", null, false);
+            TestDevice neprod = new TestDevice(TestDefinitions.DEVICE_ID+"NEProE", null, false, this.getLogger());
             this.addPossibleEventsOfNE(TestProbabilisticNetworkElementEvent.class, neprod);
             
             this.addPossibleEventsOfScenario(TestProbabilisticScenarioEvent.class, this);

@@ -26,10 +26,10 @@ import es.upm.dit.gsi.shanks.model.element.link.Link;
 
 public abstract class Device extends NetworkElement {
 
-    Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-
     private List<Link> linksList;
     private boolean isGateway;
+
+    private Logger logger;
 
     /**
      * 
@@ -45,8 +45,10 @@ public abstract class Device extends NetworkElement {
      * @param initialState
      *            the state in which the device has to be initialized.
      */
-    public Device(String id, String initialState, boolean isGateway) {
-        super(id, initialState);
+    public Device(String id, String initialState, boolean isGateway,
+            Logger logger) {
+        super(id, initialState, logger);
+        this.logger = logger;
         this.isGateway = isGateway;
         this.linksList = new ArrayList<Link>();
     }

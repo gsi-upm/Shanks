@@ -18,22 +18,23 @@ import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFi
  */
 public abstract class NetworkElement {
 
-    Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-
     private String id;
     private HashMap<String, Boolean> states;
     private HashMap<String, Object> properties;
-    public HashMap<String, Object> universal; // TODO rename this variable to
+    private HashMap<String, Object> universal; // TODO rename this variable to
                                               // global. Universal seems like
                                               // whole simulation state.
-    public List<String> possiblesStates;
+//    private List<String> possiblesStates;
+    
+    private Logger logger; 
 
     /**
      * @param id
      * @throws UnsupportedNetworkElementFieldException
      */
-    public NetworkElement(String id, String initialStatus){
+    public NetworkElement(String id, String initialStatus, Logger logger){
         this.id = id;
+        this.logger = logger;
         this.properties = new HashMap<String, Object>();
         this.states = new HashMap<String, Boolean>();
 

@@ -1,5 +1,7 @@
 package es.upm.dit.gsi.shanks.model.event.test;
 
+import java.util.logging.Logger;
+
 import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
@@ -7,8 +9,10 @@ import es.upm.dit.gsi.shanks.model.event.networkelement.ProbabilisticNetworkElem
 
 public class MyProbNetElementEvent extends ProbabilisticNetworkElementEvent{
 
+    static Logger logger = Logger.getLogger(MyProbNetElementEvent.class.getName());
+    
     public MyProbNetElementEvent(Steppable generator) {
-        super(MyProbNetElementEvent.class.getName(), generator, 0.50);
+        super(MyProbNetElementEvent.class.getName(), generator, 0.50, logger);
         // TODO Auto-generated constructor stub
     }
 

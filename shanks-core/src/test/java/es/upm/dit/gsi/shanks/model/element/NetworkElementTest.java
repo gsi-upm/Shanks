@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 import junit.framework.Assert;
 
@@ -27,6 +28,8 @@ import es.upm.dit.gsi.shanks.model.element.link.test.MyLink;
  * 
  */
 public class NetworkElementTest {
+    
+    Logger logger = Logger.getLogger(NetworkElementTest.class.getName());
 
     /**
      * @throws Exception
@@ -66,7 +69,7 @@ public class NetworkElementTest {
      */
     @Test
     public void createDevice() throws ShanksException {
-        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
+        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false, logger);
         Assert.assertEquals("MyDevice", d.getID());
         Assert.assertEquals(false, d.isGateway());
         Assert.assertTrue(d.getStatus().keySet().contains(MyDevice.OK_STATUS));
@@ -82,7 +85,7 @@ public class NetworkElementTest {
     public void createDeviceAndCheckInitialStatus()
             throws ShanksException {
         
-        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
+        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false, logger);
         Assert.assertEquals("MyDevice", d.getID());
         Assert.assertTrue(d.getStatus().keySet().contains(MyDevice.OK_STATUS));
         Assert.assertTrue(d.getStatus().keySet().contains(MyDevice.NOK_STATUS));
@@ -101,7 +104,7 @@ public class NetworkElementTest {
     public void createDeviceAndCheckChangedStatus()
             throws ShanksException {
         
-        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
+        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false, logger);
         Assert.assertEquals("MyDevice", d.getID());
         Assert.assertTrue(d.getStatus().keySet().contains(MyDevice.OK_STATUS));
         Assert.assertTrue(d.getStatus().keySet().contains(MyDevice.NOK_STATUS));
@@ -128,7 +131,7 @@ public class NetworkElementTest {
     @Test
     public void createDeviceAndCheckChangedStatusAndChangedProperty()
             throws ShanksException {
-        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
+        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false, logger);
         Assert.assertEquals("MyDevice", d.getID());
         Assert.assertTrue(d.getStatus().keySet().contains(MyDevice.OK_STATUS));
         Assert.assertTrue(d.getStatus().keySet().contains(MyDevice.NOK_STATUS));
@@ -160,7 +163,7 @@ public class NetworkElementTest {
     @Test
     public void createGatewayDevice()
             throws ShanksException {
-        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, true);
+        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, true, logger);
         Assert.assertEquals("MyDevice", d.getID());
         Assert.assertTrue(d.getStatus().keySet().contains(MyDevice.OK_STATUS));
         Assert.assertTrue(d.getStatus().keySet().contains(MyDevice.NOK_STATUS));
@@ -174,7 +177,7 @@ public class NetworkElementTest {
     @Test
     public void createDeviceChangeStatus()
             throws ShanksException {
-        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
+        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false, logger);
         try {
             d.setCurrentStatus(MyDevice.NOK_STATUS, false);
             d.setCurrentStatus(MyDevice.OK_STATUS, true);
@@ -192,7 +195,7 @@ public class NetworkElementTest {
     @Test
     public void createDeviceChangeToImpossibleStatus()
             throws ShanksException {
-        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
+        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false, logger);
         boolean catched = false;
         try {
             d.updateStatusTo("WrongStatus", true);
@@ -208,8 +211,8 @@ public class NetworkElementTest {
     @Test
     public void PorpertiesNetworkElement()
             throws ShanksException {
-        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
-        Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
+        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false, logger);
+        Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false, logger);
         d.addProperty("friendDevice", d2);
         Assert.assertEquals(d2, d.getProperty("friendDevice"));
     }
@@ -220,8 +223,8 @@ public class NetworkElementTest {
     @Test
     public void FullPorpertiesNetworkElement()
             throws ShanksException {
-        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
-        Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
+        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false, logger);
+        Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false, logger);
         HashMap<String, Object> properties = new HashMap<String, Object>();
         properties.put("friend", d2);
         d.setProperties(properties);
@@ -233,7 +236,7 @@ public class NetworkElementTest {
     @Test
     public void updateProperties() 
             throws ShanksException{
-        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
+        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false, logger);
         Assert.assertEquals(15.5, d.getProperty(MyDevice.TEMPERATURE_PROPERTY));
         d.updatePropertyTo(MyDevice.TEMPERATURE_PROPERTY, 70);
         Assert.assertEquals(70, d.getProperty(MyDevice.TEMPERATURE_PROPERTY));
@@ -255,10 +258,10 @@ public class NetworkElementTest {
     public void connect2DevicesToLink()
             throws ShanksException,
             TooManyConnectionException {
-        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
-        Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
+        Device d = new MyDevice("MyDevice", MyDevice.OK_STATUS, false, logger);
+        Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false, logger);
         
-        Link l1 = new MyLink("L1", MyLink.OK_STATUS, 2);
+        Link l1 = new MyLink("L1", MyLink.OK_STATUS, 2, logger);
         List<Device> linkList = l1.getLinkedDevices();
         List<Link> d1list = d.getLinks();
         List<Link> d2list = d2.getLinks();
@@ -283,10 +286,10 @@ public class NetworkElementTest {
     public void connect2DevicesToLinkInOneMethod()
             throws ShanksException,
             TooManyConnectionException {
-        Device d1 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
-        Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
+        Device d1 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false, logger);
+        Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false, logger);
         
-        Link l1 = new MyLink("L1", MyLink.OK_STATUS, 2);
+        Link l1 = new MyLink("L1", MyLink.OK_STATUS, 2, logger);
         
         List<Device> linkList = l1.getLinkedDevices();
         List<Link> d1list = d1.getLinks();
@@ -311,10 +314,10 @@ public class NetworkElementTest {
     public void connect2DevicesToLinkInOneMethodInFullLink()
             throws ShanksException,
             TooManyConnectionException {
-        Device d1 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
-        Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
+        Device d1 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false, logger);
+        Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false, logger);
         
-        Link l1 = new MyLink("L1", MyLink.OK_STATUS, 2);
+        Link l1 = new MyLink("L1", MyLink.OK_STATUS, 2, logger);
         
         List<Device> linkList = l1.getLinkedDevices();
 
@@ -333,10 +336,10 @@ public class NetworkElementTest {
     public void disconnectDeviceFromLink()
             throws ShanksException,
             TooManyConnectionException {
-        Device d1 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
-        Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
+        Device d1 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false, logger);
+        Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false, logger);
         
-        Link l1 = new MyLink("L1", MyLink.OK_STATUS, 2);
+        Link l1 = new MyLink("L1", MyLink.OK_STATUS, 2, logger);
         
         List<Device> linkList = l1.getLinkedDevices();
         List<Link> d1list = d1.getLinks();
@@ -363,10 +366,10 @@ public class NetworkElementTest {
     public void disconnectLinkFromDevice()
             throws ShanksException,
             TooManyConnectionException {
-        Device d1 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
-        Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
+        Device d1 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false, logger);
+        Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false, logger);
         
-        Link l1 = new MyLink("L1", MyLink.OK_STATUS, 2);
+        Link l1 = new MyLink("L1", MyLink.OK_STATUS, 2, logger);
         
         List<Device> linkList = l1.getLinkedDevices();
         List<Link> d1list = d1.getLinks();
@@ -393,10 +396,10 @@ public class NetworkElementTest {
     public void disconnectLinkFromDeviceAndViceversa()
             throws ShanksException,
             TooManyConnectionException {
-        Device d1 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
-        Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
+        Device d1 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false, logger);
+        Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false, logger);
         
-        Link l1 = new MyLink("L1", MyLink.OK_STATUS, 2);
+        Link l1 = new MyLink("L1", MyLink.OK_STATUS, 2, logger);
         
         List<Device> linkList = l1.getLinkedDevices();
         List<Link> d1list = d1.getLinks();
@@ -424,10 +427,10 @@ public class NetworkElementTest {
     public void connectDeviceToFullLink()
             throws ShanksException,
             TooManyConnectionException {
-        Device d1 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
-        Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false);
+        Device d1 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false, logger);
+        Device d2 = new MyDevice("MyDevice", MyDevice.OK_STATUS, false, logger);
         
-        Link l1 = new MyLink("L1", MyLink.OK_STATUS, 1);
+        Link l1 = new MyLink("L1", MyLink.OK_STATUS, 1, logger);
 
         d1.connectToLink(l1);
         boolean catched = false;

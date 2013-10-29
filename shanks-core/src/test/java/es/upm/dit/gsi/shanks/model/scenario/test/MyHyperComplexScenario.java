@@ -6,6 +6,7 @@ package es.upm.dit.gsi.shanks.model.scenario.test;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedAgentIDException;
@@ -51,9 +52,9 @@ public class MyHyperComplexScenario extends ComplexScenario {
     public static final String SUNNY = "SUNNY";
 
     public MyHyperComplexScenario(String type, String initialState,
-            Properties properties)
+            Properties properties, Logger logger)
             throws ShanksException {
-        super(type, initialState, properties);
+        super(type, initialState, properties, logger);
     }
 
     /* (non-Javadoc)
@@ -99,8 +100,8 @@ public class MyHyperComplexScenario extends ComplexScenario {
     @Override
     public void addNetworkElements()
             throws ShanksException {
-        Link hel1 = new MyLink("HEL1", MyLink.OK_STATUS, 3);
-        Device hed1 = new MyDevice("HED1", MyDevice.OK_STATUS, true);
+        Link hel1 = new MyLink("HEL1", MyLink.OK_STATUS, 3, this.getLogger());
+        Device hed1 = new MyDevice("HED1", MyDevice.OK_STATUS, true, this.getLogger());
 
         this.addNetworkElement(hed1);
         hed1.connectToLink(hel1);

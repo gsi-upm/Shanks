@@ -6,7 +6,6 @@ package es.upm.dit.gsi.shanks.model.element.device.portrayal;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.util.logging.Logger;
 
 import javax.media.j3d.Appearance;
 import javax.media.j3d.ColoringAttributes;
@@ -35,7 +34,6 @@ import es.upm.dit.gsi.shanks.model.element.device.Device;
 public abstract class Device3DPortrayal extends SimplePortrayal3D {
 
     private int diameter = 50;
-    public Logger log = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public String getLabel(Device device) {
         return device.getID();

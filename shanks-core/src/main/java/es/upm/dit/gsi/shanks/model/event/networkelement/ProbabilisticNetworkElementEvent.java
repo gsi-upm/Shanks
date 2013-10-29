@@ -17,18 +17,16 @@ import es.upm.dit.gsi.shanks.model.scenario.Scenario;
 public abstract class ProbabilisticNetworkElementEvent extends
         ProbabilisticEvent {
 
-    private Logger logger = Logger
-            .getLogger(Logger.GLOBAL_LOGGER_NAME);
-
+    private Logger logger;
     protected List<NetworkElement> affectedElements;
     protected List<Scenario> affectedScenarios;
     protected HashMap<Class<? extends NetworkElement>, HashMap<String, Object>> possibleAffectedElements;
     protected HashMap<Class<? extends Scenario>, HashMap<String, Object>> possibleAffectedScenarios;
 
     public ProbabilisticNetworkElementEvent(String name, Steppable generator,
-            Double prob) {
+            Double prob, Logger logger) {
         super(name, generator, prob);
-
+        this.logger = logger;
         this.affectedElements = new ArrayList<NetworkElement>();
         this.affectedScenarios = new ArrayList<Scenario>();
         this.possibleAffectedElements = new HashMap<Class<? extends NetworkElement>, HashMap<String, Object>>();

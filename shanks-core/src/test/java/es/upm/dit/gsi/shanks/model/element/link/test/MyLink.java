@@ -1,6 +1,7 @@
 package es.upm.dit.gsi.shanks.model.element.link.test;
 
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
@@ -24,8 +25,8 @@ public class MyLink extends Link {
      * @param capacity
      * @throws UnsupportedNetworkElementFieldException
      */
-    public MyLink(String id, String initialState, int capacity) throws ShanksException {
-        super(id, initialState, capacity);
+    public MyLink(String id, String initialState, int capacity, Logger logger) throws ShanksException {
+        super(id, initialState, capacity, logger);
     }
 
     /* (non-Javadoc)

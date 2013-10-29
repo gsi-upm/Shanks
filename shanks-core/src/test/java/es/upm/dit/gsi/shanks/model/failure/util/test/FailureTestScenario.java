@@ -2,6 +2,7 @@ package es.upm.dit.gsi.shanks.model.failure.util.test;
 
 import java.util.HashMap;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
@@ -15,16 +16,16 @@ import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario2DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.Scenario3DPortrayal;
 import es.upm.dit.gsi.shanks.model.scenario.portrayal.exception.DuplicatedPortrayalIDException;
 
-public class FailureTestScenario extends Scenario{
+public class FailureTestScenario extends Scenario {
 
     public static final String TEST_STATE = "testState";
     public static final String OK_STATE = "OKState";
     public static final String NOK_STATE = "NokState";
     public static final String USER_FIELD = "userField";
 
-    public FailureTestScenario(String id, String initialState, Properties properties)
-            throws ShanksException {
-        super(id, initialState, properties);
+    public FailureTestScenario(String id, String initialState,
+            Properties properties, Logger logger) throws ShanksException {
+        super(id, initialState, properties, logger);
     }
 
     @Override
@@ -58,20 +59,26 @@ public class FailureTestScenario extends Scenario{
 
     @Override
     public void addPossibleEvents() {
-//        try {
-            
-//            TestDevice neperd = new TestDevice(TestDefinitions.DEVICE_ID+"NEPerE", null, false);
-//            this.addPossibleEventsOfNE(TestPeriodicNetworkElementEvent.class, neperd);
-//            
-//            TestDevice neprod = new TestDevice(TestDefinitions.DEVICE_ID+"NEProE", null, false);
-//            this.addPossibleEventsOfNE(TestProbabilisticNetworkElementEvent.class, neprod);
-//            
-//            this.addPossibleEventsOfScenario(TestProbabilisticScenarioEvent.class, this);
-//            this.addPossibleEventsOfScenario(TestPeriodicScenarioEvent.class, this);
-            
-//        } catch (UnsupportedNetworkElementFieldException e1) {
-//            e1.printStackTrace();
-//        }
+        // try {
+
+        // TestDevice neperd = new
+        // TestDevice(TestDefinitions.DEVICE_ID+"NEPerE", null, false);
+        // this.addPossibleEventsOfNE(TestPeriodicNetworkElementEvent.class,
+        // neperd);
+        //
+        // TestDevice neprod = new
+        // TestDevice(TestDefinitions.DEVICE_ID+"NEProE", null, false);
+        // this.addPossibleEventsOfNE(TestProbabilisticNetworkElementEvent.class,
+        // neprod);
+        //
+        // this.addPossibleEventsOfScenario(TestProbabilisticScenarioEvent.class,
+        // this);
+        // this.addPossibleEventsOfScenario(TestPeriodicScenarioEvent.class,
+        // this);
+
+        // } catch (UnsupportedNetworkElementFieldException e1) {
+        // e1.printStackTrace();
+        // }
     }
 
     @Override

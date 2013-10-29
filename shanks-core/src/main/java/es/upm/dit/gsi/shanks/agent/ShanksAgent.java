@@ -5,6 +5,9 @@
 package es.upm.dit.gsi.shanks.agent;
 
 import jason.asSemantics.Message;
+
+import java.util.logging.Logger;
+
 import sim.engine.Steppable;
 import sim.engine.Stoppable;
 
@@ -41,5 +44,10 @@ public interface ShanksAgent extends Steppable, Stoppable {
      * @return The id of the agent
      */
     public String getID();
+    
+    /**
+     * @return Logger of the simulation
+     */
+    public Logger getLogger();
  
 }

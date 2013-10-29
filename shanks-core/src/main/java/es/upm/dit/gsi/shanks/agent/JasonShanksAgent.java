@@ -45,7 +45,7 @@ public abstract class JasonShanksAgent extends AgArch implements ShanksAgent {
 
     public static final String MYSELF = "myself";
 
-    private Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private Logger logger;
 
     private ShanksSimulation simulation;
     private String id;
@@ -59,11 +59,14 @@ public abstract class JasonShanksAgent extends AgArch implements ShanksAgent {
      * Constructor of the agent
      * 
      * @param id
-     * @throws DuplicatedActionIDException
+     * @param aslFilePath
+     * @param logger
+     * @throws ShanksException
      */
-    public JasonShanksAgent(String id, String aslFilePath)
+    public JasonShanksAgent(String id, String aslFilePath, Logger logger)
             throws ShanksException {
         this.id = id;
+        this.logger = logger;
         this.reasoning = false;
         this.inbox = new ArrayList<Message>();
         this.actions = new HashMap<String, Class<? extends JasonShanksAgentAction>>();
@@ -214,7 +217,7 @@ public abstract class JasonShanksAgent extends AgArch implements ShanksAgent {
                                 new Class[] { String.class, Steppable.class });
 
                 JasonShanksAgentAction shanksAction = c.newInstance(
-                        this.getID(), this);
+                        this.getID(), this, this.getLogger());
 
                 result = shanksAction.executeAction(this.getSimulation(), this,
                         actionStructure.getTerms());
@@ -320,6 +323,13 @@ public abstract class JasonShanksAgent extends AgArch implements ShanksAgent {
      */
     public String getAgName() {
         return this.id;
+    }
+    
+    /* (non-Javadoc)
+     * @see es.upm.dit.gsi.shanks.agent.ShanksAgent#getLogger()
+     */
+    public Logger getLogger() {
+        return this.logger;
     }
 
     private static final long serialVersionUID = 4744430503147830611L;

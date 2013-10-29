@@ -3,6 +3,8 @@
  */
 package es.upm.dit.gsi.shanks.notification.util.test;
 
+import java.util.logging.Logger;
+
 import jason.asSemantics.Message;
 import sim.engine.SimState;
 import sim.engine.Steppable;
@@ -118,4 +120,10 @@ public class TestAgent extends TestAction implements ShanksAgent {
     public void checkMail() {
     }
     private static final long serialVersionUID = -7213543937419402679L;
+
+    @Override
+    public Logger getLogger() {
+        // TODO Auto-generated method stub
+        return Logger.getLogger(TestAgent.class.getName());
+    }
 }

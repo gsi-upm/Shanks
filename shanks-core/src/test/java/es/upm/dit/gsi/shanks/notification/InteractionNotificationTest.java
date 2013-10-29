@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 import junit.framework.Assert;
 
@@ -36,6 +37,8 @@ import es.upm.dit.gsi.shanks.notification.util.test.TestProbabilisticScenarioEve
 import es.upm.dit.gsi.shanks.notification.util.test.TestScenario;
 
 public class InteractionNotificationTest {
+    
+    static Logger logger = Logger.getLogger(InteractionNotificationTest.class.getName());
 
     /**
      * @throws Exception
@@ -98,7 +101,7 @@ public class InteractionNotificationTest {
         }
         
         try {
-            NotificationManager nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
+            NotificationManager nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0), logger);
             Assert.assertEquals(ln, (nm.getByType(InteractionNotification.class)));
             ln.add(new InteractionNotification(null, 0, nm, null, null));
             Assert.assertNotSame(ln, (nm.getByType(InteractionNotification.class)));
@@ -126,7 +129,7 @@ public class InteractionNotificationTest {
         ArrayList<Notification> obtained_ln = new ArrayList<Notification>();
         NotificationManager nm = null;
         try {
-            nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
+            nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0), logger);
             obtained_ln= nm.getByType(InteractionNotification.class);
             Assert.assertEquals(ln, obtained_ln);
             for (Notification expected: ln){
@@ -162,7 +165,7 @@ public class InteractionNotificationTest {
         
         NotificationManager nm = null;
         try {
-            nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
+            nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0), logger);
             Assert.assertEquals(ln, nm.getByType(InteractionNotification.class));
             
             for(String step:stepCount.keySet()){
@@ -227,7 +230,7 @@ public class InteractionNotificationTest {
                         TestDefinitions.NOTIFICATION_WHEN, source, TestDefinitions.IN_INTERACTION, 
                         TestDefinitions.IN_TARGET));
             }
-            NotificationManager nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
+            NotificationManager nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0), logger);
             Assert.assertEquals(ln, nm.getByType(InteractionNotification.class));
             
             for(Object source:sourceCount.keySet()){
@@ -277,7 +280,7 @@ public class InteractionNotificationTest {
         
         NotificationManager nm = null;
         try {
-            nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
+            nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0), logger);
             Assert.assertEquals(ln, nm.getByType(InteractionNotification.class));
             
             for(String interaction:interactionCount.keySet()){
@@ -307,7 +310,7 @@ public class InteractionNotificationTest {
             ArrayList<Object> allTargets = new ArrayList<Object>();
             
             for(int i=0; i<TestDefinitions.TARGETS_SIZE; i++)
-                allTargets.add(new TestDevice(TestDefinitions.DEVICE_ID+i, null, false));
+                allTargets.add(new TestDevice(TestDefinitions.DEVICE_ID+i, null, false, logger));
             
             for (int i = 0; i < TestDefinitions.NOTIFICATIONS_SIZE; i++) {
                 ArrayList<Object> usedTargets = new ArrayList<Object>();
@@ -345,7 +348,7 @@ public class InteractionNotificationTest {
             }
             
             NotificationManager nm = null;
-            nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
+            nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0), logger);
             Assert.assertEquals(ln, nm.getByType(InteractionNotification.class));
             
             for(Object target:targetCount.keySet()){
@@ -376,7 +379,7 @@ public class InteractionNotificationTest {
                     TestDefinitions.IN_INTERACTION, TestDefinitions.IN_TARGET));
         }
         try {
-            NotificationManager nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0));
+            NotificationManager nm = new NotificationManager(ln, null, TestDefinitions.getSimulation(0), logger);
             Assert.assertEquals(ln, (nm.getByType(InteractionNotification.class)));
             ln.add(new InteractionNotification(null, 0, nm, null, null));
             Assert.assertNotSame(ln, (nm.getByType(InteractionNotification.class)));
@@ -394,11 +397,11 @@ public class InteractionNotificationTest {
     public void createNotificationsFromEvents() {
         try {
             ScenarioManager sm = new ScenarioManager(new TestScenario("TestScenario", 
-                                            TestScenario.TEST_STATE, new Properties()));
+                                            TestScenario.TEST_STATE, new Properties(), logger));
             NotificationManager nm = new NotificationManager(TestDefinitions.getSimulation(0));
             
             // Network Element Events           
-            ProbabilisticNetworkElementEvent probNEE = new TestProbabilisticNetworkElementEvent(sm);
+            ProbabilisticNetworkElementEvent probNEE = new TestProbabilisticNetworkElementEvent(sm, logger);
             probNEE.launchEvent();
             PeriodicNetworkElementEvent perNEE = (PeriodicNetworkElementEvent)new TestPeriodicNetworkElementEvent(
                     sm);

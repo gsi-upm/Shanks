@@ -1,9 +1,9 @@
 package es.upm.dit.gsi.shanks.model.failure.util.test;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import sim.engine.Steppable;
-
 import es.upm.dit.gsi.shanks.model.element.NetworkElement;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
@@ -16,16 +16,16 @@ import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
  */
 public class FailureTest extends Failure {
 
-    public FailureTest(Steppable launcher) {
-        this(FailureTest.class.getName(), launcher, 0.0);
+    public FailureTest(Steppable launcher, Logger logger) {
+        this(FailureTest.class.getName(), launcher, 0.0, logger);
     }
     
-    public FailureTest(Steppable launcher, double prob) {
-        this(FailureTest.class.getName(), launcher, prob);
+    public FailureTest(Steppable launcher, double prob, Logger logger) {
+        this(FailureTest.class.getName(), launcher, prob, logger);
     }
     
-    public FailureTest(String id, Steppable launcher, double prob) {
-        super(FailureTest.class.getName(), launcher, prob);
+    public FailureTest(String id, Steppable launcher, double prob, Logger logger) {
+        super(FailureTest.class.getName(), launcher, prob, logger);
     }
 
     /* (non-Javadoc)

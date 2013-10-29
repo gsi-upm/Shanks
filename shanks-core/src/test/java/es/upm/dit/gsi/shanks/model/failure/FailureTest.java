@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 import junit.framework.Assert;
 
@@ -19,6 +20,7 @@ import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.event.exception.UnsupportedElementByEventException;
 import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
+import es.upm.dit.gsi.shanks.model.event.test.MyProbNetElementEvent;
 import es.upm.dit.gsi.shanks.model.failure.util.test.FailureTestDefinitions;
 import es.upm.dit.gsi.shanks.model.failure.util.test.FailureTestDevice;
 import es.upm.dit.gsi.shanks.model.failure.util.test.FailureTestScenario;
@@ -34,6 +36,7 @@ import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;
  */
 public class FailureTest {
 
+    static Logger logger = Logger.getLogger(MyProbNetElementEvent.class.getName());
     /**
      * @throws Exception
      */
@@ -66,7 +69,7 @@ public class FailureTest {
     public void createFailure() {
         try {
             Failure f = new Failure(FailureTestDefinitions.FAILURE_ID, null,
-                    FailureTestDefinitions.FAILURE_PROB) {
+                    FailureTestDefinitions.FAILURE_PROB, logger) {
                 @Override
                 public void interactWithNE() {
                 }
@@ -107,7 +110,7 @@ public class FailureTest {
         try {
 
             Failure f = new Failure(FailureTestDefinitions.FAILURE_ID, null,
-                    FailureTestDefinitions.FAILURE_PROB) {
+                    FailureTestDefinitions.FAILURE_PROB, logger) {
                 @Override
                 public void interactWithNE() {
                 }
@@ -159,7 +162,7 @@ public class FailureTest {
         try {
 
             Failure f = new Failure(FailureTestDefinitions.FAILURE_ID, null,
-                    FailureTestDefinitions.FAILURE_PROB) {
+                    FailureTestDefinitions.FAILURE_PROB, logger) {
                 @Override
                 public void interactWithNE() {
                 }
@@ -219,7 +222,7 @@ public class FailureTest {
         try {
 
             Failure f = new Failure(FailureTestDefinitions.FAILURE_ID, null,
-                    FailureTestDefinitions.FAILURE_PROB) {
+                    FailureTestDefinitions.FAILURE_PROB, logger) {
                 @Override
                 public void interactWithNE() {
                 }
@@ -268,7 +271,7 @@ public class FailureTest {
         try {
 
             Failure f = new Failure(FailureTestDefinitions.FAILURE_ID, null,
-                    FailureTestDefinitions.FAILURE_PROB) {
+                    FailureTestDefinitions.FAILURE_PROB, logger) {
                 @Override
                 public void interactWithNE() {
                 }
@@ -333,18 +336,18 @@ public class FailureTest {
                     FailureTestScenario.TEST_STATE, scenarioProperties,
                     configProperties);
             
-            Device d = new FailureTestDevice(FailureTestDefinitions.DEVICE_ID, FailureTestDevice.OK_STATUS, false);
+            Device d = new FailureTestDevice(FailureTestDefinitions.DEVICE_ID, FailureTestDevice.OK_STATUS, false, logger);
             Failure deviceFailure = new TestDeviceFailure(
                     FailureTestDefinitions.FAILURE_ID,
                     sim.getNotificationManager(),
-                    FailureTestDefinitions.FAILURE_HIGH_PROB);
+                    FailureTestDefinitions.FAILURE_HIGH_PROB, logger);
             deviceFailure.addAffectedElement(d);
             
-            Scenario sc = new FailureTestScenario(FailureTestDefinitions.SCENARIO_ID, FailureTestScenario.OK_STATE, scenarioProperties);
+            Scenario sc = new FailureTestScenario(FailureTestDefinitions.SCENARIO_ID, FailureTestScenario.OK_STATE, scenarioProperties, logger);
             Failure scenarioFailure = new TestScenarioFailure(
                     FailureTestDefinitions.FAILURE_ID,
                     sim.getNotificationManager(),
-                    FailureTestDefinitions.FAILURE_HIGH_PROB);
+                    FailureTestDefinitions.FAILURE_HIGH_PROB, logger);
             scenarioFailure.addAffectedScenario(sc);
             
             deviceFailure.launchEvent();

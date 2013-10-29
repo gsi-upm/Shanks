@@ -1,6 +1,7 @@
 package es.upm.dit.gsi.shanks.model.element.device.test;
 
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.device.Device;
@@ -17,8 +18,8 @@ public class MyDevice extends Device {
      * @param isGateway
      * @throws ShanksException 
      */
-    public MyDevice(String id, String initialState, boolean isGateway) throws ShanksException {
-        super(id, initialState, isGateway);
+    public MyDevice(String id, String initialState, boolean isGateway, Logger logger) throws ShanksException {
+        super(id, initialState, isGateway, logger);
     }
 
     public static final String OK_STATUS = "OK";

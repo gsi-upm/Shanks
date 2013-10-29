@@ -5,7 +5,6 @@ package es.upm.dit.gsi.shanks.model.event.failiure.portrayal;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.util.logging.Logger;
 
 import javax.media.j3d.OrientedShape3D;
 import javax.media.j3d.Shape3D;
@@ -23,8 +22,6 @@ import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
 @SuppressWarnings("restriction")
 public class Failure3DPortrayal extends SimplePortrayal3D {
     //TODO i think this class is non-useful. Need to be eliminated. 
-    
-    public Logger log = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public TransformGroup getModel(Object object, TransformGroup model) {
 

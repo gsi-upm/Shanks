@@ -117,7 +117,6 @@ public class SimpleActionTest {
         Assert.assertFalse(d.isGateway()); 
         List<NetworkElement> arguments = new ArrayList<NetworkElement>();
         arguments.add(d);
-        MySimpleShanksAgent agent = new MySimpleShanksAgent("Agent", 50, 10, sim.getLogger());
         Properties scenarioProperties = new Properties();
         scenarioProperties.put(MyScenario.CLOUDY_PROB, "50");
         scenarioProperties.put(Scenario.SIMULATION_GUI,
@@ -128,7 +127,8 @@ public class SimpleActionTest {
         sim = new MyShanksSimulation(
                 System.currentTimeMillis(), MyScenario.class, "MyScenario",
                 MyScenario.SUNNY, scenarioProperties, configProperties);
-        
+
+        MySimpleShanksAgent agent = new MySimpleShanksAgent("Agent", 50, 10, sim.getLogger());
         act.executeAction(sim, agent, arguments);
         d.checkProperties();
         Assert.assertTrue(d.getStatus().get(MyDevice.OK_STATUS));

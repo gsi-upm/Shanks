@@ -401,7 +401,7 @@ public class InteractionNotificationTest {
             NotificationManager nm = new NotificationManager(TestDefinitions.getSimulation(0));
             
             // Network Element Events           
-            ProbabilisticNetworkElementEvent probNEE = new TestProbabilisticNetworkElementEvent(sm, logger);
+            ProbabilisticNetworkElementEvent probNEE = new TestProbabilisticNetworkElementEvent(sm);
             probNEE.launchEvent();
             PeriodicNetworkElementEvent perNEE = (PeriodicNetworkElementEvent)new TestPeriodicNetworkElementEvent(
                     sm);

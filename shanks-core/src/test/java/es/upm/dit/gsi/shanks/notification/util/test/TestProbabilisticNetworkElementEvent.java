@@ -8,9 +8,9 @@ import es.upm.dit.gsi.shanks.model.event.networkelement.ProbabilisticNetworkElem
 
 public class TestProbabilisticNetworkElementEvent extends ProbabilisticNetworkElementEvent{
 
-    public TestProbabilisticNetworkElementEvent(Steppable generator, Logger logger) {
+    public TestProbabilisticNetworkElementEvent(Steppable generator) {
         super(TestDefinitions.EVENT_ID+TestProbabilisticNetworkElementEvent.class, 
-                generator, TestDefinitions.EVENT_PROBABILITY, logger);
+                generator, TestDefinitions.EVENT_PROBABILITY, Logger.getLogger(TestPeriodicNetworkElementEvent.class.getName()));
         // TODO Auto-generated constructor stub
     }
 

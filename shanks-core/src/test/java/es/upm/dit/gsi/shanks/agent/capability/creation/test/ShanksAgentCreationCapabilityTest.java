@@ -226,9 +226,10 @@ public class ShanksAgentCreationCapabilityTest {
                     MyScenario.SUNNY, scenarioProperties, configProperties);
             // Creates an agent with a counter
 
+            Logger logger = testSim.getLogger();
             String createdAgentID = "CreatedAgent";
             CounterShanksAgent createdAgent = new CounterShanksAgent(
-                    createdAgentID, sim.getLogger());
+                    createdAgentID, logger);
 
             testSim.registerShanksAgent(createdAgent);
 
@@ -300,7 +301,7 @@ public class ShanksAgentCreationCapabilityTest {
 
             String createdAgentID = "CreatedAgent";
             CounterShanksAgent createdAgent = new CounterShanksAgent(
-                    createdAgentID, sim.getLogger());
+                    createdAgentID, testSim.getLogger());
 
             gui2D = new MyShanksSimulation2DGUI(testSim);
             gui2D.start();

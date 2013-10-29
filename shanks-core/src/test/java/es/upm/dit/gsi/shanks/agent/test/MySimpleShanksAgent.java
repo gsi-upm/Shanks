@@ -103,10 +103,9 @@ public class MySimpleShanksAgent extends SimpleShanksAgent implements
                     if (o instanceof Device) {
                         Location objectLocation = ShanksAgentPerceptionCapability
                                 .getObjectLocation(simulation, this, o);
-                        double distance = ShanksAgentPerceptionCapability
-                                .getDistanceTo(simulation, this, o);
-                        if (this.currentLocation.isNearTo(objectLocation, 1)
-                                && distance <= 1.0) {
+//                        double distance = ShanksAgentPerceptionCapability
+//                                .getDistanceTo(simulation, this, o);
+                        if (this.currentLocation.isNearTo(objectLocation, 10)) {
                             if (!hasBeenNearToSomething) {
                                 this.hasBeenNearToSomething = true;
                             }

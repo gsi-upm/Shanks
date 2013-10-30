@@ -33,5 +33,4 @@ public class CounterShanksAgent extends SimpleShanksAgent{
         if( simulation instanceof MyShanksSimulation) ;
             ((MyShanksSimulation)simulation).increaseCounter();
     }
-
 }

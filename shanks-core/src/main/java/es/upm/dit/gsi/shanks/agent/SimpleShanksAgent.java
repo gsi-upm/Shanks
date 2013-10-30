@@ -25,7 +25,7 @@ import es.upm.dit.gsi.shanks.exception.ShanksException;
 public abstract class SimpleShanksAgent implements ShanksAgent {
 
     private Logger logger;
-    
+
     private ShanksSimulation simulation;
     private String id;
     private List<Message> inbox;
@@ -36,8 +36,12 @@ public abstract class SimpleShanksAgent implements ShanksAgent {
         this.inbox = new ArrayList<Message>();
     }
 
-    /* (non-Javadoc)
-     * @see es.upm.dit.gsi.shanks.agent.ShanksAgent#putMessegaInInbox(jason.asSemantics.Message)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * es.upm.dit.gsi.shanks.agent.ShanksAgent#putMessegaInInbox(jason.asSemantics
+     * .Message)
      */
     @Override
     public void putMessegaInInbox(Message message) {
@@ -57,10 +61,11 @@ public abstract class SimpleShanksAgent implements ShanksAgent {
     }
 
     /**
-     * The reasoning cycle of the agent. All behaviors of the agent are written in this method.
+     * The reasoning cycle of the agent. All behaviors of the agent are written
+     * in this method.
      */
     abstract public void executeReasoningCycle(ShanksSimulation simulation);
-    
+
     /**
      * Return the inbox of the agent
      */
@@ -68,8 +73,12 @@ public abstract class SimpleShanksAgent implements ShanksAgent {
         return this.inbox;
     }
 
-    /* (non-Javadoc)
-     * @see es.upm.dit.gsi.shanks.agent.ShanksAgent#sendMsg(jason.asSemantics.Message)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * es.upm.dit.gsi.shanks.agent.ShanksAgent#sendMsg(jason.asSemantics.Message
+     * )
      */
     @Override
     public void sendMsg(Message message) {
@@ -95,18 +104,33 @@ public abstract class SimpleShanksAgent implements ShanksAgent {
         return this.id;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see sim.engine.Stoppable#stop()
      */
     public void stop() {
     }
-    
-    /* (non-Javadoc)
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see es.upm.dit.gsi.shanks.agent.ShanksAgent#getLogger()
      */
     public Logger getLogger() {
         return this.logger;
     }
-    
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * es.upm.dit.gsi.shanks.agent.ShanksAgent#setLogger(java.util.logging.Logger
+     * )
+     */
+    public void setLogger(Logger logger) {
+        this.logger = logger;
+    }
+
     private static final long serialVersionUID = -1895658991339856799L;
 }

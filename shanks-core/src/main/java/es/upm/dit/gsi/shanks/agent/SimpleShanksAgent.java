@@ -120,17 +120,6 @@ public abstract class SimpleShanksAgent implements ShanksAgent {
     public Logger getLogger() {
         return this.logger;
     }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * es.upm.dit.gsi.shanks.agent.ShanksAgent#setLogger(java.util.logging.Logger
-     * )
-     */
-    public void setLogger(Logger logger) {
-        this.logger = logger;
-    }
-
+    
     private static final long serialVersionUID = -1895658991339856799L;
 }

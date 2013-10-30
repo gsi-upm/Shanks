@@ -49,12 +49,5 @@ public interface ShanksAgent extends Steppable, Stoppable {
      * @return Logger of the simulation
      */
     public Logger getLogger();
-
-    /**
-     * Set the logger of the agent
-     *
-     * @param logger
-     */
-    public void setLogger(Logger logger);
  
 }

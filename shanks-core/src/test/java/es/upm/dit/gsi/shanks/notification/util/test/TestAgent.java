@@ -126,15 +126,4 @@ public class TestAgent extends TestAction implements ShanksAgent {
         // TODO Auto-generated method stub
         return Logger.getLogger(TestAgent.class.getName());
     }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * es.upm.dit.gsi.shanks.agent.ShanksAgent#setLogger(java.util.logging.Logger
-     * )
-     */
-    public void setLogger(Logger logger) {
-        //Nothing to do
-    }
 }

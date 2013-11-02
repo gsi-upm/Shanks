@@ -153,8 +153,10 @@ public class ShanksSimulation extends SimState {
         }
         logger.fine("Scenario created");
         ScenarioPortrayal sp = s.createScenarioPortrayal();
-        if (sp == null) {
-            logger.warning("ScenarioPortrayals is null");
+        if (sp == null && !properties.get(Scenario.SIMULATION_GUI).equals(Scenario.NO_GUI)) {
+            logger.severe("ScenarioPortrayals is null");
+            logger.severe("Impossible to follow with the execution...");
+            throw new ShanksException("ScenarioPortrayals is null. Impossible to continue with the simulation...");
         }
         ScenarioManager sm = new ScenarioManager(s, sp, logger);
         return sm;

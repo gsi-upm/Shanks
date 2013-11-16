@@ -289,7 +289,7 @@ public class ShanksAgentBayesianReasoningCapability {
                 softEvidenceNodePrefix + targetNodeName, triggerState);
         double conf = ShanksAgentBayesianReasoningCapability.getHypothesis(bn,
                 softEvidenceNodePrefix + targetNodeName, triggerState);
-        if (Math.abs(conf - 1) > 0.0001) {
+        if (Math.abs(conf - 1) > 0.01) {
             throw new ShanksException(
                     "Error adding finding to soft-evidence node for node: "
                             + targetNodeName

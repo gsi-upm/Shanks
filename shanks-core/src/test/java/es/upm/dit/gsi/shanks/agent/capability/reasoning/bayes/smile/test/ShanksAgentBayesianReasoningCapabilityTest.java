@@ -1,7 +1,7 @@
 /**
  * 
  */
-package es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.test;
+package es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.smile.test;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 import junit.framework.Assert;
 
@@ -18,14 +19,14 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import unbbayes.prs.Node;
-import unbbayes.prs.bn.PotentialTable;
-import unbbayes.prs.bn.ProbabilisticNetwork;
-import unbbayes.prs.bn.ProbabilisticNode;
-import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.BayesianReasonerShanksAgent;
-import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.ShanksAgentBayesianReasoningCapability;
+import smile.Network;
+import smile.SMILEException;
+
 import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.exception.UnknowkNodeStateException;
 import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.exception.UnknownNodeException;
+import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.smile.BayesianReasonerShanksAgent;
+import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.smile.ShanksAgentBayesianReasoningCapability;
+import es.upm.dit.gsi.shanks.exception.ShanksException;
 
 /**
  * @author a.carrera
@@ -33,8 +34,11 @@ import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.exception.UnknownN
  */
 public class ShanksAgentBayesianReasoningCapabilityTest {
 
-    ProbabilisticNetwork bn;
+    Network bn;
     BayesianReasonerShanksAgent agent;
+    static Logger logger;
+    static long initTime;
+    static long endTime;
 
     /**
      * @throws Exception
@@ -44,6 +48,9 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
         LogManager lm = LogManager.getLogManager();
         File configFile = new File("src/test/resources/logging.properties");
         lm.readConfiguration(new FileInputStream(configFile));
+        logger = Logger.getLogger("ShanksAgentBayesianReasoningSmile");
+        initTime = System.currentTimeMillis();
+        logger.info("Init Time: " + initTime);
     }
 
     /**
@@ -51,6 +58,9 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
      */
     @AfterClass
     public static void tearDownAfterClass() throws Exception {
+        endTime = System.currentTimeMillis();
+        logger.info("End Time: " + endTime);
+        logger.info("Execution time in milliseconds: " + (endTime - initTime));
     }
 
     /**
@@ -61,7 +71,7 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
         bn = ShanksAgentBayesianReasoningCapability
                 .loadNetwork("src/test/resources/alarm.net");
         agent = new BayesianReasonerShanksAgent() {
-            ProbabilisticNetwork bayes;
+            Network bayes;
 
             @Override
             public String getBayesianNetworkFilePath() {
@@ -69,12 +79,12 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
             }
 
             @Override
-            public ProbabilisticNetwork getBayesianNetwork() {
+            public Network getBayesianNetwork() {
                 return bayes;
             }
 
             @Override
-            public void setBayesianNetwork(ProbabilisticNetwork bn) {
+            public void setBayesianNetwork(Network bn) {
                 bayes = bn;
             }
         };
@@ -317,10 +327,7 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
             value = ShanksAgentBayesianReasoningCapability.getHypothesis(
                     this.bn, queryNodeName, queryStatus);
             Assert.assertEquals(0.2322F, value, 0.001F);
-        } catch (UnknowkNodeStateException e) {
-            e.printStackTrace();
-            Assert.fail();
-        } catch (UnknownNodeException e) {
+        } catch (SMILEException e) {
             Assert.assertTrue(true);
         } catch (Exception e) {
             e.printStackTrace();
@@ -348,11 +355,8 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
             value = ShanksAgentBayesianReasoningCapability.getHypothesis(
                     this.bn, queryNodeName, queryStatus);
             Assert.assertEquals(0.2322F, value, 0.001F);
-        } catch (UnknowkNodeStateException e) {
+        } catch (SMILEException e) {
             Assert.assertTrue(true);
-        } catch (UnknownNodeException e) {
-            e.printStackTrace();
-            Assert.fail();
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail();
@@ -378,10 +382,10 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
             value = ShanksAgentBayesianReasoningCapability.getHypothesis(
                     this.bn, queryNodeName, queryStatus);
             Assert.assertEquals(0.2322F, value, 0.001F);
-        } catch (UnknowkNodeStateException e) {
+        } catch (SMILEException e) {
             e.printStackTrace();
             Assert.fail();
-        } catch (UnknownNodeException e) {
+        } catch (ShanksException e) {
             Assert.assertTrue(true);
         } catch (Exception e) {
             e.printStackTrace();
@@ -619,10 +623,7 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
             value = ShanksAgentBayesianReasoningCapability.getHypothesis(agent,
                     queryNodeName, queryStatus);
             Assert.assertEquals(0.2322F, value, 0.001F);
-        } catch (UnknowkNodeStateException e) {
-            e.printStackTrace();
-            Assert.fail();
-        } catch (UnknownNodeException e) {
+        } catch (SMILEException e) {
             Assert.assertTrue(true);
         } catch (Exception e) {
             e.printStackTrace();
@@ -650,11 +651,8 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
             value = ShanksAgentBayesianReasoningCapability.getHypothesis(agent,
                     queryNodeName, queryStatus);
             Assert.assertEquals(0.2322F, value, 0.001F);
-        } catch (UnknowkNodeStateException e) {
+        } catch (SMILEException e) {
             Assert.assertTrue(true);
-        } catch (UnknownNodeException e) {
-            e.printStackTrace();
-            Assert.fail();
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail();
@@ -680,10 +678,10 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
             value = ShanksAgentBayesianReasoningCapability.getHypothesis(agent,
                     queryNodeName, queryStatus);
             Assert.assertEquals(0.2322F, value, 0.001F);
-        } catch (UnknowkNodeStateException e) {
+        } catch (SMILEException e) {
             e.printStackTrace();
             Assert.fail();
-        } catch (UnknownNodeException e) {
+        } catch (ShanksException e) {
             Assert.assertTrue(true);
         } catch (Exception e) {
             e.printStackTrace();
@@ -856,14 +854,14 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
         try {
             String auxNodeName = "History";
 
-            ProbabilisticNode node = ShanksAgentBayesianReasoningCapability
-                    .getNode(this.bn, auxNodeName);
-            PotentialTable cpt = node.getProbabilityFunction();
-            Assert.assertEquals(4, cpt.tableSize());
-            Assert.assertEquals(0.9F, cpt.getValue(0));
-            Assert.assertEquals(0.1F, cpt.getValue(1));
-            Assert.assertEquals(0.01F, cpt.getValue(2));
-            Assert.assertEquals(0.99F, cpt.getValue(3));
+            int node = ShanksAgentBayesianReasoningCapability.getNode(this.bn,
+                    auxNodeName);
+            double[] cpt = bn.getNodeDefinition(node);
+            Assert.assertEquals(4, cpt.length);
+            Assert.assertEquals(0.9, cpt[0]);
+            Assert.assertEquals(0.1, cpt[1]);
+            Assert.assertEquals(0.01, cpt[2]);
+            Assert.assertEquals(0.99, cpt[3]);
         } catch (UnknowkNodeStateException e) {
             e.printStackTrace();
             Assert.fail();
@@ -931,7 +929,7 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
 
             Assert.assertEquals(0.7, trueConf, 0.01);
             Assert.assertEquals(0.3, falseConf, 0.01);
-            
+
             softEvidence = new HashMap<String, Double>();
             softEvidence.put("True", 0.40);
             softEvidence.put("False", 0.60);
@@ -939,10 +937,10 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
             ShanksAgentBayesianReasoningCapability.addSoftEvidence(bn,
                     targetNodeName, softEvidence);
 
-            trueConf = ShanksAgentBayesianReasoningCapability
-                    .getHypothesis(bn, targetNodeName, "True");
-            falseConf = ShanksAgentBayesianReasoningCapability
-                    .getHypothesis(bn, targetNodeName, "False");
+            trueConf = ShanksAgentBayesianReasoningCapability.getHypothesis(bn,
+                    targetNodeName, "True");
+            falseConf = ShanksAgentBayesianReasoningCapability.getHypothesis(
+                    bn, targetNodeName, "False");
 
             Assert.assertEquals(0.4, trueConf, 0.01);
             Assert.assertEquals(0.6, falseConf, 0.01);
@@ -980,7 +978,7 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
 
             Assert.assertEquals(0.7, trueConf, 0.01);
             Assert.assertEquals(0.3, falseConf, 0.01);
-            
+
             softEvidence = new HashMap<String, Double>();
             softEvidence.put("True", 0.40);
             softEvidence.put("False", 0.60);
@@ -988,14 +986,14 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
             ShanksAgentBayesianReasoningCapability.addSoftEvidence(bn,
                     targetNodeName, softEvidence);
 
-            trueConf = ShanksAgentBayesianReasoningCapability
-                    .getHypothesis(bn, targetNodeName, "True");
-            falseConf = ShanksAgentBayesianReasoningCapability
-                    .getHypothesis(bn, targetNodeName, "False");
+            trueConf = ShanksAgentBayesianReasoningCapability.getHypothesis(bn,
+                    targetNodeName, "True");
+            falseConf = ShanksAgentBayesianReasoningCapability.getHypothesis(
+                    bn, targetNodeName, "False");
 
             Assert.assertEquals(0.4, trueConf, 0.01);
             Assert.assertEquals(0.6, falseConf, 0.01);
-            
+
             softEvidence = new HashMap<String, Double>();
             softEvidence.put("True", 0.10);
             softEvidence.put("False", 0.90);
@@ -1003,10 +1001,10 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
             ShanksAgentBayesianReasoningCapability.addSoftEvidence(bn,
                     targetNodeName, softEvidence);
 
-            trueConf = ShanksAgentBayesianReasoningCapability
-                    .getHypothesis(bn, targetNodeName, "True");
-            falseConf = ShanksAgentBayesianReasoningCapability
-                    .getHypothesis(bn, targetNodeName, "False");
+            trueConf = ShanksAgentBayesianReasoningCapability.getHypothesis(bn,
+                    targetNodeName, "True");
+            falseConf = ShanksAgentBayesianReasoningCapability.getHypothesis(
+                    bn, targetNodeName, "False");
 
             Assert.assertEquals(0.1, trueConf, 0.01);
             Assert.assertEquals(0.9, falseConf, 0.01);
@@ -1263,7 +1261,7 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
             value = ShanksAgentBayesianReasoningCapability.getHypothesis(
                     this.bn, queryNodeName, queryStatus);
             Assert.assertEquals(0.85, value, 0.01F);
-            
+
             ShanksAgentBayesianReasoningCapability.clearEvidence(bn, nodeName);
             queryNodeName = "ArtCO2";
             queryStatus = "Normal";
@@ -1277,27 +1275,6 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
         } catch (UnknownNodeException e) {
             e.printStackTrace();
             Assert.fail();
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
-    }
-
-    /**
-     * 
-     */
-    @Test
-    public void SearchingInGraphTest() {
-        try {
-            List<Node> nodes = bn.getNodes();
-            for (Node node : nodes) {
-                ProbabilisticNode pn = (ProbabilisticNode) node;
-                List<Node> adjs = pn.getAdjacents();
-                for (Node adj : adjs) {
-                    ProbabilisticNode padj = (ProbabilisticNode) adj;
-//                    padj.
-                }
-            }
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail();

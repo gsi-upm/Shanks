@@ -4,6 +4,7 @@
  */
 package es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.exception;
 
+import smile.Network;
 import unbbayes.prs.bn.ProbabilisticNetwork;
 import es.upm.dit.gsi.shanks.exception.ShanksException;
 
@@ -18,6 +19,11 @@ public class UnknowkNodeStateException extends ShanksException {
     public UnknowkNodeStateException(ProbabilisticNetwork bn, String nodeID,
             String status) {
         super("Unknown status " + status + " in node " + nodeID
+                + " for Bayesian Network " + bn.getName());
+    }
+
+    public UnknowkNodeStateException(Network bn, String nodeName, String status) {
+        super("Unknown status " + status + " in node " + nodeName
                 + " for Bayesian Network " + bn.getName());
     }
 

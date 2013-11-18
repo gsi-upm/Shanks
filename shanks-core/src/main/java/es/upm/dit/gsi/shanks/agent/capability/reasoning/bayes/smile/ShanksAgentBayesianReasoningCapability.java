@@ -2,23 +2,15 @@
  * es.upm.dit.gsi.shanks
  * 02/04/2012
  */
-package es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes;
+package es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.smile;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import unbbayes.io.BaseIO;
-import unbbayes.io.NetIO;
-import unbbayes.io.exception.LoadException;
-import unbbayes.prs.Edge;
-import unbbayes.prs.Node;
-import unbbayes.prs.bn.PotentialTable;
-import unbbayes.prs.bn.ProbabilisticNetwork;
-import unbbayes.prs.bn.ProbabilisticNode;
+import smile.Network;
+import smile.Network.NodeType;
 import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.exception.UnknowkNodeStateException;
 import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.exception.UnknownNodeException;
 import es.upm.dit.gsi.shanks.exception.ShanksException;
@@ -42,34 +34,11 @@ public class ShanksAgentBayesianReasoningCapability {
      * @return
      * @throws Exception
      */
-    public static ProbabilisticNetwork loadNetwork(String networkPath)
+    public static Network loadNetwork(String networkPath)
             throws ShanksException {
-        return ShanksAgentBayesianReasoningCapability.loadNetwork(new File(
-                networkPath));
-    }
-
-    /**
-     * Load a Bayesian network and return the probabilistic network object
-     * 
-     * @param netFile
-     * @return
-     * @throws Exception
-     */
-    @SuppressWarnings("deprecation")
-    public static ProbabilisticNetwork loadNetwork(File netFile)
-            throws ShanksException {
-        ProbabilisticNetwork net = null;
-        BaseIO io = new NetIO();
-        try {
-            net = (ProbabilisticNetwork) io.load(netFile);
-            net.compile();
-        } catch (LoadException e) {
-            throw new ShanksException(e);
-        } catch (IOException e) {
-            throw new ShanksException(e);
-        } catch (Exception e) {
-            throw new ShanksException(e);
-        }
+        Network net = new Network();
+        net.readFile(networkPath);
+        net.updateBeliefs();
         return net;
     }
 
@@ -81,8 +50,8 @@ public class ShanksAgentBayesianReasoningCapability {
      */
     public static void loadNetwork(BayesianReasonerShanksAgent agent)
             throws ShanksException {
-        ProbabilisticNetwork bn = ShanksAgentBayesianReasoningCapability
-                .loadNetwork(agent.getBayesianNetworkFilePath());
+        Network bn = ShanksAgentBayesianReasoningCapability.loadNetwork(agent
+                .getBayesianNetworkFilePath());
         agent.setBayesianNetwork(bn);
     }
 
@@ -94,26 +63,17 @@ public class ShanksAgentBayesianReasoningCapability {
      * @param status
      * @throws Exception
      */
-    public static void addEvidence(ProbabilisticNetwork bn, String nodeName,
-            String status) throws ShanksException {
-        ProbabilisticNode node = ShanksAgentBayesianReasoningCapability
-                .getNode(bn, nodeName);
-        if (node.hasEvidence()) {
-            ShanksAgentBayesianReasoningCapability.clearEvidence(bn, node);
+    public static void addEvidence(Network bn, String nodeName, String status)
+            throws ShanksException {
+
+        if (bn == null || nodeName == null || status == null) {
+            throw new ShanksException("Null parameter in addEvidence method.");
         }
-        int states = node.getStatesSize();
-        for (int i = 0; i < states; i++) {
-            if (status.equals(node.getStateAt(i))) {
-                node.addFinding(i);
-                try {
-                    bn.updateEvidences();
-                } catch (Exception e) {
-                    throw new ShanksException(e);
-                }
-                return;
-            }
+        if (bn.isEvidence(nodeName)) {
+            bn.clearEvidence(nodeName);
         }
-        throw new UnknowkNodeStateException(bn, nodeName, status);
+        bn.setEvidence(nodeName, status);
+        bn.updateBeliefs();
     }
 
     /**
@@ -124,16 +84,16 @@ public class ShanksAgentBayesianReasoningCapability {
      * @param softEvidence
      * @throws ShanksException
      */
-    public static void addSoftEvidence(ProbabilisticNetwork bn,
-            String nodeName, HashMap<String, Double> softEvidence)
-            throws ShanksException {
-        ProbabilisticNode targetNode = ShanksAgentBayesianReasoningCapability
-                .getNode(bn, nodeName);
+    public static void addSoftEvidence(Network bn, String nodeName,
+            HashMap<String, Double> softEvidence) throws ShanksException {
+        String auxNodeName = softEvidenceNodePrefix + nodeName;
+        int targetNode = bn.getNode(nodeName);
         boolean found = false;
-        for (Node child : targetNode.getChildren()) {
-            if (child.getName().equals(softEvidenceNodePrefix + nodeName)) {
-                if (child.getStatesSize() == 2
-                        && child.getStateAt(0).equals(triggerState)) {
+        int[] children = bn.getChildren(targetNode);
+        for (int child : children) {
+            if (bn.getNodeName(child).equals(auxNodeName)) {
+                if (bn.getOutcomeCount(child) == 2
+                        && bn.getOutcomeId(child, 0).equals(triggerState)) {
                     found = true;
                     break;
                 }
@@ -141,29 +101,22 @@ public class ShanksAgentBayesianReasoningCapability {
         }
         if (!found) {
             // Create soft-evidence node
-            ProbabilisticNode auxNode = new ProbabilisticNode();
-            auxNode.setName(softEvidenceNodePrefix + nodeName);
-            auxNode.setLabel(softEvidenceNodePrefix + nodeName);
-            auxNode.appendState(triggerState);
-            auxNode.appendState("NON" + triggerState);
-            PotentialTable cpt = auxNode.getProbabilityFunction();
-            cpt.addVariable(auxNode);
-            for (int i = 0; i < cpt.tableSize(); i++) {
-                cpt.setValue(i, (float) 0.5);
+            bn.addNode(NodeType.Cpt, auxNodeName);
+            bn.setNodeName(auxNodeName, auxNodeName);
+            int node = bn.getNode(auxNodeName);
+            bn.setOutcomeId(node, 0, triggerState);
+            bn.setOutcomeId(node, 1, "NON" + triggerState);
+            // bn.insertOutcome(auxNode, 0, triggerState);
+            // bn.insertOutcome(auxNode, 1, "NON" + triggerState);
+            double[] cpt = bn.getNodeDefinition(auxNodeName);
+            for (int i = 0; i < cpt.length; i++) {
+                cpt[i] = (float) 0.5;
             }
-            auxNode.initMarginalList();
-            bn.addNode(auxNode);
 
-            Edge edge = new Edge(targetNode, auxNode);
-            try {
-                bn.addEdge(edge);
-                cpt = auxNode.getProbabilityFunction();
-                for (int i = 0; i < cpt.tableSize(); i++) {
-                    cpt.setValue(i, (float) 0.5);
-                }
-                auxNode.initMarginalList();
-            } catch (Exception e) {
-                throw new ShanksException(e);
+            bn.addArc(targetNode, bn.getNode(auxNodeName));
+            cpt = bn.getNodeDefinition(auxNodeName);
+            for (int i = 0; i < cpt.length; i++) {
+                cpt[i] = (float) 0.5;
             }
         }
         ShanksAgentBayesianReasoningCapability
@@ -183,14 +136,12 @@ public class ShanksAgentBayesianReasoningCapability {
      * @param softEvidence
      * @throws ShanksException
      */
-    private static void updateSoftEvidenceAuxiliaryNodeCPT(
-            ProbabilisticNetwork bn, String targetNodeName,
-            HashMap<String, Double> softEvidence) throws ShanksException {
+    private static void updateSoftEvidenceAuxiliaryNodeCPT(Network bn,
+            String targetNodeName, HashMap<String, Double> softEvidence)
+            throws ShanksException {
 
-        ProbabilisticNode targetNode = (ProbabilisticNode) bn
-                .getNode(targetNodeName);
-        ProbabilisticNode auxNode = (ProbabilisticNode) bn
-                .getNode(softEvidenceNodePrefix + targetNodeName);
+        int targetNode = bn.getNode(targetNodeName);
+        int auxNode = bn.getNode(softEvidenceNodePrefix + targetNodeName);
 
         // Check if new beliefs join 1
         double total = 0;
@@ -201,21 +152,22 @@ public class ShanksAgentBayesianReasoningCapability {
         if (aux < (-0.05) || aux > 0.05) {
             throw new ShanksException(
                     "Impossible to set soft-evidence in node: "
-                            + targetNode.getName()
+                            + targetNodeName
                             + " Target probabilistic distribution is not consistent. All states joint: "
                             + total);
         }
 
         // Check if believes are consistent
-        if (targetNode.getStatesSize() != softEvidence.size()) {
+        if (bn.getOutcomeCount(targetNodeName) != softEvidence.size()) {
             throw new ShanksException(
                     "Old belief and new belief are incompatible. Different number of states of hypothesis");
         }
 
         for (String status : softEvidence.keySet()) {
             boolean found = false;
-            for (int i = 0; i < targetNode.getStatesSize(); i++) {
-                if (targetNode.getStateAt(i).equals(status)) {
+            String[] outcomes = bn.getOutcomeIds(targetNode);
+            for (int i = 0; i < outcomes.length; i++) {
+                if (outcomes[i].equals(status)) {
                     found = true;
                     break;
                 }
@@ -230,16 +182,22 @@ public class ShanksAgentBayesianReasoningCapability {
         // Update the belief
 
         // Reset evidence.
-        ShanksAgentBayesianReasoningCapability.clearEvidence(bn, auxNode);
+        ShanksAgentBayesianReasoningCapability.clearEvidence(bn,
+                bn.getNodeName(auxNode));
 
         // Obtain required data
-        double[] currentProbabilities = new double[targetNode.getStatesSize()];
-        double[] newProbabilities = new double[targetNode.getStatesSize()];
-        for (int i = 0; i < targetNode.getStatesSize(); i++) {
+        int size = bn.getOutcomeCount(targetNodeName);
+        double[] currentProbabilities = new double[size];
+        double[] newProbabilities = new double[size];
+        String[] states = bn.getOutcomeIds(targetNodeName);
+        bn.updateBeliefs();
+        double[] values = bn.getNodeValue(targetNodeName);
+        for (int i = 0; i < size; i++) {
             for (String status : softEvidence.keySet()) {
-                if (targetNode.getStateAt(i).equals(status)) {
-                    currentProbabilities[i] = targetNode.getMarginalAt(i);
+                if (states[i].equals(status)) {
+                    currentProbabilities[i] = values[i];
                     newProbabilities[i] = softEvidence.get(status);
+                    break;
                 }
             }
         }
@@ -270,32 +228,36 @@ public class ShanksAgentBayesianReasoningCapability {
         }
 
         // Update the CPT and the Inference Engine
-        PotentialTable cpt = auxNode.getProbabilityFunction();
-        for (int i = 0; i < cptProbabilitiesPrime.length; i++) {
-            cpt.setValue(2 * i, (float) cptProbabilitiesPrime[i]);
-            cpt.setValue(1 + (2 * i), (float) (1 - cptProbabilitiesPrime[i]));
+        // TODO check this
+        double[] cpt = new double[bn.getNodeDefinition(auxNode).length];
+        for (int i = 0; i < currentProbabilities.length; i++) {
+            cpt[2 * i] = cptProbabilitiesPrime[i];
+            cpt[1 + (2 * i)] = (1 - cptProbabilitiesPrime[i]);
         }
+        bn.setNodeDefinition(softEvidenceNodePrefix + targetNodeName, cpt);
 
         // Compiling new network
-        Map<String, String> currentEvidences = ShanksAgentBayesianReasoningCapability
-                .getEvidences(bn);
-        ShanksAgentBayesianReasoningCapability.clearEvidences(bn);
-        ShanksAgentBayesianReasoningCapability.addEvidences(bn,
-                currentEvidences);
+        // Map<String, String> currentEvidences =
+        // ShanksAgentBayesianReasoningCapability
+        // .getEvidences(bn);
+        // ShanksAgentBayesianReasoningCapability.clearEvidences(bn);
+        // ShanksAgentBayesianReasoningCapability.addEvidences(bn,
+        // currentEvidences);
 
         // Testing CPT
 
-        ShanksAgentBayesianReasoningCapability.addEvidence(bn,
-                softEvidenceNodePrefix + targetNodeName, triggerState);
-        double conf = ShanksAgentBayesianReasoningCapability.getHypothesis(bn,
-                softEvidenceNodePrefix + targetNodeName, triggerState);
-        if (Math.abs(conf - 1) > 0.01) {
-            throw new ShanksException(
-                    "Error adding finding to soft-evidence node for node: "
-                            + targetNodeName
-                            + " It should be equals to 1, but it is: " + conf);
-        }
-        ShanksAgentBayesianReasoningCapability.clearEvidence(bn, auxNode);
+        // ShanksAgentBayesianReasoningCapability.addEvidence(bn,
+        // softEvidenceNodePrefix + targetNodeName, triggerState);
+        // double conf =
+        // ShanksAgentBayesianReasoningCapability.getHypothesis(bn,
+        // softEvidenceNodePrefix + targetNodeName, triggerState);
+        // if (Math.abs(conf - 1) > 0.01) {
+        // throw new ShanksException(
+        // "Error adding finding to soft-evidence node for node: "
+        // + targetNodeName
+        // + " It should be equals to 1, but it is: " + conf);
+        // }
+        // ShanksAgentBayesianReasoningCapability.clearEvidence(bn, auxNode);
     }
 
     /**
@@ -307,10 +269,13 @@ public class ShanksAgentBayesianReasoningCapability {
      * @param nodeName
      * @throws ShanksException
      */
-    public static void clearEvidence(ProbabilisticNetwork bn, String nodeName)
+    public static void clearEvidence(Network bn, String nodeName)
             throws ShanksException {
-        ProbabilisticNode node = (ProbabilisticNode) bn.getNode(nodeName);
-        ShanksAgentBayesianReasoningCapability.clearEvidence(bn, node);
+        int node = bn.getNode(nodeName);
+        if (bn.isEvidence(node)) {
+            bn.clearEvidence(nodeName);
+            bn.updateBeliefs();
+        }
     }
 
     /**
@@ -319,14 +284,9 @@ public class ShanksAgentBayesianReasoningCapability {
      * @param node
      * @throws ShanksException
      */
-    public static void clearEvidence(ProbabilisticNetwork bn,
-            ProbabilisticNode node) throws ShanksException {
-        if (node.hasEvidence()) {
-            Map<String, String> evidences = ShanksAgentBayesianReasoningCapability
-                    .getEvidences(bn);
-            ShanksAgentBayesianReasoningCapability.clearEvidences(bn);
-            evidences.remove(node.getName());
-            ShanksAgentBayesianReasoningCapability.addEvidences(bn, evidences);
+    public static void clearEvidence(Network bn, int node) {
+        if (bn.isEvidence(node)) {
+            bn.clearEvidence(node);
         }
     }
 
@@ -336,13 +296,12 @@ public class ShanksAgentBayesianReasoningCapability {
      * @param bn
      * @return
      */
-    public static Map<String, String> getEvidences(ProbabilisticNetwork bn) {
+    public static Map<String, String> getEvidences(Network bn) {
 
         HashMap<String, String> evidences = new HashMap<String, String>();
-        for (Node n : bn.getNodes()) {
-            ProbabilisticNode pn = (ProbabilisticNode) n;
-            if (pn.hasEvidence()) {
-                evidences.put(pn.getName(), pn.getStateAt(pn.getEvidence()));
+        for (int n : bn.getAllNodes()) {
+            if (bn.isEvidence(n)) {
+                evidences.put(bn.getNodeName(n), bn.getEvidenceId(n));
             }
         }
         return evidences;
@@ -358,14 +317,13 @@ public class ShanksAgentBayesianReasoningCapability {
      * @throws UnknownNodeException
      * @throws UnknowkNodeStateException
      */
-    public static float getHypothesis(ProbabilisticNetwork bn, String nodeName,
-            String status) throws ShanksException {
-        ProbabilisticNode node = ShanksAgentBayesianReasoningCapability
-                .getNode(bn, nodeName);
-        int states = node.getStatesSize();
-        for (int i = 0; i < states; i++) {
-            if (status.equals(node.getStateAt(i))) {
-                return node.getMarginalAt(i);
+    public static float getHypothesis(Network bn, String nodeName, String status)
+            throws ShanksException {
+        int node = ShanksAgentBayesianReasoningCapability.getNode(bn, nodeName);
+        String[] states = bn.getOutcomeIds(node);
+        for (int i = 0; i < states.length; i++) {
+            if (status.equals(states[i])) {
+                return (float) bn.getNodeValue(node)[i];
             }
         }
         throw new UnknowkNodeStateException(bn, nodeName, status);
@@ -379,12 +337,9 @@ public class ShanksAgentBayesianReasoningCapability {
      * @return the ProbabilisticNode object
      * @throws UnknownNodeException
      */
-    public static ProbabilisticNode getNode(ProbabilisticNetwork bn,
-            String nodeName) throws ShanksException {
-        ProbabilisticNode node = (ProbabilisticNode) bn.getNode(nodeName);
-        if (node == null) {
-            throw new UnknownNodeException(bn, nodeName);
-        }
+    public static int getNode(Network bn, String nodeName)
+            throws ShanksException {
+        int node = bn.getNode(nodeName);
         return node;
     }
 
@@ -397,12 +352,12 @@ public class ShanksAgentBayesianReasoningCapability {
      *            bayesian network
      * @throws ShanksException
      */
-    public static void addEvidences(ProbabilisticNetwork bn,
-            Map<String, String> evidences) throws ShanksException {
+    public static void addEvidences(Network bn, Map<String, String> evidences)
+            throws ShanksException {
         for (Entry<String, String> evidence : evidences.entrySet()) {
-            ShanksAgentBayesianReasoningCapability.addEvidence(bn,
-                    evidence.getKey(), evidence.getValue());
+            bn.setEvidence(evidence.getKey(), evidence.getValue());
         }
+        bn.updateBeliefs();
     }
 
     /**
@@ -416,7 +371,7 @@ public class ShanksAgentBayesianReasoningCapability {
      *            confidence>
      * @throws ShanksException
      */
-    public static void addSoftEvidences(ProbabilisticNetwork bn,
+    public static void addSoftEvidences(Network bn,
             HashMap<String, HashMap<String, Double>> softEvidences)
             throws ShanksException {
         for (Entry<String, HashMap<String, Double>> softEvidence : softEvidences
@@ -436,9 +391,8 @@ public class ShanksAgentBayesianReasoningCapability {
      * @throws UnknownNodeException
      * @throws UnknowkNodeStateException
      */
-    public static HashMap<String, Float> getNodeHypotheses(
-            ProbabilisticNetwork bn, String nodeName, List<String> states)
-            throws ShanksException {
+    public static HashMap<String, Float> getNodeHypotheses(Network bn,
+            String nodeName, List<String> states) throws ShanksException {
         HashMap<String, Float> result = new HashMap<String, Float>();
         for (String status : states) {
             result.put(status, ShanksAgentBayesianReasoningCapability
@@ -459,7 +413,7 @@ public class ShanksAgentBayesianReasoningCapability {
      * @throws UnknowkNodeStateException
      */
     public static HashMap<String, HashMap<String, Float>> getHypotheses(
-            ProbabilisticNetwork bn, HashMap<String, List<String>> queries)
+            Network bn, HashMap<String, List<String>> queries)
             throws ShanksException {
         HashMap<String, HashMap<String, Float>> result = new HashMap<String, HashMap<String, Float>>();
         for (Entry<String, List<String>> query : queries.entrySet()) {
@@ -478,15 +432,14 @@ public class ShanksAgentBayesianReasoningCapability {
      * @return hashmap in format <status, hypothesis>
      * @throws UnknownNodeException
      */
-    public static HashMap<String, Float> getNodeStatesHypotheses(
-            ProbabilisticNetwork bn, String nodeName) throws ShanksException {
-        ProbabilisticNode node = ShanksAgentBayesianReasoningCapability
-                .getNode(bn, nodeName);
+    public static HashMap<String, Float> getNodeStatesHypotheses(Network bn,
+            String nodeName) throws ShanksException {
+        int node = ShanksAgentBayesianReasoningCapability.getNode(bn, nodeName);
+        String[] states = bn.getOutcomeIds(node);
         HashMap<String, Float> result = new HashMap<String, Float>();
-        int statesNum = node.getStatesSize();
-        for (int i = 0; i < statesNum; i++) {
-            String status = node.getStateAt(i);
-            Float hypothesis = node.getMarginalAt(i);
+        for (int i = 0; i < states.length; i++) {
+            String status = states[i];
+            Float hypothesis = (float) bn.getNodeValue(node)[i];
             result.put(status, hypothesis);
         }
         return result;
@@ -500,11 +453,10 @@ public class ShanksAgentBayesianReasoningCapability {
      * @throws UnknownNodeException
      */
     public static HashMap<String, HashMap<String, Float>> getAllHypotheses(
-            ProbabilisticNetwork bn) throws ShanksException {
-        List<Node> nodes = bn.getNodes();
+            Network bn) throws ShanksException {
         HashMap<String, HashMap<String, Float>> result = new HashMap<String, HashMap<String, Float>>();
-        for (Node node : nodes) {
-            String nodeName = node.getName();
+        for (int node : bn.getAllNodes()) {
+            String nodeName = bn.getNodeName(node);
             HashMap<String, Float> hypotheses = ShanksAgentBayesianReasoningCapability
                     .getNodeStatesHypotheses(bn, nodeName);
             result.put(nodeName, hypotheses);
@@ -518,11 +470,10 @@ public class ShanksAgentBayesianReasoningCapability {
      * @param bn
      * @throws Exception
      */
-    @SuppressWarnings("deprecation")
-    public static void clearEvidences(ProbabilisticNetwork bn)
-            throws ShanksException {
+    public static void clearEvidences(Network bn) throws ShanksException {
         try {
-            bn.compile();
+            bn.clearAllEvidence();
+            bn.updateBeliefs();
         } catch (Exception e) {
             throw new ShanksException(e);
         }
@@ -581,8 +532,8 @@ public class ShanksAgentBayesianReasoningCapability {
      * @return the ProbabilisticNode object
      * @throws UnknownNodeException
      */
-    public static ProbabilisticNode getNode(BayesianReasonerShanksAgent agent,
-            String nodeName) throws ShanksException {
+    public static int getNode(BayesianReasonerShanksAgent agent, String nodeName)
+            throws ShanksException {
         return ShanksAgentBayesianReasoningCapability.getNode(
                 agent.getBayesianNetwork(), nodeName);
     }

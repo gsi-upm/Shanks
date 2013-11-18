@@ -523,7 +523,6 @@ public class ShanksAgentBayesianReasoningCapability {
             throws ShanksException {
         try {
             bn.compile();
-            // bn.initialize();
         } catch (Exception e) {
             throw new ShanksException(e);
         }

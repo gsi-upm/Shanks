@@ -72,11 +72,11 @@ public class ShanksAgentBayesianReasoningCapability {
         try {
             if (bn.isEvidence(nodeName)) {
                 bn.clearEvidence(nodeName);
-                bn.updateBeliefs();
             }
             bn.setEvidence(nodeName, status);
             bn.updateBeliefs();
         } catch (Exception e) {
+            bn.updateBeliefs();
             HashMap<String, Float> belief = ShanksAgentBayesianReasoningCapability
                     .getNodeStatesHypotheses(bn, nodeName);
 

@@ -287,6 +287,7 @@ public class ShanksAgentBayesianReasoningCapability {
     public static void clearEvidence(Network bn, int node) {
         if (bn.isEvidence(node)) {
             bn.clearEvidence(node);
+            bn.updateBeliefs();
         }
     }
 
@@ -354,10 +355,16 @@ public class ShanksAgentBayesianReasoningCapability {
      */
     public static void addEvidences(Network bn, Map<String, String> evidences)
             throws ShanksException {
-        for (Entry<String, String> evidence : evidences.entrySet()) {
-            bn.setEvidence(evidence.getKey(), evidence.getValue());
+        if (bn == null || evidences.isEmpty()) {
+            throw new ShanksException("Null parameter in addEvidences method.");
         }
-        bn.updateBeliefs();
+        for (Entry<String, String> evidence : evidences.entrySet()) {
+            if (bn.isEvidence(evidence.getKey())) {
+                bn.clearEvidence(evidence.getKey());
+            }
+            bn.setEvidence(evidence.getKey(), evidence.getValue());
+            bn.updateBeliefs();
+        }
     }
 
     /**

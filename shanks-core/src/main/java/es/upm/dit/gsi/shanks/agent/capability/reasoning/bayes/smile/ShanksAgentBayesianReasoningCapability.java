@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import smile.Network;
+import smile.Network.BayesianAlgorithmType;
 import smile.Network.NodeType;
 import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.exception.UnknowkNodeStateException;
 import es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.exception.UnknownNodeException;
@@ -38,6 +39,7 @@ public class ShanksAgentBayesianReasoningCapability {
             throws ShanksException {
         Network net = new Network();
         net.readFile(networkPath);
+        net.setBayesianAlgorithm(BayesianAlgorithmType.Lauritzen);
         net.updateBeliefs();
         return net;
     }
@@ -70,11 +72,13 @@ public class ShanksAgentBayesianReasoningCapability {
             throw new ShanksException("Null parameter in addEvidence method.");
         }
         try {
-            if (bn.isEvidence(nodeName)) {
-                bn.clearEvidence(nodeName);
+            if (!bn.isPropagatedEvidence(nodeName)) {
+                if (bn.isRealEvidence(nodeName)) {
+                    bn.clearEvidence(nodeName);
+                }
+                bn.setEvidence(nodeName, status);
+                bn.updateBeliefs();
             }
-            bn.setEvidence(nodeName, status);
-            bn.updateBeliefs();
         } catch (Exception e) {
             bn.updateBeliefs();
             HashMap<String, Float> belief = ShanksAgentBayesianReasoningCapability

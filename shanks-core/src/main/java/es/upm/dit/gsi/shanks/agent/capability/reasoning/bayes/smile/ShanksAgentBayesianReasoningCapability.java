@@ -69,11 +69,22 @@ public class ShanksAgentBayesianReasoningCapability {
         if (bn == null || nodeName == null || status == null) {
             throw new ShanksException("Null parameter in addEvidence method.");
         }
-        if (bn.isEvidence(nodeName)) {
-            bn.clearEvidence(nodeName);
+        try {
+            if (bn.isEvidence(nodeName)) {
+                bn.clearEvidence(nodeName);
+                bn.updateBeliefs();
+            }
+            bn.setEvidence(nodeName, status);
+            bn.updateBeliefs();
+        } catch (Exception e) {
+            HashMap<String, Float> belief = ShanksAgentBayesianReasoningCapability.getNodeStatesHypotheses(bn, nodeName);
+
+            String msg = e.getMessage() + " -> values for node: " + nodeName + " -> ";
+            for (Entry<String, Float> entry : belief.entrySet()) {
+                msg = msg + entry.getKey() + "-" + entry.getValue() + " ";
+            }
+            throw new ShanksException(msg);
         }
-        bn.setEvidence(nodeName, status);
-        bn.updateBeliefs();
     }
 
     /**
@@ -359,11 +370,8 @@ public class ShanksAgentBayesianReasoningCapability {
             throw new ShanksException("Null parameter in addEvidences method.");
         }
         for (Entry<String, String> evidence : evidences.entrySet()) {
-            if (bn.isEvidence(evidence.getKey())) {
-                bn.clearEvidence(evidence.getKey());
-            }
-            bn.setEvidence(evidence.getKey(), evidence.getValue());
-            bn.updateBeliefs();
+            ShanksAgentBayesianReasoningCapability.addEvidence(bn,
+                    evidence.getKey(), evidence.getValue());
         }
     }
 

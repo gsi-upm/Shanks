@@ -77,9 +77,11 @@ public class ShanksAgentBayesianReasoningCapability {
             bn.setEvidence(nodeName, status);
             bn.updateBeliefs();
         } catch (Exception e) {
-            HashMap<String, Float> belief = ShanksAgentBayesianReasoningCapability.getNodeStatesHypotheses(bn, nodeName);
+            HashMap<String, Float> belief = ShanksAgentBayesianReasoningCapability
+                    .getNodeStatesHypotheses(bn, nodeName);
 
-            String msg = e.getMessage() + " -> values for node: " + nodeName + " -> ";
+            String msg = e.getMessage() + " -> values for node: " + nodeName
+                    + " -> ";
             for (Entry<String, Float> entry : belief.entrySet()) {
                 msg = msg + entry.getKey() + "-" + entry.getValue() + " ";
             }
@@ -449,15 +451,21 @@ public class ShanksAgentBayesianReasoningCapability {
      */
     public static HashMap<String, Float> getNodeStatesHypotheses(Network bn,
             String nodeName) throws ShanksException {
-        int node = ShanksAgentBayesianReasoningCapability.getNode(bn, nodeName);
-        String[] states = bn.getOutcomeIds(node);
-        HashMap<String, Float> result = new HashMap<String, Float>();
-        for (int i = 0; i < states.length; i++) {
-            String status = states[i];
-            Float hypothesis = (float) bn.getNodeValue(node)[i];
-            result.put(status, hypothesis);
+        try {
+            int node = ShanksAgentBayesianReasoningCapability.getNode(bn,
+                    nodeName);
+            String[] states = bn.getOutcomeIds(node);
+            HashMap<String, Float> result = new HashMap<String, Float>();
+            for (int i = 0; i < states.length; i++) {
+                String status = states[i];
+                Float hypothesis = (float) bn.getNodeValue(node)[i];
+                result.put(status, hypothesis);
+            }
+            return result;
+        } catch (Exception e) {
+            throw new ShanksException("Problem getting hypotheses from: "
+                    + nodeName + " -> Exception message: " + e.getMessage());
         }
-        return result;
     }
 
     /**

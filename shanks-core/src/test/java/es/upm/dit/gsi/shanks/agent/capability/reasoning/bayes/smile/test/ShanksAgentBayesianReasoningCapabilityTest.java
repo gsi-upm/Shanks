@@ -327,7 +327,7 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
             value = ShanksAgentBayesianReasoningCapability.getHypothesis(
                     this.bn, queryNodeName, queryStatus);
             Assert.assertEquals(0.2322F, value, 0.001F);
-        } catch (SMILEException e) {
+        } catch (ShanksException e) {
             Assert.assertTrue(true);
         } catch (Exception e) {
             e.printStackTrace();
@@ -623,7 +623,7 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
             value = ShanksAgentBayesianReasoningCapability.getHypothesis(agent,
                     queryNodeName, queryStatus);
             Assert.assertEquals(0.2322F, value, 0.001F);
-        } catch (SMILEException e) {
+        } catch (ShanksException e) {
             Assert.assertTrue(true);
         } catch (Exception e) {
             e.printStackTrace();

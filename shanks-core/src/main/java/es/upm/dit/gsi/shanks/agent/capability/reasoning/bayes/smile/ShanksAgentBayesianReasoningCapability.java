@@ -86,10 +86,19 @@ public class ShanksAgentBayesianReasoningCapability {
 
             String msg = e.getMessage() + " -> values for node: " + nodeName
                     + " -> ";
+            boolean zeroBel = false;
             for (Entry<String, Float> entry : belief.entrySet()) {
+                if (status.equals(entry.getKey()) && entry.getValue() == 0.0f) {
+                    zeroBel = true;
+                    // Impossible value calculated by inference (this is because the BN is a big shit...
+                    // But it is not a real error...
+                    break;
+                }
                 msg = msg + entry.getKey() + "-" + entry.getValue() + " ";
             }
-            throw new ShanksException(msg);
+            if (!zeroBel) {
+                throw new ShanksException(msg);
+            }
         }
     }
 

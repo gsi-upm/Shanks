@@ -192,11 +192,11 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
-				<version>2.2.1</version>
-				<configuration>
-					<arguments>-DskipTests</arguments>
-					<goals>deploy</goals>
-				</configuration>
+				<version>2.5</version>
+<!-- 				<configuration> -->
+<!-- 					<arguments>-DskipTests</arguments> -->
+<!-- 					<goals>deploy</goals> -->
+<!-- 				</configuration> -->
 			</plugin>
 
 			<plugin>

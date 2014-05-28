@@ -5,8 +5,9 @@ es.upm.dit.gsi.shanks.agent.action.exception
 es.upm.dit.gsi.shanks.agent.capability.creation
 es.upm.dit.gsi.shanks.agent.capability.movement
 es.upm.dit.gsi.shanks.agent.capability.perception
-es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes
 es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.exception
+es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.smile
+es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.unbbayes
 es.upm.dit.gsi.shanks.agent.exception
 es.upm.dit.gsi.shanks.agent.portrayal
 es.upm.dit.gsi.shanks.exception

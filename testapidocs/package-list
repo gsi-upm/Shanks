@@ -2,7 +2,8 @@ es.upm.dit.gsi.shanks.agent.action.test
 es.upm.dit.gsi.shanks.agent.capability.creation.test
 es.upm.dit.gsi.shanks.agent.capability.movement.test
 es.upm.dit.gsi.shanks.agent.capability.perception.test
-es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.test
+es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.smile.test
+es.upm.dit.gsi.shanks.agent.capability.reasoning.bayes.unbbayes.test
 es.upm.dit.gsi.shanks.agent.test
 es.upm.dit.gsi.shanks.model
 es.upm.dit.gsi.shanks.model.element

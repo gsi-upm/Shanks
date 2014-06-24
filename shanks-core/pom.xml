@@ -1,9 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>es.upm.dit.gsi.shanks</groupId>
 	<artifactId>shanks-core</artifactId>
-	<version>0.3.2-SNAPSHOT</version>
+	<version>0.3.3-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>SHANKS - Simulation for Heterogeneous and Autonomic NetworkS</name>
 	<description>Simulation for Heterogeneous and Autonomic NetworkS (SHANKS).
@@ -12,6 +11,11 @@
 	
 	To achieve this goal, a multi-agent system (MAS) is used to handle possible situations in the scenario. These agents are able to analyse environment data, perform inference and self-healing actions, etc.</description>
 
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
 	<developers>
 
 		<developer>
@@ -63,6 +67,7 @@
 		<connection>scm:git:https://github.com/gsi-upm/Shanks.git</connection>
 		<developerConnection>scm:git:https://github.com/gsi-upm/Shanks.git</developerConnection>
 		<url>http://github.com/gsi-upm/Shanks</url>
+		<tag>shanks-core-0.3.2</tag>
 	</scm>
 
 	<properties>
@@ -97,35 +102,35 @@
 		</pluginRepository>
 	</pluginRepositories>
 
-	<profiles>
-		<profile>
-			<id>release-sign-artifacts</id>
-			<activation>
-				<property>
-					<name>performRelease</name>
-					<value>true</value>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<version>1.4</version>
-						<executions>
-							<execution>
-								<id>sign-artifacts</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
+	<!-- <profiles> -->
+	<!-- <profile> -->
+	<!-- <id>release-sign-artifacts</id> -->
+	<!-- <activation> -->
+	<!-- <property> -->
+	<!-- <name>performRelease</name> -->
+	<!-- <value>true</value> -->
+	<!-- </property> -->
+	<!-- </activation> -->
+	<!-- <build> -->
+	<!-- <plugins> -->
+	<!-- <plugin> -->
+	<!-- <groupId>org.apache.maven.plugins</groupId> -->
+	<!-- <artifactId>maven-gpg-plugin</artifactId> -->
+	<!-- <version>1.4</version> -->
+	<!-- <executions> -->
+	<!-- <execution> -->
+	<!-- <id>sign-artifacts</id> -->
+	<!-- <phase>verify</phase> -->
+	<!-- <goals> -->
+	<!-- <goal>sign</goal> -->
+	<!-- </goals> -->
+	<!-- </execution> -->
+	<!-- </executions> -->
+	<!-- </plugin> -->
+	<!-- </plugins> -->
+	<!-- </build> -->
+	<!-- </profile> -->
+	<!-- </profiles> -->
 	<build>
 		<plugins>
 			<plugin>
@@ -193,7 +198,14 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
-				<version>2.2.1</version>
+				<!-- <version>2.4.2</version> -->
+				<!-- <dependencies> -->
+				<!-- <dependency> -->
+				<!-- <groupId>org.apache.maven.scm</groupId> -->
+				<!-- <artifactId>maven-scm-provider-gitexe</artifactId> -->
+				<!-- <version>1.9</version> -->
+				<!-- </dependency> -->
+				<!-- </dependencies> -->
 				<configuration>
 					<arguments>-DskipTests</arguments>
 					<goals>deploy</goals>
@@ -213,27 +225,9 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.8</version>
+				<version>2.9.1</version>
 				<configuration>
-					<doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
-					<docletArtifact>
-						<groupId>org.umlgraph</groupId>
-						<artifactId>doclet</artifactId>
-						<version>5.1</version>
-					</docletArtifact>
-					<additionalparam>
-						-inferrel
-						-inferdep
-						-quiet
-						-constructors
-						-visibility
-						-types
-						-postfixpackage
-						-nodefontsize 9
-						-nodefontpackagesize 7
-						-views
-					</additionalparam>
-					<useStandardDocletOptions>true</useStandardDocletOptions>
+					<additionalparam>-Xdoclint:none</additionalparam>
 				</configuration>
 				<executions>
 					<execution>
@@ -297,27 +291,9 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.8</version>
+				<version>2.9.1</version>
 				<configuration>
-					<doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
-					<docletArtifact>
-						<groupId>org.umlgraph</groupId>
-						<artifactId>doclet</artifactId>
-						<version>5.1</version>
-					</docletArtifact>
-					<additionalparam>
-						-inferrel
-						-inferdep
-						-quiet
-						-constructors
-						-visibility
-						-types
-						-postfixpackage
-						-nodefontsize 9
-						-nodefontpackagesize 7
-						-views
-					</additionalparam>
-					<useStandardDocletOptions>true</useStandardDocletOptions>
+					<additionalparam>-Xdoclint:none</additionalparam>
 				</configuration>
 			</plugin>
 

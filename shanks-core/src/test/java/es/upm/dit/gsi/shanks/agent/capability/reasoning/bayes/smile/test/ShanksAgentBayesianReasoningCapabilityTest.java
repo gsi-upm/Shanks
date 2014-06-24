@@ -69,13 +69,13 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
     @Before
     public void setUp() throws Exception {
         bn = ShanksAgentBayesianReasoningCapability
-                .loadNetwork("src/test/resources/alarm.net");
+                .loadNetwork("src/test/resources/alarm.xdsl");
         agent = new BayesianReasonerShanksAgent() {
             Network bayes;
 
             @Override
             public String getBayesianNetworkFilePath() {
-                return "src/test/resources/alarm.net";
+                return "src/test/resources/alarm.xdsl";
             }
 
             @Override

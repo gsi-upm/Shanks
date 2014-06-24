@@ -1,21 +1,18 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>es.upm.dit.gsi.shanks</groupId>
 	<artifactId>shanks-core</artifactId>
-	<version>0.3.3-SNAPSHOT</version>
+	<version>0.3.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>SHANKS - Simulation for Heterogeneous and Autonomic NetworkS</name>
 	<description>Simulation for Heterogeneous and Autonomic NetworkS (SHANKS).
 	
 	SHANKS is a framework to simulate different network scenarios in order to add autonomic capabilities using MASON simulation framework.
 	
-	To achieve this goal, a multi-agent system (MAS) is used to handle possible situations in the scenario. These agents are able to analyse environment data, perform inference and self-healing actions, etc.</description>
+	To achieve this goal, a multi-agent system (MAS) is used to handle possible situations in the scenario. These agents are able to analyse environment data, perform inference and self-healing actions, etc.
+	</description>
 
-	<parent>
-		<groupId>org.sonatype.oss</groupId>
-		<artifactId>oss-parent</artifactId>
-		<version>7</version>
-	</parent>
 	<developers>
 
 		<developer>
@@ -67,7 +64,6 @@
 		<connection>scm:git:https://github.com/gsi-upm/Shanks.git</connection>
 		<developerConnection>scm:git:https://github.com/gsi-upm/Shanks.git</developerConnection>
 		<url>http://github.com/gsi-upm/Shanks</url>
-		<tag>shanks-core-0.3.2</tag>
 	</scm>
 
 	<properties>
@@ -102,63 +98,23 @@
 		</pluginRepository>
 	</pluginRepositories>
 
-	<!-- <profiles> -->
-	<!-- <profile> -->
-	<!-- <id>release-sign-artifacts</id> -->
-	<!-- <activation> -->
-	<!-- <property> -->
-	<!-- <name>performRelease</name> -->
-	<!-- <value>true</value> -->
-	<!-- </property> -->
-	<!-- </activation> -->
-	<!-- <build> -->
-	<!-- <plugins> -->
-	<!-- <plugin> -->
-	<!-- <groupId>org.apache.maven.plugins</groupId> -->
-	<!-- <artifactId>maven-gpg-plugin</artifactId> -->
-	<!-- <version>1.4</version> -->
-	<!-- <executions> -->
-	<!-- <execution> -->
-	<!-- <id>sign-artifacts</id> -->
-	<!-- <phase>verify</phase> -->
-	<!-- <goals> -->
-	<!-- <goal>sign</goal> -->
-	<!-- </goals> -->
-	<!-- </execution> -->
-	<!-- </executions> -->
-	<!-- </plugin> -->
-	<!-- </plugins> -->
-	<!-- </build> -->
-	<!-- </profile> -->
-	<!-- </profiles> -->
 	<build>
 		<plugins>
 			<plugin>
-				<artifactId>maven-site-plugin</artifactId>
-				<version>3.1</version>
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.maven.wagon</groupId>
-						<artifactId>wagon-scm</artifactId>
-						<version>2.2</version>
-					</dependency>
-					<dependency>
-						<groupId>org.apache.maven.scm</groupId>
-						<artifactId>maven-scm-manager-plexus</artifactId>
-						<version>1.8</version>
-					</dependency>
-					<dependency>
-						<groupId>org.apache.maven.scm</groupId>
-						<artifactId>maven-scm-provider-gitexe</artifactId>
-						<version>1.8</version>
-					</dependency>
-					<dependency>
-						<groupId>org.apache.maven.scm</groupId>
-						<artifactId>maven-scm-api</artifactId>
-						<version>1.8</version>
-					</dependency>
-				</dependencies>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-scm-publish-plugin</artifactId>
+				<version>1.1</version>
+				<executions>
+					<execution>
+						<id>scm-publish</id>
+						<phase>site-deploy</phase>
+						<goals>
+							<goal>publish-scm</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
+
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>2.2.2</version>
@@ -197,15 +153,14 @@
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.8.1</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
-				<!-- <version>2.4.2</version> -->
-				<!-- <dependencies> -->
-				<!-- <dependency> -->
-				<!-- <groupId>org.apache.maven.scm</groupId> -->
-				<!-- <artifactId>maven-scm-provider-gitexe</artifactId> -->
-				<!-- <version>1.9</version> -->
-				<!-- </dependency> -->
-				<!-- </dependencies> -->
+				<version>2.5</version>
 				<configuration>
 					<arguments>-DskipTests</arguments>
 					<goals>deploy</goals>
@@ -225,10 +180,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9.1</version>
-				<configuration>
-					<additionalparam>-Xdoclint:none</additionalparam>
-				</configuration>
+				<version>2.8</version>
 				<executions>
 					<execution>
 						<id>aggregate-jar</id>
@@ -239,6 +191,7 @@
 					</execution>
 				</executions>
 			</plugin>
+
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -281,9 +234,103 @@
 				<version>2.4.1</version>
 			</plugin>
 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-scm-plugin</artifactId>
+				<version>1.9</version>
+			</plugin>
+
 		</plugins>
 
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-scm</artifactId>
+				<version>2.6</version>
+			</extension>
+			<extension>
+				<groupId>org.apache.maven.scm</groupId>
+				<artifactId>maven-scm-manager-plexus</artifactId>
+				<version>1.9</version>
+			</extension>
+			<extension>
+				<groupId>org.apache.maven.scm</groupId>
+				<artifactId>maven-scm-provider-gitexe</artifactId>
+				<version>1.9</version>
+			</extension>
+		</extensions>
+
+
+		<pluginManagement>
+			<plugins>
+
+				<plugin>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.3</version>
+					<dependencies>
+						<dependency>
+							<groupId>org.apache.maven.wagon</groupId>
+							<artifactId>wagon-scm</artifactId>
+							<version>2.6</version>
+						</dependency>
+						<dependency>
+							<groupId>org.apache.maven.scm</groupId>
+							<artifactId>maven-scm-manager-plexus</artifactId>
+							<version>1.9</version>
+						</dependency>
+						<dependency>
+							<groupId>org.apache.maven.scm</groupId>
+							<artifactId>maven-scm-provider-gitexe</artifactId>
+							<version>1.9</version>
+						</dependency>
+						<dependency>
+							<groupId>org.apache.maven.scm</groupId>
+							<artifactId>maven-scm-api</artifactId>
+							<version>1.9</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.codehaus.mojo
+										</groupId>
+										<artifactId>
+											exec-maven-plugin
+										</artifactId>
+										<versionRange>
+											[1.1.1,)
+										</versionRange>
+										<goals>
+											<goal>java</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+
+		</pluginManagement>
+
+
 	</build>
+
+
 	<reporting>
 
 		<plugins>
@@ -291,34 +338,25 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9.1</version>
-				<configuration>
-					<additionalparam>-Xdoclint:none</additionalparam>
-				</configuration>
+				<version>2.8</version>
 			</plugin>
 
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>2.5.1</version>
+				<version>2.6</version>
 			</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-report-plugin</artifactId>
-				<version>2.11</version>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-project-info-reports-plugin</artifactId>
-				<version>2.4</version>
+				<version>2.17</version>
 			</plugin>
 
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>findbugs-maven-plugin</artifactId>
-				<version>2.3.3</version>
+				<version>2.5.4</version>
 			</plugin>
 
 			<plugin>
@@ -387,7 +425,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jdepend-maven-plugin</artifactId>
-				<version>2.0-beta-2</version>
+				<version>2.0</version>
 			</plugin>
 
 		</plugins>
@@ -454,5 +492,37 @@
 			<version>2.0</version>
 		</dependency>
 	</dependencies>
+
+
+	<profiles>
+		<profile>
+			<id>release-sign-artifacts</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.4</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 	<url>http://www.gsi.dit.upm.es/index.php/es/tecnologia/software/227-shanks.html</url>
 </project>

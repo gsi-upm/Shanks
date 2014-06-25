@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>es.upm.dit.gsi.shanks</groupId>
 	<artifactId>shanks-core</artifactId>
@@ -59,12 +60,13 @@
 		<url>http://www.gsi.dit.upm.es</url>
 	</organization>
 
+	<url>http://www.gsi.dit.upm.es/index.php/es/tecnologia/software/227-shanks.html</url>
+
 	<scm>
 		<connection>scm:git:https://github.com/gsi-upm/Shanks.git</connection>
 		<developerConnection>scm:git:https://github.com/gsi-upm/Shanks.git</developerConnection>
 		<url>http://github.com/gsi-upm/Shanks</url>
-	  <tag>HEAD</tag>
-  </scm>
+	</scm>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -524,5 +526,5 @@
 		</profile>
 	</profiles>
 
-	<url>http://www.gsi.dit.upm.es/index.php/es/tecnologia/software/227-shanks.html</url>
+	
 </project>

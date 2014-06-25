@@ -75,7 +75,7 @@ public class ShanksAgentBayesianReasoningCapabilityTest {
 
             @Override
             public String getBayesianNetworkFilePath() {
-                return "src/test/resources/alarm.xdsl";
+                return "src/test/resources/alarm.net";
             }
 
             @Override

@@ -129,6 +129,7 @@ public abstract class ShanksSimulation3DGUI extends GUIState {
             for (Entry<String, HashMap<String, Portrayal>> displayEntry : portrayals
                     .entrySet()) {
                 Display3D display = displays.get(displayEntry.getKey());
+                display.detatchAll();
                 HashMap<String, Portrayal> displayPortrayals = displayEntry
                         .getValue();
                 for (Entry<String, Portrayal> portrayalEntry : displayPortrayals
@@ -155,10 +156,8 @@ public abstract class ShanksSimulation3DGUI extends GUIState {
      * 
      * @see sim.display.GUIState#load(sim.engine.SimState)
      */
-    public void load(ShanksSimulation state)
-            throws ShanksException {
+    public void load(ShanksSimulation state) throws ShanksException {
         super.load(state);
-        this.getSimulation().getScenarioPortrayal().setupPortrayals();
     }
 
     /*
@@ -358,8 +357,7 @@ public abstract class ShanksSimulation3DGUI extends GUIState {
      * @throws DuplicatedPortrayalIDException
      * @throws ScenarioNotFoundException
      */
-    public void removeTimeChart(String chartID)
-            throws ShanksException {
+    public void removeTimeChart(String chartID) throws ShanksException {
         Scenario3DPortrayal scenarioPortrayal = (Scenario3DPortrayal) this
                 .getSimulation().getScenarioPortrayal();
         scenarioPortrayal.removeTimeChart(chartID);
@@ -393,8 +391,7 @@ public abstract class ShanksSimulation3DGUI extends GUIState {
      * @throws DuplicatedPortrayalIDException
      * @throws ScenarioNotFoundException
      */
-    public void removeScatterPlot(String scatterID)
-            throws ShanksException {
+    public void removeScatterPlot(String scatterID) throws ShanksException {
         Scenario3DPortrayal scenarioPortrayal = (Scenario3DPortrayal) this
                 .getSimulation().getScenarioPortrayal();
         scenarioPortrayal.removeScatterPlot(scatterID);
@@ -429,8 +426,7 @@ public abstract class ShanksSimulation3DGUI extends GUIState {
      * @throws DuplicatedPortrayalIDException
      * @throws ScenarioNotFoundException
      */
-    public void removeHistogram(String histogramID)
-            throws ShanksException {
+    public void removeHistogram(String histogramID) throws ShanksException {
         Scenario3DPortrayal scenarioPortrayal = (Scenario3DPortrayal) this
                 .getSimulation().getScenarioPortrayal();
         scenarioPortrayal.removeHistogram(histogramID);

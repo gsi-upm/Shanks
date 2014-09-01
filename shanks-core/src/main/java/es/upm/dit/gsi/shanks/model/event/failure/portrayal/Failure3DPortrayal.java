@@ -18,7 +18,7 @@
 /**
  * 
  */
-package es.upm.dit.gsi.shanks.model.event.failiure.portrayal;
+package es.upm.dit.gsi.shanks.model.event.failure.portrayal;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -30,7 +30,7 @@ import javax.vecmath.Color3f;
 import javax.vecmath.Point3f;
 
 import sim.portrayal3d.SimplePortrayal3D;
-import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
+import es.upm.dit.gsi.shanks.model.event.failure.Failure;
 
 /**
  * @author a.carrera

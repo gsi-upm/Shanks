@@ -15,10 +15,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package es.upm.dit.gsi.shanks.model.event.failiure.exception;
+package es.upm.dit.gsi.shanks.model.event.failure.exception;
 
 import es.upm.dit.gsi.shanks.model.event.exception.ShanksEventException;
-import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
+import es.upm.dit.gsi.shanks.model.event.failure.Failure;
 
 public class NoCombinationForFailureException extends ShanksEventException {
 

@@ -36,7 +36,7 @@ import es.upm.dit.gsi.shanks.model.element.device.Device;
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.event.exception.UnsupportedElementByEventException;
-import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
+import es.upm.dit.gsi.shanks.model.event.failure.Failure;
 import es.upm.dit.gsi.shanks.model.event.test.MyProbNetElementEvent;
 import es.upm.dit.gsi.shanks.model.failure.util.test.FailureTestDefinitions;
 import es.upm.dit.gsi.shanks.model.failure.util.test.FailureTestDevice;

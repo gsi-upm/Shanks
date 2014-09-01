@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 
 import sim.engine.Steppable;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
-import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
+import es.upm.dit.gsi.shanks.model.event.failure.Failure;
 
 public class TestScenarioFailure extends Failure {
     

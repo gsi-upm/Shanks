@@ -15,14 +15,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package es.upm.dit.gsi.shanks.model.event.failiure.portrayal;
+package es.upm.dit.gsi.shanks.model.event.failure.portrayal;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 
 import sim.portrayal.DrawInfo2D;
 import sim.portrayal.SimplePortrayal2D;
-import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
+import es.upm.dit.gsi.shanks.model.event.failure.Failure;
 
 public class Failure2DPortrayal extends SimplePortrayal2D {
 

@@ -30,7 +30,7 @@ import es.upm.dit.gsi.shanks.model.element.device.portrayal.test.MyDevice3DPortr
 import es.upm.dit.gsi.shanks.model.element.device.test.MyDevice;
 import es.upm.dit.gsi.shanks.model.element.link.Link;
 import es.upm.dit.gsi.shanks.model.element.link.portrayal.test.MyLink3DPortrayal;
-import es.upm.dit.gsi.shanks.model.event.failiure.portrayal.Failure3DPortrayal;
+import es.upm.dit.gsi.shanks.model.event.failure.portrayal.Failure3DPortrayal;
 import es.upm.dit.gsi.shanks.model.failure.util.test.FailureTest;
 import es.upm.dit.gsi.shanks.model.scenario.ComplexScenario;
 import es.upm.dit.gsi.shanks.model.scenario.Scenario;

@@ -32,7 +32,7 @@ import es.upm.dit.gsi.shanks.agent.JasonShanksAgent;
 import es.upm.dit.gsi.shanks.agent.action.test.MyJasonShanksAgentAction;
 import es.upm.dit.gsi.shanks.agent.exception.DuplicatedActionIDException;
 import es.upm.dit.gsi.shanks.exception.ShanksException;
-import es.upm.dit.gsi.shanks.model.event.failiure.Failure;
+import es.upm.dit.gsi.shanks.model.event.failure.Failure;
 
 public class MyJasonShanksAgent extends JasonShanksAgent {
 

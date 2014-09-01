@@ -34,7 +34,7 @@ import es.upm.dit.gsi.shanks.exception.ShanksException;
 import es.upm.dit.gsi.shanks.model.element.exception.TooManyConnectionException;
 import es.upm.dit.gsi.shanks.model.element.exception.UnsupportedNetworkElementFieldException;
 import es.upm.dit.gsi.shanks.model.event.exception.UnsupportedElementByEventException;
-import es.upm.dit.gsi.shanks.model.event.failiure.exception.NoCombinationForFailureException;
+import es.upm.dit.gsi.shanks.model.event.failure.exception.NoCombinationForFailureException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.DuplicatedIDException;
 import es.upm.dit.gsi.shanks.model.scenario.exception.UnsupportedScenarioStatusException;
 import es.upm.dit.gsi.shanks.model.scenario.test.MyScenario;

@@ -94,8 +94,8 @@ public abstract class Scenario {
      * @throws UnsupportedScenarioStatusException
      * @throws DuplicatedIDException
      */
-    public Scenario(String id, String initialState, Properties properties, Logger logger)
-            throws ShanksException {
+    public Scenario(String id, String initialState, Properties properties,
+            Logger logger) throws ShanksException {
         // throws UnsupportedNetworkElementFieldException,
         // TooManyConnectionException, UnsupportedScenarioStatusException,
         // DuplicatedIDException {
@@ -354,8 +354,8 @@ public abstract class Scenario {
      */
     public void addPossibleFailure(Class<? extends Failure> failure,
             List<Set<NetworkElement>> possibleCombinations) {
-//        this.addPossibleEventsOfNE(failure, possibleCombinations);
-         this.possibleFailures.put(failure, possibleCombinations);
+        // this.addPossibleEventsOfNE(failure, possibleCombinations);
+        this.possibleFailures.put(failure, possibleCombinations);
     }
 
     /**
@@ -366,8 +366,8 @@ public abstract class Scenario {
             Set<NetworkElement> set) {
         List<Set<NetworkElement>> list = new ArrayList<Set<NetworkElement>>();
         list.add(set);
-//        this.addPossibleEventsOfNE(failure, list);
-         this.possibleFailures.put(failure, list);
+        // this.addPossibleEventsOfNE(failure, list);
+        this.possibleFailures.put(failure, list);
     }
 
     /**
@@ -380,8 +380,8 @@ public abstract class Scenario {
         Set<NetworkElement> set = new HashSet<NetworkElement>();
         set.add(element);
         list.add(set);
-//        this.addPossibleEventsOfNE(failure, list);
-         this.possibleFailures.put(failure, list);
+        // this.addPossibleEventsOfNE(failure, list);
+        this.possibleFailures.put(failure, list);
     }
 
     //
@@ -486,7 +486,7 @@ public abstract class Scenario {
 
     public void generateNetworkElementEvents(ShanksSimulation sim)
             throws ShanksException {
-        MersenneTwisterFast random = new MersenneTwisterFast();
+        MersenneTwisterFast random = sim.random;
         Iterator<Class<? extends Event>> it = this.getPossibleEventsOfNE()
                 .keySet().iterator();
         while (it.hasNext()) {
@@ -496,36 +496,47 @@ public abstract class Scenario {
             if (Failure.class.isAssignableFrom(type)) {
                 Failure failure;
                 String status = this.getCurrentStatus();
-                HashMap<Class<? extends Failure>, Double> penalties = this.getPenaltiesInStatus(status);
+                HashMap<Class<? extends Failure>, Double> penalties = this
+                        .getPenaltiesInStatus(status);
                 double penalty = 0;
                 try {
-                    c = type.getConstructor(new Class[] { Steppable.class, Logger.class });
-                    failure = (Failure) c.newInstance(sim.getScenarioManager(), this.getLogger());
-                    List<Set<NetworkElement>> list = this.getPossibleEventsOfNE().get(type);
+                    c = type.getConstructor(new Class[] { Steppable.class,
+                            Logger.class });
+                    failure = (Failure) c.newInstance(sim.getScenarioManager(),
+                            this.getLogger());
+                    List<Set<NetworkElement>> list = this
+                            .getPossibleEventsOfNE().get(type);
                     int numberOfCombinations = list.size();
-                    int combinationNumber = random.nextInt(numberOfCombinations);
+                    int combinationNumber = random
+                            .nextInt(numberOfCombinations);
                     try {
                         if (penalties.containsKey(type)) {
                             penalty = penalties.get(type); // Apply penalty
                             if (penalty > 0)
-                                prob = failure.getProb()*numberOfCombinations*penalty;
+                                prob = failure.getProb() * numberOfCombinations
+                                        * penalty;
                             else
                                 prob = 1.0; // Impossible failure
-                        } else 
+                        } else
                             prob = failure.getProb() * numberOfCombinations;
                     } catch (Exception e) {
-                        logger.fine("There is no penalty for failures: "+ type.getName() + " in status " + status);
+                        logger.fine("There is no penalty for failures: "
+                                + type.getName() + " in status " + status);
                     }
-                    // double aux = randomizer.nextDouble(); // THIS OPTION GENERATE
+                    double aux = random.nextDouble(); // THIS OPTION
+                    // GENERATE
                     // MANY FAULTS OF THE SAME TYPE AT THE SAME TIME
-                    double aux = Math.random(); // THIS WORKS BETTER, MORE RANDOMLY
+                    // double aux = Math.random(); // THIS WORKS BETTER, MORE
+                    // RANDOMLY
                     if (aux < prob) {
                         // Generate failure
                         Set<NetworkElement> elementsSet;
                         if (numberOfCombinations >= 1) {
                             elementsSet = list.get(combinationNumber);
-                            this.setupFailure(failure, elementsSet,combinationNumber);
-                        } else if (this.generatedFailureConfigurations.get(type).size() == 0) {
+                            this.setupFailure(failure, elementsSet,
+                                    combinationNumber);
+                        } else if (this.generatedFailureConfigurations
+                                .get(type).size() == 0) {
                             throw new NoCombinationForFailureException(failure);
                         }
                     }
@@ -566,7 +577,7 @@ public abstract class Scenario {
                         .get(type);
                 int numberOfCombinations = list.size();
                 prob = ((ProbabilisticEvent) event).getProb();
-                double aux = Math.random();
+                double aux = random.nextDouble();
                 int combinationNumber = random.nextInt(numberOfCombinations);
                 if (aux < prob) {
                     Set<NetworkElement> elementsSet;
@@ -601,7 +612,8 @@ public abstract class Scenario {
                     throw new ShanksException(e);
                 }
                 if ((sim.getSchedule().getSteps() != 0)
-                        && (sim.getSchedule().getSteps() % ((PeriodicEvent) event).getPeriod() == 0)) {
+                        && (sim.getSchedule().getSteps()
+                                % ((PeriodicEvent) event).getPeriod() == 0)) {
                     List<Set<NetworkElement>> list = this
                             .getPossibleEventsOfNE().get(type);
                     int numberOfCombinations = list.size();
@@ -634,7 +646,7 @@ public abstract class Scenario {
         // IllegalAccessException, UnsupportedNetworkElementFieldException,
         // SecurityException, NoSuchMethodException, IllegalArgumentException,
         // InvocationTargetException {
-        MersenneTwisterFast random = new MersenneTwisterFast();
+        MersenneTwisterFast random = sim.random;
         Iterator<Class<? extends Event>> it = this
                 .getPossibleEventsOfScenario().keySet().iterator();
         while (it.hasNext()) {
@@ -663,7 +675,7 @@ public abstract class Scenario {
                         .get(type);
                 int numberOfCombinations = list.size();
                 prob = ((ProbabilisticEvent) event).getProb();
-                double aux = Math.random();
+                double aux = random.nextDouble();
                 int combinationNumber = random.nextInt(numberOfCombinations);
                 if (aux < prob) {
                     Set<Scenario> scenarioSet;
@@ -730,12 +742,14 @@ public abstract class Scenario {
         }
     }
 
-    public void generateFailures(ShanksSimulation sim) throws InstantiationException,
-            IllegalAccessException, ShanksException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
-        MersenneTwisterFast randomizer = new MersenneTwisterFast();
+    public void generateFailures(ShanksSimulation sim)
+            throws InstantiationException, IllegalAccessException,
+            ShanksException, NoSuchMethodException, SecurityException,
+            IllegalArgumentException, InvocationTargetException {
+        MersenneTwisterFast randomizer = sim.random;
         String status = this.getCurrentStatus();
-//        HashMap<Class<? extends Failure>, Double> penalties = this
-//                .getPenaltiesInStatus(status);
+        // HashMap<Class<? extends Failure>, Double> penalties = this
+        // .getPenaltiesInStatus(status);
         Iterator<Class<? extends Failure>> it = this.getPossibleFailures()
                 .keySet().iterator();
         Constructor<? extends Event> c = null;
@@ -744,23 +758,26 @@ public abstract class Scenario {
             Failure failure;
             double prob = 0;
             try {
-                c = type.getConstructor(new Class[] { Steppable.class, Logger.class });
-                failure = (Failure) c.newInstance(sim.getScenarioManager(), this.getLogger());
+                c = type.getConstructor(new Class[] { Steppable.class,
+                        Logger.class });
+                failure = (Failure) c.newInstance(sim.getScenarioManager(),
+                        this.getLogger());
                 List<Set<NetworkElement>> list = this.getPossibleFailures()
                         .get(type);
                 int numberOfCombinations = list.size();
                 int combinationNumber = randomizer
                         .nextInt(numberOfCombinations);
                 try {
-                   prob = failure.getProb() * numberOfCombinations;
-                
+                    prob = failure.getProb() * numberOfCombinations;
+
                 } catch (Exception e) {
                     logger.fine("There is no penalty for failures: "
                             + type.getName() + " in status " + status);
                 }
-                // double aux = randomizer.nextDouble(); // THIS OPTION GENERATE
+                double aux = randomizer.nextDouble(); // THIS OPTION GENERATE
                 // MANY FAULTS OF THE SAME TYPE AT THE SAME TIME
-                double aux = Math.random(); // THIS WORKS BETTER, MORE RANDOMLY
+                // double aux = Math.random(sim.random.); // THIS WORKS BETTER,
+                // MORE RANDOMLY
                 if (aux < prob) {
                     // Generate failure
                     Set<NetworkElement> elementsSet;
@@ -784,11 +801,11 @@ public abstract class Scenario {
     /**
      * @param failure
      * @param elementsSet
-     * @throws ShanksException 
+     * @throws ShanksException
      * @throws UnsupportedElementByEventException
      */
-    private void setupFailure(Failure failure, Set<NetworkElement> elementsSet, int configurationNumber)
-            throws ShanksException {
+    private void setupFailure(Failure failure, Set<NetworkElement> elementsSet,
+            int configurationNumber) throws ShanksException {
         failure.addAffectedElements(new ArrayList<NetworkElement>(elementsSet));
         if (!this.generatedFailureConfigurations
                 .containsKey(failure.getClass())) {
@@ -855,7 +872,7 @@ public abstract class Scenario {
     public NetworkElement getNetworkElement(String id) {
         return this.currentElements.get(id);
     }
-    
+
     /**
      * @return
      */

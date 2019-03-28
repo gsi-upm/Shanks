@@ -83,7 +83,7 @@ public abstract class PeriodicScenarioEvent extends PeriodicEvent {
      * Remove this element, but not modify the status. When the failure will be
      * deactive, this removed element will keep the actual status
      * 
-     * @param element
+     * @param scen
      */
     public void removeAffectedElement(Scenario scen) {
         this.affectedScenarios.remove(scen);

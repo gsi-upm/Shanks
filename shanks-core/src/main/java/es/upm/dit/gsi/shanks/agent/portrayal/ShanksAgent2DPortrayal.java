@@ -35,7 +35,7 @@ import es.upm.dit.gsi.shanks.agent.ShanksAgent;
 /**
  * Default 2D portrayal interface for a Shanks Agent.  
  * 
- * @author 
+ * @author a.carrera
  *
  */
 public abstract class ShanksAgent2DPortrayal extends SimplePortrayal2D {

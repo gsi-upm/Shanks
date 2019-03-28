@@ -115,7 +115,7 @@ public class ShanksAgentMovementCapability {
      * @param simulation
      * @param agent
      * @param currentLocation
-     * @param tarLocation
+     * @param targetLocation
      * @param speed
      */
     public static void goTo(ShanksSimulation simulation,

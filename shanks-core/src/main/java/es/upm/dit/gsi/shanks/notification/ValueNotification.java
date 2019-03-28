@@ -26,7 +26,7 @@ package es.upm.dit.gsi.shanks.notification;
  * field, variable or whatever it wants to save for consult later. In this case  a 
  * notification has the form:
  * 
- *      source => elementID => value 
+ *      source - elementID - value 
  *      
  * @author darofar
  *

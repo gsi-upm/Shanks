@@ -71,25 +71,13 @@ public class ShanksSimulation extends SimState {
     private int numOfResolvedFailures;
 
     /**
+    /**
      * @param seed
      * @param scenarioClass
      * @param scenarioID
      * @param initialState
      * @param properties
-     * @throws SecurityException
-     * @throws IllegalArgumentException
-     * @throws NoSuchMethodException
-     * @throws InstantiationException
-     * @throws IllegalAccessException
-     * @throws InvocationTargetException
-     * @throws UnsupportedNetworkElementFieldException
-     * @throws TooManyConnectionException
-     * @throws UnsupportedScenarioStatusException
-     * @throws DuplicatedIDException
-     * @throws DuplicatedPortrayalIDException
-     * @throws ScenarioNotFoundException
-     * @throws DuplicatedActionIDException
-     * @throws DuplicatedAgentIDException
+     * @throws ShanksException
      */
     public ShanksSimulation(long seed, Class<? extends Scenario> scenarioClass,
             String scenarioID, String initialState, Properties properties) throws ShanksException {
@@ -276,12 +264,8 @@ public class ShanksSimulation extends SimState {
      * This method adds and registers the ShanksAgent
      * 
      * @param agent
-     *            The ShanksAgent
-     * @param order
-     *            The agent will be executed in this order
-     * @param interval
-     *            The agent will be executed every "x=interval" steps
-     * @throws DuplicatedAgentIDException
+     *            The ShanksAgent 
+     * @throws ShanksException
      */
     public void registerShanksAgent(ShanksAgent agent)
             throws ShanksException {

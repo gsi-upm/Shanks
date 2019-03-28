@@ -57,7 +57,7 @@ public class ShanksAgentBayesianReasoningCapability {
      * 
      * @param networkPath
      * @return
-     * @throws Exception
+     * @throws ShanksException
      */
     public static ProbabilisticNetwork loadNetwork(String networkPath)
             throws ShanksException {
@@ -70,7 +70,7 @@ public class ShanksAgentBayesianReasoningCapability {
      * 
      * @param netFile
      * @return
-     * @throws Exception
+     * @throws ShanksException
      */
     @SuppressWarnings("deprecation")
     public static ProbabilisticNetwork loadNetwork(File netFile)
@@ -94,7 +94,7 @@ public class ShanksAgentBayesianReasoningCapability {
      * Load the Bayesian network of the agent
      * 
      * @param agent
-     * @throws Exception
+     * @throws ShanksException
      */
     public static void loadNetwork(BayesianReasonerShanksAgent agent)
             throws ShanksException {
@@ -109,7 +109,7 @@ public class ShanksAgentBayesianReasoningCapability {
      * @param bn
      * @param nodeName
      * @param status
-     * @throws Exception
+     * @throws ShanksException
      */
     public static void addEvidence(ProbabilisticNetwork bn, String nodeName,
             String status) throws ShanksException {
@@ -410,7 +410,7 @@ public class ShanksAgentBayesianReasoningCapability {
      * 
      * @param bn
      * @param evidences
-     *            map in format <nodeName, status> to set evidences in the
+     *            map in format [nodeName, status] to set evidences in the
      *            bayesian network
      * @throws ShanksException
      */
@@ -427,10 +427,10 @@ public class ShanksAgentBayesianReasoningCapability {
      * creates automatically the auxiliary nodes.
      * 
      * @param bn
-     * @param evidences
-     *            hashmap in format <nodeName, hashmap> to set evidences in the
-     *            bayesian network. The second hashmap in format <nodeStatus,
-     *            confidence>
+     * @param softEvidences
+     *            hashmap in format [nodeName, hashmap] to set evidences in the
+     *            bayesian network. The second hashmap in format [nodeStatus,
+     *            confidence]
      * @throws ShanksException
      */
     public static void addSoftEvidences(ProbabilisticNetwork bn,
@@ -469,9 +469,9 @@ public class ShanksAgentBayesianReasoningCapability {
      * 
      * @param bn
      * @param queries
-     *            in format hashmap of <node, List of states>
-     * @return results in format hashmap of <node, hashmap>. The second hashmap
-     *         is <state, probability of the hypothesis>
+     *            in format hashmap of [node, List of states]
+     * @return results in format hashmap of [node, hashmap]. The second hashmap
+     *         is [state, probability of the hypothesis]
      * @throws UnknownNodeException
      * @throws UnknowkNodeStateException
      */
@@ -492,8 +492,8 @@ public class ShanksAgentBayesianReasoningCapability {
      * 
      * @param bn
      * @param nodeName
-     * @return hashmap in format <status, hypothesis>
-     * @throws UnknownNodeException
+     * @return hashmap in format [status, hypothesis]
+     * @throws ShanksException
      */
     public static HashMap<String, Float> getNodeStatesHypotheses(
             ProbabilisticNetwork bn, String nodeName) throws ShanksException {
@@ -513,7 +513,7 @@ public class ShanksAgentBayesianReasoningCapability {
      * To know all values of all nodes of the Bayesian network
      * 
      * @param bn
-     * @return hashmap in format <node, <status, hypothesis>>
+     * @return hashmap in format [node, [status, hypothesis]]
      * @throws UnknownNodeException
      */
     public static HashMap<String, HashMap<String, Float>> getAllHypotheses(
@@ -533,7 +533,7 @@ public class ShanksAgentBayesianReasoningCapability {
      * Clear all evidences in the network
      * 
      * @param bn
-     * @throws Exception
+     * @throws ShanksException
      */
     @SuppressWarnings("deprecation")
     public static void clearEvidences(ProbabilisticNetwork bn)
@@ -551,7 +551,7 @@ public class ShanksAgentBayesianReasoningCapability {
      * @param agent
      * @param nodeName
      * @param status
-     * @throws Exception
+     * @throws ShanksException
      */
     public static void addEvidence(BayesianReasonerShanksAgent agent,
             String nodeName, String status) throws ShanksException {
@@ -609,9 +609,9 @@ public class ShanksAgentBayesianReasoningCapability {
      * 
      * @param agent
      * @param evidences
-     *            hashmap in format <nodeName, status> to set evidences in the
+     *            hashmap in format [nodeName, status] to set evidences in the
      *            bayesian network
-     * @throws Exception
+     * @throws ShanksException
      */
     public static void addEvidences(BayesianReasonerShanksAgent agent,
             HashMap<String, String> evidences) throws ShanksException {
@@ -655,9 +655,9 @@ public class ShanksAgentBayesianReasoningCapability {
      * 
      * @param agent
      * @param queries
-     *            in format hashmap of <node, List of states>
-     * @return results in format hashmap of <node, hashmap>. The second hashmap
-     *         is <state, probability of the hypothesis>
+     *            in format hashmap of [node, List of states]
+     * @return results in format hashmap of [node, hashmap]. The second hashmap
+     *         is [state, probability of the hypothesis]
      * @throws UnknownNodeException
      * @throws UnknowkNodeStateException
      */
@@ -674,7 +674,7 @@ public class ShanksAgentBayesianReasoningCapability {
      * 
      * @param agent
      * @param nodeName
-     * @return hashmap in format <status, hypothesis>
+     * @return hashmap in format [status, hypothesis]
      * @throws UnknownNodeException
      */
     public static HashMap<String, Float> getNodeStatesHypotheses(
@@ -688,7 +688,7 @@ public class ShanksAgentBayesianReasoningCapability {
      * To know all values of all nodes of the Bayesian network
      * 
      * @param agent
-     * @return hashmap in format <node, <status, hypothesis>>
+     * @return hashmap in format [node, [status, hypothesis]]
      * @throws UnknownNodeException
      */
 
@@ -702,7 +702,7 @@ public class ShanksAgentBayesianReasoningCapability {
      * Clear all evidences in the Bayesian network of the agent
      * 
      * @param agent
-     * @throws Exception
+     * @throws ShanksException
      */
     public static void clearEvidences(BayesianReasonerShanksAgent agent)
             throws ShanksException {

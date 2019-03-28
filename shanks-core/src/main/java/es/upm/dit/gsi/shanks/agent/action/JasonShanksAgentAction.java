@@ -51,7 +51,7 @@ public abstract class JasonShanksAgentAction extends Action {
      * the following lines of code can be used as advise of the resulting code.
      * 
      * 
-     * //JASON -> Terms to NetworkElements convertion. for (Term e : arguments){
+     * //JASON - Terms to NetworkElements convertion. for (Term e : arguments){
      * if (e instanceof StringTermImpl) { StringTermImpl s = (StringTermImpl) e;
      * String name = s.getString();
      * simulation.getScenario().getCurrentElements().get(name); } } //add

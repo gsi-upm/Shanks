@@ -61,18 +61,8 @@ public abstract class ComplexScenario extends Scenario {
      * @param type
      * @param initialState
      * @param properties
-     * @throws UnsupportedNetworkElementFieldException
-     * @throws TooManyConnectionException
-     * @throws UnsupportedScenarioStatusException
-     * @throws DuplicatedIDException
-     * @throws NonGatewayDeviceException
-     * @throws AlreadyConnectedScenarioException
-     * @throws InvocationTargetException
-     * @throws IllegalAccessException
-     * @throws InstantiationException
-     * @throws NoSuchMethodException
-     * @throws IllegalArgumentException
-     * @throws SecurityException
+     * @param logger
+     * @throws ShanksException
      */
     public ComplexScenario(String type, String initialState,
             Properties properties, Logger logger) throws ShanksException {
@@ -95,18 +85,7 @@ public abstract class ComplexScenario extends Scenario {
     /**
      * Add all scenarios to the simulation using addScenario method
      * 
-     * @throws DuplicatedIDException
-     * @throws UnsupportedScenarioStatusException
-     * @throws TooManyConnectionException
-     * @throws UnsupportedNetworkElementFieldException
-     * @throws AlreadyConnectedScenarioException
-     * @throws NonGatewayDeviceException
-     * @throws InvocationTargetException
-     * @throws IllegalAccessException
-     * @throws InstantiationException
-     * @throws NoSuchMethodException
-     * @throws IllegalArgumentException
-     * @throws SecurityException
+     * @throws ShanksException
      */
     abstract public void addScenarios() throws ShanksException;
 
@@ -126,16 +105,7 @@ public abstract class ComplexScenario extends Scenario {
      * @param properties
      * @param gatewayDeviceID
      * @param externalLinkID
-     * @throws NonGatewayDeviceException
-     * @throws TooManyConnectionException
-     * @throws DuplicatedIDException
-     * @throws AlreadyConnectedScenarioException
-     * @throws SecurityException
-     * @throws NoSuchMethodException
-     * @throws IllegalArgumentException
-     * @throws InstantiationException
-     * @throws IllegalAccessException
-     * @throws InvocationTargetException
+     * @throws ShanksException
      */
     public void addScenario(Class<? extends Scenario> scenarioClass,
             String scenarioID, String initialState, Properties properties,
@@ -198,9 +168,8 @@ public abstract class ComplexScenario extends Scenario {
 
     /**
      * @param scenarioID
-     * @return null if the ComplexScenario does not contains the searched
-     *         scenarioID
-     * @throws ScenarioNotFoundException
+     * @return
+     * @throws ShanksException
      */
     public Scenario getScenario(String scenarioID) throws ShanksException {
         for (Scenario s : this.scenarios.keySet()) {

@@ -41,7 +41,7 @@ public class CreationShanksAgentCapability {
      * 
      * @param sim
      *            - The shanks simulation
-     * @param Agent
+     * @param agent
      *            - The new agent
      * @throws DuplicatedAgentIDException
      */

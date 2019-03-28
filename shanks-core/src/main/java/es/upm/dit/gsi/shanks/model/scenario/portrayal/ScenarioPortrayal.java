@@ -102,7 +102,7 @@ public abstract class ScenarioPortrayal {
      * @param displayID
      * @param portrayalID
      * @param portrayal
-     * @throws DuplicatedPortrayalIDException 
+     * @throws ShanksException 
      */
     public void addPortrayal(String displayID, String portrayalID, Portrayal portrayal) throws ShanksException {
         if (!this.portrayals.containsKey(displayID)) {
@@ -130,8 +130,9 @@ public abstract class ScenarioPortrayal {
      * Add a chart to the simulation
      * 
      * @param chartID
-     * @param chart
-     * @throws DuplicatedChartIDException 
+     * @param xAxisLabel
+     * @param yAxisLabel
+     * @throws ShanksException
      */
     public void addTimeChart(String chartID, String xAxisLabel, String yAxisLabel) throws ShanksException {
         if (!this.timeCharts.containsKey(chartID)) {
@@ -178,8 +179,7 @@ public abstract class ScenarioPortrayal {
     /**
      * @param chartID
      * @param dataSerieID
-     * @param dataSerie
-     * @throws DuplicatedDataSerieIDException
+     * @throws ShanksException
      */
     public void addDataSerieToTimeChart(String chartID, String dataSerieID) throws ShanksException {
         if (!this.timeChartData.containsKey(chartID)) {
@@ -199,8 +199,7 @@ public abstract class ScenarioPortrayal {
     /**
      * @param chartID
      * @param dataSerieID
-     * @param dataSerie
-     * @throws DuplicatedDataSerieIDException
+     * @return
      */
     public Series getDataSerieFromTimeChart(String chartID, String dataSerieID) {
         return this.timeChartData.get(chartID).get(dataSerieID);
@@ -254,10 +253,10 @@ public abstract class ScenarioPortrayal {
     /**
      * Add a ScatterPlot to the simulation
      * 
-     * @param String scatterID - An ID for the ScatterPlot
-     * @param String xAxisLabel - The name of the x axis
-     * @param String yAxisLabel - The name of the y axis 
-     * @throws DuplicatedChartIDException 
+     * @param scatterID - An ID for the ScatterPlot
+     * @param xAxisLabel - The name of the x axis
+     * @param yAxisLabel - The name of the y axis 
+     * @throws ShanksException
      */
     public void addScatterPlot(String scatterID, String xAxisLabel, String yAxisLabel) throws ShanksException {
         if (!this.timeCharts.containsKey(scatterID)) {
@@ -304,8 +303,7 @@ public abstract class ScenarioPortrayal {
      *
      * 
      * @param scatterID
-     * @param double[][] the data. The first dimension MUST BE 2 (double[2][whatever_int])
-     * @param String - the name of the serie
+     * @param dataSerie the data. The first dimension MUST BE 2 (double[2][whatever_int])
      */
     public void addDataSerieToScatterPlot(String scatterID, double[][] dataSerie){
         if (this.scatterPlots.containsKey(scatterID)) {
@@ -318,8 +316,8 @@ public abstract class ScenarioPortrayal {
      * Updates the data in the scatterPlot
      * 
      * @param scatterID
-     * @param index - the data serie to modify
-     * @param double[] - the series data
+     * @param index the data serie to modify
+     * @param dataSerie the series data
      */
     public void updateDataSerieOnScatterPlot(String scatterID, int index, double[][] dataSerie){
         if (this.scatterPlots.containsKey(scatterID)){
@@ -339,10 +337,10 @@ public abstract class ScenarioPortrayal {
     /**
      * Add a histogram to the simulation
      * 
-     * @param HistogramID
-     * @param String xAxisLabel
-     * @param String yAxisLabel
-     * @throws DuplicatedChartIDException 
+     * @param histogramID
+     * @param xAxisLabel
+     * @param yAxisLabel
+     * @throws ShanksException 
      */
     public void addHistogram(String histogramID, String xAxisLabel, String yAxisLabel) throws ShanksException {
         if (!this.histograms.containsKey(histogramID)) {
@@ -375,7 +373,7 @@ public abstract class ScenarioPortrayal {
     }
     
     /**
-     * @param String histogramID
+     * @param histogramID
      * @return the histogram if it exists, null if it does not
      */
     public HistogramGenerator getHistogram(String histogramID) {
@@ -411,9 +409,9 @@ public abstract class ScenarioPortrayal {
      * _|_||_|_
      * 
      * 
-     * @param String - histogramID
-     * @param double[] - dataSerie the data
-     * @param int - the number of bins
+     * @param histogramID
+     * @param dataSerie the data
+     * @param binsCount the number of bins
      */
     public void addDataSerieToHistogram(String histogramID, double[] dataSerie, int binsCount){
         if (this.histograms.containsKey(histogramID)) {
@@ -423,9 +421,9 @@ public abstract class ScenarioPortrayal {
     /**
      * Set the histogram range to be displayed
      * 
-     * @param String - The histogram ID
-     * @param lower - The lower value for the histogram
-     * @param upper - The upper value for the histogram
+     * @param histogramID The histogram ID
+     * @param lower The lower value for the histogram
+     * @param upper The upper value for the histogram
      */
     public void setHistogramRange(String histogramID, int lower, int upper) {
         if (this.histograms.containsKey(histogramID))
@@ -450,7 +448,7 @@ public abstract class ScenarioPortrayal {
      * The index will be the order of the histogram.
      * 
      * @param histogramID
-     * @param int index - the index of the data
+     * @param index - the index of the data
      */
     public void removeDataSerieFromHistogram(String histogramID, int index) {
         if (this.histograms.containsKey(histogramID)) {
@@ -459,12 +457,9 @@ public abstract class ScenarioPortrayal {
     }
     
     /**
-     * Add a datum in the chart
-     * 
-     * @param chartID
-     * @param dataSerieID
-     * @param x
-     * @param y
+     * @param histogramID
+     * @param index
+     * @param dataSerie
      */
     public void updateDataToDataSerieInTimeChart(String histogramID, int index, double[] dataSerie  ) {
         if (this.histograms.containsKey(histogramID)) {

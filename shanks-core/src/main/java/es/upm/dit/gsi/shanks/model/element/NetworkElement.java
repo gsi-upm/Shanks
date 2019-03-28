@@ -47,7 +47,8 @@ public abstract class NetworkElement {
 
     /**
      * @param id
-     * @throws UnsupportedNetworkElementFieldException
+     * @param initialStatus
+     * @param logger
      */
     public NetworkElement(String id, String initialStatus, Logger logger){
         this.id = id;
@@ -84,7 +85,7 @@ public abstract class NetworkElement {
     /**
      * @param desiredStatus
      * @return
-     * @throws UnsupportedNetworkElementFieldException
+     * @throws ShanksException
      */
     public boolean setCurrentStatus(String desiredStatus, boolean state)
             throws ShanksException {

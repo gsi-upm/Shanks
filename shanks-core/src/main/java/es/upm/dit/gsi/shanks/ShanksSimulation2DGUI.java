@@ -349,10 +349,9 @@ public abstract class ShanksSimulation2DGUI extends GUIState {
      * Add a time chart to the simulation
      * 
      * @param chartID
-     * @param chart
-     * @throws DuplicatedChartIDException
-     * @throws ScenarioNotFoundException
-     * @throws DuplicatedPortrayalIDException
+     * @param xAxisLabel
+     * @param yAxisLabel
+     * @throws ShanksException
      */
     public void addTimeChart(String chartID, String xAxisLabel,
             String yAxisLabel) throws ShanksException {

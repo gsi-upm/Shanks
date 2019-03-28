@@ -28,7 +28,7 @@ import java.util.List;
  * between two elements are defined by them. This information have a relational
  * entity with the form:
  * 
- *      source => interaction => target
+ *      source - interaction - target
  * 
  * @author darofar
  *

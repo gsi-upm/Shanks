@@ -477,13 +477,9 @@ public abstract class Scenario {
      * 
      * Algorithm used to generate failures during the simulation
      * 
-     * @throws Exception
-     * 
-     * @throws NoCombinationForFailureException
-     * @throws UnsupportedElementByEventException
-     * 
+     * @param sim
+     * @throws ShanksException
      */
-
     public void generateNetworkElementEvents(ShanksSimulation sim)
             throws ShanksException {
         MersenneTwisterFast random = sim.random;
@@ -827,8 +823,8 @@ public abstract class Scenario {
     }
 
     /**
-     * This method can return multipliers >1.0 (more probable failures) or
-     * <1.0(less probable failure). CAUTION: If the multiplier is <=0.0, the
+     * This method can return multipliers higher than 1.0 (more probable failures) or
+     * above than 1.0(less probable failure). CAUTION: If the multiplier is equal or above 0.0, the
      * failure never happends.
      * 
      * @param status

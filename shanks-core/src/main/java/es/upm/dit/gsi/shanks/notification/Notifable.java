@@ -65,8 +65,7 @@ public abstract interface Notifable {
     abstract public Object getSource();
     
     /**
-     * @return
-     *          the object that originates the variable notification. 
+     * set the object that originates the variable notification. 
      */
     abstract public void setSource(Object source);
 

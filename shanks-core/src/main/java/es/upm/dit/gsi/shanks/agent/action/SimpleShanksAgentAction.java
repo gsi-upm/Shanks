@@ -34,7 +34,7 @@ import es.upm.dit.gsi.shanks.model.event.agent.Action;
 /**
  * Class that represents action that can be executed by a Shanks Agent.
  * 
- * @author
+ * @author a.carrera
  */
 public abstract class SimpleShanksAgentAction extends Action {
 

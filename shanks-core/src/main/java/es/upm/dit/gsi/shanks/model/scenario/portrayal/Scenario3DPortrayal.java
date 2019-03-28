@@ -61,7 +61,7 @@ public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
      * @param length
      * @param width
      * @param height
-     * @throws DuplicatedPortrayalIDException 
+     * @throws ShanksException 
      */
     public Scenario3DPortrayal(Scenario scenario, long width, long height, long length) throws ShanksException {
         super(scenario);
@@ -97,7 +97,7 @@ public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
     }
 
     /**
-     * @param displayList
+     * @param displays
      */
     public void setDisplayList(HashMap<String, Display3D> displays) {
         this.displayList = displays;
@@ -106,7 +106,7 @@ public abstract class Scenario3DPortrayal extends ScenarioPortrayal{
     /**
      * @param displayID
      * @param display
-     * @throws DuplictaedDisplayIDException 
+     * @throws ShanksException 
      */
     public void addDisplay(String displayID, Display3D display) throws ShanksException {
         if (this.displayList.containsKey(displayID)) {
